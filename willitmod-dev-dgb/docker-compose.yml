@@ -948,7 +948,7 @@ services:
         fi
 
   dgbd:
-    image: ghcr.io/willitmod/digibyte:8.26.2
+    image: ghcr.io/willitmod/digibyte:9.26.4
     user: "1000:1000"
     restart: unless-stopped
     stop_grace_period: 15m30s
@@ -989,7 +989,7 @@ services:
       - ${APP_DATA_DIR}/data/pool/postgres:/var/lib/postgresql/data
 
   miningcore:
-    image: ghcr.io/willitmod/axedgb-miningcore:axedgb-0.8.10-r24
+    image: ghcr.io/willitmod/axedgb-miningcore:axedgb-0.8.10-r25
     restart: unless-stopped
     depends_on:
       - postgres
@@ -1004,7 +1004,7 @@ services:
       - ${APP_DATA_DIR}/data/pool/config/coins.json:/app/coins.json:ro
 
   app:
-    image: ghcr.io/willitmod/axedgb-app:0.9.172
+    image: ghcr.io/willitmod/axedgb-app:0.9.174
     user: "1000:1000"
     restart: on-failure
     stop_grace_period: 30s
@@ -1042,8 +1042,8 @@ services:
       WORKER_ACTIVE_SECONDS: "300"
       APP_CHANNEL: "RC3"
       APP_VERSION_SUFFIX: ""
-      DGB_IMAGE: "ghcr.io/willitmod/digibyte:8.26.2"
-      MININGCORE_IMAGE: "ghcr.io/willitmod/axedgb-miningcore:axedgb-0.8.10-r24"
+      DGB_IMAGE: "ghcr.io/willitmod/digibyte:9.26.4"
+      MININGCORE_IMAGE: "ghcr.io/willitmod/axedgb-miningcore:axedgb-0.8.10-r25"
       POSTGRES_IMAGE: "postgres:16-alpine"
       STATIC_DIR: "/app/static"
 
