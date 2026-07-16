@@ -63,24 +63,34 @@ if [ -z "$dbcache" ] && [ -f /data/.dbcache_mb ]; then
       ;;
   esac
 fi
+
 if [ -z "$dbcache" ] && [ -r /proc/meminfo ]; then
   mem_kb="$(awk '/^MemTotal:/ {print $2}' /proc/meminfo 2>/dev/null || true)"
+  avail_kb="$(awk '/^MemAvailable:/ {print $2}' /proc/meminfo 2>/dev/null || true)"
   if [ -n "$mem_kb" ]; then
     mem_mb="$((mem_kb / 1024))"
-    # Keep Auto conservative because users often run BCH/DGB/other nodes together,
-    # and HDD-backed systems suffer badly when validation and swapping collide.
-    if [ "$mem_mb" -ge 8192 ]; then
-      dbcache="4096"
-    else
+    if [ "$mem_mb" -ge 15360 ]; then
       dbcache="2048"
+    elif [ "$mem_mb" -ge 7680 ]; then
+      dbcache="1024"
+    else
+      dbcache="512"
+    fi
+  fi
+  if [ -n "$avail_kb" ]; then
+    avail_mb="$((avail_kb / 1024))"
+    if [ "$avail_mb" -lt 2048 ]; then
+      dbcache="512"
+    elif [ "$avail_mb" -lt 4096 ] && [ "${dbcache:-0}" -gt 1024 ]; then
+      dbcache="1024"
     fi
   fi
 fi
 
 if [ -n "$dbcache" ] && echo "$dbcache" | grep -Eq '^[0-9]+$'; then
-  if [ "$dbcache" -lt 1024 ]; then
-    echo "[axedgb] WARNING: dbcache=$dbcache too low; clamping to 1024MB minimum"
-    dbcache="1024"
+  if [ "$dbcache" -lt 512 ]; then
+    echo "[axedgb] WARNING: dbcache=$dbcache too low; clamping to 512MB minimum"
+    dbcache="512"
   fi
 fi
 

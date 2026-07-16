@@ -214,22 +214,31 @@ services:
 
         if [ -z "$$dbcache" ] && [ -r /proc/meminfo ]; then
           mem_kb="$$(awk '/^MemTotal:/ {print $$2}' /proc/meminfo 2>/dev/null || true)"
+          avail_kb="$$(awk '/^MemAvailable:/ {print $$2}' /proc/meminfo 2>/dev/null || true)"
           if [ -n "$$mem_kb" ]; then
             mem_mb="$$((mem_kb / 1024))"
-            # Keep Auto conservative because users often run BCH/DGB/other nodes together,
-            # and HDD-backed systems suffer badly when validation and swapping collide.
-            if [ "$$mem_mb" -ge 8192 ]; then
-              dbcache="4096"
-            else
+            if [ "$$mem_mb" -ge 15360 ]; then
               dbcache="2048"
+            elif [ "$$mem_mb" -ge 7680 ]; then
+              dbcache="1024"
+            else
+              dbcache="512"
+            fi
+          fi
+          if [ -n "$$avail_kb" ]; then
+            avail_mb="$$((avail_kb / 1024))"
+            if [ "$$avail_mb" -lt 2048 ]; then
+              dbcache="512"
+            elif [ "$$avail_mb" -lt 4096 ] && [ "$${dbcache:-0}" -gt 1024 ]; then
+              dbcache="1024"
             fi
           fi
         fi
 
         if [ -n "$$dbcache" ] && echo "$$dbcache" | grep -Eq '^[0-9]+$$'; then
-          if [ "$$dbcache" -lt 1024 ]; then
-            echo "[axedgb] WARNING: dbcache=$$dbcache too low; clamping to 1024MB minimum"
-            dbcache="1024"
+          if [ "$$dbcache" -lt 512 ]; then
+            echo "[axedgb] WARNING: dbcache=$$dbcache too low; clamping to 512MB minimum"
+            dbcache="512"
           fi
         fi
 
@@ -296,15 +305,6 @@ services:
         if [ ! -f /data/node/.dbcache_mb ]; then
           echo "auto" > /data/node/.dbcache_mb
           chown 1000:1000 /data/node/.dbcache_mb || true
-        else
-          raw="$$(cat /data/node/.dbcache_mb 2>/dev/null | tr -d ' \t\r\n' || true)"
-          if echo "$$raw" | grep -Eq '^[0-9]+$$'; then
-            if [ "$$raw" -lt 4096 ]; then
-              echo "[axedgb] Bumping dbcache preset to 4096MB minimum"
-              echo "4096" > /data/node/.dbcache_mb
-              chown 1000:1000 /data/node/.dbcache_mb || true
-            fi
-          fi
         fi
 
         # Cleanup from older broken installs (a directory with the script name).
@@ -989,7 +989,7 @@ services:
       - ${APP_DATA_DIR}/data/pool/postgres:/var/lib/postgresql/data
 
   miningcore:
-    image: ghcr.io/willitmod/axedgb-miningcore:axedgb-0.8.10-r25
+    image: ghcr.io/willitmod/axedgb-miningcore:axedgb-0.8.10-r26
     restart: unless-stopped
     depends_on:
       - postgres
@@ -1004,7 +1004,7 @@ services:
       - ${APP_DATA_DIR}/data/pool/config/coins.json:/app/coins.json:ro
 
   app:
-    image: ghcr.io/willitmod/axedgb-app:0.9.174
+    image: ghcr.io/willitmod/axedgb-app:0.9.176
     user: "1000:1000"
     restart: on-failure
     stop_grace_period: 30s
@@ -1040,10 +1040,10 @@ services:
       # Treat workers as inactive (hashrate=0) after this many seconds with no activity.
       # (Activity = last accepted share when present, else minerstats snapshot time.)
       WORKER_ACTIVE_SECONDS: "300"
-      APP_CHANNEL: "RC3"
+      APP_CHANNEL: "RC5"
       APP_VERSION_SUFFIX: ""
       DGB_IMAGE: "ghcr.io/willitmod/digibyte:9.26.4"
-      MININGCORE_IMAGE: "ghcr.io/willitmod/axedgb-miningcore:axedgb-0.8.10-r25"
+      MININGCORE_IMAGE: "ghcr.io/willitmod/axedgb-miningcore:axedgb-0.8.10-r26"
       POSTGRES_IMAGE: "postgres:16-alpine"
       STATIC_DIR: "/app/static"
 
