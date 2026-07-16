@@ -1,5 +1,5 @@
 server=1
-txindex=0
+txindex=1
 
 # Pruning: disabled by default (archival).
 prune=0

@@ -177,6 +177,25 @@ services:
           fi
         }
 
+        global_conf_value() {
+          key="$$1"
+          [ -f /data/digibyte.conf ] || return 0
+          awk -F= -v wanted="$$key" '
+            /^[[:space:]]*\[/ { exit }
+            /^[[:space:]]*#/ { next }
+            {
+              k=$$1
+              gsub(/^[[:space:]]+|[[:space:]]+$$/, "", k)
+              if (k == wanted) {
+                sub(/^[^=]*=/, "")
+                gsub(/^[[:space:]]+|[[:space:]]+$$/, "")
+                print
+                exit
+              }
+            }
+          ' /data/digibyte.conf
+        }
+
         if [ "$$(id -u)" = "0" ]; then
           mkdir -p /data || true
           chown 1000:1000 /data 2>/dev/null || true
@@ -194,6 +213,19 @@ services:
           rm -f /data/.reindex-chainstate || true
           extra="-reindex-chainstate"
         fi
+
+        prune="$$(global_conf_value prune)"
+        case "$$prune" in
+          ""|*[!0-9]*) prune="0" ;;
+        esac
+        if [ "$$prune" -gt 0 ]; then
+          txindex="0"
+          echo "[axedgb] Managed transaction index: disabled for pruned mode"
+        else
+          txindex="1"
+          echo "[axedgb] Managed transaction index: enabled for DigiDollar archival mode"
+        fi
+        extra="$$extra -txindex=$$txindex"
 
         dbcache="$${DGB_DBCACHE_MB:-}"
         if [ -z "$$dbcache" ] && [ -f /data/.dbcache_mb ]; then
@@ -482,6 +514,66 @@ services:
               printf "addnode=95.179.160.53:12026\n"
               printf "addnode=51.15.113.125:12026\n"
             } >> "$$conf"
+          fi
+        fi
+
+        # DigiByte Core 9.26.4 requires txindex on archival mainnet/testnet
+        # nodes and rejects it in pruned mode. Repair both fresh and legacy
+        # configs before dgbd starts so updates cannot enter a restart loop.
+        conf="/data/node/digibyte.conf"
+        if [ -f "$$conf" ]; then
+          prune_value="$$(awk -F= '
+            /^[[:space:]]*\[/ { exit }
+            /^[[:space:]]*#/ { next }
+            {
+              key=$$1
+              gsub(/^[[:space:]]+|[[:space:]]+$$/, "", key)
+              if (key == "prune") {
+                sub(/^[^=]*=/, "")
+                gsub(/^[[:space:]]+|[[:space:]]+$$/, "")
+                print
+                exit
+              }
+            }
+          ' "$$conf")"
+          case "$$prune_value" in
+            ""|*[!0-9]*) prune_value="0" ;;
+          esac
+          if [ "$$prune_value" -gt 0 ]; then
+            required_txindex="0"
+          else
+            required_txindex="1"
+          fi
+
+          awk -v required="$$required_txindex" '
+            BEGIN { in_section=0; wrote=0 }
+            function emit_txindex() {
+              if (!wrote) {
+                print "txindex=" required
+                wrote=1
+              }
+            }
+            /^[[:space:]]*\[[^]]+\][[:space:]]*$$/ {
+              if (!in_section) emit_txindex()
+              in_section=1
+              print
+              next
+            }
+            {
+              if (!in_section && $$0 ~ /^[[:space:]]*(#[[:space:]]*)?txindex[[:space:]]*=/) {
+                emit_txindex()
+                next
+              }
+              print
+            }
+            END { if (!in_section) emit_txindex() }
+          ' "$$conf" > "$$conf.txindex.tmp"
+          if ! cmp -s "$$conf" "$$conf.txindex.tmp"; then
+            echo "[axedgb] Setting txindex=$$required_txindex for prune=$$prune_value"
+            mv "$$conf.txindex.tmp" "$$conf"
+            chown 1000:1000 "$$conf" 2>/dev/null || true
+          else
+            rm -f "$$conf.txindex.tmp"
           fi
         fi
 
@@ -1004,7 +1096,7 @@ services:
       - ${APP_DATA_DIR}/data/pool/config/coins.json:/app/coins.json:ro
 
   app:
-    image: ghcr.io/willitmod/axedgb-app:0.9.176
+    image: ghcr.io/willitmod/axedgb-app:0.9.177
     user: "1000:1000"
     restart: on-failure
     stop_grace_period: 30s
@@ -1040,7 +1132,7 @@ services:
       # Treat workers as inactive (hashrate=0) after this many seconds with no activity.
       # (Activity = last accepted share when present, else minerstats snapshot time.)
       WORKER_ACTIVE_SECONDS: "300"
-      APP_CHANNEL: "RC5"
+      APP_CHANNEL: "RC6"
       APP_VERSION_SUFFIX: ""
       DGB_IMAGE: "ghcr.io/willitmod/digibyte:9.26.4"
       MININGCORE_IMAGE: "ghcr.io/willitmod/axedgb-miningcore:axedgb-0.8.10-r26"

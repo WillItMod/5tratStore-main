@@ -29,6 +29,25 @@ heal_node_json() {
   fi
 }
 
+global_conf_value() {
+  key="$1"
+  [ -f /data/digibyte.conf ] || return 0
+  awk -F= -v wanted="$key" '
+    /^[[:space:]]*\[/ { exit }
+    /^[[:space:]]*#/ { next }
+    {
+      k=$1
+      gsub(/^[[:space:]]+|[[:space:]]+$/, "", k)
+      if (k == wanted) {
+        sub(/^[^=]*=/, "")
+        gsub(/^[[:space:]]+|[[:space:]]+$/, "")
+        print
+        exit
+      }
+    }
+  ' /data/digibyte.conf
+}
+
 if [ "$(id -u)" = "0" ]; then
   mkdir -p /data || true
   chown 1000:1000 /data 2>/dev/null || true
@@ -46,6 +65,19 @@ if [ -f /data/.reindex-chainstate ]; then
   rm -f /data/.reindex-chainstate || true
   extra="-reindex-chainstate"
 fi
+
+prune="$(global_conf_value prune)"
+case "$prune" in
+  ""|*[!0-9]*) prune="0" ;;
+esac
+if [ "$prune" -gt 0 ]; then
+  txindex="0"
+  echo "[axedgb] Managed transaction index: disabled for pruned mode"
+else
+  txindex="1"
+  echo "[axedgb] Managed transaction index: enabled for DigiDollar archival mode"
+fi
+extra="$extra -txindex=$txindex"
 
 dbcache="${DGB_DBCACHE_MB:-}"
 if [ -z "$dbcache" ] && [ -f /data/.dbcache_mb ]; then
