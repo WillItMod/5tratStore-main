@@ -1,0 +1,122 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: powpow-app
+      APP_PORT: 3000
+      JWT_SECRET: "${JWT_SECRET}"
+    networks:
+      - umbrel_main_network
+
+  init_permissions:
+    image: alpine:3.22.1
+    restart: "no"
+    volumes:
+      - ${APP_DATA_DIR}/data:/data
+    command:
+      - /bin/sh
+      - -ec
+      - |-
+        set -eu
+        mkdir -p /data/ui/state /data/litecoin /data/dogecoin /data/pool/config /data/postgres
+        chown -R 1000:1000 /data/ui /data/litecoin /data/dogecoin /data/pool /data/pool/config || true
+        chown -R 70:70 /data/postgres || true
+        chmod 700 /data/postgres || true
+
+  app:
+    image: ghcr.io/willitmod/powpow-app:0.2.31
+    user: "1000:1000"
+    restart: unless-stopped
+    depends_on:
+      init_permissions:
+        condition: service_completed_successfully
+    networks:
+      default:
+        aliases:
+          - powpow-app
+      umbrel_main_network:
+        aliases:
+          - powpow-app
+    volumes:
+      - ${APP_DATA_DIR}/data:/data
+    environment:
+      APP_VERSION: "0.2.31"
+      APP_CHANNEL: "RC1"
+      NETWORK_HOST_HINT: "${NETWORK_IP}"
+      POOL_API_URL: "http://pool:8001"
+      POSTGRES_PASSWORD: "${APP_PASSWORD}"
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import sys, urllib.request; r=urllib.request.urlopen('http://127.0.0.1:3000/api/about', timeout=3); sys.exit(0 if r.status == 200 else 1)\""]
+      interval: 15s
+      timeout: 5s
+      retries: 20
+      start_period: 90s
+
+  litecoin:
+    image: ghcr.io/willitmod/powpow-litecoin:0.2.26
+    restart: unless-stopped
+    depends_on:
+      init_permissions:
+        condition: service_completed_successfully
+    volumes:
+      - ${APP_DATA_DIR}/data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "pid=$$(cat /data/litecoin/litecoind.pid 2>/dev/null || true); [ -n \"$$pid\" ] && kill -0 \"$$pid\" 2>/dev/null"]
+      interval: 15s
+      timeout: 5s
+      retries: 40
+      start_period: 3m
+
+  dogecoin:
+    image: ghcr.io/willitmod/powpow-dogecoin:0.2.26
+    restart: unless-stopped
+    depends_on:
+      init_permissions:
+        condition: service_completed_successfully
+    volumes:
+      - ${APP_DATA_DIR}/data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "pid=$$(cat /data/dogecoin/dogecoind.pid 2>/dev/null || true); [ -n \"$$pid\" ] && kill -0 \"$$pid\" 2>/dev/null"]
+      interval: 15s
+      timeout: 5s
+      retries: 40
+      start_period: 3m
+
+  pool:
+    image: ghcr.io/willitmod/powpow-pool:0.2.31
+    restart: unless-stopped
+    depends_on:
+      init_permissions:
+        condition: service_completed_successfully
+      postgres:
+        condition: service_started
+      litecoin:
+        condition: service_started
+      dogecoin:
+        condition: service_started
+    environment:
+      WAIT_FOR_FULL_SYNC: "1"
+    ports:
+      - "9555:9555/tcp"
+    volumes:
+      - ${APP_DATA_DIR}/data:/data
+
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    depends_on:
+      init_permissions:
+        condition: service_completed_successfully
+    environment:
+      POSTGRES_USER: "mergedmining"
+      POSTGRES_PASSWORD: "${APP_PASSWORD}"
+      POSTGRES_DB: "mergedmining"
+    volumes:
+      - ${APP_DATA_DIR}/data/postgres:/var/lib/postgresql/data
+      - ./postgres/init:/docker-entrypoint-initdb.d:ro
+
+networks:
+  umbrel_main_network:
+    external: true
+    name: umbrel_main_network

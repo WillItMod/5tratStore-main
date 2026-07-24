@@ -1,0 +1,261 @@
+version: "3.7"
+
+x-node-environment: &node-environment
+  FIVETRAT_NETWORK: main
+  FIVETRAT_RPC_USER: fivetrat
+  FIVETRAT_RPC_PASSWORD: "${APP_PASSWORD}"
+  FIVETRAT_RPC_ALLOW_IP: 127.0.0.1,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
+  FIVETRAT_RPC_PORT: "57576"
+  FIVETRAT_P2P_PORT: "57555"
+  FIVETRAT_ZMQ_HASHBLOCK_PORT: "28342"
+  FIVETRAT_CANONICAL_CHECKPOINT_HEIGHT: "300"
+  FIVETRAT_CANONICAL_CHECKPOINT_HASH: "00000000000001cfbd4dbb75e5caf69ba8d5421c053a4d80994eb5afe51f3558"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: 5tratsmack-app
+      APP_PORT: 3000
+      JWT_SECRET: "${JWT_SECRET}"
+    networks:
+      - umbrel_main_network
+
+  init_permissions:
+    image: alpine:3.22.1
+    restart: "no"
+    volumes:
+      - ${APP_DATA_DIR}/data:/data
+    command:
+      - /bin/sh
+      - -ec
+      - |-
+        set -eu
+        mkdir -p \
+          /data/node \
+          /data/pool/config \
+          /data/ui/state \
+          /data/p2p-state \
+          /data/swap \
+          /data/updater
+        # Never recurse through the blockchain during an app update. Existing
+        # data already belongs to UID 1000 and traversing blocks/chainstate is
+        # what turns a routine restart into a 30-minute "update".
+        chown 1000:1000 \
+          /data/node \
+          /data/ui \
+          /data/ui/state \
+          /data/p2p-state \
+          /data/swap \
+          /data/updater
+        find /data/p2p-state \
+          -mindepth 1 -maxdepth 1 -type f -exec chown 1000:1000 {} +
+        chmod ug+rwx \
+          /data/node \
+          /data/pool \
+          /data/pool/config \
+          /data/ui \
+          /data/ui/state \
+          /data/p2p-state \
+          /data/swap \
+          /data/updater
+
+  p2p-helper:
+    image: ghcr.io/willitmod/5tratsmack-upnp:0.10.24
+    restart: unless-stopped
+    user: "1000:1000"
+    network_mode: host
+    depends_on:
+      init_permissions:
+        condition: service_completed_successfully
+    environment:
+      FIVETRAT_UPNP_ENABLED: "1"
+      FIVETRAT_BIND_IP: ""
+      FIVETRAT_P2P_INTERNAL_PORT: "57555"
+      FIVETRAT_P2P_EXTERNAL_PORT: "57555"
+      FIVETRAT_EXTERNAL_P2P: ""
+      FIVETRAT_UPNP_DESCRIPTION: 5TRAT blockchain node
+      BCH2_RPC_HOST: 127.0.0.1
+      BCH2_RPC_PORT: "57576"
+      BCH2_RPC_USER: fivetrat
+      BCH2_RPC_PASSWORD: "${APP_PASSWORD}"
+    volumes:
+      - ${APP_DATA_DIR}/data/p2p-state:/state
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp
+    healthcheck:
+      test: ["CMD-SHELL", "test -s /state/reachability.json && test -f /state/attempted"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+
+  node-a:
+    image: ghcr.io/willitmod/5tratsmack-core:0.10.24
+    restart: unless-stopped
+    stop_grace_period: 2m
+    depends_on:
+      init_permissions:
+        condition: service_completed_successfully
+      p2p-helper:
+        condition: service_healthy
+    environment:
+      <<: *node-environment
+      FIVETRAT_BOOTSTRAP_NODES: "seed1.5trat.net:57555,seed2.5trat.net:57555"
+      FIVETRAT_EXTERNAL_IP: ""
+      FIVETRAT_P2P_ADVERTISE_FILE: /p2p-state/external-p2p
+    volumes:
+      - ${APP_DATA_DIR}/data/node:/data
+      - ${APP_DATA_DIR}/data/p2p-state:/p2p-state:ro
+    ports:
+      - "127.0.0.1:57576:57576/tcp"
+      - "57555:57555/tcp"
+    networks:
+      - chain
+      - edge
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - 'test "$$(fivetrat-cli -datadir=/data -rpcuser=fivetrat -rpcpassword="$$FIVETRAT_RPC_PASSWORD" -rpcport=57576 getblockhash "$$FIVETRAT_CANONICAL_CHECKPOINT_HEIGHT" 2>/dev/null)" = "$$FIVETRAT_CANONICAL_CHECKPOINT_HASH" && fivetrat-cli -datadir=/data -rpcuser=fivetrat -rpcpassword="$$FIVETRAT_RPC_PASSWORD" -rpcport=57576 getblockchaininfo | grep -Eq ''"initialblockdownload"[[:space:]]*:[[:space:]]*false'''
+      interval: 10s
+      timeout: 5s
+      retries: 20
+      start_period: 30s
+
+  swap:
+    image: ghcr.io/willitmod/5tratsmack-kdf:0.10.24
+    restart: unless-stopped
+    network_mode: service:node-a
+    depends_on:
+      init_permissions:
+        condition: service_completed_successfully
+      node-a:
+        condition: service_healthy
+    environment:
+      FIVETRAT_DEX_NETWORK_ENABLED: "1"
+      FIVETRAT_DEX_BOOTSTRAP: "0"
+      FIVETRAT_DEX_NETID: "6133"
+      FIVETRAT_DEX_NETWORK_NAME: Komodo DeFi public network
+      FIVETRAT_DEX_SEEDNODES: "seed01.kmdefi.net,seed03.kmdefi.net,kdfseed1.decker.im,staking1.gleec.com,staking2.gleec.com"
+      FIVETRAT_DEX_BIND_IP: ""
+      FIVETRAT_TRADE_MAX_5TRAT: "100"
+      FIVETRAT_TRADE_MAX_DGB: "50000"
+    volumes:
+      - ${APP_DATA_DIR}/data/node:/node-data:ro
+      - ${APP_DATA_DIR}/data/swap:/data
+    healthcheck:
+      test: ["CMD", "/usr/local/bin/5trat-kdf-healthcheck"]
+      interval: 15s
+      timeout: 5s
+      retries: 20
+      start_period: 30s
+
+  ckpool:
+    image: ghcr.io/willitmod/5tratsmack-ckpool:0.10.24
+    command: ["-k", "-L", "-c", "/data/pool/config/ckpool.conf"]
+    restart: unless-stopped
+    depends_on:
+      init_permissions:
+        condition: service_completed_successfully
+      node-a:
+        condition: service_healthy
+    environment:
+      BCH2_RPC_HOST: node-a
+      BCH2_RPC_PORT: "57576"
+      BCH2_RPC_USER: fivetrat
+      BCH2_RPC_PASSWORD: "${APP_PASSWORD}"
+      BCH2_ZMQ_HASHBLOCK_PORT: "28342"
+      FIVETRAT_CANONICAL_CHECKPOINT_HEIGHT: "300"
+      FIVETRAT_CANONICAL_CHECKPOINT_HASH: "00000000000001cfbd4dbb75e5caf69ba8d5421c053a4d80994eb5afe51f3558"
+      PAYOUT_ADDRESS: ""
+      MINDIFF: "4096"
+      STARTDIFF: "16384"
+      MAXDIFF: "0"
+      NONCE2_LENGTH: "3"
+      FIVETRAT_MINING_ACTIVATION_HEIGHT: "1000"
+      DEV_FUND_ADDRESS: 5trat:qr7rg4z88tc34fr0z0mtkjc0c6s3knw5hce39q9evk
+      DEV_FEE_PERCENT: "5"
+    volumes:
+      - ${APP_DATA_DIR}/data/pool:/data/pool
+    ports:
+      - "57557:3333/tcp"
+    networks:
+      - chain
+      - edge
+
+  app:
+    image: ghcr.io/willitmod/5tratsmack-app:0.10.26
+    restart: unless-stopped
+    depends_on:
+      init_permissions:
+        condition: service_completed_successfully
+      node-a:
+        condition: service_started
+    environment:
+      APP_ID: 5tratsmack
+      APP_VERSION: 0.10.26
+      APP_CHANNEL: MAIN
+      APP_RELEASE_PHASE: RC1
+      APP_PLATFORM: 5TRATUMOS
+      APP_SELF_RESTART_ENABLED: "0"
+      FIVETRAT_UPDATER_ENABLED: "0"
+      FIVETRAT_STORE_UPDATE_APP_ID: 5tratsmack
+      FIVETRAT_STORE_UPDATE_CHANNEL: main
+      FIVETRAT_INSTALL_REVISION: main-store
+      FIVETRAT_RELEASE_TAG: 0.10.26
+      FIVETRAT_OS_UPDATE_PROXY_BASE: http://host.docker.internal
+      NETWORK_IP: "${NETWORK_IP}"
+      BCH2_RPC_HOST: node-a
+      BCH2_RPC_PORT: "57576"
+      BCH2_RPC_USER: fivetrat
+      BCH2_RPC_PASS: "${APP_PASSWORD}"
+      BCH2_ZMQ_HASHBLOCK_PORT: "28342"
+      BCH2_LEGIT_CHECKPOINT_HEIGHT: "300"
+      BCH2_LEGIT_CHECKPOINT_HASH: "00000000000001cfbd4dbb75e5caf69ba8d5421c053a4d80994eb5afe51f3558"
+      FIVETRAT_CANONICAL_ANCHORS: "280:0000000000000040db0681ab3fa0d9f539d5c4ae998baaa187c6aa4f0d70a30a,290:000000000000012f22465457580ff0e331235138925355e6df7ecdcf46881012,298:000000000000014cdcace53042000a35d90746964b0b400adc92a85635d3dc59,300:00000000000001cfbd4dbb75e5caf69ba8d5421c053a4d80994eb5afe51f3558"
+      CKPOOL_STRATUM_HOST: ckpool
+      CKPOOL_STRATUM_PORT: "3333"
+      FIVETRAT_WALLET_NAME: 5tratsmack
+      FIVETRAT_WALLET_TRANSFER_DIR: /data/node/wallet-transfers
+      FIVETRAT_WALLET_NODE_TRANSFER_DIR: /data/wallet-transfers
+      FIVETRAT_DEV_FUND_ADDRESS: 5trat:qr7rg4z88tc34fr0z0mtkjc0c6s3knw5hce39q9evk
+      FIVETRAT_MINING_ACTIVATION_HEIGHT: "1000"
+      FIVETRAT_P2P_STATE_PATH: /data/p2p-state/reachability.json
+      FIVETRAT_SWAP_CONTROL_URL: http://node-a:7784
+      FIVETRAT_SWAP_CONTROL_TOKEN_PATH: /data/swap/control-token
+      FIVETRAT_MARKET_TAPE_URLS: https://market1.5trat.net/trade-tape,https://market2.5trat.net/trade-tape
+      FIVETRAT_COINGECKO_ID: ""
+    volumes:
+      - ${APP_DATA_DIR}/data/node:/data/node
+      - ${APP_DATA_DIR}/data/pool:/data/pool
+      - ${APP_DATA_DIR}/data/ui/state:/data/ui/state
+      - ${APP_DATA_DIR}/data/p2p-state:/data/p2p-state
+      - ${APP_DATA_DIR}/data/swap:/data/swap:ro
+      - ${APP_DATA_DIR}/data/updater:/data/updater
+    networks:
+      chain:
+      edge:
+      umbrel_main_network:
+        aliases:
+          - 5tratsmack-app
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - python -c "import sys, urllib.request; r=urllib.request.urlopen('http://127.0.0.1:3000/api/about', timeout=3); sys.exit(0 if r.status == 200 else 1)"
+      interval: 15s
+      timeout: 5s
+      retries: 20
+      start_period: 30s
+
+networks:
+  chain:
+    internal: true
+  edge:
+  umbrel_main_network:
+    external: true
+    name: umbrel_main_network

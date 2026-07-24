@@ -1,0 +1,82 @@
+{
+  "logLevel": "warning",
+  "logColors": true,
+
+  "cliHost": "127.0.0.1",
+  "cliPort": 17117,
+
+  "clustering": {
+    "enabled": false,
+    "forks": "auto"
+  },
+
+  "defaultPoolConfigs": {
+    "blockRefreshInterval": 1000,
+    "jobRebroadcastTimeout": 55,
+    "connectionTimeout": 600,
+    "emitInvalidBlockHashes": false,
+    "validateWorkerUsername": false,
+    "tcpProxyProtocol": false,
+    "banning": {
+      "enabled": true,
+      "time": 600,
+      "invalidPercent": 50,
+      "checkThreshold": 500,
+      "purgeInterval": 300
+    },
+    "redis": {
+      "host": "redis",
+      "port": 6379
+    }
+  },
+
+  "website": {
+    "enabled": true,
+    "host": "0.0.0.0",
+    "port": ${CPS_WEBSITE_PORT},
+    "stratumHost": "localhost",
+    "stats": {
+      "updateInterval": 60,
+      "historicalRetention": 43200,
+      "hashrateWindow": 300
+    },
+    "adminCenter": {
+      "enabled": false,
+      "password": "password"
+    }
+  },
+
+  "redis": {
+    "host": "redis",
+    "port": 6379
+  },
+
+  "switching": {
+    "switch1": {
+      "enabled": false,
+      "algorithm": "sha256",
+      "ports": {
+        "3333": {
+          "diff": 10,
+          "varDiff": {
+            "minDiff": 16,
+            "maxDiff": 512,
+            "targetTime": 15,
+            "retargetTime": 90,
+            "variancePercent": 30
+          }
+        }
+      }
+    }
+  },
+
+  "profitSwitch": {
+    "enabled": false,
+    "updateInterval": 600,
+    "depth": 0.9,
+    "usePoloniex": false,
+    "useCryptsy": false,
+    "useMintpal": false,
+    "useBittrex": false
+  }
+}

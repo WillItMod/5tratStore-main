@@ -1,0 +1,71 @@
+manifestVersion: 1
+id: willitmod-dev-ppc
+category: altcoin
+name: AxePPC
+version: "0.2.30"
+tagline: PPC node + solo pool
+description: >-
+  RC1 RELEASE
+
+  AxePPC is functional, has successfully found blocks, and has completed
+  extended DEV-channel node and solo-pool testing.
+
+  Run a Peercoin full node and a solo Stratum v1 pool as a single app.
+
+
+  Miner connection:
+    - URL: `stratum+tcp://<your-host-ip>:8765`
+    - Username: worker name (optional)
+    - Password: anything
+
+
+  Notes:
+    - Payout address must be a Base58 Peercoin address.
+    - Stratum will not respond until the node finishes initial sync.
+    - RC1: verify payout settings and report unexpected behaviour.
+developer: WillItMod
+website: https://github.com/WillItMod/AxePPC
+repo: https://github.com/WillItMod/AxePPC
+support: https://discord.gg/vC2UrFAbUF
+dependencies: []
+port: 21220
+icon: https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-dev-ppc/icon.png
+gallery:
+  - https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-dev-ppc/icon.png
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+widgets:
+  - id: "sync"
+    type: "text-with-progress"
+    refresh: "5s"
+    endpoint: "axeppc-app:3000/api/widget/sync"
+    link: ""
+    example:
+      type: "text-with-progress"
+      link: ""
+      title: "PPC sync"
+      text: "83%"
+      progressLabel: "In progress"
+      progress: 0.83
+  - id: "pool"
+    type: "three-stats"
+    refresh: "30s"
+    endpoint: "axeppc-app:3000/api/widget/pool"
+    link: ""
+    example:
+      type: "three-stats"
+      link: ""
+      items:
+        - title: "Hashrate"
+          text: "1.2"
+          subtext: "TH/s"
+        - title: "Workers"
+          text: "2"
+        - title: "Best Share"
+          text: "1.23T"
+backupIgnore:
+  - data/node/blocks
+  - data/node/chainstate
+  - data/node/indexes
+submitter: WillItMod

@@ -1,0 +1,147 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: axebch2-app
+      APP_PORT: 3000
+      JWT_SECRET: "${JWT_SECRET}"
+    networks:
+      - umbrel_main_network
+
+  init_permissions:
+    image: alpine:3.22.1
+    restart: "no"
+    volumes:
+      - ${APP_DATA_DIR}/data:/data
+    command:
+      - /bin/sh
+      - -ec
+      - |-
+        set -eu
+        mkdir -p /data/ui/state /data/node /data/pool/config /data/pool/www/pool /data/pool/www/users
+        chown -R 1000:1000 /data/ui /data/node /data/pool || true
+        chmod -R ug+rwX /data/ui /data/node /data/pool || true
+
+  app:
+    image: ghcr.io/willitmod/axebch2-app:0.2.0.1
+    user: "1000:1000"
+    restart: unless-stopped
+    depends_on:
+      init_permissions:
+        condition: service_completed_successfully
+      bch2:
+        condition: service_started
+    networks:
+      default:
+        aliases:
+          - axebch2-app
+      umbrel_main_network:
+        aliases:
+          - axebch2-app
+    volumes:
+      - ${APP_DATA_DIR}/data:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      APP_ID: "willitmod-dev-axebch2"
+      APP_VERSION: "0.2.0.1"
+      APP_CHANNEL: "RC1"
+      APP_RELEASE_PHASE: "RC"
+      APP_SELF_RESTART_ENABLED: "1"
+      APP_COMPOSE_PROJECT: "${COMPOSE_PROJECT_NAME}"
+      NETWORK_IP: "${NETWORK_IP}"
+      BCH2_NODE_IMAGE: "ghcr.io/willitmod/axebch2-node:0.1.33"
+      CKPOOL_IMAGE: "ghcr.io/willitmod/axebch2-ckpool:0.1.33"
+      BCH2_RPC_HOST: "bch2"
+      BCH2_RPC_PORT: "8342"
+      BCH2_RPC_USER: "bch2"
+      BCH2_RPC_PASS: "${APP_PASSWORD}"
+      CKPOOL_STRATUM_HOST: "ckpool"
+      CKPOOL_STRATUM_PORT: "3333"
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - python -c "import sys, urllib.request; r=urllib.request.urlopen('http://127.0.0.1:3000/api/about', timeout=3); sys.exit(0 if r.status == 200 else 1)"
+      interval: 15s
+      timeout: 5s
+      retries: 20
+      start_period: 90s
+
+  bch2:
+    image: ghcr.io/willitmod/axebch2-node:0.1.33
+    restart: unless-stopped
+    stop_grace_period: 15m30s
+    depends_on:
+      init_permissions:
+        condition: service_completed_successfully
+    environment:
+      NETWORK: "mainnet"
+      RPC_USER: "bch2"
+      RPC_PASSWORD: "${APP_PASSWORD}"
+      RPC_PORT: "8342"
+      P2P_PORT: "8339"
+      EXTERNAL_IP: "${NETWORK_IP}"
+      FORCE_IPV4_BIND: "1"
+      PRUNE: "0"
+      RPC_THREADS: "4"
+      MAX_MEMPOOL: "64"
+      DB_CACHE: "256"
+      TX_INDEX: "0"
+      BOOTSTRAP_CONNECTNODES: ""
+      PEER_WATCHDOG_INTERVAL: "30"
+      PEER_WATCHDOG_MIN_CONNECTIONS: "1"
+      ONE_TIME_FULL_RESYNC_KEY: "bitcoincashii-shadow-chain-20260413"
+      ONE_TIME_FULL_RESYNC_REQUIRE_EXISTING_DATA: "1"
+      ONE_TIME_REINDEX_KEY: "bitcoincashii-v27.0.2"
+      ONE_TIME_REINDEX_REQUIRE_EXISTING_DATA: "1"
+    volumes:
+      - ${APP_DATA_DIR}/data/node:/data/node
+    ports:
+      - "8339:8339/tcp"
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - bitcoincashII-cli -datadir=/data/node -rpcuser="$$RPC_USER" -rpcpassword="$$RPC_PASSWORD" getblockchaininfo >/dev/null 2>&1
+      interval: 30s
+      timeout: 10s
+      retries: 20
+      start_period: 2m
+
+  ckpool:
+    image: ghcr.io/willitmod/axebch2-ckpool:0.1.33
+    restart: unless-stopped
+    stop_grace_period: 30s
+    depends_on:
+      init_permissions:
+        condition: service_completed_successfully
+      bch2:
+        condition: service_started
+    environment:
+      BCH2_RPC_HOST: "bch2"
+      BCH2_RPC_PORT: "8342"
+      BCH2_RPC_USER: "bch2"
+      BCH2_RPC_PASSWORD: "${APP_PASSWORD}"
+      BCH2_ZMQ_HASHBLOCK_PORT: "28342"
+      PAYOUT_ADDRESS: "CHANGEME_BCH_PAYOUT_ADDRESS"
+      MINDIFF: "1"
+      STARTDIFF: "16"
+      MAXDIFF: "0"
+    user: "1000:1000"
+    command: ["-k", "-L", "-c", "/data/pool/config/ckpool.conf"]
+    ports:
+      - "9265:3333/tcp"
+    volumes:
+      - ${APP_DATA_DIR}/data/pool:/data/pool
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - 'pid=$$(cat /tmp/ckpool/main.pid 2>/dev/null || true); [ -n "$$pid" ] && kill -0 "$$pid" 2>/dev/null'
+      interval: 15s
+      timeout: 5s
+      retries: 20
+      start_period: 45s
+
+networks:
+  umbrel_main_network:
+    external: true
+    name: umbrel_main_network

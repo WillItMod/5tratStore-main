@@ -1,4 +1,4 @@
 - Bitcoin Core (MIT): https://github.com/bitcoin/bitcoin
 - ckpool (GPLv3): https://github.com/ckolivas/ckpool
 - getumbrel/docker-ckpool-solo (MIT): https://github.com/getumbrel/docker-ckpool-solo
-- getumbrel/umbrel-bitcoin (container wrapper): https://github.com/getumbrel/umbrel-apps/tree/master/bitcoin
+- getumbrel/umbrel-bitcoin (Umbrel container wrapper): https://github.com/getumbrel/umbrel-apps/tree/master/bitcoin

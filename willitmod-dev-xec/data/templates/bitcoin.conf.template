@@ -1,0 +1,26 @@
+server=1
+txindex=0
+
+# Pruning: disabled by default (archival).
+prune=0
+
+# Network selection (uncomment one, then restart the app):
+# testnet=1
+# regtest=1
+
+# Ports
+port=${XEC_P2P_PORT}
+rpcport=${XEC_RPC_PORT}
+
+# RPC (not published to the host by default; internal apps only)
+rpcuser=${RPC_USER}
+rpcpassword=${RPC_PASSWORD}
+rpcbind=0.0.0.0
+rpcallowip=127.0.0.1/32
+rpcallowip=${APPS_SUBNET}
+rpcallowip=10.0.0.0/8
+rpcallowip=172.16.0.0/12
+rpcallowip=192.168.0.0/16
+
+# ZMQ (for pool notifications)
+zmqpubhashblock=tcp://0.0.0.0:${XEC_ZMQ_HASHBLOCK_PORT}

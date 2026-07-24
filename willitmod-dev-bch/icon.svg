@@ -43,7 +43,6 @@
   <g font-family="Segoe UI, Inter, Arial, sans-serif" text-anchor="middle">
     <text x="256" y="278" font-size="96" font-weight="800" fill="#ffffff" letter-spacing="1">BCH</text>
     <text x="256" y="332" font-size="28" font-weight="700" fill="#d8d8e6" opacity="0.95" letter-spacing="6">NODE + SOLO</text>
-    <text x="256" y="372" font-size="20" font-weight="700" fill="#d8d8e6" opacity="0.85" letter-spacing="4">WILLITMOD DEV</text>
+    <text x="256" y="372" font-size="20" font-weight="700" fill="#d8d8e6" opacity="0.85" letter-spacing="4">RELEASE CANDIDATE</text>
   </g>
 </svg>
-

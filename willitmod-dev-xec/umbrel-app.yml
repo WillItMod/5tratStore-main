@@ -1,0 +1,99 @@
+manifestVersion: 1
+id: willitmod-dev-xec
+category: bitcoin
+name: AxeXEC
+version: "0.1.14"
+tagline: XEC node + solo pool
+description: >-
+  RC1 RELEASE
+
+  AxeXEC is functional, has successfully found blocks, and has completed
+  extended DEV-channel node and solo-pool testing.
+
+  **IMPORTANT (XEC MINING RULES):** eCash enforces mandatory coinbase deductions (Miner Fund + staking rewards).
+  This is NOT set by AxeXEC / WillItMod and is not configurable or removable by the app.
+  Blocks without the required outputs would be invalid.
+  Current policy (subject to change by protocol): 32% Miner Fund + 10% stakers = 42% total deductions.
+
+  Run an eCash (XEC) full node and an integrated solo Stratum v1 pool (ckpool) as a single app.
+
+
+  Features:
+    - Axe-style dashboard for node sync and pool stats
+    - Supports legacy and CashAddr payout addresses
+    - Difficulty presets (vardiff) tuned for home miners
+    - Blocks view for solved blocks, plus optional history scan
+    - Community support via Discord
+
+
+  Miner connection:
+    - Set your payout address in the app Settings tab.
+    - URL: `stratum+tcp://<your-host-ip>:4321`
+    - Username: worker name (optional). `walletAddress.workername` also works, but it does not control payout.
+      Example: `rig01.workername`
+    - Password: anything
+
+
+  Notes:
+    - Payout address supports both legacy Base58 (`1...` / `3...`) and CashAddr (`ecash:q...` / `ecash:p...`).
+    - Solo mining is extremely unlikely to find blocks without significant hashrate.
+    - First sync can be slow on small or busy systems. SSD strongly recommended.
+
+
+  Components:
+    - Bitcoin ABC (eCash) full node (MIT): https://github.com/Bitcoin-ABC/bitcoin-abc
+    - ecash-ckpool-solo (GPLv3) solo pool engine: https://github.com/WillItMod/ecash-ckpool-solo
+
+
+  Status:
+    - RC1 build: verify payout addresses before mining and report unexpected behaviour.
+developer: WillItMod
+website: https://github.com/WillItMod/AxeXEC
+repo: https://github.com/WillItMod/AxeXEC
+support: https://discord.gg/vC2UrFAbUF
+dependencies: []
+port: 21218
+icon: https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-dev-xec/icon.png
+gallery:
+  - https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-dev-xec/icon.png
+  - https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-dev-xec/images/1.png
+  - https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-dev-xec/images/2.png
+  - https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-dev-xec/images/3.png
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+widgets:
+  - id: "sync"
+    type: "text-with-progress"
+    refresh: "5s"
+    endpoint: "axexec-app:3000/api/widget/sync"
+    link: ""
+    example:
+      type: "text-with-progress"
+      link: ""
+      title: "XEC sync"
+      text: "83%"
+      progressLabel: "In progress"
+      progress: 0.83
+  - id: "pool"
+    type: "three-stats"
+    refresh: "30s"
+    endpoint: "axexec-app:3000/api/widget/pool"
+    link: ""
+    example:
+      type: "three-stats"
+      link: ""
+      items:
+        - title: "Hashrate"
+          text: "1.2"
+          subtext: "TH/s"
+        - title: "Workers"
+          text: "2"
+        - title: "Best Share"
+          text: "21"
+          subtext: "G"
+backupIgnore:
+  - data/node/blocks
+  - data/node/chainstate
+  - data/node/indexes
+submitter: WillItMod

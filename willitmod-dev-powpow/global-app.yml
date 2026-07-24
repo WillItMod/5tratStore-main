@@ -1,0 +1,68 @@
+manifestVersion: 1
+id: willitmod-dev-powpow
+category: altcoin
+name: "PowPow"
+version: "0.2.31"
+tagline: LTC + DOGE merged mining
+description: >-
+  RC1 RELEASE
+
+  PowPow is functional, has successfully found blocks, and has completed
+  extended DEV-channel merged-mining tests.
+
+  Miner connection:
+    - URL: `stratum+tcp://<your-5tratumos-host-ip>:9555`
+    - Username: `solo.workername`
+    - Password: anything
+developer: WillItMod
+website: https://github.com/WillItMod/PowPow
+repo: https://github.com/WillItMod/PowPow
+support: https://discord.gg/vC2UrFAbUF
+dependencies: []
+port: 21221
+icon: https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-dev-powpow/icon.png
+gallery:
+  - https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-dev-powpow/images/1.png
+  - https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-dev-powpow/images/2.png
+  - https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-dev-powpow/images/3.png
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+widgets:
+  - id: "sync"
+    type: "text-with-progress"
+    refresh: "5s"
+    endpoint: "powpow-app:3000/api/widget/sync"
+    link: ""
+    example:
+      type: "text-with-progress"
+      link: ""
+      title: "PowPow sync"
+      text: "83%"
+      progressLabel: "In progress"
+      progress: 0.83
+  - id: "pool"
+    type: "three-stats"
+    refresh: "30s"
+    endpoint: "powpow-app:3000/api/widget/pool"
+    link: ""
+    example:
+      type: "three-stats"
+      link: ""
+      items:
+        - title: "Hashrate"
+          text: "1.2"
+          subtext: "GH/s"
+        - title: "Workers"
+          text: "2"
+        - title: "Best share"
+          text: "21"
+          subtext: ""
+backupIgnore:
+  - data/litecoin/blocks
+  - data/litecoin/chainstate
+  - data/litecoin/indexes
+  - data/dogecoin/blocks
+  - data/dogecoin/chainstate
+  - data/dogecoin/indexes
+submitter: WillItMod

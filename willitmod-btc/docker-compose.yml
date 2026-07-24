@@ -29,7 +29,7 @@ services:
       - |-
         set -eu
 
-        apk add --no-cache envsubst >/dev/null
+        apk add --no-cache envsubst jq >/dev/null
 
         # Persist JWT secret into ${APP_DATA_DIR}/.env so that SSH restarts
         # (without exports.sh) don't boot app_proxy with an empty JWT_SECRET.
@@ -48,10 +48,26 @@ services:
         fi
 
         mkdir -p /data/node /data/pool/config /data/pool/www/pool /data/pool/www/users
-
         # Ensure template scripts are executable (Windows checkouts can lose +x).
         chmod +x /data/templates/bitcoind-entrypoint.sh /data/templates/ckpool-entrypoint.sh 2>/dev/null || true
         chown 1000:1000 /data/templates/bitcoind-entrypoint.sh /data/templates/ckpool-entrypoint.sh 2>/dev/null || true
+
+        # Migration/repair:
+        # Older installs may have persisted an AxeBTCF-era ckpool.conf.template (merged-mining/Fractal).
+        # Because templates live in the persistent /data volume, store updates do not automatically replace them.
+        #
+        # NOTE: avoid embedding a full JSON template directly in this command block because 5tratumos/umbrel
+        # tooling rewrites docker-compose.yml and can choke on lots of unescaped quotes.
+        if [ -f /data/templates/ckpool.conf.template ]; then
+          if grep -q '"auxd"' /data/templates/ckpool.conf.template; then
+            # Drop the auxd block (merged mining).
+            sed -i '/"auxd"[[:space:]]*:/,/^  ],/d' /data/templates/ckpool.conf.template || true
+          fi
+          # Drop auxaddress (merged mining).
+          sed -i '/"auxaddress"[[:space:]]*:/d' /data/templates/ckpool.conf.template || true
+          # Fix signature string.
+          sed -i 's#/AxeBTCF/#/AxeBTC/#g' /data/templates/ckpool.conf.template || true
+        fi
 
         # The host may create settings.yml as root during update/install; ensure it stays writable.
         touch /appdata/settings.yml
@@ -75,9 +91,15 @@ services:
           envsubst < /data/templates/ckpool.conf.template > /data/pool/config/ckpool.conf
           chown -R 1000:1000 /data/pool
         else
-          # Upgrade safety: older installs may have a ckpool.conf without webdir/userdir,
-          # which prevents ckpool from writing per-user/worker stats (UI shows 0 workers).
+          # Upgrade safety:
+          # - Ensure ckpool.conf has webdir/userdir so worker stats are written.
+          # - Remove any AuxPoW (Fractal) config keys from older AxeBTCF installs.
+          existing_addr="$$(grep -oE '\"btcaddress\"[[:space:]]*:[[:space:]]*\"[^\"]*\"' /data/pool/config/ckpool.conf | head -n 1 | cut -d: -f2- | tr -d ' \"' || true)"
           needs_ckpool_regen=0
+          # If ckpool.conf isn't valid JSON, regenerate it (fixes broken escapes like "btcaddress": "\1").
+          if ! jq -e . /data/pool/config/ckpool.conf >/dev/null 2>&1; then
+            needs_ckpool_regen=1
+          fi
           if ! grep -q '"btcaddress"' /data/pool/config/ckpool.conf; then
             needs_ckpool_regen=1
           fi
@@ -97,11 +119,19 @@ services:
           if grep -q '/AxeBTCF/' /data/pool/config/ckpool.conf; then
             needs_ckpool_regen=1
           fi
+          # Repair: invalid JSON caused by an escaped backreference (e.g. "btcaddress": "\1").
+          case "$$existing_addr" in
+            *\\*) needs_ckpool_regen=1 ;;
+          esac
           if [ "$$needs_ckpool_regen" -eq 1 ]; then
-            existing_addr="$$(grep -oE '\"btcaddress\"[[:space:]]*:[[:space:]]*\"[^\"]*\"' /data/pool/config/ckpool.conf | head -n 1 | sed -E 's/.*\"btcaddress\"[[:space:]]*:[[:space:]]*\"([^\"]*)\".*/\\1/' || true)"
-            if [ -n "$$existing_addr" ] && [ "$$existing_addr" != "CHANGEME_BTC_PAYOUT_ADDRESS" ]; then
-              export PAYOUT_ADDRESS="$$existing_addr"
-            fi
+            # Preserve a valid existing payout address when regenerating.
+            case "$$existing_addr" in
+              bc1*|1*|3*)
+                if [ "$$existing_addr" != "CHANGEME_BTC_PAYOUT_ADDRESS" ]; then
+                  export PAYOUT_ADDRESS="$$existing_addr"
+                fi
+                ;;
+            esac
             mv /data/pool/config/ckpool.conf "/data/pool/config/ckpool.conf.bak.$(date +%s 2>/dev/null || echo 0)" || true
             envsubst < /data/templates/ckpool.conf.template > /data/pool/config/ckpool.conf
             chown -R 1000:1000 /data/pool
@@ -148,7 +178,7 @@ services:
     entrypoint: ["/bin/sh", "/ckpool-entrypoint.sh"]
 
   app:
-    image: ghcr.io/willitmod/axebtc-app-umbrel-dev:0.7.82.4-dev
+    image: ghcr.io/willitmod/axebtc-app-umbrel-dev:0.7.82.8
     user: "1000:1000"
     restart: on-failure
     stop_grace_period: 30s
@@ -170,7 +200,10 @@ services:
       BTC_RPC_USER: "btc"
       BTC_RPC_PASS: "${APP_PASSWORD}"
       CKPOOL_STATUS_DIR: "/data/pool/www/pool"
+      CKPOOL_STRATUM_HOST: "ckpool"
+      CKPOOL_STRATUM_PORT: "3333"
       APP_CHANNEL: "RC1"
+      APP_VERSION_SUFFIX: ""
       BITCOIND_IMAGE: "ghcr.io/willitmod/axebtc-bitcoind-switch:0.7.44"
       CKPOOL_IMAGE: "ghcr.io/willitmod/docker-ckpool-solo:590fb2a"
       STATIC_DIR: "/app/static"

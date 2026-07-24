@@ -217,7 +217,7 @@ services:
       - ${APP_DATA_DIR}/data/pool/www:/www
 
   app:
-    image: ghcr.io/willitmod/axebch-app-umbrel-dev:0.9.1
+    image: ghcr.io/willitmod/axebch-app-umbrel-dev:0.9.16
     user: "1000:1000"
     restart: on-failure
     stop_grace_period: 30s
@@ -240,7 +240,10 @@ services:
       BCH_RPC_USER: "bch"
       BCH_RPC_PASS: "${APP_PASSWORD}"
       CKPOOL_STATUS_DIR: "/data/pool/www/pool"
+      CKPOOL_STRATUM_HOST: "ckpool"
+      CKPOOL_STRATUM_PORT: "3333"
       APP_CHANNEL: "RC1"
+      APP_VERSION_SUFFIX: ""
       BCHN_IMAGE: "ghcr.io/willitmod/bitcoin-cash-node:v29.0.0-wm3"
       CKPOOL_IMAGE: "ghcr.io/willitmod/wim-solo-ckpool:0.8.3-rc1-590fb2a"
       STATIC_DIR: "/app/static"

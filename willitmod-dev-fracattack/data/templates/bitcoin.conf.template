@@ -1,0 +1,40 @@
+server=1
+txindex=0
+listen=1
+discover=1
+
+# Fractal mining nodes can run pruned. Keep the default conservative for
+# test boxes; serious mining nodes still need substantial SSD storage.
+prune=10000
+
+# Allow more peers (helps initial sync + network robustness).
+maxconnections=256
+dnsseed=1
+fixedseeds=1
+forcednsseed=1
+
+# Fractal mainnet service-bit DNS seeds. The root seed hostnames can be empty
+# unless queried with the service prefix, so keep explicit x9 seeds here.
+seednode=x9.dnsseed-mainnet.fractalbitcoin.io
+seednode=x9.dnsseed-mainnet.unisat.io
+addnode=x9.dnsseed-mainnet.fractalbitcoin.io
+addnode=x9.dnsseed-mainnet.unisat.io
+
+# Mainnet only.
+
+# Ports
+port=${BTC_P2P_PORT}
+rpcport=${BTC_RPC_PORT}
+
+# RPC (not published to the host by default; internal apps only)
+rpcuser=${RPC_USER}
+rpcpassword=${RPC_PASSWORD}
+rpcbind=0.0.0.0
+rpcallowip=127.0.0.1/32
+rpcallowip=${APPS_SUBNET}
+rpcallowip=10.0.0.0/8
+rpcallowip=172.16.0.0/12
+rpcallowip=192.168.0.0/16
+
+# ZMQ (for pool notifications)
+zmqpubhashblock=tcp://0.0.0.0:${BTC_ZMQ_HASHBLOCK_PORT}

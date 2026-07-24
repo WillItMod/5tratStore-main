@@ -1,0 +1,19 @@
+{
+  "btcd": [
+    {
+      "url": "xecd:${XEC_RPC_PORT}",
+      "auth": "${RPC_USER}",
+      "pass": "${RPC_PASSWORD}",
+      "notify": true
+    }
+  ],
+  "btcaddress": "${PAYOUT_ADDRESS}",
+  "btcsig": "/mined by WillItMod on 5tratumOS/",
+  "mindiff": 1,
+  "startdiff": 16,
+  "maxdiff": 0,
+  "logdir": "/www",
+  "webdir": "/www/pool",
+  "userdir": "/www/users",
+  "zmqblock": "tcp://xecd:${XEC_ZMQ_HASHBLOCK_PORT}"
+}
