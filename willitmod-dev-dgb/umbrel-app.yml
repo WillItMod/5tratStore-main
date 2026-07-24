@@ -2,15 +2,15 @@ manifestVersion: 1
 id: willitmod-dev-dgb
 category: altcoin
 name: AxeDGB
-version: "0.9.177"
+version: "0.9.179"
 tagline: DGB node + solo pool
 description: >-
   RC6 RELEASE
 
-  AxeDGB is functional and has successfully found blocks. This release includes
-  current DigiByte Core support, full NerdQAxe version rolling, clearer startup
-  progress, safer automatic memory settings for shared-node systems, and automatic
-  handling of the DigiDollar transaction-index requirement introduced by Core 9.26.4.
+  AxeDGB is functional and has successfully found blocks. This release makes
+  DigiByte Core startup progress visible, reduces peak RAM pressure on shared nodes,
+  and moves the node to Core 9.26.5, which fixes the long DigiDollar oracle startup
+  delay seen in 9.26.4.
 
   Verify payout addresses before mining and send helpful feedback if anything behaves oddly.
 
@@ -46,7 +46,7 @@ description: >-
 
 
   Status:
-    - RC6 build: expect minor bugs. This update automatically enables the transaction index on archival nodes and disables it on pruned nodes, preventing Core 9.26.4 startup loops without deleting blockchain data.
+    - RC6 build: expect minor bugs. Core 9.26.5 fixes the long DigiDollar startup delay without requiring a reindex. AxeDGB also avoids false rebuild warnings while Core is starting, and preserves existing blockchain data.
 developer: WillItMod
 website: https://github.com/WillItMod/umbrel-community-store
 repo: https://github.com/WillItMod/umbrel-community-store

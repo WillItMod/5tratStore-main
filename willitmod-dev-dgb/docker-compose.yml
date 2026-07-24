@@ -1040,7 +1040,7 @@ services:
         fi
 
   dgbd:
-    image: ghcr.io/willitmod/digibyte:9.26.4
+    image: ghcr.io/willitmod/digibyte:9.26.5
     user: "1000:1000"
     restart: unless-stopped
     stop_grace_period: 15m30s
@@ -1059,7 +1059,7 @@ services:
       test:
         [
           "CMD-SHELL",
-          "digibyte-cli -datadir=/data getblockchaininfo >/dev/null 2>&1 || digibyte-cli -datadir=/data getblockchaininfo 2>&1 | grep -qE 'Loading block index|Rewinding blocks|Verifying blocks|Loading wallet'",
+          "digibyte-cli -datadir=/data getblockchaininfo >/dev/null 2>&1 || digibyte-cli -datadir=/data getblockchaininfo 2>&1 | grep -qE 'error code: -28|Loading block index|Rewinding blocks|Verifying blocks|Loading wallet|Starting network threads'",
         ]
       interval: 30s
       timeout: 10s
@@ -1096,7 +1096,7 @@ services:
       - ${APP_DATA_DIR}/data/pool/config/coins.json:/app/coins.json:ro
 
   app:
-    image: ghcr.io/willitmod/axedgb-app:0.9.177
+    image: ghcr.io/willitmod/axedgb-app:0.9.179
     user: "1000:1000"
     restart: on-failure
     stop_grace_period: 30s
@@ -1134,7 +1134,7 @@ services:
       WORKER_ACTIVE_SECONDS: "300"
       APP_CHANNEL: "RC6"
       APP_VERSION_SUFFIX: ""
-      DGB_IMAGE: "ghcr.io/willitmod/digibyte:9.26.4"
+      DGB_IMAGE: "ghcr.io/willitmod/digibyte:9.26.5"
       MININGCORE_IMAGE: "ghcr.io/willitmod/axedgb-miningcore:axedgb-0.8.10-r26"
       POSTGRES_IMAGE: "postgres:16-alpine"
       STATIC_DIR: "/app/static"

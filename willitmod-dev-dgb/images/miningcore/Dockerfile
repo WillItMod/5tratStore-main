@@ -2,7 +2,9 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0-jammy AS builder
 
 WORKDIR /src
 
-RUN apt-get update && \
+RUN find /etc/apt -type f \( -name '*.list' -o -name '*.sources' \) \
+      -exec sed -i 's|http://ports.ubuntu.com/ubuntu-ports|https://mirrors.mit.edu/ubuntu-ports|g' {} + && \
+    apt-get -o Acquire::Retries=5 -o Acquire::https::Timeout=30 update && \
     apt-get -y install --no-install-recommends \
       build-essential \
       libssl-dev \
@@ -78,7 +80,10 @@ FROM mcr.microsoft.com/dotnet/aspnet:6.0-jammy
 
 WORKDIR /app
 
-RUN apt-get update && apt-get -y install --no-install-recommends \
+RUN find /etc/apt -type f \( -name '*.list' -o -name '*.sources' \) \
+      -exec sed -i 's|http://ports.ubuntu.com/ubuntu-ports|https://mirrors.mit.edu/ubuntu-ports|g' {} + && \
+    apt-get -o Acquire::Retries=5 -o Acquire::https::Timeout=30 update && \
+    apt-get -y install --no-install-recommends \
   libzmq5 \
   ca-certificates \
   curl \

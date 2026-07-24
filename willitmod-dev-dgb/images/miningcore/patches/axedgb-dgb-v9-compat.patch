@@ -1,0 +1,84 @@
+diff --git a/src/Miningcore/Blockchain/Bitcoin/BitcoinPool.cs b/src/Miningcore/Blockchain/Bitcoin/BitcoinPool.cs
+index 25ca34d1..38a19fcb 100644
+--- a/src/Miningcore/Blockchain/Bitcoin/BitcoinPool.cs
++++ b/src/Miningcore/Blockchain/Bitcoin/BitcoinPool.cs
+@@ -83,7 +83,8 @@ public class BitcoinPool : PoolBase
+ 
+         // send intial update
+         await connection.NotifyAsync(BitcoinStratumMethods.SetDifficulty, new object[] { context.Difficulty });
+-        await connection.NotifyAsync(BitcoinStratumMethods.MiningNotify, currentJobParams);
++        await connection.NotifyAsync(BitcoinStratumMethods.MiningNotify,
++            GetJobParamsForConnection(context, currentJobParams));
+     }
+ 
+     protected virtual async Task OnAuthorizeAsync(StratumConnection connection, Timestamped<JsonRpcRequest> tsRequest, CancellationToken ct)
+@@ -228,7 +229,11 @@ public class BitcoinPool : PoolBase
+ 
+         try
+         {
+-            var requestedDiff = (double) Convert.ChangeType(request.Params, TypeCode.Double)!;
++            var requestParams = request.ParamsAs<JToken[]>();
++            if(requestParams == null || requestParams.Length == 0)
++                throw new StratumException(StratumError.Other, "missing suggested difficulty");
++
++            var requestedDiff = requestParams[0].Value<double>();
+ 
+             // client may suggest higher-than-base difficulty, but not a lower one
+             var poolEndpoint = poolConfig.Ports[connection.LocalEndpoint.Port];
+@@ -276,6 +281,15 @@ public class BitcoinPool : PoolBase
+         }
+ 
+         await connection.RespondAsync(result, request.Id);
++
++        // ESP-Miner-family clients subscribe before negotiating version rolling. Send
++        // a replacement job immediately after configure so they do not keep hashing
++        // the initial, unsanitized DGB job until the next network template arrives.
++        if(coin.Symbol == "DGB" && context.IsSubscribed && context.VersionRollingMask.HasValue && currentJobParams != null)
++        {
++            await connection.NotifyAsync(BitcoinStratumMethods.MiningNotify,
++                GetJobParamsForConnection(context, currentJobParams, true));
++        }
+     }
+ 
+     private void ConfigureVersionRolling(StratumConnection connection, BitcoinWorkerContext context,
+@@ -317,6 +331,30 @@ public class BitcoinPool : PoolBase
+         }
+     }
+ 
++    private object GetJobParamsForConnection(BitcoinWorkerContext context, object jobParams, bool forceClean = false)
++    {
++        if(coin.Symbol != "DGB" || !context.VersionRollingMask.HasValue || jobParams is not object[] source)
++            return jobParams;
++
++        var result = source.ToArray();
++
++        if(result.Length > 5 && result[5] is string versionHex &&
++            uint.TryParse(versionHex, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out var version))
++        {
++            // DGB v9 uses BIP9 bit 23 inside the standard rolling region. NerdQAxe
++            // firmware ORs ASIC-rolled bits into the advertised base and submits an
++            // XOR delta. Clearing negotiated rolling bits in the per-client base makes
++            // that delta identical to BIP310 version bits without altering non-rolling
++            // clients or Miningcore's original block-template version.
++            result[5] = (version & ~context.VersionRollingMask.Value).ToStringHex8();
++        }
++
++        if(forceClean && result.Length > 0)
++            result[^1] = true;
++
++        return result;
++    }
++
+     protected virtual async Task OnNewJobAsync(object jobParams)
+     {
+         currentJobParams = jobParams;
+@@ -332,7 +370,8 @@ public class BitcoinPool : PoolBase
+                 await connection.NotifyAsync(BitcoinStratumMethods.SetDifficulty, new object[] { context.Difficulty });
+ 
+             // send job
+-            await connection.NotifyAsync(BitcoinStratumMethods.MiningNotify, currentJobParams);
++            await connection.NotifyAsync(BitcoinStratumMethods.MiningNotify,
++                GetJobParamsForConnection(context, currentJobParams));
+         }));
+     }
+ 

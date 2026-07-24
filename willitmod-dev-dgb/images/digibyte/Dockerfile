@@ -1,44 +1,76 @@
-FROM debian:bookworm-slim
+FROM debian:bookworm AS builder
 
-# DigiByte Core: install from official upstream release tarballs (amd64 + arm64).
+# v9.26.5 is an official upstream tag. DigiByte had not yet attached binary
+# release assets when this image was built, so compile the exact tagged commit
+# rather than taking code from a moving branch.
 ARG TARGETARCH
-ARG DGB_RELEASE_TAG="v8.26.2"
-ARG DGB_VERSION="8.26.2"
-ARG DGB_AMD64_SHA256="bffa56a4609e374010da36125c7f84521ef449f6c741a3ef765be4a23264535d"
-ARG DGB_ARM64_SHA256="9fc818ca15b849a609be0714751e7673eeba1b35936fb42acdcbcf2511554313"
+ARG DGB_VERSION="9.26.5"
+ARG DGB_RELEASE_TAG="v9.26.5"
+ARG DGB_COMMIT="05b50e229db5a3d1fb316c77f3f6c62efa879b96"
 
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends ca-certificates curl gzip tar libstdc++6 libgcc-s1 libevent-2.1-7 && \
+    apt-get install -y --no-install-recommends \
+      autoconf \
+      automake \
+      bsdmainutils \
+      build-essential \
+      ca-certificates \
+      curl \
+      git \
+      libtool \
+      pkg-config \
+      python3 \
+      xz-utils && \
     rm -rf /var/lib/apt/lists/*
+
+RUN git clone --filter=blob:none https://github.com/DigiByte-Core/digibyte.git /src && \
+    cd /src && \
+    git checkout --detach "${DGB_COMMIT}" && \
+    test "$(git rev-parse HEAD)" = "${DGB_COMMIT}" && \
+    git tag --points-at HEAD | grep -Fx "${DGB_RELEASE_TAG}"
+
+WORKDIR /src
 
 RUN set -eu; \
     case "${TARGETARCH:-}" in \
-      amd64) asset="digibyte-${DGB_VERSION}-x86_64-linux-gnu.tar.gz"; sha="${DGB_AMD64_SHA256}" ;; \
-      arm64) asset="digibyte-${DGB_VERSION}-aarch64-linux-gnu.tar.gz"; sha="${DGB_ARM64_SHA256}" ;; \
+      amd64) host="x86_64-pc-linux-gnu" ;; \
+      arm64) host="aarch64-linux-gnu" ;; \
       *) echo "unsupported TARGETARCH=${TARGETARCH:-<unset>}"; exit 1 ;; \
     esac; \
-    url="https://github.com/DigiByte-Core/digibyte/releases/download/${DGB_RELEASE_TAG}/${asset}"; \
-    curl -fsSL -o /tmp/dgb.tar.gz "${url}"; \
-    echo "${sha}  /tmp/dgb.tar.gz" | sha256sum -c -; \
-    mkdir -p /opt/digibyte; \
-    tar -xzf /tmp/dgb.tar.gz -C /opt/digibyte --strip-components=1; \
-    rm -f /tmp/dgb.tar.gz; \
-    if [ -f /opt/digibyte/lib/libdigibyteconsensus.so.0.0.0 ]; then \
-      cp -f /opt/digibyte/lib/libdigibyteconsensus.so.0.0.0 /opt/digibyte/lib/libdigibyteconsensus.so.0 || true; \
-      cp -f /opt/digibyte/lib/libdigibyteconsensus.so.0.0.0 /opt/digibyte/lib/libdigibyteconsensus.so || true; \
-    fi; \
-    mkdir -p /opt/digibyte; \
-    install -m 0755 /opt/digibyte/bin/digibyted /usr/local/bin/digibyted; \
-    install -m 0755 /opt/digibyte/bin/digibyte-cli /usr/local/bin/digibyte-cli; \
-    install -m 0755 /opt/digibyte/bin/digibyte-tx /usr/local/bin/digibyte-tx; \
-    install -m 0755 /opt/digibyte/bin/digibyte-util /usr/local/bin/digibyte-util; \
-    if [ -f /opt/digibyte/bin/digibyte-wallet ]; then \
-      install -m 0755 /opt/digibyte/bin/digibyte-wallet /usr/local/bin/digibyte-wallet; \
-    fi
+    make -C depends -j"$(nproc)" HOST="${host}" NO_QT=1 NO_QR=1; \
+    ./autogen.sh; \
+    CONFIG_SITE="$PWD/depends/${host}/share/config.site" \
+      ./configure \
+        --without-gui \
+        --disable-tests \
+        --disable-bench \
+        --disable-man \
+        --enable-reduce-exports; \
+    make -j"$(nproc)"; \
+    make install DESTDIR=/stage
 
-ENV LD_LIBRARY_PATH="/opt/digibyte/lib"
+FROM debian:bookworm-slim
+
+ARG DGB_VERSION="9.26.5"
+ARG DGB_COMMIT="05b50e229db5a3d1fb316c77f3f6c62efa879b96"
+
+LABEL org.opencontainers.image.source="https://github.com/DigiByte-Core/digibyte" \
+      org.opencontainers.image.version="${DGB_VERSION}" \
+      org.opencontainers.image.revision="${DGB_COMMIT}"
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends ca-certificates libstdc++6 libgcc-s1 && \
+    rm -rf /var/lib/apt/lists/*
+
+COPY --from=builder /stage/usr/local/bin/digibyted /usr/local/bin/digibyted
+COPY --from=builder /stage/usr/local/bin/digibyte-cli /usr/local/bin/digibyte-cli
+COPY --from=builder /stage/usr/local/bin/digibyte-tx /usr/local/bin/digibyte-tx
+COPY --from=builder /stage/usr/local/bin/digibyte-util /usr/local/bin/digibyte-util
+COPY --from=builder /stage/usr/local/bin/digibyte-wallet /usr/local/bin/digibyte-wallet
 
 RUN groupadd -g 1000 umbrel 2>/dev/null || true && \
     useradd -m -u 1000 -g 1000 umbrel 2>/dev/null || true && \
