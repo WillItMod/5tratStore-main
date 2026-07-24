@@ -1,8 +1,8 @@
-﻿manifestVersion: 1
+manifestVersion: 1
 id: willitmod-axebench
 category: bitcoin
 name: AxeBench
-version: "4.0.28"
+version: "4.0.28-r1"
 tagline: Bitaxe fleet benchmarking and management
 icon: https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-axebench/icon.png
 description: >-
@@ -32,6 +32,11 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
+  v4.0.28-r1:
+    - Restore the MAIN Umbrel proxy hostname so AxeBench opens correctly on port 5000.
+    - Restore the MAIN network subnet to avoid colliding with an installed DEV package.
+    - Keep the tested v4.0.28 Release Candidate application image unchanged.
+
   v4.0.28:
     - Promote the tested DEV build to the MAIN Community Store as a Release Candidate.
     - Align the visible UI and backend version markers with the release image.
