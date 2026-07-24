@@ -1,0 +1,7 @@
+{
+  "name": "Peercoin",
+  "symbol": "PPC",
+  "algorithm": "sha256",
+  "reward": "POW",
+  "version_mask": "1fffe000"
+}

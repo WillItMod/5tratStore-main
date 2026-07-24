@@ -2,9 +2,19 @@ manifestVersion: 1
 id: willitmod-btc
 category: bitcoin
 name: AxeBTC
-version: "0.7.82.4"
+version: "0.7.82.8"
 tagline: BTC node + solo pool
 description: >-
+  RC1 RELEASE
+
+  AxeBTC is functional and has completed extended DEV-channel testing. It has
+  not hit a solo block yet, but
+  that is expected at typical solo-mining odds and is not a sign that the app is
+  failing.
+
+  Verify payout addresses and pool settings before mining, and send helpful
+  feedback if anything behaves oddly.
+
   Run a Bitcoin (BTC) full node (Bitcoin Core or Bitcoin Knots) and an integrated solo Stratum v1 pool (ckpool) as a single app.
 
   Miner connection:
@@ -14,6 +24,8 @@ description: >-
 
 
   Notes:
+    - Initial sync can take a long time and a lot of bandwidth/storage (the node downloads and validates the chain).
+    - Blockchains can carry arbitrary data (e.g. via `OP_RETURN`). That’s not unique to any one chain.
     - Set your payout address in the app Settings tab.
     - Pool settings apply automatically; miners may briefly reconnect after saving.
     - On first launch you must pick Bitcoin Core vs Knots before sync starts.
@@ -25,9 +37,9 @@ repo: https://github.com/WillItMod/umbrel-community-store
 support: https://discord.gg/vC2UrFAbUF
 dependencies: []
 port: 21215
-icon: "https://raw.githubusercontent.com/WillItMod/umbrel-community-store/2ef643c/willitmod-btc/logo.png"
+icon: "https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-btc/icon.png"
 gallery:
-  - "https://raw.githubusercontent.com/WillItMod/umbrel-community-store/2ef643c/willitmod-btc/logo.png"
+  - "https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-btc/icon.png"
   - "https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-btc/images/1.png"
   - "https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-btc/images/2.png"
   - "https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-btc/images/3.png"

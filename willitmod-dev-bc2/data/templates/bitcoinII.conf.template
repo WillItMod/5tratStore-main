@@ -1,0 +1,23 @@
+server=1
+txindex=0
+
+rpcuser=${RPC_USER}
+rpcpassword=${RPC_PASSWORD}
+rpcport=${BTC2_RPC_PORT}
+rpcbind=0.0.0.0
+rpcallowip=127.0.0.1/32
+rpcallowip=${APPS_SUBNET}
+rpcallowip=10.0.0.0/8
+rpcallowip=172.16.0.0/12
+rpcallowip=192.168.0.0/16
+
+# ZMQ (ckpool block notifications)
+zmqpubhashblock=tcp://0.0.0.0:${BTC2_ZMQ_HASHBLOCK_PORT}
+
+# Network
+port=${BTC2_P2P_PORT}
+listen=1
+upnp=1
+
+# Pruning (optional): keep only a rolling tail of recent blocks to reduce retained history.
+prune=550

@@ -1,0 +1,77 @@
+manifestVersion: 1
+id: willitmod-dev-bc2
+category: bitcoin
+name: AxeBC2
+version: "0.1.8"
+tagline: BC2 node + solo pool
+description: >-
+  RC1 RELEASE
+
+  AxeBC2 is functional, has successfully found blocks, and has completed
+  extended DEV-channel node and solo-pool testing.
+
+  Run a BitcoinII (BC2) full node and an integrated solo Stratum v1 pool (ckpool) as a single app.
+
+
+  Miner connection:
+    - URL: `stratum+tcp://<node-ip>:2345`
+    - Username: worker name (optional)
+    - Password: anything
+
+
+  Notes:
+    - Set your payout address in the app Settings tab.
+    - Initial sync can take a long time and a lot of bandwidth/storage (the node downloads and validates the chain).
+    - Solo mining is extremely unlikely to find blocks without significant hashrate.
+
+
+  Components:
+    - BitcoinII Core: https://github.com/Bitcoin-II/BitcoinII-Core
+    - ckpool: https://github.com/ckolivas/ckpool
+developer: WillItMod
+website: https://github.com/WillItMod/AxeBC2
+repo: https://github.com/WillItMod/AxeBC2
+support: https://discord.gg/vC2UrFAbUF
+dependencies: []
+port: 21219
+icon: https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-dev-bc2/icon.png
+gallery:
+  - https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-dev-bc2/icon.png
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+widgets:
+  - id: "sync"
+    type: "text-with-progress"
+    refresh: "5s"
+    endpoint: "axebc2-app:3000/api/widget/sync"
+    link: ""
+    example:
+      type: "text-with-progress"
+      link: ""
+      title: "BC2 sync"
+      text: "83%"
+      progressLabel: "In progress"
+      progress: 0.83
+  - id: "pool"
+    type: "three-stats"
+    refresh: "30s"
+    endpoint: "axebc2-app:3000/api/widget/pool"
+    link: ""
+    example:
+      type: "three-stats"
+      link: ""
+      items:
+        - title: "Hashrate"
+          text: "1.2"
+          subtext: "TH/s"
+        - title: "Workers"
+          text: "2"
+        - title: "Best Share"
+          text: "21"
+          subtext: "G"
+backupIgnore:
+  - data/node/blocks
+  - data/node/chainstate
+  - data/node/indexes
+submitter: WillItMod

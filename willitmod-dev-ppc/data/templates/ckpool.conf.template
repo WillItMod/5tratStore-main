@@ -1,0 +1,19 @@
+{
+  "btcd": [
+    {
+      "url": "ppcd:${PPC_RPC_PORT}",
+      "auth": "${RPC_USER}",
+      "pass": "${RPC_PASSWORD}",
+      "notify": true
+    }
+  ],
+  "btcaddress": "${PAYOUT_ADDRESS}",
+  "btcsig": "/AxePPC/",
+  "mindiff": 1,
+  "startdiff": 1,
+  "maxdiff": 0,
+  "logdir": "/www",
+  "webdir": "/www/pool",
+  "userdir": "/www/users",
+  "zmqblock": "tcp://ppcd:${PPC_ZMQ_HASHBLOCK_PORT}"
+}

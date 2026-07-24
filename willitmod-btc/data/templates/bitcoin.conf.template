@@ -7,7 +7,7 @@ prune=0
 # Allow more peers (helps initial sync + network robustness).
 maxconnections=256
 
-# Mainnet only (AxeBTC v0.7.1).
+# Mainnet only.
 
 # Ports
 port=${BTC_P2P_PORT}

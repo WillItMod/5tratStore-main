@@ -2,19 +2,21 @@ manifestVersion: 1
 id: willitmod-axemig
 category: bitcoin
 name: AxeMIG
-version: "0.1.17"
-tagline: EXPERIMENTAL - PRE ALPHA - USE WITH CAUTION
-icon: "https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-axemig/icon.png"
+version: "0.1.21"
+tagline: Data-only blockchain migration tool
 description: >-
-  EXPERIMENTAL - PRE ALPHA - USE WITH CAUTION.
+  RELEASE CANDIDATE
 
+  AxeMIG is functional, but it moves/copies blockchain data and should be used
+  deliberately. Stop affected apps first, verify the source and target, and keep
+  a backup path for important data.
 
   AxeMIG helps you move/copy chain data (blocks/chainstate, optional peers/indexes) between Umbrel node apps.
   It does not migrate configs, secrets, cookies, or wallets.
 
 
   Typical workflow:
-    - Install the target node app (AxeBTCF / AxeBCH / AxeDGB / etc) and start it until it begins syncing (IBD started), then stop it.
+    - Install the target node app (AxeBTC / AxeBCH / AxeDGB / etc) and start it until it shows Synchronising (IBD started), then stop it.
     - Stop the source node app (Umbrel Bitcoin / Knots / etc).
     - Run AxeMIG migration, then start the target node app and verify.
 
@@ -23,15 +25,19 @@ description: >-
 developer: WillItMod
 website: https://github.com/WillItMod/AxeMIG-Release
 repo: https://github.com/WillItMod/umbrel-community-store
-support: https://github.com/WillItMod/AxeMIG-Release/issues
+support: https://discord.gg/vC2UrFAbUF
 dependencies: []
 port: 12150
+icon: "https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-axemig/icon.png"
 gallery:
   - "https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-axemig/icon.png"
 path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  EXPERIMENTAL - PRE ALPHA - USE WITH CAUTION.
+  v0.1.21: Promotes the tested DEV build to MAIN and replaces legacy Fractal wording in migration guidance with AxeBTC.
+
+  v0.1.20-dev: Relaxes the in-app maturity label to ALPHA while keeping migration safety guidance clear.
+
+  v0.1.19-dev: Fixes helper payload passing for endpoint/USB discovery and returns JSON 404 for unknown API routes so utility-app probes do not receive the HTML app shell as a false success.
 submitter: WillItMod
-submission: https://github.com/WillItMod/umbrel-community-store/commit/1fb66e1e6fc5ab9a206bdd82ca4f11ec20547ea0

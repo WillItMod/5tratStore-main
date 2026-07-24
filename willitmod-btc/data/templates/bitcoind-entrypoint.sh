@@ -28,4 +28,3 @@ fi
 echo "[axebtc] Using dbcache=${dbcache}MB"
 echo "[axebtc] Exec: bitcoind -datadir=/data -printtoconsole -dbcache=${dbcache} $extra"
 exec bitcoind -datadir=/data -printtoconsole -dbcache="${dbcache}" $extra
-

@@ -1,0 +1,252 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      # Use a unique DNS alias to avoid collisions on the host's shared Docker network.
+      APP_HOST: axexec-app
+      APP_PORT: 3000
+      # Verify auth tokens using the same secret the auth-server uses.
+      JWT_SECRET: "${JWT_SECRET}"
+    networks:
+      - umbrel_main_network
+
+  init:
+    image: alpine:3.22.1
+    volumes:
+      - ${APP_DATA_DIR}/data:/data
+      - ${APP_DATA_DIR}:/appdata
+    environment:
+      APPS_SUBNET: "${NETWORK_IP}/16"
+      RPC_USER: "xec"
+      RPC_PASSWORD: "${APP_PASSWORD}"
+      XEC_P2P_PORT: "28338"
+      XEC_RPC_PORT: "28337"
+      XEC_ZMQ_HASHBLOCK_PORT: "28339"
+      PAYOUT_ADDRESS: "CHANGEME_XEC_PAYOUT_ADDRESS"
+    command:
+      - /bin/sh
+      - -ec
+      - |-
+        set -eu
+
+        apk add --no-cache envsubst curl >/dev/null
+
+        # Persist JWT secret into ${APP_DATA_DIR}/.env so that SSH restarts
+        # (without exports.sh) don't boot app_proxy with an empty JWT_SECRET.
+        if [ -n "${JWT_SECRET:-}" ]; then
+          envfile="/appdata/.env"
+          tmp="/appdata/.env.tmp"
+          if [ -f "$$envfile" ]; then
+            grep -v '^JWT_SECRET=' "$$envfile" > "$$tmp" || true
+          else
+            : > "$$tmp"
+          fi
+          printf "JWT_SECRET=%s\n" "${JWT_SECRET}" >> "$$tmp"
+          chmod 600 "$$tmp" || true
+          chown 1000:1000 "$$tmp" || true
+          mv "$$tmp" "$$envfile"
+        fi
+
+        mkdir -p /data/node /data/pool/config /data/pool/www/pool /data/pool/www/users /data/templates
+
+        # The host may create settings.yml as root during update/install; ensure it stays writable.
+        touch /appdata/settings.yml
+        chown 1000:1000 /appdata/settings.yml || true
+
+        # Cleanup from older broken installs (a directory with the script name).
+        if [ -d /data/templates/init-entrypoint.sh ]; then
+          rm -rf /data/templates/init-entrypoint.sh || true
+        fi
+
+        if [ ! -f /data/node/bitcoin.conf ]; then
+          envsubst < /data/templates/bitcoin.conf.template > /data/node/bitcoin.conf
+          chown -R 1000:1000 /data/node
+        else
+          # Keep peer limit high on existing installs too.
+          if grep -q '^maxconnections=' /data/node/bitcoin.conf; then
+            sed -i 's/^maxconnections=.*/maxconnections=256/' /data/node/bitcoin.conf
+          else
+            echo '' >> /data/node/bitcoin.conf
+            echo 'maxconnections=256' >> /data/node/bitcoin.conf
+          fi
+
+          # Ensure RPC is reachable from other containers (app + ckpool).
+          # Older installs may have rpcbind=127.0.0.1 or missing rpcallowip for the apps subnet,
+          # which can present as "connection refused" from the UI or pool services.
+          conf="/data/node/bitcoin.conf"
+          if ! awk -v apps="$$APPS_SUBNET" 'BEGIN{seenBind=0; seenApps=0}
+            /^[[]/{exit}
+            $$0=="rpcbind=0.0.0.0"{seenBind=1}
+            apps!="" && $$0==("rpcallowip=" apps){seenApps=1}
+            END{exit(seenBind && seenApps ? 0 : 1)}
+          ' "$$conf"; then
+            echo "[axexec] Ensuring RPC bind/access settings in bitcoin.conf"
+            awk -v apps="$$APPS_SUBNET" '
+              BEGIN{seenBind=0; seenLocal=0; seenApps=0; seen10=0; seen172=0; seen192=0; injected=0}
+              function mark_allow(line){
+                if(line=="rpcallowip=127.0.0.1/32") seenLocal=1
+                else if(apps!="" && line==("rpcallowip=" apps)) seenApps=1
+                else if(line=="rpcallowip=10.0.0.0/8") seen10=1
+                else if(line=="rpcallowip=172.16.0.0/12") seen172=1
+                else if(line=="rpcallowip=192.168.0.0/16") seen192=1
+              }
+              function emit_missing(){
+                if(seenBind==0){ print "rpcbind=0.0.0.0"; seenBind=1 }
+                if(seenLocal==0){ print "rpcallowip=127.0.0.1/32"; seenLocal=1 }
+                if(seenApps==0 && apps!=""){ print "rpcallowip=" apps; seenApps=1 }
+                if(seen10==0){ print "rpcallowip=10.0.0.0/8"; seen10=1 }
+                if(seen172==0){ print "rpcallowip=172.16.0.0/12"; seen172=1 }
+                if(seen192==0){ print "rpcallowip=192.168.0.0/16"; seen192=1 }
+              }
+              function maybe_inject(){
+                if(injected==1) return
+                if(seenBind==0 || seenLocal==0 || seenApps==0 || seen10==0 || seen172==0 || seen192==0){
+                  print ""
+                  print "# axexec-rpc-access-v1"
+                  print "# Ensure RPC is reachable from other containers (app + pool)"
+                  emit_missing()
+                  print ""
+                }
+                injected=1
+              }
+              /^[[]/{
+                maybe_inject()
+                print
+                next
+              }
+              /^rpcbind=/{
+                if(seenBind==0){ print "rpcbind=0.0.0.0"; seenBind=1 }
+                next
+              }
+              /^rpcallowip=/{
+                mark_allow($$0)
+                print
+                next
+              }
+              {
+                print
+                if(seenBind==0 && $$0 ~ /^rpcpassword=/){
+                  print "rpcbind=0.0.0.0"; seenBind=1
+                }
+                next
+              }
+              END{ maybe_inject() }
+            ' "$$conf" > "$$conf.tmp" && mv "$$conf.tmp" "$$conf"
+          fi
+
+          chown 1000:1000 /data/node/bitcoin.conf || true
+        fi
+
+        if [ ! -f /data/pool/config/ckpool.conf ]; then
+          envsubst < /data/templates/ckpool.conf.template > /data/pool/config/ckpool.conf
+          chown -R 1000:1000 /data/pool
+        else
+          needs_ckpool_regen=0
+          if ! grep -q '"btcaddress"' /data/pool/config/ckpool.conf; then
+            needs_ckpool_regen=1
+          fi
+          if ! grep -q '"webdir"' /data/pool/config/ckpool.conf; then
+            needs_ckpool_regen=1
+          fi
+          if ! grep -q '"userdir"' /data/pool/config/ckpool.conf; then
+            needs_ckpool_regen=1
+          fi
+          if [ "$$needs_ckpool_regen" -eq 1 ]; then
+            existing_addr="$$(grep -oE '\"btcaddress\"[[:space:]]*:[[:space:]]*\"[^\"]*\"' /data/pool/config/ckpool.conf | head -n 1 | sed -E 's/.*\"btcaddress\"[[:space:]]*:[[:space:]]*\"([^\"]*)\".*/\\1/' || true)"
+            if [ -n "$$existing_addr" ] && [ "$$existing_addr" != "CHANGEME_XEC_PAYOUT_ADDRESS" ]; then
+              export PAYOUT_ADDRESS="$$existing_addr"
+            fi
+            mv /data/pool/config/ckpool.conf "/data/pool/config/ckpool.conf.bak.$(date +%s 2>/dev/null || echo 0)" || true
+            envsubst < /data/templates/ckpool.conf.template > /data/pool/config/ckpool.conf
+            chown -R 1000:1000 /data/pool
+          fi
+        fi
+
+  xecd:
+    image: ghcr.io/willitmod/axexec-node:0.33.4-nojemalloc
+    user: "1000:1000"
+    restart: unless-stopped
+    stop_grace_period: 15m30s
+    depends_on:
+      init:
+        condition: service_completed_successfully
+    ports:
+      - "28338:28338/tcp" # P2P
+    volumes:
+      - ${APP_DATA_DIR}/data/node:/data
+      - ${APP_DATA_DIR}/data/templates/xec-entrypoint.sh:/xec-entrypoint.sh:ro
+    entrypoint: ["/bin/sh", "/xec-entrypoint.sh"]
+    healthcheck:
+      test: ["CMD-SHELL", "bitcoin-cli -datadir=/data getblockchaininfo >/dev/null 2>&1"]
+      interval: 30s
+      timeout: 10s
+      retries: 20
+      start_period: 2m
+
+  ckpool:
+    image: ghcr.io/willitmod/ecash-ckpool-solo:18b38ad
+    entrypoint: ["/bin/sh"]
+    command:
+      - -ec
+      - |-
+        # After an unclean host restart, ckpool can leave stale pid files behind in the
+        # container filesystem (Docker restarts the same container, so its writable layer
+        # persists). This can prevent ckpool from starting cleanly until the container is
+        # recreated via an app restart. Remove stale pid files on boot to self-heal.
+        rm -f /tmp/ckpool/*.pid 2>/dev/null || true
+        if command -v ckpool >/dev/null 2>&1; then
+          exec ckpool -k -x -L -c /config/ckpool.conf
+        elif [ -x /bin/ckpool ]; then
+          exec /bin/ckpool -k -x -L -c /config/ckpool.conf
+        elif [ -x /usr/bin/ckpool ]; then
+          exec /usr/bin/ckpool -k -x -L -c /config/ckpool.conf
+        else
+          echo "ckpool binary not found in image"
+          exit 1
+        fi
+    user: "1000:1000"
+    depends_on:
+      - xecd
+    restart: on-failure
+    stop_grace_period: 30s
+    ports:
+      - "4321:3333/tcp"
+    volumes:
+      - ${APP_DATA_DIR}/data/pool/config:/config:ro
+      - ${APP_DATA_DIR}/data/pool/www:/www
+
+  app:
+    image: ghcr.io/willitmod/axexec-app-umbrel-dev:0.1.14
+    user: "1000:1000"
+    restart: on-failure
+    stop_grace_period: 30s
+    depends_on:
+      - xecd
+      - ckpool
+    networks:
+      default:
+        aliases:
+          - axexec-app
+      umbrel_main_network:
+        aliases:
+          - axexec-app
+    volumes:
+      - ${APP_DATA_DIR}/data:/data
+    environment:
+      NETWORK_IP: "${NETWORK_IP}"
+      XEC_RPC_HOST: "xecd"
+      XEC_RPC_PORT: "28337"
+      XEC_RPC_USER: "xec"
+      XEC_RPC_PASS: "${APP_PASSWORD}"
+      CKPOOL_STATUS_DIR: "/data/pool/www/pool"
+      APP_CHANNEL: "RC1"
+      APP_VERSION_SUFFIX: ""
+      XECD_IMAGE: "ghcr.io/willitmod/axexec-node:0.33.4-nojemalloc"
+      CKPOOL_IMAGE: "ghcr.io/willitmod/ecash-ckpool-solo:18b38ad"
+      STATIC_DIR: "/app/static"
+
+networks:
+  umbrel_main_network:
+    external: true
+    name: umbrel_main_network

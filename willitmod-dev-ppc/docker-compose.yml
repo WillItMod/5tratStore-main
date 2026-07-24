@@ -1,0 +1,268 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: axeppc-app
+      APP_PORT: 3000
+      JWT_SECRET: "${JWT_SECRET}"
+    networks:
+      - umbrel_main_network
+
+  init:
+    image: alpine:3.22.1
+    volumes:
+      - ${APP_DATA_DIR}/data:/data
+      - ${APP_DATA_DIR}:/appdata
+    environment:
+      APPS_SUBNET: "${NETWORK_IP}/16"
+      RPC_USER: "ppc"
+      RPC_PASSWORD: "${APP_PASSWORD}"
+      PPC_RPC_PORT: "9902"
+      PPC_P2P_PORT: "9901"
+      PPC_ZMQ_HASHBLOCK_PORT: "28336"
+      CPS_WEBSITE_PORT: "8080"
+      CPS_STRATUM_PORT: "3333"
+      PAYOUT_ADDRESS: "CHANGEME_PPC_PAYOUT_ADDRESS"
+    command:
+      - /bin/sh
+      - -ec
+      - |-
+        set -eu
+
+        apk add --no-cache envsubst jq >/dev/null
+
+        tpl_dir="/data/templates"
+
+        if [ -n "${JWT_SECRET:-}" ]; then
+          envfile="/appdata/.env"
+          tmp="/appdata/.env.tmp"
+          if [ -f "$$envfile" ]; then
+            grep -v '^JWT_SECRET=' "$$envfile" > "$$tmp" || true
+          else
+            : > "$$tmp"
+          fi
+          printf "JWT_SECRET=%s\n" "${JWT_SECRET}" >> "$$tmp"
+          chmod 600 "$$tmp" || true
+          chown 1000:1000 "$$tmp" || true
+          mv "$$tmp" "$$envfile"
+        fi
+
+        mkdir -p /data/node /data/pool/config /data/pool/www/pool /data/pool/www/users /data/pool/cps/pool_configs /data/pool/cps/coins /data/templates
+
+        # NOTE: `/data/templates` is a persistent volume. Existing installs may not automatically
+        # receive new template files on app updates, so we must not hard-fail on newly added files.
+        if [ ! -f "$$tpl_dir/peercoin.conf.template" ] || [ ! -f "$$tpl_dir/ckpool.conf.template" ] || [ ! -f "$$tpl_dir/cps-config.json.template" ] || [ ! -f "$$tpl_dir/cps-peercoin.json.template" ]; then
+          echo "Template files not found in $$tpl_dir. (Expected peercoin.conf.template, ckpool.conf.template, cps-config.json.template, cps-peercoin.json.template)"
+          echo "Contents of $$tpl_dir:"
+          ls -la "$$tpl_dir" || true
+          exit 1
+        fi
+
+        if [ ! -f "$$tpl_dir/cps-coin-peercoin.json.template" ]; then
+          cat > "$$tpl_dir/cps-coin-peercoin.json.template" <<'EOF'
+        {
+          "name": "Peercoin",
+          "symbol": "PPC",
+          "algorithm": "sha256",
+          "reward": "POW",
+          "version_mask": "1fffe000"
+        }
+        EOF
+          chown 1000:1000 "$$tpl_dir/cps-coin-peercoin.json.template" 2>/dev/null || true
+        fi
+
+        if [ ! -f /data/node/peercoin.conf ]; then
+          envsubst < "$$tpl_dir/peercoin.conf.template" > /data/node/peercoin.conf
+          chown -R 1000:1000 /data/node || true
+        fi
+
+        # Self-heal older/invalid configs that enable multiple networks simultaneously.
+        # Peercoin refuses to start if both testnet and regtest are enabled.
+        cfg="/data/node/peercoin.conf"
+        if [ -f "$$cfg" ]; then
+          if grep -qE '^[[:space:]]*testnet=1([[:space:]]*#.*)?$$' "$$cfg" && grep -qE '^[[:space:]]*regtest=1([[:space:]]*#.*)?$$' "$$cfg"; then
+            echo "Found invalid Peercoin network flags (testnet+regtest). Removing both to default back to mainnet."
+            sed -E -i '/^[[:space:]]*testnet=1([[:space:]]*#.*)?$$/d; /^[[:space:]]*regtest=1([[:space:]]*#.*)?$$/d' "$$cfg" || true
+          fi
+        fi
+
+        needs_ckpool_regen=0
+        if [ -f /data/pool/config/ckpool.conf ]; then
+          if ! grep -qE '"btcd"[[:space:]]*:[[:space:]]*\\[' /data/pool/config/ckpool.conf; then
+            needs_ckpool_regen=1
+          fi
+          if ! grep -q '"zmqblock"' /data/pool/config/ckpool.conf; then
+            needs_ckpool_regen=1
+          fi
+        else
+          needs_ckpool_regen=1
+        fi
+
+        if [ "$$needs_ckpool_regen" -eq 1 ]; then
+          existing_addr="$$(grep -oE '\\\"btcaddress\\\"[[:space:]]*:[[:space:]]*\\\"[^\\\"]*\\\"' /data/pool/config/ckpool.conf 2>/dev/null | head -n 1 | sed -E 's/.*\\\"btcaddress\\\"[[:space:]]*:[[:space:]]*\\\"([^\\\"]*)\\\".*/\\1/' || true)"
+          if [ -f /data/pool/config/ckpool.conf ]; then
+            mv /data/pool/config/ckpool.conf "/data/pool/config/ckpool.conf.bak.invalid.$$(date +%s 2>/dev/null || echo 0)" || true
+          fi
+          envsubst < "$$tpl_dir/ckpool.conf.template" > /data/pool/config/ckpool.conf
+          if [ -n "$$existing_addr" ] && [ "$$existing_addr" != "CHANGEME_PPC_PAYOUT_ADDRESS" ]; then
+            tmp="$$(mktemp)"
+            if jq --arg a "$$existing_addr" '.btcaddress=$$a' /data/pool/config/ckpool.conf > "$$tmp" 2>/dev/null; then
+              mv "$$tmp" /data/pool/config/ckpool.conf
+            else
+              rm -f "$$tmp" || true
+            fi
+          fi
+          chown -R 1000:1000 /data/pool || true
+        fi
+
+        if [ ! -f /data/pool/config/ckpool.args ]; then
+          echo "-B" > /data/pool/config/ckpool.args
+          chown 1000:1000 /data/pool/config/ckpool.args || true
+        fi
+
+        # Apply saved UI settings (if present) to ckpool.conf so payouts go to the configured address.
+        if [ -f /data/ui/state/pool_settings.json ]; then
+          addr="$(jq -r '.payoutAddress // empty' /data/ui/state/pool_settings.json 2>/dev/null || true)"
+          if [ -n "$$addr" ] && [ -f /data/pool/config/ckpool.conf ]; then
+            tmp="$$(mktemp)"
+            if jq --arg a "$$addr" '.btcaddress=$$a' /data/pool/config/ckpool.conf > "$$tmp" 2>/dev/null; then
+              mv "$$tmp" /data/pool/config/ckpool.conf
+              chown 1000:1000 /data/pool/config/ckpool.conf || true
+            else
+              rm -f "$$tmp" || true
+            fi
+          fi
+        fi
+
+        # cryptocurrency-pool-server config
+        if [ ! -f /data/pool/cps/config.json ]; then
+          envsubst < "$$tpl_dir/cps-config.json.template" > /data/pool/cps/config.json
+          chown -R 1000:1000 /data/pool/cps || true
+        fi
+        if [ ! -f /data/pool/cps/pool_configs/peercoin.json ]; then
+          envsubst < "$$tpl_dir/cps-peercoin.json.template" > /data/pool/cps/pool_configs/peercoin.json
+          chown -R 1000:1000 /data/pool/cps || true
+        fi
+        # Self-heal CPS vardiff settings so upgrades/mode changes cannot leave invalid
+        # values that cause runaway or excessively low share difficulty.
+        if [ -f /data/pool/cps/pool_configs/peercoin.json ]; then
+          tmp="$$(mktemp)"
+          if jq '
+            if ((.ports["3333"] // null) | type) != "object" then
+              .
+            else
+              .ports["3333"].varDiff = ((.ports["3333"].varDiff // {}) | if type == "object" then . else {} end)
+              | .ports["3333"].varDiff.minDiff = (
+                  (.ports["3333"].varDiff.minDiff | tonumber? // 16) as $$m
+                  | if $$m < 16 then 16 elif $$m > 1048576 then 1048576 else $$m end
+                )
+              | .ports["3333"].varDiff.maxDiff = (
+                  (.ports["3333"].varDiff.maxDiff | tonumber? // 16384) as $$mx_raw
+                  | ($$mx_raw | if . <= 0 then 16384 else . end) as $$mx
+                  | if $$mx < .ports["3333"].varDiff.minDiff then .ports["3333"].varDiff.minDiff
+                    elif $$mx > 1048576 then 1048576
+                    else $$mx
+                    end
+                )
+              | .ports["3333"].diff = (
+                  (.ports["3333"].diff | tonumber? // (.ports["3333"].varDiff.minDiff * 2)) as $$d
+                  | if $$d < .ports["3333"].varDiff.minDiff then .ports["3333"].varDiff.minDiff
+                    elif $$d > .ports["3333"].varDiff.maxDiff then .ports["3333"].varDiff.maxDiff
+                    else $$d
+                    end
+                )
+              | .ports["3333"].varDiff.targetTime = (
+                  (.ports["3333"].varDiff.targetTime | tonumber? // 15) as $$t
+                  | if $$t < 8 then 8 elif $$t > 60 then 60 else $$t end
+                )
+              | .ports["3333"].varDiff.retargetTime = (
+                  (.ports["3333"].varDiff.retargetTime | tonumber? // 90) as $$rt
+                  | if $$rt < 30 then 30 elif $$rt > 300 then 300 else $$rt end
+                )
+              | .ports["3333"].varDiff.variancePercent = (
+                  (.ports["3333"].varDiff.variancePercent | tonumber? // 30) as $$v
+                  | if $$v < 10 then 10 elif $$v > 80 then 80 else $$v end
+                )
+            end
+          ' /data/pool/cps/pool_configs/peercoin.json > "$$tmp" 2>/dev/null; then
+            mv "$$tmp" /data/pool/cps/pool_configs/peercoin.json
+            chown 1000:1000 /data/pool/cps/pool_configs/peercoin.json || true
+          else
+            rm -f "$$tmp" || true
+          fi
+        fi
+        if [ ! -f /data/pool/cps/coins/peercoin.json ]; then
+          cp "$$tpl_dir/cps-coin-peercoin.json.template" /data/pool/cps/coins/peercoin.json
+          chown -R 1000:1000 /data/pool/cps || true
+        fi
+
+  ppcd:
+    build:
+      context: ${APP_DATA_DIR}/data/peercoind
+    user: "1000:1000"
+    restart: unless-stopped
+    depends_on:
+      init:
+        condition: service_completed_successfully
+    volumes:
+      - ${APP_DATA_DIR}/data/node:/data
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+
+  pool:
+    image: ghcr.io/willitmod/axeppc-pool:0.2.30
+    user: "1000:1000"
+    restart: unless-stopped
+    depends_on:
+      ppcd:
+        condition: service_started
+      redis:
+        condition: service_started
+      init:
+        condition: service_completed_successfully
+    stop_grace_period: 30s
+    ports:
+      - "8765:3333/tcp"
+    volumes:
+      - ${APP_DATA_DIR}/data/pool/cps/config.json:/app/config.json:ro
+      - ${APP_DATA_DIR}/data/pool/cps/pool_configs:/app/pool_configs:ro
+      - ${APP_DATA_DIR}/data/pool/cps/coins/peercoin.json:/app/coins/peercoin.json:ro
+
+  app:
+    image: ghcr.io/willitmod/axeppc-app-umbrel-dev:0.2.30
+    user: "1000:1000"
+    restart: unless-stopped
+    stop_grace_period: 30s
+    networks:
+      default:
+        aliases:
+          - axeppc-app
+      umbrel_main_network:
+        aliases:
+          - axeppc-app
+    volumes:
+      - ${APP_DATA_DIR}/data:/data
+    environment:
+      NETWORK_IP: "${NETWORK_IP}"
+      STATIC_DIR: "/app/static"
+      APP_CHANNEL: "RC1"
+      APP_VERSION_SUFFIX: ""
+      PPCD_IMAGE: ""
+      PPC_RPC_HOST: "ppcd"
+      PPC_RPC_PORT: "9902"
+      PPC_RPC_USER: "ppc"
+      PPC_RPC_PASS: "${APP_PASSWORD}"
+      POOL_BACKEND: "cps"
+      POOL_IMAGE: "ghcr.io/willitmod/axeppc-pool:0.2.30"
+      POOL_STATS_URL: "http://pool:8080/api/stats"
+      POOL_STRATUM_HOST: "pool"
+      POOL_STRATUM_PORT: "3333"
+      POOL_CFG_PATH: "/data/pool/cps/pool_configs/peercoin.json"
+
+networks:
+  umbrel_main_network:
+    external: true
+    name: umbrel_main_network

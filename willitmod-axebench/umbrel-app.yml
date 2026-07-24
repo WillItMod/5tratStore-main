@@ -1,16 +1,23 @@
-manifestVersion: 1
+﻿manifestVersion: 1
 id: willitmod-axebench
 category: bitcoin
 name: AxeBench
-version: "4.0.19"
+version: "4.0.28"
 tagline: Bitaxe fleet benchmarking and management
 icon: https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-axebench/icon.png
 description: >-
+  RELEASE CANDIDATE
+
+  AxeBench is functional and has completed extended DEV-channel fleet testing.
+  This MAIN-channel Release Candidate includes the current miner-control,
+  benchmarking and offline-device handling improvements.
+
   AxeBench is a web UI for managing and benchmarking supported miners, with fleet-level views,
   profiles, and automation.
+
 developer: WillItMod
 website: https://github.com/WillItMod/AxeBench-Release
-support: https://github.com/WillItMod/AxeBench-Release/issues
+support: https://discord.gg/vC2UrFAbUF
 dependencies: []
 port: 5000
 gallery:
@@ -25,7 +32,39 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  v4.0.19:
-    - Fix Nano3s add flow: send fixed PSU voltage/amperage automatically (no user input required).
+  v4.0.28:
+    - Promote the tested DEV build to the MAIN Community Store as a Release Candidate.
+    - Align the visible UI and backend version markers with the release image.
+    - Keep the Docker runtime platform warning cleanup from v4.0.27-dev.
+
+  v4.0.27-dev:
+    - Remove a redundant Docker platform pin from the runtime image build.
+    - Keep the app image aligned with the current dev-store recipe.
+
+  v4.0.26-dev:
+    - Align the app, UI, and dev-store versions after the v4 refresh series.
+    - Update the store maturity wording to ALPHA while keeping the dev-channel version suffix.
+
+  v4.0.25-dev:
+    - Stabilize Dashboard auto-refresh so live cards do not flicker offline/online between polls.
+    - Keep background refreshes from flipping the top-right refresh button to SYNCING.
+    - Ignore one transient live-status miss for previously-online devices before marking them offline.
+
+  v4.0.24-dev:
+    - Keep quick offline scans quiet in logs while still returning offline devices quickly.
+
+  v4.0.23-dev:
+    - Speed up Pool and AxeShed device list endpoints when miners are offline.
+    - Scan devices concurrently instead of waiting one-by-one through offline timeouts.
+    - Use quick Canaan/Bitaxe pool probes by default, with full scans still available via full=1.
+
+  v4.0.22-dev:
+    - Render Dashboard, Operations, Pool, and Profiles quickly when miners are offline.
+    - Add bounded quick status probes so dead miners become offline cards instead of blocking tab load.
+    - Harden empty/corrupt schedule, profile, and benchmark state files.
+
+  v4.0.21-dev:
+    - Add Avalon Q power profile controls in device config.
+    - Apply Avalon Q/Nano3S work modes from AxePool schedules.
+    - Surface Canaan work modes in Profiles and Operations instead of treating Avalon Q as unsupported.
 submitter: WillItMod
-submission: https://github.com/WillItMod/umbrel-community-store/commit/8f4826c

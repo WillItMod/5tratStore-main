@@ -1,0 +1,85 @@
+manifestVersion: 1
+id: willitmod-dev-fracattack
+category: bitcoin
+name: FracAttack
+version: "0.1.3"
+tagline: Fractal node + solo pool
+description: >-
+  RC1 RELEASE
+
+  FracAttack is a Fractal Bitcoin (FB) node + solo pool app. It is being built
+  for standalone Fractal solo mining first, with a future AxeBTC merged-mining
+  integration path planned.
+
+  Verify payout addresses and pool settings before mining, and send helpful
+  feedback if anything behaves oddly.
+
+  FracAttack has now produced multiple live Fractal block wins, proving the
+  complete node, pool and miner path before promotion to MAIN.
+
+  Fractal uses Bitcoin-style node software and SHA256d mining, but it has its
+  own Fractal chain data. FracAttack does not reuse AxeBTC's Bitcoin blocks or
+  chainstate.
+
+  Miner connection:
+    - URL: `stratum+tcp://<your-host-ip>:7891`
+    - Username: Fractal payout address, optionally followed by `.worker`
+    - Password: anything
+
+
+  Notes:
+    - Initial sync can take a long time and a lot of bandwidth/storage.
+    - Fractal P2P listens on TCP `28343`; forward public TCP `28343` to this node for inbound peers.
+    - Live Fractal blocks have been found through the bundled solo-pool path.
+    - External SSD storage is strongly recommended; Fractal mining-node prune mode is still roughly 300 GB on mainnet.
+    - Blockchains can carry arbitrary data (e.g. via `OP_RETURN`). That’s not unique to any one chain.
+    - Set your payout address in the app Settings tab.
+    - Pool settings apply automatically; miners may briefly reconnect after saving.
+    - Fractal payout addresses support bech32 (`bc1...`) and legacy (`1...` / `3...`). Bitcoin Cash CashAddr (`q...` / `p...`) is not supported.
+developer: WillItMod
+website: https://github.com/WillItMod/umbrel-community-store
+repo: https://github.com/WillItMod/umbrel-community-store
+support: https://discord.gg/vC2UrFAbUF
+dependencies: []
+port: 21225
+icon: "https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-dev-fracattack/icon.png"
+gallery:
+  - "https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-dev-fracattack/icon.png"
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+widgets:
+  - id: "sync"
+    type: "text-with-progress"
+    refresh: "5s"
+    endpoint: "fracattack-app:3000/api/widget/sync"
+    link: ""
+    example:
+      type: "text-with-progress"
+      link: ""
+      title: "Fractal sync"
+      text: "83%"
+      progressLabel: "In progress"
+      progress: 0.83
+  - id: "pool"
+    type: "three-stats"
+    refresh: "30s"
+    endpoint: "fracattack-app:3000/api/widget/pool"
+    link: ""
+    example:
+      type: "three-stats"
+      link: ""
+      items:
+        - title: "Hashrate"
+          text: "1.2"
+          subtext: "TH/s"
+        - title: "Workers"
+          text: "2"
+        - title: "Best Share"
+          text: "21"
+          subtext: "G"
+backupIgnore:
+  - data/node/blocks
+  - data/node/chainstate
+  - data/node/indexes
+submitter: WillItMod

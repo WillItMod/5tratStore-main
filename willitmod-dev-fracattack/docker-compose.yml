@@ -1,0 +1,256 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: fracattack-app
+      APP_PORT: 3000
+      JWT_SECRET: "${JWT_SECRET}"
+    networks:
+      - umbrel_main_network
+
+  init:
+    image: alpine:3.22.1
+    volumes:
+      - ${APP_DATA_DIR}/data:/data
+      - ${APP_DATA_DIR}:/appdata
+      - ${APP_DATA_DIR}/data/templates:/data/templates:rw
+    environment:
+      APPS_SUBNET: "${NETWORK_IP}/16"
+      RPC_USER: "fractal"
+      RPC_PASSWORD: "${APP_PASSWORD}"
+      BTC_P2P_PORT: "28343"
+      BTC_RPC_PORT: "28342"
+      BTC_ZMQ_HASHBLOCK_PORT: "28345"
+      PAYOUT_ADDRESS: "bc1qg09gugv3kk2sv8svq7zewmt6ey00gppkctgtzk"
+    command:
+      - /bin/sh
+      - -ec
+      - |-
+        set -eu
+
+        apk add --no-cache bind-tools envsubst jq >/dev/null
+
+        # Persist JWT secret into ${APP_DATA_DIR}/.env so that SSH restarts
+        # (without exports.sh) don't boot app_proxy with an empty JWT_SECRET.
+        if [ -n "$${JWT_SECRET:-}" ]; then
+          envfile="/appdata/.env"
+          tmp="/appdata/.env.tmp"
+          if [ -f "$$envfile" ]; then
+            grep -v '^JWT_SECRET=' "$$envfile" > "$$tmp" || true
+          else
+            : > "$$tmp"
+          fi
+          printf "JWT_SECRET=%s\n" "$$JWT_SECRET" >> "$$tmp"
+          chmod 600 "$$tmp" || true
+          chown 1000:1000 "$$tmp" || true
+          mv "$$tmp" "$$envfile"
+        fi
+
+        mkdir -p /data/node /data/pool/config /data/pool/www/pool /data/pool/www/users
+        # Ensure template scripts are executable (Windows checkouts can lose +x).
+        chmod +x /data/templates/fractald-entrypoint.sh /data/templates/ckpool-entrypoint.sh 2>/dev/null || true
+        chown 1000:1000 /data/templates/fractald-entrypoint.sh /data/templates/ckpool-entrypoint.sh 2>/dev/null || true
+
+        if [ -f /data/templates/ckpool.conf.template ]; then
+          if grep -q '"auxd"' /data/templates/ckpool.conf.template; then
+            # Drop the auxd block (merged mining).
+            sed -i '/"auxd"[[:space:]]*:/,/^  ],/d' /data/templates/ckpool.conf.template || true
+          fi
+          # Drop auxaddress (merged mining).
+          sed -i '/"auxaddress"[[:space:]]*:/d' /data/templates/ckpool.conf.template || true
+        fi
+
+        # The host may create settings.yml as root during update/install; ensure it stays writable.
+        touch /appdata/settings.yml
+        chown 1000:1000 /appdata/settings.yml || true
+
+        ensure_bitcoin_conf_line() {
+          line="$$1"
+          grep -qxF "$$line" /data/node/bitcoin.conf || echo "$$line" >> /data/node/bitcoin.conf
+        }
+
+        set_bitcoin_conf_key() {
+          key="$$1"
+          value="$$2"
+          if grep -Eq "^[#[:space:]]*$$key=" /data/node/bitcoin.conf; then
+            sed -i "s|^[#[:space:]]*$$key=.*|$$key=$$value|" /data/node/bitcoin.conf
+          else
+            echo "$$key=$$value" >> /data/node/bitcoin.conf
+          fi
+        }
+
+        refresh_fractal_seed_addnodes() {
+          # Resolve service-bit DNS seeds and pin current reachable peer
+          # candidates explicitly. Fractal seed DNS is sparse during IBD, and
+          # hostname-only addnode entries have left nodes with too few peers.
+          for seed in x9.dnsseed-mainnet.fractalbitcoin.io x9.dnsseed-mainnet.unisat.io; do
+            dig +short A "$$seed" 2>/dev/null \
+              | awk '/^[0-9.]+$$/ { print }' \
+              | sort -u \
+              | while read -r ip; do
+                  [ -n "$$ip" ] || continue
+                  ensure_bitcoin_conf_line "addnode=$$ip:8333"
+                done
+          done
+        }
+
+        if [ ! -f /data/node/bitcoin.conf ]; then
+          envsubst < /data/templates/bitcoin.conf.template > /data/node/bitcoin.conf
+          chown -R 1000:1000 /data/node
+        else
+          # Repair old/hand-edited configs without changing chain data. This
+          # removes accidental garbage lines and exact duplicate entries.
+          tmp_conf="/data/node/bitcoin.conf.tmp"
+          awk '
+            /^[[:space:]]*password123[[:space:]]*$/ { next }
+            { if (!seen[$0]++) print }
+          ' /data/node/bitcoin.conf > "$$tmp_conf" && mv "$$tmp_conf" /data/node/bitcoin.conf
+
+          # Keep existing installs reachable and discovery-enabled without changing chain data.
+          set_bitcoin_conf_key 'listen' '1'
+          set_bitcoin_conf_key 'discover' '1'
+          set_bitcoin_conf_key 'maxconnections' '256'
+          set_bitcoin_conf_key 'port' "$${BTC_P2P_PORT}"
+
+          # Keep Fractal peer discovery healthy on existing installs. The
+          # service-bit x9 seeds return reachable mainnet full-relay peers.
+          ensure_bitcoin_conf_line 'dnsseed=1'
+          ensure_bitcoin_conf_line 'fixedseeds=1'
+          ensure_bitcoin_conf_line 'forcednsseed=1'
+          ensure_bitcoin_conf_line 'seednode=x9.dnsseed-mainnet.fractalbitcoin.io'
+          ensure_bitcoin_conf_line 'seednode=x9.dnsseed-mainnet.unisat.io'
+          ensure_bitcoin_conf_line 'addnode=x9.dnsseed-mainnet.fractalbitcoin.io'
+          ensure_bitcoin_conf_line 'addnode=x9.dnsseed-mainnet.unisat.io'
+        fi
+        refresh_fractal_seed_addnodes
+        chown 1000:1000 /data/node/bitcoin.conf || true
+
+        if [ ! -f /data/pool/config/ckpool.conf ]; then
+          envsubst < /data/templates/ckpool.conf.template > /data/pool/config/ckpool.conf
+          chown -R 1000:1000 /data/pool
+        else
+          # Upgrade safety:
+          # - Ensure ckpool.conf has webdir/userdir so worker stats are written.
+          # - Remove any AuxPoW (Fractal) config keys from older FracAttack installs.
+          existing_addr="$$(grep -oE '\"btcaddress\"[[:space:]]*:[[:space:]]*\"[^\"]*\"' /data/pool/config/ckpool.conf | head -n 1 | cut -d: -f2- | tr -d ' \"' || true)"
+          needs_ckpool_regen=0
+          # If ckpool.conf isn't valid JSON, regenerate it (fixes broken escapes like "btcaddress": "\1").
+          if ! jq -e . /data/pool/config/ckpool.conf >/dev/null 2>&1; then
+            needs_ckpool_regen=1
+          fi
+          if ! grep -q '"btcaddress"' /data/pool/config/ckpool.conf; then
+            needs_ckpool_regen=1
+          fi
+          if ! grep -q '"webdir"' /data/pool/config/ckpool.conf; then
+            needs_ckpool_regen=1
+          fi
+          if ! grep -q '"userdir"' /data/pool/config/ckpool.conf; then
+            needs_ckpool_regen=1
+          fi
+          # Upgrade safety: remove legacy merged-mining config.
+          if grep -q '"auxd"' /data/pool/config/ckpool.conf; then
+            needs_ckpool_regen=1
+          fi
+          if grep -q '"auxaddress"' /data/pool/config/ckpool.conf; then
+            needs_ckpool_regen=1
+          fi
+          # Repair: invalid JSON caused by an escaped backreference (e.g. "btcaddress": "\1").
+          case "$$existing_addr" in
+            *\\*) needs_ckpool_regen=1 ;;
+          esac
+          if [ "$$needs_ckpool_regen" -eq 1 ]; then
+            # Preserve a valid existing payout address when regenerating.
+            case "$$existing_addr" in
+              bc1*|1*|3*)
+                if [ "$$existing_addr" != "CHANGEME_FRACTAL_PAYOUT_ADDRESS" ]; then
+                  export PAYOUT_ADDRESS="$$existing_addr"
+                fi
+                ;;
+            esac
+            mv /data/pool/config/ckpool.conf "/data/pool/config/ckpool.conf.bak.$(date +%s 2>/dev/null || echo 0)" || true
+            envsubst < /data/templates/ckpool.conf.template > /data/pool/config/ckpool.conf
+            chown -R 1000:1000 /data/pool
+          fi
+        fi
+
+        if [ ! -f /data/pool/config/ckpool.args ]; then
+          echo "-B" > /data/pool/config/ckpool.args
+          chown 1000:1000 /data/pool/config/ckpool.args || true
+        fi
+
+  fractald:
+    image: ghcr.io/willitmod/fracattack-fractald:0.3.1
+    user: "1000:1000"
+    restart: unless-stopped
+    stop_grace_period: 15m30s
+    depends_on:
+      init:
+        condition: service_completed_successfully
+    volumes:
+      - ${APP_DATA_DIR}/data/node:/data
+      - ${APP_DATA_DIR}/data/templates/fractald-entrypoint.sh:/fractald-entrypoint.sh:ro
+    ports:
+      - "28343:28343/tcp"
+    entrypoint: ["/bin/sh", "/fractald-entrypoint.sh"]
+    healthcheck:
+      test: ["CMD-SHELL", "bitcoin-cli -datadir=/data -rpcclienttimeout=20 getnetworkinfo >/dev/null 2>&1"]
+      interval: 30s
+      timeout: 30s
+      retries: 60
+      start_period: 10m
+
+  ckpool:
+    image: ghcr.io/willitmod/docker-ckpool-solo:590fb2a
+    user: "1000:1000"
+    depends_on:
+      - fractald
+    restart: on-failure
+    stop_grace_period: 30s
+    ports:
+      - "7891:3333/tcp"
+    volumes:
+      - ${APP_DATA_DIR}/data/pool/config:/config:ro
+      - ${APP_DATA_DIR}/data/pool/www:/www
+      - ${APP_DATA_DIR}/data/templates/ckpool-entrypoint.sh:/ckpool-entrypoint.sh:ro
+    entrypoint: ["/bin/sh", "/ckpool-entrypoint.sh"]
+
+  app:
+    image: ghcr.io/willitmod/fracattack-app-umbrel-dev:0.1.3
+    user: "1000:1000"
+    restart: on-failure
+    stop_grace_period: 30s
+    ports:
+      - "21225:3000/tcp"
+    depends_on:
+      - fractald
+      - ckpool
+    networks:
+      default:
+        aliases:
+          - fracattack-app
+      umbrel_main_network:
+        aliases:
+          - fracattack-app
+    volumes:
+      - ${APP_DATA_DIR}/data:/data
+    environment:
+      BTC_RPC_HOST: "fractald"
+      BTC_RPC_PORT: "28342"
+      BTC_P2P_PORT: "28343"
+      BTC_RPC_USER: "fractal"
+      BTC_RPC_PASS: "${APP_PASSWORD}"
+      CKPOOL_STATUS_DIR: "/data/pool/www/pool"
+      CKPOOL_STRATUM_HOST: "ckpool"
+      CKPOOL_STRATUM_PORT: "3333"
+      APP_VERSION: "0.1.3"
+      APP_CHANNEL: "RC1"
+      APP_VERSION_SUFFIX: ""
+      FRACTAL_IMAGE: "ghcr.io/willitmod/fracattack-fractald:0.3.1"
+      CKPOOL_IMAGE: "ghcr.io/willitmod/docker-ckpool-solo:590fb2a"
+      STATIC_DIR: "/app/static"
+
+networks:
+  umbrel_main_network:
+    external: true
+    name: umbrel_main_network

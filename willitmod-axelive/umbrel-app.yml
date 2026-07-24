@@ -2,15 +2,21 @@ manifestVersion: 1
 id: willitmod-axelive
 category: bitcoin
 name: AxeLive
-version: "1.3"
+version: "1.4.2"
 tagline: Real-time miner monitoring and thermal control
 icon: https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-axelive/icon.png
 description: >-
+  RELEASE CANDIDATE
+
+  AxeLive is functional and has completed extended DEV-channel monitoring and
+  thermal-control testing. This MAIN-channel Release Candidate includes the
+  current offline-scan and Nano 3/3S thermal-model fixes.
+
   AxeLive is a web UI and controller for supported miners, focused on safe thermal governance,
   stable fan control, and fleet management.
 developer: WillItMod
 website: https://github.com/WillItMod/AxeLive-Release
-support: https://github.com/WillItMod/AxeLive-Release/issues
+support: https://discord.gg/vC2UrFAbUF
 dependencies: []
 port: 5210
 gallery:
@@ -21,6 +27,5 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  v1.3: Removes Patreon sign-in/banners/limits; keeps licensing telemetry ping.
+  v1.4.2: Promotes the tested DEV build to MAIN, improves IP scan cancellation when offline miners are slow to respond, and fixes a Nano 3/3S thermal-model edge case that could silently stop fan-learning updates.
 submitter: WillItMod
-submission: https://github.com/WillItMod/umbrel-community-store/commit/8f4826c
