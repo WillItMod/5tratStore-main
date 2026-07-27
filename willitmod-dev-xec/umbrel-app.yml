@@ -2,7 +2,7 @@ manifestVersion: 1
 id: willitmod-dev-xec
 category: bitcoin
 name: AxeXEC
-version: "0.1.14"
+version: "0.1.15"
 tagline: XEC node + solo pool
 description: >-
   RC1 RELEASE
