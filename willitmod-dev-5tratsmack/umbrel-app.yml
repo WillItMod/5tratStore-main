@@ -2,7 +2,7 @@ manifestVersion: 1
 id: willitmod-dev-5tratsmack
 category: altcoin
 name: 5tratSmack
-version: "0.10.28"
+version: "0.10.29"
 tagline: Home-miner 5TRAT node, wallet, solo pool and atomic trade lab
 description: >-
   Install and synchronize a complete 5TRAT node, create or restore an encrypted
@@ -10,14 +10,12 @@ description: >-
   use the atomic trade lab from one 5tratumOS app.
 
   This MAIN-channel Release Candidate has completed extended public-chain,
-  wallet, pool and trading tests. Version 0.10.28 is a routing hotfix for
-  5tratumOS. It reasserts the declared web UI on port 21226 after an update and
-  prevents the node JSON-RPC endpoint from being presented in the app window.
-  It also includes the portable browser-wallet bridge, clearer separation
-  between mining electricity cost and traded value, an in-app field guide, the
-  latest named Blue, Pink and Gold winners, and a strongest-proof Wall of Hash
-  with one entry per personalised coinbase name. Back up both the mining wallet
-  and trading recovery file before moving funds.
+  wallet, pool and trading tests. Version 0.10.29 fixes wallet restores that
+  could time out after the node had already created the restored database.
+  Restore requests now have enough time to finish, are never replayed blindly,
+  and a single interrupted restore can be verified and completed safely on the
+  next attempt. Back up both the mining wallet and trading recovery file before
+  moving funds.
   The trade book uses the public
   Komodo DeFi Framework network through outbound peer connections; every atomic
   swap still requires the participating wallets to approve and settle it.
