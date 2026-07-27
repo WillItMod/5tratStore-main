@@ -174,7 +174,7 @@ services:
       MINDIFF: "4096"
       STARTDIFF: "16384"
       MAXDIFF: "0"
-      NONCE2_LENGTH: "3"
+      NONCE2_LENGTH: "4"
       FIVETRAT_MINING_ACTIVATION_HEIGHT: "1000"
       DEV_FUND_ADDRESS: 5trat:qr7rg4z88tc34fr0z0mtkjc0c6s3knw5hce39q9evk
       DEV_FEE_PERCENT: "5"
@@ -196,7 +196,7 @@ services:
         condition: service_started
     environment:
       APP_ID: 5tratsmack
-      APP_VERSION: 0.10.29
+      APP_VERSION: 0.10.30
       APP_CHANNEL: MAIN
       APP_RELEASE_PHASE: RC1
       APP_PLATFORM: 5TRATUMOS
