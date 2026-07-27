@@ -2,13 +2,17 @@ manifestVersion: 1
 id: willitmod-dev-bch
 category: bitcoin
 name: AxeBCH
-version: "0.9.16"
+version: "0.9.17"
 tagline: BCH node + solo pool
 description: >-
   RC1 RELEASE
 
   AxeBCH is functional, has successfully found blocks, and has completed
   extended DEV-channel pool and node testing.
+
+  Version 0.9.17 fixes Luck tracking on fresh installations and pools that have
+  not found their first block. Current-round effort now starts from the tracking
+  timestamp and switches automatically to the first real block anchor.
 
   Verify payout addresses before mining and send helpful feedback if anything
   behaves oddly.
