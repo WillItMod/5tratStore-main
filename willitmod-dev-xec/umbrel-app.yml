@@ -2,7 +2,7 @@ manifestVersion: 1
 id: willitmod-dev-xec
 category: bitcoin
 name: AxeXEC
-version: "0.1.15"
+version: "0.1.16"
 tagline: XEC node + solo pool
 description: >-
   RC1 RELEASE
@@ -62,6 +62,11 @@ gallery:
 path: ""
 defaultUsername: ""
 defaultPassword: ""
+releaseNotes: >-
+  Workers using either coin-prefixed or prefixless payout usernames now appear
+  as one combined worker entry in the app and Fleet Dashboard APIs. Hashrate,
+  shares and best-share data are merged without double-counting duplicate
+  worker names.
 widgets:
   - id: "sync"
     type: "text-with-progress"

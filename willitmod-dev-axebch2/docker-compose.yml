@@ -24,7 +24,7 @@ services:
         chmod -R ug+rwX /data/ui /data/node /data/pool || true
 
   app:
-    image: ghcr.io/willitmod/axebch2-app:0.2.0.1
+    image: ghcr.io/willitmod/axebch2-app:0.2.0.2
     user: "1000:1000"
     restart: unless-stopped
     depends_on:

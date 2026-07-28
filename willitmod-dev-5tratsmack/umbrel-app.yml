@@ -2,7 +2,7 @@ manifestVersion: 1
 id: willitmod-dev-5tratsmack
 category: altcoin
 name: 5tratSmack
-version: "0.10.30"
+version: "0.10.31"
 tagline: Home-miner 5TRAT node, wallet, solo pool and atomic trade lab
 description: >-
   Install and synchronize a complete 5TRAT node, create or restore an encrypted
@@ -46,6 +46,11 @@ gallery:
 path: ""
 defaultUsername: ""
 defaultPassword: ""
+releaseNotes: >-
+  Workers using either the 5TRAT-prefixed or prefixless payout username now
+  appear as one combined worker entry in the app and Fleet Dashboard APIs.
+  Hashrate, shares and best-share data are merged without double-counting
+  duplicate worker names.
 widgets:
   - id: sync
     type: text-with-progress

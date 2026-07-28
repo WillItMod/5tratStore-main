@@ -216,7 +216,7 @@ services:
     entrypoint: ["/bin/sh", "/ckpool-entrypoint.sh"]
 
   app:
-    image: ghcr.io/willitmod/fracattack-app-umbrel-dev:0.1.3
+    image: ghcr.io/willitmod/fracattack-app-umbrel-dev:0.1.4
     user: "1000:1000"
     restart: on-failure
     stop_grace_period: 30s
