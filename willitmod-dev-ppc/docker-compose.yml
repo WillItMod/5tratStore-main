@@ -232,7 +232,7 @@ services:
       - ${APP_DATA_DIR}/data/pool/cps/coins/peercoin.json:/app/coins/peercoin.json:ro
 
   app:
-    image: ghcr.io/willitmod/axeppc-app-umbrel-dev:0.2.30
+    image: ghcr.io/willitmod/axeppc-app-umbrel-dev:0.2.31
     user: "1000:1000"
     restart: unless-stopped
     stop_grace_period: 30s

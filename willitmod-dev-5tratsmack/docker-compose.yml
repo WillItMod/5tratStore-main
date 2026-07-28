@@ -187,7 +187,7 @@ services:
       - edge
 
   app:
-    image: ghcr.io/willitmod/5tratsmack-app:0.10.29
+    image: ghcr.io/willitmod/5tratsmack-app:0.10.31
     restart: unless-stopped
     depends_on:
       init_permissions:

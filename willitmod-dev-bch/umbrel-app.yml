@@ -2,7 +2,7 @@ manifestVersion: 1
 id: willitmod-dev-bch
 category: bitcoin
 name: AxeBCH
-version: "0.9.17"
+version: "0.9.18"
 tagline: BCH node + solo pool
 description: >-
   RC1 RELEASE
@@ -69,6 +69,11 @@ gallery:
 path: ""
 defaultUsername: ""
 defaultPassword: ""
+releaseNotes: >-
+  Workers using either coin-prefixed or prefixless payout usernames now appear
+  as one combined worker entry in the app and Fleet Dashboard APIs. Hashrate,
+  shares and best-share data are merged without double-counting duplicate
+  worker names.
 widgets:
   - id: "sync"
     type: "text-with-progress"
