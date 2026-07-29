@@ -2,7 +2,7 @@ manifestVersion: 1
 id: willitmod-dev-xec
 category: bitcoin
 name: AxeXEC
-version: "0.1.16"
+version: "0.1.17"
 tagline: XEC node + solo pool
 description: >-
   RC1 RELEASE
@@ -63,10 +63,10 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Workers using either coin-prefixed or prefixless payout usernames now appear
-  as one combined worker entry in the app and Fleet Dashboard APIs. Hashrate,
-  shares and best-share data are merged without double-counting duplicate
-  worker names.
+  Fixes AxeXEC repeatedly restarting on Raspberry Pi and other ARM64 systems
+  using non-4K memory pages. The Bitcoin ABC 0.33.4 node is now compiled
+  without jemalloc for both AMD64 and ARM64. Existing blockchain data is
+  preserved and does not need to be downloaded again.
 widgets:
   - id: "sync"
     type: "text-with-progress"
