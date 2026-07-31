@@ -2,28 +2,18 @@ manifestVersion: 1
 id: willitmod-dev-5tratsmack
 category: altcoin
 name: 5tratSmack
-version: "0.10.31"
+version: "0.11.0"
 tagline: Home-miner 5TRAT node, wallet, solo pool and atomic trade lab
 description: >-
   Install and synchronize a complete 5TRAT node, create or restore an encrypted
   wallet, connect home miners to the bundled solo pool, explore the chain, and
   use the atomic trade lab from one 5tratumOS app.
 
-  This MAIN-channel Release Candidate has completed extended public-chain,
-  wallet, pool and trading tests. Version 0.10.30 restores the four-byte
-  extranonce contract required by 5tratMux warm routing. Updating recreates
-  the bundled pool with the corrected setting while retaining the wallet RPC,
-  restore, rescan and trading fixes already present in 0.10.29.
-
-  Version 0.10.29 fixes wallet restores that
-  could time out after the node had already created the restored database.
-  Restore requests now have enough time to finish, are never replayed blindly,
-  and a single interrupted restore can be verified and completed safely on the
-  next attempt. Back up both the mining wallet and trading recovery file before
-  moving funds.
-  The trade book uses the public
-  Komodo DeFi Framework network through outbound peer connections; every atomic
-  swap still requires the participating wallets to approve and settle it.
+  This MAIN-channel Release Candidate has completed public-chain, wallet, pool,
+  MUX pass-through and trading tests. Back up both the mining wallet and trading
+  recovery file before moving funds. The trade book uses the public Komodo DeFi
+  Framework network through outbound peer connections; every atomic swap still
+  requires the participating wallets to approve and settle it.
 
   Trade Pulse uses an anonymous completed-swap tape. A price point becomes
   network-visible only when the maker and taker independently report matching
@@ -47,10 +37,10 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Workers using either the 5TRAT-prefixed or prefixless payout username now
-  appear as one combined worker entry in the app and Fleet Dashboard APIs.
-  Hashrate, shares and best-share data are merged without double-counting
-  duplicate worker names.
+  Version 0.11.0 aligns the full node, pool, UPnP, swap and UI services on one
+  release. It preserves four-byte extranonce warm routing, accepts live hardware
+  and routed-hashrate data from 5tratMux, and combines prefixed and prefixless
+  worker identities without double-counting.
 widgets:
   - id: sync
     type: text-with-progress
