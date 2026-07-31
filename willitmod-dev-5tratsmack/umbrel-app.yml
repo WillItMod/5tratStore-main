@@ -2,7 +2,7 @@ manifestVersion: 1
 id: willitmod-dev-5tratsmack
 category: altcoin
 name: 5tratSmack
-version: "0.11.0"
+version: "0.11.1"
 tagline: Home-miner 5TRAT node, wallet, solo pool and atomic trade lab
 description: >-
   Install and synchronize a complete 5TRAT node, create or restore an encrypted
@@ -37,10 +37,10 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Version 0.11.0 aligns the full node, pool, UPnP, swap and UI services on one
-  release. It preserves four-byte extranonce warm routing, accepts live hardware
-  and routed-hashrate data from 5tratMux, and combines prefixed and prefixless
-  worker identities without double-counting.
+  Fixes the update/start failure caused by the application container claiming
+  the same host port as the platform app proxy. Live route and hardware
+  hashrate integration from 5tratMux remains enabled, and existing wallet,
+  blockchain and application data are retained during the update.
 widgets:
   - id: sync
     type: text-with-progress

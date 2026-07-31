@@ -60,7 +60,7 @@ services:
           /data/updater
 
   p2p-helper:
-    image: ghcr.io/willitmod/5tratsmack-upnp:0.11.0
+    image: ghcr.io/willitmod/5tratsmack-upnp:0.11.1
     restart: unless-stopped
     user: "1000:1000"
     network_mode: host
@@ -94,7 +94,7 @@ services:
       retries: 12
 
   node-a:
-    image: ghcr.io/willitmod/5tratsmack-core:0.11.0
+    image: ghcr.io/willitmod/5tratsmack-core:0.11.1
     restart: unless-stopped
     stop_grace_period: 2m
     depends_on:
@@ -126,7 +126,7 @@ services:
       start_period: 30s
 
   swap:
-    image: ghcr.io/willitmod/5tratsmack-kdf:0.11.0
+    image: ghcr.io/willitmod/5tratsmack-kdf:0.11.1
     restart: unless-stopped
     network_mode: service:node-a
     depends_on:
@@ -154,7 +154,7 @@ services:
       start_period: 30s
 
   ckpool:
-    image: ghcr.io/willitmod/5tratsmack-ckpool:0.11.0
+    image: ghcr.io/willitmod/5tratsmack-ckpool:0.11.1
     command: ["-k", "-L", "-c", "/data/pool/config/ckpool.conf"]
     restart: unless-stopped
     depends_on:
@@ -187,7 +187,7 @@ services:
       - edge
 
   app:
-    image: ghcr.io/willitmod/5tratsmack-app:0.11.0
+    image: ghcr.io/willitmod/5tratsmack-app:0.11.1
     restart: unless-stopped
     depends_on:
       init_permissions:
@@ -196,7 +196,7 @@ services:
         condition: service_started
     environment:
       APP_ID: 5tratsmack
-      APP_VERSION: 0.11.0
+      APP_VERSION: 0.11.1
       APP_CHANNEL: MAIN
       APP_RELEASE_PHASE: RC1
       APP_PLATFORM: 5TRATUMOS
@@ -205,7 +205,7 @@ services:
       FIVETRAT_STORE_UPDATE_APP_ID: 5tratsmack
       FIVETRAT_STORE_UPDATE_CHANNEL: main
       FIVETRAT_INSTALL_REVISION: main-store
-      FIVETRAT_RELEASE_TAG: 0.11.0
+      FIVETRAT_RELEASE_TAG: 0.11.1
       FIVETRAT_OS_UPDATE_PROXY_BASE: http://host.docker.internal
       NETWORK_IP: "${NETWORK_IP}"
       BCH2_RPC_HOST: node-a
@@ -235,8 +235,6 @@ services:
       - ${APP_DATA_DIR}/data/p2p-state:/data/p2p-state
       - ${APP_DATA_DIR}/data/swap:/data/swap:ro
       - ${APP_DATA_DIR}/data/updater:/data/updater
-    ports:
-      - "0.0.0.0:21226:3000"
     networks:
       chain:
       edge:
