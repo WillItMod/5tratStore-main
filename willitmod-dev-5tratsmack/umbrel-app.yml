@@ -2,7 +2,7 @@ manifestVersion: 1
 id: willitmod-dev-5tratsmack
 category: altcoin
 name: 5tratSmack
-version: "0.11.3"
+version: "0.11.4"
 tagline: Home-miner 5TRAT node, wallet, solo pool and atomic trade lab
 description: >-
   Install and synchronize a complete 5TRAT node, create or restore an encrypted
@@ -37,11 +37,11 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Removes repeated full ckpool-log scans from the live block watcher and makes
-  solve tracking incremental. This substantially reduces sustained CPU use on
-  busy and long-running nodes without slowing block detection. Live route and
-  hardware hashrate integration from 5tratMux remains enabled. Existing wallet,
-  blockchain and application data are retained during the update.
+  Further reduces background CPU use by limiting live hashrate reads to recent
+  share logs, coalescing overlapping scans and bounding legacy block-metadata
+  retries. Live block detection and direct route and hardware hashrate injection
+  from 5tratMux remain enabled. Existing wallet, blockchain, pool and trading
+  data are retained during the update.
 widgets:
   - id: sync
     type: text-with-progress
