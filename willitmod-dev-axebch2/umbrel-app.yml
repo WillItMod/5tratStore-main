@@ -22,10 +22,10 @@ repo: https://github.com/WillItMod/AxeBCH2
 support: https://discord.gg/vC2UrFAbUF
 dependencies: []
 port: 21223
-icon: https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-dev-axebch2/icon.png
+icon: https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-dev-axebch2/icon.png
 gallery:
-  - https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-dev-axebch2/images/1.png
-  - https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-dev-axebch2/images/2.png
+  - https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-dev-axebch2/images/1.png
+  - https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-dev-axebch2/images/2.png
 path: ""
 defaultUsername: ""
 defaultPassword: ""

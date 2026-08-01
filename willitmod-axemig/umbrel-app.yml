@@ -11,26 +11,26 @@ description: >-
   deliberately. Stop affected apps first, verify the source and target, and keep
   a backup path for important data.
 
-  AxeMIG helps you move/copy chain data (blocks/chainstate, optional peers/indexes) between Umbrel node apps.
+  AxeMIG helps you move or copy chain data (blocks/chainstate and optional peers/indexes) between supported node apps.
   It does not migrate configs, secrets, cookies, or wallets.
 
 
   Typical workflow:
     - Install the target node app (AxeBTC / AxeBCH / AxeDGB / etc) and start it until it shows Synchronising (IBD started), then stop it.
-    - Stop the source node app (Umbrel Bitcoin / Knots / etc).
+    - Stop the source node app (compatible Bitcoin, Knots, or similar app).
     - Run AxeMIG migration, then start the target node app and verify.
 
 
   If something goes wrong, use AxeMIG Undo to restore the target's previous state.
 developer: WillItMod
 website: https://github.com/WillItMod/AxeMIG-Release
-repo: https://github.com/WillItMod/umbrel-community-store
+repo: https://github.com/WillItMod/5tratStore-main
 support: https://discord.gg/vC2UrFAbUF
 dependencies: []
 port: 12150
-icon: "https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-axemig/icon.png"
+icon: "https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-axemig/icon.png"
 gallery:
-  - "https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-axemig/icon.png"
+  - "https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-axemig/icon.png"
 path: ""
 defaultUsername: ""
 defaultPassword: ""

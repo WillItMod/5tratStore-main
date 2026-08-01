@@ -55,17 +55,17 @@ description: >-
   Status:
     - RC1 build: verify payout addresses before mining and report unexpected behaviour.
 developer: WillItMod
-website: https://github.com/WillItMod/umbrel-community-store
-repo: https://github.com/WillItMod/umbrel-community-store
+website: https://github.com/WillItMod/5tratStore-main
+repo: https://github.com/WillItMod/5tratStore-main
 support: https://discord.gg/vC2UrFAbUF
 dependencies: []
 port: 21212
-icon: https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-dev-bch/icon.png
+icon: https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-dev-bch/icon.png
 gallery:
-  - https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-dev-bch/icon.png
-  - https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-dev-bch/images/1.png
-  - https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-dev-bch/images/2.png
-  - https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-dev-bch/images/3.png
+  - https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-dev-bch/icon.png
+  - https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-dev-bch/images/1.png
+  - https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-dev-bch/images/2.png
+  - https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-dev-bch/images/3.png
 path: ""
 defaultUsername: ""
 defaultPassword: ""

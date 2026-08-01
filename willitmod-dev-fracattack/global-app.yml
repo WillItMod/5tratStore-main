@@ -37,14 +37,14 @@ description: >-
     - Pool settings apply automatically; miners may briefly reconnect after saving.
     - Fractal payout addresses support bech32 (`bc1...`) and legacy (`1...` / `3...`). Bitcoin Cash CashAddr (`q...` / `p...`) is not supported.
 developer: WillItMod
-website: https://github.com/WillItMod/umbrel-community-store
-repo: https://github.com/WillItMod/umbrel-community-store
+website: https://github.com/WillItMod/5tratStore-main
+repo: https://github.com/WillItMod/5tratStore-main
 support: https://discord.gg/vC2UrFAbUF
 dependencies: []
 port: 21225
-icon: "https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-dev-fracattack/icon.png"
+icon: "https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-dev-fracattack/icon.png"
 gallery:
-  - "https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-dev-fracattack/icon.png"
+  - "https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-dev-fracattack/icon.png"
 path: ""
 defaultUsername: ""
 defaultPassword: ""

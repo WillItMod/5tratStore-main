@@ -21,10 +21,10 @@ repo: https://github.com/WillItMod/PowPow
 support: https://discord.gg/vC2UrFAbUF
 dependencies: []
 port: 21221
-icon: https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-dev-powpow/icon.png
+icon: https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-dev-powpow/icon.png
 gallery:
-  - https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-dev-powpow/images/1.png
-  - https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-dev-powpow/images/2.png
+  - https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-dev-powpow/images/1.png
+  - https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-dev-powpow/images/2.png
 path: ""
 defaultUsername: ""
 defaultPassword: ""

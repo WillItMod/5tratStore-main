@@ -29,9 +29,9 @@ repo: https://github.com/WillItMod/AxePPC
 support: https://discord.gg/vC2UrFAbUF
 dependencies: []
 port: 21220
-icon: https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-dev-ppc/icon.png
+icon: https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-dev-ppc/icon.png
 gallery:
-  - https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-dev-ppc/icon.png
+  - https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-dev-ppc/icon.png
 path: ""
 defaultUsername: ""
 defaultPassword: ""

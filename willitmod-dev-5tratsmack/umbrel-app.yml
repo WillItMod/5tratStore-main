@@ -30,9 +30,9 @@ repo: https://github.com/WillItMod/5tratSmack
 support: https://github.com/WillItMod/5tratSmack/issues
 dependencies: []
 port: 21226
-icon: https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-dev-5tratsmack/icon.png
+icon: https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-dev-5tratsmack/icon.png
 gallery:
-  - https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-dev-5tratsmack/icon.png
+  - https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-dev-5tratsmack/icon.png
 path: ""
 defaultUsername: ""
 defaultPassword: ""

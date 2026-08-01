@@ -34,9 +34,9 @@ repo: https://github.com/WillItMod/AxeBC2
 support: https://discord.gg/vC2UrFAbUF
 dependencies: []
 port: 21219
-icon: https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-dev-bc2/icon.png
+icon: https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-dev-bc2/icon.png
 gallery:
-  - https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-dev-bc2/icon.png
+  - https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-dev-bc2/icon.png
 path: ""
 defaultUsername: ""
 defaultPassword: ""

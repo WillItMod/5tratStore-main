@@ -48,17 +48,17 @@ description: >-
   Status:
     - RC6 build: expect minor bugs. Core 9.26.5 fixes the long DigiDollar startup delay without requiring a reindex. AxeDGB also avoids false rebuild warnings while Core is starting, and preserves existing blockchain data.
 developer: WillItMod
-website: https://github.com/WillItMod/umbrel-community-store
-repo: https://github.com/WillItMod/umbrel-community-store
+website: https://github.com/WillItMod/5tratStore-main
+repo: https://github.com/WillItMod/5tratStore-main
 support: https://discord.gg/vC2UrFAbUF
 dependencies: []
 port: 21213
-icon: https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-dev-dgb/icon.png
+icon: https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-dev-dgb/icon.png
 gallery:
-  - https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-dev-dgb/icon.png
-  - https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-dev-dgb/images/1.png
-  - https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-dev-dgb/images/2.png
-  - https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-dev-dgb/images/3.png
+  - https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-dev-dgb/icon.png
+  - https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-dev-dgb/images/1.png
+  - https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-dev-dgb/images/2.png
+  - https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-dev-dgb/images/3.png
 path: ""
 defaultUsername: ""
 defaultPassword: ""

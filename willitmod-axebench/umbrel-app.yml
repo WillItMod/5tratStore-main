@@ -4,7 +4,7 @@ category: bitcoin
 name: AxeBench
 version: "4.0.29"
 tagline: Bitaxe fleet benchmarking and management
-icon: https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-axebench/icon.png
+icon: https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-axebench/icon.png
 description: >-
   RELEASE CANDIDATE
 
@@ -21,24 +21,24 @@ support: https://discord.gg/vC2UrFAbUF
 dependencies: []
 port: 5000
 gallery:
-  - https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-axebench/1.png
-  - https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-axebench/2.png
-  - https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-axebench/3.png
-  - https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-axebench/4.png
-  - https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-axebench/5.png
-  - https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-axebench/6.png
-  - https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-axebench/7.png
+  - https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-axebench/1.png
+  - https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-axebench/2.png
+  - https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-axebench/3.png
+  - https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-axebench/4.png
+  - https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-axebench/5.png
+  - https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-axebench/6.png
+  - https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-axebench/7.png
 path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
   v4.0.29:
-    - Publish a new multi-architecture image tag so Umbrel performs the update.
+    - Publish a new multi-architecture image tag so the platform performs the update.
     - Restore the MAIN proxy hostname so AxeBench opens correctly on port 5000.
     - Restore the MAIN network subnet to avoid colliding with an installed DEV package.
 
   v4.0.28-r1:
-    - Restore the MAIN Umbrel proxy hostname so AxeBench opens correctly on port 5000.
+    - Restore the MAIN application proxy hostname so AxeBench opens correctly on port 5000.
     - Restore the MAIN network subnet to avoid colliding with an installed DEV package.
     - Keep the tested v4.0.28 Release Candidate application image unchanged.
 

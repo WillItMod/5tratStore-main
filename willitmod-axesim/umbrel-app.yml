@@ -4,7 +4,7 @@ category: bitcoin
 name: AxeSim
 version: "1.0.9"
 tagline: Virtual miner simulator
-icon: https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-axesim/icon.png
+icon: https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-axesim/icon.png
 description: >-
   AxeSim is a virtual miner simulator you can use to test AxeLive and AxeBench
   without real hardware. It emulates common miner endpoints and produces
@@ -17,14 +17,14 @@ support: https://github.com/WillItMod/AxeSim-Release/issues
 dependencies: []
 port: 8081
 gallery:
-  - https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-axesim/1.png
-  - https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-axesim/2.png
-  - https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-axesim/3.png
-  - https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-axesim/4.png
+  - https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-axesim/1.png
+  - https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-axesim/2.png
+  - https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-axesim/3.png
+  - https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-axesim/4.png
 path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
   Add: Integrations panel in AxeSim to push published miner ports into AxeLive/AxeBench running on the same host (or configured URLs).
 submitter: WillItMod
-submission: https://github.com/WillItMod/umbrel-community-store/commit/a5c82a8
+submission: https://github.com/WillItMod/5tratStore-main/commit/a5c82a8

@@ -53,12 +53,12 @@ repo: https://github.com/WillItMod/AxeXEC
 support: https://discord.gg/vC2UrFAbUF
 dependencies: []
 port: 21218
-icon: https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-dev-xec/icon.png
+icon: https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-dev-xec/icon.png
 gallery:
-  - https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-dev-xec/icon.png
-  - https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-dev-xec/images/1.png
-  - https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-dev-xec/images/2.png
-  - https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-dev-xec/images/3.png
+  - https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-dev-xec/icon.png
+  - https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-dev-xec/images/1.png
+  - https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-dev-xec/images/2.png
+  - https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-dev-xec/images/3.png
 path: ""
 defaultUsername: ""
 defaultPassword: ""

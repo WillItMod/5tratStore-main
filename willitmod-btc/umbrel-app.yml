@@ -32,18 +32,18 @@ description: >-
     - Switching Core/Knots triggers an in-app migration and can take a while; avoid restarting the app or powering off the host while it migrates.
     - BTC payout addresses support bech32 (`bc1...`) and legacy (`1...` / `3...`). Bitcoin Cash CashAddr (`q...` / `p...`) is not supported.
 developer: WillItMod
-website: https://github.com/WillItMod/umbrel-community-store
-repo: https://github.com/WillItMod/umbrel-community-store
+website: https://github.com/WillItMod/5tratStore-main
+repo: https://github.com/WillItMod/5tratStore-main
 support: https://discord.gg/vC2UrFAbUF
 dependencies: []
 port: 21215
-icon: "https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-btc/icon.png"
+icon: "https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-btc/icon.png"
 gallery:
-  - "https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-btc/icon.png"
-  - "https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-btc/images/1.png"
-  - "https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-btc/images/2.png"
-  - "https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-btc/images/3.png"
-  - "https://raw.githubusercontent.com/WillItMod/umbrel-community-store/main/willitmod-btc/images/4.png"
+  - "https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-btc/icon.png"
+  - "https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-btc/images/1.png"
+  - "https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-btc/images/2.png"
+  - "https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-btc/images/3.png"
+  - "https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-btc/images/4.png"
 path: ""
 defaultUsername: ""
 defaultPassword: ""
