@@ -2,7 +2,7 @@ manifestVersion: 1
 id: willitmod-dev-5tratsmack
 category: altcoin
 name: 5tratSmack
-version: "0.11.6"
+version: "0.11.7"
 tagline: Home-miner 5TRAT node, wallet, solo pool and atomic trade lab
 description: >-
   Install and synchronize a complete 5TRAT node, create or restore an encrypted
@@ -41,7 +41,8 @@ releaseNotes: >-
   loop that could survive an app reinstall. Only the rebuildable txindex is
   quarantined; wallets, blocks, chainstate, pool and trading data are retained.
   Repeated recovery is rate-limited and later healthy startups supersede old
-  errors.
+  errors. Restores live 5tratMux hardware identity and active-route hashrate
+  telemetry with stale-route, standby and worker-alias protection.
 widgets:
   - id: sync
     type: text-with-progress
