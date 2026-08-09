@@ -2,7 +2,7 @@ manifestVersion: 1
 id: willitmod-dev-5tratsmack
 category: altcoin
 name: 5tratSmack
-version: "0.11.5"
+version: "0.11.6"
 tagline: Home-miner 5TRAT node, wallet, solo pool and atomic trade lab
 description: >-
   Install and synchronize a complete 5TRAT node, create or restore an encrypted
@@ -37,11 +37,11 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Fixes iPhone and iPad confirmation dialogs so trade approval buttons remain
-  visible in portrait and landscape. Long trade, wallet, backup, explorer,
-  search, block-win and authentication popups now follow the live viewport,
-  respect device safe areas and scroll independently. Existing wallet,
-  blockchain, pool and trading data are retained during the update.
+  Automatically recovers from the specific damaged transaction-index startup
+  loop that could survive an app reinstall. Only the rebuildable txindex is
+  quarantined; wallets, blocks, chainstate, pool and trading data are retained.
+  Repeated recovery is rate-limited and later healthy startups supersede old
+  errors.
 widgets:
   - id: sync
     type: text-with-progress

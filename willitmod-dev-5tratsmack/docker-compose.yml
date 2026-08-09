@@ -17,8 +17,6 @@ services:
       APP_HOST: 5tratsmack-app
       APP_PORT: 3000
       JWT_SECRET: "${JWT_SECRET}"
-    networks:
-      - umbrel_main_network
 
   init_permissions:
     image: alpine:3.22.1
@@ -94,7 +92,7 @@ services:
       retries: 12
 
   node-a:
-    image: ghcr.io/willitmod/5tratsmack-core:0.11.1
+    image: ghcr.io/willitmod/5tratsmack-core:0.11.2
     restart: unless-stopped
     stop_grace_period: 2m
     depends_on:
@@ -187,7 +185,7 @@ services:
       - edge
 
   app:
-    image: ghcr.io/willitmod/5tratsmack-app:0.11.5
+    image: ghcr.io/willitmod/5tratsmack-app:0.11.6
     restart: unless-stopped
     depends_on:
       init_permissions:
@@ -196,7 +194,7 @@ services:
         condition: service_started
     environment:
       APP_ID: 5tratsmack
-      APP_VERSION: 0.11.5
+      APP_VERSION: 0.11.6
       APP_CHANNEL: MAIN
       APP_RELEASE_PHASE: RC1
       APP_PLATFORM: 5TRATUMOS
@@ -205,7 +203,7 @@ services:
       FIVETRAT_STORE_UPDATE_APP_ID: 5tratsmack
       FIVETRAT_STORE_UPDATE_CHANNEL: main
       FIVETRAT_INSTALL_REVISION: main-store
-      FIVETRAT_RELEASE_TAG: 0.11.5
+      FIVETRAT_RELEASE_TAG: 0.11.6
       FIVETRAT_OS_UPDATE_PROXY_BASE: http://host.docker.internal
       NETWORK_IP: "${NETWORK_IP}"
       BCH2_RPC_HOST: node-a
@@ -238,9 +236,6 @@ services:
     networks:
       chain:
       edge:
-      umbrel_main_network:
-        aliases:
-          - 5tratsmack-app
     extra_hosts:
       - "host.docker.internal:host-gateway"
     healthcheck:
@@ -256,6 +251,3 @@ networks:
   chain:
     internal: true
   edge:
-  umbrel_main_network:
-    external: true
-    name: umbrel_main_network
