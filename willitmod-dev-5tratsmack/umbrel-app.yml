@@ -1,0 +1,81 @@
+manifestVersion: 1
+id: willitmod-dev-5tratsmack
+category: altcoin
+name: 5tratSmack
+version: "0.11.7"
+tagline: Home-miner 5TRAT node, wallet, solo pool and atomic trade lab
+description: >-
+  Install and synchronize a complete 5TRAT node, create or restore an encrypted
+  wallet, connect home miners to the bundled solo pool, explore the chain, and
+  use the atomic trade lab from one 5tratumOS app.
+
+  This MAIN-channel Release Candidate has completed public-chain, wallet, pool,
+  MUX pass-through and trading tests. Back up both the mining wallet and trading
+  recovery file before moving funds. The trade book uses the public Komodo DeFi
+  Framework network through outbound peer connections; every atomic swap still
+  requires the participating wallets to approve and settle it.
+
+  Trade Pulse uses an anonymous completed-swap tape. A price point becomes
+  network-visible only when the maker and taker independently report matching
+  settlement details. Wallet addresses, node names and open offers are not
+  published and cannot move the guide price.
+
+  Miner connection:
+    - URL: `stratum+tcp://<your-5tratumos-host-ip>:57557`
+    - Username: your 5TRAT address plus an optional worker name
+    - Password: anything
+developer: WillItMod
+website: https://5trat.com
+repo: https://github.com/WillItMod/5tratSmack
+support: https://github.com/WillItMod/5tratSmack/issues
+dependencies: []
+port: 21226
+icon: https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-dev-5tratsmack/icon.png
+gallery:
+  - https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-dev-5tratsmack/icon.png
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+releaseNotes: >-
+  Automatically recovers from the specific damaged transaction-index startup
+  loop that could survive an app reinstall. Only the rebuildable txindex is
+  quarantined; wallets, blocks, chainstate, pool and trading data are retained.
+  Repeated recovery is rate-limited and later healthy startups supersede old
+  errors. Restores live 5tratMux hardware identity and active-route hashrate
+  telemetry with stale-route, standby and worker-alias protection.
+widgets:
+  - id: sync
+    type: text-with-progress
+    refresh: 5s
+    endpoint: 5tratsmack-app:3000/api/widget/sync
+    link: ""
+    example:
+      type: text-with-progress
+      link: ""
+      title: 5TRAT sync
+      text: 83%
+      progressLabel: In progress
+      progress: 0.83
+  - id: pool
+    type: three-stats
+    refresh: 30s
+    endpoint: 5tratsmack-app:3000/api/widget/pool
+    link: ""
+    example:
+      type: three-stats
+      link: ""
+      items:
+        - title: Hashrate
+          text: "12.4"
+          subtext: TH/s
+        - title: Workers
+          text: "2"
+        - title: Best proof
+          text: "8.2"
+          subtext: M
+backupIgnore:
+  - data/node/blocks
+  - data/node/chainstate
+  - data/node/indexes
+  - data/node/debug.log
+submitter: WillItMod
