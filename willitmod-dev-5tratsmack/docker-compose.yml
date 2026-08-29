@@ -37,6 +37,8 @@ services:
           /data/p2p-state \
           /data/swap \
           /data/updater
+        # The guarded ckpool entrypoint owns the atomic JSON migration and
+        # refuses to mine until the local node validates the configured payout.
         # Never recurse through the blockchain during an app update. Existing
         # data already belongs to UID 1000 and traversing blocks/chainstate is
         # what turns a routine restart into a 30-minute "update".
@@ -154,7 +156,7 @@ services:
       start_period: 30s
 
   ckpool:
-    image: ghcr.io/willitmod/5tratsmack-ckpool:0.11.1
+    image: ghcr.io/willitmod/5tratsmack-ckpool:0.11.2
     command: ["-k", "-L", "-c", "/data/pool/config/ckpool.conf"]
     restart: unless-stopped
     depends_on:
@@ -176,8 +178,6 @@ services:
       MAXDIFF: "0"
       NONCE2_LENGTH: "4"
       FIVETRAT_MINING_ACTIVATION_HEIGHT: "1000"
-      DEV_FUND_ADDRESS: 5trat:qr7rg4z88tc34fr0z0mtkjc0c6s3knw5hce39q9evk
-      DEV_FEE_PERCENT: "5"
     volumes:
       - ${APP_DATA_DIR}/data/pool:/data/pool
     ports:
@@ -187,7 +187,7 @@ services:
       - edge
 
   app:
-    image: ghcr.io/willitmod/5tratsmack-app:0.11.7
+    image: ghcr.io/willitmod/5tratsmack-app:0.11.9
     restart: unless-stopped
     depends_on:
       init_permissions:
@@ -196,7 +196,7 @@ services:
         condition: service_started
     environment:
       APP_ID: 5tratsmack
-      APP_VERSION: 0.11.8
+      APP_VERSION: 0.11.9
       APP_CHANNEL: MAIN
       APP_RELEASE_PHASE: RC1
       APP_PLATFORM: 5TRATUMOS
@@ -205,7 +205,7 @@ services:
       FIVETRAT_STORE_UPDATE_APP_ID: 5tratsmack
       FIVETRAT_STORE_UPDATE_CHANNEL: main
       FIVETRAT_INSTALL_REVISION: main-store
-      FIVETRAT_RELEASE_TAG: 0.11.8
+      FIVETRAT_RELEASE_TAG: 0.11.9
       FIVETRAT_MUX_IDENTITY_URL: http://172.17.0.1:21222/api/integrations/workers
       FIVETRAT_OS_UPDATE_PROXY_BASE: http://host.docker.internal
       NETWORK_IP: "${NETWORK_IP}"
@@ -222,12 +222,12 @@ services:
       FIVETRAT_WALLET_NAME: 5tratsmack
       FIVETRAT_WALLET_TRANSFER_DIR: /data/node/wallet-transfers
       FIVETRAT_WALLET_NODE_TRANSFER_DIR: /data/wallet-transfers
-      FIVETRAT_DEV_FUND_ADDRESS: 5trat:qr7rg4z88tc34fr0z0mtkjc0c6s3knw5hce39q9evk
       FIVETRAT_MINING_ACTIVATION_HEIGHT: "1000"
       FIVETRAT_P2P_STATE_PATH: /data/p2p-state/reachability.json
       FIVETRAT_SWAP_CONTROL_URL: http://node-a:7784
       FIVETRAT_SWAP_CONTROL_TOKEN_PATH: /data/swap/control-token
-      FIVETRAT_MARKET_TAPE_URLS: https://market1.5trat.net/trade-tape,https://market2.5trat.net/trade-tape
+      FIVETRAT_PUBLIC_MARKET_TAPE_ENABLED: "1"
+      FIVETRAT_MARKET_TAPE_URLS: "https://market1.5trat.net/trade-tape,https://market2.5trat.net/trade-tape"
       FIVETRAT_COINGECKO_ID: ""
     volumes:
       - ${APP_DATA_DIR}/data/node:/data/node
