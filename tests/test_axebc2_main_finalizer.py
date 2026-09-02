@@ -34,19 +34,23 @@ class AxeBC2MainFinalizerTests(unittest.TestCase):
             "core_source_revision": "cdf44542dde255648008249d187fafc15f3a2f09",
             "core_candidate_run": 33675068951,
             "app_version": "0.1.10-dev",
+            "tested_os_version": "v0.7.12-dev",
+            "tested_os_bundle_sha256": "8" * 64,
             "source_revision": "6e4ef58218e8cd5a4d1113196f9872a7f501f52e",
             "tested_on": "10.10.10.235",
             "tested_at": "2026-09-02T20:00:00Z",
             "acceptance": {
-                "observed_at": "2026-09-02T20:00:00Z", "core_version": 310100,
-                "migration_required_marker_absent": True, "migration_complete_marker_valid": True,
+                "observed_at": "2026-09-02T20:00:00Z", "chain": "main", "core_version": 310100,
+                "migration_required_marker_absent": True, "migration_started_marker_valid": True, "migration_complete_marker_valid": True,
                 "checkpoint_height": 57752, "checkpoint_hash": "000000000000000013ceffe797280c57f75a5b9f1d9e70c3503584058c322576",
                 "chainwork": "0000000000000000000000000000000000000000000000959028194ff1139272",
                 "ibd": False, "verification_progress": 1.0, "blocks": 60000, "headers": 60000,
                 "best_block_hash": "f" * 64, "explorer_common_height": 60000, "explorer_common_hash": "f" * 64,
-                "outbound_core31_peers": 3, "verifychain_level": 4, "verifychain_passed": True,
+                "outbound_core31_peers": 3, "competing_valid_tips": 0, "verifychain_level": 4, "verifychain_passed": True,
                 "payout_configured": True, "payout_preserved": True, "pool_stratum_result": "passed",
                 "app_ui_privacy_passed": True, "telemetry_disabled": True,
+                "p2p_port_unpublished": True, "natpmp_disabled": True,
+                "post_completion_restart_passed": True, "reindex_not_repeated": True,
                 "app_rollback_rejected": True, "os_rollback_rejected": True,
             },
         }), encoding="utf-8")
@@ -55,10 +59,10 @@ class AxeBC2MainFinalizerTests(unittest.TestCase):
         self.fake_docker.write_text("""#!/bin/sh
 set -eu
 printf '%s\\n' "$*" >>"$FAKE_DOCKER_LOG"
-config="$2"
-[ "$1" = --config ] && [ -f "$config/config.json" ]
+host="$2"; config="$4"
+[ "$1" = --host ] && [ "$3" = --config ] && [ -n "$host" ] && [ -f "$config/config.json" ]
 [ "$(cat "$config/config.json")" = '{"auths":{}}' ]
-shift 2
+shift 4
 if [ "$1 $2" = 'buildx imagetools' ]; then
   case "$4" in
     ghcr.io/willitmod/axebc2-app:0.1.10) printf 'Name: x\\nDigest: %s\\n' "$APP_DIGEST" ;;
@@ -102,6 +106,7 @@ esac
         env = os.environ.copy()
         env.update({
             "DOCKER_BIN": str(self.fake_docker),
+            "DOCKER_HOST": "unix:///tmp/test-colima.sock",
             "CURL_BIN": str(self.fake_curl),
             "FAKE_CURL_LOG": str(self.curl_log),
             "CURL_DIGEST_MODE": curl_mode,
@@ -126,7 +131,14 @@ esac
         self.assertEqual(calls.count("--platform linux/arm64"), 2)
         self.assertNotIn("-dev", calls)
         self.assertNotIn("buildx", calls)
-        self.assertTrue(all("--config" in line for line in calls.splitlines()))
+        self.assertTrue(all("--host unix:///tmp/test-colima.sock --config" in line for line in calls.splitlines()))
+
+    def test_bad_explicit_docker_host_fails_before_registry_or_mutation(self):
+        env = os.environ.copy()
+        env.update({"DOCKER_BIN":str(self.fake_docker),"DOCKER_HOST":"bad-host","CURL_BIN":str(self.fake_curl),"FAKE_DOCKER_LOG":str(self.log),"FAKE_CURL_LOG":str(self.curl_log),"APP_DIGEST":APP_DIGEST,"CORE_DIGEST":CORE_DIGEST})
+        result=subprocess.run([str(self.root/"scripts"/SCRIPT.name),APP_DIGEST,CORE_DIGEST,str(self.evidence)],env=env,text=True,capture_output=True,check=False)
+        self.assertNotEqual(result.returncode,0); self.assertFalse(self.log.exists()); self.assertFalse(self.curl_log.exists())
+        self.assertEqual((self.root/"willitmod-dev-bc2/docker-compose.yml").read_bytes(),self.original)
 
     def test_bad_registry_digest_headers_fail_without_docker_or_mutation(self):
         for mode in ("wrong", "missing", "malformed"):
@@ -191,6 +203,21 @@ esac
             self.assertNotEqual(result.returncode, 0)
             self.assertFalse(self.log.exists())
             self.assertEqual((self.root / "willitmod-dev-bc2/docker-compose.yml").read_bytes(), self.original)
+
+    def test_network_restart_and_os_evidence_fail_closed(self):
+        baseline = json.loads(self.evidence.read_text(encoding="utf-8"))
+        cases = (("chain", "test"), ("migration_started_marker_valid", False),
+                 ("competing_valid_tips", 1), ("p2p_port_unpublished", False),
+                 ("natpmp_disabled", False), ("post_completion_restart_passed", False),
+                 ("reindex_not_repeated", False))
+        for field, value in cases:
+            doc = json.loads(json.dumps(baseline)); doc["acceptance"][field] = value
+            self.evidence.write_text(json.dumps(doc), encoding="utf-8")
+            result = self.run_finalizer(); self.assertNotEqual(result.returncode, 0)
+            self.assertFalse(self.log.exists())
+        doc = json.loads(json.dumps(baseline)); doc["tested_os_version"] = "v0.7.11-dev"
+        self.evidence.write_text(json.dumps(doc), encoding="utf-8")
+        self.assertNotEqual(self.run_finalizer().returncode, 0); self.assertFalse(self.log.exists())
 
 
 if __name__ == "__main__":

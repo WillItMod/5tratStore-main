@@ -9,7 +9,7 @@ policy_file="${data_dir}/.5tratumos-rollback-policy.json"
 node_dir="${data_dir}/node"
 required_marker="${node_dir}/.core31-full-reindex-required.json"
 complete_marker="${node_dir}/.core31-full-reindex-complete.json"
-minimum_os="0.7.11"
+minimum_os="0.7.12"
 minimum_app="0.1.10"
 migration="bitcoinii-shockwave-core31-full-reindex"
 

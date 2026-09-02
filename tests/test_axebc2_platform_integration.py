@@ -96,7 +96,7 @@ class AxeBC2PlatformIntegrationTests(unittest.TestCase):
             data.mkdir(parents=True)
             build = temp / "etc/5tratumos/build.json"
             build.parent.mkdir(parents=True)
-            build.write_text(json.dumps({"tag": "0.7.11"}), encoding="utf-8")
+            build.write_text(json.dumps({"tag": "0.7.12"}), encoding="utf-8")
             env = os.environ.copy()
             env.update(
                 {

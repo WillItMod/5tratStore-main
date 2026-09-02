@@ -25,7 +25,7 @@ class AxeBC2InitTests(unittest.TestCase):
     def tearDown(self):
         shutil.rmtree(self.tmp)
 
-    def run_init(self, tag="0.7.11", expect=0, jwt_secret=None):
+    def run_init(self, tag="0.7.12", expect=0, jwt_secret=None):
         self.build.write_text(json.dumps({"tag": tag}), encoding="utf-8")
         env = os.environ.copy()
         env.pop("JWT_SECRET", None)
@@ -81,7 +81,7 @@ class AxeBC2InitTests(unittest.TestCase):
             (self.data / ".5tratumos-rollback-policy.json").read_text(encoding="utf-8")
         )
         self.assertEqual(policy["minimum_base_version"], "0.1.10")
-        self.assertEqual(policy["minimum_5tratumos_version"], "0.7.11")
+        self.assertEqual(policy["minimum_5tratumos_version"], "0.7.12")
         marker = json.loads(
             (self.data / "node/.core31-full-reindex-required.json").read_text(
                 encoding="utf-8"
@@ -206,7 +206,7 @@ class AxeBC2InitTests(unittest.TestCase):
         apk = tool_dir / "apk"
         apk.write_text("#!/bin/sh\nexit 42\n", encoding="utf-8")
         apk.chmod(0o755)
-        self.build.write_text(json.dumps({"tag": "0.7.11"}), encoding="utf-8")
+        self.build.write_text(json.dumps({"tag": "0.7.12"}), encoding="utf-8")
         sentinel = self.data / "unchanged"
         sentinel.write_text("original", encoding="utf-8")
         env = os.environ.copy()

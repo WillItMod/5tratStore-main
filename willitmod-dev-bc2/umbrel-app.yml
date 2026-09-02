@@ -21,7 +21,7 @@ description: >-
 
   Notes:
     - Set your payout address in the app Settings tab.
-    - Requires 5tratumOS 0.7.11 or newer.
+    - Requires 5tratumOS 0.7.12 or newer.
     - The node makes outbound peer connections; this app does not publish a public P2P port or request NAT-PMP mappings.
     - Initial sync can take a long time and a lot of bandwidth/storage (the node downloads and validates the chain).
     - Solo mining is extremely unlikely to find blocks without significant hashrate.
@@ -44,7 +44,7 @@ defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
   Upgrades BitcoinII Core to 31.1 for the ShockWave consensus change. Requires
-  5tratumOS 0.7.11 or newer. Back up your app data before upgrading. Existing
+  5tratumOS 0.7.12 or newer. Back up your app data before upgrading. Existing
   nodes must perform a full reindex of their stored blockchain data; mining and
   sync data will be unavailable until validation completes. Stratum remains on TCP
   port 2345. Support telemetry is disabled by default. The node uses outbound

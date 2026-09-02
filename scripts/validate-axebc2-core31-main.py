@@ -37,7 +37,7 @@ require(
     "full reindex of their stored blockchain data" in manifest,
     "release notes must describe the migration accurately",
 )
-require("Requires 5tratumOS 0.7.11" in manifest, "OS prerequisite must be disclosed")
+require("Requires 5tratumOS 0.7.12" in manifest, "OS prerequisite must be disclosed")
 require('"2345:3333/tcp"' in compose, "Stratum host port 2345 must be retained")
 require("SUPPORT_CHECKIN_ENABLED: \"false\"" in compose, "telemetry must default off")
 require("create_host_path: false" in compose, "build metadata bind must fail closed")

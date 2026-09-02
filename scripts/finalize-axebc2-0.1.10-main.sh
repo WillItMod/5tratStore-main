@@ -24,6 +24,13 @@ fail() { echo "ERROR: $*" >&2; exit 1; }
 command -v "$docker_bin" >/dev/null 2>&1 || fail "Docker is required for registry verification"
 command -v "$curl_bin" >/dev/null 2>&1 || fail "curl is required for anonymous registry verification"
 command -v "$jq_bin" >/dev/null 2>&1 || fail "jq is required for anonymous registry verification"
+docker_host="${DOCKER_HOST:-}"
+if [[ -z "$docker_host" ]]; then
+  active_context="$("$docker_bin" context show)" || fail "cannot determine active Docker context"
+  [[ -n "$active_context" ]] || fail "active Docker context is empty"
+  docker_host="$("$docker_bin" context inspect "$active_context" --format '{{.Endpoints.docker.Host}}')" || fail "cannot resolve active Docker daemon endpoint"
+fi
+[[ "$docker_host" =~ ^(unix|tcp|ssh|npipe)://[^[:space:]]+$ ]] || fail "Docker daemon endpoint is missing or malformed"
 
 # Promotion is allowed only from a recorded, successful DEV run of the exact
 # two multi-architecture indexes that MAIN will reference.
@@ -46,10 +53,13 @@ expected = {
     "core_source_revision": "cdf44542dde255648008249d187fafc15f3a2f09",
     "core_candidate_run": 33675068951,
     "app_version": "0.1.10-dev",
+    "tested_os_version": "v0.7.12-dev",
 }
 for key, value in expected.items():
     if evidence.get(key) != value:
         raise SystemExit(f"DEV acceptance evidence {key!r} must equal {value!r}")
+if not re.fullmatch(r"[0-9a-f]{64}", str(evidence.get("tested_os_bundle_sha256", ""))):
+    raise SystemExit("DEV acceptance evidence requires the exact OS bundle sha256")
 if not str(evidence.get("tested_on", "")).strip():
     raise SystemExit("DEV acceptance evidence requires the tested node identity")
 try:
@@ -60,8 +70,9 @@ a=evidence.get("acceptance")
 if not isinstance(a, dict): raise SystemExit("DEV acceptance evidence requires structured acceptance observations")
 try: datetime.datetime.fromisoformat(str(a["observed_at"]).replace("Z", "+00:00"))
 except (KeyError, ValueError): raise SystemExit("acceptance observed_at must be ISO-8601")
-truth=("migration_required_marker_absent","migration_complete_marker_valid","verifychain_passed","payout_configured","payout_preserved","app_ui_privacy_passed","telemetry_disabled","app_rollback_rejected","os_rollback_rejected")
+truth=("migration_required_marker_absent","migration_started_marker_valid","migration_complete_marker_valid","verifychain_passed","payout_configured","payout_preserved","app_ui_privacy_passed","telemetry_disabled","p2p_port_unpublished","natpmp_disabled","post_completion_restart_passed","reindex_not_repeated","app_rollback_rejected","os_rollback_rejected")
 if any(a.get(k) is not True for k in truth): raise SystemExit("all required acceptance gates must be true")
+if a.get("chain") != "main" or a.get("competing_valid_tips") != 0: raise SystemExit("main chain must have no competing valid tips")
 if a.get("core_version") != 310100: raise SystemExit("exact Core 31.1.0 version was not observed")
 if a.get("checkpoint_height") != 57752 or a.get("checkpoint_hash") != "000000000000000013ceffe797280c57f75a5b9f1d9e70c3503584058c322576": raise SystemExit("official checkpoint observation is invalid")
 hex64=lambda v: isinstance(v,str) and bool(re.fullmatch(r"[0-9a-f]{64}",v))
@@ -99,7 +110,7 @@ resolve_tag() {
 
 verify_index() {
   local ref="$1" digest="$2" manifest
-  manifest="$("$docker_bin" --config "$anon_config" manifest inspect "$ref@$digest")" \
+  manifest="$("$docker_bin" --host "$docker_host" --config "$anon_config" manifest inspect "$ref@$digest")" \
     || fail "anonymous manifest inspection failed for $ref@$digest"
   python3 -c '
 import json, sys
@@ -108,9 +119,9 @@ platforms={(m.get("platform",{}).get("os"),m.get("platform",{}).get("architectur
 missing={("linux","amd64"),("linux","arm64")}-platforms
 if missing: raise SystemExit("missing required platforms: "+", ".join("/".join(x) for x in sorted(missing)))
 ' <<<"$manifest" || fail "$ref@$digest is not the required amd64+arm64 index"
-  "$docker_bin" --config "$anon_config" pull --platform linux/amd64 "$ref@$digest" >/dev/null \
+  "$docker_bin" --host "$docker_host" --config "$anon_config" pull --platform linux/amd64 "$ref@$digest" >/dev/null \
     || fail "anonymous amd64 pull failed for $ref@$digest"
-  "$docker_bin" --config "$anon_config" pull --platform linux/arm64 "$ref@$digest" >/dev/null \
+  "$docker_bin" --host "$docker_host" --config "$anon_config" pull --platform linux/arm64 "$ref@$digest" >/dev/null \
     || fail "anonymous arm64 pull failed for $ref@$digest"
 }
 

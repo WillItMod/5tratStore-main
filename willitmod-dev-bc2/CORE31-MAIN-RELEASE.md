@@ -28,7 +28,7 @@ two identical immutable Core sha256 pins. A partial or mixed state is rejected.
 They must be replaced with the exact verified multi-architecture candidate
 digests. After substitution, the merged platform Compose must pass validation,
 all images must pull anonymously by digest, init must complete successfully on
-5tratumOS 0.7.11+, and the exact promoted images must already have passed DEV
+5tratumOS 0.7.12+, and the exact promoted images must already have passed DEV
 acceptance before this MAIN recipe is released.
 
 Run `scripts/finalize-axebc2-0.1.10-main.sh` with the promoted application
