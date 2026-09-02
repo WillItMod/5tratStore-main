@@ -89,7 +89,7 @@ case "$url" in
    missing) printf 'HTTP/2 200\\r\\n\\r\\n'; exit 0 ;;
    malformed) digest='sha256:not-a-digest' ;;
   esac
-  printf 'HTTP/2 200\\r\\nDocker-Content-Digest: %s\\r\\n\\r\\n' "$digest"
+  printf 'HTTP/2 200\\r\\ndocker-content-digest: %s\\r\\n\\r\\n' "$digest"
  ;;
 esac
 """, encoding="utf-8")
