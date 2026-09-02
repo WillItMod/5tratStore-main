@@ -29,10 +29,10 @@ class AxeBC2MainFinalizerTests(unittest.TestCase):
             "result": "passed",
             "app_image": "ghcr.io/willitmod/axebc2-app-umbrel-dev:0.1.10-candidate.6e4ef58218e8",
             "app_digest": APP_DIGEST,
-            "core_image": "ghcr.io/willitmod/bitcoinii-core:31.1.0-rc.3c2cafcab19e",
+            "core_image": "ghcr.io/willitmod/bitcoinii-core:31.1.0-rc.cdf44542dde2",
             "core_digest": CORE_DIGEST,
-            "core_source_revision": "3c2cafcab19efde33c1e476a982c3389957dacb2",
-            "core_candidate_run": 33674007419,
+            "core_source_revision": "cdf44542dde255648008249d187fafc15f3a2f09",
+            "core_candidate_run": 33675068951,
             "app_version": "0.1.10-dev",
             "source_revision": "6e4ef58218e8cd5a4d1113196f9872a7f501f52e",
             "tested_on": "10.10.10.235",
@@ -147,6 +147,17 @@ fi
         self.assertNotEqual(result.returncode, 0)
         self.assertFalse(self.log.exists())
         self.assertEqual((self.root / "willitmod-dev-bc2/docker-compose.yml").read_bytes(), self.original)
+
+    def test_wrong_core_versions_and_progress_fail_before_registry_or_mutation(self):
+        baseline = json.loads(self.evidence.read_text(encoding="utf-8"))
+        for field, value in (("core_version", 310000), ("core_version", 320000), ("verification_progress", 0.999998)):
+            doc = json.loads(json.dumps(baseline))
+            doc["acceptance"][field] = value
+            self.evidence.write_text(json.dumps(doc), encoding="utf-8")
+            result = self.run_finalizer()
+            self.assertNotEqual(result.returncode, 0)
+            self.assertFalse(self.log.exists())
+            self.assertEqual((self.root / "willitmod-dev-bc2/docker-compose.yml").read_bytes(), self.original)
 
 
 if __name__ == "__main__":

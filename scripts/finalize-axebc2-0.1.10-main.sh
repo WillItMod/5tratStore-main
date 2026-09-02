@@ -37,10 +37,10 @@ expected = {
     "app_image": "ghcr.io/willitmod/axebc2-app-umbrel-dev:0.1.10-candidate.6e4ef58218e8",
     "app_digest": app_digest,
     "source_revision": "6e4ef58218e8cd5a4d1113196f9872a7f501f52e",
-    "core_image": "ghcr.io/willitmod/bitcoinii-core:31.1.0-rc.3c2cafcab19e",
+    "core_image": "ghcr.io/willitmod/bitcoinii-core:31.1.0-rc.cdf44542dde2",
     "core_digest": core_digest,
-    "core_source_revision": "3c2cafcab19efde33c1e476a982c3389957dacb2",
-    "core_candidate_run": 33674007419,
+    "core_source_revision": "cdf44542dde255648008249d187fafc15f3a2f09",
+    "core_candidate_run": 33675068951,
     "app_version": "0.1.10-dev",
 }
 for key, value in expected.items():
@@ -58,12 +58,12 @@ try: datetime.datetime.fromisoformat(str(a["observed_at"]).replace("Z", "+00:00"
 except (KeyError, ValueError): raise SystemExit("acceptance observed_at must be ISO-8601")
 truth=("migration_required_marker_absent","migration_complete_marker_valid","verifychain_passed","payout_configured","payout_preserved","app_ui_privacy_passed","telemetry_disabled","app_rollback_rejected","os_rollback_rejected")
 if any(a.get(k) is not True for k in truth): raise SystemExit("all required acceptance gates must be true")
-if a.get("core_version",0) < 310000: raise SystemExit("Core 31 version was not observed")
+if a.get("core_version") != 310100: raise SystemExit("exact Core 31.1.0 version was not observed")
 if a.get("checkpoint_height") != 57752 or a.get("checkpoint_hash") != "000000000000000013ceffe797280c57f75a5b9f1d9e70c3503584058c322576": raise SystemExit("official checkpoint observation is invalid")
 hex64=lambda v: isinstance(v,str) and bool(re.fullmatch(r"[0-9a-f]{64}",v))
 minimum="0000000000000000000000000000000000000000000000959028194ff1139272"
 if not hex64(a.get("chainwork")) or a["chainwork"] < minimum: raise SystemExit("observed chainwork is below minimum")
-if a.get("ibd") is not False or not isinstance(a.get("verification_progress"),(int,float)) or a["verification_progress"] < 0.999: raise SystemExit("node synchronization evidence is incomplete")
+if a.get("ibd") is not False or not isinstance(a.get("verification_progress"),(int,float)) or a["verification_progress"] < 0.999999: raise SystemExit("node synchronization evidence is incomplete")
 if not isinstance(a.get("blocks"),int) or a["blocks"] != a.get("headers") or a["blocks"] != a.get("explorer_common_height"): raise SystemExit("node/explorer heights do not match")
 if not hex64(a.get("best_block_hash")) or a["best_block_hash"] != a.get("explorer_common_hash"): raise SystemExit("node/explorer hashes do not match")
 if not isinstance(a.get("outbound_core31_peers"),int) or a["outbound_core31_peers"] < 3: raise SystemExit("fewer than three outbound Core 31 peers observed")

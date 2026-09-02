@@ -35,9 +35,9 @@ Run `scripts/finalize-axebc2-0.1.10-main.sh` with the promoted application
 index digest, promoted Core index digest and a completed DEV acceptance JSON
 based on `DEV-ACCEPTANCE-EVIDENCE.example.json`. The finalizer fails before
 editing Compose unless the evidence identifies the exact DEV-tested Core RC
-`31.1.0-rc.3c2cafcab19e`, full Core source revision
-`3c2cafcab19efde33c1e476a982c3389957dacb2`, candidate workflow run
-`33674007419`, and both exact tested digests.
+`31.1.0-rc.cdf44542dde2`, full Core source revision
+`cdf44542dde255648008249d187fafc15f3a2f09`, candidate workflow run
+`33675068951`, and both exact tested digests.
 The application evidence must likewise identify the exact tested candidate
 `ghcr.io/willitmod/axebc2-app-umbrel-dev:0.1.10-candidate.6e4ef58218e8` and its
 full source revision; MAIN independently resolves the promoted stable app tag
