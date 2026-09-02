@@ -2,14 +2,14 @@ manifestVersion: 1
 id: willitmod-dev-5tratsmack
 category: altcoin
 name: 5tratSmack
-version: "0.11.9"
+version: "0.11.10"
 tagline: Home-miner 5TRAT node, wallet, solo pool and atomic trade lab
 description: >-
   Install and synchronize a complete 5TRAT node, create or restore an encrypted
   wallet, connect home miners to the bundled solo pool, explore the chain, and
   use the atomic trade lab from one 5tratumOS app.
 
-  This MAIN-channel Release Candidate has completed public-chain, wallet, pool,
+  This MAIN-channel release has completed public-chain, wallet, pool,
   MUX pass-through and trading tests. Back up both the mining wallet and trading
   recovery file before moving funds. The trade book uses the public Komodo DeFi
   Framework network through outbound peer connections; every atomic swap still
@@ -38,13 +38,18 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Privacy hotfix: Your Private Activity now comes only from this installation's
-  isolated trading wallet, and automatic completed-swap relay publication has
-  been removed. Trade Pulse adds separate Global Trades, My Trades and Compare
-  views with readable execution-order charts. Embedded development-fund and
-  donation payment identities are removed; the pool now refuses to mine until
-  the local node validates its configured payout. Adds a GLEEC Wallet & DEX
-  information tab. Existing wallets, blockchain, pool and trading data are retained.
+  Jackpot and reliability update: Pink and Gold bonuses settle to the previous
+  block's payout script while the current miner remains output zero; malformed
+  metadata and invalid payouts fail closed. Restores the transparent 0.11.8
+  development contribution, enabled by default at 5%, adjustable or optional,
+  and paid only as a disclosed coinbase output after any prior-winner jackpot.
+  Since 0.11.9 did not retain opt-outs, upgrades return to that 5% default. It
+  never withdraws wallet funds. The dashboard labels last-known fiat values,
+  excludes them from order pricing, shows rejected candidates, and replays full
+  retained history. Exact-config restart acknowledgement, live Stratum checks,
+  cached incremental scans and atomic locked state updates improve reliability
+  and performance. The 0.11.9 private local/global trade separation remains,
+  and existing wallets, blockchain, pool and trading data are retained.
 widgets:
   - id: sync
     type: text-with-progress
