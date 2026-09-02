@@ -40,15 +40,16 @@ defaultPassword: ""
 releaseNotes: >-
   Jackpot and reliability update: Pink and Gold bonuses settle to the previous
   block's payout script while the current miner remains output zero; malformed
-  metadata and invalid payouts fail closed. The dashboard now labels last-known
-  fiat values and excludes them from order pricing, shows rejected block
-  candidates, and replays the full retained block history. Restart completion
-  waits for the running pool to acknowledge the exact config, while Stratum
-  readiness detects a stopped listener. Incremental log scans, cached history
-  discovery, atomic state writes and locked updates reduce CPU, I/O and state
-  races. The
-  0.11.9 privacy protections remain in place, and existing wallets, blockchain,
-  pool and trading data are retained.
+  metadata and invalid payouts fail closed. Restores the transparent 0.11.8
+  development contribution, enabled by default at 5%, adjustable or optional,
+  and paid only as a disclosed coinbase output after any prior-winner jackpot.
+  Since 0.11.9 did not retain opt-outs, upgrades return to that 5% default. It
+  never withdraws wallet funds. The dashboard labels last-known fiat values,
+  excludes them from order pricing, shows rejected candidates, and replays full
+  retained history. Exact-config restart acknowledgement, live Stratum checks,
+  cached incremental scans and atomic locked state updates improve reliability
+  and performance. The 0.11.9 private local/global trade separation remains,
+  and existing wallets, blockchain, pool and trading data are retained.
 widgets:
   - id: sync
     type: text-with-progress

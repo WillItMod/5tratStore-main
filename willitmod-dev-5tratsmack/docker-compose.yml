@@ -180,6 +180,8 @@ services:
       MAXDIFF: "0"
       NONCE2_LENGTH: "4"
       FIVETRAT_MINING_ACTIVATION_HEIGHT: "1000"
+      DEV_FUND_ADDRESS: 5trat:qr7rg4z88tc34fr0z0mtkjc0c6s3knw5hce39q9evk
+      DEV_FEE_PERCENT: "5"
     volumes:
       - ${APP_DATA_DIR}/data/pool:/data/pool
     ports:
@@ -234,6 +236,7 @@ services:
       FIVETRAT_WALLET_NAME: 5tratsmack
       FIVETRAT_WALLET_TRANSFER_DIR: /data/node/wallet-transfers
       FIVETRAT_WALLET_NODE_TRANSFER_DIR: /data/wallet-transfers
+      FIVETRAT_DEV_FUND_ADDRESS: 5trat:qr7rg4z88tc34fr0z0mtkjc0c6s3knw5hce39q9evk
       FIVETRAT_MINING_ACTIVATION_HEIGHT: "1000"
       FIVETRAT_P2P_STATE_PATH: /data/p2p-state/reachability.json
       FIVETRAT_SWAP_CONTROL_URL: http://node-a:7784

@@ -48,4 +48,7 @@ grep -Fx "      APP_IMAGE: ghcr.io/willitmod/5tratsmack-app:0.11.10@${app_digest
 grep -Fx "      APP_REVISION: ${source_revision}" "$compose" >/dev/null
 grep -Fx "      BCH2_NODE_IMAGE: ghcr.io/willitmod/5tratsmack-core:0.11.2@sha256:7bf02513144c7a157965fb8e9ad5865f5e84fa679afa7cb61fc0a8e140a40070" "$compose" >/dev/null
 grep -Fx "      CKPOOL_IMAGE: ghcr.io/willitmod/5tratsmack-ckpool:0.11.3@${ckpool_digest}" "$compose" >/dev/null
+grep -Fx "      DEV_FUND_ADDRESS: 5trat:qr7rg4z88tc34fr0z0mtkjc0c6s3knw5hce39q9evk" "$compose" >/dev/null
+grep -Fx '      DEV_FEE_PERCENT: "5"' "$compose" >/dev/null
+grep -Fx "      FIVETRAT_DEV_FUND_ADDRESS: 5trat:qr7rg4z88tc34fr0z0mtkjc0c6s3knw5hce39q9evk" "$compose" >/dev/null
 printf 'Prepared MAIN from source %s\napp=%s\nckpool=%s\n' "$source_revision" "$app_digest" "$ckpool_digest"
