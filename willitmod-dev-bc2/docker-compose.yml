@@ -21,16 +21,24 @@ services:
       - type: bind
         source: ${APP_DATA_DIR}/data
         target: /data
+        bind:
+          create_host_path: false
       - type: bind
         source: ${APP_DATA_DIR}
         target: /appdata
+        bind:
+          create_host_path: false
       - type: bind
         source: ${APP_DATA_DIR}/data/templates
         target: /data/templates
+        bind:
+          create_host_path: false
       - type: bind
         source: ${APP_DATA_DIR}/data/init/init.sh
         target: /opt/axebc2/init.sh
         read_only: true
+        bind:
+          create_host_path: false
     environment:
       APPS_SUBNET: "${NETWORK_IP}/16"
       RPC_USER: "btc2"
@@ -53,7 +61,11 @@ services:
       init:
         condition: service_completed_successfully
     volumes:
-      - ${APP_DATA_DIR}/data/node:/data
+      - type: bind
+        source: ${APP_DATA_DIR}/data/node
+        target: /data
+        bind:
+          create_host_path: false
 
   ckpool:
     image: ghcr.io/willitmod/docker-ckpool-solo:590fb2a@sha256:8a9a7f10c8138d0f55533132ee7710a06715a42a49f75efb39be3350ada4fa6e
@@ -67,8 +79,17 @@ services:
     ports:
       - "2345:3333/tcp"
     volumes:
-      - ${APP_DATA_DIR}/data/pool/config:/config:ro
-      - ${APP_DATA_DIR}/data/pool/www:/www
+      - type: bind
+        source: ${APP_DATA_DIR}/data/pool/config
+        target: /config
+        read_only: true
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ${APP_DATA_DIR}/data/pool/www
+        target: /www
+        bind:
+          create_host_path: false
     entrypoint:
       - /bin/sh
       - -ec
@@ -104,7 +125,11 @@ services:
         aliases:
           - axebc2-app
     volumes:
-      - ${APP_DATA_DIR}/data:/data
+      - type: bind
+        source: ${APP_DATA_DIR}/data
+        target: /data
+        bind:
+          create_host_path: false
     environment:
       NETWORK_IP: "${NETWORK_IP}"
       STATIC_DIR: "/app/static"

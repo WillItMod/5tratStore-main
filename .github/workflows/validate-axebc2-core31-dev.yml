@@ -5,6 +5,8 @@ on:
     paths:
       - "willitmod-dev-bc2/**"
       - "tests/test_axebc2_core31_init.py"
+      - "tests/test_axebc2_platform_integration.py"
+      - "tests/fixtures/5tratumos_contract_4f979cb.py"
       - "scripts/validate-axebc2-core31-dev.py"
       - ".github/workflows/validate-axebc2-core31-dev.yml"
   push:
@@ -12,6 +14,8 @@ on:
     paths:
       - "willitmod-dev-bc2/**"
       - "tests/test_axebc2_core31_init.py"
+      - "tests/test_axebc2_platform_integration.py"
+      - "tests/fixtures/5tratumos_contract_4f979cb.py"
       - "scripts/validate-axebc2-core31-dev.py"
       - ".github/workflows/validate-axebc2-core31-dev.yml"
 
@@ -26,7 +30,7 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
       - name: Install test dependencies
-        run: sudo apt-get update && sudo apt-get install --yes gettext-base jq
+        run: sudo apt-get update && sudo apt-get install --yes gettext-base jq python3-yaml
 
       - name: Validate metadata and migration initialization
         run: python3 scripts/validate-axebc2-core31-dev.py

@@ -151,6 +151,30 @@ class AxeBC2InitTests(unittest.TestCase):
         self.assertEqual(result.returncode, 78)
         self.assertEqual(list(self.data.iterdir()), [])
 
+    def test_dependency_install_failure_precedes_persistent_mutation(self):
+        tool_dir = self.tmp / "broken-tools"
+        tool_dir.mkdir()
+        apk = tool_dir / "apk"
+        apk.write_text("#!/bin/sh\nexit 42\n", encoding="utf-8")
+        apk.chmod(0o755)
+        self.build.write_text(json.dumps({"tag": "0.7.11"}), encoding="utf-8")
+        sentinel = self.data / "unchanged"
+        sentinel.write_text("original", encoding="utf-8")
+        env = os.environ.copy()
+        env.update(
+            {
+                "PATH": str(tool_dir),
+                "AXEBC2_DATA_DIR": str(self.data),
+                "AXEBC2_APPDATA_DIR": str(self.appdata),
+                "AXEBC2_BUILD_FILE": str(self.build),
+            }
+        )
+        result = subprocess.run(["/bin/sh", str(INIT)], env=env, capture_output=True)
+        self.assertEqual(result.returncode, 42)
+        self.assertEqual(sentinel.read_text(encoding="utf-8"), "original")
+        self.assertEqual(sorted(p.name for p in self.data.iterdir()), ["unchanged"])
+        self.assertEqual(list(self.appdata.iterdir()), [])
+
 
 if __name__ == "__main__":
     unittest.main()

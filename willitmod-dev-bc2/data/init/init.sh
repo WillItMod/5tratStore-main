@@ -19,7 +19,10 @@ fail() {
 }
 
 if ! command -v jq >/dev/null 2>&1 || ! command -v envsubst >/dev/null 2>&1; then
-  apk add --no-cache envsubst jq >/dev/null
+  # The digest-pinned Alpine image is intentionally kept generic. These tools
+  # come from its configured 3.22 repositories; a repository/network failure
+  # exits here, before the OS check and before any persistent-data write.
+  apk add --no-cache gettext-envsubst jq >/dev/null
 fi
 
 version_normalize() {
