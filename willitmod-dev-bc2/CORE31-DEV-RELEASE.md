@@ -25,3 +25,13 @@ digests. After substitution, the merged platform Compose must pass validation,
 all images must pull anonymously by digest, init must complete successfully on
 5tratumOS 0.7.11+, and the resulting installation must be tested on DEV before
 any production promotion.
+
+The store validator exercises a pinned copy of the relevant 5tratumOS
+materialization contract from platform commit `4f979cb9541622c1fdccdf43b8a885bbf845ba38`:
+it consumes `app_proxy`, publishes the manifest port on the resolved app
+service, removes the legacy shared network, and normalizes restart policies.
+The platform currently exposes this logic only inside its mutating install and
+update commands, so invoking the live implementation from isolated store CI
+would require performing a stateful platform transaction. Final DEV acceptance
+therefore still runs the real platform materializer and validates its generated
+Compose file before containers are started.

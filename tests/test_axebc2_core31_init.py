@@ -2,6 +2,7 @@ import json
 import os
 from pathlib import Path
 import shutil
+import stat
 import subprocess
 import tempfile
 import unittest
@@ -24,9 +25,10 @@ class AxeBC2InitTests(unittest.TestCase):
     def tearDown(self):
         shutil.rmtree(self.tmp)
 
-    def run_init(self, tag="0.7.11", expect=0):
+    def run_init(self, tag="0.7.11", expect=0, jwt_secret=None):
         self.build.write_text(json.dumps({"tag": tag}), encoding="utf-8")
         env = os.environ.copy()
+        env.pop("JWT_SECRET", None)
         env.update(
             {
                 "AXEBC2_DATA_DIR": str(self.data),
@@ -43,11 +45,34 @@ class AxeBC2InitTests(unittest.TestCase):
                 "PAYOUT_ADDRESS": "CHANGEME_BTC2_PAYOUT_ADDRESS",
             }
         )
+        if jwt_secret is not None:
+            env["JWT_SECRET"] = jwt_secret
         result = subprocess.run(
             ["sh", str(INIT)], env=env, text=True, capture_output=True, check=False
         )
         self.assertEqual(result.returncode, expect, result.stderr)
         return result
+
+    def test_fresh_env_persists_jwt_secret_with_private_mode(self):
+        self.run_init(jwt_secret="fresh-secret")
+        envfile = self.appdata / ".env"
+        self.assertEqual(envfile.read_text(encoding="utf-8"), "JWT_SECRET=fresh-secret\n")
+        self.assertEqual(stat.S_IMODE(envfile.stat().st_mode), 0o600)
+
+    def test_existing_env_replaces_all_jwts_and_preserves_unrelated_entries(self):
+        envfile = self.appdata / ".env"
+        envfile.write_text(
+            "KEEP_FIRST=alpha\nJWT_SECRET=old-one\nKEEP_SECOND=beta=value\nJWT_SECRET=old-two\n",
+            encoding="utf-8",
+        )
+        envfile.chmod(0o644)
+        self.run_init(jwt_secret="replacement-secret")
+        lines = envfile.read_text(encoding="utf-8").splitlines()
+        self.assertEqual(lines.count("JWT_SECRET=replacement-secret"), 1)
+        self.assertFalse(any(line in {"JWT_SECRET=old-one", "JWT_SECRET=old-two"} for line in lines))
+        self.assertIn("KEEP_FIRST=alpha", lines)
+        self.assertIn("KEEP_SECOND=beta=value", lines)
+        self.assertEqual(stat.S_IMODE(envfile.stat().st_mode), 0o600)
 
     def test_policy_and_reindex_requirement_exist_without_rpc(self):
         (self.data / "node/blocks").mkdir(parents=True)

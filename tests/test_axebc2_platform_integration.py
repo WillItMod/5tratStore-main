@@ -59,6 +59,21 @@ def load_policy_module(platform: Path):
 
 
 class AxeBC2PlatformIntegrationTests(unittest.TestCase):
+    def test_pinned_materialization_contract_matches_platform_source(self):
+        platform = platform_root()
+        cli = platform / "bin/5tratumos"
+        if not cli.is_file():
+            self.skipTest("live platform checkout is not available in isolated store CI")
+        source = cli.read_text(encoding="utf-8")
+        for required in (
+            'services.pop("app_proxy", None)',
+            "ensure_port_mapping(svc, host_port, app_port or host_port)",
+            'compose.pop("version", None)',
+            'if n.endswith("_main_network"):',
+            'svc["restart"] = "unless-stopped"',
+        ):
+            self.assertIn(required, source)
+
     def test_real_dev_store_id_maps_to_axebc2_and_policy_is_accepted(self):
         platform = platform_root()
         if platform.joinpath("daemon/5tratumosd.py").is_file():

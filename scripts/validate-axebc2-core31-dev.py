@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 from pathlib import Path
+import importlib.util
 import json
 import os
 import re
@@ -29,6 +30,7 @@ require('"2345:3333/tcp"' in compose, "Stratum host port 2345 must be retained")
 require("SUPPORT_CHECKIN_ENABLED: \"false\"" in compose, "telemetry must default off")
 require("create_host_path: false" in compose, "build metadata bind must fail closed")
 require("/etc/5tratumos/build.json" in compose, "build metadata must be mounted")
+require('JWT_SECRET: "${JWT_SECRET}"' in compose, "init must receive the platform JWT secret")
 require(
     ".5tratumos-rollback-policy.json" in (APP / "data/init/init.sh").read_text(encoding="utf-8"),
     "init must use the policy filename consumed by AxeBC2 and 5tratumOS",
@@ -89,16 +91,25 @@ def validate_platform_merged_compose():
             ),
             encoding="utf-8",
         )
+        parsed = temp / "parsed-compose.json"
         merged = temp / "platform-merged-compose.json"
         transform = """
 import json, sys, yaml
 with open(sys.argv[1], encoding='utf-8') as handle:
     config = yaml.safe_load(handle)
-config['services'].pop('app_proxy', None)
 with open(sys.argv[2], 'w', encoding='utf-8') as handle:
     json.dump(config, handle)
 """
-        subprocess.run([yaml_python(), "-c", transform, source, merged], check=True)
+        subprocess.run([yaml_python(), "-c", transform, source, parsed], check=True)
+        contract_path = ROOT / "tests/fixtures/5tratumos_contract_4f979cb.py"
+        spec = importlib.util.spec_from_file_location("pinned_5tratumos_contract", contract_path)
+        contract = importlib.util.module_from_spec(spec)
+        assert spec.loader is not None
+        spec.loader.exec_module(contract)
+        rendered_contract = contract.materialize_compose(
+            json.loads(parsed.read_text(encoding="utf-8")), 21219
+        )
+        merged.write_text(json.dumps(rendered_contract), encoding="utf-8")
         env = os.environ.copy()
         env.update(
             {
@@ -119,6 +130,23 @@ with open(sys.argv[2], 'w', encoding='utf-8') as handle:
         rendered = json.loads(result.stdout)
         services = rendered["services"]
         require("app_proxy" not in services, "platform merge must remove legacy app_proxy")
+        require(
+            services["init"]["environment"]["JWT_SECRET"] == "validation-only",
+            "platform-merged init service must receive JWT_SECRET",
+        )
+        require(
+            services["app"]["ports"] == [{"mode": "ingress", "target": 3000, "published": "21219", "protocol": "tcp"}],
+            "platform merge must materialize the app-proxy host port on the app service",
+        )
+        require(
+            "umbrel_main_network" not in rendered.get("networks", {}),
+            "platform merge must remove the legacy shared network",
+        )
+        require(
+            services["app"]["restart"] == "unless-stopped"
+            and services["ckpool"]["restart"] == "unless-stopped",
+            "platform merge must normalize service restart policies",
+        )
         require(
             services["btc2d"]["depends_on"]["init"]["condition"]
             == "service_completed_successfully",

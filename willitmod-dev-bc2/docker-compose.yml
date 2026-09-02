@@ -40,6 +40,7 @@ services:
         bind:
           create_host_path: false
     environment:
+      JWT_SECRET: "${JWT_SECRET}"
       APPS_SUBNET: "${NETWORK_IP}/16"
       RPC_USER: "btc2"
       RPC_PASSWORD: "${APP_PASSWORD}"
