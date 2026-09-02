@@ -24,7 +24,18 @@ compose = (APP / "docker-compose.yml").read_text(encoding="utf-8")
 manifest = (APP / "umbrel-app.yml").read_text(encoding="utf-8")
 node_config = (APP / "data/templates/bitcoinII.conf.template").read_text(encoding="utf-8")
 
-require('version: "0.1.10-dev"' in manifest, "manifest must be 0.1.10-dev")
+require('version: "0.1.10"' in manifest, "manifest must be stable 0.1.10")
+require('id: willitmod-dev-bc2' in manifest, "stable store identity must remain unchanged")
+require('APP_CHANNEL: "MAIN"' in compose, "stable app channel must be MAIN")
+require('APP_VERSION_SUFFIX: ""' in compose, "stable app must have no DEV suffix")
+require(
+    "ghcr.io/willitmod/axebc2-app:0.1.10@sha256:APP_PROMOTED_DIGEST_REQUIRED" in compose,
+    "stable app must use the promoted production repository",
+)
+require(
+    "full reindex of their stored blockchain data" in manifest,
+    "release notes must describe the migration accurately",
+)
 require("Requires 5tratumOS 0.7.11" in manifest, "OS prerequisite must be disclosed")
 require('"2345:3333/tcp"' in compose, "Stratum host port 2345 must be retained")
 require("SUPPORT_CHECKIN_ENABLED: \"false\"" in compose, "telemetry must default off")
@@ -48,7 +59,7 @@ require(
 require("natpmp=0" in node_config and "upnp=1" not in node_config, "NAT-PMP must be off")
 require(not re.search(r'^\s+-\s+"?8338:', compose, re.MULTILINE), "P2P must not be published")
 
-for placeholder in ("CORE31_CANDIDATE_DIGEST_REQUIRED", "APP_CANDIDATE_DIGEST_REQUIRED"):
+for placeholder in ("CORE31_PROMOTED_DIGEST_REQUIRED", "APP_PROMOTED_DIGEST_REQUIRED"):
     require(placeholder in compose, f"pending digest sentinel is missing: {placeholder}")
 
 require(
@@ -86,8 +97,8 @@ def validate_platform_merged_compose():
         (app_data / "data/init/init.sh").write_text("#!/bin/sh\n", encoding="utf-8")
         source = temp / "docker-compose.yml"
         source.write_text(
-            compose.replace("CORE31_CANDIDATE_DIGEST_REQUIRED", "a" * 64).replace(
-                "APP_CANDIDATE_DIGEST_REQUIRED", "b" * 64
+            compose.replace("CORE31_PROMOTED_DIGEST_REQUIRED", "a" * 64).replace(
+                "APP_PROMOTED_DIGEST_REQUIRED", "b" * 64
             ),
             encoding="utf-8",
         )

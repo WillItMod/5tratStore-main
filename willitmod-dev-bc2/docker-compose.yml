@@ -54,7 +54,7 @@ services:
       - exec /bin/sh /opt/axebc2/init.sh
 
   btc2d:
-    image: ghcr.io/willitmod/bitcoinii-core:31.1.0-dev@sha256:CORE31_CANDIDATE_DIGEST_REQUIRED
+    image: ghcr.io/willitmod/bitcoinii-core:31.1.0@sha256:CORE31_PROMOTED_DIGEST_REQUIRED
     user: "1000:1000"
     restart: unless-stopped
     stop_grace_period: 15m30s
@@ -110,7 +110,7 @@ services:
         fi
 
   app:
-    image: ghcr.io/willitmod/axebc2-app-umbrel-dev:0.1.10-dev@sha256:APP_CANDIDATE_DIGEST_REQUIRED
+    image: ghcr.io/willitmod/axebc2-app:0.1.10@sha256:APP_PROMOTED_DIGEST_REQUIRED
     user: "1000:1000"
     restart: on-failure
     stop_grace_period: 30s
@@ -134,9 +134,9 @@ services:
     environment:
       NETWORK_IP: "${NETWORK_IP}"
       STATIC_DIR: "/app/static"
-      APP_CHANNEL: "ALPHA"
-      APP_VERSION_SUFFIX: "-dev"
-      BTC2D_IMAGE: "ghcr.io/willitmod/bitcoinii-core:31.1.0-dev@sha256:CORE31_CANDIDATE_DIGEST_REQUIRED"
+      APP_CHANNEL: "MAIN"
+      APP_VERSION_SUFFIX: ""
+      BTC2D_IMAGE: "ghcr.io/willitmod/bitcoinii-core:31.1.0@sha256:CORE31_PROMOTED_DIGEST_REQUIRED"
       CKPOOL_IMAGE: "ghcr.io/willitmod/docker-ckpool-solo:590fb2a@sha256:8a9a7f10c8138d0f55533132ee7710a06715a42a49f75efb39be3350ada4fa6e"
       SUPPORT_CHECKIN_ENABLED: "false"
       BTC2_RPC_HOST: "btc2d"

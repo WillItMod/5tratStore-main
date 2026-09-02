@@ -1,4 +1,4 @@
-name: Validate AxeBC2 Core 31 DEV metadata
+name: Validate AxeBC2 Core 31 MAIN metadata
 
 on:
   pull_request:
@@ -7,8 +7,8 @@ on:
       - "tests/test_axebc2_core31_init.py"
       - "tests/test_axebc2_platform_integration.py"
       - "tests/fixtures/5tratumos_contract_4f979cb.py"
-      - "scripts/validate-axebc2-core31-dev.py"
-      - ".github/workflows/validate-axebc2-core31-dev.yml"
+      - "scripts/validate-axebc2-core31-main.py"
+      - ".github/workflows/validate-axebc2-core31-main.yml"
   push:
     branches: [main]
     paths:
@@ -16,8 +16,8 @@ on:
       - "tests/test_axebc2_core31_init.py"
       - "tests/test_axebc2_platform_integration.py"
       - "tests/fixtures/5tratumos_contract_4f979cb.py"
-      - "scripts/validate-axebc2-core31-dev.py"
-      - ".github/workflows/validate-axebc2-core31-dev.yml"
+      - "scripts/validate-axebc2-core31-main.py"
+      - ".github/workflows/validate-axebc2-core31-main.yml"
 
 permissions:
   contents: read
@@ -33,4 +33,4 @@ jobs:
         run: sudo apt-get update && sudo apt-get install --yes gettext-base jq python3-yaml
 
       - name: Validate metadata and migration initialization
-        run: python3 scripts/validate-axebc2-core31-dev.py
+        run: python3 scripts/validate-axebc2-core31-main.py

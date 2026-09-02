@@ -2,17 +2,13 @@ manifestVersion: 1
 id: willitmod-dev-bc2
 category: bitcoin
 name: AxeBC2
-version: "0.1.10-dev"
+version: "0.1.10"
 tagline: BC2 node + solo pool
 description: >-
-  ALPHA RELEASE (DEV CHANNEL)
+  STABLE RELEASE (MAIN CHANNEL)
 
-  AxeBC2 is functional and has successfully found blocks, but it is still under
-  active development. Expect rough edges, occasional breaking changes, and
-  mining/pool behavior that may still need tuning.
-
-  Use this build if you are happy to test, mine, and send helpful feedback.
-  For known-good production setups, use stable/main channel apps.
+  AxeBC2 runs a BitcoinII node and private solo-mining pool. This Core 31
+  release supports the ShockWave consensus activation.
 
   Run a BitcoinII (BC2) full node and an integrated solo Stratum v1 pool (ckpool) as a single app.
 
@@ -40,17 +36,17 @@ repo: https://github.com/WillItMod/AxeBC2
 support: https://discord.gg/vC2UrFAbUF
 dependencies: []
 port: 21219
-icon: https://raw.githubusercontent.com/WillItMod/5tratStore-dev/main/willitmod-dev-bc2/icon.png
+icon: https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-dev-bc2/icon.png
 gallery:
-  - https://raw.githubusercontent.com/WillItMod/5tratStore-dev/main/willitmod-dev-bc2/icon.png
+  - https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-dev-bc2/icon.png
 path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
   Upgrades BitcoinII Core to 31.1 for the ShockWave consensus change. Requires
   5tratumOS 0.7.11 or newer. Back up your app data before upgrading. Existing
-  nodes must perform a full blockchain redownload and reindex; mining and sync
-  data will be unavailable until validation completes. Stratum remains on TCP
+  nodes must perform a full reindex of their stored blockchain data; mining and
+  sync data will be unavailable until validation completes. Stratum remains on TCP
   port 2345. Support telemetry is disabled by default. The node uses outbound
   peer connections only: no public P2P port or NAT-PMP mapping is enabled.
 widgets:

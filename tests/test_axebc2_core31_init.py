@@ -161,6 +161,30 @@ class AxeBC2InitTests(unittest.TestCase):
         self.assertNotIn("upnp=", updated)
         self.assertEqual(updated.count("natpmp=0"), 1)
 
+    def test_saved_payout_and_persistent_settings_survive_main_upgrade(self):
+        pool_config = self.data / "pool/config"
+        pool_config.mkdir(parents=True)
+        (pool_config / "ckpool.conf").write_text(
+            json.dumps({"btcaddress": "LegacySavedPayout"}), encoding="utf-8"
+        )
+        settings_dir = self.data / "ui/state"
+        settings_dir.mkdir(parents=True)
+        settings = settings_dir / "pool_settings.json"
+        original_settings = json.dumps(
+            {"payoutAddress": "CurrentSavedPayout", "unrelated": "preserve-me"},
+            sort_keys=True,
+        )
+        settings.write_text(original_settings, encoding="utf-8")
+
+        self.run_init()
+
+        regenerated = json.loads((pool_config / "ckpool.conf").read_text(encoding="utf-8"))
+        self.assertEqual(regenerated["btcaddress"], "CurrentSavedPayout")
+        self.assertEqual(settings.read_text(encoding="utf-8"), original_settings)
+        backups = list(pool_config.glob("ckpool.conf.bak.*"))
+        self.assertEqual(len(backups), 1)
+        self.assertEqual(json.loads(backups[0].read_text())["btcaddress"], "LegacySavedPayout")
+
     def test_missing_or_malformed_build_metadata_fails_closed(self):
         self.build.write_text("not-json", encoding="utf-8")
         env = os.environ.copy()

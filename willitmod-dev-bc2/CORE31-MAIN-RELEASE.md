@@ -1,6 +1,6 @@
-# AxeBC2 Core 31 DEV release gates
+# AxeBC2 Core 31 MAIN release gates
 
-The DEV recipe maps store ID `willitmod-dev-bc2` to canonical 5tratumOS app ID
+The MAIN recipe maps its preserved store ID `willitmod-dev-bc2` to canonical 5tratumOS app ID
 `axebc2`. Its preserved data path is `/var/lib/5tratumos/apps/axebc2`, matching
 the `app_id` in `.5tratumos-rollback-policy.json`.
 
@@ -17,14 +17,14 @@ that availability dependency; it is not introduced in this consensus release.
 
 The committed Compose file deliberately retains these non-runnable sentinels:
 
-- `CORE31_CANDIDATE_DIGEST_REQUIRED`
-- `APP_CANDIDATE_DIGEST_REQUIRED`
+- `CORE31_PROMOTED_DIGEST_REQUIRED`
+- `APP_PROMOTED_DIGEST_REQUIRED`
 
 They must be replaced with the exact verified multi-architecture candidate
 digests. After substitution, the merged platform Compose must pass validation,
 all images must pull anonymously by digest, init must complete successfully on
-5tratumOS 0.7.11+, and the resulting installation must be tested on DEV before
-any production promotion.
+5tratumOS 0.7.11+, and the exact promoted images must already have passed DEV
+acceptance before this MAIN recipe is released.
 
 The store validator exercises a pinned copy of the relevant 5tratumOS
 materialization contract from platform commit `4f979cb9541622c1fdccdf43b8a885bbf845ba38`:
@@ -32,6 +32,6 @@ it consumes `app_proxy`, publishes the manifest port on the resolved app
 service, removes the legacy shared network, and normalizes restart policies.
 The platform currently exposes this logic only inside its mutating install and
 update commands, so invoking the live implementation from isolated store CI
-would require performing a stateful platform transaction. Final DEV acceptance
-therefore still runs the real platform materializer and validates its generated
+would require performing a stateful platform transaction. Final MAIN acceptance
+therefore runs the real platform materializer and validates its generated
 Compose file before containers are started.

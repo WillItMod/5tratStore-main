@@ -74,7 +74,7 @@ class AxeBC2PlatformIntegrationTests(unittest.TestCase):
         ):
             self.assertIn(required, source)
 
-    def test_real_dev_store_id_maps_to_axebc2_and_policy_is_accepted(self):
+    def test_real_main_store_id_maps_to_axebc2_and_policy_is_accepted(self):
         platform = platform_root()
         if platform.joinpath("daemon/5tratumosd.py").is_file():
             mapper = load_platform_store_mapper(platform)
@@ -82,7 +82,7 @@ class AxeBC2PlatformIntegrationTests(unittest.TestCase):
         else:
             policy = load_fixture_module()
             mapper = policy.map_store_id_to_app_id
-        canonical_id = mapper("willitmod-dev-bc2", "dev")
+        canonical_id = mapper("willitmod-dev-bc2", "main")
         self.assertEqual(canonical_id, "axebc2")
         self.assertEqual(
             Path("/var/lib/5tratumos/apps") / canonical_id,
@@ -116,10 +116,10 @@ class AxeBC2PlatformIntegrationTests(unittest.TestCase):
             )
             subprocess.run(["sh", str(INIT)], env=env, check=True, capture_output=True)
             policy_path = data / ".5tratumos-rollback-policy.json"
-            accepted = policy.check_rollback_policy(policy_path, canonical_id, "0.1.10-dev")
+            accepted = policy.check_rollback_policy(policy_path, canonical_id, "0.1.10")
             self.assertTrue(accepted["enforced"])
             with self.assertRaises(policy.RollbackPolicyError):
-                policy.check_rollback_policy(policy_path, canonical_id, "0.1.9-dev")
+                policy.check_rollback_policy(policy_path, canonical_id, "0.1.9")
         finally:
             shutil.rmtree(temp)
 
