@@ -13,6 +13,7 @@ SCRIPT = ROOT / "scripts/finalize-axebc2-0.1.10-main.sh"
 COMPOSE = ROOT / "willitmod-dev-bc2/docker-compose.yml"
 APP_DIGEST = "sha256:" + "a" * 64
 CORE_DIGEST = "sha256:" + "b" * 64
+OS_BUNDLE_SHA256 = "11a35e68ab169eb0446485992a57b33fae018a92020b7d86bbf9a005571377af"
 
 
 class AxeBC2MainFinalizerTests(unittest.TestCase):
@@ -41,7 +42,7 @@ class AxeBC2MainFinalizerTests(unittest.TestCase):
             "core_candidate_run": 33675068951,
             "app_version": "0.1.10-dev",
             "tested_os_version": "v0.7.12-dev",
-            "tested_os_bundle_sha256": "8" * 64,
+            "tested_os_bundle_sha256": OS_BUNDLE_SHA256,
             "source_revision": "6e4ef58218e8cd5a4d1113196f9872a7f501f52e",
             "tested_on": "10.10.10.235",
             "tested_at": "2026-09-02T20:00:00Z",
@@ -224,6 +225,10 @@ esac
         doc = json.loads(json.dumps(baseline)); doc["tested_os_version"] = "v0.7.11-dev"
         self.evidence.write_text(json.dumps(doc), encoding="utf-8")
         self.assertNotEqual(self.run_finalizer().returncode, 0); self.assertFalse(self.log.exists())
+        doc = json.loads(json.dumps(baseline)); doc["tested_os_bundle_sha256"] = OS_BUNDLE_SHA256[:-1] + "e"
+        self.evidence.write_text(json.dumps(doc), encoding="utf-8")
+        self.assertNotEqual(self.run_finalizer().returncode, 0); self.assertFalse(self.log.exists())
+        self.assertEqual((self.root / "willitmod-dev-bc2/docker-compose.yml").read_bytes(), self.original)
 
 
 if __name__ == "__main__":

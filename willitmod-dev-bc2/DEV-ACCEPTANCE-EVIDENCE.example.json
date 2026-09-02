@@ -9,7 +9,7 @@
   "core_candidate_run": 33675068951,
   "app_version": "0.1.10-dev",
   "tested_os_version": "v0.7.12-dev",
-  "tested_os_bundle_sha256": "RECORD_64_HEX_OS_BUNDLE_SHA256",
+  "tested_os_bundle_sha256": "11a35e68ab169eb0446485992a57b33fae018a92020b7d86bbf9a005571377af",
   "source_revision": "RECORD_EXACT_40_CHARACTER_APP_SOURCE_REVISION",
   "tested_on": "10.10.10.235",
   "tested_at": "RECORD_ISO_8601_TIMESTAMP",

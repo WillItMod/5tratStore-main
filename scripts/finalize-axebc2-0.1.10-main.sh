@@ -54,12 +54,11 @@ expected = {
     "core_candidate_run": 33675068951,
     "app_version": "0.1.10-dev",
     "tested_os_version": "v0.7.12-dev",
+    "tested_os_bundle_sha256": "11a35e68ab169eb0446485992a57b33fae018a92020b7d86bbf9a005571377af",
 }
 for key, value in expected.items():
     if evidence.get(key) != value:
         raise SystemExit(f"DEV acceptance evidence {key!r} must equal {value!r}")
-if not re.fullmatch(r"[0-9a-f]{64}", str(evidence.get("tested_os_bundle_sha256", ""))):
-    raise SystemExit("DEV acceptance evidence requires the exact OS bundle sha256")
 if not str(evidence.get("tested_on", "")).strip():
     raise SystemExit("DEV acceptance evidence requires the tested node identity")
 try:

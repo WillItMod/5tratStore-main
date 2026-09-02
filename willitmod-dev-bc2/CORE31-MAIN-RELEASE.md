@@ -31,6 +31,12 @@ all images must pull anonymously by digest, init must complete successfully on
 5tratumOS 0.7.12+, and the exact promoted images must already have passed DEV
 acceptance before this MAIN recipe is released.
 
+The DEV evidence must name the published DEV-only 5tratumOS `v0.7.12-dev`
+bundle and its exact SHA-256,
+`11a35e68ab169eb0446485992a57b33fae018a92020b7d86bbf9a005571377af`.
+MAIN finalization rejects any other bundle digest, including a different bundle
+published under the same displayed version.
+
 Run `scripts/finalize-axebc2-0.1.10-main.sh` with the promoted application
 index digest, promoted Core index digest and a completed DEV acceptance JSON
 based on `DEV-ACCEPTANCE-EVIDENCE.example.json`. The finalizer fails before
