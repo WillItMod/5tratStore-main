@@ -17,7 +17,9 @@ zmqpubhashblock=tcp://0.0.0.0:${BTC2_ZMQ_HASHBLOCK_PORT}
 # Network
 port=${BTC2_P2P_PORT}
 listen=1
-upnp=1
+# No host P2P port is published by this app. Keep automatic router mappings off;
+# the node makes outbound connections and remains reachable only inside Compose.
+natpmp=0
 
 # Pruning (optional): keep only a rolling tail of recent blocks to reduce retained history.
 prune=550

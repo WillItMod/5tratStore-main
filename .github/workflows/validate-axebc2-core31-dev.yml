@@ -1,0 +1,32 @@
+name: Validate AxeBC2 Core 31 DEV metadata
+
+on:
+  pull_request:
+    paths:
+      - "willitmod-dev-bc2/**"
+      - "tests/test_axebc2_core31_init.py"
+      - "scripts/validate-axebc2-core31-dev.py"
+      - ".github/workflows/validate-axebc2-core31-dev.yml"
+  push:
+    branches: [main]
+    paths:
+      - "willitmod-dev-bc2/**"
+      - "tests/test_axebc2_core31_init.py"
+      - "scripts/validate-axebc2-core31-dev.py"
+      - ".github/workflows/validate-axebc2-core31-dev.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the store
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Install test dependencies
+        run: sudo apt-get update && sudo apt-get install --yes gettext-base jq
+
+      - name: Validate metadata and migration initialization
+        run: python3 scripts/validate-axebc2-core31-dev.py

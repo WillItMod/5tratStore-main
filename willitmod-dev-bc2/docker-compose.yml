@@ -10,11 +10,27 @@ services:
       - umbrel_main_network
 
   init:
-    image: alpine:3.22.1
+    image: alpine:3.22.1@sha256:4bcff63911fcb4448bd4fdacec207030997caf25e9bea4045fa6c8c44de311d1
     volumes:
-      - ${APP_DATA_DIR}/data:/data
-      - ${APP_DATA_DIR}:/appdata
-      - ${APP_DATA_DIR}/data/templates:/data/templates:rw
+      - type: bind
+        source: /etc/5tratumos/build.json
+        target: /etc/5tratumos/build.json
+        read_only: true
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ${APP_DATA_DIR}/data
+        target: /data
+      - type: bind
+        source: ${APP_DATA_DIR}
+        target: /appdata
+      - type: bind
+        source: ${APP_DATA_DIR}/data/templates
+        target: /data/templates
+      - type: bind
+        source: ${APP_DATA_DIR}/data/init/init.sh
+        target: /opt/axebc2/init.sh
+        read_only: true
     environment:
       APPS_SUBNET: "${NETWORK_IP}/16"
       RPC_USER: "btc2"
@@ -26,88 +42,10 @@ services:
     command:
       - /bin/sh
       - -ec
-      - |-
-        set -eu
-
-        apk add --no-cache envsubst jq >/dev/null
-
-        # Persist JWT secret into ${APP_DATA_DIR}/.env so that SSH restarts
-        # (without exports.sh) don't boot app_proxy with an empty JWT_SECRET.
-        if [ -n "${JWT_SECRET:-}" ]; then
-          envfile="/appdata/.env"
-          tmp="/appdata/.env.tmp"
-          if [ -f "$$envfile" ]; then
-            grep -v '^JWT_SECRET=' "$$envfile" > "$$tmp" || true
-          else
-            : > "$$tmp"
-          fi
-          printf "JWT_SECRET=%s\n" "${JWT_SECRET}" >> "$$tmp"
-          chmod 600 "$$tmp" || true
-          chown 1000:1000 "$$tmp" || true
-          mv "$$tmp" "$$envfile"
-        fi
-
-        mkdir -p /data/node /data/pool/config /data/pool/www/pool /data/pool/www/users
-
-        # The host may create settings.yml as root during update/install; ensure it stays writable.
-        touch /appdata/settings.yml
-        chown 1000:1000 /appdata/settings.yml || true
-
-        if [ ! -f /data/node/bitcoinII.conf ]; then
-          envsubst < /data/templates/bitcoinII.conf.template > /data/node/bitcoinII.conf
-          chown -R 1000:1000 /data/node || true
-        fi
-
-        needs_ckpool_regen=0
-        if [ -f /data/pool/config/ckpool.conf ]; then
-          if ! grep -qE '"btcd"[[:space:]]*:[[:space:]]*\[' /data/pool/config/ckpool.conf; then
-            needs_ckpool_regen=1
-          fi
-          if ! grep -q '"zmqblock"' /data/pool/config/ckpool.conf; then
-            needs_ckpool_regen=1
-          fi
-        else
-          needs_ckpool_regen=1
-        fi
-
-        if [ "$$needs_ckpool_regen" -eq 1 ]; then
-          existing_addr="$$(grep -oE '\"btcaddress\"[[:space:]]*:[[:space:]]*\"[^\"]*\"' /data/pool/config/ckpool.conf 2>/dev/null | head -n 1 | sed -E 's/.*\"btcaddress\"[[:space:]]*:[[:space:]]*\"([^\"]*)\".*/\1/' || true)"
-          if [ -f /data/pool/config/ckpool.conf ]; then
-            mv /data/pool/config/ckpool.conf "/data/pool/config/ckpool.conf.bak.$$(date +%s 2>/dev/null || echo 0)" || true
-          fi
-          envsubst < /data/templates/ckpool.conf.template > /data/pool/config/ckpool.conf
-          if [ -n "$$existing_addr" ] && [ "$$existing_addr" != "CHANGEME_BTC2_PAYOUT_ADDRESS" ]; then
-            tmp="$$(mktemp)"
-            if jq --arg a "$$existing_addr" '.btcaddress=$$a' /data/pool/config/ckpool.conf > "$$tmp" 2>/dev/null; then
-              mv "$$tmp" /data/pool/config/ckpool.conf
-            else
-              rm -f "$$tmp" || true
-            fi
-          fi
-          chown -R 1000:1000 /data/pool || true
-        fi
-
-        if [ ! -f /data/pool/config/ckpool.args ]; then
-          echo "-B" > /data/pool/config/ckpool.args
-          chown 1000:1000 /data/pool/config/ckpool.args || true
-        fi
-
-        # Apply saved UI settings (if present) to ckpool.conf so payouts go to the configured address.
-        if [ -f /data/ui/state/pool_settings.json ]; then
-          addr="$(jq -r '.payoutAddress // empty' /data/ui/state/pool_settings.json 2>/dev/null || true)"
-          if [ -n "$$addr" ] && [ -f /data/pool/config/ckpool.conf ]; then
-            tmp="$$(mktemp)"
-            if jq --arg a "$$addr" '.btcaddress=$$a' /data/pool/config/ckpool.conf > "$$tmp" 2>/dev/null; then
-              mv "$$tmp" /data/pool/config/ckpool.conf
-              chown 1000:1000 /data/pool/config/ckpool.conf || true
-            else
-              rm -f "$$tmp" || true
-            fi
-          fi
-        fi
+      - exec /bin/sh /opt/axebc2/init.sh
 
   btc2d:
-    image: ghcr.io/willitmod/bitcoinii-core:29.1.0
+    image: ghcr.io/willitmod/bitcoinii-core:31.1.0-dev@sha256:CORE31_CANDIDATE_DIGEST_REQUIRED
     user: "1000:1000"
     restart: unless-stopped
     stop_grace_period: 15m30s
@@ -118,7 +56,7 @@ services:
       - ${APP_DATA_DIR}/data/node:/data
 
   ckpool:
-    image: ghcr.io/willitmod/docker-ckpool-solo:590fb2a
+    image: ghcr.io/willitmod/docker-ckpool-solo:590fb2a@sha256:8a9a7f10c8138d0f55533132ee7710a06715a42a49f75efb39be3350ada4fa6e
     user: "1000:1000"
     restart: on-failure
     depends_on:
@@ -150,7 +88,7 @@ services:
         fi
 
   app:
-    image: ghcr.io/willitmod/axebc2-app-umbrel-dev:0.1.9
+    image: ghcr.io/willitmod/axebc2-app-umbrel-dev:0.1.10-dev@sha256:APP_CANDIDATE_DIGEST_REQUIRED
     user: "1000:1000"
     restart: on-failure
     stop_grace_period: 30s
@@ -170,10 +108,11 @@ services:
     environment:
       NETWORK_IP: "${NETWORK_IP}"
       STATIC_DIR: "/app/static"
-      APP_CHANNEL: "RC1"
-      APP_VERSION_SUFFIX: ""
-      BTC2D_IMAGE: "ghcr.io/willitmod/bitcoinii-core:29.1.0"
-      CKPOOL_IMAGE: "ghcr.io/willitmod/docker-ckpool-solo:590fb2a"
+      APP_CHANNEL: "ALPHA"
+      APP_VERSION_SUFFIX: "-dev"
+      BTC2D_IMAGE: "ghcr.io/willitmod/bitcoinii-core:31.1.0-dev@sha256:CORE31_CANDIDATE_DIGEST_REQUIRED"
+      CKPOOL_IMAGE: "ghcr.io/willitmod/docker-ckpool-solo:590fb2a@sha256:8a9a7f10c8138d0f55533132ee7710a06715a42a49f75efb39be3350ada4fa6e"
+      SUPPORT_CHECKIN_ENABLED: "false"
       BTC2_RPC_HOST: "btc2d"
       BTC2_RPC_PORT: "8337"
       BTC2_RPC_USER: "btc2"

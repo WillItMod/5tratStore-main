@@ -2,13 +2,17 @@ manifestVersion: 1
 id: willitmod-dev-bc2
 category: bitcoin
 name: AxeBC2
-version: "0.1.9"
+version: "0.1.10-dev"
 tagline: BC2 node + solo pool
 description: >-
-  RC1 RELEASE
+  ALPHA RELEASE (DEV CHANNEL)
 
-  AxeBC2 is functional, has successfully found blocks, and has completed
-  extended DEV-channel node and solo-pool testing.
+  AxeBC2 is functional and has successfully found blocks, but it is still under
+  active development. Expect rough edges, occasional breaking changes, and
+  mining/pool behavior that may still need tuning.
+
+  Use this build if you are happy to test, mine, and send helpful feedback.
+  For known-good production setups, use stable/main channel apps.
 
   Run a BitcoinII (BC2) full node and an integrated solo Stratum v1 pool (ckpool) as a single app.
 
@@ -21,6 +25,8 @@ description: >-
 
   Notes:
     - Set your payout address in the app Settings tab.
+    - Requires 5tratumOS 0.7.11 or newer.
+    - The node makes outbound peer connections; this app does not publish a public P2P port or request NAT-PMP mappings.
     - Initial sync can take a long time and a lot of bandwidth/storage (the node downloads and validates the chain).
     - Solo mining is extremely unlikely to find blocks without significant hashrate.
 
@@ -34,17 +40,19 @@ repo: https://github.com/WillItMod/AxeBC2
 support: https://discord.gg/vC2UrFAbUF
 dependencies: []
 port: 21219
-icon: https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-dev-bc2/icon.png
+icon: https://raw.githubusercontent.com/WillItMod/5tratStore-dev/main/willitmod-dev-bc2/icon.png
 gallery:
-  - https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-dev-bc2/icon.png
+  - https://raw.githubusercontent.com/WillItMod/5tratStore-dev/main/willitmod-dev-bc2/icon.png
 path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Workers using either coin-prefixed or prefixless payout usernames now appear
-  as one combined worker entry in the app and Fleet Dashboard APIs. Hashrate,
-  shares and best-share data are merged without double-counting duplicate
-  worker names.
+  Upgrades BitcoinII Core to 31.1 for the ShockWave consensus change. Requires
+  5tratumOS 0.7.11 or newer. Back up your app data before upgrading. Existing
+  nodes must perform a full blockchain redownload and reindex; mining and sync
+  data will be unavailable until validation completes. Stratum remains on TCP
+  port 2345. Support telemetry is disabled by default. The node uses outbound
+  peer connections only: no public P2P port or NAT-PMP mapping is enabled.
 widgets:
   - id: "sync"
     type: "text-with-progress"
