@@ -1,6 +1,6 @@
 version: "3.7"
 
-# Release source revision: SOURCE_REVISION_REQUIRED
+# Release source revision: a992f40e96d47348e6a0afa6bc6b70e5e67cbc18
 
 x-node-environment: &node-environment
   FIVETRAT_NETWORK: main
@@ -158,7 +158,7 @@ services:
       start_period: 30s
 
   ckpool:
-    image: ghcr.io/willitmod/5tratsmack-ckpool:0.11.3@CKPOOL_INDEX_DIGEST_REQUIRED
+    image: ghcr.io/willitmod/5tratsmack-ckpool:0.11.3@sha256:95a1a5f343d579206a0f8bb3c961cafa7500b5d487211a0cfb7b989cf34b895e
     command: ["-k", "-L", "-c", "/data/pool/config/ckpool.conf"]
     restart: unless-stopped
     depends_on:
@@ -197,7 +197,7 @@ services:
       start_period: 90s
 
   app:
-    image: ghcr.io/willitmod/5tratsmack-app:0.11.10@APP_INDEX_DIGEST_REQUIRED
+    image: ghcr.io/willitmod/5tratsmack-app:0.11.10@sha256:77873ff141b17e18dd42e6d5bbdbd5fcd3d1f07047b26772e91718b92f3d1a41
     restart: unless-stopped
     depends_on:
       init_permissions:
@@ -216,10 +216,10 @@ services:
       FIVETRAT_STORE_UPDATE_CHANNEL: main
       FIVETRAT_INSTALL_REVISION: main-store
       FIVETRAT_RELEASE_TAG: 0.11.10
-      APP_IMAGE: ghcr.io/willitmod/5tratsmack-app:0.11.10@APP_INDEX_DIGEST_REQUIRED
-      APP_REVISION: SOURCE_REVISION_REQUIRED
+      APP_IMAGE: ghcr.io/willitmod/5tratsmack-app:0.11.10@sha256:77873ff141b17e18dd42e6d5bbdbd5fcd3d1f07047b26772e91718b92f3d1a41
+      APP_REVISION: a992f40e96d47348e6a0afa6bc6b70e5e67cbc18
       BCH2_NODE_IMAGE: ghcr.io/willitmod/5tratsmack-core:0.11.2@sha256:7bf02513144c7a157965fb8e9ad5865f5e84fa679afa7cb61fc0a8e140a40070
-      CKPOOL_IMAGE: ghcr.io/willitmod/5tratsmack-ckpool:0.11.3@CKPOOL_INDEX_DIGEST_REQUIRED
+      CKPOOL_IMAGE: ghcr.io/willitmod/5tratsmack-ckpool:0.11.3@sha256:95a1a5f343d579206a0f8bb3c961cafa7500b5d487211a0cfb7b989cf34b895e
       FIVETRAT_MUX_IDENTITY_URL: http://172.17.0.1:21222/api/integrations/workers
       FIVETRAT_OS_UPDATE_PROXY_BASE: http://host.docker.internal
       NETWORK_IP: "${NETWORK_IP}"
