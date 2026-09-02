@@ -11,7 +11,30 @@
   "source_revision": "RECORD_EXACT_40_CHARACTER_APP_SOURCE_REVISION",
   "tested_on": "10.10.10.235",
   "tested_at": "RECORD_ISO_8601_TIMESTAMP",
-  "checks": [
-    "record the completed DEV acceptance checks here"
-  ]
+  "acceptance": {
+    "observed_at": "RECORD_ISO_8601_TIMESTAMP",
+    "core_version": "RECORD_INTEGER_VERSION",
+    "migration_required_marker_absent": "RECORD_BOOLEAN",
+    "migration_complete_marker_valid": "RECORD_BOOLEAN",
+    "checkpoint_height": 57752,
+    "checkpoint_hash": "000000000000000013ceffe797280c57f75a5b9f1d9e70c3503584058c322576",
+    "chainwork": "RECORD_64_HEX_CHAINWORK_AT_OR_ABOVE_MINIMUM",
+    "ibd": false,
+    "verification_progress": "RECORD_NUMBER_AT_LEAST_0.999",
+    "blocks": "RECORD_INTEGER",
+    "headers": "RECORD_SAME_INTEGER",
+    "best_block_hash": "RECORD_64_HEX_HASH",
+    "explorer_common_height": "RECORD_SAME_INTEGER",
+    "explorer_common_hash": "RECORD_SAME_64_HEX_HASH",
+    "outbound_core31_peers": "RECORD_INTEGER_AT_LEAST_3",
+    "verifychain_level": 4,
+    "verifychain_passed": "RECORD_BOOLEAN",
+    "payout_configured": "RECORD_BOOLEAN",
+    "payout_preserved": "RECORD_BOOLEAN",
+    "pool_stratum_result": "RECORD_passed",
+    "app_ui_privacy_passed": "RECORD_BOOLEAN",
+    "telemetry_disabled": "RECORD_BOOLEAN",
+    "app_rollback_rejected": "RECORD_BOOLEAN",
+    "os_rollback_rejected": "RECORD_BOOLEAN"
+  }
 }

@@ -42,6 +42,12 @@ The application evidence must likewise identify the exact tested candidate
 `ghcr.io/willitmod/axebc2-app-umbrel-dev:0.1.10-candidate.6e4ef58218e8` and its
 full source revision; MAIN independently resolves the promoted stable app tag
 to that same digest.
+Free-form checklists are not accepted. The DEV evidence records typed observed
+values for Core version and synchronization, valid migration marker state, the
+official height-57,752 checkpoint, minimum chainwork, matching node/explorer
+height and hash, at least three outbound Core 31 peers, verifychain level 4,
+payout configuration/preservation booleans, pool/Stratum, UI privacy, disabled telemetry, rejected app
+rollback and rejected OS rollback, together with node identity and timestamps.
 Both stable GHCR tags must then resolve anonymously to the tested digests,
 including stable Core `31.1.0` resolving to the exact DEV-tested RC digest.
 Both indexes must advertise linux/amd64 and linux/arm64, and both architectures

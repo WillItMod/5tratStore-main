@@ -36,6 +36,7 @@ expected = {
     "result": "passed",
     "app_image": "ghcr.io/willitmod/axebc2-app-umbrel-dev:0.1.10-candidate.6e4ef58218e8",
     "app_digest": app_digest,
+    "source_revision": "6e4ef58218e8cd5a4d1113196f9872a7f501f52e",
     "core_image": "ghcr.io/willitmod/bitcoinii-core:31.1.0-rc.3c2cafcab19e",
     "core_digest": core_digest,
     "core_source_revision": "3c2cafcab19efde33c1e476a982c3389957dacb2",
@@ -45,17 +46,29 @@ expected = {
 for key, value in expected.items():
     if evidence.get(key) != value:
         raise SystemExit(f"DEV acceptance evidence {key!r} must equal {value!r}")
-if not re.fullmatch(r"[0-9a-f]{40}", str(evidence.get("source_revision", ""))):
-    raise SystemExit("DEV acceptance evidence requires an exact source revision")
 if not str(evidence.get("tested_on", "")).strip():
     raise SystemExit("DEV acceptance evidence requires the tested node identity")
 try:
     datetime.datetime.fromisoformat(str(evidence["tested_at"]).replace("Z", "+00:00"))
 except (KeyError, ValueError):
     raise SystemExit("DEV acceptance evidence requires an ISO-8601 tested_at value")
-checks = evidence.get("checks")
-if not isinstance(checks, list) or not checks or not all(isinstance(v, str) and v.strip() for v in checks):
-    raise SystemExit("DEV acceptance evidence requires a non-empty checks list")
+a=evidence.get("acceptance")
+if not isinstance(a, dict): raise SystemExit("DEV acceptance evidence requires structured acceptance observations")
+try: datetime.datetime.fromisoformat(str(a["observed_at"]).replace("Z", "+00:00"))
+except (KeyError, ValueError): raise SystemExit("acceptance observed_at must be ISO-8601")
+truth=("migration_required_marker_absent","migration_complete_marker_valid","verifychain_passed","payout_configured","payout_preserved","app_ui_privacy_passed","telemetry_disabled","app_rollback_rejected","os_rollback_rejected")
+if any(a.get(k) is not True for k in truth): raise SystemExit("all required acceptance gates must be true")
+if a.get("core_version",0) < 310000: raise SystemExit("Core 31 version was not observed")
+if a.get("checkpoint_height") != 57752 or a.get("checkpoint_hash") != "000000000000000013ceffe797280c57f75a5b9f1d9e70c3503584058c322576": raise SystemExit("official checkpoint observation is invalid")
+hex64=lambda v: isinstance(v,str) and bool(re.fullmatch(r"[0-9a-f]{64}",v))
+minimum="0000000000000000000000000000000000000000000000959028194ff1139272"
+if not hex64(a.get("chainwork")) or a["chainwork"] < minimum: raise SystemExit("observed chainwork is below minimum")
+if a.get("ibd") is not False or not isinstance(a.get("verification_progress"),(int,float)) or a["verification_progress"] < 0.999: raise SystemExit("node synchronization evidence is incomplete")
+if not isinstance(a.get("blocks"),int) or a["blocks"] != a.get("headers") or a["blocks"] != a.get("explorer_common_height"): raise SystemExit("node/explorer heights do not match")
+if not hex64(a.get("best_block_hash")) or a["best_block_hash"] != a.get("explorer_common_hash"): raise SystemExit("node/explorer hashes do not match")
+if not isinstance(a.get("outbound_core31_peers"),int) or a["outbound_core31_peers"] < 3: raise SystemExit("fewer than three outbound Core 31 peers observed")
+if a.get("verifychain_level") != 4: raise SystemExit("verifychain level 4 was not recorded")
+if a.get("pool_stratum_result") != "passed": raise SystemExit("pool/Stratum acceptance did not pass")
 PY
 
 anon_config="$(mktemp -d "${TMPDIR:-/tmp}/axebc2-anonymous-docker.XXXXXX")"

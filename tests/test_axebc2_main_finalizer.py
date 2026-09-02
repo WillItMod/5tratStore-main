@@ -34,10 +34,21 @@ class AxeBC2MainFinalizerTests(unittest.TestCase):
             "core_source_revision": "3c2cafcab19efde33c1e476a982c3389957dacb2",
             "core_candidate_run": 33674007419,
             "app_version": "0.1.10-dev",
-            "source_revision": "c" * 40,
+            "source_revision": "6e4ef58218e8cd5a4d1113196f9872a7f501f52e",
             "tested_on": "10.10.10.235",
             "tested_at": "2026-09-02T20:00:00Z",
-            "checks": ["Core 31 migration and application acceptance passed"],
+            "acceptance": {
+                "observed_at": "2026-09-02T20:00:00Z", "core_version": 310100,
+                "migration_required_marker_absent": True, "migration_complete_marker_valid": True,
+                "checkpoint_height": 57752, "checkpoint_hash": "000000000000000013ceffe797280c57f75a5b9f1d9e70c3503584058c322576",
+                "chainwork": "0000000000000000000000000000000000000000000000959028194ff1139272",
+                "ibd": False, "verification_progress": 1.0, "blocks": 60000, "headers": 60000,
+                "best_block_hash": "f" * 64, "explorer_common_height": 60000, "explorer_common_hash": "f" * 64,
+                "outbound_core31_peers": 3, "verifychain_level": 4, "verifychain_passed": True,
+                "payout_configured": True, "payout_preserved": True, "pool_stratum_result": "passed",
+                "app_ui_privacy_passed": True, "telemetry_disabled": True,
+                "app_rollback_rejected": True, "os_rollback_rejected": True,
+            },
         }), encoding="utf-8")
         self.log = self.root / "docker.log"
         self.fake_docker = self.root / "docker"
@@ -113,6 +124,24 @@ fi
     def test_wrong_app_candidate_ref_fails_before_registry_or_compose_mutation(self):
         doc = json.loads(self.evidence.read_text(encoding="utf-8"))
         doc["app_image"] = "ghcr.io/willitmod/axebc2-app:0.1.10-dev"
+        self.evidence.write_text(json.dumps(doc), encoding="utf-8")
+        result = self.run_finalizer()
+        self.assertNotEqual(result.returncode, 0)
+        self.assertFalse(self.log.exists())
+        self.assertEqual((self.root / "willitmod-dev-bc2/docker-compose.yml").read_bytes(), self.original)
+
+    def test_wrong_app_source_revision_fails_before_registry_or_compose_mutation(self):
+        doc = json.loads(self.evidence.read_text(encoding="utf-8"))
+        doc["source_revision"] = "e" * 40
+        self.evidence.write_text(json.dumps(doc), encoding="utf-8")
+        result = self.run_finalizer()
+        self.assertNotEqual(result.returncode, 0)
+        self.assertFalse(self.log.exists())
+        self.assertEqual((self.root / "willitmod-dev-bc2/docker-compose.yml").read_bytes(), self.original)
+
+    def test_incomplete_structured_acceptance_fails_before_registry_or_mutation(self):
+        doc = json.loads(self.evidence.read_text(encoding="utf-8"))
+        doc["acceptance"]["outbound_core31_peers"] = 2
         self.evidence.write_text(json.dumps(doc), encoding="utf-8")
         result = self.run_finalizer()
         self.assertNotEqual(result.returncode, 0)
