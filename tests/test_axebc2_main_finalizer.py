@@ -29,8 +29,9 @@ class AxeBC2MainFinalizerTests(unittest.TestCase):
             "result": "passed",
             "app_image": "ghcr.io/willitmod/axebc2-app:0.1.10-dev",
             "app_digest": APP_DIGEST,
-            "core_image": "ghcr.io/willitmod/bitcoinii-core:31.1.0-dev",
+            "core_image": "ghcr.io/willitmod/bitcoinii-core:31.1.0-rc.d2d53fb1bd30",
             "core_digest": CORE_DIGEST,
+            "core_source_revision": "d2d53fb1bd307e2ec464fd752255cbc78023efbd",
             "app_version": "0.1.10-dev",
             "source_revision": "c" * 40,
             "tested_on": "10.10.10.235",
@@ -93,6 +94,15 @@ fi
     def test_mismatched_dev_digest_fails_before_registry_or_compose_mutation(self):
         doc = json.loads(self.evidence.read_text(encoding="utf-8"))
         doc["core_digest"] = "sha256:" + "d" * 64
+        self.evidence.write_text(json.dumps(doc), encoding="utf-8")
+        result = self.run_finalizer()
+        self.assertNotEqual(result.returncode, 0)
+        self.assertFalse(self.log.exists())
+        self.assertEqual((self.root / "willitmod-dev-bc2/docker-compose.yml").read_bytes(), self.original)
+
+    def test_wrong_core_source_revision_fails_before_registry_or_compose_mutation(self):
+        doc = json.loads(self.evidence.read_text(encoding="utf-8"))
+        doc["core_source_revision"] = "d" * 40
         self.evidence.write_text(json.dumps(doc), encoding="utf-8")
         result = self.run_finalizer()
         self.assertNotEqual(result.returncode, 0)

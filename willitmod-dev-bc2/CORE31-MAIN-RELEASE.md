@@ -29,9 +29,13 @@ acceptance before this MAIN recipe is released.
 Run `scripts/finalize-axebc2-0.1.10-main.sh` with the promoted application
 index digest, promoted Core index digest and a completed DEV acceptance JSON
 based on `DEV-ACCEPTANCE-EVIDENCE.example.json`. The finalizer fails before
-editing Compose unless the evidence identifies those exact DEV-tested digests,
-both stable GHCR tags resolve anonymously to them, both indexes advertise
-linux/amd64 and linux/arm64, and both architectures pull anonymously. It then
+editing Compose unless the evidence identifies the exact DEV-tested Core RC
+`31.1.0-rc.d2d53fb1bd30`, full Core source revision
+`d2d53fb1bd307e2ec464fd752255cbc78023efbd`, and both exact tested digests.
+Both stable GHCR tags must then resolve anonymously to the tested digests,
+including stable Core `31.1.0` resolving to the exact DEV-tested RC digest.
+Both indexes must advertise linux/amd64 and linux/arm64, and both architectures
+must pull anonymously. The finalizer then
 replaces all sentinels atomically and verifies that the Core service and
 `BTC2D_IMAGE` use the identical digest.
 
