@@ -12,6 +12,8 @@ evidence="$3"
 repo_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 compose="$repo_root/willitmod-dev-bc2/docker-compose.yml"
 docker_bin="${DOCKER_BIN:-docker}"
+curl_bin="${CURL_BIN:-curl}"
+jq_bin="${JQ_BIN:-jq}"
 app_tag="ghcr.io/willitmod/axebc2-app:0.1.10"
 core_tag="ghcr.io/willitmod/bitcoinii-core:31.1.0"
 
@@ -20,6 +22,8 @@ fail() { echo "ERROR: $*" >&2; exit 1; }
 [[ "$core_digest" =~ ^sha256:[0-9a-f]{64}$ ]] || fail "Core digest is not an exact sha256 digest"
 [[ -f "$evidence" ]] || fail "DEV acceptance evidence does not exist: $evidence"
 command -v "$docker_bin" >/dev/null 2>&1 || fail "Docker is required for registry verification"
+command -v "$curl_bin" >/dev/null 2>&1 || fail "curl is required for anonymous registry verification"
+command -v "$jq_bin" >/dev/null 2>&1 || fail "jq is required for anonymous registry verification"
 
 # Promotion is allowed only from a recorded, successful DEV run of the exact
 # two multi-architecture indexes that MAIN will reference.
@@ -77,12 +81,18 @@ trap cleanup EXIT
 printf '{"auths":{}}\n' >"$anon_config/config.json"
 
 resolve_tag() {
-  local ref="$1" expected="$2" output resolved
+  local ref="$1" expected="$2" path repository tag token headers resolved
   [[ "$ref" != *-dev* && "$ref" =~ :[0-9]+\.[0-9]+\.[0-9]+$ ]] \
     || fail "MAIN registry reference is not a stable release tag: $ref"
-  output="$("$docker_bin" --config "$anon_config" buildx imagetools inspect "$ref")" \
-    || fail "anonymous registry resolution failed for $ref"
-  resolved="$(printf '%s\n' "$output" | awk '$1 == "Digest:" {print $2; exit}')"
+  path="${ref#ghcr.io/}"; repository="${path%:*}"; tag="${path##*:}"
+  token="$("$curl_bin" -fsSL "https://ghcr.io/token?service=ghcr.io&scope=repository:${repository}:pull" | "$jq_bin" -er '.token')" \
+    || fail "anonymous token request failed for $ref"
+  headers="$("$curl_bin" -fsSI -H "Authorization: Bearer $token" \
+    -H 'Accept: application/vnd.oci.image.index.v1+json, application/vnd.docker.distribution.manifest.list.v2+json' \
+    "https://ghcr.io/v2/${repository}/manifests/${tag}")" \
+    || fail "anonymous manifest HEAD failed for $ref"
+  resolved="$(printf '%s\n' "$headers" | awk 'BEGIN{IGNORECASE=1} /^Docker-Content-Digest:/ {gsub("\\r","",$2); print $2}' | tail -n 1)"
+  [[ "$resolved" =~ ^sha256:[0-9a-f]{64}$ ]] || fail "$ref returned a missing or malformed Docker-Content-Digest"
   [[ "$resolved" == "$expected" ]] \
     || fail "$ref resolves to ${resolved:-nothing}, expected $expected"
 }
