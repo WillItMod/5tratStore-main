@@ -36,9 +36,10 @@ expected = {
     "result": "passed",
     "app_image": "ghcr.io/willitmod/axebc2-app:0.1.10-dev",
     "app_digest": app_digest,
-    "core_image": "ghcr.io/willitmod/bitcoinii-core:31.1.0-rc.d2d53fb1bd30",
+    "core_image": "ghcr.io/willitmod/bitcoinii-core:31.1.0-rc.3c2cafcab19e",
     "core_digest": core_digest,
-    "core_source_revision": "d2d53fb1bd307e2ec464fd752255cbc78023efbd",
+    "core_source_revision": "3c2cafcab19efde33c1e476a982c3389957dacb2",
+    "core_candidate_run": 33674007419,
     "app_version": "0.1.10-dev",
 }
 for key, value in expected.items():

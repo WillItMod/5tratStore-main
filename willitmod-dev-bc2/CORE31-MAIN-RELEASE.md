@@ -30,8 +30,9 @@ Run `scripts/finalize-axebc2-0.1.10-main.sh` with the promoted application
 index digest, promoted Core index digest and a completed DEV acceptance JSON
 based on `DEV-ACCEPTANCE-EVIDENCE.example.json`. The finalizer fails before
 editing Compose unless the evidence identifies the exact DEV-tested Core RC
-`31.1.0-rc.d2d53fb1bd30`, full Core source revision
-`d2d53fb1bd307e2ec464fd752255cbc78023efbd`, and both exact tested digests.
+`31.1.0-rc.3c2cafcab19e`, full Core source revision
+`3c2cafcab19efde33c1e476a982c3389957dacb2`, candidate workflow run
+`33674007419`, and both exact tested digests.
 Both stable GHCR tags must then resolve anonymously to the tested digests,
 including stable Core `31.1.0` resolving to the exact DEV-tested RC digest.
 Both indexes must advertise linux/amd64 and linux/arm64, and both architectures
