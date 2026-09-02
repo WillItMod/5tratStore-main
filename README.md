@@ -17,3 +17,7 @@ release-facing packaging for supported apps.
 
 Third-party components referenced by individual app recipes remain under their
 own licenses.
+
+## Current app releases
+
+- **5tratSmack** (`willitmod-dev-5tratsmack`) - `0.11.11`
