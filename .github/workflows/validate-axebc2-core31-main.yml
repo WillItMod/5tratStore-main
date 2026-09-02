@@ -7,8 +7,10 @@ on:
       - "tests/test_axebc2_core31_init.py"
       - "tests/test_axebc2_platform_integration.py"
       - "tests/test_axebc2_main_finalizer.py"
+      - "tests/test_axebc2_release_state.py"
       - "tests/fixtures/5tratumos_contract_4f979cb.py"
       - "scripts/validate-axebc2-core31-main.py"
+      - "scripts/axebc2_release_state.py"
       - "scripts/finalize-axebc2-0.1.10-main.sh"
       - ".github/workflows/validate-axebc2-core31-main.yml"
   push:
@@ -18,8 +20,10 @@ on:
       - "tests/test_axebc2_core31_init.py"
       - "tests/test_axebc2_platform_integration.py"
       - "tests/test_axebc2_main_finalizer.py"
+      - "tests/test_axebc2_release_state.py"
       - "tests/fixtures/5tratumos_contract_4f979cb.py"
       - "scripts/validate-axebc2-core31-main.py"
+      - "scripts/axebc2_release_state.py"
       - "scripts/finalize-axebc2-0.1.10-main.sh"
       - ".github/workflows/validate-axebc2-core31-main.yml"
 
@@ -39,4 +43,6 @@ jobs:
       - name: Validate metadata and migration initialization
         run: |
           bash -n scripts/finalize-axebc2-0.1.10-main.sh
-          python3 scripts/validate-axebc2-core31-main.py
+          count="$(awk '{n += gsub(/_DIGEST_REQUIRED/, "")} END {print n + 0}' willitmod-dev-bc2/docker-compose.yml)"
+          if [ "$count" = 3 ]; then phase=prefinalization; elif [ "$count" = 0 ]; then phase=finalized; else echo "partial digest finalization" >&2; exit 1; fi
+          python3 scripts/validate-axebc2-core31-main.py --phase "$phase"

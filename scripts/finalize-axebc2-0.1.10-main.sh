@@ -34,7 +34,7 @@ except (OSError, ValueError) as exc:
 expected = {
     "schema": 1,
     "result": "passed",
-    "app_image": "ghcr.io/willitmod/axebc2-app:0.1.10-dev",
+    "app_image": "ghcr.io/willitmod/axebc2-app-umbrel-dev:0.1.10-candidate.6e4ef58218e8",
     "app_digest": app_digest,
     "core_image": "ghcr.io/willitmod/bitcoinii-core:31.1.0-rc.3c2cafcab19e",
     "core_digest": core_digest,

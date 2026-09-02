@@ -20,6 +20,11 @@ The committed Compose file deliberately retains these non-runnable sentinels:
 - `CORE31_PROMOTED_DIGEST_REQUIRED`
 - `APP_PROMOTED_DIGEST_REQUIRED`
 
+CI treats this as the strict `prefinalization` phase. It accepts exactly all
+three expected sentinel occurrences. Once finalization is committed, CI
+switches to `finalized` and requires one immutable application sha256 pin and
+two identical immutable Core sha256 pins. A partial or mixed state is rejected.
+
 They must be replaced with the exact verified multi-architecture candidate
 digests. After substitution, the merged platform Compose must pass validation,
 all images must pull anonymously by digest, init must complete successfully on
@@ -33,6 +38,10 @@ editing Compose unless the evidence identifies the exact DEV-tested Core RC
 `31.1.0-rc.3c2cafcab19e`, full Core source revision
 `3c2cafcab19efde33c1e476a982c3389957dacb2`, candidate workflow run
 `33674007419`, and both exact tested digests.
+The application evidence must likewise identify the exact tested candidate
+`ghcr.io/willitmod/axebc2-app-umbrel-dev:0.1.10-candidate.6e4ef58218e8` and its
+full source revision; MAIN independently resolves the promoted stable app tag
+to that same digest.
 Both stable GHCR tags must then resolve anonymously to the tested digests,
 including stable Core `31.1.0` resolving to the exact DEV-tested RC digest.
 Both indexes must advertise linux/amd64 and linux/arm64, and both architectures

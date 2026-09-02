@@ -27,7 +27,7 @@ class AxeBC2MainFinalizerTests(unittest.TestCase):
         self.evidence.write_text(json.dumps({
             "schema": 1,
             "result": "passed",
-            "app_image": "ghcr.io/willitmod/axebc2-app:0.1.10-dev",
+            "app_image": "ghcr.io/willitmod/axebc2-app-umbrel-dev:0.1.10-candidate.6e4ef58218e8",
             "app_digest": APP_DIGEST,
             "core_image": "ghcr.io/willitmod/bitcoinii-core:31.1.0-rc.3c2cafcab19e",
             "core_digest": CORE_DIGEST,
@@ -104,6 +104,15 @@ fi
     def test_wrong_core_source_revision_fails_before_registry_or_compose_mutation(self):
         doc = json.loads(self.evidence.read_text(encoding="utf-8"))
         doc["core_source_revision"] = "d" * 40
+        self.evidence.write_text(json.dumps(doc), encoding="utf-8")
+        result = self.run_finalizer()
+        self.assertNotEqual(result.returncode, 0)
+        self.assertFalse(self.log.exists())
+        self.assertEqual((self.root / "willitmod-dev-bc2/docker-compose.yml").read_bytes(), self.original)
+
+    def test_wrong_app_candidate_ref_fails_before_registry_or_compose_mutation(self):
+        doc = json.loads(self.evidence.read_text(encoding="utf-8"))
+        doc["app_image"] = "ghcr.io/willitmod/axebc2-app:0.1.10-dev"
         self.evidence.write_text(json.dumps(doc), encoding="utf-8")
         result = self.run_finalizer()
         self.assertNotEqual(result.returncode, 0)

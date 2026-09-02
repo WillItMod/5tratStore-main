@@ -9,6 +9,8 @@ import subprocess
 import sys
 import tempfile
 import unittest
+import argparse
+from axebc2_release_state import validate as validate_release_state
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -21,6 +23,9 @@ def require(condition, message):
 
 
 compose = (APP / "docker-compose.yml").read_text(encoding="utf-8")
+parser=argparse.ArgumentParser(); parser.add_argument("--phase",required=True,choices=("prefinalization","finalized")); phase=parser.parse_args().phase
+try: validate_release_state(compose,phase)
+except ValueError as exc: raise SystemExit(str(exc))
 manifest = (APP / "umbrel-app.yml").read_text(encoding="utf-8")
 node_config = (APP / "data/templates/bitcoinII.conf.template").read_text(encoding="utf-8")
 
@@ -28,10 +33,6 @@ require('version: "0.1.10"' in manifest, "manifest must be stable 0.1.10")
 require('id: willitmod-dev-bc2' in manifest, "stable store identity must remain unchanged")
 require('APP_CHANNEL: "MAIN"' in compose, "stable app channel must be MAIN")
 require('APP_VERSION_SUFFIX: ""' in compose, "stable app must have no DEV suffix")
-require(
-    "ghcr.io/willitmod/axebc2-app:0.1.10@sha256:APP_PROMOTED_DIGEST_REQUIRED" in compose,
-    "stable app must use the promoted production repository",
-)
 require(
     "full reindex of their stored blockchain data" in manifest,
     "release notes must describe the migration accurately",
@@ -58,9 +59,6 @@ require(
 )
 require("natpmp=0" in node_config and "upnp=1" not in node_config, "NAT-PMP must be off")
 require(not re.search(r'^\s+-\s+"?8338:', compose, re.MULTILINE), "P2P must not be published")
-
-for placeholder in ("CORE31_PROMOTED_DIGEST_REQUIRED", "APP_PROMOTED_DIGEST_REQUIRED"):
-    require(placeholder in compose, f"pending digest sentinel is missing: {placeholder}")
 
 require(
     compose.count("create_host_path: false") == 9,
