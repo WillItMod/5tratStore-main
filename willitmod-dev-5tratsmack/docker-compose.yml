@@ -1,5 +1,7 @@
 version: "3.7"
 
+# Release source revision: SOURCE_REVISION_REQUIRED
+
 x-node-environment: &node-environment
   FIVETRAT_NETWORK: main
   FIVETRAT_RPC_USER: fivetrat
@@ -21,7 +23,7 @@ services:
       - edge
 
   init_permissions:
-    image: alpine:3.22.1
+    image: alpine:3.22.1@sha256:4bcff63911fcb4448bd4fdacec207030997caf25e9bea4045fa6c8c44de311d1
     restart: "no"
     volumes:
       - ${APP_DATA_DIR}/data:/data
@@ -62,7 +64,7 @@ services:
           /data/updater
 
   p2p-helper:
-    image: ghcr.io/willitmod/5tratsmack-upnp:0.11.1
+    image: ghcr.io/willitmod/5tratsmack-upnp:0.11.1@sha256:c85d527b8a12007be2565b200b99dfe46781ddaa773831852414d2cc5ad041d0
     restart: unless-stopped
     user: "1000:1000"
     network_mode: host
@@ -96,7 +98,7 @@ services:
       retries: 12
 
   node-a:
-    image: ghcr.io/willitmod/5tratsmack-core:0.11.2
+    image: ghcr.io/willitmod/5tratsmack-core:0.11.2@sha256:7bf02513144c7a157965fb8e9ad5865f5e84fa679afa7cb61fc0a8e140a40070
     restart: unless-stopped
     stop_grace_period: 2m
     depends_on:
@@ -128,7 +130,7 @@ services:
       start_period: 30s
 
   swap:
-    image: ghcr.io/willitmod/5tratsmack-kdf:0.11.1
+    image: ghcr.io/willitmod/5tratsmack-kdf:0.11.1@sha256:9eff0bfdc330bb997eacbce2b98500a52a084d682aec3644b73e663d54e6606a
     restart: unless-stopped
     network_mode: service:node-a
     depends_on:
@@ -156,7 +158,7 @@ services:
       start_period: 30s
 
   ckpool:
-    image: ghcr.io/willitmod/5tratsmack-ckpool:0.11.2
+    image: ghcr.io/willitmod/5tratsmack-ckpool:0.11.3@CKPOOL_INDEX_DIGEST_REQUIRED
     command: ["-k", "-L", "-c", "/data/pool/config/ckpool.conf"]
     restart: unless-stopped
     depends_on:
@@ -185,9 +187,15 @@ services:
     networks:
       - chain
       - edge
+    healthcheck:
+      test: ["CMD", "/usr/local/bin/5tratsmack-ckpool-healthcheck.sh"]
+      interval: 30s
+      timeout: 12s
+      retries: 3
+      start_period: 90s
 
   app:
-    image: ghcr.io/willitmod/5tratsmack-app:0.11.9
+    image: ghcr.io/willitmod/5tratsmack-app:0.11.10@APP_INDEX_DIGEST_REQUIRED
     restart: unless-stopped
     depends_on:
       init_permissions:
@@ -196,16 +204,20 @@ services:
         condition: service_started
     environment:
       APP_ID: 5tratsmack
-      APP_VERSION: 0.11.9
+      APP_VERSION: 0.11.10
       APP_CHANNEL: MAIN
-      APP_RELEASE_PHASE: RC1
+      APP_RELEASE_PHASE: STABLE
       APP_PLATFORM: 5TRATUMOS
       APP_SELF_RESTART_ENABLED: "0"
       FIVETRAT_UPDATER_ENABLED: "0"
       FIVETRAT_STORE_UPDATE_APP_ID: 5tratsmack
       FIVETRAT_STORE_UPDATE_CHANNEL: main
       FIVETRAT_INSTALL_REVISION: main-store
-      FIVETRAT_RELEASE_TAG: 0.11.9
+      FIVETRAT_RELEASE_TAG: 0.11.10
+      APP_IMAGE: ghcr.io/willitmod/5tratsmack-app:0.11.10@APP_INDEX_DIGEST_REQUIRED
+      APP_REVISION: SOURCE_REVISION_REQUIRED
+      BCH2_NODE_IMAGE: ghcr.io/willitmod/5tratsmack-core:0.11.2@sha256:7bf02513144c7a157965fb8e9ad5865f5e84fa679afa7cb61fc0a8e140a40070
+      CKPOOL_IMAGE: ghcr.io/willitmod/5tratsmack-ckpool:0.11.3@CKPOOL_INDEX_DIGEST_REQUIRED
       FIVETRAT_MUX_IDENTITY_URL: http://172.17.0.1:21222/api/integrations/workers
       FIVETRAT_OS_UPDATE_PROXY_BASE: http://host.docker.internal
       NETWORK_IP: "${NETWORK_IP}"
