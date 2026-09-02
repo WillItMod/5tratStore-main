@@ -2,7 +2,7 @@ manifestVersion: 1
 id: willitmod-dev-5tratsmack
 category: altcoin
 name: 5tratSmack
-version: "0.11.10"
+version: "0.11.11"
 tagline: Home-miner 5TRAT node, wallet, solo pool and atomic trade lab
 description: >-
   Install and synchronize a complete 5TRAT node, create or restore an encrypted
@@ -38,18 +38,15 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Jackpot and reliability update: Pink and Gold bonuses settle to the previous
-  block's payout script while the current miner remains output zero; malformed
-  metadata and invalid payouts fail closed. Restores the transparent 0.11.8
-  development contribution, enabled by default at 5%, adjustable or optional,
-  and paid only as a disclosed coinbase output after any prior-winner jackpot.
-  Since 0.11.9 did not retain opt-outs, upgrades return to that 5% default. It
-  never withdraws wallet funds. The dashboard labels last-known fiat values,
-  excludes them from order pricing, shows rejected candidates, and replays full
-  retained history. Exact-config restart acknowledgement, live Stratum checks,
-  cached incremental scans and atomic locked state updates improve reliability
-  and performance. The 0.11.9 private local/global trade separation remains,
-  and existing wallets, blockchain, pool and trading data are retained.
+  Update-channel correctness release: the in-app updater now refreshes and
+  reads the selected 5tratumOS catalogue directly. DEV installations explicitly
+  read the authenticated DEV catalogue instead of version fields selected
+  through the system's default store channel. It rejects wrong-channel or
+  malformed catalogue data, clearly reports installations newer than the
+  catalogue, and never offers a downgrade. The 0.11.10 jackpot, reliability,
+  last-known fiat labelling, private local/global trade separation and
+  transparent default-on 5% development contribution remain unchanged.
+  Existing wallets, blockchain, pool and trading data are retained.
 widgets:
   - id: sync
     type: text-with-progress

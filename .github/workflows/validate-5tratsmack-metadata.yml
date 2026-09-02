@@ -1,0 +1,28 @@
+name: Validate 5tratSmack store metadata
+
+on:
+  pull_request:
+    paths:
+      - "README.md"
+      - "willitmod-dev-5tratsmack/**"
+      - "scripts/validate-5tratsmack-metadata.py"
+      - ".github/workflows/validate-5tratsmack-metadata.yml"
+  push:
+    branches: [main]
+    paths:
+      - "README.md"
+      - "willitmod-dev-5tratsmack/**"
+      - "scripts/validate-5tratsmack-metadata.py"
+      - ".github/workflows/validate-5tratsmack-metadata.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check MAIN metadata and immutable image pins
+        run: python3 scripts/validate-5tratsmack-metadata.py
