@@ -26,6 +26,15 @@ all images must pull anonymously by digest, init must complete successfully on
 5tratumOS 0.7.11+, and the exact promoted images must already have passed DEV
 acceptance before this MAIN recipe is released.
 
+Run `scripts/finalize-axebc2-0.1.10-main.sh` with the promoted application
+index digest, promoted Core index digest and a completed DEV acceptance JSON
+based on `DEV-ACCEPTANCE-EVIDENCE.example.json`. The finalizer fails before
+editing Compose unless the evidence identifies those exact DEV-tested digests,
+both stable GHCR tags resolve anonymously to them, both indexes advertise
+linux/amd64 and linux/arm64, and both architectures pull anonymously. It then
+replaces all sentinels atomically and verifies that the Core service and
+`BTC2D_IMAGE` use the identical digest.
+
 The store validator exercises a pinned copy of the relevant 5tratumOS
 materialization contract from platform commit `4f979cb9541622c1fdccdf43b8a885bbf845ba38`:
 it consumes `app_proxy`, publishes the manifest port on the resolved app

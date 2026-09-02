@@ -6,8 +6,10 @@ on:
       - "willitmod-dev-bc2/**"
       - "tests/test_axebc2_core31_init.py"
       - "tests/test_axebc2_platform_integration.py"
+      - "tests/test_axebc2_main_finalizer.py"
       - "tests/fixtures/5tratumos_contract_4f979cb.py"
       - "scripts/validate-axebc2-core31-main.py"
+      - "scripts/finalize-axebc2-0.1.10-main.sh"
       - ".github/workflows/validate-axebc2-core31-main.yml"
   push:
     branches: [main]
@@ -15,8 +17,10 @@ on:
       - "willitmod-dev-bc2/**"
       - "tests/test_axebc2_core31_init.py"
       - "tests/test_axebc2_platform_integration.py"
+      - "tests/test_axebc2_main_finalizer.py"
       - "tests/fixtures/5tratumos_contract_4f979cb.py"
       - "scripts/validate-axebc2-core31-main.py"
+      - "scripts/finalize-axebc2-0.1.10-main.sh"
       - ".github/workflows/validate-axebc2-core31-main.yml"
 
 permissions:
@@ -33,4 +37,6 @@ jobs:
         run: sudo apt-get update && sudo apt-get install --yes gettext-base jq python3-yaml
 
       - name: Validate metadata and migration initialization
-        run: python3 scripts/validate-axebc2-core31-main.py
+        run: |
+          bash -n scripts/finalize-axebc2-0.1.10-main.sh
+          python3 scripts/validate-axebc2-core31-main.py

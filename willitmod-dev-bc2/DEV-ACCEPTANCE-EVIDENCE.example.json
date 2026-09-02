@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "result": "passed",
+  "app_image": "ghcr.io/willitmod/axebc2-app:0.1.10-dev",
+  "app_digest": "sha256:RECORD_EXACT_DEV_TESTED_APP_INDEX_DIGEST",
+  "core_image": "ghcr.io/willitmod/bitcoinii-core:31.1.0-dev",
+  "core_digest": "sha256:RECORD_EXACT_DEV_TESTED_CORE_INDEX_DIGEST",
+  "app_version": "0.1.10-dev",
+  "source_revision": "RECORD_EXACT_40_CHARACTER_APP_SOURCE_REVISION",
+  "tested_on": "10.10.10.235",
+  "tested_at": "RECORD_ISO_8601_TIMESTAMP",
+  "checks": [
+    "record the completed DEV acceptance checks here"
+  ]
+}

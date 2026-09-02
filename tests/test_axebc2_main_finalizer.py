@@ -1,0 +1,104 @@
+import json
+import os
+from pathlib import Path
+import shutil
+import subprocess
+import tempfile
+import unittest
+
+
+ROOT = Path(__file__).resolve().parents[1]
+SCRIPT = ROOT / "scripts/finalize-axebc2-0.1.10-main.sh"
+COMPOSE = ROOT / "willitmod-dev-bc2/docker-compose.yml"
+APP_DIGEST = "sha256:" + "a" * 64
+CORE_DIGEST = "sha256:" + "b" * 64
+
+
+class AxeBC2MainFinalizerTests(unittest.TestCase):
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory(prefix="axebc2-finalizer-")
+        self.root = Path(self.temp.name)
+        (self.root / "scripts").mkdir()
+        (self.root / "willitmod-dev-bc2").mkdir()
+        shutil.copy2(SCRIPT, self.root / "scripts" / SCRIPT.name)
+        shutil.copy2(COMPOSE, self.root / "willitmod-dev-bc2/docker-compose.yml")
+        self.original = (self.root / "willitmod-dev-bc2/docker-compose.yml").read_bytes()
+        self.evidence = self.root / "evidence.json"
+        self.evidence.write_text(json.dumps({
+            "schema": 1,
+            "result": "passed",
+            "app_image": "ghcr.io/willitmod/axebc2-app:0.1.10-dev",
+            "app_digest": APP_DIGEST,
+            "core_image": "ghcr.io/willitmod/bitcoinii-core:31.1.0-dev",
+            "core_digest": CORE_DIGEST,
+            "app_version": "0.1.10-dev",
+            "source_revision": "c" * 40,
+            "tested_on": "10.10.10.235",
+            "tested_at": "2026-09-02T20:00:00Z",
+            "checks": ["Core 31 migration and application acceptance passed"],
+        }), encoding="utf-8")
+        self.log = self.root / "docker.log"
+        self.fake_docker = self.root / "docker"
+        self.fake_docker.write_text("""#!/bin/sh
+set -eu
+printf '%s\\n' "$*" >>"$FAKE_DOCKER_LOG"
+config="$2"
+[ "$1" = --config ] && [ -f "$config/config.json" ]
+[ "$(cat "$config/config.json")" = '{"auths":{}}' ]
+shift 2
+if [ "$1 $2" = 'buildx imagetools' ]; then
+  case "$4" in
+    ghcr.io/willitmod/axebc2-app:0.1.10) printf 'Name: x\\nDigest: %s\\n' "$APP_DIGEST" ;;
+    ghcr.io/willitmod/bitcoinii-core:31.1.0) printf 'Name: x\\nDigest: %s\\n' "$CORE_DIGEST" ;;
+    *) exit 2 ;;
+  esac
+elif [ "$1 $2" = 'manifest inspect' ]; then
+  printf '%s\\n' '{"manifests":[{"platform":{"os":"linux","architecture":"amd64"}},{"platform":{"os":"linux","architecture":"arm64"}}]}'
+elif [ "$1" = pull ]; then
+  exit 0
+else
+  exit 3
+fi
+""", encoding="utf-8")
+        self.fake_docker.chmod(0o755)
+
+    def tearDown(self):
+        self.temp.cleanup()
+
+    def run_finalizer(self):
+        env = os.environ.copy()
+        env.update({
+            "DOCKER_BIN": str(self.fake_docker),
+            "FAKE_DOCKER_LOG": str(self.log),
+            "APP_DIGEST": APP_DIGEST,
+            "CORE_DIGEST": CORE_DIGEST,
+        })
+        return subprocess.run(
+            [str(self.root / "scripts" / SCRIPT.name), APP_DIGEST, CORE_DIGEST, str(self.evidence)],
+            text=True, capture_output=True, env=env, check=False,
+        )
+
+    def test_exact_dev_evidence_and_anonymous_multiarch_checks_then_finalize(self):
+        result = self.run_finalizer()
+        self.assertEqual(result.returncode, 0, result.stderr)
+        compose = (self.root / "willitmod-dev-bc2/docker-compose.yml").read_text(encoding="utf-8")
+        self.assertNotIn("_DIGEST_REQUIRED", compose)
+        self.assertEqual(compose.count("ghcr.io/willitmod/bitcoinii-core:31.1.0@" + CORE_DIGEST), 2)
+        self.assertIn("ghcr.io/willitmod/axebc2-app:0.1.10@" + APP_DIGEST, compose)
+        calls = self.log.read_text(encoding="utf-8")
+        self.assertEqual(calls.count("--platform linux/amd64"), 2)
+        self.assertEqual(calls.count("--platform linux/arm64"), 2)
+        self.assertNotIn("-dev", calls)
+
+    def test_mismatched_dev_digest_fails_before_registry_or_compose_mutation(self):
+        doc = json.loads(self.evidence.read_text(encoding="utf-8"))
+        doc["core_digest"] = "sha256:" + "d" * 64
+        self.evidence.write_text(json.dumps(doc), encoding="utf-8")
+        result = self.run_finalizer()
+        self.assertNotEqual(result.returncode, 0)
+        self.assertFalse(self.log.exists())
+        self.assertEqual((self.root / "willitmod-dev-bc2/docker-compose.yml").read_bytes(), self.original)
+
+
+if __name__ == "__main__":
+    unittest.main()
