@@ -179,9 +179,10 @@ with open(sys.argv[2], 'w', encoding='utf-8') as handle:
             for volume in service.get("volumes", []):
                 if volume.get("type") == "bind":
                     rendered_bind_targets.append((service_name, volume.get("target")))
+                    create_host_path = volume.get("bind", {}).get("create_host_path")
                     require(
-                        volume.get("bind", {}).get("create_host_path") is not True,
-                        "Docker Compose enabled implicit host-path creation",
+                        create_host_path is None or create_host_path is False,
+                        "Docker Compose enabled or malformed implicit host-path creation",
                     )
         require(
             sorted(rendered_bind_targets) == sorted(declared_bind_targets),

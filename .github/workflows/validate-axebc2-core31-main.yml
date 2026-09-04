@@ -42,6 +42,7 @@ jobs:
 
       - name: Validate metadata and migration initialization
         run: |
+          docker compose version
           bash -n scripts/finalize-axebc2-0.1.10-main.sh
           count="$(awk '{n += gsub(/_DIGEST_REQUIRED/, "")} END {print n + 0}' willitmod-dev-bc2/docker-compose.yml)"
           if [ "$count" = 3 ]; then phase=prefinalization; elif [ "$count" = 0 ]; then phase=finalized; else echo "partial digest finalization" >&2; exit 1; fi
