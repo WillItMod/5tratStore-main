@@ -1,8 +1,9 @@
-# AxeBC2 Core 31 MAIN release gates
+# AxeBC2 Core 31 MAIN release record
 
-The MAIN recipe maps its preserved store ID `willitmod-dev-bc2` to canonical 5tratumOS app ID
-`axebc2`. Its preserved data path is `/var/lib/5tratumos/apps/axebc2`, matching
-the `app_id` in `.5tratumos-rollback-policy.json`.
+The MAIN recipe maps its preserved store ID `willitmod-dev-bc2` to canonical
+5tratumOS app ID `axebc2`. Its preserved data path is
+`/var/lib/5tratumos/apps/axebc2`, matching the `app_id` in
+`.5tratumos-rollback-policy.json`.
 
 Every host bind uses `create_host_path: false`. The recipe contains the empty
 runtime directories that 5tratumOS stages before Compose validation, so Docker
@@ -13,60 +14,81 @@ The digest-pinned generic Alpine init container installs `jq` and
 network-availability dependency, but an install failure occurs before any
 persistent app-data or node-data mutation and prevents Core from starting. A
 future dedicated, independently built and digest-pinned init image could remove
-that availability dependency; it is not introduced in this consensus release.
+that availability dependency; it was not introduced in this consensus release.
 
-The committed Compose file deliberately retains these non-runnable sentinels:
+## Finalized image set
 
-- `CORE31_PROMOTED_DIGEST_REQUIRED`
-- `APP_PROMOTED_DIGEST_REQUIRED`
+The committed Compose file is finalized for AxeBC2 `0.1.10`. It contains no
+release sentinel, one immutable application pin and two identical immutable
+Core pins. CI validates it in the strict `finalized` phase and rejects partial,
+mixed or mutable image state.
 
-CI treats this as the strict `prefinalization` phase. It accepts exactly all
-three expected sentinel occurrences. Once finalization is committed, CI
-switches to `finalized` and requires one immutable application sha256 pin and
-two identical immutable Core sha256 pins. A partial or mixed state is rejected.
+The released image set is:
 
-They must be replaced with the exact verified multi-architecture candidate
-digests. After substitution, the merged platform Compose must pass validation,
-all images must pull anonymously by digest, init must complete successfully on
-5tratumOS 0.7.12+, and the exact promoted images must already have passed DEV
-acceptance before this MAIN recipe is released.
+- init: `alpine:3.22.1@sha256:4bcff63911fcb4448bd4fdacec207030997caf25e9bea4045fa6c8c44de311d1`;
+- app: `ghcr.io/willitmod/axebc2-app:0.1.10@sha256:b7ba2df2f48389d145ad18a927b099f32b5aa7708a0ea617a1b04e25c8e7f961`;
+- BitcoinII Core: `ghcr.io/willitmod/bitcoinii-core:31.1.0@sha256:8875917ece57668fe9925d40a256ce8d429a3071511bb555d4ace1fa4370afc6`;
+- CKPool: `ghcr.io/willitmod/docker-ckpool-solo:590fb2a@sha256:8a9a7f10c8138d0f55533132ee7710a06715a42a49f75efb39be3350ada4fa6e`.
 
-The DEV evidence must name the published DEV-only 5tratumOS `v0.7.12-dev`
-bundle and its exact SHA-256,
+The Core service and `BTC2D_IMAGE` use the same Core reference. The CKPool
+service and `CKPOOL_IMAGE` likewise use the same unchanged CKPool reference.
+The app and Core indexes both advertise linux/amd64 and linux/arm64 and are
+anonymously pullable by their exact digests.
+
+## Source and promotion provenance
+
+The stable app tag is a no-rebuild promotion of the DEV-tested candidate
+`ghcr.io/willitmod/axebc2-app-umbrel-dev:0.1.10-candidate.6e4ef58218e8`.
+Both tags resolve to app digest
+`sha256:b7ba2df2f48389d145ad18a927b099f32b5aa7708a0ea617a1b04e25c8e7f961`.
+The application source revision is
+`6e4ef58218e8cd5a4d1113196f9872a7f501f52e`; promotion workflow run
+`33881273637` completed successfully without rebuilding the candidate.
+
+The stable Core tag is a no-rebuild promotion of the DEV-tested RC
+`ghcr.io/willitmod/bitcoinii-core:31.1.0-rc.cdf44542dde2`. Both tags resolve to
+Core digest
+`sha256:8875917ece57668fe9925d40a256ce8d429a3071511bb555d4ace1fa4370afc6`.
+The image pipeline revision is
+`cdf44542dde255648008249d187fafc15f3a2f09`; candidate workflow run
+`33675068951` and promotion workflow run `33881286149` completed successfully.
+The image compiles official BitcoinII Core `v31.1.0` at upstream commit
+`8daaf7b12e71d3646eed787f040bf2899a69dc1c` without patching ShockWave.
+
+## Accepted DEV evidence
+
+The exact candidate pair passed live DEV acceptance on `10.10.10.235` at
+`2026-09-04T13:57:46Z` using the published 5tratumOS `v0.7.12-dev` bundle with
+SHA-256
 `11a35e68ab169eb0446485992a57b33fae018a92020b7d86bbf9a005571377af`.
-MAIN finalization rejects any other bundle digest, including a different bundle
-published under the same displayed version.
+The structured evidence is recorded in the DEV store at
+[`DEV-ACCEPTANCE-EVIDENCE.json`](https://github.com/WillItMod/5tratStore-dev/blob/main/willitmod-dev-bc2/DEV-ACCEPTANCE-EVIDENCE.json).
 
-Run `scripts/finalize-axebc2-0.1.10-main.sh` with the promoted application
-index digest, promoted Core index digest and a completed DEV acceptance JSON
-based on `DEV-ACCEPTANCE-EVIDENCE.example.json`. The finalizer fails before
-editing Compose unless the evidence identifies the exact DEV-tested Core RC
-`31.1.0-rc.cdf44542dde2`, full Core source revision
-`cdf44542dde255648008249d187fafc15f3a2f09`, candidate workflow run
-`33675068951`, and both exact tested digests.
-The application evidence must likewise identify the exact tested candidate
-`ghcr.io/willitmod/axebc2-app-umbrel-dev:0.1.10-candidate.6e4ef58218e8` and its
-full source revision; MAIN independently resolves the promoted stable app tag
-to that same digest.
-Free-form checklists are not accepted. The DEV evidence records typed observed
-values for Core version and synchronization, valid migration marker state, the
-official height-57,752 checkpoint, minimum chainwork, matching node/explorer
-height and hash, at least three outbound Core 31 peers, verifychain level 4,
-payout configuration/preservation booleans, pool/Stratum, UI privacy, disabled telemetry, rejected app
-rollback and rejected OS rollback, together with node identity and timestamps.
-Both stable GHCR tags must then resolve anonymously to the tested digests,
-including stable Core `31.1.0` resolving to the exact DEV-tested RC digest.
-Both indexes must advertise linux/amd64 and linux/arm64, and both architectures
-must pull anonymously. The finalizer then
-replaces all sentinels atomically and verifies that the Core service and
-`BTC2D_IMAGE` use the identical digest.
+The mandatory Core 31 full reindex completed and did not repeat after a full
+app restart. Core reported version `310100`, passed `verifychain` level 4 and
+matched the official BitcoinII explorer at height 58,433 and block hash
+`0000000000000001077a5ea39eefb3a44e5d88357c723f56484840a7f89c5554`.
+Five outbound Core 31 peers and zero competing valid post-checkpoint tips were
+recorded. The payout configuration was preserved, and Stratum, UI privacy,
+disabled telemetry, unpublished P2P, disabled NAT-PMP, app rollback rejection
+and OS rollback rejection checks all passed.
+
+## Migration and validation contract
+
+5tratumOS `0.7.12` or newer is required. Existing node data receives a guarded
+one-time full reindex. Persistent migration markers allow an interrupted reindex
+to resume and prevent a completed reindex from being requested again. The
+rollback policy prevents returning the migrated data to an incompatible older
+app, Core or OS version, while the saved payout and unrelated persistent state
+remain in place.
 
 The store validator exercises a pinned copy of the relevant 5tratumOS
-materialization contract from platform commit `4f979cb9541622c1fdccdf43b8a885bbf845ba38`:
-it consumes `app_proxy`, publishes the manifest port on the resolved app
-service, removes the legacy shared network, and normalizes restart policies.
-The platform currently exposes this logic only inside its mutating install and
-update commands, so invoking the live implementation from isolated store CI
-would require performing a stateful platform transaction. Final MAIN acceptance
-therefore runs the real platform materializer and validates its generated
-Compose file before containers are started.
+materialization contract from platform commit
+`4f979cb9541622c1fdccdf43b8a885bbf845ba38`. It consumes `app_proxy`, publishes
+the manifest port on the resolved app service, removes the legacy shared
+network, normalizes restart policies and rejects implicit host-path creation.
+The finalized MAIN checks also bind promotion to the exact accepted DEV
+evidence and immutable image digests. The retained
+`scripts/finalize-axebc2-0.1.10-main.sh` documents and tests the reproducible
+finalization procedure; the current release requires no further sentinel
+replacement or image promotion.
