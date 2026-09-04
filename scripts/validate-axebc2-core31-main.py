@@ -118,6 +118,15 @@ with open(sys.argv[2], 'w', encoding='utf-8') as handle:
         rendered_contract = contract.materialize_compose(
             json.loads(parsed.read_text(encoding="utf-8")), 21219
         )
+        declared_bind_targets = []
+        for service_name, service in rendered_contract["services"].items():
+            for volume in service.get("volumes", []):
+                if volume.get("type") == "bind":
+                    require(
+                        volume.get("bind", {}).get("create_host_path") is False,
+                        "platform-merged Compose contains an implicit host-path bind",
+                    )
+                    declared_bind_targets.append((service_name, volume.get("target")))
         merged.write_text(json.dumps(rendered_contract), encoding="utf-8")
         env = os.environ.copy()
         env.update(
@@ -161,13 +170,23 @@ with open(sys.argv[2], 'w', encoding='utf-8') as handle:
             == "service_completed_successfully",
             "Core must wait for successful init completion",
         )
-        for service in services.values():
+        # Compose releases differ in whether ``false`` boolean fields survive
+        # JSON serialization. The materialized contract above must declare the
+        # fail-closed value; the CLI output may omit it, but must never turn it
+        # on or change the declared bind set.
+        rendered_bind_targets = []
+        for service_name, service in services.items():
             for volume in service.get("volumes", []):
                 if volume.get("type") == "bind":
+                    rendered_bind_targets.append((service_name, volume.get("target")))
                     require(
-                        volume.get("bind", {}).get("create_host_path") is False,
-                        "rendered Compose contains an implicit host-path bind",
+                        volume.get("bind", {}).get("create_host_path") is not True,
+                        "Docker Compose enabled implicit host-path creation",
                     )
+        require(
+            sorted(rendered_bind_targets) == sorted(declared_bind_targets),
+            "Docker Compose changed the platform-declared host binds",
+        )
 
 
 validate_platform_merged_compose()
