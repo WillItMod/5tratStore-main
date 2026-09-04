@@ -2,17 +2,19 @@ import sys
 from pathlib import Path
 import unittest
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/"scripts"))
-from axebc2_release_state import APP_TAG,CORE_TAG,validate
+from axebc2_release_state import APP_DIGEST,APP_TAG,CORE_DIGEST,CORE_TAG,validate
 class ReleaseStateTests(unittest.TestCase):
  def test_no_middle_state(self):
-  pre=f"{APP_TAG}@sha256:APP_PROMOTED_DIGEST_REQUIRED\n{CORE_TAG}@sha256:CORE31_PROMOTED_DIGEST_REQUIRED\n{CORE_TAG}@sha256:CORE31_PROMOTED_DIGEST_REQUIRED"; validate(pre,"prefinalization")
-  with self.assertRaises(ValueError): validate(pre.replace("CORE31_PROMOTED_DIGEST_REQUIRED","a"*64,1),"prefinalization")
+  core=f"{CORE_TAG}@{CORE_DIGEST}"; pre=f"{APP_TAG}@sha256:APP_PROMOTED_DIGEST_REQUIRED\n{core}\n{core}"; validate(pre,"prefinalization")
+  with self.assertRaises(ValueError): validate(pre.replace(CORE_DIGEST,"sha256:"+"a"*64,1),"prefinalization")
  def test_final_requires_matching_immutable_pins(self):
-  a="sha256:"+"a"*64;c="sha256:"+"c"*64;text=f"{APP_TAG}@{a}\n{CORE_TAG}@{c}\n{CORE_TAG}@{c}";validate(text,"finalized")
-  with self.assertRaises(ValueError): validate(text.replace(c,"sha256:"+"d"*64,1),"finalized")
+  core=f"{CORE_TAG}@{CORE_DIGEST}";text=f"{APP_TAG}@{APP_DIGEST}\n{core}\n{core}";validate(text,"finalized")
+  with self.assertRaises(ValueError): validate(text.replace(APP_DIGEST,"sha256:"+"a"*64),"finalized")
+  with self.assertRaises(ValueError): validate(text.replace(CORE_DIGEST,"sha256:"+"d"*64,1),"finalized")
  def test_lifecycle_matrix_rejects_cross_phase_validation(self):
-  pre=f"{APP_TAG}@sha256:APP_PROMOTED_DIGEST_REQUIRED\n{CORE_TAG}@sha256:CORE31_PROMOTED_DIGEST_REQUIRED\n{CORE_TAG}@sha256:CORE31_PROMOTED_DIGEST_REQUIRED"
-  final=f"{APP_TAG}@sha256:{'a'*64}\n{CORE_TAG}@sha256:{'c'*64}\n{CORE_TAG}@sha256:{'c'*64}"
+  core=f"{CORE_TAG}@{CORE_DIGEST}"
+  pre=f"{APP_TAG}@sha256:APP_PROMOTED_DIGEST_REQUIRED\n{core}\n{core}"
+  final=f"{APP_TAG}@{APP_DIGEST}\n{core}\n{core}"
   validate(pre,"prefinalization"); validate(final,"finalized")
   with self.assertRaises(ValueError): validate(pre,"finalized")
   with self.assertRaises(ValueError): validate(final,"prefinalization")

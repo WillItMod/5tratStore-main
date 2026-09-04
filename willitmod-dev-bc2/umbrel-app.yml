@@ -2,7 +2,7 @@ manifestVersion: 1
 id: willitmod-dev-bc2
 category: bitcoin
 name: AxeBC2
-version: "0.1.10"
+version: "0.1.11"
 tagline: BC2 node + solo pool
 description: >-
   STABLE RELEASE (MAIN CHANNEL)
@@ -43,12 +43,19 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Upgrades BitcoinII Core to 31.1 for the ShockWave consensus change. Requires
-  5tratumOS 0.7.12 or newer. Back up your app data before upgrading. Existing
-  nodes must perform a full reindex of their stored blockchain data; mining and
-  sync data will be unavailable until validation completes. Stratum remains on TCP
-  port 2345. Support telemetry is disabled by default. The node uses outbound
-  peer connections only: no public P2P port or NAT-PMP mapping is enabled.
+  Corrects payout-address validation: BitcoinII Core-accepted mainnet addresses
+  beginning with 1, 3, or bc1 are supported, while invalid or wrong-network
+  addresses are rejected without changing the saved pool configuration. Settings
+  are also left untouched while Core is unavailable, and payout checks left
+  pending by an older release are retried at a bounded interval. It removes the
+  misleading payout warning from MAIN builds, keeps CKPool /config writable on
+  every initializer run, and conditionally repairs /www ownership when needed so
+  existing sharelogs remain writable. This app-only update retains the accepted
+  BitcoinII Core 31.1 image, existing blockchain and pool data, and the configured
+  payout address; it does not trigger another blockchain reindex. Requires
+  5tratumOS 0.7.12 or newer.
+  Stratum remains on TCP port 2345, telemetry remains disabled by default, and
+  no public P2P port or NAT-PMP mapping is enabled.
 widgets:
   - id: "sync"
     type: "text-with-progress"

@@ -20,4 +20,5 @@ own licenses.
 
 ## Current app releases
 
+- **AxeBC2** (`willitmod-dev-bc2`) - `0.1.11`
 - **5tratSmack** (`willitmod-dev-5tratsmack`) - `0.11.12`

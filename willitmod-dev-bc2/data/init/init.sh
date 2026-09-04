@@ -188,7 +188,6 @@ if [ "$needs_ckpool_regen" -eq 1 ]; then
     jq --arg a "$existing_addr" '.btcaddress=$a' "$ckpool_conf" >"$tmp" || fail "cannot preserve payout address"
     mv "$tmp" "$ckpool_conf"
   fi
-  chown -R 1000:1000 "${data_dir}/pool" 2>/dev/null || true
 fi
 
 if [ ! -f "${data_dir}/pool/config/ckpool.args" ]; then
@@ -204,5 +203,36 @@ if [ -f "$settings" ]; then
     jq --arg a "$addr" '.btcaddress=$a' "$ckpool_conf" >"$tmp" || fail "cannot apply saved payout address"
     mv "$tmp" "$ckpool_conf"
     chown 1000:1000 "$ckpool_conf" 2>/dev/null || true
+  fi
+fi
+
+# The app atomically replaces files in pool/config as uid/gid 1000, so the
+# directory itself must remain writable even when a fresh install seeded it as
+# root. This tree is tiny and safe to repair on every initializer run.
+#
+# CKPool also runs as uid/gid 1000 and creates per-height sharelog directories
+# directly under /www. Existing installs can already have a current config and
+# therefore skip the regeneration branch above while /www remains root-owned.
+# Check only the three known writable directories on normal starts; recursively
+# repair the existing sharelog tree once if an upgrade left any of them behind.
+if [ "${AXEBC2_TEST_SKIP_CHOWN:-false}" != "true" ]; then
+  chown -R 1000:1000 "${data_dir}/pool/config" 2>/dev/null ||
+    fail "cannot assign CKPool config data to the app user"
+
+  repair_sharelog_ownership=false
+  for writable_dir in \
+    "${data_dir}/pool/www" \
+    "${data_dir}/pool/www/pool" \
+    "${data_dir}/pool/www/users"
+  do
+    owner_group="$(stat -c '%u:%g' "$writable_dir" 2>/dev/null || true)"
+    if [ "$owner_group" != "1000:1000" ]; then
+      repair_sharelog_ownership=true
+      break
+    fi
+  done
+  if [ "$repair_sharelog_ownership" = "true" ]; then
+    chown -R 1000:1000 "${data_dir}/pool/www" 2>/dev/null ||
+      fail "cannot assign CKPool sharelog data to the app user"
   fi
 fi

@@ -9,11 +9,36 @@ import unittest
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SCRIPT = ROOT / "scripts/finalize-axebc2-0.1.10-main.sh"
+SCRIPT = ROOT / "scripts/finalize-axebc2-0.1.11-main.sh"
 COMPOSE = ROOT / "willitmod-dev-bc2/docker-compose.yml"
-APP_DIGEST = "sha256:" + "a" * 64
-CORE_DIGEST = "sha256:" + "b" * 64
+APP_DIGEST = "sha256:23a7962e223da5549eba52697c6f4cfa16ab74cba935c68c48148a4c515302b4"
+CORE_DIGEST = "sha256:8875917ece57668fe9925d40a256ce8d429a3071511bb555d4ace1fa4370afc6"
 OS_BUNDLE_SHA256 = "11a35e68ab169eb0446485992a57b33fae018a92020b7d86bbf9a005571377af"
+DEV_STORE_REVISION = "249ab61506dc09c2151d39e2b210f5f18d75ff21"
+DEV_COMPOSE_SHA256 = "93ceba92069947f47d650a5fb32205836fe070d83707f36912a2e0e83beb1244"
+REQUIRED_TRUE_GATES = (
+    "migration_required_marker_absent",
+    "migration_started_marker_valid",
+    "migration_complete_marker_valid",
+    "verifychain_passed",
+    "payout_configured",
+    "payout_preserved",
+    "app_ui_privacy_passed",
+    "payout_validation_passed",
+    "invalid_payout_rejected_without_mutation",
+    "rpc_unavailable_rejected_without_mutation",
+    "pending_payout_revalidation_passed",
+    "main_payout_banner_hidden",
+    "pool_config_directory_writable",
+    "ckpool_sharelog_ownership_repaired",
+    "telemetry_disabled",
+    "p2p_port_unpublished",
+    "natpmp_disabled",
+    "post_completion_restart_passed",
+    "reindex_not_repeated",
+    "app_rollback_rejected",
+    "os_rollback_rejected",
+)
 
 
 class AxeBC2MainFinalizerTests(unittest.TestCase):
@@ -24,26 +49,28 @@ class AxeBC2MainFinalizerTests(unittest.TestCase):
         (self.root / "willitmod-dev-bc2").mkdir()
         shutil.copy2(SCRIPT, self.root / "scripts" / SCRIPT.name)
         fixture = COMPOSE.read_text(encoding="utf-8")
-        fixture = re.sub(r"(ghcr\.io/willitmod/axebc2-app:0\.1\.10@sha256:)[0-9a-f]{64}", r"\1APP_PROMOTED_DIGEST_REQUIRED", fixture)
-        fixture = re.sub(r"(ghcr\.io/willitmod/bitcoinii-core:31\.1\.0@sha256:)[0-9a-f]{64}", r"\1CORE31_PROMOTED_DIGEST_REQUIRED", fixture)
+        fixture = re.sub(r"(ghcr\.io/willitmod/axebc2-app:0\.1\.11@sha256:)(?:[0-9a-f]{64}|APP_PROMOTED_DIGEST_REQUIRED)", r"\1APP_PROMOTED_DIGEST_REQUIRED", fixture)
         (self.root / "willitmod-dev-bc2/docker-compose.yml").write_text(fixture, encoding="utf-8")
         self.assertEqual(fixture.count("APP_PROMOTED_DIGEST_REQUIRED"), 1)
-        self.assertEqual(fixture.count("CORE31_PROMOTED_DIGEST_REQUIRED"), 2)
+        self.assertEqual(fixture.count(CORE_DIGEST), 2)
         self.original = (self.root / "willitmod-dev-bc2/docker-compose.yml").read_bytes()
         self.evidence = self.root / "evidence.json"
         self.evidence.write_text(json.dumps({
             "schema": 1,
             "result": "passed",
-            "app_image": "ghcr.io/willitmod/axebc2-app-umbrel-dev:0.1.10-candidate.6e4ef58218e8",
+            "app_image": "ghcr.io/willitmod/axebc2-app-umbrel-dev:0.1.11-candidate.ecf6e2c8cfd0",
             "app_digest": APP_DIGEST,
+            "app_candidate_run": 33895447789,
             "core_image": "ghcr.io/willitmod/bitcoinii-core:31.1.0-rc.cdf44542dde2",
             "core_digest": CORE_DIGEST,
             "core_source_revision": "cdf44542dde255648008249d187fafc15f3a2f09",
             "core_candidate_run": 33675068951,
-            "app_version": "0.1.10-dev",
+            "app_version": "0.1.11-dev",
             "tested_os_version": "v0.7.12-dev",
             "tested_os_bundle_sha256": OS_BUNDLE_SHA256,
-            "source_revision": "6e4ef58218e8cd5a4d1113196f9872a7f501f52e",
+            "source_revision": "ecf6e2c8cfd0e42ea53d3cc146b18cd6d4c4b563",
+            "dev_store_revision": DEV_STORE_REVISION,
+            "dev_compose_sha256": DEV_COMPOSE_SHA256,
             "tested_on": "10.10.10.235",
             "tested_at": "2026-09-02T20:00:00Z",
             "acceptance": {
@@ -55,7 +82,14 @@ class AxeBC2MainFinalizerTests(unittest.TestCase):
                 "best_block_hash": "f" * 64, "explorer_common_height": 60000, "explorer_common_hash": "f" * 64,
                 "outbound_core31_peers": 3, "competing_valid_tips": 0, "verifychain_level": 4, "verifychain_passed": True,
                 "payout_configured": True, "payout_preserved": True, "pool_stratum_result": "passed",
-                "app_ui_privacy_passed": True, "telemetry_disabled": True,
+                "app_ui_privacy_passed": True, "payout_validation_passed": True,
+                "invalid_payout_rejected_without_mutation": True,
+                "rpc_unavailable_rejected_without_mutation": True,
+                "pending_payout_revalidation_passed": True,
+                "main_payout_banner_hidden": True,
+                "pool_config_directory_writable": True,
+                "ckpool_sharelog_ownership_repaired": True,
+                "telemetry_disabled": True,
                 "p2p_port_unpublished": True, "natpmp_disabled": True,
                 "post_completion_restart_passed": True, "reindex_not_repeated": True,
                 "app_rollback_rejected": True, "os_rollback_rejected": True,
@@ -72,7 +106,7 @@ host="$2"; config="$4"
 shift 4
 if [ "$1 $2" = 'buildx imagetools' ]; then
   case "$4" in
-    ghcr.io/willitmod/axebc2-app:0.1.10) printf 'Name: x\\nDigest: %s\\n' "$APP_DIGEST" ;;
+    ghcr.io/willitmod/axebc2-app:0.1.11) printf 'Name: x\\nDigest: %s\\n' "$APP_DIGEST" ;;
     ghcr.io/willitmod/bitcoinii-core:31.1.0) printf 'Name: x\\nDigest: %s\\n' "$CORE_DIGEST" ;;
     *) exit 2 ;;
   esac
@@ -122,7 +156,7 @@ esac
             "CORE_DIGEST": CORE_DIGEST,
         })
         return subprocess.run(
-            [str(self.root / "scripts" / SCRIPT.name), APP_DIGEST, CORE_DIGEST, str(self.evidence)],
+            [str(self.root / "scripts" / SCRIPT.name), APP_DIGEST, str(self.evidence)],
             text=True, capture_output=True, env=env, check=False,
         )
 
@@ -132,7 +166,7 @@ esac
         compose = (self.root / "willitmod-dev-bc2/docker-compose.yml").read_text(encoding="utf-8")
         self.assertNotIn("_DIGEST_REQUIRED", compose)
         self.assertEqual(compose.count("ghcr.io/willitmod/bitcoinii-core:31.1.0@" + CORE_DIGEST), 2)
-        self.assertIn("ghcr.io/willitmod/axebc2-app:0.1.10@" + APP_DIGEST, compose)
+        self.assertIn("ghcr.io/willitmod/axebc2-app:0.1.11@" + APP_DIGEST, compose)
         calls = self.log.read_text(encoding="utf-8")
         self.assertEqual(calls.count("--platform linux/amd64"), 2)
         self.assertEqual(calls.count("--platform linux/arm64"), 2)
@@ -143,7 +177,7 @@ esac
     def test_bad_explicit_docker_host_fails_before_registry_or_mutation(self):
         env = os.environ.copy()
         env.update({"DOCKER_BIN":str(self.fake_docker),"DOCKER_HOST":"bad-host","CURL_BIN":str(self.fake_curl),"FAKE_DOCKER_LOG":str(self.log),"FAKE_CURL_LOG":str(self.curl_log),"APP_DIGEST":APP_DIGEST,"CORE_DIGEST":CORE_DIGEST})
-        result=subprocess.run([str(self.root/"scripts"/SCRIPT.name),APP_DIGEST,CORE_DIGEST,str(self.evidence)],env=env,text=True,capture_output=True,check=False)
+        result=subprocess.run([str(self.root/"scripts"/SCRIPT.name),APP_DIGEST,str(self.evidence)],env=env,text=True,capture_output=True,check=False)
         self.assertNotEqual(result.returncode,0); self.assertFalse(self.log.exists()); self.assertFalse(self.curl_log.exists())
         self.assertEqual((self.root/"willitmod-dev-bc2/docker-compose.yml").read_bytes(),self.original)
 
@@ -175,7 +209,7 @@ esac
 
     def test_wrong_app_candidate_ref_fails_before_registry_or_compose_mutation(self):
         doc = json.loads(self.evidence.read_text(encoding="utf-8"))
-        doc["app_image"] = "ghcr.io/willitmod/axebc2-app:0.1.10-dev"
+        doc["app_image"] = "ghcr.io/willitmod/axebc2-app:0.1.11-dev"
         self.evidence.write_text(json.dumps(doc), encoding="utf-8")
         result = self.run_finalizer()
         self.assertNotEqual(result.returncode, 0)
@@ -190,6 +224,51 @@ esac
         self.assertNotEqual(result.returncode, 0)
         self.assertFalse(self.log.exists())
         self.assertEqual((self.root / "willitmod-dev-bc2/docker-compose.yml").read_bytes(), self.original)
+
+    def test_dev_recipe_provenance_and_config_writability_fail_closed(self):
+        baseline = json.loads(self.evidence.read_text(encoding="utf-8"))
+        cases = (
+            (None, "dev_store_revision", "d" * 40),
+            (None, "dev_store_revision", None),
+            (None, "dev_compose_sha256", "e" * 64),
+            (None, "dev_compose_sha256", None),
+        )
+        for section, field, value in cases:
+            doc = json.loads(json.dumps(baseline))
+            target = doc if section is None else doc[section]
+            if value is None:
+                target.pop(field)
+            else:
+                target[field] = value
+            self.evidence.write_text(json.dumps(doc), encoding="utf-8")
+            result = self.run_finalizer()
+            self.assertNotEqual(result.returncode, 0)
+            self.assertFalse(self.curl_log.exists())
+            self.assertFalse(self.log.exists())
+            self.assertEqual(
+                (self.root / "willitmod-dev-bc2/docker-compose.yml").read_bytes(),
+                self.original,
+            )
+
+    def test_every_boolean_acceptance_gate_is_required_true(self):
+        baseline = json.loads(self.evidence.read_text(encoding="utf-8"))
+        for field in REQUIRED_TRUE_GATES:
+            for remove in (False, True):
+                doc = json.loads(json.dumps(baseline))
+                if remove:
+                    doc["acceptance"].pop(field)
+                else:
+                    doc["acceptance"][field] = False
+                self.evidence.write_text(json.dumps(doc), encoding="utf-8")
+                result = self.run_finalizer()
+                self.assertNotEqual(result.returncode, 0, field)
+                self.assertFalse(self.curl_log.exists(), field)
+                self.assertFalse(self.log.exists(), field)
+                self.assertEqual(
+                    (self.root / "willitmod-dev-bc2/docker-compose.yml").read_bytes(),
+                    self.original,
+                    field,
+                )
 
     def test_incomplete_structured_acceptance_fails_before_registry_or_mutation(self):
         doc = json.loads(self.evidence.read_text(encoding="utf-8"))

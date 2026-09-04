@@ -51,7 +51,23 @@ services:
     command:
       - /bin/sh
       - -ec
-      - exec /bin/sh /opt/axebc2/init.sh
+      - |-
+        # 5tratumOS preserves an installed app's data directory during an
+        # update, including its previously seeded init script. Keep this
+        # upgrade repair in the versioned Compose command so 0.1.10 installs
+        # receive it even when /data/init/init.sh is intentionally retained.
+        mkdir -p /data/pool/config /data/pool/www/pool /data/pool/www/users
+        # Keep the small mutable config directory writable by the unprivileged
+        # app. This is required on fresh installs as well as preserved upgrades.
+        chown -R 1000:1000 /data/pool/config ||
+          { echo >&2 "cannot assign CKPool config data to uid/gid 1000"; exit 1; }
+        if [ "$$(stat -c '%u:%g' /data/pool/www 2>/dev/null || true)" != "1000:1000" ] ||
+           [ "$$(stat -c '%u:%g' /data/pool/www/pool 2>/dev/null || true)" != "1000:1000" ] ||
+           [ "$$(stat -c '%u:%g' /data/pool/www/users 2>/dev/null || true)" != "1000:1000" ]; then
+          chown -R 1000:1000 /data/pool/www ||
+            { echo >&2 "cannot assign CKPool sharelog data to uid/gid 1000"; exit 1; }
+        fi
+        exec /bin/sh /opt/axebc2/init.sh
 
   btc2d:
     image: ghcr.io/willitmod/bitcoinii-core:31.1.0@sha256:8875917ece57668fe9925d40a256ce8d429a3071511bb555d4ace1fa4370afc6
@@ -110,7 +126,7 @@ services:
         fi
 
   app:
-    image: ghcr.io/willitmod/axebc2-app:0.1.10@sha256:b7ba2df2f48389d145ad18a927b099f32b5aa7708a0ea617a1b04e25c8e7f961
+    image: ghcr.io/willitmod/axebc2-app:0.1.11@sha256:23a7962e223da5549eba52697c6f4cfa16ab74cba935c68c48148a4c515302b4
     user: "1000:1000"
     restart: on-failure
     stop_grace_period: 30s
