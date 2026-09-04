@@ -1,0 +1,49 @@
+name: Validate AxeBC2 Core 31 MAIN metadata
+
+on:
+  pull_request:
+    paths:
+      - "willitmod-dev-bc2/**"
+      - "tests/test_axebc2_core31_init.py"
+      - "tests/test_axebc2_platform_integration.py"
+      - "tests/test_axebc2_main_finalizer.py"
+      - "tests/test_axebc2_release_state.py"
+      - "tests/fixtures/5tratumos_contract_4f979cb.py"
+      - "scripts/validate-axebc2-core31-main.py"
+      - "scripts/axebc2_release_state.py"
+      - "scripts/finalize-axebc2-0.1.10-main.sh"
+      - ".github/workflows/validate-axebc2-core31-main.yml"
+  push:
+    branches: [main]
+    paths:
+      - "willitmod-dev-bc2/**"
+      - "tests/test_axebc2_core31_init.py"
+      - "tests/test_axebc2_platform_integration.py"
+      - "tests/test_axebc2_main_finalizer.py"
+      - "tests/test_axebc2_release_state.py"
+      - "tests/fixtures/5tratumos_contract_4f979cb.py"
+      - "scripts/validate-axebc2-core31-main.py"
+      - "scripts/axebc2_release_state.py"
+      - "scripts/finalize-axebc2-0.1.10-main.sh"
+      - ".github/workflows/validate-axebc2-core31-main.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the store
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Install test dependencies
+        run: sudo apt-get update && sudo apt-get install --yes gettext-base jq python3-yaml
+
+      - name: Validate metadata and migration initialization
+        run: |
+          docker compose version
+          bash -n scripts/finalize-axebc2-0.1.10-main.sh
+          count="$(awk '{n += gsub(/_DIGEST_REQUIRED/, "")} END {print n + 0}' willitmod-dev-bc2/docker-compose.yml)"
+          if [ "$count" = 3 ]; then phase=prefinalization; elif [ "$count" = 0 ]; then phase=finalized; else echo "partial digest finalization" >&2; exit 1; fi
+          python3 scripts/validate-axebc2-core31-main.py --phase "$phase"
