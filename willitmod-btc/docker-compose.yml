@@ -6,13 +6,12 @@ services:
       APP_HOST: axebtc-app
       APP_PORT: 3000
       JWT_SECRET: "${JWT_SECRET}"
-    networks:
-      - umbrel_main_network
 
   init:
     image: alpine:3.22.1
     volumes:
       - ${APP_DATA_DIR}/data:/data
+      - ${APP_DATA_DIR}/data/node-rdts:/data-rdts
       - ${APP_DATA_DIR}:/appdata
       - ${APP_DATA_DIR}/data/templates:/data/templates:rw
     environment:
@@ -47,7 +46,8 @@ services:
           mv "$$tmp" "$$envfile"
         fi
 
-        mkdir -p /data/node /data/pool/config /data/pool/www/pool /data/pool/www/users
+        mkdir -p /data/node /data-rdts /data/pool/config /data/pool/www/pool /data/pool/www/users
+        chown 1000:1000 /data-rdts || true
         # Ensure template scripts are executable (Windows checkouts can lose +x).
         chmod +x /data/templates/bitcoind-entrypoint.sh /data/templates/ckpool-entrypoint.sh 2>/dev/null || true
         chown 1000:1000 /data/templates/bitcoind-entrypoint.sh /data/templates/ckpool-entrypoint.sh 2>/dev/null || true
@@ -56,7 +56,7 @@ services:
         # Older installs may have persisted an AxeBTCF-era ckpool.conf.template (merged-mining/Fractal).
         # Because templates live in the persistent /data volume, store updates do not automatically replace them.
         #
-        # NOTE: avoid embedding a full JSON template directly in this command block because 5tratumos/umbrel
+        # NOTE: avoid embedding a full JSON template directly in this command block because 5tratumOS
         # tooling rewrites docker-compose.yml and can choke on lots of unescaped quotes.
         if [ -f /data/templates/ckpool.conf.template ]; then
           if grep -q '"auxd"' /data/templates/ckpool.conf.template; then
@@ -144,7 +144,7 @@ services:
         fi
 
   bitcoind:
-    image: ghcr.io/willitmod/axebtc-bitcoind-switch:0.7.44
+    image: ghcr.io/willitmod/axebtc-bitcoind-switch:0.7.47
     user: "1000:1000"
     restart: unless-stopped
     stop_grace_period: 15m30s
@@ -153,6 +153,7 @@ services:
         condition: service_completed_successfully
     volumes:
       - ${APP_DATA_DIR}/data/node:/data
+      - ${APP_DATA_DIR}/data/node-rdts:/data-rdts
       - ${APP_DATA_DIR}/data/templates/bitcoind-entrypoint.sh:/bitcoind-entrypoint.sh:ro
     entrypoint: ["/bin/sh", "/bitcoind-entrypoint.sh"]
     healthcheck:
@@ -178,7 +179,7 @@ services:
     entrypoint: ["/bin/sh", "/ckpool-entrypoint.sh"]
 
   app:
-    image: ghcr.io/willitmod/axebtc-app-umbrel-dev:0.7.82.8
+    image: ghcr.io/willitmod/axebtc-app-5tratumos:0.7.82.11
     user: "1000:1000"
     restart: on-failure
     stop_grace_period: 30s
@@ -187,9 +188,6 @@ services:
       - ckpool
     networks:
       default:
-        aliases:
-          - axebtc-app
-      umbrel_main_network:
         aliases:
           - axebtc-app
     volumes:
@@ -202,13 +200,11 @@ services:
       CKPOOL_STATUS_DIR: "/data/pool/www/pool"
       CKPOOL_STRATUM_HOST: "ckpool"
       CKPOOL_STRATUM_PORT: "3333"
-      APP_CHANNEL: "RC1"
+      APP_CHANNEL: "MAIN"
       APP_VERSION_SUFFIX: ""
-      BITCOIND_IMAGE: "ghcr.io/willitmod/axebtc-bitcoind-switch:0.7.44"
+      BTC_CORE_VERSION: "30.3"
+      BTC_KNOTS_VERSION: "29.3.knots20260507"
+      BTC_KNOTS_RDTS_VERSION: "29.3.knots20260508"
+      BITCOIND_IMAGE: "ghcr.io/willitmod/axebtc-bitcoind-switch:0.7.47"
       CKPOOL_IMAGE: "ghcr.io/willitmod/docker-ckpool-solo:590fb2a"
       STATIC_DIR: "/app/static"
-
-networks:
-  umbrel_main_network:
-    external: true
-    name: umbrel_main_network
