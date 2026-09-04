@@ -2,7 +2,7 @@ manifestVersion: 1
 id: willitmod-dev-5tratsmack
 category: altcoin
 name: 5tratSmack
-version: "0.11.11"
+version: "0.11.12"
 tagline: Home-miner 5TRAT node, wallet, solo pool and atomic trade lab
 description: >-
   Install and synchronize a complete 5TRAT node, create or restore an encrypted
@@ -38,15 +38,15 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Update-channel correctness release: the in-app updater now refreshes and
-  reads the selected 5tratumOS catalogue directly. DEV installations explicitly
-  read the authenticated DEV catalogue instead of version fields selected
-  through the system's default store channel. It rejects wrong-channel or
-  malformed catalogue data, clearly reports installations newer than the
-  catalogue, and never offers a downgrade. The 0.11.10 jackpot, reliability,
-  last-known fiat labelling, private local/global trade separation and
-  transparent default-on 5% development contribution remain unchanged.
-  Existing wallets, blockchain, pool and trading data are retained.
+  Runtime efficiency release: node, pool, trade, chart and Explorer refreshes
+  are paced and coalesced, and inactive browser tabs pause background polling.
+  CKPool share logs and Explorer indexing now advance incrementally with bounded
+  reads and writes, startup warm-up and reorg-safe journal recovery, avoiding
+  repeated history scans and large checkpoint rewrites. Existing app state,
+  wallets, blockchain, pool and trading data persist through the update; the
+  blockchain is not deleted or reindexed. Private local/global trade separation
+  and chosen-currency balance and value labelling remain unchanged, as does the
+  transparent default-on 5% development contribution.
 widgets:
   - id: sync
     type: text-with-progress
