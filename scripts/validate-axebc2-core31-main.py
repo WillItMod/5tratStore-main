@@ -29,14 +29,18 @@ except ValueError as exc: raise SystemExit(str(exc))
 manifest = (APP / "umbrel-app.yml").read_text(encoding="utf-8")
 node_config = (APP / "data/templates/bitcoinII.conf.template").read_text(encoding="utf-8")
 
-require('version: "0.1.10"' in manifest, "manifest must be stable 0.1.10")
+require('version: "0.1.11"' in manifest, "manifest must be stable 0.1.11")
 require('id: willitmod-dev-bc2' in manifest, "stable store identity must remain unchanged")
 require('APP_CHANNEL: "MAIN"' in compose, "stable app channel must be MAIN")
 require('APP_VERSION_SUFFIX: ""' in compose, "stable app must have no DEV suffix")
+require("beginning with 1, 3, or bc1" in manifest, "release notes must describe valid payout families")
+require("misleading payout warning from MAIN builds" in manifest, "release notes must describe the MAIN banner fix")
 require(
-    "full reindex of their stored blockchain data" in manifest,
-    "release notes must describe the migration accurately",
+    "keeps CKPool /config writable on" in manifest
+    and "conditionally repairs /www ownership" in manifest,
+    "release notes must accurately describe the config and sharelog repairs",
 )
+require("does not trigger another blockchain reindex" in manifest, "release notes must rule out a repeated reindex")
 require("Requires 5tratumOS 0.7.12" in manifest, "OS prerequisite must be disclosed")
 require('"2345:3333/tcp"' in compose, "Stratum host port 2345 must be retained")
 require("SUPPORT_CHECKIN_ENABLED: \"false\"" in compose, "telemetry must default off")
@@ -44,8 +48,37 @@ require("create_host_path: false" in compose, "build metadata bind must fail clo
 require("/etc/5tratumos/build.json" in compose, "build metadata must be mounted")
 require('JWT_SECRET: "${JWT_SECRET}"' in compose, "init must receive the platform JWT secret")
 require(
+    "chown -R 1000:1000 /data/pool/config" in compose
+    and compose.index("chown -R 1000:1000 /data/pool/config")
+    < compose.index("exec /bin/sh /opt/axebc2/init.sh"),
+    "versioned Compose init must keep fresh and preserved CKPool config writable",
+)
+require(
+    "chown -R 1000:1000 /data/pool/www" in compose
+    and compose.count("$$(stat -c '%u:%g' /data/pool/www") == 3
+    and '"$(stat -c' not in compose,
+    "versioned Compose init must repair CKPool sharelogs with escaped interpolation",
+)
+require(
+    "previously seeded init script" in compose,
+    "ownership repair must document why it cannot live only in seeded app data",
+)
+require(
     ".5tratumos-rollback-policy.json" in (APP / "data/init/init.sh").read_text(encoding="utf-8"),
     "init must use the policy filename consumed by AxeBC2 and 5tratumOS",
+)
+require(
+    'minimum_app="0.1.10"' in (APP / "data/init/init.sh").read_text(encoding="utf-8"),
+    "Core 31 rollback floor must remain 0.1.10",
+)
+require(
+    'chown -R 1000:1000 "${data_dir}/pool/config"'
+    in (APP / "data/init/init.sh").read_text(encoding="utf-8"),
+    "seeded init must retain targeted CKPool config ownership repair",
+)
+require(
+    "repair_sharelog_ownership" in (APP / "data/init/init.sh").read_text(encoding="utf-8"),
+    "init must retain the conditional CKPool sharelog ownership repair",
 )
 require(
     "alpine:3.22.1@sha256:4bcff63911fcb4448bd4fdacec207030997caf25e9bea4045fa6c8c44de311d1"
@@ -95,9 +128,7 @@ def validate_platform_merged_compose():
         (app_data / "data/init/init.sh").write_text("#!/bin/sh\n", encoding="utf-8")
         source = temp / "docker-compose.yml"
         source.write_text(
-            compose.replace("CORE31_PROMOTED_DIGEST_REQUIRED", "a" * 64).replace(
-                "APP_PROMOTED_DIGEST_REQUIRED", "b" * 64
-            ),
+            compose.replace("APP_PROMOTED_DIGEST_REQUIRED", "b" * 64),
             encoding="utf-8",
         )
         parsed = temp / "parsed-compose.json"

@@ -1,24 +1,26 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
-if [[ "$#" -ne 3 ]]; then
-  echo "usage: $0 APP_INDEX_DIGEST CORE_INDEX_DIGEST DEV_ACCEPTANCE_JSON" >&2
+if [[ "$#" -ne 2 ]]; then
+  echo "usage: $0 APP_INDEX_DIGEST DEV_ACCEPTANCE_JSON" >&2
   exit 64
 fi
 
 app_digest="$1"
-core_digest="$2"
-evidence="$3"
+evidence="$2"
 repo_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 compose="$repo_root/willitmod-dev-bc2/docker-compose.yml"
 docker_bin="${DOCKER_BIN:-docker}"
 curl_bin="${CURL_BIN:-curl}"
 jq_bin="${JQ_BIN:-jq}"
-app_tag="ghcr.io/willitmod/axebc2-app:0.1.10"
+app_tag="ghcr.io/willitmod/axebc2-app:0.1.11"
 core_tag="ghcr.io/willitmod/bitcoinii-core:31.1.0"
+expected_app_digest="sha256:23a7962e223da5549eba52697c6f4cfa16ab74cba935c68c48148a4c515302b4"
+core_digest="sha256:8875917ece57668fe9925d40a256ce8d429a3071511bb555d4ace1fa4370afc6"
 
 fail() { echo "ERROR: $*" >&2; exit 1; }
 [[ "$app_digest" =~ ^sha256:[0-9a-f]{64}$ ]] || fail "app digest is not an exact sha256 digest"
+[[ "$app_digest" == "$expected_app_digest" ]] || fail "app digest must equal the tested DEV candidate digest"
 [[ "$core_digest" =~ ^sha256:[0-9a-f]{64}$ ]] || fail "Core digest is not an exact sha256 digest"
 [[ -f "$evidence" ]] || fail "DEV acceptance evidence does not exist: $evidence"
 command -v "$docker_bin" >/dev/null 2>&1 || fail "Docker is required for registry verification"
@@ -45,16 +47,19 @@ except (OSError, ValueError) as exc:
 expected = {
     "schema": 1,
     "result": "passed",
-    "app_image": "ghcr.io/willitmod/axebc2-app-umbrel-dev:0.1.10-candidate.6e4ef58218e8",
+    "app_image": "ghcr.io/willitmod/axebc2-app-umbrel-dev:0.1.11-candidate.ecf6e2c8cfd0",
     "app_digest": app_digest,
-    "source_revision": "6e4ef58218e8cd5a4d1113196f9872a7f501f52e",
+    "app_candidate_run": 33895447789,
+    "source_revision": "ecf6e2c8cfd0e42ea53d3cc146b18cd6d4c4b563",
     "core_image": "ghcr.io/willitmod/bitcoinii-core:31.1.0-rc.cdf44542dde2",
     "core_digest": core_digest,
     "core_source_revision": "cdf44542dde255648008249d187fafc15f3a2f09",
     "core_candidate_run": 33675068951,
-    "app_version": "0.1.10-dev",
+    "app_version": "0.1.11-dev",
     "tested_os_version": "v0.7.12-dev",
     "tested_os_bundle_sha256": "11a35e68ab169eb0446485992a57b33fae018a92020b7d86bbf9a005571377af",
+    "dev_store_revision": "249ab61506dc09c2151d39e2b210f5f18d75ff21",
+    "dev_compose_sha256": "93ceba92069947f47d650a5fb32205836fe070d83707f36912a2e0e83beb1244",
 }
 for key, value in expected.items():
     if evidence.get(key) != value:
@@ -69,7 +74,7 @@ a=evidence.get("acceptance")
 if not isinstance(a, dict): raise SystemExit("DEV acceptance evidence requires structured acceptance observations")
 try: datetime.datetime.fromisoformat(str(a["observed_at"]).replace("Z", "+00:00"))
 except (KeyError, ValueError): raise SystemExit("acceptance observed_at must be ISO-8601")
-truth=("migration_required_marker_absent","migration_started_marker_valid","migration_complete_marker_valid","verifychain_passed","payout_configured","payout_preserved","app_ui_privacy_passed","telemetry_disabled","p2p_port_unpublished","natpmp_disabled","post_completion_restart_passed","reindex_not_repeated","app_rollback_rejected","os_rollback_rejected")
+truth=("migration_required_marker_absent","migration_started_marker_valid","migration_complete_marker_valid","verifychain_passed","payout_configured","payout_preserved","app_ui_privacy_passed","payout_validation_passed","invalid_payout_rejected_without_mutation","rpc_unavailable_rejected_without_mutation","pending_payout_revalidation_passed","main_payout_banner_hidden","pool_config_directory_writable","ckpool_sharelog_ownership_repaired","telemetry_disabled","p2p_port_unpublished","natpmp_disabled","post_completion_restart_passed","reindex_not_repeated","app_rollback_rejected","os_rollback_rejected")
 if any(a.get(k) is not True for k in truth): raise SystemExit("all required acceptance gates must be true")
 if a.get("chain") != "main" or a.get("competing_valid_tips") != 0: raise SystemExit("main chain must have no competing valid tips")
 if a.get("core_version") != 310100: raise SystemExit("exact Core 31.1.0 version was not observed")
@@ -131,12 +136,13 @@ verify_index "$core_tag" "$core_digest"
 
 [[ "$(grep -oF 'APP_PROMOTED_DIGEST_REQUIRED' "$compose" | wc -l | tr -d ' ')" == 1 ]] \
   || fail "expected exactly one app digest sentinel"
-[[ "$(grep -oF 'CORE31_PROMOTED_DIGEST_REQUIRED' "$compose" | wc -l | tr -d ' ')" == 2 ]] \
-  || fail "expected exactly two Core digest sentinels"
+[[ "$(grep -oF "$core_tag@$core_digest" "$compose" | wc -l | tr -d ' ')" == 2 ]] \
+  || fail "expected exactly two retained Core pins"
+[[ "$(grep -oF '_DIGEST_REQUIRED' "$compose" | wc -l | tr -d ' ')" == 1 ]] \
+  || fail "unexpected digest sentinel"
 
 tmp="$(mktemp "${compose}.finalize.XXXXXX")"
 sed -e "s/APP_PROMOTED_DIGEST_REQUIRED/${app_digest#sha256:}/g" \
-    -e "s/CORE31_PROMOTED_DIGEST_REQUIRED/${core_digest#sha256:}/g" \
     "$compose" >"$tmp"
 chmod 0644 "$tmp"
 grep -F '_DIGEST_REQUIRED' "$tmp" >/dev/null && fail "unresolved digest sentinel remains"
@@ -150,5 +156,5 @@ grep -Fx "      BTC2D_IMAGE: \"$core_tag@$core_digest\"" "$tmp" >/dev/null \
   || fail "final BTC2D_IMAGE reference is incorrect"
 mv -f "$tmp" "$compose"
 
-printf 'Prepared AxeBC2 0.1.10 MAIN\napp=%s\ncore=%s\nDEV evidence=%s\n' \
+printf 'Finalized AxeBC2 0.1.11 MAIN\napp=%s\ncore=%s\nDEV evidence=%s\n' \
   "$app_digest" "$core_digest" "$evidence"

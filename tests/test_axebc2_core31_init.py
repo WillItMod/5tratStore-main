@@ -25,7 +25,7 @@ class AxeBC2InitTests(unittest.TestCase):
     def tearDown(self):
         shutil.rmtree(self.tmp)
 
-    def run_init(self, tag="0.7.12", expect=0, jwt_secret=None):
+    def run_init(self, tag="0.7.12", expect=0, jwt_secret=None, extra_env=None):
         self.build.write_text(json.dumps({"tag": tag}), encoding="utf-8")
         env = os.environ.copy()
         env.pop("JWT_SECRET", None)
@@ -47,6 +47,8 @@ class AxeBC2InitTests(unittest.TestCase):
         )
         if jwt_secret is not None:
             env["JWT_SECRET"] = jwt_secret
+        if extra_env:
+            env.update(extra_env)
         result = subprocess.run(
             ["sh", str(INIT)], env=env, text=True, capture_output=True, check=False
         )
@@ -160,6 +162,97 @@ class AxeBC2InitTests(unittest.TestCase):
         updated = config.read_text(encoding="utf-8")
         self.assertNotIn("upnp=", updated)
         self.assertEqual(updated.count("natpmp=0"), 1)
+
+    def test_current_ckpool_config_still_repairs_sharelog_ownership(self):
+        pool = self.data / "pool"
+        sharelogs = pool / "www"
+        sharelogs.mkdir(parents=True)
+        config_dir = pool / "config"
+        config_dir.mkdir()
+        config = config_dir / "ckpool.conf"
+        original = json.dumps(
+            {
+                "btcaddress": "1BoatSLRHtKNngkdXEeobR76b53LETtpyT",
+                "btcd": [{"url": "btc2d:8337"}],
+                "zmqblock": "tcp://btc2d:28336",
+            },
+            sort_keys=True,
+        ) + "\n"
+        config.write_text(original, encoding="utf-8")
+
+        fake_bin = self.tmp / "fake-bin"
+        fake_bin.mkdir()
+        chown_log = self.tmp / "chown.log"
+        chown_state = self.tmp / "sharelog-ownership-repaired"
+        fake_chown = fake_bin / "chown"
+        fake_chown.write_text(
+            "#!/bin/sh\n"
+            'printf "%s\\n" "$*" >> "$AXEBC2_TEST_CHOWN_LOG"\n'
+            'case "$*" in *"$AXEBC2_TEST_SHARELOG_ROOT"*) '
+            ': > "$AXEBC2_TEST_CHOWN_STATE" ;; esac\n',
+            encoding="utf-8",
+        )
+        fake_chown.chmod(0o755)
+        fake_stat = fake_bin / "stat"
+        fake_stat.write_text(
+            "#!/bin/sh\n"
+            'if [ -e "$AXEBC2_TEST_CHOWN_STATE" ]; then '
+            "printf '1000:1000\\n'; else printf '0:0\\n'; fi\n",
+            encoding="utf-8",
+        )
+        fake_stat.chmod(0o755)
+        extra_env = {
+            "AXEBC2_TEST_SKIP_CHOWN": "false",
+            "AXEBC2_TEST_CHOWN_LOG": str(chown_log),
+            "AXEBC2_TEST_CHOWN_STATE": str(chown_state),
+            "AXEBC2_TEST_SHARELOG_ROOT": str(sharelogs),
+            "PATH": f"{fake_bin}{os.pathsep}{os.environ['PATH']}",
+        }
+
+        self.run_init(extra_env=extra_env)
+        self.run_init(extra_env=extra_env)
+
+        repair = f"-R 1000:1000 {sharelogs}"
+        self.assertEqual(chown_log.read_text(encoding="utf-8").splitlines().count(repair), 1)
+        self.assertEqual(config.read_text(encoding="utf-8"), original)
+
+    def test_fresh_install_repairs_mutable_pool_config_ownership(self):
+        fake_bin = self.tmp / "fake-bin"
+        fake_bin.mkdir()
+        chown_log = self.tmp / "chown.log"
+        fake_chown = fake_bin / "chown"
+        fake_chown.write_text(
+            "#!/bin/sh\n"
+            'printf "%s\\n" "$*" >> "$AXEBC2_TEST_CHOWN_LOG"\n',
+            encoding="utf-8",
+        )
+        fake_chown.chmod(0o755)
+        fake_stat = fake_bin / "stat"
+        fake_stat.write_text("#!/bin/sh\nprintf '1000:1000\\n'\n", encoding="utf-8")
+        fake_stat.chmod(0o755)
+
+        self.run_init(
+            extra_env={
+                "AXEBC2_TEST_SKIP_CHOWN": "false",
+                "AXEBC2_TEST_CHOWN_LOG": str(chown_log),
+                "PATH": f"{fake_bin}{os.pathsep}{os.environ['PATH']}",
+            }
+        )
+
+        config_dir = self.data / "pool/config"
+        self.assertTrue((config_dir / "ckpool.conf").is_file())
+        self.assertIn(
+            f"-R 1000:1000 {config_dir}",
+            chown_log.read_text(encoding="utf-8").splitlines(),
+        )
+        # Atomic payout saves need directory-level create and replace access.
+        replacement = config_dir / ".ckpool.conf.atomic-test"
+        replacement.write_text("replacement\n", encoding="utf-8")
+        replacement.replace(config_dir / "ckpool.conf")
+        self.assertEqual(
+            (config_dir / "ckpool.conf").read_text(encoding="utf-8"),
+            "replacement\n",
+        )
 
     def test_saved_payout_and_persistent_settings_survive_main_upgrade(self):
         pool_config = self.data / "pool/config"

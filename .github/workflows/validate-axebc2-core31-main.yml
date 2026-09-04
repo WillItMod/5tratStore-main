@@ -11,7 +11,7 @@ on:
       - "tests/fixtures/5tratumos_contract_4f979cb.py"
       - "scripts/validate-axebc2-core31-main.py"
       - "scripts/axebc2_release_state.py"
-      - "scripts/finalize-axebc2-0.1.10-main.sh"
+      - "scripts/finalize-axebc2-0.1.11-main.sh"
       - ".github/workflows/validate-axebc2-core31-main.yml"
   push:
     branches: [main]
@@ -24,7 +24,7 @@ on:
       - "tests/fixtures/5tratumos_contract_4f979cb.py"
       - "scripts/validate-axebc2-core31-main.py"
       - "scripts/axebc2_release_state.py"
-      - "scripts/finalize-axebc2-0.1.10-main.sh"
+      - "scripts/finalize-axebc2-0.1.11-main.sh"
       - ".github/workflows/validate-axebc2-core31-main.yml"
 
 permissions:
@@ -43,7 +43,7 @@ jobs:
       - name: Validate metadata and migration initialization
         run: |
           docker compose version
-          bash -n scripts/finalize-axebc2-0.1.10-main.sh
+          bash -n scripts/finalize-axebc2-0.1.11-main.sh
           count="$(awk '{n += gsub(/_DIGEST_REQUIRED/, "")} END {print n + 0}' willitmod-dev-bc2/docker-compose.yml)"
-          if [ "$count" = 3 ]; then phase=prefinalization; elif [ "$count" = 0 ]; then phase=finalized; else echo "partial digest finalization" >&2; exit 1; fi
+          if [ "$count" = 1 ]; then phase=prefinalization; elif [ "$count" = 0 ]; then phase=finalized; else echo "partial digest finalization" >&2; exit 1; fi
           python3 scripts/validate-axebc2-core31-main.py --phase "$phase"
