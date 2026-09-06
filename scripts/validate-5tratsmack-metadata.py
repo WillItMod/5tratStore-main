@@ -6,12 +6,12 @@ import re
 REPO_ROOT = Path(__file__).resolve().parents[1]
 APP_DIR = REPO_ROOT / "willitmod-dev-5tratsmack"
 
-EXPECTED_VERSION = "0.11.12"
+EXPECTED_VERSION = "0.11.13"
 EXPECTED_PHASE = "STABLE"
-EXPECTED_SOURCE_REVISION = "72eed58ad52274c6b6bf409260a3fc6deca75f2a"
+EXPECTED_SOURCE_REVISION = "53f0415e517952a98d21f02b11009976a16a1d20"
 EXPECTED_APP_REF = (
-    "ghcr.io/willitmod/5tratsmack-app:0.11.12@"
-    "sha256:56887fa21813a2e3dc29a9f386d4c0cbc8053cbdc14d01d6b19cf88c5105d05f"
+    "ghcr.io/willitmod/5tratsmack-app:0.11.13@"
+    "sha256:70d007cf7a65fcdbee82d50c70d48aacb63af66b4cd9985e919bd99387401a42"
 )
 EXPECTED_CKPOOL_REF = (
     "ghcr.io/willitmod/5tratsmack-ckpool:0.11.3@"
@@ -126,17 +126,18 @@ for line in required_compose_lines:
         raise SystemExit(f"expected one exact compose line: {line}")
 
 expected_readme_line = (
-    "- **5tratSmack** (`willitmod-dev-5tratsmack`) - `0.11.12`"
+    "- **5tratSmack** (`willitmod-dev-5tratsmack`) - `0.11.13`"
 )
 if readme_text.count(expected_readme_line) != 1:
-    raise SystemExit("README current-version entry is not exactly 0.11.12")
+    raise SystemExit("README current-version entry is not exactly 0.11.13")
 
 for release_note_fragment in (
-    "inactive browser tabs pause background polling",
-    "blockchain is not deleted or reindexed",
-    "Private local/global trade separation",
-    "chosen-currency balance and value labelling",
-    "default-on 5% development contribution",
+    "Quarterly recovery checks",
+    "test your",
+    "Optional unencrypted files require an explicit warning",
+    "downloading alone does not complete a quarterly check",
+    "cryptography dependency is",
+    "only the application image changes.",
 ):
     if release_note_fragment not in manifest_text:
         raise SystemExit(f"release notes missing: {release_note_fragment}")
