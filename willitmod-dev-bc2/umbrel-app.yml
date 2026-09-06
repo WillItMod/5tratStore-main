@@ -2,7 +2,7 @@ manifestVersion: 1
 id: willitmod-dev-bc2
 category: bitcoin
 name: AxeBC2
-version: "0.1.11"
+version: "0.1.12"
 tagline: BC2 node + solo pool
 description: >-
   STABLE RELEASE (MAIN CHANNEL)
@@ -21,7 +21,7 @@ description: >-
 
   Notes:
     - Set your payout address in the app Settings tab.
-    - Requires 5tratumOS 0.7.12 or newer.
+    - Supports Umbrel; on 5tratumOS, version 0.7.12 or newer is required.
     - The node makes outbound peer connections; this app does not publish a public P2P port or request NAT-PMP mappings.
     - Initial sync can take a long time and a lot of bandwidth/storage (the node downloads and validates the chain).
     - Solo mining is extremely unlikely to find blocks without significant hashrate.
@@ -43,6 +43,12 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
+  Fixes Umbrel installation by removing its dependency on the 5tratumOS host
+  build.json file. 5tratumOS keeps its existing startup recipe and OS version
+  check. This packaging-only update retains the 0.1.11 application image,
+  Core 31 migration checks, payout address, and existing blockchain data.
+
+  Included fixes from 0.1.11:
   Corrects payout-address validation: BitcoinII Core-accepted mainnet addresses
   beginning with 1, 3, or bc1 are supported, while invalid or wrong-network
   addresses are rejected without changing the saved pool configuration. Settings

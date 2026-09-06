@@ -29,7 +29,8 @@ except ValueError as exc: raise SystemExit(str(exc))
 manifest = (APP / "umbrel-app.yml").read_text(encoding="utf-8")
 node_config = (APP / "data/templates/bitcoinII.conf.template").read_text(encoding="utf-8")
 
-require('version: "0.1.11"' in manifest, "manifest must be stable 0.1.11")
+# Packaging-only revision; retained image pins below are the accepted 0.1.11 runtime.
+require('version: "0.1.12"' in manifest, "manifest must be stable 0.1.12")
 require('id: willitmod-dev-bc2' in manifest, "stable store identity must remain unchanged")
 require('APP_CHANNEL: "MAIN"' in compose, "stable app channel must be MAIN")
 require('APP_VERSION_SUFFIX: ""' in compose, "stable app must have no DEV suffix")
@@ -41,7 +42,7 @@ require(
     "release notes must accurately describe the config and sharelog repairs",
 )
 require("does not trigger another blockchain reindex" in manifest, "release notes must rule out a repeated reindex")
-require("Requires 5tratumOS 0.7.12" in manifest, "OS prerequisite must be disclosed")
+require("on 5tratumOS, version 0.7.12 or newer is required" in manifest, "OS prerequisite must be disclosed")
 require('"2345:3333/tcp"' in compose, "Stratum host port 2345 must be retained")
 require("SUPPORT_CHECKIN_ENABLED: \"false\"" in compose, "telemetry must default off")
 require("create_host_path: false" in compose, "build metadata bind must fail closed")
