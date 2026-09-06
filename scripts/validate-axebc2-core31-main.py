@@ -29,8 +29,8 @@ except ValueError as exc: raise SystemExit(str(exc))
 manifest = (APP / "umbrel-app.yml").read_text(encoding="utf-8")
 node_config = (APP / "data/templates/bitcoinII.conf.template").read_text(encoding="utf-8")
 
-# Packaging-only revision; retained image pins below are the accepted 0.1.11 runtime.
-require('version: "0.1.12"' in manifest, "manifest must be stable 0.1.12")
+# Application and package versions align; Core and pool images retain their accepted pins.
+require('version: "0.1.13"' in manifest, "manifest must be stable 0.1.13")
 require('id: willitmod-dev-bc2' in manifest, "stable store identity must remain unchanged")
 require('APP_CHANNEL: "MAIN"' in compose, "stable app channel must be MAIN")
 require('APP_VERSION_SUFFIX: ""' in compose, "stable app must have no DEV suffix")

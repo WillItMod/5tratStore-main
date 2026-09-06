@@ -2,7 +2,7 @@ manifestVersion: 1
 id: willitmod-dev-bc2
 category: bitcoin
 name: AxeBC2
-version: "0.1.12"
+version: "0.1.13"
 tagline: BC2 node + solo pool
 description: >-
   STABLE RELEASE (MAIN CHANNEL)
@@ -43,10 +43,13 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
+  Aligns the application image and store package at version 0.1.13 across
+  DEV and MAIN. Includes the BETA presentation update and removal of the
+  general ALPHA/BETA warning banner.
   Fixes Umbrel installation by removing its dependency on the 5tratumOS host
-  build.json file. 5tratumOS keeps its existing startup recipe and OS version
-  check. This packaging-only update retains the 0.1.11 application image,
-  Core 31 migration checks, payout address, and existing blockchain data.
+  build.json file. 5tratumOS retains its native startup checks. The update
+  preserves Core 31 migration checks, payout settings, and existing blockchain
+  and pool data.
 
   Included fixes from 0.1.11:
   Corrects payout-address validation: BitcoinII Core-accepted mainnet addresses

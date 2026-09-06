@@ -6,8 +6,8 @@ The generated template uses `hooks/umbrel-init` and `hooks/umbrel-ckpool` as
 container entrypoints, so an older initializer preserved under `data/` cannot
 block an upgraded Umbrel installation.
 
-5tratumOS consumes `docker-compose.yml` directly. That accepted recipe and
-`data/init/init.sh` remain unchanged, including the minimum OS check. The
+5tratumOS consumes `docker-compose.yml` directly. The native recipe changes only the app image pin;
+`data/init/init.sh` and the minimum OS check remain unchanged. The
 Umbrel template needs no 5tratumOS host file and uses the same pinned app,
 Core 31, CKPool, and initialization images.
 
@@ -33,17 +33,17 @@ not be embedded in the Compose template: Umbrel's `envsubst` would consume
 their local shell variables before container startup.
 
 Runtime validation target: a fresh umbrelOS 1.7.4 amd64 VM. The existing Core 31
-acceptance record describes the unchanged 5tratumOS recipe; it is not evidence
+acceptance record describes the original 0.1.11 5tratumOS recipe; it is not evidence
 that the new Umbrel path has passed runtime testing.
 
 Upstream contract:
 https://github.com/getumbrel/umbrel/blob/1.7.4/packages/umbreld/source/modules/apps/legacy-compat/app-script
 
-## Packaging revision 0.1.12
+## Initial packaging candidate 0.1.12 (superseded)
 
-The store version advances to 0.1.12 (0.1.12-dev on DEV) so existing Umbrel
-installs can receive the recipe correction. The application binary and its
-reported version remain 0.1.11; no application or node image is rebuilt.
+The initial packaging candidate used package version 0.1.12 with the
+0.1.11 application image. Release 0.1.13 supersedes that candidate and aligns
+the package and application versions; the node image is unchanged.
 
 On 6 September 2026, both candidates passed the native installer and repeated
 container initialization on 5tratumOS v0.7.12-dev at 10.10.10.235, using
@@ -58,3 +58,11 @@ establish synchronized mining or Umbrel dashboard authentication.
 
 Automated validation: 33 DEV tests and 40 MAIN tests passed. Real Umbrel
 installation, authenticated opening, and upgrade remain pending VM access.
+
+## Aligned release 0.1.13
+
+Application and package versions now align: 0.1.13-dev in DEV and 0.1.13 in
+MAIN. Both use the same tested application digest with channel-specific image
+tags. Core 31, CKPool, the native initializer, and persistent data paths retain
+their accepted configuration. Historical 0.1.11/0.1.12 observations above remain
+bound to those releases. See RELEASE-0.1.13-EVIDENCE.json for this release.

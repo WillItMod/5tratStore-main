@@ -92,7 +92,7 @@ services:
     - /bin/sh
     - /opt/axebc2/ckpool-entrypoint.sh
   app:
-    image: ghcr.io/willitmod/axebc2-app:0.1.11@sha256:23a7962e223da5549eba52697c6f4cfa16ab74cba935c68c48148a4c515302b4
+    image: ghcr.io/willitmod/axebc2-app:0.1.13@sha256:914cfcb82e0e42d03fb27133861f7ec19cfa88ba26fafac0e73855929982eb2c
     user: 1000:1000
     restart: on-failure
     stop_grace_period: 30s

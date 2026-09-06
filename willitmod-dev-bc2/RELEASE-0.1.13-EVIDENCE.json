@@ -1,0 +1,83 @@
+{
+  "image": "ghcr.io/willitmod/axebc2-app-umbrel-dev",
+  "candidate": "ghcr.io/willitmod/axebc2-app-umbrel-dev:0.1.13-candidate.49471c2152c1",
+  "digest": "sha256:914cfcb82e0e42d03fb27133861f7ec19cfa88ba26fafac0e73855929982eb2c",
+  "revision": "49471c2152c156fe4890e81e0f98dcea3d2d5d9a",
+  "version": "0.1.13",
+  "platforms": [
+    "linux/amd64",
+    "linux/arm64"
+  ],
+  "provenance": true,
+  "sbom": true,
+  "candidate_run": 34026543911,
+  "promotion_run": 34026658274,
+  "promotion_result": "success",
+  "promotion_rebuilt_image": false,
+  "channel": "main",
+  "package_version": "0.1.13",
+  "application_tests_passed": 50,
+  "store_tests_passed": 40,
+  "runtime_checks": {
+    "tested_at": "2026-09-06T10:09:46.320475+00:00",
+    "tested_on": "10.10.10.235",
+    "image": "ghcr.io/willitmod/axebc2-app-umbrel-dev:0.1.13-candidate.49471c2152c1@sha256:914cfcb82e0e42d03fb27133861f7ec19cfa88ba26fafac0e73855929982eb2c",
+    "observations": [
+      {
+        "channel": "BETA",
+        "display_version": "0.1.13-dev",
+        "http": 200,
+        "about": {
+          "channel": "BETA"
+        },
+        "node": {
+          "chain": "main",
+          "blocks": 58546,
+          "headers": 58546,
+          "verificationprogress": 1.0,
+          "version": null,
+          "subversion": "/BitcoinII:31.1.0/",
+          "cached": false
+        }
+      },
+      {
+        "channel": "MAIN",
+        "display_version": "0.1.13",
+        "http": 200,
+        "about": {
+          "channel": "MAIN"
+        },
+        "node": {
+          "chain": "main",
+          "blocks": 58546,
+          "headers": 58546,
+          "verificationprogress": 1.0,
+          "version": null,
+          "subversion": "/BitcoinII:31.1.0/",
+          "cached": false
+        }
+      }
+    ],
+    "scope": "Isolated application with separate test data; existing synchronized node RPC; no production data writes",
+    "umbrel_lifecycle_tested": false
+  },
+  "native_installer_checks": [
+    {
+      "channel": "dev",
+      "installer_exit": 0,
+      "version": "0.1.13-dev",
+      "image": "ghcr.io/willitmod/axebc2-app-umbrel-dev:0.1.13-dev@sha256:914cfcb82e0e42d03fb27133861f7ec19cfa88ba26fafac0e73855929982eb2c",
+      "stage": "BETA"
+    },
+    {
+      "channel": "main",
+      "installer_exit": 0,
+      "version": "0.1.13",
+      "image": "ghcr.io/willitmod/axebc2-app:0.1.13@sha256:914cfcb82e0e42d03fb27133861f7ec19cfa88ba26fafac0e73855929982eb2c",
+      "stage": "MAIN"
+    }
+  ],
+  "native_compose_sha256": "322d6377dee192a8d81262f9ef6d5f0c34ae0034d1a16c9aa47b3a41eb90ad5f",
+  "umbrel_template_sha256": "712afb2ede8a503cab81976964d35e3925519e0b9c19a78714785bd1ef32036e",
+  "umbrel_lifecycle_tested": false
+}
