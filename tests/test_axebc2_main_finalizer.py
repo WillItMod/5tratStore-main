@@ -3,12 +3,15 @@ import os
 import re
 from pathlib import Path
 import shutil
+import sys
 import subprocess
 import tempfile
 import unittest
 
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+from axebc2_release_state import APP_TAG as CURRENT_APP_TAG, APP_DIGEST as CURRENT_APP_DIGEST
 SCRIPT = ROOT / "scripts/finalize-axebc2-0.1.11-main.sh"
 COMPOSE = ROOT / "willitmod-dev-bc2/docker-compose.yml"
 APP_DIGEST = "sha256:23a7962e223da5549eba52697c6f4cfa16ab74cba935c68c48148a4c515302b4"
@@ -48,7 +51,11 @@ class AxeBC2MainFinalizerTests(unittest.TestCase):
         (self.root / "scripts").mkdir()
         (self.root / "willitmod-dev-bc2").mkdir()
         shutil.copy2(SCRIPT, self.root / "scripts" / SCRIPT.name)
-        fixture = COMPOSE.read_text(encoding="utf-8")
+        # Exercise the historical 0.1.11 finalizer with its original app pin.
+        fixture = COMPOSE.read_text(encoding="utf-8").replace(
+            CURRENT_APP_TAG + "@" + CURRENT_APP_DIGEST,
+            "ghcr.io/willitmod/axebc2-app:0.1.11@" + APP_DIGEST,
+        )
         fixture = re.sub(r"(ghcr\.io/willitmod/axebc2-app:0\.1\.11@sha256:)(?:[0-9a-f]{64}|APP_PROMOTED_DIGEST_REQUIRED)", r"\1APP_PROMOTED_DIGEST_REQUIRED", fixture)
         (self.root / "willitmod-dev-bc2/docker-compose.yml").write_text(fixture, encoding="utf-8")
         self.assertEqual(fixture.count("APP_PROMOTED_DIGEST_REQUIRED"), 1)

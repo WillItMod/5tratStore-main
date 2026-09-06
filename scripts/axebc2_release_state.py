@@ -1,5 +1,5 @@
-APP_TAG="ghcr.io/willitmod/axebc2-app:0.1.11"
-APP_DIGEST="sha256:23a7962e223da5549eba52697c6f4cfa16ab74cba935c68c48148a4c515302b4"
+APP_TAG="ghcr.io/willitmod/axebc2-app:0.1.13"
+APP_DIGEST="sha256:914cfcb82e0e42d03fb27133861f7ec19cfa88ba26fafac0e73855929982eb2c"
 CORE_TAG="ghcr.io/willitmod/bitcoinii-core:31.1.0"
 CORE_DIGEST="sha256:8875917ece57668fe9925d40a256ce8d429a3071511bb555d4ace1fa4370afc6"
 def validate(compose,phase):
