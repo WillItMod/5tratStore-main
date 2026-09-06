@@ -66,3 +66,36 @@ MAIN. Both use the same tested application digest with channel-specific image
 tags. Core 31, CKPool, the native initializer, and persistent data paths retain
 their accepted configuration. Historical 0.1.11/0.1.12 observations above remain
 bound to those releases. See RELEASE-0.1.13-EVIDENCE.json for this release.
+
+## Umbrel 2 installer repair 0.1.14
+
+Umbrel sources `exports.sh` under its own strict shell settings before it renders
+`docker-compose.yml.template`. Release 0.1.14 makes missing legacy auth
+containers an expected lookup result and does not alter the caller's shell
+options. It retains a supplied or discovered real `JWT_SECRET` for legacy
+Umbrel authentication. When no legacy auth service exists, it leaves the secret
+unset instead of fabricating one; Umbrel 2's in-process app gateway does not
+consume this legacy Compose value. The generated Umbrel recipe also declares
+the unique `axebc2-app` hostname. Umbrel 2 can therefore resolve the authenticated
+gateway target and register the manifest LAN port without relying on a Docker
+network alias that its ingress resolver does not inspect.
+
+The final package pairs this repair with a separately built and verified
+0.1.14 application image so the app UI and package versions remain aligned.
+BitcoinII Core 31.1, CKPool, Alpine, persistent paths, and migration safeguards
+remain unchanged.
+
+Real lifecycle validation on 6 September 2026 used Umbrel 2.0.0-beta.1 on an
+amd64 VM. The failed 0.1.13 install was reproduced, repaired, installed, and then
+upgraded through Umbrel's own app-update API to the 0.1.14 candidate digest.
+Unauthenticated requests redirect to Umbrel login; normal owner authentication
+opens the dashboard and all tested node/pool/widget APIs successfully.
+
+This new Core 31 chain had no accepted migration-completion record. Its first
+upgrade therefore ran the existing full-reindex safeguard and completed with
+checkpoint and chainwork verification. This release does not bypass that check.
+Installations without a valid completion record can still reindex; already
+completed migrations retain their record. Node and pool configuration were
+preserved. No payout address was configured on this new VM, so actual mining
+and share submission were not exercised. See RELEASE-0.1.14-EVIDENCE.json for
+precise validation scope and results; older observations above are historical.

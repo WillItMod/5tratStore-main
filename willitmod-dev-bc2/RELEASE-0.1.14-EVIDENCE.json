@@ -1,0 +1,90 @@
+{
+  "version": "0.1.14",
+  "channel": "main",
+  "package_version": "0.1.14",
+  "app_source_revision": "5f2265eb75ca41faea2405e609e5adba8f5c735f",
+  "app_image": "ghcr.io/willitmod/axebc2-app:0.1.14",
+  "digest": "sha256:57903091f4b89c297e2adfd741eef834aed2b4ec4a1eee65d64000da770fa4ca",
+  "candidate": "ghcr.io/willitmod/axebc2-app-umbrel-dev:0.1.14-candidate.5f2265eb75ca",
+  "platforms": {
+    "linux/amd64": "sha256:21934adf783284df397a81d18f7058d8030e3456d35d25b123d6cdbf3f04adb8",
+    "linux/arm64": "sha256:27a321b4bd1b46e3f64158f97a76afd31d43034e50fcad58efa489ace2fa6a10"
+  },
+  "application_tests": {
+    "local_passed": 51,
+    "vm108_passed": 51
+  },
+  "store_tests_passed": 44,
+  "build_execution": "direct SSH VM108; no GitHub Actions",
+  "provenance": true,
+  "sbom": true,
+  "promotion_rebuilt_image": false,
+  "umbrel_lifecycle_tested": true,
+  "runtime_checks": {
+    "umbrel_version": "2.0.0-beta.1",
+    "platform": "linux/amd64",
+    "initial_repaired_install": "0.1.13",
+    "upgrade_version": "0.1.14",
+    "tested_channel": "MAIN",
+    "normal_install_api": true,
+    "normal_update_api": true,
+    "normal_restart_api": true,
+    "unauthenticated_http": 302,
+    "authenticated_ui_http": 200,
+    "display_version_verified": "0.1.14",
+    "authenticated_api_http": {
+      "/api/about": 200,
+      "/api/node": 200,
+      "/api/pool": 200,
+      "/api/widget/sync": 200,
+      "/api/widget/pool": 200
+    },
+    "node": {
+      "blocks": 58583,
+      "headers": 58583,
+      "initialblockdownload": false,
+      "verificationprogress": 1.0,
+      "subversion": "/BitcoinII:31.1.0/",
+      "core31_full_reindex": {
+        "migration": "bitcoinii-shockwave-core31-full-reindex",
+        "required": false,
+        "started": true,
+        "complete": true,
+        "checkpoint_height": 57752,
+        "checkpoint_verified": true,
+        "chainwork_verified": true
+      },
+      "rollback_policy": {
+        "required": true,
+        "installed": true,
+        "minimum_base_version": "0.1.10",
+        "minimum_5tratumos_version": "0.7.11"
+      }
+    },
+    "node_and_pool_configuration_preserved": true,
+    "block_file_preserved": true,
+    "umbrel_setting_change": "autoStart enabled by normal update",
+    "initial_upgrade_reindexed": true,
+    "repeat_reindex_after_restart": false,
+    "native_build_json_bind_present": false,
+    "payout_configured": false,
+    "actual_mining_tested": false,
+    "gui_interaction_tested": false
+  },
+  "compatibility_scope": "Live install/upgrade/authentication on Umbrel 2 amd64; both app architectures and legacy auth/platform contracts covered by automated checks. No live legacy Umbrel or physical arm64 host tested.",
+  "recipe_sha256": {
+    "exports.sh": "04a5074c6e421f182572c3af3ba9016f18bdba447d74ce2f85a256e84469b971",
+    "docker-compose.yml": "e9801286ca7a7c9badd35d277b00e3e897822b168ab5ff46f3e6b565df76bec5",
+    "docker-compose.yml.template": "26ac7d58164de7e150a44efdd2800a7f506fcde3d25790e44ac78890fec51018",
+    "hooks/umbrel-init": "bef7d8a9984c6ebdc0412337531186cf6d9b82ca0093e9e7c1b5a43cc3316897",
+    "hooks/umbrel-ckpool": "b278e5875b841b9e825a07c80066f92c365713f97726bfaa4d62361d2b6969ab"
+  },
+  "store_validation": {
+    "executor": "VM108 direct SSH",
+    "tests_passed": 44,
+    "result": "PASS",
+    "tested_archive_sha256": "c88a45a14430610452ff853fffc5f6175b4b1bd6727abb2e087e752a8bef77b2",
+    "functional_files_match_tested_archive": true,
+    "post_test_changes": "Release notes, compatibility documentation and evidence only"
+  }
+}

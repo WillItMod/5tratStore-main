@@ -73,6 +73,7 @@ class UmbrelPackagingTests(unittest.TestCase):
             self.assertEqual(services[service]["image"], accepted[service]["image"])
         self.assertEqual(services["app_proxy"]["environment"]["JWT_SECRET"], "test-only")
         self.assertEqual(services["app_proxy"]["environment"]["APP_HOST"], "axebc2-app")
+        self.assertEqual(services["app"]["hostname"], "axebc2-app")
         self.assertEqual(services["btc2d"]["depends_on"]["init"]["condition"], "service_completed_successfully")
         self.assertEqual(services["init"]["environment"]["AXEBC2_PLATFORM"], "umbrel")
         for service in services.values():
