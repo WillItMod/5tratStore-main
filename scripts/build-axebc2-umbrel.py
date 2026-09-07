@@ -38,11 +38,14 @@ def artifacts():
     # Umbrel 2 resolves declared hostnames, but not network aliases, when
     # registering its gateway. Retain the unique target used by legacy proxies.
     services["app"]["hostname"] = services["app_proxy"]["environment"]["APP_HOST"]
+    # Umbrel 1 patches names before envsubst replaces the entire Compose file.
+    # Preserve the names it uses to track containers after every template render.
+    for name, service in services.items():
+        service["container_name"] = "${APP_ID}_" + name + "_1"
     svc = services["init"]
-    svc["volumes"] = [v for v in svc["volumes"] if v["target"] != "/etc/5tratumos/build.json"]
-    for volume in svc["volumes"]:
-        if volume["target"] == "/opt/axebc2/init.sh":
-            volume["source"] = "${APP_DATA_DIR}/hooks/umbrel-init"
+    svc["configs"] = [c for c in svc["configs"] if c["source"] != "axebc2_build_metadata"]
+    del compose["configs"]["axebc2_build_metadata"]
+    compose["configs"]["axebc2_init"]["file"] = "${APP_DATA_DIR}/hooks/umbrel-init"
     svc["environment"]["AXEBC2_PLATFORM"] = "umbrel"
     svc["command"] = ["/bin/sh", "/opt/axebc2/init.sh"]
     # No shell program is embedded in an envsubst template: unexported local
@@ -50,11 +53,8 @@ def artifacts():
     pool = services["ckpool"]
     pool_script = "#!/bin/sh\n" + generated + pool["entrypoint"][-1].replace("$$ARGS", "$ARGS") + "\n"
     pool["entrypoint"] = ["/bin/sh", "/opt/axebc2/ckpool-entrypoint.sh"]
-    pool["volumes"].append({
-        "type": "bind", "source": "${APP_DATA_DIR}/hooks/umbrel-ckpool",
-        "target": "/opt/axebc2/ckpool-entrypoint.sh", "read_only": True,
-        "bind": {"create_host_path": False},
-    })
+    pool["configs"] = [{"source": "axebc2_ckpool", "target": "/opt/axebc2/ckpool-entrypoint.sh"}]
+    compose["configs"]["axebc2_ckpool"] = {"file": "${APP_DATA_DIR}/hooks/umbrel-ckpool"}
     return {
         APP / "docker-compose.yml.template": generated + yaml.safe_dump(compose, sort_keys=False),
         APP / "hooks/umbrel-init": init,

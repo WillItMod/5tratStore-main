@@ -1,0 +1,107 @@
+{
+  "version": "0.1.15",
+  "channel": "main",
+  "package_version": "0.1.15",
+  "app_source_revision": "ebe054d14c1b42df5dd69d2e63f19315cdf09d59",
+  "app_image": "ghcr.io/willitmod/axebc2-app:0.1.15",
+  "digest": "sha256:0a7110d55a538ce9d5352b8617a89cd83a548151b5eed2486b13495c06a5c65d",
+  "candidate": "ghcr.io/willitmod/axebc2-app-umbrel-dev:0.1.15-candidate.ebe054d14c1b",
+  "platforms": {
+    "linux/amd64": "sha256:cf90167894f805e00122d0ad1aeb6fbcdfe92946c9f02d4a41aa47a4e0d21ddc",
+    "linux/arm64": "sha256:c13e940463acaae2f88c2849ed5228acd8425bcdc821ca2e2a6f0f1dbdcb0969"
+  },
+  "application_tests": {
+    "local_passed": 51,
+    "vm108_passed": 51
+  },
+  "build_execution": "direct SSH VM108; no GitHub Actions",
+  "provenance": true,
+  "sbom": true,
+  "promotion_rebuilt_image": false,
+  "promotion_manifest_and_attestations_byte_identical": true,
+  "anonymous_final_image_pulls_both_architectures": true,
+  "original_failure": {
+    "platform": "Umbrel 1.7.4",
+    "package": "MAIN 0.1.14",
+    "error": "TypeError: volume?.replace is not a function",
+    "phase": "App.patchComposeFile before image downloads or template rendering"
+  },
+  "packaging_changes": [
+    "Short service volume strings backed by project-scoped local-driver bind volumes with nocopy",
+    "File-backed read-only Compose configs reject missing source files",
+    "Generated Umbrel template retains expected APP_ID_service_1 container names"
+  ],
+  "native_contract": {
+    "effective_mounts_preserved": 9,
+    "minimum_5tratumos_version": "0.7.12",
+    "initializer_unchanged": true,
+    "core_and_ckpool_images_unchanged": true,
+    "missing_source_rejection": true,
+    "readonly_file_and_directory_write_rejection": true
+  },
+  "store_validation": {
+    "executor": "VM108 direct SSH",
+    "result": "PASS",
+    "tests_run": 49,
+    "tests_passed": 48,
+    "tests_skipped": 1,
+    "skip_reason": "Optional adjacent live 5tratumOS checkout absent on builder; pinned installer contract still tested; MAIN live checkout check passed locally",
+    "real_docker_mount_tests_passed": 3,
+    "source_hashes_verified": true,
+    "post_test_changes": "Compatibility documentation and this release evidence only"
+  },
+  "runtime_checks": {
+    "umbrel_version": "1.7.4",
+    "platform": "linux/amd64",
+    "tested_channel": "MAIN",
+    "repaired_install_version": "0.1.14",
+    "upgrade_version": "0.1.15",
+    "normal_install_api": true,
+    "normal_update_api": true,
+    "normal_stop_start_api": true,
+    "vm_reboot_autostart": true,
+    "unauthenticated_http": 302,
+    "authenticated_ui_http": 200,
+    "display_version_verified": "0.1.15",
+    "authenticated_api_http": {
+      "/api/node": 200,
+      "/api/pool": 200,
+      "/api/about": 200,
+      "/api/widget/sync": 200,
+      "/api/widget/pool": 200
+    },
+    "node": {
+      "blocks": 58622,
+      "headers": 58622,
+      "initialblockdownload": false,
+      "verificationprogress": 1.0,
+      "subversion": "/BitcoinII:31.1.0/",
+      "core31_full_reindex": {
+        "migration": "bitcoinii-shockwave-core31-full-reindex",
+        "required": false,
+        "started": true,
+        "complete": true,
+        "checkpoint_height": 57752,
+        "checkpoint_verified": true,
+        "chainwork_verified": true
+      }
+    },
+    "node_and_pool_configuration_preserved": true,
+    "block_file_preserved": true,
+    "rollback_policy_and_migration_marker_preserved": true,
+    "repeat_reindex_after_upgrade_or_reboot": false,
+    "payout_configured": false,
+    "actual_mining_tested": false,
+    "gui_interaction_tested": false
+  },
+  "compatibility_scope": "Live MAIN install, upgrade, owner authentication, node sync and reboot on Umbrel 1.7.4 amd64. Both channels passed automated install/start/update parser, strict Docker mount and native installer contract checks. Both app architectures passed runtime smoke tests. No physical arm64 host, separate live DEV install, new live Umbrel 2 validation or mining/share submission in this release.",
+  "recipe_sha256": {
+    "umbrel-app.yml": "1f7b4719e76ecd50335c45db74b86db39c29bb4e67511241073073c1d4618a43",
+    "exports.sh": "04a5074c6e421f182572c3af3ba9016f18bdba447d74ce2f85a256e84469b971",
+    "docker-compose.yml": "0d2a0a4e9a21abaf8e6770991d7bf9c6d231941edbaafb8debdc12636c601a59",
+    "docker-compose.yml.template": "d5b67eb5fd8911b68b008853f25aa4a9997ec42ede667417fd1f44df06243af1",
+    "hooks/umbrel-init": "bef7d8a9984c6ebdc0412337531186cf6d9b82ca0093e9e7c1b5a43cc3316897",
+    "hooks/umbrel-ckpool": "b278e5875b841b9e825a07c80066f92c365713f97726bfaa4d62361d2b6969ab",
+    "data/init/init.sh": "1d7d01b96f80779a834e70975d2187dc650ad693807becc113e8573ae727fc31"
+  }
+}

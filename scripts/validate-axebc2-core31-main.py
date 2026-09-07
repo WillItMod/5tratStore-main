@@ -11,6 +11,7 @@ import tempfile
 import unittest
 import argparse
 from axebc2_release_state import validate as validate_release_state
+from axebc2_mount_contract import effective_mounts
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -30,7 +31,7 @@ manifest = (APP / "umbrel-app.yml").read_text(encoding="utf-8")
 node_config = (APP / "data/templates/bitcoinII.conf.template").read_text(encoding="utf-8")
 
 # Application and package versions align; Core and pool images retain their accepted pins.
-require('version: "0.1.14"' in manifest, "manifest must be stable 0.1.14")
+require('version: "0.1.15"' in manifest, "manifest must be stable 0.1.15")
 require('id: willitmod-dev-bc2' in manifest, "stable store identity must remain unchanged")
 require('APP_CHANNEL: "MAIN"' in compose, "stable app channel must be MAIN")
 require('APP_VERSION_SUFFIX: ""' in compose, "stable app must have no DEV suffix")
@@ -45,7 +46,6 @@ require("does not trigger another blockchain reindex" in manifest, "release note
 require("on 5tratumOS, version 0.7.12 or newer is required" in manifest, "OS prerequisite must be disclosed")
 require('"2345:3333/tcp"' in compose, "Stratum host port 2345 must be retained")
 require("SUPPORT_CHECKIN_ENABLED: \"false\"" in compose, "telemetry must default off")
-require("create_host_path: false" in compose, "build metadata bind must fail closed")
 require("/etc/5tratumos/build.json" in compose, "build metadata must be mounted")
 require('JWT_SECRET: "${JWT_SECRET}"' in compose, "init must receive the platform JWT secret")
 require(
@@ -94,10 +94,6 @@ require(
 require("natpmp=0" in node_config and "upnp=1" not in node_config, "NAT-PMP must be off")
 require(not re.search(r'^\s+-\s+"?8338:', compose, re.MULTILINE), "P2P must not be published")
 
-require(
-    compose.count("create_host_path: false") == 9,
-    "every AxeBC2 host bind must disable implicit source-path creation",
-)
 
 
 def yaml_python():
@@ -150,15 +146,15 @@ with open(sys.argv[2], 'w', encoding='utf-8') as handle:
         rendered_contract = contract.materialize_compose(
             json.loads(parsed.read_text(encoding="utf-8")), 21219
         )
-        declared_bind_targets = []
-        for service_name, service in rendered_contract["services"].items():
-            for volume in service.get("volumes", []):
-                if volume.get("type") == "bind":
-                    require(
-                        volume.get("bind", {}).get("create_host_path") is False,
-                        "platform-merged Compose contains an implicit host-path bind",
-                    )
-                    declared_bind_targets.append((service_name, volume.get("target")))
+        try:
+            declared_mounts = effective_mounts(rendered_contract)
+        except ValueError as exc:
+            raise SystemExit(str(exc))
+        require(len(declared_mounts) == 9, "the nine accepted native host mounts must remain")
+        require(
+            ("init", "/etc/5tratumos/build.json", "/etc/5tratumos/build.json", True) in declared_mounts,
+            "native metadata must remain an exact-path read-only file mount",
+        )
         merged.write_text(json.dumps(rendered_contract), encoding="utf-8")
         env = os.environ.copy()
         env.update(
@@ -202,24 +198,19 @@ with open(sys.argv[2], 'w', encoding='utf-8') as handle:
             == "service_completed_successfully",
             "Core must wait for successful init completion",
         )
-        # Compose releases differ in whether ``false`` boolean fields survive
-        # JSON serialization. The materialized contract above must declare the
-        # fail-closed value; the CLI output may omit it, but must never turn it
-        # on or change the declared bind set.
-        rendered_bind_targets = []
-        for service_name, service in services.items():
-            for volume in service.get("volumes", []):
-                if volume.get("type") == "bind":
-                    rendered_bind_targets.append((service_name, volume.get("target")))
-                    create_host_path = volume.get("bind", {}).get("create_host_path")
-                    require(
-                        create_host_path is None or create_host_path is False,
-                        "Docker Compose enabled or malformed implicit host-path creation",
-                    )
-        require(
-            sorted(rendered_bind_targets) == sorted(declared_bind_targets),
-            "Docker Compose changed the platform-declared host binds",
+        try:
+            rendered_mounts = effective_mounts(rendered)
+        except ValueError as exc:
+            raise SystemExit(str(exc))
+        expected_mounts = sorted(
+            (service, source.replace("${APP_DATA_DIR}", str(app_data)), target, readonly)
+            for service, source, target, readonly in declared_mounts
         )
+        require(
+            rendered_mounts == expected_mounts,
+            "Docker Compose changed the exact host sources, targets, or write permissions",
+        )
+
 
 
 validate_platform_merged_compose()

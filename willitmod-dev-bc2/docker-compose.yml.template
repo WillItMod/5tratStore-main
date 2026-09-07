@@ -8,30 +8,16 @@ services:
       JWT_SECRET: ${JWT_SECRET}
     networks:
     - umbrel_main_network
+    container_name: ${APP_ID}_app_proxy_1
   init:
+    configs:
+    - source: axebc2_init
+      target: /opt/axebc2/init.sh
     image: alpine:3.22.1@sha256:4bcff63911fcb4448bd4fdacec207030997caf25e9bea4045fa6c8c44de311d1
     volumes:
-    - type: bind
-      source: ${APP_DATA_DIR}/data
-      target: /data
-      bind:
-        create_host_path: false
-    - type: bind
-      source: ${APP_DATA_DIR}
-      target: /appdata
-      bind:
-        create_host_path: false
-    - type: bind
-      source: ${APP_DATA_DIR}/data/templates
-      target: /data/templates
-      bind:
-        create_host_path: false
-    - type: bind
-      source: ${APP_DATA_DIR}/hooks/umbrel-init
-      target: /opt/axebc2/init.sh
-      read_only: true
-      bind:
-        create_host_path: false
+    - axebc2_data:/data:nocopy
+    - axebc2_appdata:/appdata:nocopy
+    - axebc2_templates:/data/templates:nocopy
     environment:
       JWT_SECRET: ${JWT_SECRET}
       APPS_SUBNET: ${NETWORK_IP}/16
@@ -45,6 +31,7 @@ services:
     command:
     - /bin/sh
     - /opt/axebc2/init.sh
+    container_name: ${APP_ID}_init_1
   btc2d:
     image: ghcr.io/willitmod/bitcoinii-core:31.1.0@sha256:8875917ece57668fe9925d40a256ce8d429a3071511bb555d4ace1fa4370afc6
     user: 1000:1000
@@ -54,11 +41,8 @@ services:
       init:
         condition: service_completed_successfully
     volumes:
-    - type: bind
-      source: ${APP_DATA_DIR}/data/node
-      target: /data
-      bind:
-        create_host_path: false
+    - axebc2_node:/data:nocopy
+    container_name: ${APP_ID}_btc2d_1
   ckpool:
     image: ghcr.io/willitmod/docker-ckpool-solo:590fb2a@sha256:8a9a7f10c8138d0f55533132ee7710a06715a42a49f75efb39be3350ada4fa6e
     user: 1000:1000
@@ -71,28 +55,17 @@ services:
     ports:
     - 2345:3333/tcp
     volumes:
-    - type: bind
-      source: ${APP_DATA_DIR}/data/pool/config
-      target: /config
-      read_only: true
-      bind:
-        create_host_path: false
-    - type: bind
-      source: ${APP_DATA_DIR}/data/pool/www
-      target: /www
-      bind:
-        create_host_path: false
-    - type: bind
-      source: ${APP_DATA_DIR}/hooks/umbrel-ckpool
-      target: /opt/axebc2/ckpool-entrypoint.sh
-      read_only: true
-      bind:
-        create_host_path: false
+    - axebc2_pool_config:/config:ro,nocopy
+    - axebc2_pool_www:/www:nocopy
     entrypoint:
     - /bin/sh
     - /opt/axebc2/ckpool-entrypoint.sh
+    container_name: ${APP_ID}_ckpool_1
+    configs:
+    - source: axebc2_ckpool
+      target: /opt/axebc2/ckpool-entrypoint.sh
   app:
-    image: ghcr.io/willitmod/axebc2-app:0.1.14@sha256:57903091f4b89c297e2adfd741eef834aed2b4ec4a1eee65d64000da770fa4ca
+    image: ghcr.io/willitmod/axebc2-app:0.1.15@sha256:0a7110d55a538ce9d5352b8617a89cd83a548151b5eed2486b13495c06a5c65d
     user: 1000:1000
     restart: on-failure
     stop_grace_period: 30s
@@ -108,11 +81,7 @@ services:
         aliases:
         - axebc2-app
     volumes:
-    - type: bind
-      source: ${APP_DATA_DIR}/data
-      target: /data
-      bind:
-        create_host_path: false
+    - axebc2_data:/data:nocopy
     environment:
       NETWORK_IP: ${NETWORK_IP}
       STATIC_DIR: /app/static
@@ -130,7 +99,50 @@ services:
       CKPOOL_LOG_PATH: /data/pool/www/ckpool.log
       CKPOOL_CONF_PATH: /data/pool/config/ckpool.conf
     hostname: axebc2-app
+    container_name: ${APP_ID}_app_1
 networks:
   umbrel_main_network:
     external: true
     name: umbrel_main_network
+volumes:
+  axebc2_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${APP_DATA_DIR}/data
+  axebc2_appdata:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${APP_DATA_DIR}
+  axebc2_templates:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${APP_DATA_DIR}/data/templates
+  axebc2_node:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${APP_DATA_DIR}/data/node
+  axebc2_pool_config:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${APP_DATA_DIR}/data/pool/config
+  axebc2_pool_www:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${APP_DATA_DIR}/data/pool/www
+configs:
+  axebc2_init:
+    file: ${APP_DATA_DIR}/hooks/umbrel-init
+  axebc2_ckpool:
+    file: ${APP_DATA_DIR}/hooks/umbrel-ckpool

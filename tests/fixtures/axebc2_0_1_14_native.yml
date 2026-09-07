@@ -1,3 +1,5 @@
+# Accepted MAIN recipe before the Umbrel 1.7.4 volume-parser repair.
+# Source: WillItMod/umbrel-community-store@258543a, willitmod-dev-bc2/docker-compose.yml
 version: "3.7"
 
 services:
@@ -10,17 +12,35 @@ services:
       - umbrel_main_network
 
   init:
-    # File configs are read-only bind mounts; Docker rejects missing sources.
-    configs:
-      - source: axebc2_build_metadata
-        target: /etc/5tratumos/build.json
-      - source: axebc2_init
-        target: /opt/axebc2/init.sh
     image: alpine:3.22.1@sha256:4bcff63911fcb4448bd4fdacec207030997caf25e9bea4045fa6c8c44de311d1
     volumes:
-      - "axebc2_data:/data:nocopy"
-      - "axebc2_appdata:/appdata:nocopy"
-      - "axebc2_templates:/data/templates:nocopy"
+      - type: bind
+        source: /etc/5tratumos/build.json
+        target: /etc/5tratumos/build.json
+        read_only: true
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ${APP_DATA_DIR}/data
+        target: /data
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ${APP_DATA_DIR}
+        target: /appdata
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ${APP_DATA_DIR}/data/templates
+        target: /data/templates
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ${APP_DATA_DIR}/data/init/init.sh
+        target: /opt/axebc2/init.sh
+        read_only: true
+        bind:
+          create_host_path: false
     environment:
       JWT_SECRET: "${JWT_SECRET}"
       APPS_SUBNET: "${NETWORK_IP}/16"
@@ -60,7 +80,11 @@ services:
       init:
         condition: service_completed_successfully
     volumes:
-      - "axebc2_node:/data:nocopy"
+      - type: bind
+        source: ${APP_DATA_DIR}/data/node
+        target: /data
+        bind:
+          create_host_path: false
 
   ckpool:
     image: ghcr.io/willitmod/docker-ckpool-solo:590fb2a@sha256:8a9a7f10c8138d0f55533132ee7710a06715a42a49f75efb39be3350ada4fa6e
@@ -74,8 +98,17 @@ services:
     ports:
       - "2345:3333/tcp"
     volumes:
-      - "axebc2_pool_config:/config:ro,nocopy"
-      - "axebc2_pool_www:/www:nocopy"
+      - type: bind
+        source: ${APP_DATA_DIR}/data/pool/config
+        target: /config
+        read_only: true
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ${APP_DATA_DIR}/data/pool/www
+        target: /www
+        bind:
+          create_host_path: false
     entrypoint:
       - /bin/sh
       - -ec
@@ -95,7 +128,7 @@ services:
         fi
 
   app:
-    image: ghcr.io/willitmod/axebc2-app:0.1.15@sha256:0a7110d55a538ce9d5352b8617a89cd83a548151b5eed2486b13495c06a5c65d
+    image: ghcr.io/willitmod/axebc2-app:0.1.14@sha256:57903091f4b89c297e2adfd741eef834aed2b4ec4a1eee65d64000da770fa4ca
     user: "1000:1000"
     restart: on-failure
     stop_grace_period: 30s
@@ -111,7 +144,11 @@ services:
         aliases:
           - axebc2-app
     volumes:
-      - "axebc2_data:/data:nocopy"
+      - type: bind
+        source: ${APP_DATA_DIR}/data
+        target: /data
+        bind:
+          create_host_path: false
     environment:
       NETWORK_IP: "${NETWORK_IP}"
       STATIC_DIR: "/app/static"
@@ -133,50 +170,3 @@ networks:
   umbrel_main_network:
     external: true
     name: umbrel_main_network
-
-# Umbrel 1.7.4 patches service.volumes as strings before rendering templates.
-# Local bind volumes preserve exact host paths and fail if a directory is absent.
-# nocopy prevents Docker from seeding image contents into these persistent paths.
-volumes:
-  axebc2_data:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: ${APP_DATA_DIR}/data
-  axebc2_appdata:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: ${APP_DATA_DIR}
-  axebc2_templates:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: ${APP_DATA_DIR}/data/templates
-  axebc2_node:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: ${APP_DATA_DIR}/data/node
-  axebc2_pool_config:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: ${APP_DATA_DIR}/data/pool/config
-  axebc2_pool_www:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: ${APP_DATA_DIR}/data/pool/www
-
-configs:
-  axebc2_build_metadata:
-    file: /etc/5tratumos/build.json
-  axebc2_init:
-    file: ${APP_DATA_DIR}/data/init/init.sh

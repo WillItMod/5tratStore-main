@@ -2,7 +2,7 @@ manifestVersion: 1
 id: willitmod-dev-bc2
 category: bitcoin
 name: AxeBC2
-version: "0.1.14"
+version: "0.1.15"
 tagline: BC2 node + solo pool
 description: >-
   STABLE RELEASE (MAIN CHANNEL)
@@ -43,6 +43,14 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
+  Fixes AxeBC2 installation, startup and updates on Umbrel 1.7.4. The package
+  now works with its storage parser and preserves the container names Umbrel
+  uses to track app health. Existing blockchain data, payout settings and
+  Core 31 migration records are preserved. Required files and directories
+  still fail closed when missing, and 5tratumOS retains its host version check.
+  The dashboard now displays 0.1.15; BitcoinII Core and CKPool are unchanged.
+
+  Included changes from 0.1.14:
   Fixes AxeBC2 installation failing near completion on Umbrel 2. The app now
   starts correctly when Umbrel uses its new built-in authentication gateway,
   while preserving authentication support for older Umbrel releases. The dashboard

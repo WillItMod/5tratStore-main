@@ -1,4 +1,4 @@
-import hashlib
+import copy
 import json
 import os
 from pathlib import Path
@@ -12,6 +12,8 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 APP = ROOT / "willitmod-dev-bc2"
+sys.path.insert(0, str(ROOT / "scripts"))
+from axebc2_mount_contract import effective_mounts
 
 
 class UmbrelPackagingTests(unittest.TestCase):
@@ -28,6 +30,7 @@ class UmbrelPackagingTests(unittest.TestCase):
             "AXEBC2_TEMPLATES_DIR": str(self.data / "templates"),
             "AXEBC2_TEST_SKIP_CHOWN": "true", "APP_DATA_DIR": str(self.root),
             "APP_PASSWORD": "test-only", "JWT_SECRET": "test-only",
+            "APP_ID": "willitmod-dev-bc2",
             "NETWORK_IP": "10.21.0.0", "APPS_SUBNET": "10.21.0.0/16",
             "RPC_USER": "btc2", "RPC_PASSWORD": "test-only",
             "BTC2_RPC_PORT": "8337", "BTC2_P2P_PORT": "8338",
@@ -48,13 +51,56 @@ class UmbrelPackagingTests(unittest.TestCase):
     def test_generated_artifacts_are_current(self):
         subprocess.run([sys.executable, str(ROOT / "scripts/build-axebc2-umbrel.py"), "--check"], check=True)
 
-    def test_5tratumos_recipe_changes_only_the_app_image(self):
-        source = (APP / "docker-compose.yml").read_text()
-        current = yaml.safe_load(source)["services"]["app"]["image"]
-        baseline = source.replace(current,
-            "ghcr.io/willitmod/axebc2-app:0.1.11@sha256:23a7962e223da5549eba52697c6f4cfa16ab74cba935c68c48148a4c515302b4")
-        self.assertEqual(hashlib.sha256(baseline.encode()).hexdigest(),
-                         "367b7ff11bf3021b56feaa239c65aedd9e9cf4fbaeedcb3172d4cd6adbbdcd2e")
+    def test_native_container_contract_preserves_the_accepted_recipe(self):
+        baseline = yaml.safe_load((ROOT / "tests/fixtures/axebc2_0_1_14_native.yml").read_text())
+        current = yaml.safe_load((APP / "docker-compose.yml").read_text())
+        self.assertEqual(effective_mounts(current), effective_mounts(baseline))
+        self.assertEqual(len(effective_mounts(current)), 9)
+        self.assertTrue(all("name" not in definition for definition in current["volumes"].values()))
+        # Compare every non-mount service setting with the accepted recipe. The
+        # application image may advance independently; node/pool pins may not.
+        for config in (baseline, current):
+            config.pop("volumes", None)
+            config.pop("configs", None)
+            for service in config["services"].values():
+                service.pop("volumes", None)
+                service.pop("configs", None)
+            config["services"]["app"]["image"] = "application-release-image"
+        self.assertEqual(current, baseline)
+
+    def patch_like_umbrel_174(self, compose, expected=0):
+        result = subprocess.run(
+            ["node", str(ROOT / "tests/fixtures/umbrel_1_7_4_patch_compose.cjs")],
+            input=json.dumps({"compose": compose, "id": self.env["APP_ID"]}),
+            text=True, capture_output=True,
+        )
+        self.assertEqual(result.returncode, expected, result.stderr)
+        return json.loads(result.stdout) if result.returncode == 0 else result.stderr
+
+    def rendered_template(self):
+        return yaml.safe_load(subprocess.check_output(
+            ["envsubst"], input=(APP / "docker-compose.yml.template").read_text(),
+            env=self.env, text=True,
+        ))
+
+    def test_umbrel_174_preflight_catches_original_failure(self):
+        old = yaml.safe_load((ROOT / "tests/fixtures/axebc2_0_1_14_native.yml").read_text())
+        self.assertIn("replace is not a function", self.patch_like_umbrel_174(old, expected=1))
+
+    def test_umbrel_174_install_start_and_update_preflights(self):
+        native = yaml.safe_load((APP / "docker-compose.yml").read_text())
+        # install: app.ts patches the shipped recipe before legacy envsubst.
+        self.patch_like_umbrel_174(copy.deepcopy(native))
+        installed = self.rendered_template()
+        for name, service in installed["services"].items():
+            self.assertEqual(service["container_name"], f"willitmod-dev-bc2_{name}_1")
+        self.assertEqual(len(effective_mounts(installed)), 9)
+        # start: app.ts patches the installed template result, then rerenders it.
+        self.patch_like_umbrel_174(copy.deepcopy(installed))
+        self.assertEqual(self.rendered_template(), installed)
+        # update: pre-patch-update renders the replacement template first.
+        self.patch_like_umbrel_174(copy.deepcopy(self.rendered_template()))
+        self.assertEqual(self.rendered_template(), installed)
 
     def test_umbrel_envsubst_and_compose_keep_pins_and_auth_without_os_bind(self):
         rendered = subprocess.check_output(["envsubst"], input=(APP / "docker-compose.yml.template").read_text(),
@@ -76,11 +122,13 @@ class UmbrelPackagingTests(unittest.TestCase):
         self.assertEqual(services["app"]["hostname"], "axebc2-app")
         self.assertEqual(services["btc2d"]["depends_on"]["init"]["condition"], "service_completed_successfully")
         self.assertEqual(services["init"]["environment"]["AXEBC2_PLATFORM"], "umbrel")
-        for service in services.values():
-            for volume in service.get("volumes", []):
-                if volume["type"] == "bind":
-                    self.assertFalse(volume.get("bind", {}).get("create_host_path", False))
-                    self.assertTrue(Path(volume["source"]).exists(), volume)
+        expected_mounts = effective_mounts(config)
+        self.assertEqual(effective_mounts(json.loads(result.stdout)), expected_mounts)
+        for name, service in services.items():
+            self.assertEqual(service["container_name"], f"willitmod-dev-bc2_{name}_1")
+        self.assertIn(("ckpool", str(self.root / "hooks/umbrel-ckpool"),
+                       "/opt/axebc2/ckpool-entrypoint.sh", True), expected_mounts)
+        self.assertIn(("ckpool", str(self.data / "pool/config"), "/config", True), expected_mounts)
 
     def test_fresh_umbrel_init_succeeds_without_5tratumos_metadata(self):
         self.run_init()

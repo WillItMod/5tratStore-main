@@ -6,10 +6,62 @@ The generated template uses `hooks/umbrel-init` and `hooks/umbrel-ckpool` as
 container entrypoints, so an older initializer preserved under `data/` cannot
 block an upgraded Umbrel installation.
 
-5tratumOS consumes `docker-compose.yml` directly. The native recipe changes only the app image pin;
-`data/init/init.sh` and the minimum OS check remain unchanged. The
+5tratumOS consumes `docker-compose.yml` directly. Its initializer
+`data/init/init.sh` retains the minimum OS check and migration safeguards. The
 Umbrel template needs no 5tratumOS host file and uses the same pinned app,
 Core 31, CKPool, and initialization images.
+
+## Umbrel 1.7.4 packaging repair — 0.1.15
+
+Umbrel 1.7.4 reads the shipped Compose file before its shell installer renders
+templates. Its `App.patchComposeFile()` treats every `service.volumes` entry as
+a string and calls `.replace()` on it. The long-form bind objects in the 0.1.14
+package therefore fail immediately, before image downloads or initialization.
+The same patch runs against a previously rendered file on start, and after
+template rendering during updates; both Compose forms must satisfy it.
+
+The 0.1.15 package keeps service volume entries as short strings backed by
+project-scoped local-driver bind volumes. Each volume still binds the exact
+existing host directory, and fails if that directory is missing. `nocopy`
+prevents Docker from populating those directories from image contents.
+Read-only file mounts use file-backed Compose configs, which reject missing
+source files instead of creating directories in their place. The native
+`/etc/5tratumos/build.json` mount remains read-only at the same container path.
+The Umbrel template omits that config and supplies its initializer and CKPool
+entrypoint through configs pointing to the refreshed `hooks/` files. The
+read-only CKPool config directory also retains its write protection.
+
+This changes mount representation; all nine effective native host mounts,
+container users, Core/CKPool pins, commands, dependency order, network behavior and
+persistent paths are preserved. The native initializer is unchanged, including
+the OS floor, Core 31 migration checks, payout preservation and rollback policy.
+The template declares the `${APP_ID}_<service>_1` container names that Umbrel
+1.7.4 expects, so rendering does not discard names inserted by its earlier patch.
+
+Regression tests execute the relevant 1.7.4 patch statements against both
+Compose forms in install/start/update order. The accepted 0.1.14 recipe fixture
+reproduces the original TypeError. A semantic comparison verifies the complete
+native container contract and mount permissions rather than blessing a new
+whole-file hash. The optional Docker tests exercise missing file/directory
+rejection and attempted writes to the read-only file and directory mounts:
+
+```sh
+AXEBC2_TEST_DOCKER_RUNTIME=1 python3 -m unittest discover -s tests -p 'test_axebc2_mount_runtime.py' -v
+```
+
+Run these tests on the Docker host with the pinned Alpine image already
+available. They create isolated temporary files, containers and project volumes,
+and clean them up afterwards. Live Umbrel 1.7.4 amd64 validation covered the
+repaired install, update to 0.1.15, normal stop/start, and VM reboot recovery.
+Authenticated dashboard/API access, full node sync, and preservation of node
+configuration, pool configuration, rollback policy and the completed Core 31
+migration marker were verified. The app image changes its displayed version
+only; BitcoinII Core and CKPool images are unchanged. No miners or payout
+address were configured, and no physical arm64 or new Umbrel 2 live test was run.
+See `RELEASE-0.1.15-EVIDENCE.json` for the exact release and validation scope.
+
+Upstream source:
+https://github.com/getumbrel/umbrel/blob/1.7.4/packages/umbreld/source/modules/apps/app.ts#L100-L219
 
 The generated Umbrel initializer retains migration-marker validation, reindex
 requirements, payout preservation, data ownership repair, and the persistent

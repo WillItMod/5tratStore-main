@@ -9,6 +9,10 @@ on:
       - "tests/test_axebc2_main_finalizer.py"
       - "tests/test_axebc2_release_state.py"
       - "tests/test_axebc2_umbrel.py"
+      - "tests/test_axebc2_mount_runtime.py"
+      - "tests/fixtures/axebc2_0_1_14_native.yml"
+      - "tests/fixtures/umbrel_1_7_4_patch_compose.cjs"
+      - "scripts/axebc2_mount_contract.py"
       - "scripts/build-axebc2-umbrel.py"
       - "tests/fixtures/5tratumos_contract_4f979cb.py"
       - "scripts/validate-axebc2-core31-main.py"
@@ -24,6 +28,10 @@ on:
       - "tests/test_axebc2_main_finalizer.py"
       - "tests/test_axebc2_release_state.py"
       - "tests/test_axebc2_umbrel.py"
+      - "tests/test_axebc2_mount_runtime.py"
+      - "tests/fixtures/axebc2_0_1_14_native.yml"
+      - "tests/fixtures/umbrel_1_7_4_patch_compose.cjs"
+      - "scripts/axebc2_mount_contract.py"
       - "scripts/build-axebc2-umbrel.py"
       - "tests/fixtures/5tratumos_contract_4f979cb.py"
       - "scripts/validate-axebc2-core31-main.py"
@@ -42,7 +50,7 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
       - name: Install test dependencies
-        run: sudo apt-get update && sudo apt-get install --yes gettext-base jq python3-yaml
+        run: sudo apt-get update && sudo apt-get install --yes gettext-base jq python3-yaml nodejs
 
       - name: Validate metadata and migration initialization
         run: |
