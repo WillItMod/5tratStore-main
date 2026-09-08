@@ -2,7 +2,7 @@ manifestVersion: 1
 id: willitmod-btc
 category: bitcoin
 name: AxeBTC
-version: "0.7.82.8"
+version: "0.7.82.11"
 tagline: BTC node + solo pool
 description: >-
   RC1 RELEASE
@@ -28,8 +28,9 @@ description: >-
     - Blockchains can carry arbitrary data (e.g. via `OP_RETURN`). That’s not unique to any one chain.
     - Set your payout address in the app Settings tab.
     - Pool settings apply automatically; miners may briefly reconnect after saving.
-    - On first launch you must pick Bitcoin Core vs Knots before sync starts.
-    - Switching Core/Knots triggers an in-app migration and can take a while; avoid restarting the app or powering off the host while it migrates.
+    - On first launch you choose Bitcoin Core, standard Knots, or the explicit BIP-110/RDTS Knots option.
+    - Core and standard Knots follow established Bitcoin. BIP-110/RDTS can follow a minority chain and requires a separate risk confirmation.
+    - RDTS chain data is isolated from the established-chain data. Switching implementations can take a while; avoid restarting or powering off while it migrates.
     - BTC payout addresses support bech32 (`bc1...`) and legacy (`1...` / `3...`). Bitcoin Cash CashAddr (`q...` / `p...`) is not supported.
 developer: WillItMod
 website: https://github.com/WillItMod/5tratStore-main
@@ -47,6 +48,11 @@ gallery:
 path: ""
 defaultUsername: ""
 defaultPassword: ""
+releaseNotes: >-
+  Adds an explicit optional BIP-110/RDTS Knots node profile with a prominent
+  risk warning and required acknowledgement. Bitcoin Core 30.3 and standard
+  Knots 29.3 remain established-chain choices. RDTS uses separate chain data,
+  preventing it from contaminating the normal Core/Knots chainstate.
 widgets:
   - id: "sync"
     type: "text-with-progress"
@@ -81,4 +87,7 @@ backupIgnore:
   - data/node/blocks
   - data/node/chainstate
   - data/node/indexes
+  - data/node-rdts/blocks
+  - data/node-rdts/chainstate
+  - data/node-rdts/indexes
 submitter: WillItMod
