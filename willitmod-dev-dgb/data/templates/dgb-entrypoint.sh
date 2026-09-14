@@ -60,11 +60,6 @@ fi
 heal_node_json /data/settings.json "DigiByte settings file"
 
 extra=""
-if [ -f /data/.reindex-chainstate ]; then
-  echo "[axedgb] Reindex requested (chainstate)."
-  rm -f /data/.reindex-chainstate || true
-  extra="-reindex-chainstate"
-fi
 
 prune="$(global_conf_value prune)"
 case "$prune" in
@@ -79,56 +74,6 @@ else
 fi
 extra="$extra -txindex=$txindex"
 
-dbcache="${DGB_DBCACHE_MB:-}"
-if [ -z "$dbcache" ] && [ -f /data/.dbcache_mb ]; then
-  raw="$(cat /data/.dbcache_mb 2>/dev/null | tr -d ' \t\r\n' || true)"
-  case "$raw" in
-    ""|auto|AUTO)
-      dbcache=""
-      ;;
-    *[!0-9]*)
-      echo "[axedgb] WARNING: invalid /data/.dbcache_mb value, ignoring"
-      dbcache=""
-      ;;
-    *)
-      dbcache="$raw"
-      ;;
-  esac
-fi
-
-if [ -z "$dbcache" ] && [ -r /proc/meminfo ]; then
-  mem_kb="$(awk '/^MemTotal:/ {print $2}' /proc/meminfo 2>/dev/null || true)"
-  avail_kb="$(awk '/^MemAvailable:/ {print $2}' /proc/meminfo 2>/dev/null || true)"
-  if [ -n "$mem_kb" ]; then
-    mem_mb="$((mem_kb / 1024))"
-    if [ "$mem_mb" -ge 15360 ]; then
-      dbcache="2048"
-    elif [ "$mem_mb" -ge 7680 ]; then
-      dbcache="1024"
-    else
-      dbcache="512"
-    fi
-  fi
-  if [ -n "$avail_kb" ]; then
-    avail_mb="$((avail_kb / 1024))"
-    if [ "$avail_mb" -lt 2048 ]; then
-      dbcache="512"
-    elif [ "$avail_mb" -lt 4096 ] && [ "${dbcache:-0}" -gt 1024 ]; then
-      dbcache="1024"
-    fi
-  fi
-fi
-
-if [ -n "$dbcache" ] && echo "$dbcache" | grep -Eq '^[0-9]+$'; then
-  if [ "$dbcache" -lt 512 ]; then
-    echo "[axedgb] WARNING: dbcache=$dbcache too low; clamping to 512MB minimum"
-    dbcache="512"
-  fi
-fi
-
-if [ -n "$dbcache" ]; then
-  extra="$extra -dbcache=$dbcache"
-fi
-
-echo "[axedgb] Exec: digibyted -datadir=/data -printtoconsole $extra"
-exec digibyted -datadir=/data -printtoconsole $extra
+# The supervisor selects the cache against the node's cgroup/host capacity,
+# measures the actual Core process and preserves memory pauses across restarts.
+exec python3 /usr/local/lib/axedgb/core_supervisor.py digibyted -datadir=/data -printtoconsole $extra
