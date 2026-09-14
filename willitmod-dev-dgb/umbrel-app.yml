@@ -2,17 +2,21 @@ manifestVersion: 1
 id: willitmod-dev-dgb
 category: altcoin
 name: AxeDGB
-version: "0.9.179"
+version: "0.9.181"
 tagline: DGB node + solo pool
 description: >-
   RC6 RELEASE
 
-  AxeDGB is functional and has successfully found blocks. This release makes
-  DigiByte Core startup progress visible, reduces peak RAM pressure on shared nodes,
-  and moves the node to Core 9.26.5, which fixes the long DigiDollar oracle startup
-  delay seen in 9.26.4.
+  AxeDGB is functional and has successfully found blocks. This update adds
+  actual Core RAM and swap measurements, conservative database-cache sizing, and
+  a configurable memory guard that shuts Core down cleanly and holds it paused
+  until resumed. Setup tools are bundled so installation no longer depends on
+  Alpine package mirrors at startup. Core remains at 9.26.5. Version 0.9.181 fixes
+  status-cache compatibility with the new Core supervisor image, avoiding
+  intermittent dashboard 503 errors during concurrent status requests.
 
-  Verify payout addresses before mining and send helpful feedback if anything behaves oddly.
+  Verify payout addresses before mining and send helpful feedback if anything
+  behaves oddly.
 
   Run a DigiByte full node (DigiByte Core) and an integrated solo Stratum v1 pool (Miningcore) as a single app.
 
@@ -36,7 +40,8 @@ description: >-
     - Payout address must be a legacy/base58 DigiByte address (starts with `D`/`S`). `dgb1...` payout is not supported yet.
     - Initial sync can take a long time and a lot of bandwidth/storage (the node downloads and validates the chain).
     - Like most chains, transactions may include arbitrary data; use at your own risk and comply with local laws.
-    - First sync and the first boot after some upgrades can be heavy on RAM and disk. SSD/NVMe storage is strongly recommended. 16GB is recommended; 8GB is the practical minimum.
+    - Mainnet startup is heavy on RAM and disk. A September 2026 test of the 24-million-block index peaked near 9 GiB of Core RAM with only 128 MiB of database cache. An 8 GiB Core budget did not complete startup. Use a 16 GB or larger host with enough RAM available for Core and the operating system; other node apps may need to be stopped. SSD/NVMe storage is strongly recommended.
+    - The memory budget is a soft shutdown guard, not a way to shrink the block index. Low budgets pause Core and require an explicit resume. Allow headroom above the observed Core usage; the requirement can grow with the chain.
     - Solo mining is extremely unlikely to find blocks without significant hashrate.
 
 
@@ -46,7 +51,7 @@ description: >-
 
 
   Status:
-    - RC6 build: expect minor bugs. Core 9.26.5 fixes the long DigiDollar startup delay without requiring a reindex. AxeDGB also avoids false rebuild warnings while Core is starting, and preserves existing blockchain data.
+    - RC6 build: expect minor bugs. Existing mainnet data loaded successfully in testing without a reindex. Core can still spend several minutes on index and oracle-history work, and RPC briefly became unavailable while finishing catch-up. Watch the measured activity and current startup stage before restarting. AxeDGB preserves existing blockchain data.
 developer: WillItMod
 website: https://github.com/WillItMod/5tratStore-main
 repo: https://github.com/WillItMod/5tratStore-main

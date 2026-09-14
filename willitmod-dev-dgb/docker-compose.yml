@@ -85,7 +85,7 @@ services:
         done
 
   init:
-    image: alpine:3.22.1
+    image: ghcr.io/willitmod/axedgb-init:0.9.181
     depends_on:
       init_permissions:
         condition: service_completed_successfully
@@ -122,7 +122,26 @@ services:
       - |-
         set -eu
 
-        apk add --no-cache envsubst curl jq postgresql-client >/dev/null
+        # Setup tools are included in the image; no package mirror is contacted.
+        mkdir -p /data/ui/state
+        init_phase="Checking bundled setup tools"
+        init_status() {
+          printf '{"state":"%s","phase":"%s","at":%s}\n' "$$1" "$$init_phase" "$$(date +%s)" > /data/ui/state/init_status.json.tmp
+          chmod 644 /data/ui/state/init_status.json.tmp
+          mv /data/ui/state/init_status.json.tmp /data/ui/state/init_status.json
+        }
+        init_failed() {
+          code=$$?
+          if [ "$$code" -ne 0 ]; then init_status failed; fi
+          exit "$$code"
+        }
+        trap init_failed EXIT
+        init_status running
+        for tool in envsubst curl jq psql pg_isready; do
+          command -v "$$tool" >/dev/null || { echo "[axedgb] Bundled setup tool missing: $$tool"; exit 1; }
+        done
+        init_phase="Preparing node and pool configuration"
+        init_status running
 
         # Persist JWT secret into ${APP_DATA_DIR}/.env so that SSH restarts
         # (without exports.sh) don't boot app_proxy with an empty JWT_SECRET.
@@ -208,11 +227,6 @@ services:
         heal_node_json /data/settings.json "DigiByte settings file"
 
         extra=""
-        if [ -f /data/.reindex-chainstate ]; then
-          echo "[axedgb] Reindex requested (chainstate)."
-          rm -f /data/.reindex-chainstate || true
-          extra="-reindex-chainstate"
-        fi
 
         prune="$$(global_conf_value prune)"
         case "$$prune" in
@@ -227,59 +241,9 @@ services:
         fi
         extra="$$extra -txindex=$$txindex"
 
-        dbcache="$${DGB_DBCACHE_MB:-}"
-        if [ -z "$$dbcache" ] && [ -f /data/.dbcache_mb ]; then
-          raw="$$(cat /data/.dbcache_mb 2>/dev/null | tr -d ' \t\r\n' || true)"
-          case "$$raw" in
-            ""|auto|AUTO)
-              dbcache=""
-              ;;
-            *[!0-9]*)
-              echo "[axedgb] WARNING: invalid /data/.dbcache_mb value, ignoring"
-              dbcache=""
-              ;;
-            *)
-              dbcache="$$raw"
-              ;;
-          esac
-        fi
-
-        if [ -z "$$dbcache" ] && [ -r /proc/meminfo ]; then
-          mem_kb="$$(awk '/^MemTotal:/ {print $$2}' /proc/meminfo 2>/dev/null || true)"
-          avail_kb="$$(awk '/^MemAvailable:/ {print $$2}' /proc/meminfo 2>/dev/null || true)"
-          if [ -n "$$mem_kb" ]; then
-            mem_mb="$$((mem_kb / 1024))"
-            if [ "$$mem_mb" -ge 15360 ]; then
-              dbcache="2048"
-            elif [ "$$mem_mb" -ge 7680 ]; then
-              dbcache="1024"
-            else
-              dbcache="512"
-            fi
-          fi
-          if [ -n "$$avail_kb" ]; then
-            avail_mb="$$((avail_kb / 1024))"
-            if [ "$$avail_mb" -lt 2048 ]; then
-              dbcache="512"
-            elif [ "$$avail_mb" -lt 4096 ] && [ "$${dbcache:-0}" -gt 1024 ]; then
-              dbcache="1024"
-            fi
-          fi
-        fi
-
-        if [ -n "$$dbcache" ] && echo "$$dbcache" | grep -Eq '^[0-9]+$$'; then
-          if [ "$$dbcache" -lt 512 ]; then
-            echo "[axedgb] WARNING: dbcache=$$dbcache too low; clamping to 512MB minimum"
-            dbcache="512"
-          fi
-        fi
-
-        if [ -n "$$dbcache" ]; then
-          extra="$$extra -dbcache=$$dbcache"
-        fi
-
-        echo "[axedgb] Exec: digibyted -datadir=/data -printtoconsole $$extra"
-        exec digibyted -datadir=/data -printtoconsole $$extra
+        # The supervisor selects the cache against the node's cgroup/host capacity,
+        # measures the actual Core process and preserves memory pauses across restarts.
+        exec python3 /usr/local/lib/axedgb/core_supervisor.py digibyted -datadir=/data -printtoconsole $$extra
         DGB_ENTRYPOINT
         chmod 755 /data/templates/dgb-entrypoint.sh || true
         chown 1000:1000 /data/templates/dgb-entrypoint.sh || true
@@ -932,10 +896,12 @@ services:
           chown 1000:1000 /data/pool/config/coins.json || true
         fi
 
+        init_phase="Preparing Miningcore database"
+        init_status running
         # Ensure Miningcore DB schema exists (poolstats etc). This is safe to re-run when missing.
         export PGPASSWORD="$$DB_PASSWORD"
         echo "[axedgb] Waiting for postgres..."
-        for i in $(seq 1 60); do
+        for i in $$(seq 1 60); do
           if pg_isready -h "$$DB_HOST" -p 5432 -U "$$DB_USER" >/dev/null 2>&1; then
             break
           fi
@@ -984,7 +950,7 @@ services:
               printf '\n'
             } > /data/templates/miningcore-createdb.sql
           fi
-          psql -v ON_ERROR_STOP=1 -h "$$DB_HOST" -p 5432 -U "$$DB_USER" -d "$$DB_NAME" < /data/templates/miningcore-createdb.sql >/dev/null
+          psql --single-transaction -v ON_ERROR_STOP=1 -h "$$DB_HOST" -p 5432 -U "$$DB_USER" -d "$$DB_NAME" < /data/templates/miningcore-createdb.sql >/dev/null
         fi
 
         # Add new columns when upgrading (safe to re-run).
@@ -1039,8 +1005,11 @@ services:
           psql -v ON_ERROR_STOP=1 -h "$$DB_HOST" -p 5432 -U "$$DB_USER" -d "$$DB_NAME" -c "INSERT INTO poolstats (poolid, connectedminers, poolhashrate, networkhashrate, networkdifficulty, lastnetworkblocktime, blockheight, connectedpeers, sharespersecond, created) VALUES ('dgb-sha256-1', 0, 0, 0, 0, NULL, 0, 0, 0, NOW());" >/dev/null
         fi
 
+        init_phase="Setup complete"
+        init_status ready
+
   dgbd:
-    image: ghcr.io/willitmod/digibyte:9.26.5
+    image: ghcr.io/willitmod/axedgb-core:0.9.181
     user: "1000:1000"
     restart: unless-stopped
     stop_grace_period: 15m30s
@@ -1096,7 +1065,7 @@ services:
       - ${APP_DATA_DIR}/data/pool/config/coins.json:/app/coins.json:ro
 
   app:
-    image: ghcr.io/willitmod/axedgb-app:0.9.179
+    image: ghcr.io/willitmod/axedgb-app:0.9.181
     user: "1000:1000"
     restart: on-failure
     stop_grace_period: 30s
@@ -1134,7 +1103,7 @@ services:
       WORKER_ACTIVE_SECONDS: "300"
       APP_CHANNEL: "RC6"
       APP_VERSION_SUFFIX: ""
-      DGB_IMAGE: "ghcr.io/willitmod/digibyte:9.26.5"
+      DGB_IMAGE: "ghcr.io/willitmod/axedgb-core:0.9.181"
       MININGCORE_IMAGE: "ghcr.io/willitmod/axedgb-miningcore:axedgb-0.8.10-r26"
       POSTGRES_IMAGE: "postgres:16-alpine"
       STATIC_DIR: "/app/static"

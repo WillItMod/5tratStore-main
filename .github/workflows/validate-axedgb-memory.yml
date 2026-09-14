@@ -1,0 +1,13 @@
+name: Validate AxeDGB memory packaging
+on:
+  pull_request:
+    paths: ["willitmod-dev-dgb/**", "tests/test_axedgb_memory_package.py", ".github/workflows/validate-axedgb-memory.yml"]
+  push:
+    paths: ["willitmod-dev-dgb/**", "tests/test_axedgb_memory_package.py", ".github/workflows/validate-axedgb-memory.yml"]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 -m pip install PyYAML
+      - run: python3 -m unittest discover -s tests -p test_axedgb_memory_package.py -v
