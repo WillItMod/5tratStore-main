@@ -2,7 +2,12 @@ manifestVersion: 1
 id: willitmod-dev-powpow
 category: altcoin
 name: "PowPow"
-version: "0.2.31"
+version: "0.2.32"
+releaseNotes: >-
+  Upgrades the bundled Litecoin node from Litecoin Core 0.21.4 to 0.21.5.8,
+  including upstream security, MWEB validation, and mining fixes for the
+  consensus rule activated at block 3,172,640. AMD64 and ARM64 release archives are
+  verified against pinned SHA-256 checksums. Existing chain data is retained.
 tagline: LTC + DOGE merged mining
 description: >-
   RC1 RELEASE

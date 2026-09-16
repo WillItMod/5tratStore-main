@@ -41,7 +41,7 @@ services:
     volumes:
       - ${APP_DATA_DIR}/data:/data
     environment:
-      APP_VERSION: "0.2.31"
+      APP_VERSION: "0.2.32"
       APP_CHANNEL: "RC1"
       NETWORK_HOST_HINT: "${NETWORK_IP}"
       POOL_API_URL: "http://pool:8001"
@@ -54,7 +54,7 @@ services:
       start_period: 90s
 
   litecoin:
-    image: ghcr.io/willitmod/powpow-litecoin:0.2.26
+    image: ghcr.io/willitmod/powpow-litecoin:0.2.32
     restart: unless-stopped
     depends_on:
       init_permissions:
