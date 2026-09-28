@@ -2,10 +2,10 @@ manifestVersion: 1
 id: willitmod-dev-fracattack
 category: bitcoin
 name: FracAttack
-version: "0.1.5"
+version: "0.1.6"
 tagline: Fractal node + solo pool
 description: >-
-  RC1 RELEASE
+  MAIN CHANNEL
 
   FracAttack is a Fractal Bitcoin (FB) node + solo pool app. It is being built
   for standalone Fractal solo mining first, with a future AxeBTC merged-mining
