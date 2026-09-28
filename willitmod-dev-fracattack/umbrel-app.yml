@@ -2,10 +2,10 @@ manifestVersion: 1
 id: willitmod-dev-fracattack
 category: bitcoin
 name: FracAttack
-version: "0.1.4"
+version: "0.1.6"
 tagline: Fractal node + solo pool
 description: >-
-  RC1 RELEASE
+  MAIN CHANNEL
 
   FracAttack is a Fractal Bitcoin (FB) node + solo pool app. It is being built
   for standalone Fractal solo mining first, with a future AxeBTC merged-mining
@@ -49,10 +49,16 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Workers using either coin-prefixed or prefixless payout usernames now appear
-  as one combined worker entry in the app and Fleet Dashboard APIs. Hashrate,
-  shares and best-share data are merged without double-counting duplicate
-  worker names.
+  Required Fractal mining compatibility update: the bundled Fractal node is
+  upgraded to v0.4.0 and applies the additional subsidy halving activated at
+  block 2,100,000. Older nodes could build overpaying mining jobs and accept
+  blocks locally that do not earn rewards on the upgraded network. Existing
+  chain data, payout settings and pool configuration are retained.
+
+  Block history now distinguishes unverified, orphaned, immature and mature
+  blocks, refreshes chain status after reorganisations, and opens the Fractal
+  explorer. Updating cannot recover rewards for blocks outside the accepted
+  chain. Check that the node is synced before resuming mining.
 widgets:
   - id: "sync"
     type: "text-with-progress"
