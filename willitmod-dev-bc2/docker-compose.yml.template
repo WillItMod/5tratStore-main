@@ -65,7 +65,7 @@ services:
     - source: axebc2_ckpool
       target: /opt/axebc2/ckpool-entrypoint.sh
   app:
-    image: ghcr.io/willitmod/axebc2-app-umbrel-dev:0.1.18-mux.8eae6c37ef92@sha256:a70084e5e6897fba03bf5051a031b045deb48c51bdf54b64834b33c45aeed0cb
+    image: ghcr.io/willitmod/axebc2-app-umbrel-dev:0.1.18-mux.8164f42cc1ab@sha256:df461e0c507d8d863256d96d8653c9f49585a39aed6f83e8ad3976c6c42fea4d
     user: 1000:1000
     restart: on-failure
     stop_grace_period: 30s
