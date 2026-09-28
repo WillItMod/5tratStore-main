@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "description": "MAIN candidate packaging for the same verified native images; node and independent package acceptance remain pending. No publication authorized by this record.",
   "baselineCommit": "7bf351859c5a29c99fbd6bcf7ade79c3f54f39d0",
-  "devSourceCommit": "e349e242ede62508c9f11999df12dc4ce0e6b42e",
-  "imageEvidenceSha256": "4365cba1b7d4367c81380c5023a8f617cf43d18a9df5b8779c822d8c73c9bee7",
+  "devSourceCommit": "4b11a804082b52189b82ca9753bd14e90e7be650",
+  "imageEvidenceSha256": "b8c794a2d4ac4644f2e5ca87ac6b12d00c20855fbbc34b4cbdf990de2fc837f8",
   "apps": {
     "willitmod-btc": {
       "sourceRevision": "6202831bba65f2651fa5ef25d672137acfb6df58",
@@ -438,16 +438,16 @@
       ]
     },
     "willitmod-dev-powpow": {
-      "sourceRevision": "e5ce6530186b2c6749ed62b54e537932a2cd1fd2",
-      "imageRef": "ghcr.io/willitmod/powpow-app:0.2.36-mux.e5ce6530186b@sha256:a4cbc9f32170c638b8ef0d80811f6518b00cd66e734bd500129c86ae036c9c28",
+      "sourceRevision": "a1cc15f97ffe375a558d1eda5901df470c6cb59f",
+      "imageRef": "ghcr.io/willitmod/powpow-app:0.2.36-mux.a1cc15f97ffe@sha256:fb959f6ea49e5fcd4f4155ae7e678cc91ec59daf8b6c6bee3dc43fd7aeff5572",
       "version": "0.2.36",
-      "buildRun": "https://github.com/WillItMod/PowPow_Build/actions/runs/36462295651",
+      "buildRun": "https://github.com/WillItMod/PowPow_Build/actions/runs/36480713402",
       "platforms": [
         "linux/amd64",
         "linux/arm64"
       ],
-      "poolImageRef": "ghcr.io/willitmod/powpow-pool:0.2.36-mux.e5ce6530186b@sha256:56c1995f85816ee0ed5da2c267a1d4f650d4b50c656062d0bc6090d697a216d0",
-      "poolSourceRevision": "e5ce6530186b2c6749ed62b54e537932a2cd1fd2",
+      "poolImageRef": "ghcr.io/willitmod/powpow-pool:0.2.36-mux.a1cc15f97ffe@sha256:85c898ac406f7506daa8ca5be00ec68267e69770d99e502a690758490fbe8fc7",
+      "poolSourceRevision": "a1cc15f97ffe375a558d1eda5901df470c6cb59f",
       "baselineComposeSha256": "270ccd3eac6b901fa4141395547c73b29f7e3f3cfe65e0cdeb0d53a05ab73c86",
       "approvedRuntimeChanges": [
         {
@@ -490,7 +490,7 @@
             "image"
           ],
           "before": "ghcr.io/willitmod/powpow-app:0.2.31",
-          "after": "ghcr.io/willitmod/powpow-app:0.2.36-mux.e5ce6530186b@sha256:a4cbc9f32170c638b8ef0d80811f6518b00cd66e734bd500129c86ae036c9c28",
+          "after": "ghcr.io/willitmod/powpow-app:0.2.36-mux.a1cc15f97ffe@sha256:fb959f6ea49e5fcd4f4155ae7e678cc91ec59daf8b6c6bee3dc43fd7aeff5572",
           "existed": true
         },
         {
@@ -510,10 +510,40 @@
             "image"
           ],
           "before": "ghcr.io/willitmod/powpow-pool:0.2.31",
-          "after": "ghcr.io/willitmod/powpow-pool:0.2.36-mux.e5ce6530186b@sha256:56c1995f85816ee0ed5da2c267a1d4f650d4b50c656062d0bc6090d697a216d0",
+          "after": "ghcr.io/willitmod/powpow-pool:0.2.36-mux.a1cc15f97ffe@sha256:85c898ac406f7506daa8ca5be00ec68267e69770d99e502a690758490fbe8fc7",
           "existed": true
+        },
+        {
+          "path": [
+            "x-5tratumos-stop-policy"
+          ],
+          "before": null,
+          "after": {
+            "version": 1,
+            "services": {
+              "litecoin": {
+                "stop_signal": "SIGTERM",
+                "stop_grace_period": "15m30s",
+                "user": "1000:1000"
+              },
+              "dogecoin": {
+                "stop_signal": "SIGTERM",
+                "stop_grace_period": "15m30s",
+                "user": "1000:1000"
+              }
+            }
+          },
+          "existed": false
         }
-      ]
+      ],
+      "successorEvidence": {
+        "supersedesSourceRevision": "e5ce6530186b2c6749ed62b54e537932a2cd1fd2",
+        "candidateReceiptSha256": "0f173f73a284d638eda34ef3c4b970649e6c699da635e4404b6b73a159e3f8b8",
+        "registryVerified": true,
+        "nodeAcceptance": "pending",
+        "releasePublication": "pending",
+        "coreStopPolicyConsumer": "requires separately reviewed OS consumer; raw Compose Core services unchanged"
+      }
     },
     "willitmod-dev-fracattack": {
       "sourceRevision": "faf94ec42e795f1b2a63e5abeca524f2b7943696",

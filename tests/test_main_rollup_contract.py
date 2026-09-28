@@ -19,7 +19,12 @@ class MainRollupContractTests(unittest.TestCase):
                 allowed.update(('services','app','environment',key) for key in ('MUX_IDENTITY_URL','APP_CHANNEL','APP_VERSION_SUFFIX','APP_VERSION','APP_RELEASE_PHASE'))
                 if name=='willitmod-dev-axebch2':allowed.add(('services','init_permissions','command'))
                 if name=='willitmod-dev-ppc':allowed.update({('services','init','command'),('services','pool','init')})
-                if name=='willitmod-dev-powpow':allowed.add(('services','pool','image'))
+                if name=='willitmod-dev-powpow':
+                    allowed.update({('services','pool','image'),('x-5tratumos-stop-policy',)})
+                    self.assertEqual(current['x-5tratumos-stop-policy'], {
+                        'version': 1, 'services': {
+                            core: {'stop_signal': 'SIGTERM', 'stop_grace_period': '15m30s', 'user': '1000:1000'}
+                            for core in ('litecoin','dogecoin')}})
                 for change in record['approvedRuntimeChanges']:
                     path=change['path'];self.assertIn(tuple(path),allowed)
                     node=original
