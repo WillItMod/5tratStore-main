@@ -217,7 +217,8 @@ services:
       - ${APP_DATA_DIR}/data/pool/www:/www
 
   app:
-    image: ghcr.io/willitmod/axebch-app-umbrel-dev:0.9.18
+    stop_signal: "SIGINT"
+    image: ghcr.io/willitmod/axebch-app-umbrel-dev:0.9.22-mux.30b2044e9efb@sha256:a1f0c78c59b4649df6c4eae83381f4ee43f023982cd3611cc534d213d4c83553
     user: "1000:1000"
     restart: on-failure
     stop_grace_period: 30s
@@ -234,6 +235,7 @@ services:
     volumes:
       - ${APP_DATA_DIR}/data:/data
     environment:
+      MUX_IDENTITY_URL: "http://172.17.0.1:21222/api/integrations/workers"
       NETWORK_IP: "${NETWORK_IP}"
       BCH_RPC_HOST: "bchn"
       BCH_RPC_PORT: "28332"
@@ -242,7 +244,7 @@ services:
       CKPOOL_STATUS_DIR: "/data/pool/www/pool"
       CKPOOL_STRATUM_HOST: "ckpool"
       CKPOOL_STRATUM_PORT: "3333"
-      APP_CHANNEL: "RC1"
+      APP_CHANNEL: "MAIN"
       APP_VERSION_SUFFIX: ""
       BCHN_IMAGE: "ghcr.io/willitmod/bitcoin-cash-node:v29.0.0-wm3"
       CKPOOL_IMAGE: "ghcr.io/willitmod/wim-solo-ckpool:0.8.3-rc1-590fb2a"

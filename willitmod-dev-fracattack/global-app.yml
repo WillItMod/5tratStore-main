@@ -2,10 +2,10 @@ manifestVersion: 1
 id: willitmod-dev-fracattack
 category: bitcoin
 name: FracAttack
-version: "0.1.3"
+version: "0.1.8"
 tagline: Fractal node + solo pool
 description: >-
-  RC1 RELEASE
+  MAIN CHANNEL
 
   FracAttack is a Fractal Bitcoin (FB) node + solo pool app. It is being built
   for standalone Fractal solo mining first, with a future AxeBTC merged-mining
@@ -48,6 +48,21 @@ gallery:
 path: ""
 defaultUsername: ""
 defaultPassword: ""
+releaseNotes: >-
+  Current miner hash rate from 5tratMux appears separately from accepted-share
+  estimates, with stale or unavailable telemetry handled explicitly. Block
+  history checks the full block hash against the correct chain and refreshes
+  confirmation and reorganisation status before showing a confirmed find.
+  Unverified reports remain distinguishable from confirmed pool blocks.
+
+  Block alerts in this browser is a separate local preference. Recent verified
+  blocks queue across app tabs, with browser-only Close acknowledgements.
+  Reorgs or unavailable proof retract the alert without acknowledging it.
+  OS and MUX delivery and acknowledgements remain independently managed.
+
+  Retains Fractal Core v0.4.0 and the subsidy correction introduced in 0.1.6.
+  Maturity and orphan status remain visible. No live block find has yet qualified
+  this release; updating cannot recover rewards outside the accepted chain.
 widgets:
   - id: "sync"
     type: "text-with-progress"

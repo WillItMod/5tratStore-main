@@ -2,10 +2,10 @@ manifestVersion: 1
 id: willitmod-dev-bch
 category: bitcoin
 name: AxeBCH
-version: "0.9.17"
+version: "0.9.22"
 tagline: BCH node + solo pool
 description: >-
-  RC1 RELEASE
+  MAIN RELEASE
 
   AxeBCH is functional, has successfully found blocks, and has completed
   extended DEV-channel pool and node testing.
@@ -53,7 +53,7 @@ description: >-
 
 
   Status:
-    - RC1 build: verify payout addresses before mining and report unexpected behaviour.
+    - MAIN build: verify payout addresses before mining and report unexpected behaviour.
 developer: WillItMod
 website: https://github.com/WillItMod/5tratStore-main
 repo: https://github.com/WillItMod/5tratStore-main
@@ -69,6 +69,17 @@ gallery:
 path: ""
 defaultUsername: ""
 defaultPassword: ""
+releaseNotes: >-
+  Current miner hash rate from 5tratMux appears separately from accepted-share
+  estimates, with stale or unavailable telemetry handled explicitly. Block
+  history checks the full block hash against the correct chain and refreshes
+  confirmation and reorganisation status before showing a confirmed find.
+  Unverified reports remain distinguishable from confirmed pool blocks.
+
+  Block alerts in this browser is a separate local preference. Recent verified
+  blocks queue across app tabs, with browser-only Close acknowledgements.
+  Reorgs or unavailable proof retract the alert without acknowledging it.
+  OS and MUX delivery and acknowledgements remain independently managed.
 widgets:
   - id: "sync"
     type: "text-with-progress"

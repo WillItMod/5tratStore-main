@@ -25,7 +25,8 @@ services:
         chmod 700 /data/postgres || true
 
   app:
-    image: ghcr.io/willitmod/powpow-app:0.2.31
+    stop_signal: "SIGINT"
+    image: ghcr.io/willitmod/powpow-app:0.2.36-mux.e5ce6530186b@sha256:a4cbc9f32170c638b8ef0d80811f6518b00cd66e734bd500129c86ae036c9c28
     user: "1000:1000"
     restart: unless-stopped
     depends_on:
@@ -41,8 +42,9 @@ services:
     volumes:
       - ${APP_DATA_DIR}/data:/data
     environment:
-      APP_VERSION: "0.2.32"
-      APP_CHANNEL: "RC1"
+      MUX_IDENTITY_URL: "http://172.17.0.1:21222/api/integrations/workers"
+      APP_VERSION: "0.2.36"
+      APP_CHANNEL: "MAIN"
       NETWORK_HOST_HINT: "${NETWORK_IP}"
       POOL_API_URL: "http://pool:8001"
       POSTGRES_PASSWORD: "${APP_PASSWORD}"
@@ -84,7 +86,7 @@ services:
       start_period: 3m
 
   pool:
-    image: ghcr.io/willitmod/powpow-pool:0.2.31
+    image: ghcr.io/willitmod/powpow-pool:0.2.36-mux.e5ce6530186b@sha256:56c1995f85816ee0ed5da2c267a1d4f650d4b50c656062d0bc6090d697a216d0
     restart: unless-stopped
     depends_on:
       init_permissions:

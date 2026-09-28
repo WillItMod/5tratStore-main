@@ -20,11 +20,14 @@ services:
       - |-
         set -eu
         mkdir -p /data/ui/state /data/node /data/pool/config /data/pool/www/pool /data/pool/www/users
-        chown -R 1000:1000 /data/ui /data/node /data/pool || true
-        chmod -R ug+rwX /data/ui /data/node /data/pool || true
+        # Core owns /data/node as bch2:bch2. Changing a running Core's
+        # database ownership here prevents writes and can force a restart.
+        chown -R 1000:1000 /data/ui /data/pool || true
+        chmod -R ug+rwX /data/ui /data/pool || true
 
   app:
-    image: ghcr.io/willitmod/axebch2-app:0.2.0.3
+    stop_signal: "SIGINT"
+    image: ghcr.io/willitmod/axebch2-app:0.2.0.8-mux.63c55a8b82f7@sha256:bafbe07900479416b13d2090e45fc63183daadc26f404e4ff0fccd4244ce0366
     user: "1000:1000"
     restart: unless-stopped
     depends_on:
@@ -43,10 +46,11 @@ services:
       - ${APP_DATA_DIR}/data:/data
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
+      MUX_IDENTITY_URL: "http://172.17.0.1:21222/api/integrations/workers"
       APP_ID: "willitmod-dev-axebch2"
-      APP_VERSION: "0.2.0.3"
-      APP_CHANNEL: "RC1"
-      APP_RELEASE_PHASE: "RC"
+      APP_VERSION: "0.2.0.8"
+      APP_CHANNEL: "MAIN"
+      APP_RELEASE_PHASE: "STABLE"
       APP_SELF_RESTART_ENABLED: "1"
       APP_COMPOSE_PROJECT: "${COMPOSE_PROJECT_NAME}"
       NETWORK_IP: "${NETWORK_IP}"

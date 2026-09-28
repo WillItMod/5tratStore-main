@@ -2,10 +2,10 @@ manifestVersion: 1
 id: willitmod-dev-axebch2
 category: altcoin
 name: "AxeBCH2"
-version: "0.2.0.3"
+version: "0.2.0.8"
 tagline: BCH2 node + solo pool
 description: >-
-  RC1 RELEASE
+  MAIN RELEASE
 
   AxeBCH2 is functional, has successfully found blocks, and has completed
   extended DEV-channel node and solo-pool testing. Verify payout settings and
@@ -30,9 +30,19 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Corrects stale version metadata from 0.2.0.2 so the store, image, app UI, API
-  and support check-in now consistently report 0.2.0.3. Includes the worker
-  identity compatibility fix from the previous release.
+  Current miner hash rate from 5tratMux appears separately from accepted-share
+  estimates, with stale or unavailable telemetry handled explicitly. Block
+  history checks the full block hash against the correct chain and refreshes
+  confirmation and reorganisation status before showing a confirmed find.
+  Unverified reports remain distinguishable from confirmed pool blocks.
+
+  Block alerts in this browser is a separate local preference. Recent verified
+  blocks queue across app tabs, with browser-only Close acknowledgements.
+  Reorgs or unavailable proof retract the alert without acknowledging it.
+  OS and MUX delivery and acknowledgements remain independently managed.
+
+  Settings saves preserve existing file ownership and report permission errors accurately.
+  Existing Core data ownership and mining configuration are retained.
 widgets:
   - id: "sync"
     type: "text-with-progress"

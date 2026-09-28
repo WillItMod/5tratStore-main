@@ -1,0 +1,35 @@
+name: Validate MUX app packages
+on:
+  pull_request:
+    paths:
+      - "MAIN-NODE-ROLLUP-2026-09-28.json"
+      - "willitmod-btc/**"
+      - "willitmod-dev-*/docker-compose.yml*"
+      - "willitmod-dev-*/umbrel-app.yml"
+      - "willitmod-dev-*/global-app.yml"
+      - "tests/test_mux_app_packages.py"
+      - "tests/test_ppc_pool_lifecycle.py"
+      - "tests/test_main_rollup_contract.py"
+      - ".github/workflows/validate-mux-app-packages.yml"
+  push:
+    branches: [main]
+    paths:
+      - "MAIN-NODE-ROLLUP-2026-09-28.json"
+      - "willitmod-btc/**"
+      - "willitmod-dev-*/docker-compose.yml*"
+      - "willitmod-dev-*/umbrel-app.yml"
+      - "willitmod-dev-*/global-app.yml"
+      - "tests/test_mux_app_packages.py"
+      - "tests/test_ppc_pool_lifecycle.py"
+      - "tests/test_main_rollup_contract.py"
+      - ".github/workflows/validate-mux-app-packages.yml"
+permissions:
+  contents: read
+jobs:
+  validate-mux-packages:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - run: python3 -m pip install PyYAML==6.0.2
+      - run: sudo apt-get update && sudo apt-get install --yes gettext-base jq
+      - run: python3 -m unittest discover -s tests -v

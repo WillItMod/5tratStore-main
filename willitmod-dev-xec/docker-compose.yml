@@ -217,7 +217,8 @@ services:
       - ${APP_DATA_DIR}/data/pool/www:/www
 
   app:
-    image: ghcr.io/willitmod/axexec-app:0.1.17
+    stop_signal: "SIGINT"
+    image: ghcr.io/willitmod/axexec-app-umbrel-dev:0.1.21-mux.f29d53f02ff1@sha256:0d44709424b2edaae265c491e2cee658a7001379fdedb95c1577ec82b4422fd8
     user: "1000:1000"
     restart: on-failure
     stop_grace_period: 30s
@@ -234,13 +235,14 @@ services:
     volumes:
       - ${APP_DATA_DIR}/data:/data
     environment:
+      MUX_IDENTITY_URL: "http://172.17.0.1:21222/api/integrations/workers"
       NETWORK_IP: "${NETWORK_IP}"
       XEC_RPC_HOST: "xecd"
       XEC_RPC_PORT: "28337"
       XEC_RPC_USER: "xec"
       XEC_RPC_PASS: "${APP_PASSWORD}"
       CKPOOL_STATUS_DIR: "/data/pool/www/pool"
-      APP_CHANNEL: "RC1"
+      APP_CHANNEL: "MAIN"
       APP_VERSION_SUFFIX: ""
       XECD_IMAGE: "ghcr.io/willitmod/xecd-abc:0.33.4-nojemalloc-r1"
       CKPOOL_IMAGE: "ghcr.io/willitmod/ecash-ckpool-solo:18b38ad"
