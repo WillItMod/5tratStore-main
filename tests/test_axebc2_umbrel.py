@@ -57,8 +57,10 @@ class UmbrelPackagingTests(unittest.TestCase):
         self.assertEqual(effective_mounts(current), effective_mounts(baseline))
         self.assertEqual(len(effective_mounts(current)), 9)
         self.assertTrue(all("name" not in definition for definition in current["volumes"].values()))
+        self.assertEqual(current["services"]["app"]["environment"].pop("MUX_IDENTITY_URL"),
+                         "http://172.17.0.1:21222/api/integrations/workers")
         # Compare every non-mount service setting with the accepted recipe. The
-        # application image may advance independently; node/pool pins may not.
+        # application image and reviewed MUX endpoint may advance; node/pool pins may not.
         for config in (baseline, current):
             config.pop("volumes", None)
             config.pop("configs", None)

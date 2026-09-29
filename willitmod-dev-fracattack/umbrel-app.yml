@@ -2,7 +2,7 @@ manifestVersion: 1
 id: willitmod-dev-fracattack
 category: bitcoin
 name: FracAttack
-version: "0.1.6"
+version: "0.1.8"
 tagline: Fractal node + solo pool
 description: >-
   MAIN CHANNEL
@@ -49,16 +49,20 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Required Fractal mining compatibility update: the bundled Fractal node is
-  upgraded to v0.4.0 and applies the additional subsidy halving activated at
-  block 2,100,000. Older nodes could build overpaying mining jobs and accept
-  blocks locally that do not earn rewards on the upgraded network. Existing
-  chain data, payout settings and pool configuration are retained.
+  Current miner hash rate from 5tratMux appears separately from accepted-share
+  estimates, with stale or unavailable telemetry handled explicitly. Block
+  history checks the full block hash against the correct chain and refreshes
+  confirmation and reorganisation status before showing a confirmed find.
+  Unverified reports remain distinguishable from confirmed pool blocks.
 
-  Block history now distinguishes unverified, orphaned, immature and mature
-  blocks, refreshes chain status after reorganisations, and opens the Fractal
-  explorer. Updating cannot recover rewards for blocks outside the accepted
-  chain. Check that the node is synced before resuming mining.
+  Block alerts in this browser is a separate local preference. Recent verified
+  blocks queue across app tabs, with browser-only Close acknowledgements.
+  Reorgs or unavailable proof retract the alert without acknowledging it.
+  OS and MUX delivery and acknowledgements remain independently managed.
+
+  Retains Fractal Core v0.4.0 and the subsidy correction introduced in 0.1.6.
+  Maturity and orphan status remain visible. No live block find has yet qualified
+  this release; updating cannot recover rewards outside the accepted chain.
 widgets:
   - id: "sync"
     type: "text-with-progress"

@@ -1065,7 +1065,8 @@ services:
       - ${APP_DATA_DIR}/data/pool/config/coins.json:/app/coins.json:ro
 
   app:
-    image: ghcr.io/willitmod/axedgb-app:0.9.181
+    stop_signal: "SIGINT"
+    image: ghcr.io/willitmod/axedgb-app:0.9.185-mux.d5261d8a2301@sha256:4d3fe626f20a8e98c69a9969e000c51fa551e640914d0e734466c3e891c8f63a
     user: "1000:1000"
     restart: on-failure
     stop_grace_period: 30s
@@ -1083,6 +1084,7 @@ services:
     volumes:
       - ${APP_DATA_DIR}/data:/data
     environment:
+      MUX_IDENTITY_URL: "http://172.17.0.1:21222/api/integrations/workers"
       DGB_RPC_HOST: "dgbd"
       DGB_RPC_PORT: "14022"
       DGB_RPC_USER: "dgb"
@@ -1101,7 +1103,7 @@ services:
       # Treat workers as inactive (hashrate=0) after this many seconds with no activity.
       # (Activity = last accepted share when present, else minerstats snapshot time.)
       WORKER_ACTIVE_SECONDS: "300"
-      APP_CHANNEL: "RC6"
+      APP_CHANNEL: "MAIN"
       APP_VERSION_SUFFIX: ""
       DGB_IMAGE: "ghcr.io/willitmod/axedgb-core:0.9.181"
       MININGCORE_IMAGE: "ghcr.io/willitmod/axedgb-miningcore:axedgb-0.8.10-r26"

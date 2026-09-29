@@ -178,7 +178,8 @@ services:
     entrypoint: ["/bin/sh", "/ckpool-entrypoint.sh"]
 
   app:
-    image: ghcr.io/willitmod/axebtc-app-umbrel-dev:0.7.82.8
+    stop_signal: "SIGINT"
+    image: ghcr.io/willitmod/axebtc-app-umbrel-dev:0.7.82.14-mux.3809ff0b89da@sha256:503a73d2763a850c567e6f0227a024766352d083bc1671f296963c5fb5e5d366
     user: "1000:1000"
     restart: on-failure
     stop_grace_period: 30s
@@ -195,6 +196,7 @@ services:
     volumes:
       - ${APP_DATA_DIR}/data:/data
     environment:
+      MUX_IDENTITY_URL: "http://172.17.0.1:21222/api/integrations/workers"
       BTC_RPC_HOST: "bitcoind"
       BTC_RPC_PORT: "28332"
       BTC_RPC_USER: "btc"
@@ -202,7 +204,7 @@ services:
       CKPOOL_STATUS_DIR: "/data/pool/www/pool"
       CKPOOL_STRATUM_HOST: "ckpool"
       CKPOOL_STRATUM_PORT: "3333"
-      APP_CHANNEL: "RC1"
+      APP_CHANNEL: "MAIN"
       APP_VERSION_SUFFIX: ""
       BITCOIND_IMAGE: "ghcr.io/willitmod/axebtc-bitcoind-switch:0.7.44"
       CKPOOL_IMAGE: "ghcr.io/willitmod/docker-ckpool-solo:590fb2a"

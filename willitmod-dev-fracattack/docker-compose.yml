@@ -216,7 +216,8 @@ services:
     entrypoint: ["/bin/sh", "/ckpool-entrypoint.sh"]
 
   app:
-    image: ghcr.io/willitmod/fracattack-app-umbrel-dev:0.1.6
+    stop_signal: "SIGINT"
+    image: ghcr.io/willitmod/fracattack-app-umbrel-dev:0.1.8-mux.a91064381fcd@sha256:27fbe21e4ecd3cab20344def44d059c4a2d3206bae44f1288287ecebb7eb7130
     user: "1000:1000"
     restart: on-failure
     stop_grace_period: 30s
@@ -235,6 +236,7 @@ services:
     volumes:
       - ${APP_DATA_DIR}/data:/data
     environment:
+      MUX_IDENTITY_URL: "http://172.17.0.1:21222/api/integrations/workers"
       BTC_RPC_HOST: "fractald"
       BTC_RPC_PORT: "28342"
       BTC_P2P_PORT: "28343"
@@ -243,7 +245,7 @@ services:
       CKPOOL_STATUS_DIR: "/data/pool/www/pool"
       CKPOOL_STRATUM_HOST: "ckpool"
       CKPOOL_STRATUM_PORT: "3333"
-      APP_VERSION: "0.1.6"
+      APP_VERSION: "0.1.8"
       APP_CHANNEL: "MAIN"
       APP_VERSION_SUFFIX: ""
       FRACTAL_IMAGE: "ghcr.io/willitmod/fracattack-fractald:0.4.0"

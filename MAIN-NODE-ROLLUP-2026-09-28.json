@@ -1,0 +1,609 @@
+{
+  "schemaVersion": 1,
+  "description": "MAIN candidate packaging for the same verified native images; node and independent package acceptance remain pending. No publication authorized by this record.",
+  "baselineCommit": "7bf351859c5a29c99fbd6bcf7ade79c3f54f39d0",
+  "devSourceCommit": "01dfa2600c0199cd1d16f3b5043424f5efeb4fab",
+  "imageEvidenceSha256": "5cf7fecc45162bf80a55b0d0acd57b1b8abfb3b7a0972f8a9bb1ea83396787f2",
+  "apps": {
+    "willitmod-btc": {
+      "sourceRevision": "3809ff0b89da380bb2a09141929453fefb0e86e9",
+      "imageRef": "ghcr.io/willitmod/axebtc-app-umbrel-dev:0.7.82.14-mux.3809ff0b89da@sha256:503a73d2763a850c567e6f0227a024766352d083bc1671f296963c5fb5e5d366",
+      "version": "0.7.82.14",
+      "buildRun": "https://github.com/WillItMod/AxeBTC_Build/actions/runs/36493101222",
+      "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+      ],
+      "baselineComposeSha256": "ca2409cd6de237704d55b929f849462350d9a64e68729ab361aec6ef4f2154ab",
+      "approvedRuntimeChanges": [
+        {
+          "path": [
+            "services",
+            "app",
+            "environment",
+            "APP_CHANNEL"
+          ],
+          "before": "RC1",
+          "after": "MAIN",
+          "existed": true
+        },
+        {
+          "path": [
+            "services",
+            "app",
+            "environment",
+            "MUX_IDENTITY_URL"
+          ],
+          "before": null,
+          "after": "http://172.17.0.1:21222/api/integrations/workers",
+          "existed": false
+        },
+        {
+          "path": [
+            "services",
+            "app",
+            "image"
+          ],
+          "before": "ghcr.io/willitmod/axebtc-app-umbrel-dev:0.7.82.8",
+          "after": "ghcr.io/willitmod/axebtc-app-umbrel-dev:0.7.82.14-mux.3809ff0b89da@sha256:503a73d2763a850c567e6f0227a024766352d083bc1671f296963c5fb5e5d366",
+          "existed": true
+        },
+        {
+          "path": [
+            "services",
+            "app",
+            "stop_signal"
+          ],
+          "before": null,
+          "after": "SIGINT",
+          "existed": false
+        }
+      ]
+    },
+    "willitmod-dev-bch": {
+      "sourceRevision": "5fb33f07ec0de979bb285ad748c3b65c81ab9d50",
+      "imageRef": "ghcr.io/willitmod/axebch-app-umbrel-dev:0.9.22-mux.5fb33f07ec0d@sha256:64d59b3d26132079eda24fbc593356fde926705d7f0196b6a5998b62ad67dbc7",
+      "version": "0.9.22",
+      "buildRun": "https://github.com/WillItMod/AxeBCH_Build/actions/runs/36493114519",
+      "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+      ],
+      "baselineComposeSha256": "e4f29b4fee2f8545bbadd9e0cd171c31939d769b338f7329362c5c173c645772",
+      "approvedRuntimeChanges": [
+        {
+          "path": [
+            "services",
+            "app",
+            "environment",
+            "APP_CHANNEL"
+          ],
+          "before": "RC1",
+          "after": "MAIN",
+          "existed": true
+        },
+        {
+          "path": [
+            "services",
+            "app",
+            "environment",
+            "MUX_IDENTITY_URL"
+          ],
+          "before": null,
+          "after": "http://172.17.0.1:21222/api/integrations/workers",
+          "existed": false
+        },
+        {
+          "path": [
+            "services",
+            "app",
+            "image"
+          ],
+          "before": "ghcr.io/willitmod/axebch-app-umbrel-dev:0.9.18",
+          "after": "ghcr.io/willitmod/axebch-app-umbrel-dev:0.9.22-mux.5fb33f07ec0d@sha256:64d59b3d26132079eda24fbc593356fde926705d7f0196b6a5998b62ad67dbc7",
+          "existed": true
+        },
+        {
+          "path": [
+            "services",
+            "app",
+            "stop_signal"
+          ],
+          "before": null,
+          "after": "SIGINT",
+          "existed": false
+        }
+      ]
+    },
+    "willitmod-dev-bc2": {
+      "sourceRevision": "8164f42cc1ab76a6ba0dff51d82e03878eda6559",
+      "imageRef": "ghcr.io/willitmod/axebc2-app-umbrel-dev:0.1.18-mux.8164f42cc1ab@sha256:df461e0c507d8d863256d96d8653c9f49585a39aed6f83e8ad3976c6c42fea4d",
+      "version": "0.1.18",
+      "buildRun": "https://github.com/WillItMod/AxeBC2_Build/actions/runs/36493127481",
+      "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+      ],
+      "baselineComposeSha256": "f5c36fa0ff228f482c9bbf9cfddeee6c14c3f948716416e48500b0124f01a2c7",
+      "approvedRuntimeChanges": [
+        {
+          "path": [
+            "services",
+            "app",
+            "environment",
+            "MUX_IDENTITY_URL"
+          ],
+          "before": null,
+          "after": "http://172.17.0.1:21222/api/integrations/workers",
+          "existed": false
+        },
+        {
+          "path": [
+            "services",
+            "app",
+            "image"
+          ],
+          "before": "ghcr.io/willitmod/axebc2-app:0.1.15@sha256:0a7110d55a538ce9d5352b8617a89cd83a548151b5eed2486b13495c06a5c65d",
+          "after": "ghcr.io/willitmod/axebc2-app-umbrel-dev:0.1.18-mux.8164f42cc1ab@sha256:df461e0c507d8d863256d96d8653c9f49585a39aed6f83e8ad3976c6c42fea4d",
+          "existed": true
+        }
+      ]
+    },
+    "willitmod-dev-axebch2": {
+      "sourceRevision": "b9f51d5375d353d9089aed7f3b63686c78340007",
+      "imageRef": "ghcr.io/willitmod/axebch2-app:0.2.0.8-mux.b9f51d5375d3@sha256:83d7286346399dbd13a0827728f511a95ae640061ba7e2cd2708a0359cc98c86",
+      "version": "0.2.0.8",
+      "buildRun": "https://github.com/WillItMod/AxeBCH2_Build/actions/runs/36493138773",
+      "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+      ],
+      "baselineComposeSha256": "4298436e569720efe70ce56327517dde9c8fb4abca287234e79e093749995376",
+      "approvedRuntimeChanges": [
+        {
+          "path": [
+            "services",
+            "app",
+            "environment",
+            "APP_CHANNEL"
+          ],
+          "before": "RC1",
+          "after": "MAIN",
+          "existed": true
+        },
+        {
+          "path": [
+            "services",
+            "app",
+            "environment",
+            "APP_RELEASE_PHASE"
+          ],
+          "before": "RC",
+          "after": "STABLE",
+          "existed": true
+        },
+        {
+          "path": [
+            "services",
+            "app",
+            "environment",
+            "APP_VERSION"
+          ],
+          "before": "0.2.0.3",
+          "after": "0.2.0.8",
+          "existed": true
+        },
+        {
+          "path": [
+            "services",
+            "app",
+            "environment",
+            "MUX_IDENTITY_URL"
+          ],
+          "before": null,
+          "after": "http://172.17.0.1:21222/api/integrations/workers",
+          "existed": false
+        },
+        {
+          "path": [
+            "services",
+            "app",
+            "image"
+          ],
+          "before": "ghcr.io/willitmod/axebch2-app:0.2.0.3",
+          "after": "ghcr.io/willitmod/axebch2-app:0.2.0.8-mux.b9f51d5375d3@sha256:83d7286346399dbd13a0827728f511a95ae640061ba7e2cd2708a0359cc98c86",
+          "existed": true
+        },
+        {
+          "path": [
+            "services",
+            "app",
+            "stop_signal"
+          ],
+          "before": null,
+          "after": "SIGINT",
+          "existed": false
+        },
+        {
+          "path": [
+            "services",
+            "init_permissions",
+            "command"
+          ],
+          "before": [
+            "/bin/sh",
+            "-ec",
+            "set -eu\nmkdir -p /data/ui/state /data/node /data/pool/config /data/pool/www/pool /data/pool/www/users\nchown -R 1000:1000 /data/ui /data/node /data/pool || true\nchmod -R ug+rwX /data/ui /data/node /data/pool || true"
+          ],
+          "after": [
+            "/bin/sh",
+            "-ec",
+            "set -eu\nmkdir -p /data/ui/state /data/node /data/pool/config /data/pool/www/pool /data/pool/www/users\n# Core owns /data/node as bch2:bch2. Changing a running Core's\n# database ownership here prevents writes and can force a restart.\nchown -R 1000:1000 /data/ui /data/pool || true\nchmod -R ug+rwX /data/ui /data/pool || true"
+          ],
+          "existed": true
+        }
+      ]
+    },
+    "willitmod-dev-dgb": {
+      "sourceRevision": "d5261d8a2301edff03879b00f11528c2af2f8499",
+      "imageRef": "ghcr.io/willitmod/axedgb-app:0.9.185-mux.d5261d8a2301@sha256:4d3fe626f20a8e98c69a9969e000c51fa551e640914d0e734466c3e891c8f63a",
+      "version": "0.9.185",
+      "buildRun": "https://github.com/WillItMod/AxeDGB_Build/actions/runs/36493176837",
+      "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+      ],
+      "baselineComposeSha256": "c26d8377b71c2b74b208e74c55f3e3271ba4930942cc95eaba897aeb31d01d5b",
+      "approvedRuntimeChanges": [
+        {
+          "path": [
+            "services",
+            "app",
+            "environment",
+            "APP_CHANNEL"
+          ],
+          "before": "RC6",
+          "after": "MAIN",
+          "existed": true
+        },
+        {
+          "path": [
+            "services",
+            "app",
+            "environment",
+            "MUX_IDENTITY_URL"
+          ],
+          "before": null,
+          "after": "http://172.17.0.1:21222/api/integrations/workers",
+          "existed": false
+        },
+        {
+          "path": [
+            "services",
+            "app",
+            "image"
+          ],
+          "before": "ghcr.io/willitmod/axedgb-app:0.9.181",
+          "after": "ghcr.io/willitmod/axedgb-app:0.9.185-mux.d5261d8a2301@sha256:4d3fe626f20a8e98c69a9969e000c51fa551e640914d0e734466c3e891c8f63a",
+          "existed": true
+        },
+        {
+          "path": [
+            "services",
+            "app",
+            "stop_signal"
+          ],
+          "before": null,
+          "after": "SIGINT",
+          "existed": false
+        }
+      ]
+    },
+    "willitmod-dev-xec": {
+      "sourceRevision": "0aa726c9d405184297144b5ee25bb47c82ec0905",
+      "imageRef": "ghcr.io/willitmod/axexec-app-umbrel-dev:0.1.21-mux.0aa726c9d405@sha256:9583008eb1a427fa85e6738da5c22b5057bae1da85b791d6087ba307dd39c26f",
+      "version": "0.1.21",
+      "buildRun": "https://github.com/WillItMod/AxeXEC_Build/actions/runs/36493151677",
+      "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+      ],
+      "baselineComposeSha256": "5fbf5fcf2af110a1b02c84963999a90b1588b4e9ce168210ac84f4cf644c03d3",
+      "approvedRuntimeChanges": [
+        {
+          "path": [
+            "services",
+            "app",
+            "environment",
+            "APP_CHANNEL"
+          ],
+          "before": "RC1",
+          "after": "MAIN",
+          "existed": true
+        },
+        {
+          "path": [
+            "services",
+            "app",
+            "environment",
+            "MUX_IDENTITY_URL"
+          ],
+          "before": null,
+          "after": "http://172.17.0.1:21222/api/integrations/workers",
+          "existed": false
+        },
+        {
+          "path": [
+            "services",
+            "app",
+            "image"
+          ],
+          "before": "ghcr.io/willitmod/axexec-app:0.1.17",
+          "after": "ghcr.io/willitmod/axexec-app-umbrel-dev:0.1.21-mux.0aa726c9d405@sha256:9583008eb1a427fa85e6738da5c22b5057bae1da85b791d6087ba307dd39c26f",
+          "existed": true
+        },
+        {
+          "path": [
+            "services",
+            "app",
+            "stop_signal"
+          ],
+          "before": null,
+          "after": "SIGINT",
+          "existed": false
+        }
+      ]
+    },
+    "willitmod-dev-ppc": {
+      "sourceRevision": "5b207b104169d3332f3ecb53c2ffe2a90d7ee2d5",
+      "imageRef": "ghcr.io/willitmod/axeppc-app-umbrel-dev:0.2.35-mux.5b207b104169@sha256:56343361f8ebbe9a6c68126309f55fddc2ddaadb1d3549573c4f71f2e1c1d6ff",
+      "version": "0.2.35",
+      "buildRun": "https://github.com/WillItMod/AxePPC_Build/actions/runs/36493164396",
+      "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+      ],
+      "baselineComposeSha256": "0d935dcd7f503b0636d93d1dedc9d6e515ecbdf3e23e85ce48320c70a4d2ea64",
+      "approvedRuntimeChanges": [
+        {
+          "path": [
+            "services",
+            "app",
+            "environment",
+            "APP_CHANNEL"
+          ],
+          "before": "RC1",
+          "after": "MAIN",
+          "existed": true
+        },
+        {
+          "path": [
+            "services",
+            "app",
+            "environment",
+            "MUX_IDENTITY_URL"
+          ],
+          "before": null,
+          "after": "http://172.17.0.1:21222/api/integrations/workers",
+          "existed": false
+        },
+        {
+          "path": [
+            "services",
+            "app",
+            "image"
+          ],
+          "before": "ghcr.io/willitmod/axeppc-app-umbrel-dev:0.2.31",
+          "after": "ghcr.io/willitmod/axeppc-app-umbrel-dev:0.2.35-mux.5b207b104169@sha256:56343361f8ebbe9a6c68126309f55fddc2ddaadb1d3549573c4f71f2e1c1d6ff",
+          "existed": true
+        },
+        {
+          "path": [
+            "services",
+            "app",
+            "stop_signal"
+          ],
+          "before": null,
+          "after": "SIGINT",
+          "existed": false
+        },
+        {
+          "path": [
+            "services",
+            "init",
+            "command"
+          ],
+          "before": [
+            "/bin/sh",
+            "-ec",
+            "set -eu\n\napk add --no-cache envsubst jq >/dev/null\n\ntpl_dir=\"/data/templates\"\n\nif [ -n \"${JWT_SECRET:-}\" ]; then\n  envfile=\"/appdata/.env\"\n  tmp=\"/appdata/.env.tmp\"\n  if [ -f \"$$envfile\" ]; then\n    grep -v '^JWT_SECRET=' \"$$envfile\" > \"$$tmp\" || true\n  else\n    : > \"$$tmp\"\n  fi\n  printf \"JWT_SECRET=%s\\n\" \"${JWT_SECRET}\" >> \"$$tmp\"\n  chmod 600 \"$$tmp\" || true\n  chown 1000:1000 \"$$tmp\" || true\n  mv \"$$tmp\" \"$$envfile\"\nfi\n\nmkdir -p /data/node /data/pool/config /data/pool/www/pool /data/pool/www/users /data/pool/cps/pool_configs /data/pool/cps/coins /data/templates\n\n# NOTE: `/data/templates` is a persistent volume. Existing installs may not automatically\n# receive new template files on app updates, so we must not hard-fail on newly added files.\nif [ ! -f \"$$tpl_dir/peercoin.conf.template\" ] || [ ! -f \"$$tpl_dir/ckpool.conf.template\" ] || [ ! -f \"$$tpl_dir/cps-config.json.template\" ] || [ ! -f \"$$tpl_dir/cps-peercoin.json.template\" ]; then\n  echo \"Template files not found in $$tpl_dir. (Expected peercoin.conf.template, ckpool.conf.template, cps-config.json.template, cps-peercoin.json.template)\"\n  echo \"Contents of $$tpl_dir:\"\n  ls -la \"$$tpl_dir\" || true\n  exit 1\nfi\n\nif [ ! -f \"$$tpl_dir/cps-coin-peercoin.json.template\" ]; then\n  cat > \"$$tpl_dir/cps-coin-peercoin.json.template\" <<'EOF'\n{\n  \"name\": \"Peercoin\",\n  \"symbol\": \"PPC\",\n  \"algorithm\": \"sha256\",\n  \"reward\": \"POW\",\n  \"version_mask\": \"1fffe000\"\n}\nEOF\n  chown 1000:1000 \"$$tpl_dir/cps-coin-peercoin.json.template\" 2>/dev/null || true\nfi\n\nif [ ! -f /data/node/peercoin.conf ]; then\n  envsubst < \"$$tpl_dir/peercoin.conf.template\" > /data/node/peercoin.conf\n  chown -R 1000:1000 /data/node || true\nfi\n\n# Self-heal older/invalid configs that enable multiple networks simultaneously.\n# Peercoin refuses to start if both testnet and regtest are enabled.\ncfg=\"/data/node/peercoin.conf\"\nif [ -f \"$$cfg\" ]; then\n  if grep -qE '^[[:space:]]*testnet=1([[:space:]]*#.*)?$$' \"$$cfg\" && grep -qE '^[[:space:]]*regtest=1([[:space:]]*#.*)?$$' \"$$cfg\"; then\n    echo \"Found invalid Peercoin network flags (testnet+regtest). Removing both to default back to mainnet.\"\n    sed -E -i '/^[[:space:]]*testnet=1([[:space:]]*#.*)?$$/d; /^[[:space:]]*regtest=1([[:space:]]*#.*)?$$/d' \"$$cfg\" || true\n  fi\nfi\n\nneeds_ckpool_regen=0\nif [ -f /data/pool/config/ckpool.conf ]; then\n  if ! grep -qE '\"btcd\"[[:space:]]*:[[:space:]]*\\\\[' /data/pool/config/ckpool.conf; then\n    needs_ckpool_regen=1\n  fi\n  if ! grep -q '\"zmqblock\"' /data/pool/config/ckpool.conf; then\n    needs_ckpool_regen=1\n  fi\nelse\n  needs_ckpool_regen=1\nfi\n\nif [ \"$$needs_ckpool_regen\" -eq 1 ]; then\n  existing_addr=\"$$(grep -oE '\\\\\\\"btcaddress\\\\\\\"[[:space:]]*:[[:space:]]*\\\\\\\"[^\\\\\\\"]*\\\\\\\"' /data/pool/config/ckpool.conf 2>/dev/null | head -n 1 | sed -E 's/.*\\\\\\\"btcaddress\\\\\\\"[[:space:]]*:[[:space:]]*\\\\\\\"([^\\\\\\\"]*)\\\\\\\".*/\\\\1/' || true)\"\n  if [ -f /data/pool/config/ckpool.conf ]; then\n    mv /data/pool/config/ckpool.conf \"/data/pool/config/ckpool.conf.bak.invalid.$$(date +%s 2>/dev/null || echo 0)\" || true\n  fi\n  envsubst < \"$$tpl_dir/ckpool.conf.template\" > /data/pool/config/ckpool.conf\n  if [ -n \"$$existing_addr\" ] && [ \"$$existing_addr\" != \"CHANGEME_PPC_PAYOUT_ADDRESS\" ]; then\n    tmp=\"$$(mktemp)\"\n    if jq --arg a \"$$existing_addr\" '.btcaddress=$$a' /data/pool/config/ckpool.conf > \"$$tmp\" 2>/dev/null; then\n      mv \"$$tmp\" /data/pool/config/ckpool.conf\n    else\n      rm -f \"$$tmp\" || true\n    fi\n  fi\n  chown -R 1000:1000 /data/pool || true\nfi\n\nif [ ! -f /data/pool/config/ckpool.args ]; then\n  echo \"-B\" > /data/pool/config/ckpool.args\n  chown 1000:1000 /data/pool/config/ckpool.args || true\nfi\n\n# Apply saved UI settings (if present) to ckpool.conf so payouts go to the configured address.\nif [ -f /data/ui/state/pool_settings.json ]; then\n  addr=\"$(jq -r '.payoutAddress // empty' /data/ui/state/pool_settings.json 2>/dev/null || true)\"\n  if [ -n \"$$addr\" ] && [ -f /data/pool/config/ckpool.conf ]; then\n    tmp=\"$$(mktemp)\"\n    if jq --arg a \"$$addr\" '.btcaddress=$$a' /data/pool/config/ckpool.conf > \"$$tmp\" 2>/dev/null; then\n      mv \"$$tmp\" /data/pool/config/ckpool.conf\n      chown 1000:1000 /data/pool/config/ckpool.conf || true\n    else\n      rm -f \"$$tmp\" || true\n    fi\n  fi\nfi\n\n# cryptocurrency-pool-server config\nif [ ! -f /data/pool/cps/config.json ]; then\n  envsubst < \"$$tpl_dir/cps-config.json.template\" > /data/pool/cps/config.json\n  chown -R 1000:1000 /data/pool/cps || true\nfi\nif [ ! -f /data/pool/cps/pool_configs/peercoin.json ]; then\n  envsubst < \"$$tpl_dir/cps-peercoin.json.template\" > /data/pool/cps/pool_configs/peercoin.json\n  chown -R 1000:1000 /data/pool/cps || true\nfi\n# Self-heal CPS vardiff settings so upgrades/mode changes cannot leave invalid\n# values that cause runaway or excessively low share difficulty.\nif [ -f /data/pool/cps/pool_configs/peercoin.json ]; then\n  tmp=\"$$(mktemp)\"\n  if jq '\n    if ((.ports[\"3333\"] // null) | type) != \"object\" then\n      .\n    else\n      .ports[\"3333\"].varDiff = ((.ports[\"3333\"].varDiff // {}) | if type == \"object\" then . else {} end)\n      | .ports[\"3333\"].varDiff.minDiff = (\n          (.ports[\"3333\"].varDiff.minDiff | tonumber? // 16) as $$m\n          | if $$m < 16 then 16 elif $$m > 1048576 then 1048576 else $$m end\n        )\n      | .ports[\"3333\"].varDiff.maxDiff = (\n          (.ports[\"3333\"].varDiff.maxDiff | tonumber? // 16384) as $$mx_raw\n          | ($$mx_raw | if . <= 0 then 16384 else . end) as $$mx\n          | if $$mx < .ports[\"3333\"].varDiff.minDiff then .ports[\"3333\"].varDiff.minDiff\n            elif $$mx > 1048576 then 1048576\n            else $$mx\n            end\n        )\n      | .ports[\"3333\"].diff = (\n          (.ports[\"3333\"].diff | tonumber? // (.ports[\"3333\"].varDiff.minDiff * 2)) as $$d\n          | if $$d < .ports[\"3333\"].varDiff.minDiff then .ports[\"3333\"].varDiff.minDiff\n            elif $$d > .ports[\"3333\"].varDiff.maxDiff then .ports[\"3333\"].varDiff.maxDiff\n            else $$d\n            end\n        )\n      | .ports[\"3333\"].varDiff.targetTime = (\n          (.ports[\"3333\"].varDiff.targetTime | tonumber? // 15) as $$t\n          | if $$t < 8 then 8 elif $$t > 60 then 60 else $$t end\n        )\n      | .ports[\"3333\"].varDiff.retargetTime = (\n          (.ports[\"3333\"].varDiff.retargetTime | tonumber? // 90) as $$rt\n          | if $$rt < 30 then 30 elif $$rt > 300 then 300 else $$rt end\n        )\n      | .ports[\"3333\"].varDiff.variancePercent = (\n          (.ports[\"3333\"].varDiff.variancePercent | tonumber? // 30) as $$v\n          | if $$v < 10 then 10 elif $$v > 80 then 80 else $$v end\n        )\n    end\n  ' /data/pool/cps/pool_configs/peercoin.json > \"$$tmp\" 2>/dev/null; then\n    mv \"$$tmp\" /data/pool/cps/pool_configs/peercoin.json\n    chown 1000:1000 /data/pool/cps/pool_configs/peercoin.json || true\n  else\n    rm -f \"$$tmp\" || true\n  fi\nfi\nif [ ! -f /data/pool/cps/coins/peercoin.json ]; then\n  cp \"$$tpl_dir/cps-coin-peercoin.json.template\" /data/pool/cps/coins/peercoin.json\n  chown -R 1000:1000 /data/pool/cps || true\nfi"
+          ],
+          "after": [
+            "/bin/sh",
+            "-ec",
+            "set -eu\n\napk add --no-cache envsubst jq >/dev/null\n\ntpl_dir=\"/data/templates\"\n\nif [ -n \"${JWT_SECRET:-}\" ]; then\n  envfile=\"/appdata/.env\"\n  tmp=\"/appdata/.env.tmp\"\n  if [ -f \"$$envfile\" ]; then\n    grep -v '^JWT_SECRET=' \"$$envfile\" > \"$$tmp\" || true\n  else\n    : > \"$$tmp\"\n  fi\n  printf \"JWT_SECRET=%s\\n\" \"${JWT_SECRET}\" >> \"$$tmp\"\n  chmod 600 \"$$tmp\" || true\n  chown 1000:1000 \"$$tmp\" || true\n  mv \"$$tmp\" \"$$envfile\"\nfi\n\nmkdir -p /data/node /data/pool/config /data/pool/www/pool /data/pool/www/users /data/pool/cps/pool_configs /data/pool/cps/coins /data/templates\n\n# NOTE: `/data/templates` is a persistent volume. Existing installs may not automatically\n# receive new template files on app updates, so we must not hard-fail on newly added files.\nif [ ! -f \"$$tpl_dir/peercoin.conf.template\" ] || [ ! -f \"$$tpl_dir/ckpool.conf.template\" ] || [ ! -f \"$$tpl_dir/cps-config.json.template\" ] || [ ! -f \"$$tpl_dir/cps-peercoin.json.template\" ]; then\n  echo \"Template files not found in $$tpl_dir. (Expected peercoin.conf.template, ckpool.conf.template, cps-config.json.template, cps-peercoin.json.template)\"\n  echo \"Contents of $$tpl_dir:\"\n  ls -la \"$$tpl_dir\" || true\n  exit 1\nfi\n\nif [ ! -f \"$$tpl_dir/cps-coin-peercoin.json.template\" ]; then\n  cat > \"$$tpl_dir/cps-coin-peercoin.json.template\" <<'EOF'\n{\n  \"name\": \"Peercoin\",\n  \"symbol\": \"PPC\",\n  \"algorithm\": \"sha256\",\n  \"reward\": \"POW\",\n  \"version_mask\": \"1fffe000\"\n}\nEOF\n  chown 1000:1000 \"$$tpl_dir/cps-coin-peercoin.json.template\" 2>/dev/null || true\nfi\n\nif [ ! -f /data/node/peercoin.conf ]; then\n  envsubst < \"$$tpl_dir/peercoin.conf.template\" > /data/node/peercoin.conf\n  chown -R 1000:1000 /data/node || true\nfi\n\n# Self-heal older/invalid configs that enable multiple networks simultaneously.\n# Peercoin refuses to start if both testnet and regtest are enabled.\ncfg=\"/data/node/peercoin.conf\"\nif [ -f \"$$cfg\" ]; then\n  if grep -qE '^[[:space:]]*testnet=1([[:space:]]*#.*)?$$' \"$$cfg\" && grep -qE '^[[:space:]]*regtest=1([[:space:]]*#.*)?$$' \"$$cfg\"; then\n    echo \"Found invalid Peercoin network flags (testnet+regtest). Removing both to default back to mainnet.\"\n    sed -E -i '/^[[:space:]]*testnet=1([[:space:]]*#.*)?$$/d; /^[[:space:]]*regtest=1([[:space:]]*#.*)?$$/d' \"$$cfg\" || true\n  fi\nfi\n\nneeds_ckpool_regen=0\nif [ -f /data/pool/config/ckpool.conf ]; then\n  if ! grep -qE '\"btcd\"[[:space:]]*:[[:space:]]*[[]' /data/pool/config/ckpool.conf; then\n    needs_ckpool_regen=1\n  fi\n  if ! grep -q '\"zmqblock\"' /data/pool/config/ckpool.conf; then\n    needs_ckpool_regen=1\n  fi\nelse\n  needs_ckpool_regen=1\nfi\n\nif [ \"$$needs_ckpool_regen\" -eq 1 ]; then\n  existing_addr=\"$$(grep -oE '\"btcaddress\"[[:space:]]*:[[:space:]]*\"[^\"]*\"' /data/pool/config/ckpool.conf 2>/dev/null | head -n 1 | sed -E 's/.*\"btcaddress\"[[:space:]]*:[[:space:]]*\"([^\"]*)\".*/\\1/' || true)\"\n  if [ -f /data/pool/config/ckpool.conf ]; then\n    mv /data/pool/config/ckpool.conf \"/data/pool/config/ckpool.conf.bak.invalid.$$(date +%s 2>/dev/null || echo 0)\" || true\n  fi\n  envsubst < \"$$tpl_dir/ckpool.conf.template\" > /data/pool/config/ckpool.conf\n  if [ -n \"$$existing_addr\" ] && [ \"$$existing_addr\" != \"CHANGEME_PPC_PAYOUT_ADDRESS\" ]; then\n    tmp=\"$$(mktemp)\"\n    if jq --arg a \"$$existing_addr\" '.btcaddress=$$a' /data/pool/config/ckpool.conf > \"$$tmp\" 2>/dev/null; then\n      mv \"$$tmp\" /data/pool/config/ckpool.conf\n    else\n      rm -f \"$$tmp\" || true\n    fi\n  fi\n  chown -R 1000:1000 /data/pool || true\nfi\n\nif [ ! -f /data/pool/config/ckpool.args ]; then\n  echo \"-B\" > /data/pool/config/ckpool.args\n  chown 1000:1000 /data/pool/config/ckpool.args || true\nfi\n\n# Apply saved UI settings (if present) to ckpool.conf so payouts go to the configured address.\nif [ -f /data/ui/state/pool_settings.json ]; then\n  addr=\"$(jq -r '.payoutAddress // empty' /data/ui/state/pool_settings.json 2>/dev/null || true)\"\n  if [ -n \"$$addr\" ] && [ -f /data/pool/config/ckpool.conf ]; then\n    tmp=\"$$(mktemp)\"\n    if jq --arg a \"$$addr\" '.btcaddress=$$a' /data/pool/config/ckpool.conf > \"$$tmp\" 2>/dev/null; then\n      mv \"$$tmp\" /data/pool/config/ckpool.conf\n      chown 1000:1000 /data/pool/config/ckpool.conf || true\n    else\n      rm -f \"$$tmp\" || true\n    fi\n  fi\nfi\n\n# cryptocurrency-pool-server config\nif [ ! -f /data/pool/cps/config.json ]; then\n  envsubst < \"$$tpl_dir/cps-config.json.template\" > /data/pool/cps/config.json\n  chown -R 1000:1000 /data/pool/cps || true\nfi\nif [ ! -f /data/pool/cps/pool_configs/peercoin.json ]; then\n  envsubst < \"$$tpl_dir/cps-peercoin.json.template\" > /data/pool/cps/pool_configs/peercoin.json\n  chown -R 1000:1000 /data/pool/cps || true\nfi\n# Self-heal CPS vardiff settings so upgrades/mode changes cannot leave invalid\n# values that cause runaway or excessively low share difficulty.\nif [ -f /data/pool/cps/pool_configs/peercoin.json ]; then\n  tmp=\"$$(mktemp)\"\n  if jq '\n    if ((.ports[\"3333\"] // null) | type) != \"object\" then\n      .\n    else\n      .ports[\"3333\"].varDiff = ((.ports[\"3333\"].varDiff // {}) | if type == \"object\" then . else {} end)\n      | .ports[\"3333\"].varDiff.minDiff = (\n          (.ports[\"3333\"].varDiff.minDiff | tonumber? // 16) as $$m\n          | if $$m < 16 then 16 elif $$m > 1048576 then 1048576 else $$m end\n        )\n      | .ports[\"3333\"].varDiff.maxDiff = (\n          (.ports[\"3333\"].varDiff.maxDiff | tonumber? // 16384) as $$mx_raw\n          | ($$mx_raw | if . <= 0 then 16384 else . end) as $$mx\n          | if $$mx < .ports[\"3333\"].varDiff.minDiff then .ports[\"3333\"].varDiff.minDiff\n            elif $$mx > 1048576 then 1048576\n            else $$mx\n            end\n        )\n      | .ports[\"3333\"].diff = (\n          (.ports[\"3333\"].diff | tonumber? // (.ports[\"3333\"].varDiff.minDiff * 2)) as $$d\n          | if $$d < .ports[\"3333\"].varDiff.minDiff then .ports[\"3333\"].varDiff.minDiff\n            elif $$d > .ports[\"3333\"].varDiff.maxDiff then .ports[\"3333\"].varDiff.maxDiff\n            else $$d\n            end\n        )\n      | .ports[\"3333\"].varDiff.targetTime = (\n          (.ports[\"3333\"].varDiff.targetTime | tonumber? // 15) as $$t\n          | if $$t < 8 then 8 elif $$t > 60 then 60 else $$t end\n        )\n      | .ports[\"3333\"].varDiff.retargetTime = (\n          (.ports[\"3333\"].varDiff.retargetTime | tonumber? // 90) as $$rt\n          | if $$rt < 30 then 30 elif $$rt > 300 then 300 else $$rt end\n        )\n      | .ports[\"3333\"].varDiff.variancePercent = (\n          (.ports[\"3333\"].varDiff.variancePercent | tonumber? // 30) as $$v\n          | if $$v < 10 then 10 elif $$v > 80 then 80 else $$v end\n        )\n    end\n  ' /data/pool/cps/pool_configs/peercoin.json > \"$$tmp\" 2>/dev/null; then\n    mv \"$$tmp\" /data/pool/cps/pool_configs/peercoin.json\n    chown 1000:1000 /data/pool/cps/pool_configs/peercoin.json || true\n  else\n    rm -f \"$$tmp\" || true\n  fi\nfi\nif [ ! -f /data/pool/cps/coins/peercoin.json ]; then\n  cp \"$$tpl_dir/cps-coin-peercoin.json.template\" /data/pool/cps/coins/peercoin.json\n  chown -R 1000:1000 /data/pool/cps || true\nfi"
+          ],
+          "existed": true
+        },
+        {
+          "path": [
+            "services",
+            "pool",
+            "init"
+          ],
+          "before": null,
+          "after": true,
+          "existed": false
+        }
+      ]
+    },
+    "willitmod-dev-powpow": {
+      "sourceRevision": "a1cc15f97ffe375a558d1eda5901df470c6cb59f",
+      "imageRef": "ghcr.io/willitmod/powpow-app:0.2.36-mux.a1cc15f97ffe@sha256:fb959f6ea49e5fcd4f4155ae7e678cc91ec59daf8b6c6bee3dc43fd7aeff5572",
+      "version": "0.2.36",
+      "buildRun": "https://github.com/WillItMod/PowPow_Build/actions/runs/36480713402",
+      "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+      ],
+      "poolImageRef": "ghcr.io/willitmod/powpow-pool:0.2.36-mux.a1cc15f97ffe@sha256:85c898ac406f7506daa8ca5be00ec68267e69770d99e502a690758490fbe8fc7",
+      "poolSourceRevision": "a1cc15f97ffe375a558d1eda5901df470c6cb59f",
+      "baselineComposeSha256": "270ccd3eac6b901fa4141395547c73b29f7e3f3cfe65e0cdeb0d53a05ab73c86",
+      "approvedRuntimeChanges": [
+        {
+          "path": [
+            "services",
+            "app",
+            "environment",
+            "APP_CHANNEL"
+          ],
+          "before": "RC1",
+          "after": "MAIN",
+          "existed": true
+        },
+        {
+          "path": [
+            "services",
+            "app",
+            "environment",
+            "APP_VERSION"
+          ],
+          "before": "0.2.32",
+          "after": "0.2.36",
+          "existed": true
+        },
+        {
+          "path": [
+            "services",
+            "app",
+            "environment",
+            "MUX_IDENTITY_URL"
+          ],
+          "before": null,
+          "after": "http://172.17.0.1:21222/api/integrations/workers",
+          "existed": false
+        },
+        {
+          "path": [
+            "services",
+            "app",
+            "image"
+          ],
+          "before": "ghcr.io/willitmod/powpow-app:0.2.31",
+          "after": "ghcr.io/willitmod/powpow-app:0.2.36-mux.a1cc15f97ffe@sha256:fb959f6ea49e5fcd4f4155ae7e678cc91ec59daf8b6c6bee3dc43fd7aeff5572",
+          "existed": true
+        },
+        {
+          "path": [
+            "services",
+            "app",
+            "stop_signal"
+          ],
+          "before": null,
+          "after": "SIGINT",
+          "existed": false
+        },
+        {
+          "path": [
+            "services",
+            "pool",
+            "image"
+          ],
+          "before": "ghcr.io/willitmod/powpow-pool:0.2.31",
+          "after": "ghcr.io/willitmod/powpow-pool:0.2.36-mux.a1cc15f97ffe@sha256:85c898ac406f7506daa8ca5be00ec68267e69770d99e502a690758490fbe8fc7",
+          "existed": true
+        },
+        {
+          "path": [
+            "x-5tratumos-stop-policy"
+          ],
+          "before": null,
+          "after": {
+            "version": 1,
+            "services": {
+              "litecoin": {
+                "stop_signal": "SIGTERM",
+                "stop_grace_period": "15m30s",
+                "user": "1000:1000"
+              },
+              "dogecoin": {
+                "stop_signal": "SIGTERM",
+                "stop_grace_period": "15m30s",
+                "user": "1000:1000"
+              }
+            }
+          },
+          "existed": false
+        }
+      ],
+      "successorEvidence": {
+        "supersedesSourceRevision": "e5ce6530186b2c6749ed62b54e537932a2cd1fd2",
+        "candidateReceiptSha256": "0f173f73a284d638eda34ef3c4b970649e6c699da635e4404b6b73a159e3f8b8",
+        "registryVerified": true,
+        "nodeAcceptance": "pending",
+        "releasePublication": "pending",
+        "coreStopPolicyConsumer": "requires separately reviewed OS consumer; raw Compose Core services unchanged"
+      }
+    },
+    "willitmod-dev-fracattack": {
+      "sourceRevision": "a91064381fcdca25a306daeeaf217d834f366442",
+      "imageRef": "ghcr.io/willitmod/fracattack-app-umbrel-dev:0.1.8-mux.a91064381fcd@sha256:27fbe21e4ecd3cab20344def44d059c4a2d3206bae44f1288287ecebb7eb7130",
+      "version": "0.1.8",
+      "buildRun": "https://github.com/WillItMod/FracAttack_Build/actions/runs/36493189636",
+      "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+      ],
+      "baselineComposeSha256": "32786a4a0c3eaaf6b618b05b9a45b1be26bf8d406447f93d2cc564332cddeb94",
+      "approvedRuntimeChanges": [
+        {
+          "path": [
+            "services",
+            "app",
+            "environment",
+            "APP_VERSION"
+          ],
+          "before": "0.1.6",
+          "after": "0.1.8",
+          "existed": true
+        },
+        {
+          "path": [
+            "services",
+            "app",
+            "environment",
+            "MUX_IDENTITY_URL"
+          ],
+          "before": null,
+          "after": "http://172.17.0.1:21222/api/integrations/workers",
+          "existed": false
+        },
+        {
+          "path": [
+            "services",
+            "app",
+            "image"
+          ],
+          "before": "ghcr.io/willitmod/fracattack-app-umbrel-dev:0.1.6",
+          "after": "ghcr.io/willitmod/fracattack-app-umbrel-dev:0.1.8-mux.a91064381fcd@sha256:27fbe21e4ecd3cab20344def44d059c4a2d3206bae44f1288287ecebb7eb7130",
+          "existed": true
+        },
+        {
+          "path": [
+            "services",
+            "app",
+            "stop_signal"
+          ],
+          "before": null,
+          "after": "SIGINT",
+          "existed": false
+        }
+      ]
+    }
+  },
+  "smackCandidate": {
+    "record": "SMACK-RELEASE-CANDIDATE-2026-09-29.json",
+    "recordSha256": "b59505a09ae9b5649db1f069b3f9e6cdec2e14f54cdd69031e151cc95378555e",
+    "nodeAcceptancePassed": false
+  }
+}
