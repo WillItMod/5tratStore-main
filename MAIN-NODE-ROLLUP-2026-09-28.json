@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "description": "MAIN candidate packaging for the same verified native images; node and independent package acceptance remain pending. No publication authorized by this record.",
   "baselineCommit": "7bf351859c5a29c99fbd6bcf7ade79c3f54f39d0",
-  "devSourceCommit": "98903055ab5c7bd50fcc9fa8fb29b29796863a44",
+  "devSourceCommit": "da45ab159e702140419e205884d3b0dbf3207537",
   "imageEvidenceSha256": "5cf7fecc45162bf80a55b0d0acd57b1b8abfb3b7a0972f8a9bb1ea83396787f2",
   "apps": {
     "willitmod-btc": {
@@ -600,5 +600,10 @@
         }
       ]
     }
+  },
+  "smackCandidate": {
+    "record": "SMACK-RELEASE-CANDIDATE-2026-09-29.json",
+    "recordSha256": "11f12d5d157c55f8b5d7ca2ca4c779a1a773ae6aadeb30c21ae2d775beb8ad54",
+    "nodeAcceptancePassed": false
   }
 }

@@ -1,6 +1,6 @@
 version: "3.7"
 
-# Release source revision: 53f0415e517952a98d21f02b11009976a16a1d20
+# Release source revision: fe2559223ed0fbd4fcd8bd5180713dd6b9686a29
 
 x-node-environment: &node-environment
   FIVETRAT_NETWORK: main
@@ -130,7 +130,7 @@ services:
       start_period: 30s
 
   swap:
-    image: ghcr.io/willitmod/5tratsmack-kdf:0.11.1@sha256:9eff0bfdc330bb997eacbce2b98500a52a084d682aec3644b73e663d54e6606a
+    image: ghcr.io/willitmod/5tratsmack-kdf:0.11.16-rc.fe2559223ed0@sha256:34392d2c5bb5371d82d4ecea3def9dc79c2d02427b0cb3926a6cc0066b88fdbf
     restart: unless-stopped
     network_mode: service:node-a
     depends_on:
@@ -197,7 +197,9 @@ services:
       start_period: 90s
 
   app:
-    image: ghcr.io/willitmod/5tratsmack-app:0.11.13@sha256:70d007cf7a65fcdbee82d50c70d48aacb63af66b4cd9985e919bd99387401a42
+    stop_signal: SIGINT
+    hostname: 5tratsmack-app
+    image: ghcr.io/willitmod/5tratsmack-app:0.11.16-rc.fe2559223ed0@sha256:857a73d220ce36204afb5b4d1dc11afe13511e00fa30878ea6339dd8d64d0668
     restart: unless-stopped
     depends_on:
       init_permissions:
@@ -206,7 +208,7 @@ services:
         condition: service_started
     environment:
       APP_ID: 5tratsmack
-      APP_VERSION: 0.11.13
+      APP_VERSION: 0.11.16
       APP_CHANNEL: MAIN
       APP_RELEASE_PHASE: STABLE
       APP_PLATFORM: 5TRATUMOS
@@ -215,9 +217,9 @@ services:
       FIVETRAT_STORE_UPDATE_APP_ID: 5tratsmack
       FIVETRAT_STORE_UPDATE_CHANNEL: main
       FIVETRAT_INSTALL_REVISION: main-store
-      FIVETRAT_RELEASE_TAG: 0.11.13
-      APP_IMAGE: ghcr.io/willitmod/5tratsmack-app:0.11.13@sha256:70d007cf7a65fcdbee82d50c70d48aacb63af66b4cd9985e919bd99387401a42
-      APP_REVISION: 53f0415e517952a98d21f02b11009976a16a1d20
+      FIVETRAT_RELEASE_TAG: 0.11.16
+      APP_IMAGE: ghcr.io/willitmod/5tratsmack-app:0.11.16-rc.fe2559223ed0@sha256:857a73d220ce36204afb5b4d1dc11afe13511e00fa30878ea6339dd8d64d0668
+      APP_REVISION: fe2559223ed0fbd4fcd8bd5180713dd6b9686a29
       BCH2_NODE_IMAGE: ghcr.io/willitmod/5tratsmack-core:0.11.2@sha256:7bf02513144c7a157965fb8e9ad5865f5e84fa679afa7cb61fc0a8e140a40070
       CKPOOL_IMAGE: ghcr.io/willitmod/5tratsmack-ckpool:0.11.3@sha256:95a1a5f343d579206a0f8bb3c961cafa7500b5d487211a0cfb7b989cf34b895e
       FIVETRAT_MUX_IDENTITY_URL: http://172.17.0.1:21222/api/integrations/workers
