@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "kind": "smack-native-store-release",
+  "appId": "willitmod-dev-5tratsmack",
+  "channel": "main",
+  "version": "0.11.18",
+  "sourceRevision": "fa08d11623b51159f78c47ac2e2a93cab639cb71",
+  "mergedSourceRevision": "466e63185c984e3537a4fb6fcf815cda57fa01ed",
+  "appImageRef": "ghcr.io/willitmod/5tratsmack-app:0.11.18@sha256:afc841745d33b2cf72b0ed2c03fec2ab6ba48db0474e7983e16a39edd0be22d6",
+  "kdfImageRef": "ghcr.io/willitmod/5tratsmack-kdf:0.11.17-rc.99a34a0ef5f5@sha256:c3ce7e638bdf55710fbfb607145d76c7d6e00b81a35e4c843645d9815f862087",
+  "platforms": [
+    "linux/amd64",
+    "linux/arm64"
+  ],
+  "registryEvidenceSha256": "2ac33f26fac9fe2e52e3882b6a194a1cb826372e69460ae9348495cc56d11050",
+  "baselineCommit": "7bf351859c5a29c99fbd6bcf7ade79c3f54f39d0",
+  "baselineComposeSha256": "9be169d521de8fa4ffea9da44b4f1cd983cac71887463c97ee48c5f582931f18",
+  "approvedRuntimeChanges": [
+    {
+      "path": [
+        "services",
+        "app",
+        "environment",
+        "APP_IMAGE"
+      ],
+      "before": "ghcr.io/willitmod/5tratsmack-app:0.11.13@sha256:70d007cf7a65fcdbee82d50c70d48aacb63af66b4cd9985e919bd99387401a42",
+      "after": "ghcr.io/willitmod/5tratsmack-app:0.11.18@sha256:afc841745d33b2cf72b0ed2c03fec2ab6ba48db0474e7983e16a39edd0be22d6",
+      "existed": true
+    },
+    {
+      "path": [
+        "services",
+        "app",
+        "environment",
+        "APP_REVISION"
+      ],
+      "before": "53f0415e517952a98d21f02b11009976a16a1d20",
+      "after": "fa08d11623b51159f78c47ac2e2a93cab639cb71",
+      "existed": true
+    },
+    {
+      "path": [
+        "services",
+        "app",
+        "environment",
+        "APP_VERSION"
+      ],
+      "before": "0.11.13",
+      "after": "0.11.18",
+      "existed": true
+    },
+    {
+      "path": [
+        "services",
+        "app",
+        "environment",
+        "FIVETRAT_RELEASE_TAG"
+      ],
+      "before": "0.11.13",
+      "after": "0.11.18",
+      "existed": true
+    },
+    {
+      "path": [
+        "services",
+        "app",
+        "healthcheck",
+        "test"
+      ],
+      "before": [
+        "CMD-SHELL",
+        "python -c \"import sys, urllib.request; r=urllib.request.urlopen('http://127.0.0.1:3000/api/about', timeout=3); sys.exit(0 if r.status == 200 else 1)\""
+      ],
+      "after": [
+        "CMD",
+        "curl",
+        "--fail",
+        "--silent",
+        "--max-time",
+        "3",
+        "http://127.0.0.1:3000/api/about"
+      ],
+      "existed": true
+    },
+    {
+      "path": [
+        "services",
+        "app",
+        "hostname"
+      ],
+      "before": null,
+      "after": "5tratsmack-app",
+      "existed": false
+    },
+    {
+      "path": [
+        "services",
+        "app",
+        "image"
+      ],
+      "before": "ghcr.io/willitmod/5tratsmack-app:0.11.13@sha256:70d007cf7a65fcdbee82d50c70d48aacb63af66b4cd9985e919bd99387401a42",
+      "after": "ghcr.io/willitmod/5tratsmack-app:0.11.18@sha256:afc841745d33b2cf72b0ed2c03fec2ab6ba48db0474e7983e16a39edd0be22d6",
+      "existed": true
+    },
+    {
+      "path": [
+        "services",
+        "app",
+        "stop_signal"
+      ],
+      "before": null,
+      "after": "SIGINT",
+      "existed": false
+    },
+    {
+      "path": [
+        "services",
+        "swap",
+        "image"
+      ],
+      "before": "ghcr.io/willitmod/5tratsmack-kdf:0.11.1@sha256:9eff0bfdc330bb997eacbce2b98500a52a084d682aec3644b73e663d54e6606a",
+      "after": "ghcr.io/willitmod/5tratsmack-kdf:0.11.17-rc.99a34a0ef5f5@sha256:c3ce7e638bdf55710fbfb607145d76c7d6e00b81a35e4c843645d9815f862087",
+      "existed": true
+    }
+  ],
+  "validation": {
+    "nativeRuntimeAndLayerChecks": true,
+    "liveProofAcrossTwoCacheExpiries": true,
+    "retainedHistoryPreserved": true,
+    "walletAndTradeMutationPerformed": false
+  },
+  "kdfReuse": "Exact previously tested DEV 0.11.17 broker; app 0.11.18 compatibility checked read-only.",
+  "scope": "MAIN includes prior DEV application and broker changes; DEV changes the application only. Core, CKPool, helpers, data mounts, ports and channel settings retain their catalogue baseline."
+}
