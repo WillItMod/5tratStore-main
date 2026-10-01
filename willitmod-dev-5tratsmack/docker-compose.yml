@@ -1,6 +1,6 @@
 version: "3.7"
 
-# Release source revision: 53f0415e517952a98d21f02b11009976a16a1d20
+# Release source revision: fa08d11623b51159f78c47ac2e2a93cab639cb71
 
 x-node-environment: &node-environment
   FIVETRAT_NETWORK: main
@@ -130,7 +130,7 @@ services:
       start_period: 30s
 
   swap:
-    image: ghcr.io/willitmod/5tratsmack-kdf:0.11.1@sha256:9eff0bfdc330bb997eacbce2b98500a52a084d682aec3644b73e663d54e6606a
+    image: ghcr.io/willitmod/5tratsmack-kdf:0.11.17-rc.99a34a0ef5f5@sha256:c3ce7e638bdf55710fbfb607145d76c7d6e00b81a35e4c843645d9815f862087
     restart: unless-stopped
     network_mode: service:node-a
     depends_on:
@@ -197,7 +197,9 @@ services:
       start_period: 90s
 
   app:
-    image: ghcr.io/willitmod/5tratsmack-app:0.11.13@sha256:70d007cf7a65fcdbee82d50c70d48aacb63af66b4cd9985e919bd99387401a42
+    stop_signal: SIGINT
+    hostname: 5tratsmack-app
+    image: ghcr.io/willitmod/5tratsmack-app:0.11.18@sha256:afc841745d33b2cf72b0ed2c03fec2ab6ba48db0474e7983e16a39edd0be22d6
     restart: unless-stopped
     depends_on:
       init_permissions:
@@ -206,7 +208,7 @@ services:
         condition: service_started
     environment:
       APP_ID: 5tratsmack
-      APP_VERSION: 0.11.13
+      APP_VERSION: 0.11.18
       APP_CHANNEL: MAIN
       APP_RELEASE_PHASE: STABLE
       APP_PLATFORM: 5TRATUMOS
@@ -215,9 +217,9 @@ services:
       FIVETRAT_STORE_UPDATE_APP_ID: 5tratsmack
       FIVETRAT_STORE_UPDATE_CHANNEL: main
       FIVETRAT_INSTALL_REVISION: main-store
-      FIVETRAT_RELEASE_TAG: 0.11.13
-      APP_IMAGE: ghcr.io/willitmod/5tratsmack-app:0.11.13@sha256:70d007cf7a65fcdbee82d50c70d48aacb63af66b4cd9985e919bd99387401a42
-      APP_REVISION: 53f0415e517952a98d21f02b11009976a16a1d20
+      FIVETRAT_RELEASE_TAG: 0.11.18
+      APP_IMAGE: ghcr.io/willitmod/5tratsmack-app:0.11.18@sha256:afc841745d33b2cf72b0ed2c03fec2ab6ba48db0474e7983e16a39edd0be22d6
+      APP_REVISION: fa08d11623b51159f78c47ac2e2a93cab639cb71
       BCH2_NODE_IMAGE: ghcr.io/willitmod/5tratsmack-core:0.11.2@sha256:7bf02513144c7a157965fb8e9ad5865f5e84fa679afa7cb61fc0a8e140a40070
       CKPOOL_IMAGE: ghcr.io/willitmod/5tratsmack-ckpool:0.11.3@sha256:95a1a5f343d579206a0f8bb3c961cafa7500b5d487211a0cfb7b989cf34b895e
       FIVETRAT_MUX_IDENTITY_URL: http://172.17.0.1:21222/api/integrations/workers
@@ -259,9 +261,7 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     healthcheck:
-      test:
-        - CMD-SHELL
-        - python -c "import sys, urllib.request; r=urllib.request.urlopen('http://127.0.0.1:3000/api/about', timeout=3); sys.exit(0 if r.status == 200 else 1)"
+      test: ["CMD", "curl", "--fail", "--silent", "--max-time", "3", "http://127.0.0.1:3000/api/about"]
       interval: 15s
       timeout: 5s
       retries: 20

@@ -1,0 +1,29 @@
+{
+  "version": "0.11.18",
+  "sourceRevision": "fa08d11623b51159f78c47ac2e2a93cab639cb71",
+  "mergedSourceRevision": "466e63185c984e3537a4fb6fcf815cda57fa01ed",
+  "verifierRevision": "393e38e447470867f5a5617947a94d49fb5f1c89",
+  "appImageRef": "ghcr.io/willitmod/5tratsmack-app:0.11.18@sha256:afc841745d33b2cf72b0ed2c03fec2ab6ba48db0474e7983e16a39edd0be22d6",
+  "manifestDigest": "sha256:afc841745d33b2cf72b0ed2c03fec2ab6ba48db0474e7983e16a39edd0be22d6",
+  "platforms": [
+    "linux/amd64",
+    "linux/arm64"
+  ],
+  "images": {
+    "amd64": {
+      "manifestDigest": "sha256:7c4d0724f5f3a3bf74136aded8af5dfb14d2660eccd2f2933579a31b7f90a7e1",
+      "configDigest": "sha256:d58680f81abd75ed5591395c156674ab111f4d68f1281de4dc9e1d7328fe710d"
+    },
+    "arm64": {
+      "manifestDigest": "sha256:34eaf467eed309402cad3498b7792009df85b8068d7bc70f03ca923d87d63182",
+      "configDigest": "sha256:ceb13072ad877f7f57149d86d3bcf67ab8d6d14ce77bd408fe2032690d2661fb"
+    }
+  },
+  "anonymousPullVerified": true,
+  "validation": {
+    "nativeRuntimeAndLayerChecks": true,
+    "liveProofAcrossTwoCacheExpiries": true,
+    "retainedHistoryPreserved": true,
+    "walletAndTradeMutationPerformed": false
+  }
+}

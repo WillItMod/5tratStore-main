@@ -2,15 +2,14 @@ manifestVersion: 1
 id: willitmod-dev-5tratsmack
 category: altcoin
 name: 5tratSmack
-version: "0.11.13"
+version: "0.11.18"
 tagline: Home-miner 5TRAT node, wallet, solo pool and atomic trade lab
 description: >-
   Install and synchronize a complete 5TRAT node, create or restore an encrypted
   wallet, connect home miners to the bundled solo pool, explore the chain, and
   use the atomic trade lab from one 5tratumOS app.
 
-  This MAIN-channel release has completed public-chain, wallet, pool,
-  MUX pass-through and trading tests. Back up both the mining wallet and trading
+  Back up both the mining wallet and trading
   recovery file before moving funds. The trade book uses the public Komodo DeFi
   Framework network through outbound peer connections; every atomic swap still
   requires the participating wallets to approve and settle it.
@@ -38,18 +37,17 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Quarterly recovery checks help protect the main and trading wallets: test your
-  saved wallet password, read back a saved recovery file, and download a fresh
-  backup. Encryption with a separate backup passphrase is recommended and selected
-  by default. Optional unencrypted files require an explicit warning because
-  anyone with the file can spend the coins; store them securely offline. Both
-  recovery formats can restore with a new wallet password. Native .dat backups
-  still require their original wallet password. Checks never move funds or replace
-  a wallet, and downloading alone does not complete a quarterly check. A seven-day
-  reminder option is available. Portable recovery now preserves older private keys,
-  full address ranges and indices above 1,000. The cryptography dependency is
-  updated to 50.0.1 and backup download tokens are redacted from logs. Existing
-  wallet, chain, mining and trading data persist; only the application image changes.
+  Block status stays current during normal MUX polling. Large retained block histories now have a bounded recent feed for MUX, while the complete Blocks history remains visible in the app. Fresh proof of the exact active-chain block and the pool payout in coinbase output zero is still required. Unavailable or orphaned proof withdraws a verified claim without deleting history.
+
+  Direct and mixed miners keep accepted-share hashrate visible when MUX is empty, offline, or routing other miners elsewhere. MUX headlines require matched worker identities; pool estimates and routed telemetry remain separately labelled. Worker cards retain pool estimates when a previously MUX-connected miner reconnects directly.
+
+  Settings includes Block alerts in this browser. Its queue and acknowledgements are local to that browser. OS and MUX notification acknowledgements remain separate.
+
+  Trade guides Buy and Sell through Amount, Prepare funds, Review and Follow progress. Send and Receive use focused forms with expandable Gleec wallet instructions. Trade Pulse retains Global Trades, My Trades and Compare. Native transfers validate the recipient and reviewed amount, protect open-order funds, and recover uncertain broadcasts without signing a second payment. Wallet backup and final transaction approval remain required.
+
+  Existing wallet, chain and mining data paths remain unchanged.
+
+  This MAIN release includes the previously tested DEV application and trading backend updates. The tested backend image is reused unchanged.
 widgets:
   - id: sync
     type: text-with-progress
