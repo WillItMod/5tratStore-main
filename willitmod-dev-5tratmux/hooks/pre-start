@@ -1,0 +1,54 @@
+#!/bin/sh
+set -eu
+umask 077
+# Only the two app-owned directory inodes are repaired. Never recurse into
+# saved files. Chmod/chown use '.' after canonical-path verification, avoiding
+# symlink-following mutations of a replaced path.
+app_dir=${APP_DATA_DIR:?APP_DATA_DIR must name this app directory}
+case "$app_dir" in /*) ;; *) echo "App directory must be absolute" >&2; exit 1;; esac
+if [ ! -d "$app_dir" ] || [ -L "$app_dir" ]; then
+  echo "Refusing a missing or symlinked app directory" >&2
+  exit 1
+fi
+app_real=$(cd -P -- "$app_dir" && pwd -P)
+app_id=willitmod-dev-5tratmux
+if [ "${app_real##*/}" != "$app_id" ]; then
+  echo "Refusing another app's definition directory" >&2
+  exit 1
+fi
+data_root=${APP_DATA_ROOT:-$app_dir/data}
+case "$data_root" in /*) ;; *) echo "Data root must be absolute" >&2; exit 1;; esac
+if [ "$data_root" = "$app_dir" ] || [ "$data_root" = "$app_real" ]; then
+  echo "Refusing the app definition directory as storage" >&2; exit 1
+fi
+legacy_root=false
+case "$data_root" in "$app_dir/data"|"$app_real/data") legacy_root=true;;
+  */"$app_id") ;; *) echo "Refusing a data root outside this app's managed slot" >&2; exit 1;; esac
+if [ -L "$data_root" ]; then
+  echo "Refusing a symlinked data root" >&2
+  exit 1
+fi
+if [ ! -e "$data_root" ]; then
+  # A relocated Umbrel 2.0 root must already exist. Only the legacy app/data
+  # directory is created here, so unavailable storage cannot become empty state.
+  if [ -n "${APP_DATA_ROOT:-}" ]; then echo "Relocated data root is unavailable" >&2; exit 1; fi
+  mkdir -m 700 -- "$data_root"
+fi
+[ -d "$data_root" ] || { echo "Data root is not a directory" >&2; exit 1; }
+cd -P -- "$data_root"
+root_real=$(pwd -P)
+[ "$root_real" != "$app_real" ] || { echo "Refusing the app definition directory as storage" >&2; exit 1; }
+if [ "$legacy_root" = true ]; then
+  [ "$root_real" = "$app_real/data" ] || { echo "Refusing a changed app data root" >&2; exit 1; }
+else
+  [ "${root_real##*/}" = "$app_id" ] || { echo "Refusing an unexpected relocated slot" >&2; exit 1; }
+fi
+chown -h 1000:1000 -- .
+chmod 700 .
+if [ -L state ]; then echo "Refusing symlinked state directory" >&2; exit 1; fi
+if [ ! -e state ]; then mkdir -m 700 -- state; fi
+[ -d state ] || { echo "State is not a directory" >&2; exit 1; }
+cd -P -- state
+[ "$(pwd -P)" = "$root_real/state" ] || { echo "Refusing changed state directory" >&2; exit 1; }
+chown -h 1000:1000 -- .
+chmod 700 .

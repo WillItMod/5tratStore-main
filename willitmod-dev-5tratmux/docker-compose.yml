@@ -1,0 +1,40 @@
+version: "3.7"
+services:
+  # Umbrel 1.7 runs this proxy; 2.0 renders it into the host app gateway.
+  # Keep it declarative, with no dependencies or namespace sharing.
+  app_proxy:
+    environment:
+      APP_HOST: willitmod-dev-5tratmux_server_1
+      APP_PORT: "21222"
+  server:
+    # Protected runtime; release metadata binds the immutable multi-platform index.
+    image: ghcr.io/willitmod/5tratmux-app:0.9.79-umbrel@sha256:13b78473d6c16ec5e9104695df030c240f4189c4d7488ba63377f8fd316c7391
+    user: "1000:1000"
+    init: true
+    restart: unless-stopped
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    pids_limit: 256
+    mem_limit: 1536m
+    stop_grace_period: 30s
+    tmpfs:
+      # The protected onefile executable needs an executable extraction path.
+      - /tmp:rw,nosuid,nodev,exec,size=256m,mode=1777
+    ports:
+      - "7331:7331/tcp"
+    expose:
+      - "21222"
+    volumes:
+      - ${APP_DATA_DIR}/data:/data
+    environment:
+      MUX_PLATFORM: umbrel
+      APP_HOST: 0.0.0.0
+      APP_PORT: "21222"
+      STATE_DIR: /data/state
+      MUX_OPERATOR_PASSWORD: ${APP_PASSWORD}
+      MUX_AUTH_TRUSTED_PROXIES: ${GATEWAY_IP}
+      MUX_HTTP_STRICT_HOST: "1"
+      MUX_HTTP_ALLOWED_HOSTS: ${DEVICE_DOMAIN_NAME},${DEVICE_HOSTNAME},localhost
+      APP_VERSION: 0.9.79
+      APP_CHANNEL: MAIN

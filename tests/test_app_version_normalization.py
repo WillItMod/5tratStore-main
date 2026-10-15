@@ -9,6 +9,7 @@ from unittest.mock import patch
 
 import yaml
 import app_version_normalization as normalization
+from test_mux_umbrel_release import mux as mux_release
 
 ROOT = Path(__file__).resolve().parents[1]
 APP = normalization.APP
@@ -136,7 +137,11 @@ class AppVersionNormalizationTests(unittest.TestCase):
         expected = normalization.contract()
         old = normalization.published_ports(expected["baselineCommit"])
         self.assertEqual(normalization.digest(old), expected["publishedPortsSHA256"])
-        self.assertEqual(normalization.published_ports(), old)
+        current = normalization.published_ports()
+        # Admit only the exact new Umbrel-only MUX listener inventory. Every
+        # preexisting app retains the frozen channel baseline without filters.
+        self.assertEqual(current.pop(mux_release.APP), mux_release.PORTS)
+        self.assertEqual(current, old)
 
     def test_every_preexisting_release_record_remains_byte_exact(self):
         revision = normalization.contract()["baselineCommit"]
