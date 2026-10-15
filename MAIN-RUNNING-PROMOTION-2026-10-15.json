@@ -188,7 +188,8 @@
       "amd64",
       "arm64"
     ],
-    "FumbrelOrdinaryRunningUpdate": "PASS"
+    "FumbrelOrdinaryRunningUpdate": "PASS",
+    "BC2EvidenceScope": "Local complete49tests/0skips include Linux runtime and live platform contract. Isolated GitHub CI also executes the Linux fixture; only its live platform checkout comparison may be unavailable."
   },
   "knownLimits": [
     "Current Umbrel1.7 host login is unavailable; retained exact-version running receipts are used",
