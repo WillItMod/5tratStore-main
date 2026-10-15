@@ -1,0 +1,16 @@
+#!/bin/sh
+set -eu
+# Docker creates an absent bind root as root; the app intentionally runs as UID 1000.
+app_dir=${APP_DATA_DIR:?APP_DATA_DIR must name the app data directory}
+if [ ! -d "$app_dir" ] || [ -L "$app_dir" ]; then
+  echo "Refusing a missing or symlinked app data directory" >&2
+  exit 1
+fi
+data_dir="$app_dir/data"
+if [ -L "$data_dir" ]; then
+  echo "Refusing a symlinked persistent data directory" >&2
+  exit 1
+fi
+mkdir -p -- "$data_dir"
+# Repair only the mount root. Do not traverse or change the app's stored files.
+chown -h 1000:1000 -- "$data_dir"

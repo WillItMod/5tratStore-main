@@ -2,7 +2,7 @@ manifestVersion: 1
 id: willitmod-axemig
 category: bitcoin
 name: AxeMIG
-version: "0.1.21"
+version: "0.1.24"
 tagline: Data-only blockchain migration tool
 description: >-
   RELEASE CANDIDATE
@@ -35,6 +35,8 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
+  v0.1.24: Waits for verified graceful node shutdown before moving, copying or restoring chain data. Retains the tested USB path and chain-discovery fixes. Timeouts or cancellations prevent data changes and automatic restarts; wallets, secrets and layouts are unchanged.
+
   v0.1.21: Promotes the tested DEV build to MAIN and replaces legacy Fractal wording in migration guidance with AxeBTC.
 
   v0.1.20-dev: Relaxes the in-app maturity label to ALPHA while keeping migration safety guidance clear.
