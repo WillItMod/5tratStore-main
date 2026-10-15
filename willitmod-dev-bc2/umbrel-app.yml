@@ -2,13 +2,13 @@ manifestVersion: 1
 id: willitmod-dev-bc2
 category: bitcoin
 name: AxeBC2
-version: "0.1.15"
+version: "0.1.22"
 tagline: BC2 node + solo pool
 description: >-
-  STABLE RELEASE (MAIN CHANNEL)
+  BETA RELEASE (DEV CHANNEL)
 
-  AxeBC2 runs a BitcoinII node and private solo-mining pool. This Core 31
-  release supports the ShockWave consensus activation.
+  AxeBC2 is a functional BitcoinII node and solo pool that has successfully
+  found blocks. This BETA build includes the latest fixes and refinements.
 
   Run a BitcoinII (BC2) full node and an integrated solo Stratum v1 pool (ckpool) as a single app.
 
@@ -43,46 +43,35 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Fixes AxeBC2 installation, startup and updates on Umbrel 1.7.4. The package
-  now works with its storage parser and preserves the container names Umbrel
-  uses to track app health. Existing blockchain data, payout settings and
-  Core 31 migration records are preserved. Required files and directories
-  still fail closed when missing, and 5tratumOS retains its host version check.
-  The dashboard now displays 0.1.15; BitcoinII Core and CKPool are unchanged.
+  Fresh installations retain their Core31 chain across ordinary restarts. Existing chain data still follows the required migration, checkpoint and rollback checks. Application, node and pool images are unchanged.
 
-  Included changes from 0.1.14:
-  Fixes AxeBC2 installation failing near completion on Umbrel 2. The app now
-  starts correctly when Umbrel uses its new built-in authentication gateway,
-  while preserving authentication support for older Umbrel releases. The dashboard
-  is now reachable through Umbrel 2 on its usual app port, 21219.
-  Existing blockchain data, payout settings, and Core 31 migration safeguards
-  are preserved. BitcoinII Core and CKPool versions are unchanged. An existing
-  chain without a verified Core 31 completion record still runs the required
-  one-time reindex; completed migrations do not repeat it.
+  Adds safe pool log retention with 5tratumOS 0.8.23. Complete block and pool accounting records are saved before old raw log bytes are retired. The active log uses a 20 MiB rolling target with two recent archives. Unread or unresolved evidence is retained, and the app reports backlog or blockers. Existing mining, wallet and chain data are preserved.
 
-  Included changes from 0.1.13:
-  Aligns the application image and store package at version 0.1.13 across
-  DEV and MAIN. Includes the BETA presentation update and removal of the
-  general ALPHA/BETA warning banner.
-  Fixes Umbrel installation by removing its dependency on the 5tratumOS host
-  build.json file. 5tratumOS retains its native startup checks. The update
-  preserves Core 31 migration checks, payout settings, and existing blockchain
-  and pool data.
+  Best-share records now use verified payout/worker identities and supported
+  worker aliases. Fixes record/cache resets. Incomplete pool-log entries
+  are retained until complete. Existing unqualified records remain
+  pool-wide only; verified personal records start with fresh shares
+  after this update. The card explains partial history until the next
+  block or global record reset. Direct/MUX hashrate support, node and
+  pool images, mining configuration and payouts are unchanged.
 
-  Included fixes from 0.1.11:
-  Corrects payout-address validation: BitcoinII Core-accepted mainnet addresses
-  beginning with 1, 3, or bc1 are supported, while invalid or wrong-network
-  addresses are rejected without changing the saved pool configuration. Settings
-  are also left untouched while Core is unavailable, and payout checks left
-  pending by an older release are retried at a bounded interval. It removes the
-  misleading payout warning from MAIN builds, keeps CKPool /config writable on
-  every initializer run, and conditionally repairs /www ownership when needed so
-  existing sharelogs remain writable. This app-only update retains the accepted
-  BitcoinII Core 31.1 image, existing blockchain and pool data, and the configured
-  payout address; it does not trigger another blockchain reindex. Requires
-  5tratumOS 0.7.12 or newer.
-  Stratum remains on TCP port 2345, telemetry remains disabled by default, and
-  no public P2P port or NAT-PMP mapping is enabled.
+  Direct and mixed miners now keep their accepted-share hashrate visible
+  when MUX is empty, offline, or routing other miners elsewhere. MUX-only
+  headlines require matched worker identities; pool estimates and routed
+  telemetry remain separately labelled. Worker cards also retain pool estimates
+  when a previously MUX-connected miner reconnects directly. Accepted shares
+  and history are unchanged.
+
+  Current miner hash rate from 5tratMux appears separately from accepted-share
+  estimates, with stale or unavailable telemetry handled explicitly. Block
+  history checks the full block hash against the correct chain and refreshes
+  confirmation and reorganisation status before showing a confirmed find.
+  Unverified reports remain distinguishable from confirmed pool blocks.
+
+  Block alerts in this browser is a separate local preference. Recent verified
+  blocks queue across app tabs, with browser-only Close acknowledgements.
+  Reorgs or unavailable proof retract the alert without acknowledging it.
+  OS and MUX delivery and acknowledgements remain independently managed.
 widgets:
   - id: "sync"
     type: "text-with-progress"

@@ -1,0 +1,30 @@
+{
+  "at": "2026-10-15T00:39:47.030368+00:00",
+  "repository": "willitmod/fumbrel",
+  "tag": "0.1.2-dev",
+  "digest": "sha256:4d7d0183604372ee340ab51c6f612cc63f832e5e357c3fb2ac77b77106816d10",
+  "source": "f666e677138aebe06a319459d8da62c4c02a4bea",
+  "workflow": 38661048787,
+  "anonymous_access": true,
+  "platforms": {
+    "amd64": {
+      "manifest_digest": "sha256:b13d6e88f64f530a03bcd2c3f76755cbef4b6936b27752d7760493eb7d29c604",
+      "config_digest": "sha256:c9f9befae396d82581c2aeeb52e4967d2dd957b9d2e339ad09422c411dabb7ab"
+    },
+    "arm64": {
+      "manifest_digest": "sha256:fd85490d5f71293b313523421d5b78d9039cae9475c68ea003499049ac20d77c",
+      "config_digest": "sha256:5329498a28bbee8b03c56f0f8c17320135ef241ce691669561e7e41d6864c709"
+    }
+  },
+  "base_index": "sha256:290a91f5e8f42e51af4b9c715c449bda96071b98eb4c2de0ef97e52d9d4fba7a",
+  "catalogue_source": "81535f05ffc82e742b9aa32299c806de6b3b712c",
+  "only_changed_runtime_files_sha256": {
+    "engine.py": "b0fd07e91699419d55c7982d5febf43eb8fb7485839567b54c1540003a5f7cda",
+    "catalog.json": "d6bb1c6fe19018c26f826e4fb682790d28238466640caca0664cf394f44850ab"
+  },
+  "actual_published_native_architectures_verified": [
+    "amd64",
+    "arm64"
+  ],
+  "ordinary_Umbrel_qualification_claimed": false
+}

@@ -1,5 +1,27 @@
 # Umbrel packaging
 
+The `0.1.22-dev.1` recipe records fresh Core31 chain provenance at the first
+initialization of an empty chain directory. The record binds the immutable
+Core31 node image and source revision. Subsequent starts retain that chain
+without queuing the historical migration merely because blocks now exist.
+This record has no validated height, checkpoint, chainwork or completion claim.
+
+Historical chain data without valid fresh provenance still queues the existing
+full reindex. Explicit reindex configuration and required migration markers are
+preserved. Malformed records and source/image mismatches reject initialization.
+The existing checkpoint, chainwork, rollback floors and validated completion
+checks are unchanged. The normal initializer generates this record; upgrades
+do not retroactively infer it from an already populated chain directory.
+
+The canonical initializer remains `data/init/init.sh`, and the generator below
+produces the identical admission logic in `hooks/umbrel-init`. Fresh native
+installs receive the canonical initializer through the existing seed contract;
+Umbrel receives the generated hook through its normal update whitelist.
+Application, node, pool images and data paths are unchanged. The regression
+fixtures execute both shipped initializers; live fresh-chain and mining
+qualification remain separate checks recorded in
+`BC2-FRESH-PROVENANCE-2026-10-14.json`.
+
 Umbrel renders the top-level `docker-compose.yml.template` before installation
 and every start. It refreshes top-level templates and `hooks/` on upgrades.
 The generated template uses `hooks/umbrel-init` and `hooks/umbrel-ckpool` as
@@ -8,10 +30,11 @@ block an upgraded Umbrel installation.
 
 5tratumOS consumes `docker-compose.yml` directly. Its initializer
 `data/init/init.sh` retains the minimum OS check and migration safeguards. The
-Umbrel template needs no 5tratumOS host file and uses the same pinned app,
-Core 31, CKPool, and initialization images.
+Umbrel template needs no 5tratumOS host file. Native and Umbrel recipes share
+the same pinned application and retain the existing Core 31, CKPool, and
+initialization images.
 
-## Umbrel 1.7.4 packaging repair — 0.1.15
+## Umbrel 1.7.4 packaging repair 0.1.15-dev
 
 Umbrel 1.7.4 reads the shipped Compose file before its shell installer renders
 templates. Its `App.patchComposeFile()` treats every `service.volumes` entry as
@@ -20,7 +43,7 @@ package therefore fail immediately, before image downloads or initialization.
 The same patch runs against a previously rendered file on start, and after
 template rendering during updates; both Compose forms must satisfy it.
 
-The 0.1.15 package keeps service volume entries as short strings backed by
+The 0.1.15-dev package keeps service volume entries as short strings backed by
 project-scoped local-driver bind volumes. Each volume still binds the exact
 existing host directory, and fails if that directory is missing. `nocopy`
 prevents Docker from populating those directories from image contents.
@@ -32,7 +55,7 @@ entrypoint through configs pointing to the refreshed `hooks/` files. The
 read-only CKPool config directory also retains its write protection.
 
 This changes mount representation; all nine effective native host mounts,
-container users, Core/CKPool pins, commands, dependency order, network behavior and
+container users, node/pool/initialization image pins, commands, dependency order, network behavior and
 persistent paths are preserved. The native initializer is unchanged, including
 the OS floor, Core 31 migration checks, payout preservation and rollback policy.
 The template declares the `${APP_ID}_<service>_1` container names that Umbrel
@@ -51,14 +74,9 @@ AXEBC2_TEST_DOCKER_RUNTIME=1 python3 -m unittest discover -s tests -p 'test_axeb
 
 Run these tests on the Docker host with the pinned Alpine image already
 available. They create isolated temporary files, containers and project volumes,
-and clean them up afterwards. Live Umbrel 1.7.4 amd64 validation covered the
-repaired install, update to 0.1.15, normal stop/start, and VM reboot recovery.
-Authenticated dashboard/API access, full node sync, and preservation of node
-configuration, pool configuration, rollback policy and the completed Core 31
-migration marker were verified. The app image changes its displayed version
-only; BitcoinII Core and CKPool images are unchanged. No miners or payout
-address were configured, and no physical arm64 or new Umbrel 2 live test was run.
-See `RELEASE-0.1.15-EVIDENCE.json` for the exact release and validation scope.
+and clean them up afterwards. Package and application versions align at
+0.1.15-dev, using the same verified application digest as MAIN 0.1.15.
+The node, CKPool, and initialization image pins retain their accepted values.
 
 Upstream source:
 https://github.com/getumbrel/umbrel/blob/1.7.4/packages/umbreld/source/modules/apps/app.ts#L100-L219
@@ -75,7 +93,7 @@ Regenerate after changing the shared recipe or initializer:
 ```sh
 python3 scripts/build-axebc2-umbrel.py
 python3 scripts/build-axebc2-umbrel.py --check
-python3 scripts/validate-axebc2-core31-main.py --phase finalized
+python3 scripts/validate-axebc2-core31-dev.py --phase finalized
 ```
 
 Generated entrypoints live in `hooks/` because it is an upstream update
@@ -93,9 +111,11 @@ https://github.com/getumbrel/umbrel/blob/1.7.4/packages/umbreld/source/modules/a
 
 ## Initial packaging candidate 0.1.12 (superseded)
 
-The initial packaging candidate used package version 0.1.12 with the
-0.1.11 application image. Release 0.1.13 supersedes that candidate and aligns
-the package and application versions; the node image is unchanged.
+The initial MAIN packaging candidate used version 0.1.12 with the 0.1.11
+application image. DEV published 0.1.12 with the BETA UI update: the general
+release banner was removed and the compact badge retained. Release 0.1.13
+supersedes both, aligning application and package versions in each channel.
+Node and pool images are unchanged.
 
 On 6 September 2026, both candidates passed the native installer and repeated
 container initialization on 5tratumOS v0.7.12-dev at 10.10.10.235, using
@@ -111,6 +131,13 @@ establish synchronized mining or Umbrel dashboard authentication.
 Automated validation: 33 DEV tests and 40 MAIN tests passed. Real Umbrel
 installation, authenticated opening, and upgrade remain pending VM access.
 
+The BETA application candidate is bound in `BETA-RELEASE-EVIDENCE.json`.
+Historical Core 31 acceptance remains tied to 0.1.11. The original 0.1.14-dev
+fixture retains its baseline hash after reversing the explicit BETA app-image
+and stage changes. Validation compares the current recipe with that verified
+fixture, preserving all effective mounts and non-mount runtime settings while
+allowing the app release image to advance through the exact-pin release gate.
+
 ## Aligned release 0.1.13
 
 Application and package versions now align: 0.1.13-dev in DEV and 0.1.13 in
@@ -119,21 +146,21 @@ tags. Core 31, CKPool, the native initializer, and persistent data paths retain
 their accepted configuration. Historical 0.1.11/0.1.12 observations above remain
 bound to those releases. See RELEASE-0.1.13-EVIDENCE.json for this release.
 
-## Umbrel 2 installer repair 0.1.14
+## Umbrel 2 installer repair 0.1.14-dev
 
 Umbrel sources `exports.sh` under its own strict shell settings before it renders
-`docker-compose.yml.template`. Release 0.1.14 makes missing legacy auth
+`docker-compose.yml.template`. Release 0.1.14-dev makes missing legacy auth
 containers an expected lookup result and does not alter the caller's shell
 options. It retains a supplied or discovered real `JWT_SECRET` for legacy
 Umbrel authentication. When no legacy auth service exists, it leaves the secret
 unset instead of fabricating one; Umbrel 2's in-process app gateway does not
 consume this legacy Compose value. The generated Umbrel recipe also declares
 the unique `axebc2-app` hostname. Umbrel 2 can therefore resolve the authenticated
-gateway target and register the manifest LAN port without relying on a Docker
+gateway target and register the manifest's LAN port without relying on a Docker
 network alias that its ingress resolver does not inspect.
 
 The final package pairs this repair with a separately built and verified
-0.1.14 application image so the app UI and package versions remain aligned.
+0.1.14-dev application image so the app UI and package versions remain aligned.
 BitcoinII Core 31.1, CKPool, Alpine, persistent paths, and migration safeguards
 remain unchanged.
 
@@ -151,3 +178,9 @@ completed migrations retain their record. Node and pool configuration were
 preserved. No payout address was configured on this new VM, so actual mining
 and share submission were not exercised. See RELEASE-0.1.14-EVIDENCE.json for
 precise validation scope and results; older observations above are historical.
+
+The equivalent MAIN 0.1.15 packaging passed live Umbrel 1.7.4 amd64 install,
+update, stop/start and VM reboot recovery. Configuration and chain data were
+preserved. DEV lifecycle was covered by automated parser and Docker mount tests;
+this release did not run a separate live DEV installation or a new Umbrel 2 VM
+test. See `RELEASE-0.1.15-EVIDENCE.json` for exact validation scope.

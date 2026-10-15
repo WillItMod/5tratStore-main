@@ -29,7 +29,7 @@ if [ -z "${dbcache}" ]; then
   avail_kb="$(awk '/MemAvailable/ {print $2}' /proc/meminfo 2>/dev/null || echo 0)"
   mem_mb="$((mem_kb / 1024))"
   avail_mb="$((avail_kb / 1024))"
-  # Keep the default conservative because Umbrel/5tratumOS nodes often run
+  # Keep the default conservative because 5tratumOS nodes often run
   # several full nodes at once. BTC_DBCACHE_MB can still override this.
   if [ "$mem_mb" -ge 12000 ]; then
     dbcache=1536

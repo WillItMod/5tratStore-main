@@ -20,12 +20,18 @@ services:
       - |-
         set -eu
         mkdir -p /data/ui/state /data/node /data/pool/config /data/pool/www/pool /data/pool/www/users
-        chown -R 1000:1000 /data/ui /data/node /data/pool || true
-        chmod -R ug+rwX /data/ui /data/node /data/pool || true
+        # Core owns /data/node as bch2:bch2. Changing a running Core's
+        # database ownership here prevents writes and can force a restart.
+        chown -R 1000:1000 /data/ui /data/pool || true
+        chmod -R ug+rwX /data/ui /data/pool || true
 
   app:
-    image: ghcr.io/willitmod/axebch2-app:0.2.0.3
+    stop_signal: SIGINT
+    hostname: axebch2-app
+    image: ghcr.io/willitmod/axebch2-app:0.2.0.12-dev@sha256:65891eb60db568ca9f9ee21e00869769b5bc475a94f2af5f215dfdc55857e2d1
     user: "1000:1000"
+    group_add:
+      - "${AXEBCH2_DOCKER_GID:-1000}"
     restart: unless-stopped
     depends_on:
       init_permissions:
@@ -43,15 +49,17 @@ services:
       - ${APP_DATA_DIR}/data:/data
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
+      APP_REVISION: 5531b5e6e2e4c55353454665af9fc1950f9f0844
+      MUX_IDENTITY_URL: "http://172.17.0.1:21222/api/integrations/workers"
       APP_ID: "willitmod-dev-axebch2"
-      APP_VERSION: "0.2.0.3"
-      APP_CHANNEL: "RC1"
-      APP_RELEASE_PHASE: "RC"
+      APP_VERSION: "0.2.0.12"
+      APP_CHANNEL: "MAIN"
+      APP_RELEASE_PHASE: "STABLE"
       APP_SELF_RESTART_ENABLED: "1"
       APP_COMPOSE_PROJECT: "${COMPOSE_PROJECT_NAME}"
       NETWORK_IP: "${NETWORK_IP}"
-      BCH2_NODE_IMAGE: "ghcr.io/willitmod/axebch2-node:0.1.33"
-      CKPOOL_IMAGE: "ghcr.io/willitmod/axebch2-ckpool:0.1.33"
+      BCH2_NODE_IMAGE: "ghcr.io/willitmod/axebch2-node:0.1.34-fresh-entrypoint-dev-20261014@sha256:f90cbc4bc844a773b864c6f33300289a362b6ccd48aa014fd738578a608ca697"
+      CKPOOL_IMAGE: "ghcr.io/willitmod/axebch2-ckpool:0.1.34-idle-stop-dev-20261014@sha256:de3dca9f94f73aa9fb46812aa8ef65556e3ffa14b25ef3273bf4523753ea555c"
       BCH2_RPC_HOST: "bch2"
       BCH2_RPC_PORT: "8342"
       BCH2_RPC_USER: "bch2"
@@ -68,7 +76,7 @@ services:
       start_period: 90s
 
   bch2:
-    image: ghcr.io/willitmod/axebch2-node:0.1.33
+    image: ghcr.io/willitmod/axebch2-node:0.1.34-fresh-entrypoint-dev-20261014@sha256:f90cbc4bc844a773b864c6f33300289a362b6ccd48aa014fd738578a608ca697
     restart: unless-stopped
     stop_grace_period: 15m30s
     depends_on:
@@ -108,7 +116,7 @@ services:
       start_period: 2m
 
   ckpool:
-    image: ghcr.io/willitmod/axebch2-ckpool:0.1.33
+    image: ghcr.io/willitmod/axebch2-ckpool:0.1.34-idle-stop-dev-20261014@sha256:de3dca9f94f73aa9fb46812aa8ef65556e3ffa14b25ef3273bf4523753ea555c
     restart: unless-stopped
     stop_grace_period: 30s
     depends_on:

@@ -1,16 +1,16 @@
-# PowPow MAIN Release Candidate Notes
+# PowPow Dev Store Notes
 
 This package is now wired to the real PowPow stack.
 
 ## Current status
 
 - Uses GHCR images published from `WillItMod/PowPow_Build`
-- Package version: `0.2.32`
-- App image: `ghcr.io/willitmod/powpow-app:0.2.31`
+- Package version: `0.2.32-dev`
+- App image: `ghcr.io/willitmod/powpow-app:0.2.31-dev`
 - Service images:
-  - `ghcr.io/willitmod/powpow-litecoin:0.2.32` (Litecoin Core `0.21.5.8`)
-  - `ghcr.io/willitmod/powpow-dogecoin:0.2.26`
-  - `ghcr.io/willitmod/powpow-pool:0.2.31`
+  - `ghcr.io/willitmod/powpow-litecoin:0.2.32-dev` (Litecoin Core `0.21.5.8`)
+  - `ghcr.io/willitmod/powpow-dogecoin:0.2.26-dev`
+  - `ghcr.io/willitmod/powpow-pool:0.2.31-dev`
 - Acceptance testing for this update passed on `10.10.10.235` on `2026-09-16`.
 - Miner endpoint hint is injected through packaging with `NETWORK_HOST_HINT: "${NETWORK_IP}"`
 - App version display is set from `APP_VERSION`
@@ -42,6 +42,5 @@ This package is now wired to the real PowPow stack.
 
 ## Deployment note
 
-This package is the MAIN Community Store release candidate promoted from the
-tested DEV recipe. The AMD64 and ARM64 image checks and live acceptance passed
-on `2026-09-16`; the MAIN package uses the same tested Litecoin image manifest.
+This DEV package contains the Litecoin node security update validated above.
+The corresponding MAIN package uses the same tested Litecoin image manifest.

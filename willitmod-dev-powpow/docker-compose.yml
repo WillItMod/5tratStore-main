@@ -19,13 +19,28 @@ services:
       - -ec
       - |-
         set -eu
+        test -d /data
+        test ! -L /data
+        test -d /data/postgres-init
+        test ! -L /data/postgres-init
+        test -f /data/postgres-init/2-schema.sql
+        test ! -L /data/postgres-init/2-schema.sql
+        test "$$(stat -c '%h' /data/postgres-init/2-schema.sql)" = 1
+        test "$$(stat -c '%s' /data/postgres-init/2-schema.sql)" -le 2097152
+        test -f /data/postgres-init/3-multi-pool-partition.sql
+        test ! -L /data/postgres-init/3-multi-pool-partition.sql
+        test "$$(stat -c '%h' /data/postgres-init/3-multi-pool-partition.sql)" = 1
+        test "$$(stat -c '%s' /data/postgres-init/3-multi-pool-partition.sql)" -le 2097152
+        printf '%s\n' 'c9a0e0c871ddb7fe198e154903c053db1a26c614c5062d660af0add0e2fc8427  /data/postgres-init/2-schema.sql' '83a380949be2a2dd7b67a667575fc06133eae7be885ce458e0687803edc2f4bf  /data/postgres-init/3-multi-pool-partition.sql' | sha256sum -c -
         mkdir -p /data/ui/state /data/litecoin /data/dogecoin /data/pool/config /data/postgres
         chown -R 1000:1000 /data/ui /data/litecoin /data/dogecoin /data/pool /data/pool/config || true
         chown -R 70:70 /data/postgres || true
         chmod 700 /data/postgres || true
 
   app:
-    image: ghcr.io/willitmod/powpow-app:0.2.31
+    stop_signal: SIGINT
+    hostname: powpow-app
+    image: ghcr.io/willitmod/powpow-app:0.2.37-mux.88f8fc0af57e@sha256:59994fb26f1b9b1daf2bf25bf528d190d3beda89acd65d80bd674b49696bed8d
     user: "1000:1000"
     restart: unless-stopped
     depends_on:
@@ -41,8 +56,9 @@ services:
     volumes:
       - ${APP_DATA_DIR}/data:/data
     environment:
-      APP_VERSION: "0.2.32"
-      APP_CHANNEL: "RC1"
+      MUX_IDENTITY_URL: "http://172.17.0.1:21222/api/integrations/workers"
+      APP_VERSION: "0.2.37"
+      APP_CHANNEL: "MAIN"
       NETWORK_HOST_HINT: "${NETWORK_IP}"
       POOL_API_URL: "http://pool:8001"
       POSTGRES_PASSWORD: "${APP_PASSWORD}"
@@ -54,7 +70,10 @@ services:
       start_period: 90s
 
   litecoin:
-    image: ghcr.io/willitmod/powpow-litecoin:0.2.32
+    stop_signal: SIGTERM
+    stop_grace_period: 15m30s
+    image: ghcr.io/willitmod/powpow-litecoin:0.2.32-dev
+    user: "1000:1000"
     restart: unless-stopped
     depends_on:
       init_permissions:
@@ -69,7 +88,10 @@ services:
       start_period: 3m
 
   dogecoin:
-    image: ghcr.io/willitmod/powpow-dogecoin:0.2.26
+    stop_signal: SIGTERM
+    stop_grace_period: 15m30s
+    image: ghcr.io/willitmod/powpow-dogecoin:0.2.26-dev
+    user: "1000:1000"
     restart: unless-stopped
     depends_on:
       init_permissions:
@@ -84,7 +106,7 @@ services:
       start_period: 3m
 
   pool:
-    image: ghcr.io/willitmod/powpow-pool:0.2.31
+    image: ghcr.io/willitmod/powpow-pool:0.2.37-pool-startup.a443d6f3e552@sha256:b89d5e8c8e078fb200690b1b7ce941c2c995b18ba9cfa699ccac08ff6ddebea8
     restart: unless-stopped
     depends_on:
       init_permissions:
@@ -114,9 +136,21 @@ services:
       POSTGRES_DB: "mergedmining"
     volumes:
       - ${APP_DATA_DIR}/data/postgres:/var/lib/postgresql/data
-      - ./postgres/init:/docker-entrypoint-initdb.d:ro
+      - ${APP_DATA_DIR}/data/postgres-init:/docker-entrypoint-initdb.d:ro
 
 networks:
   umbrel_main_network:
     external: true
     name: umbrel_main_network
+
+x-5tratumos-stop-policy:
+  version: 1
+  services:
+    litecoin:
+      stop_signal: SIGTERM
+      stop_grace_period: 15m30s
+      user: 1000:1000
+    dogecoin:
+      stop_signal: SIGTERM
+      stop_grace_period: 15m30s
+      user: 1000:1000

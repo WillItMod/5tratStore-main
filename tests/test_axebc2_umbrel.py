@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 APP = ROOT / "willitmod-dev-bc2"
 sys.path.insert(0, str(ROOT / "scripts"))
 from axebc2_mount_contract import effective_mounts
+from axebc2_release_state import validate_promoted_compose
 
 
 class UmbrelPackagingTests(unittest.TestCase):
@@ -57,16 +58,9 @@ class UmbrelPackagingTests(unittest.TestCase):
         self.assertEqual(effective_mounts(current), effective_mounts(baseline))
         self.assertEqual(len(effective_mounts(current)), 9)
         self.assertTrue(all("name" not in definition for definition in current["volumes"].values()))
-        # Compare every non-mount service setting with the accepted recipe. The
-        # application image may advance independently; node/pool pins may not.
-        for config in (baseline, current):
-            config.pop("volumes", None)
-            config.pop("configs", None)
-            for service in config["services"].values():
-                service.pop("volumes", None)
-                service.pop("configs", None)
-            config["services"]["app"]["image"] = "application-release-image"
-        self.assertEqual(current, baseline)
+        # The current full model is the tested DEV948 package, with only its
+        # MAIN channel labels changed. Keep the historical exact-mount check.
+        validate_promoted_compose(current)
 
     def patch_like_umbrel_174(self, compose, expected=0):
         result = subprocess.run(

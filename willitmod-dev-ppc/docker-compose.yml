@@ -89,7 +89,7 @@ services:
 
         needs_ckpool_regen=0
         if [ -f /data/pool/config/ckpool.conf ]; then
-          if ! grep -qE '"btcd"[[:space:]]*:[[:space:]]*\\[' /data/pool/config/ckpool.conf; then
+          if ! grep -qE '"btcd"[[:space:]]*:[[:space:]]*[[]' /data/pool/config/ckpool.conf; then
             needs_ckpool_regen=1
           fi
           if ! grep -q '"zmqblock"' /data/pool/config/ckpool.conf; then
@@ -100,7 +100,7 @@ services:
         fi
 
         if [ "$$needs_ckpool_regen" -eq 1 ]; then
-          existing_addr="$$(grep -oE '\\\"btcaddress\\\"[[:space:]]*:[[:space:]]*\\\"[^\\\"]*\\\"' /data/pool/config/ckpool.conf 2>/dev/null | head -n 1 | sed -E 's/.*\\\"btcaddress\\\"[[:space:]]*:[[:space:]]*\\\"([^\\\"]*)\\\".*/\\1/' || true)"
+          existing_addr="$$(grep -oE '"btcaddress"[[:space:]]*:[[:space:]]*"[^"]*"' /data/pool/config/ckpool.conf 2>/dev/null | head -n 1 | sed -E 's/.*"btcaddress"[[:space:]]*:[[:space:]]*"([^"]*)".*/\1/' || true)"
           if [ -f /data/pool/config/ckpool.conf ]; then
             mv /data/pool/config/ckpool.conf "/data/pool/config/ckpool.conf.bak.invalid.$$(date +%s 2>/dev/null || echo 0)" || true
           fi
@@ -198,8 +198,9 @@ services:
         fi
 
   ppcd:
-    build:
-      context: ${APP_DATA_DIR}/data/peercoind
+    image: ghcr.io/willitmod/axeppc-peercoind:0.15.1ppc-node.602518e559df@sha256:41bebfa7003bfc3073cae18345abd55da8831288277b1c4185114e91ef437e75
+    stop_signal: SIGTERM
+    stop_grace_period: 2m
     user: "1000:1000"
     restart: unless-stopped
     depends_on:
@@ -213,6 +214,9 @@ services:
     restart: unless-stopped
 
   pool:
+    # Node 12 must not be PID 1: its default TERM handler cannot terminate
+    # PID 1, causing Docker to reach the forced-kill timeout on updates.
+    init: true
     image: ghcr.io/willitmod/axeppc-pool:0.2.30
     user: "1000:1000"
     restart: unless-stopped
@@ -232,7 +236,9 @@ services:
       - ${APP_DATA_DIR}/data/pool/cps/coins/peercoin.json:/app/coins/peercoin.json:ro
 
   app:
-    image: ghcr.io/willitmod/axeppc-app-umbrel-dev:0.2.31
+    stop_signal: SIGINT
+    hostname: axeppc-app
+    image: ghcr.io/willitmod/axeppc-app-umbrel-dev:0.2.37-mux.5b0aac96a475@sha256:df22d1f1ba4f607d7422945cbdb0ec4ad348b9ce7ddd578d8179849db45d536d
     user: "1000:1000"
     restart: unless-stopped
     stop_grace_period: 30s
@@ -246,11 +252,12 @@ services:
     volumes:
       - ${APP_DATA_DIR}/data:/data
     environment:
+      MUX_IDENTITY_URL: "http://172.17.0.1:21222/api/integrations/workers"
       NETWORK_IP: "${NETWORK_IP}"
       STATIC_DIR: "/app/static"
-      APP_CHANNEL: "RC1"
+      APP_CHANNEL: "MAIN"
       APP_VERSION_SUFFIX: ""
-      PPCD_IMAGE: ""
+      PPCD_IMAGE: "ghcr.io/willitmod/axeppc-peercoind:0.15.1ppc-node.602518e559df@sha256:41bebfa7003bfc3073cae18345abd55da8831288277b1c4185114e91ef437e75"
       PPC_RPC_HOST: "ppcd"
       PPC_RPC_PORT: "9902"
       PPC_RPC_USER: "ppc"

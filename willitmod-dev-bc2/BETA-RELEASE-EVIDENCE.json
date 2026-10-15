@@ -1,0 +1,26 @@
+{
+  "image": "ghcr.io/willitmod/axebc2-app-umbrel-dev",
+  "candidate": "ghcr.io/willitmod/axebc2-app-umbrel-dev:0.1.12-candidate.3b893173de7b",
+  "digest": "sha256:5defc8ac3c1d6e188959ed5c0642165e66108701c5ce3881e909c0994c8e3189",
+  "revision": "3b893173de7b43c70bdddac4817a05e35ffa1957",
+  "version": "0.1.12",
+  "platforms": [
+    "linux/amd64",
+    "linux/arm64"
+  ],
+  "provenance": true,
+  "sbom": true,
+  "candidate_run": 34026015018,
+  "tested_on": "10.10.10.235",
+  "scope": "UI-only candidate, separate writable test data, existing Core 31 node via read-only RPC methods",
+  "browser_verified": {
+    "version": "0.1.12-dev",
+    "channel": "BETA",
+    "legacy_alpha_environment": true,
+    "release_warning_visible": false,
+    "node_synchronized": true
+  },
+  "application_tests_passed": 50,
+  "store_tests_passed": 33,
+  "umbrel_lifecycle_tested": false
+}

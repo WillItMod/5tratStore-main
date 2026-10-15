@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fumbrel · App recovery</title><link rel="icon" href="/static/icon.svg" type="image/svg+xml"><link rel="stylesheet" href="/static/style.css"><script defer src="/static/app.js"></script></head>
+<body>
+<header><a class="brand" href="/"><img src="/static/icon.svg" alt=""><span>Fumbrel<span class="dev">DEV</span></span></a><div class="header-right"><span id="version">WillItMod recovery</span><button class="quiet hidden" id="logout">Disconnect</button></div></header>
+<main>
+  <section class="intro"><div class="eyebrow">FUCK UP ON UMBREL</div><h1>A little unfuckery.<br>A lot less starting over.</h1><p>Get your WillItMod apps moving again after an Umbrel upgrade.<br>Repair the recipe. Keep the app. Keep your data.</p></section>
+  <div id="notice" class="notice hidden" role="alert"></div>
+  <section id="login-panel" class="login-layout">
+    <div class="card login-card"><span class="eyebrow">01 / CONNECT TO THIS UMBREL</span><h2>Let’s see what’s stuck.</h2><p class="muted">Use your Umbrel SSH login. Fumbrel checks this machine’s SSH key and requests administrator access for recovery.</p>
+      <form id="login-form"><label for="username">SSH username</label><input id="username" name="username" value="umbrel" autocomplete="username" required maxlength="32"><label for="password">SSH password</label><input id="password" name="password" type="password" autocomplete="current-password" required>
+      <details><summary>Different sudo password?</summary><label for="sudo-password">Administrator password</label><input id="sudo-password" type="password" autocomplete="off" placeholder="Leave empty to use your SSH password"></details>
+      <button class="primary wide" id="connect" type="submit">Connect & scan <span>↗</span></button></form>
+      <p class="fineprint">Credentials stay in memory for this session. Disconnect or stop Fumbrel to end access. An idle session expires after 30 minutes.</p>
+    </div>
+    <aside class="explain"><div class="number">14</div><h2>app families. One recovery desk.</h2><p>AxeBTC, AxeBCH, AxeBCH2, AxeBC2, AxeDGB, AxePPC, AxeXEC, FracAttack, PowPow, 5tratSmack, AxeBench, AxeLive, AxeMIG and AxeSim.</p><div class="rule"></div><h3>What gets touched?</h3><p>App recipes are backed up before changes. Your installation IDs, wallets, chain data and payout settings stay in place. Starting an updated app can run its normal data migrations.</p><h3>What won’t this cure?</h3><p>Unknown failures, damaged data and CPU “illegal instruction” crashes need their own diagnosis. No magic umbrella for those.</p><details class="host-key"><summary>Verified host identity</summary><code id="fingerprint">Loading local SSH public key…</code></details></aside>
+  </section>
+  <section id="workspace" class="hidden">
+    <div class="section-top"><div><span class="eyebrow">02 / INSTALLED APPLICATIONS</span><h2>Your recovery desk</h2></div><button id="rescan" class="secondary">↻ Scan again</button></div>
+    <div class="stats"><div><strong id="app-count">—</strong><span>supported apps installed</span></div><div><strong id="issue-count">—</strong><span>with known fixes or flags</span></div><div><strong id="backup-count">—</strong><span>recipe backups</span></div></div>
+    <div class="catalog-note">Updates use the reviewed packages bundled with this Fumbrel release. MAIN apps can receive DEV versions without losing their existing installation. Newer installed versions are protected from downgrade.</div>
+    <div class="card app-card"><div class="table-toolbar"><label class="check"><input type="checkbox" id="select-all">Select all supported apps</label><span class="muted" id="selected-count">0 selected</span></div><div id="app-list"></div></div>
+    <div class="action-bar"><label class="check"><input type="checkbox" id="start-after">Start apps after recovery <span class="muted">(otherwise leave stopped)</span></label><div class="buttons"><button id="repair" class="secondary" disabled>Repair selected</button><button id="update" class="primary" disabled>Repair & update selected ↗</button></div></div>
+    <p class="fineprint">Recovery briefly stops selected apps. “Repair” keeps the installed version. “Repair & update” reapplies the bundled package, even if Umbrel’s updater is stuck or already shows that version.</p>
+    <section id="job-panel" class="card hidden" aria-live="polite"><div class="section-top"><div><span class="eyebrow">RECOVERY ACTIVITY</span><h2 id="job-title">Working on it…</h2></div><button id="report" class="quiet">Download report</button></div><ol id="events"></ol><div id="results"></div></section>
+    <section class="backups"><div class="section-top"><div><span class="eyebrow">A WAY BACK</span><h2>Recipe backups</h2></div></div><p class="muted">Restore is available while the app is stopped. This restores its recipe only; it cannot undo an application’s data migration. Restored apps remain stopped for review.</p><div id="backups-list"></div></section>
+  </section>
+  <dialog id="review"><form method="dialog"><span class="eyebrow">READY WHEN YOU ARE</span><h2 id="review-title"></h2><p id="review-text"></p><ul id="review-apps"></ul><p class="fineprint">A recipe backup will be saved first. Application data is not included in this backup.</p><div class="buttons"><button value="cancel" class="secondary">Back</button><button value="confirm" class="primary" id="confirm">Begin recovery</button></div></form></dialog>
+</main><footer><span>WillItMod / Fumbrel</span><span>Umbrel 1.x + 2.0 · DEV preview</span></footer>
+</body></html>

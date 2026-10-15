@@ -17,3 +17,4 @@ fi
 
 echo "[axexec] Exec: bitcoind -datadir=/data -printtoconsole $extra"
 exec bitcoind -datadir=/data -printtoconsole $extra
+

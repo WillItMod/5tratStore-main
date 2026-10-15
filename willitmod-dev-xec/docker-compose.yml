@@ -185,7 +185,7 @@ services:
       start_period: 2m
 
   ckpool:
-    image: ghcr.io/willitmod/ecash-ckpool-solo:18b38ad
+    image: ghcr.io/willitmod/ecash-ckpool-solo:18b38ad-portable-dev-20261014@sha256:20069e6ac004af010b20ca9aeb056ebbaf48a8656ad858ad69c8deba7f590d61
     entrypoint: ["/bin/sh"]
     command:
       - -ec
@@ -217,7 +217,9 @@ services:
       - ${APP_DATA_DIR}/data/pool/www:/www
 
   app:
-    image: ghcr.io/willitmod/axexec-app:0.1.17
+    stop_signal: SIGINT
+    hostname: axexec-app
+    image: ghcr.io/willitmod/axexec-app-umbrel-dev:0.1.24@sha256:ae783ceb68f7768314b0eb8864ce1b22b188eb29e706d32e6f87575df9b58b7f
     user: "1000:1000"
     restart: on-failure
     stop_grace_period: 30s
@@ -234,16 +236,18 @@ services:
     volumes:
       - ${APP_DATA_DIR}/data:/data
     environment:
+      APP_REVISION: ebf6e6f8970f490fe72750f4e0a705edc54de677
+      MUX_IDENTITY_URL: "http://172.17.0.1:21222/api/integrations/workers"
       NETWORK_IP: "${NETWORK_IP}"
       XEC_RPC_HOST: "xecd"
       XEC_RPC_PORT: "28337"
       XEC_RPC_USER: "xec"
       XEC_RPC_PASS: "${APP_PASSWORD}"
       CKPOOL_STATUS_DIR: "/data/pool/www/pool"
-      APP_CHANNEL: "RC1"
+      APP_CHANNEL: "MAIN"
       APP_VERSION_SUFFIX: ""
       XECD_IMAGE: "ghcr.io/willitmod/xecd-abc:0.33.4-nojemalloc-r1"
-      CKPOOL_IMAGE: "ghcr.io/willitmod/ecash-ckpool-solo:18b38ad"
+      CKPOOL_IMAGE: "ghcr.io/willitmod/ecash-ckpool-solo:18b38ad-portable-dev-20261014@sha256:20069e6ac004af010b20ca9aeb056ebbaf48a8656ad858ad69c8deba7f590d61"
       STATIC_DIR: "/app/static"
 
 networks:

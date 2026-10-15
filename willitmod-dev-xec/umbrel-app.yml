@@ -2,13 +2,17 @@ manifestVersion: 1
 id: willitmod-dev-xec
 category: bitcoin
 name: AxeXEC
-version: "0.1.17"
+version: "0.1.24"
 tagline: XEC node + solo pool
 description: >-
-  RC1 RELEASE
+  ALPHA RELEASE (DEV CHANNEL)
 
-  AxeXEC is functional, has successfully found blocks, and has completed
-  extended DEV-channel node and solo-pool testing.
+  AxeXEC is functional and has successfully found blocks, but it is still under
+  active development. Expect rough edges, occasional breaking changes, and
+  mining/pool behavior that may still need tuning.
+
+  Use this build if you are happy to test, mine, and send helpful feedback.
+  For known-good production setups, use stable/main channel apps.
 
   **IMPORTANT (XEC MINING RULES):** eCash enforces mandatory coinbase deductions (Miner Fund + staking rewards).
   This is NOT set by AxeXEC / WillItMod and is not configurable or removable by the app.
@@ -46,7 +50,7 @@ description: >-
 
 
   Status:
-    - RC1 build: verify payout addresses before mining and report unexpected behaviour.
+    - ALPHA build: expect bugs. Verify payout addresses before mining.
 developer: WillItMod
 website: https://github.com/WillItMod/AxeXEC
 repo: https://github.com/WillItMod/AxeXEC
@@ -63,10 +67,32 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Fixes AxeXEC repeatedly restarting on Raspberry Pi and other ARM64 systems
-  using non-4K memory pages. The Bitcoin ABC 0.33.4 node is now compiled
-  without jemalloc for both AMD64 and ARM64. Existing blockchain data is
-  preserved and does not need to be downloaded again.
+  Uses portable SHA256 for the eCash pool on CPUs without AVX2/BMI2, built from the same pinned upstream source. The node, app image, protocol, payout rules and data paths are unchanged. Full mining acceptance remains a separate DEV test.
+
+  Adds safe pool log retention with 5tratumOS 0.8.23. Complete block and pool accounting records are saved before old raw log bytes are retired. The active log uses a 20 MiB rolling target with two recent archives. Unread or unresolved evidence is retained, and the app reports backlog or blockers. Existing mining, wallet and chain data are preserved.
+
+  Best-share records now retain complete pool-log entries that arrive across
+  separate reads. BCH and BCH2 also start their best-share tracker reliably.
+  Existing records and direct/MUX hashrate support are retained; node and
+  pool images, mining configuration and payouts are unchanged.
+
+  Direct and mixed miners now keep their accepted-share hashrate visible
+  when MUX is empty, offline, or routing other miners elsewhere. MUX-only
+  headlines require matched worker identities; pool estimates and routed
+  telemetry remain separately labelled. Worker cards also retain pool estimates
+  when a previously MUX-connected miner reconnects directly. Accepted shares
+  and history are unchanged.
+
+  Current miner hash rate from 5tratMux appears separately from accepted-share
+  estimates, with stale or unavailable telemetry handled explicitly. Block
+  history checks the full block hash against the correct chain and refreshes
+  confirmation and reorganisation status before showing a confirmed find.
+  Unverified reports remain distinguishable from confirmed pool blocks.
+
+  Block alerts in this browser is a separate local preference. Recent verified
+  blocks queue across app tabs, with browser-only Close acknowledgements.
+  Reorgs or unavailable proof retract the alert without acknowledging it.
+  OS and MUX delivery and acknowledgements remain independently managed.
 widgets:
   - id: "sync"
     type: "text-with-progress"

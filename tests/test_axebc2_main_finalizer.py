@@ -11,9 +11,9 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
-from axebc2_release_state import APP_TAG as CURRENT_APP_TAG, APP_DIGEST as CURRENT_APP_DIGEST
 SCRIPT = ROOT / "scripts/finalize-axebc2-0.1.11-main.sh"
-COMPOSE = ROOT / "willitmod-dev-bc2/docker-compose.yml"
+COMPOSE = ROOT / "tests/fixtures/axebc2_0_1_14_native.yml"
+HISTORICAL_APP = "ghcr.io/willitmod/axebc2-app:0.1.14@sha256:57903091f4b89c297e2adfd741eef834aed2b4ec4a1eee65d64000da770fa4ca"
 APP_DIGEST = "sha256:23a7962e223da5549eba52697c6f4cfa16ab74cba935c68c48148a4c515302b4"
 CORE_DIGEST = "sha256:8875917ece57668fe9925d40a256ce8d429a3071511bb555d4ace1fa4370afc6"
 OS_BUNDLE_SHA256 = "11a35e68ab169eb0446485992a57b33fae018a92020b7d86bbf9a005571377af"
@@ -51,9 +51,10 @@ class AxeBC2MainFinalizerTests(unittest.TestCase):
         (self.root / "scripts").mkdir()
         (self.root / "willitmod-dev-bc2").mkdir()
         shutil.copy2(SCRIPT, self.root / "scripts" / SCRIPT.name)
-        # Exercise the historical 0.1.11 finalizer with its original app pin.
+        # Exercise the historical finalizer with a retained historical recipe,
+        # independently of later promotions and their unchanged DEV image tags.
         fixture = COMPOSE.read_text(encoding="utf-8").replace(
-            CURRENT_APP_TAG + "@" + CURRENT_APP_DIGEST,
+            HISTORICAL_APP,
             "ghcr.io/willitmod/axebc2-app:0.1.11@" + APP_DIGEST,
         )
         fixture = re.sub(r"(ghcr\.io/willitmod/axebc2-app:0\.1\.11@sha256:)(?:[0-9a-f]{64}|APP_PROMOTED_DIGEST_REQUIRED)", r"\1APP_PROMOTED_DIGEST_REQUIRED", fixture)

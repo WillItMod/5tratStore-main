@@ -9,6 +9,9 @@ policy_file="${data_dir}/.5tratumos-rollback-policy.json"
 node_dir="${data_dir}/node"
 required_marker="${node_dir}/.core31-full-reindex-required.json"
 complete_marker="${node_dir}/.core31-full-reindex-complete.json"
+fresh_marker="${node_dir}/.core31-fresh-provenance.json"
+fresh_source="cdf44542dde255648008249d187fafc15f3a2f09"
+fresh_image="ghcr.io/willitmod/bitcoinii-core:31.1.0-rc.cdf44542dde2@sha256:8875917ece57668fe9925d40a256ce8d429a3071511bb555d4ace1fa4370afc6"
 minimum_os="0.7.12"
 minimum_app="0.1.10"
 migration="bitcoinii-shockwave-core31-full-reindex"
@@ -77,6 +80,21 @@ atomic_json_write() {
   trap - EXIT HUP INT TERM
 }
 
+# This is provenance of an empty chain directory first admitted by the pinned
+# Core 31 recipe. It is not a checkpoint, chainwork or reindex completion proof.
+# Validate it before persistent writes, including dangling links and directories.
+if [ -e "$fresh_marker" ] || [ -L "$fresh_marker" ]; then
+  [ -f "$fresh_marker" ] && [ ! -L "$fresh_marker" ] && [ -r "$fresh_marker" ] &&
+    jq -e --arg source "$fresh_source" --arg image "$fresh_image" '
+      type == "object" and
+      (keys == ["core_major","empty_chain_at_creation","node_image","purpose","schema","source_revision"]) and
+      .schema == 1 and .purpose == "bitcoinii-core31-fresh-chain" and
+      .core_major == 31 and .empty_chain_at_creation == true and
+      .source_revision == $source and .node_image == $image
+    ' "$fresh_marker" >/dev/null 2>&1 ||
+    fail "existing Core 31 fresh provenance is invalid or does not match the pinned source/image"
+fi
+
 policy_app="$minimum_app"
 policy_os="$minimum_os"
 policy_height=57750
@@ -124,16 +142,27 @@ validate_complete_marker() {
     ' "$marker" >/dev/null 2>&1
 }
 
-if [ -e "$complete_marker" ]; then
-  [ -r "$complete_marker" ] && validate_complete_marker "$complete_marker" ||
+if [ -e "$complete_marker" ] || [ -L "$complete_marker" ]; then
+  [ -f "$complete_marker" ] && [ ! -L "$complete_marker" ] && [ -r "$complete_marker" ] && validate_complete_marker "$complete_marker" ||
     fail "existing Core 31 completion marker is invalid"
 fi
-if [ -e "$required_marker" ]; then
-  [ -r "$required_marker" ] && validate_migration_marker "$required_marker" ||
+if [ -e "$required_marker" ] || [ -L "$required_marker" ]; then
+  [ -f "$required_marker" ] && [ ! -L "$required_marker" ] && [ -r "$required_marker" ] && validate_migration_marker "$required_marker" ||
     fail "existing Core 31 required marker is invalid"
 fi
 
-if { [ -e "${node_dir}/blocks" ] || [ -e "${node_dir}/chainstate" ]; } && [ ! -e "$complete_marker" ]; then
+if [ ! -e "${node_dir}/blocks" ] && [ ! -L "${node_dir}/blocks" ] &&
+   [ ! -e "${node_dir}/chainstate" ] && [ ! -L "${node_dir}/chainstate" ] &&
+   [ ! -e "$required_marker" ] && [ ! -e "$complete_marker" ] && [ ! -e "$fresh_marker" ]; then
+  fresh_payload="$(jq -cn --arg source "$fresh_source" --arg image "$fresh_image" \
+    '{schema:1,purpose:"bitcoinii-core31-fresh-chain",core_major:31,empty_chain_at_creation:true,source_revision:$source,node_image:$image}')"
+  atomic_json_write "$fresh_marker" "$fresh_payload"
+fi
+
+# An explicit required marker is never removed or superseded by provenance.
+# Historical chain data without either form of proof keeps the migration path.
+if { [ -e "${node_dir}/blocks" ] || [ -e "${node_dir}/chainstate" ]; } &&
+   [ ! -e "$complete_marker" ] && [ ! -e "$fresh_marker" ]; then
   required_payload='{"schema":1,"migration":"bitcoinii-shockwave-core31-full-reindex","minimum_core_major":31,"activation_height":57750}'
   atomic_json_write "$required_marker" "$required_payload"
 fi

@@ -2,10 +2,10 @@ manifestVersion: 1
 id: willitmod-axemig
 category: bitcoin
 name: AxeMIG
-version: "0.1.21"
+version: "0.1.24"
 tagline: Data-only blockchain migration tool
 description: >-
-  RELEASE CANDIDATE
+  ALPHA RELEASE (DEV CHANNEL)
 
   AxeMIG is functional, but it moves/copies blockchain data and should be used
   deliberately. Stop affected apps first, verify the source and target, and keep
@@ -35,7 +35,17 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  v0.1.21: Promotes the tested DEV build to MAIN and replaces legacy Fractal wording in migration guidance with AxeBTC.
+  v0.1.24-dev: Waits for verified graceful node shutdown before copy or restore. A timeout or cancellation prevents file changes and automatic restarts. Layouts, chain selectors and migration data exclusions are unchanged.
+
+  v0.1.23-dev: Keeps USB host paths usable and excludes independent BC2, BCH2,
+  eCash and Peercoin chains from Bitcoin/BCH selectors. Restores stopped FracAttack
+  discovery. Migration scripts, settings and layouts are unchanged.
+
+  v0.1.22-dev: USB discovery and exported folders now retain their host paths, so selected drives can be used by export/import. The UI and existing migration exclusions are unchanged.
+
+  v0.1.21-dev.1 (recipe revision): Route the Umbrel proxy to this app's unique container so other utilities cannot intercept its requests.
+
+  v0.1.21-dev: Replaces legacy Fractal wording in migration guidance with AxeBTC.
 
   v0.1.20-dev: Relaxes the in-app maturity label to ALPHA while keeping migration safety guidance clear.
 

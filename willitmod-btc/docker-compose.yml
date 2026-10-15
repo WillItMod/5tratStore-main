@@ -29,6 +29,73 @@ services:
       - |-
         set -eu
 
+        # BEGIN REVIEWED POOL SUPERVISOR MIGRATION
+        # Compose is replaced on ordinary updates; persistent data/templates is not.
+        pool_migration_refuse() {
+          echo "Pool supervisor migration refused: keep custom files unchanged and restore the reviewed regular template before updating." >&2
+          exit 1
+        }
+        pool_migration_check() {
+          [ -d /data ] && [ ! -L /data ] || return 1
+          [ -d /data/templates ] && [ ! -L /data/templates ] || return 1
+          [ -f "$$pool_wrapper" ] && [ ! -L "$$pool_wrapper" ] || return 1
+          [ "$$(stat -c '%h' "$$pool_wrapper")" = 1 ] || return 1
+          [ "$$(stat -c '%s' "$$pool_wrapper")" -le 16384 ] || return 1
+          pool_wrapper_metadata="$$(stat -c '%d:%i:%h:%s:%a:%u:%g:%Y:%Z' "$$pool_wrapper")" || return 1
+          pool_wrapper_hash="$$(sha256sum "$$pool_wrapper" | awk '{print $$1}')" || return 1
+        }
+        pool_wrapper=/data/templates/ckpool-entrypoint.sh
+        pool_migration_check || pool_migration_refuse
+        case "$$pool_wrapper_hash" in
+          113b01035df42190328e2bc449b4daae5d59ec1dbca09a8199d699da97228f4a) ;;
+          656f5dd87ad73ab5a0fe87e41616981a7192bba7802880bd6007f0fb37165850)
+            pool_old_metadata="$$pool_wrapper_metadata"
+            pool_migration_tmp="$$(mktemp /data/templates/.ckpool-entrypoint.XXXXXXXX)" || pool_migration_refuse
+            trap 'rm -f "$$pool_migration_tmp"' EXIT
+            trap 'exit 1' TERM INT
+            cp -p "$$pool_wrapper" "$$pool_migration_tmp" || pool_migration_refuse
+            [ "$$(sha256sum "$$pool_migration_tmp" | awk '{print $$1}')" = 656f5dd87ad73ab5a0fe87e41616981a7192bba7802880bd6007f0fb37165850 ] || pool_migration_refuse
+            base64 -d >"$$pool_migration_tmp" <<'REVIEWED_POOL_SUPERVISOR'
+        IyEvYmluL3NoCnNldCAtZXUKCkNGRz0iL2NvbmZpZy9ja3Bvb2wuY29uZiIKQVJHU19GSUxFPSIv
+        Y29uZmlnL2NrcG9vbC5hcmdzIgoKcm0gLWYgL3RtcC9ja3Bvb2wvKi5waWQgMj4vZGV2L251bGwg
+        fHwgdHJ1ZQoKY2twb29sX2Jpbj0iIgppZiBjb21tYW5kIC12IGNrcG9vbCA+L2Rldi9udWxsIDI+
+        JjE7IHRoZW4KICBja3Bvb2xfYmluPSJja3Bvb2wiCmVsaWYgWyAteCAvYmluL2NrcG9vbCBdOyB0
+        aGVuCiAgY2twb29sX2Jpbj0iL2Jpbi9ja3Bvb2wiCmVsaWYgWyAteCAvdXNyL2Jpbi9ja3Bvb2wg
+        XTsgdGhlbgogIGNrcG9vbF9iaW49Ii91c3IvYmluL2NrcG9vbCIKZWxzZQogIGVjaG8gIltheGVi
+        dGNdIEVSUk9SOiBja3Bvb2wgYmluYXJ5IG5vdCBmb3VuZCBpbiBpbWFnZSIgPiYyCiAgZXhpdCAx
+        CmZpCgpjaGVja3N1bSgpIHsKICBpZiBbICEgLWYgIiRDRkciIF07IHRoZW4KICAgIGVjaG8gIiIK
+        ICAgIHJldHVybiAwCiAgZmkKICBja3N1bSAiJENGRyIgMj4vZGV2L251bGwgfCBhd2sgJ3twcmlu
+        dCAkMSAiOiIgJDJ9Jwp9CgpzdGFydF9ja3Bvb2woKSB7CiAgaWYgWyAhIC1mICIkQ0ZHIiBdOyB0
+        aGVuCiAgICByZXR1cm4gMAogIGZpCiAgQVJHUz0iJChjYXQgIiRBUkdTX0ZJTEUiIDI+L2Rldi9u
+        dWxsIHx8IHRydWUpIgogICMgc2hlbGxjaGVjayBkaXNhYmxlPVNDMjA4NgogICIkY2twb29sX2Jp
+        biIgLWsgLUwgLWMgIiRDRkciICRBUkdTICYKICBwaWQ9IiQhIgp9CgpsYXN0PSIiCnBpZD0iIgpw
+        b2xsX3BpZD0iIgoKc3RvcF9ja3Bvb2woKSB7CiAgaWYgWyAtbiAiJHBpZCIgXTsgdGhlbgogICAg
+        a2lsbCAtVEVSTSAiJHBpZCIgMj4vZGV2L251bGwgfHwgdHJ1ZQogICAgd2FpdCAiJHBpZCIgMj4v
+        ZGV2L251bGwgfHwgdHJ1ZQogICAgcGlkPSIiCiAgZmkKfQoKdGVybWluYXRlX3Bvb2woKSB7CiAg
+        dHJhcCAnJyBURVJNIElOVAogIGlmIFsgLW4gIiRwb2xsX3BpZCIgXTsgdGhlbgogICAga2lsbCAt
+        VEVSTSAiJHBvbGxfcGlkIiAyPi9kZXYvbnVsbCB8fCB0cnVlCiAgICB3YWl0ICIkcG9sbF9waWQi
+        IDI+L2Rldi9udWxsIHx8IHRydWUKICAgIHBvbGxfcGlkPSIiCiAgZmkKICBzdG9wX2NrcG9vbAog
+        IGV4aXQgMAp9Cgp0cmFwIHRlcm1pbmF0ZV9wb29sIFRFUk0gSU5UCgp3aGlsZSB0cnVlOyBkbwog
+        IHN1bT0iJChjaGVja3N1bSkiCgogIGlmIFsgIiRzdW0iICE9ICIkbGFzdCIgXTsgdGhlbgogICAg
+        bGFzdD0iJHN1bSIKICAgIHN0b3BfY2twb29sCiAgICBzdGFydF9ja3Bvb2wKICAgIGlmIFsgLW4g
+        IiR7cGlkOi19IiBdOyB0aGVuCiAgICAgIGVjaG8gIltheGVidGNdIGNrcG9vbCBzdGFydGVkIChw
+        aWQgJHtwaWR9KSIKICAgIGVsc2UKICAgICAgZWNobyAiW2F4ZWJ0Y10gd2FpdGluZyBmb3IgY2tw
+        b29sLmNvbmYuLi4iCiAgICBmaQogIGZpCgogIGlmIFsgLW4gIiR7cGlkOi19IiBdICYmICEga2ls
+        bCAtMCAiJHBpZCIgMj4vZGV2L251bGw7IHRoZW4KICAgIHdhaXQgIiRwaWQiIDI+L2Rldi9udWxs
+        IHx8IHRydWUKICAgIHBpZD0iIgogIGZpCgogIHNsZWVwIDIgJgogIHBvbGxfcGlkPSIkISIKICB3
+        YWl0ICIkcG9sbF9waWQiIDI+L2Rldi9udWxsIHx8IHRydWUKICBwb2xsX3BpZD0iIgpkb25lCg==
+        REVIEWED_POOL_SUPERVISOR
+            [ "$$(sha256sum "$$pool_migration_tmp" | awk '{print $$1}')" = 113b01035df42190328e2bc449b4daae5d59ec1dbca09a8199d699da97228f4a ] || pool_migration_refuse
+            touch -r "$$pool_wrapper" "$$pool_migration_tmp" || pool_migration_refuse
+            pool_migration_check || pool_migration_refuse
+            [ "$$pool_wrapper_hash" = 656f5dd87ad73ab5a0fe87e41616981a7192bba7802880bd6007f0fb37165850 ] && [ "$$pool_wrapper_metadata" = "$$pool_old_metadata" ] || pool_migration_refuse
+            mv -f "$$pool_migration_tmp" "$$pool_wrapper" || pool_migration_refuse
+            trap - EXIT TERM INT
+            ;;
+          *) pool_migration_refuse ;;
+        esac
+        # END REVIEWED POOL SUPERVISOR MIGRATION
+
         apk add --no-cache envsubst jq >/dev/null
 
         # Persist JWT secret into ${APP_DATA_DIR}/.env so that SSH restarts
@@ -178,7 +245,9 @@ services:
     entrypoint: ["/bin/sh", "/ckpool-entrypoint.sh"]
 
   app:
-    image: ghcr.io/willitmod/axebtc-app-umbrel-dev:0.7.82.8
+    stop_signal: SIGINT
+    hostname: axebtc-app
+    image: ghcr.io/willitmod/axebtc-app-umbrel-dev:0.7.82.17@sha256:21334b67d803987a3ae4e79242ba2d74da0415d22e786783c73723a460d9c174
     user: "1000:1000"
     restart: on-failure
     stop_grace_period: 30s
@@ -195,6 +264,8 @@ services:
     volumes:
       - ${APP_DATA_DIR}/data:/data
     environment:
+      APP_REVISION: 27734d195a01149dba1f5ce9837dd00e2afc049a
+      MUX_IDENTITY_URL: "http://172.17.0.1:21222/api/integrations/workers"
       BTC_RPC_HOST: "bitcoind"
       BTC_RPC_PORT: "28332"
       BTC_RPC_USER: "btc"
@@ -202,7 +273,7 @@ services:
       CKPOOL_STATUS_DIR: "/data/pool/www/pool"
       CKPOOL_STRATUM_HOST: "ckpool"
       CKPOOL_STRATUM_PORT: "3333"
-      APP_CHANNEL: "RC1"
+      APP_CHANNEL: "MAIN"
       APP_VERSION_SUFFIX: ""
       BITCOIND_IMAGE: "ghcr.io/willitmod/axebtc-bitcoind-switch:0.7.44"
       CKPOOL_IMAGE: "ghcr.io/willitmod/docker-ckpool-solo:590fb2a"
