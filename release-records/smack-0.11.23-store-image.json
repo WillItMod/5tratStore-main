@@ -1,0 +1,49 @@
+{
+  "source": "42ef8e00bbdfe67dbade44ef6c56aa0f2676c986",
+  "run": 38750784963,
+  "version": "0.11.23",
+  "tag": "0.11.23-store.42ef8e00bbdf",
+  "index": "sha256:598071c0e8a0e01e837b1b8c375c71390d75e2180673ea5dff1af1b613f50404",
+  "anonymousTagAndImmutableIndexMatch": true,
+  "platforms": {
+    "amd64": {
+      "manifest": "sha256:c5f4b05bba9f6c900778c814b1f31b28c57d092c19bdadda5bc07cf493c09bc4",
+      "config": "sha256:fceaaf741fa1959add9f7a251db0dad095ce48e5fd3b7229bd2469fd348ea568",
+      "nativeConfigExact": true,
+      "binarySha256": "9e91129f944098517548d33362cfc358b1456cf7c258a4a2b320c1093ceebaa2",
+      "jsSha256": "443313505d2ae0fa77cfadba99ac45f91a67ab214947d4f804cc1f74d5412e28",
+      "onlyOneAddedLayer": true
+    },
+    "arm64": {
+      "manifest": "sha256:2abefe1e55c552d7d9d2a34ad3210b89710b9f4dc8b30f5fe6f04a034dba1482",
+      "config": "sha256:7e5988ae363701ba93c92b109a8c23e42136fe5a0bb6ba521f83d7617e900246",
+      "nativeConfigExact": true,
+      "binarySha256": "956d78e573a67133bfdbd760018db8b0ee25adbd926452e85de3e6be1441c951",
+      "jsSha256": "443313505d2ae0fa77cfadba99ac45f91a67ab214947d4f804cc1f74d5412e28",
+      "onlyOneAddedLayer": true
+    }
+  },
+  "newAliases": false,
+  "sourcePR": "https://github.com/WillItMod/5tratSmack-private/pull/94",
+  "sourceCIPass": [
+    38750697379,
+    38750697193
+  ],
+  "nativePreAndActualPublishedPostProofs": "PASS both architectures",
+  "nativeHTTPHtmlAboutVersion": "0.11.23",
+  "nativeMAINBrokerEnabled": true,
+  "nativeNormalSIGINTExit0BothPreAndPost": true,
+  "optionalArtifactUpload": "Account quota hit; full proof printed to job logs/summary and saved locally",
+  "attestation": "Workflow does not generate OCI provenance or SBOM; source/artifact bindings are exact image/config/layer/file receipts",
+  "noOSGuestDeploymentYet": true,
+  "portsChanged": false,
+  "sourceWorktreeClean": true,
+  "all13ApplicationFilesAccountedForAnd11Unchanged": true,
+  "actualLocalARMUmbrelPlatformProof": {
+    "result": "PASS brokerdisabled/newversionfalse/buttondisabled/noOSredirect/noPOST",
+    "normalSIGINTExit0": true,
+    "freshTmpfsNetworkNone": true,
+    "inheritedGenericUnavailableMessage": "Install the current public release once to enable automatic updates.",
+    "noLiveUmbrelClaim": true
+  }
+}

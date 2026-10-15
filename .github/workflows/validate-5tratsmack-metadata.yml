@@ -6,6 +6,12 @@ on:
       - "README.md"
       - "willitmod-dev-5tratsmack/**"
       - "scripts/validate-5tratsmack-metadata.py"
+      - "scripts/smack_store_release.py"
+      - "SMACK-STORE-UPDATE-2026-10-15.json"
+      - "release-records/smack-0.11.23-store-image.json"
+      - "release-records/smack-0.11.23-platform-delivery.json"
+      - "tests/test_smack_platform_delivery.py"
+      - "tests/test_smack_store_release.py"
       - ".github/workflows/validate-5tratsmack-metadata.yml"
   push:
     branches: [main]
@@ -13,6 +19,12 @@ on:
       - "README.md"
       - "willitmod-dev-5tratsmack/**"
       - "scripts/validate-5tratsmack-metadata.py"
+      - "scripts/smack_store_release.py"
+      - "SMACK-STORE-UPDATE-2026-10-15.json"
+      - "release-records/smack-0.11.23-store-image.json"
+      - "release-records/smack-0.11.23-platform-delivery.json"
+      - "tests/test_smack_platform_delivery.py"
+      - "tests/test_smack_store_release.py"
       - ".github/workflows/validate-5tratsmack-metadata.yml"
 
 permissions:
@@ -23,6 +35,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Check MAIN metadata and immutable image pins
         run: python3 scripts/validate-5tratsmack-metadata.py
+
+      - name: Check exact additive release and negative scope guards
+        run: |
+          python3 -m pip install PyYAML==6.0.3
+          python3 -m unittest discover -s tests -p test_smack_store_release.py -v
+          python3 -m unittest discover -s tests -p test_smack_platform_delivery.py -v

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from pathlib import Path
 import re
+from smack_store_release import validate_files, PLATFORM
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -25,6 +26,16 @@ EXPECTED_NON_APP_IMAGE_LINES = (
     "    image: ghcr.io/willitmod/5tratsmack-kdf:0.11.17-rc.99a34a0ef5f5@sha256:c3ce7e638bdf55710fbfb607145d76c7d6e00b81a35e4c843645d9815f862087",
     "      BCH2_NODE_IMAGE: ghcr.io/willitmod/5tratsmack-core:0.11.2@sha256:7bf02513144c7a157965fb8e9ad5865f5e84fa679afa7cb61fc0a8e140a40070",
 )
+
+# Preserve the previous stable metadata floor before admitting its exact delta.
+STORE = validate_files()
+assert STORE['channel'] == 'MAIN' and STORE['previousVersion'] == EXPECTED_VERSION
+assert EXPECTED_RUNTIME_VERSION == '0.11.21'
+assert EXPECTED_SOURCE_REVISION == 'f41e154a74afbd54f67545d0b95d18506a336fa1'
+assert EXPECTED_APP_REF == 'ghcr.io/willitmod/5tratsmack-app:0.11.22-hero.6fc6597c3aba@sha256:304566aaf4374398d10e53612f1b1ccce89344e6fcf4a51293006d9c8f2111e9'
+EXPECTED_VERSION = EXPECTED_RUNTIME_VERSION = STORE['version']
+EXPECTED_SOURCE_REVISION = STORE['sourceRevision']
+EXPECTED_APP_REF = STORE['imageRef']
 
 primary = APP_DIR / "5tratstore-app.yml"
 compatibility = APP_DIR / "umbrel-app.yml"
@@ -77,6 +88,9 @@ release_tag = one(
 app_revision = one(
     r"^\s{6}APP_REVISION:\s*([0-9a-f]{40})$", compose_text, "APP_REVISION"
 )
+platform = one(r'^\s{6}APP_PLATFORM:\s*"([^"\n]+)"$', compose_text, 'APP_PLATFORM')
+if platform != PLATFORM:
+    raise SystemExit('unexpected platform selector: ' + platform)
 
 if manifest_id != "willitmod-dev-5tratsmack":
     raise SystemExit(f"unexpected manifest id: {manifest_id}")
@@ -128,10 +142,10 @@ for line in required_compose_lines:
         raise SystemExit(f"expected one exact compose line: {line}")
 
 expected_readme_line = (
-    "- **5tratSmack** (`willitmod-dev-5tratsmack`) - `0.11.22`"
+    f"- **5tratSmack** (`willitmod-dev-5tratsmack`) - `{EXPECTED_VERSION}`"
 )
 if readme_text.count(expected_readme_line) != 1:
-    raise SystemExit("README current-version entry is not exactly 0.11.22")
+    raise SystemExit("README current-version entry is not exactly " + EXPECTED_VERSION)
 
 for release_note_fragment in (
     "bounded recent feed",
@@ -147,5 +161,5 @@ for release_note_fragment in (
 print(
     "5tratSmack MAIN metadata verified: "
     f"version={EXPECTED_VERSION} source={EXPECTED_SOURCE_REVISION} "
-    f"runtime={EXPECTED_RUNTIME_VERSION}; exact tested DEV app, broker and node images retained"
+    f"runtime={EXPECTED_RUNTIME_VERSION}; platform export, published app and protected services verified"
 )

@@ -1,0 +1,125 @@
+{
+  "schemaVersion": 1,
+  "channel": "MAIN",
+  "appId": "willitmod-dev-5tratsmack",
+  "baselineCommit": "ccdfcbded052e445a49d57f730bd7c0b4d8744fa",
+  "previousVersion": "0.11.22",
+  "version": "0.11.23",
+  "compiledCoreVersion": "0.11.23",
+  "sourceRevision": "42ef8e00bbdfe67dbade44ef6c56aa0f2676c986",
+  "sourceRepository": "https://github.com/WillItMod/5tratSmack-private",
+  "imageRef": "ghcr.io/willitmod/5tratsmack-app:0.11.23-store.42ef8e00bbdf@sha256:598071c0e8a0e01e837b1b8c375c71390d75e2180673ea5dff1af1b613f50404",
+  "releaseNotePrefix": "Fixes repeating update prompts by comparing the applied store package with the matching MAIN or DEV catalogue. Updates remain authenticated through 5tratumOS, while Umbrel uses its own app manager. The running version and catalogue agree. Existing ports, Claude layouts, node and pool images, wallets and stored data are retained.",
+  "publication": {
+    "path": "release-records/smack-0.11.23-store-image.json",
+    "sha256": "aa342c83324aea9e3d453170371a97a4371eb16e8dc5c8928b38909a51fe3664",
+    "originalEvidenceSHA256": "d30693171cdf1968b2fd9e433eb4933d64ff4dc2f5f56786adca417b3288eabd",
+    "workflowRun": 38750784963,
+    "nativeActualPublishedAMDARM": true,
+    "OCIProvenanceOrSBOM": "Not generated; exact native file/config/layer/source records only"
+  },
+  "runtimeContract": {
+    "beforeModelSHA256": "8ebb08fa7c45104e9485d76c048376ec148d7db4122c86bec5fdf2c5a1219940",
+    "afterModelSHA256": "f600c56e179c3618587389dfe193507462dc6c7f657dddb9999c08a6cd0f0dec",
+    "changes": [
+      {
+        "path": [
+          "services",
+          "app",
+          "image"
+        ],
+        "before": "ghcr.io/willitmod/5tratsmack-app:0.11.22-hero.6fc6597c3aba@sha256:304566aaf4374398d10e53612f1b1ccce89344e6fcf4a51293006d9c8f2111e9",
+        "after": "ghcr.io/willitmod/5tratsmack-app:0.11.23-store.42ef8e00bbdf@sha256:598071c0e8a0e01e837b1b8c375c71390d75e2180673ea5dff1af1b613f50404"
+      },
+      {
+        "path": [
+          "services",
+          "app",
+          "environment",
+          "APP_VERSION"
+        ],
+        "before": "0.11.21",
+        "after": "0.11.23"
+      },
+      {
+        "path": [
+          "services",
+          "app",
+          "environment",
+          "APP_PLATFORM"
+        ],
+        "before": "5TRATUMOS",
+        "after": "${APP_5TRATSMACK_PLATFORM:-5TRATUMOS}"
+      },
+      {
+        "path": [
+          "services",
+          "app",
+          "environment",
+          "FIVETRAT_RELEASE_TAG"
+        ],
+        "before": "0.11.21",
+        "after": "0.11.23"
+      },
+      {
+        "path": [
+          "services",
+          "app",
+          "environment",
+          "APP_IMAGE"
+        ],
+        "before": "ghcr.io/willitmod/5tratsmack-app:0.11.22-hero.6fc6597c3aba@sha256:304566aaf4374398d10e53612f1b1ccce89344e6fcf4a51293006d9c8f2111e9",
+        "after": "ghcr.io/willitmod/5tratsmack-app:0.11.23-store.42ef8e00bbdf@sha256:598071c0e8a0e01e837b1b8c375c71390d75e2180673ea5dff1af1b613f50404"
+      },
+      {
+        "path": [
+          "services",
+          "app",
+          "environment",
+          "APP_REVISION"
+        ],
+        "before": "f41e154a74afbd54f67545d0b95d18506a336fa1",
+        "after": "42ef8e00bbdfe67dbade44ef6c56aa0f2676c986"
+      }
+    ]
+  },
+  "packageFiles": {
+    "willitmod-dev-5tratsmack/5tratstore-app.yml": {
+      "sha256": "ce6225c6171f5e82e3e75231fc4b1bfc7da8048dc953d04aa14512b27aba33f4",
+      "mode": "0o644"
+    },
+    "willitmod-dev-5tratsmack/LICENSES.md": {
+      "sha256": "27258667b6e645d9d5064c424b9c3947b9dbf2b6ec38d8f8d221328fa54a3d10",
+      "mode": "0o644"
+    },
+    "willitmod-dev-5tratsmack/docker-compose.yml": {
+      "sha256": "8cd5d46ad3dbd831dc433e30cd8866ba2f98245204cbf9525682f87e38a698d4",
+      "mode": "0o644"
+    },
+    "willitmod-dev-5tratsmack/exports.sh": {
+      "sha256": "c3682dc2c7bc3a4bef1b54913741e0ba48a2223974081376a4345fc371b75a14",
+      "mode": "0o755"
+    },
+    "willitmod-dev-5tratsmack/icon.png": {
+      "sha256": "bd5787184624cea7bcf087ca0a1e4db8ac7ebb56c4e12feeba1b0d3553a5773a",
+      "mode": "0o644"
+    },
+    "willitmod-dev-5tratsmack/images/1.png": {
+      "sha256": "e6e6cb263ca8e5dcf712989886054a091e6c4dd7e5dcedc62b3039bb61c8314f",
+      "mode": "0o644"
+    },
+    "willitmod-dev-5tratsmack/umbrel-app.yml": {
+      "sha256": "ce6225c6171f5e82e3e75231fc4b1bfc7da8048dc953d04aa14512b27aba33f4",
+      "mode": "0o644"
+    }
+  },
+  "frozenRecords": {
+    "APP-VERSION-NORMALIZATION-2026-10-15.json": "84004b9e8757c0631ef03166bfafc01619a424d8dadbe47987b19e6e75f1827f"
+  },
+  "scope": "Only the APP image references, package/runtime version and release tag, source revision, default native/platform selector and one Umbrel exports marker change. All other Compose fields, services, published ports, mounts, node/pool/KDF/swap images, permissions, wallet/data/config paths and historical release records remain exact. The published image changes the compiled backend and application JavaScript only; inherited layout/CSS/assets/dependencies remain verified by native public receipts. No guest deployment or complete mining/trading qualification claimed.",
+  "platformDelivery": {
+    "path": "release-records/smack-0.11.23-platform-delivery.json",
+    "sha256": "a5068beb1ca459443237d5c83f44e7506d63ebcac79e8ea6779fa7e001de643d",
+    "scope": "Exact shipped Compose/export bytes and official native/Umbrel loading semantics; no complete guest lifecycle claim."
+  }
+}

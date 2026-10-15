@@ -2,7 +2,7 @@ manifestVersion: 1
 id: willitmod-dev-5tratsmack
 category: altcoin
 name: 5tratSmack
-version: "0.11.22"
+version: "0.11.23"
 tagline: Home-miner 5TRAT node, wallet, solo pool and atomic trade lab
 description: >-
   Install and synchronize a complete 5TRAT node, create or restore an encrypted
@@ -37,6 +37,8 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
+  Fixes repeating update prompts by comparing the applied store package with the matching MAIN or DEV catalogue. Updates remain authenticated through 5tratumOS, while Umbrel uses its own app manager. The running version and catalogue agree. Existing ports, Claude layouts, node and pool images, wallets and stored data are retained.
+
   Display a neutral node-address placeholder when the endpoint cannot be inferred
   from the current browser address. Only that one HTML text value changes; the
   existing layout, JavaScript, CSS, compiled backend, node, pool and trading
