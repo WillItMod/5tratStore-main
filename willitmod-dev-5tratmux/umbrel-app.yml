@@ -1,0 +1,35 @@
+manifestVersion: 1
+id: willitmod-dev-5tratmux
+name: 5tratMux
+tagline: Route miners through one stable Stratum endpoint
+icon: icon.png
+category: crypto
+version: 0.9.79
+port: 21222
+description: >-
+  Standalone Stratum routing for Umbrel. Configure a pool endpoint and account,
+  set the Umbrel LAN address in Connection settings, and connect miners to TCP
+  port 7331. Manual routing requires active trial or paid licence access.
+  Cloud AI is optional; no local model runtime is bundled. An 8 GB or larger
+  Umbrel host is recommended when running node/pool apps. Native 5tratumOS app
+  management and managed Local AI
+  are unavailable. Sign in using the generated app password shown by Umbrel.
+  Existing mining and dashboard ports are retained.
+developer: WillItMod
+website: https://5tratum.com
+repo: https://github.com/WillItMod/5tratMux
+support: https://github.com/WillItMod/5tratMux/issues
+dependencies: []
+permissions: []
+gallery: []
+path: ""
+defaultUsername: ""
+deterministicPassword: true
+storage:
+  dataRoot: data
+releaseNotes: >-
+  Adds standalone 5tratMux for Umbrel with an application password, persistent
+  connection settings, optional directly reachable local pool APIs and cloud AI.
+  Preserves current miner layouts and routing fixes. Use Umbrel to start, stop
+  and update the app. Managed Local AI and native 5tratumOS pool/host management
+  controls are unavailable. The dashboard remains on 21222 and mining on 7331.
