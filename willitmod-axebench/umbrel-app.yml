@@ -2,7 +2,7 @@ manifestVersion: 1
 id: willitmod-axebench
 category: bitcoin
 name: AxeBench
-version: "4.0.29"
+version: "4.0.30"
 tagline: Bitaxe fleet benchmarking and management
 icon: https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-axebench/icon.png
 description: >-
@@ -32,6 +32,8 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
+  v4.0.30: Shows measured benchmark results on completed session cards and reports interrupted or empty runs truthfully. Preserves existing history, hardware controls and layouts. Fresh installs receive the tested data-directory ownership hook.
+
   v4.0.29:
     - Publish a new multi-architecture image tag so the platform performs the update.
     - Restore the MAIN proxy hostname so AxeBench opens correctly on port 5000.
