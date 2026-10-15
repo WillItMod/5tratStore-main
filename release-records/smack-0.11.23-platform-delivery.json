@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 1,
+  "scope": "Smack 0.11.23 platform delivery from actual prepared DEV and MAIN packages; configuration-only source proof",
+  "result": "PASS",
+  "packageBinding": {
+    "dev": {
+      "testedComposeSHA256": "7d76a9fc8d0d197e78bf12db4648bbc6b1967f275c551d91def721bb5a9b11f6",
+      "currentComposeSHA256": "7dcd65ad8946a41b46cce7cfd445ac54694ad24d8207de76b4acb5623eef295c",
+      "difference": "Only the release-source comment now names actual app source 42ef8e00bbdfe67dbade44ef6c56aa0f2676c986",
+      "wholeParsedModelIdenticalToTested": true,
+      "exportsSHA256": "c3682dc2c7bc3a4bef1b54913741e0ba48a2223974081376a4345fc371b75a14",
+      "exportsMode": "0755"
+    },
+    "main": {
+      "testedComposeSHA256": "6b45a4379eb4af0713225a015edaa0eb31b7c0808b980e24bb6fd52da17a5fff",
+      "currentComposeSHA256": "8cd5d46ad3dbd831dc433e30cd8866ba2f98245204cbf9525682f87e38a698d4",
+      "difference": "Only the release-source comment now names actual app source 42ef8e00bbdfe67dbade44ef6c56aa0f2676c986",
+      "wholeParsedModelIdenticalToTested": true,
+      "exportsSHA256": "c3682dc2c7bc3a4bef1b54913741e0ba48a2223974081376a4345fc371b75a14",
+      "exportsMode": "0755"
+    }
+  },
+  "appImageRef": "ghcr.io/willitmod/5tratsmack-app:0.11.23-store.42ef8e00bbdf@sha256:598071c0e8a0e01e837b1b8c375c71390d75e2180673ea5dff1af1b613f50404",
+  "runtimeDelta": {
+    "path": "services.app.environment.APP_PLATFORM",
+    "expression": "${APP_5TRATSMACK_PLATFORM:-5TRATUMOS}",
+    "addedFile": "exports.sh",
+    "umbrelExport": "APP_5TRATSMACK_PLATFORM=UMBREL",
+    "allOtherRuntimeFieldsRetained": true
+  },
+  "native": [
+    {
+      "version": "0.8.33",
+      "CLI_SHA256": "caa747717a3a5ba12dbc231ce79987179b3c37b8ca31d8f588baa1c30c715cfc",
+      "exactInstallUpdateFragments": [
+        "9dc8fd762892a0a4d4492de4348646df87584469eb079a3d9a54d53a7d594578",
+        "0cf6ed5c7955a343ae7c3028c0e5a5b2872f41e8e011f41eabcf3df76f4ccd68"
+      ],
+      "doesNotExecuteExports": true,
+      "regularComposeOnly": true
+    },
+    {
+      "version": "0.8.34/current",
+      "CLI_SHA256": "aca43e31bfcc5b13b92088c74483410ed9ec530d0fd22df34ad147277327d37b",
+      "exactInstallUpdateFragments": [
+        "9dc8fd762892a0a4d4492de4348646df87584469eb079a3d9a54d53a7d594578",
+        "0cf6ed5c7955a343ae7c3028c0e5a5b2872f41e8e011f41eabcf3df76f4ccd68"
+      ],
+      "doesNotExecuteExports": true,
+      "regularComposeOnly": true
+    },
+    {
+      "channel": "dev",
+      "stage": "install",
+      "actualGeneratorAndComposeConfigPassed": true,
+      "platform": "5TRATUMOS",
+      "wholeParsedModelIdentical": true,
+      "unsetAndEmptyDefaultPassed": true
+    },
+    {
+      "channel": "dev",
+      "stage": "update",
+      "actualGeneratorAndComposeConfigPassed": true,
+      "platform": "5TRATUMOS",
+      "wholeParsedModelIdentical": true,
+      "unsetAndEmptyDefaultPassed": true
+    },
+    {
+      "channel": "main",
+      "stage": "install",
+      "actualGeneratorAndComposeConfigPassed": true,
+      "platform": "5TRATUMOS",
+      "wholeParsedModelIdentical": true,
+      "unsetAndEmptyDefaultPassed": true
+    },
+    {
+      "channel": "main",
+      "stage": "update",
+      "actualGeneratorAndComposeConfigPassed": true,
+      "platform": "5TRATUMOS",
+      "wholeParsedModelIdentical": true,
+      "unsetAndEmptyDefaultPassed": true
+    }
+  ],
+  "umbrel": [
+    {
+      "version": "1.7.4",
+      "actualSourceSHA256": "94e05c22d532e00945a058b63f76c2986b227e6492d6c35dc3c9d617dfc6de41",
+      "exportsLoadingBlockSHA256": "ce7c0b900c8ba232bb800b6db285045d7e914d3e31443dece79214578696346f",
+      "sourceAppBeforeCompose": true,
+      "templatesWouldOverwriteOrdinaryCompose": true
+    },
+    {
+      "version": "2.0.0",
+      "actualSourceSHA256": "26a65b4da50b581a5130c8a8d2dd57eae5e186a3114ca74d1eed3c39d86b05b9",
+      "exportsLoadingBlockSHA256": "dd01f04a4f615799de312c21df664f01ca80a4097532c09505696eee6388beb5",
+      "sourceAppBeforeCompose": true,
+      "templatesWouldOverwriteOrdinaryCompose": true
+    }
+  ],
+  "actualExportLoaderCases": [
+    "1.7.4-strict:UMBREL",
+    "1.7.4-loose:UMBREL",
+    "2.0.0-strict:UMBREL",
+    "2.0.0-loose:UMBREL"
+  ],
+  "supportFragmentsSHA256": {
+    "1.7.4": {
+      "docker-compose.common.yml": "e0cc23a4c64661070c3676fb2741aa114eb072d93555e5a51f3513375abab035",
+      "docker-compose.app_proxy.yml": "c5fce59699a37a139ec886df309dab477700b279d22a62d24a95a9b7db59df86"
+    },
+    "2.0.0": {
+      "docker-compose.common.yml": "e0cc23a4c64661070c3676fb2741aa114eb072d93555e5a51f3513375abab035",
+      "docker-compose.app_gateway.yml": "8397c3216ab814ec25367a81c6ce36c7f43f894a75d2bddad775a494cdd48cb6"
+    }
+  },
+  "compose": {
+    "bothChannelsPassed": true,
+    "platform": "UMBREL",
+    "wholeParsedModelsOnlyPlatformChanged": true,
+    "healthcheckDollarEscapesRetained": true,
+    "parserVersion": "Docker Compose version v5.6.0"
+  },
+  "negativeDriftCases": 6,
+  "catalogueTests": {
+    "file": "tests/test_smack_platform_delivery.py",
+    "sha256": "3171efd53a8b25ecee0ba1c9065f14e814f64f2e23b4cb6ff99d0ed77cd3b9fe",
+    "devPassed": 7,
+    "mainPassed": 7,
+    "localExternalChecksExplicitlyEnabled": true,
+    "isolatedCIDefault": "5 mandatory tests; 2 named optional external-source/Compose checks"
+  },
+  "originalTestedReceiptSHA256": "8863f83685d0e72f655cc97025828928586933d700905b0ce8371a4b6af1574f",
+  "qualificationLimits": [
+    "Exact source_app export-loading blocks only, not complete Umbrel lifecycle actions",
+    "Real Compose config parser; no application or mining backend started",
+    "No guest, device, catalogue recipe, image or release mutation by this proof"
+  ]
+}

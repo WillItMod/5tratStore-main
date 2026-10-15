@@ -1,6 +1,6 @@
 version: "3.7"
 
-# Release source revision: f41e154a74afbd54f67545d0b95d18506a336fa1
+# Release source revision: 42ef8e00bbdfe67dbade44ef6c56aa0f2676c986
 
 x-node-environment: &node-environment
   FIVETRAT_NETWORK: main
@@ -199,7 +199,7 @@ services:
   app:
     stop_signal: SIGINT
     hostname: 5tratsmack-app
-    image: ghcr.io/willitmod/5tratsmack-app:0.11.22-hero.6fc6597c3aba@sha256:304566aaf4374398d10e53612f1b1ccce89344e6fcf4a51293006d9c8f2111e9
+    image: ghcr.io/willitmod/5tratsmack-app:0.11.23-store.42ef8e00bbdf@sha256:598071c0e8a0e01e837b1b8c375c71390d75e2180673ea5dff1af1b613f50404
     restart: unless-stopped
     depends_on:
       init_permissions:
@@ -208,18 +208,18 @@ services:
         condition: service_started
     environment:
       APP_ID: 5tratsmack
-      APP_VERSION: "0.11.21"
+      APP_VERSION: "0.11.23"
       APP_CHANNEL: MAIN
       APP_RELEASE_PHASE: STABLE
-      APP_PLATFORM: 5TRATUMOS
+      APP_PLATFORM: "${APP_5TRATSMACK_PLATFORM:-5TRATUMOS}"
       APP_SELF_RESTART_ENABLED: "0"
       FIVETRAT_UPDATER_ENABLED: "0"
       FIVETRAT_STORE_UPDATE_APP_ID: 5tratsmack
       FIVETRAT_STORE_UPDATE_CHANNEL: main
       FIVETRAT_INSTALL_REVISION: main-store
-      FIVETRAT_RELEASE_TAG: "0.11.21"
-      APP_IMAGE: "ghcr.io/willitmod/5tratsmack-app:0.11.22-hero.6fc6597c3aba@sha256:304566aaf4374398d10e53612f1b1ccce89344e6fcf4a51293006d9c8f2111e9"
-      APP_REVISION: f41e154a74afbd54f67545d0b95d18506a336fa1
+      FIVETRAT_RELEASE_TAG: "0.11.23"
+      APP_IMAGE: "ghcr.io/willitmod/5tratsmack-app:0.11.23-store.42ef8e00bbdf@sha256:598071c0e8a0e01e837b1b8c375c71390d75e2180673ea5dff1af1b613f50404"
+      APP_REVISION: 42ef8e00bbdfe67dbade44ef6c56aa0f2676c986
       BCH2_NODE_IMAGE: ghcr.io/willitmod/5tratsmack-core:0.11.2@sha256:7bf02513144c7a157965fb8e9ad5865f5e84fa679afa7cb61fc0a8e140a40070
       CKPOOL_IMAGE: ghcr.io/willitmod/5tratsmack-ckpool:0.11.3-rc.a992f40e96d4@sha256:95a1a5f343d579206a0f8bb3c961cafa7500b5d487211a0cfb7b989cf34b895e
       FIVETRAT_MUX_IDENTITY_URL: http://172.17.0.1:21222/api/integrations/workers

@@ -20,7 +20,7 @@ own licenses.
 
 ## Current app releases
 
-- **5tratSmack** (`willitmod-dev-5tratsmack`) - `0.11.22`
+- **5tratSmack** (`willitmod-dev-5tratsmack`) - `0.11.23`
 - **AxeBC2** (`willitmod-dev-bc2`) - `0.1.22`
 - **AxeBCH** (`willitmod-dev-bch`) - `0.9.26`
 - **AxeBCH2** (`willitmod-dev-axebch2`) - `0.2.1`
