@@ -23,9 +23,9 @@ own licenses.
 - **5tratSmack** (`willitmod-dev-5tratsmack`) - `0.11.22`
 - **AxeBC2** (`willitmod-dev-bc2`) - `0.1.22`
 - **AxeBCH** (`willitmod-dev-bch`) - `0.9.26`
-- **AxeBCH2** (`willitmod-dev-axebch2`) - `0.2.0.12`
+- **AxeBCH2** (`willitmod-dev-axebch2`) - `0.2.1`
 - **AxeBench** (`willitmod-axebench`) - `4.0.30`
-- **AxeBTC** (`willitmod-btc`) - `0.7.82.17`
+- **AxeBTC** (`willitmod-btc`) - `0.7.83`
 - **AxeDGB** (`willitmod-dev-dgb`) - `0.9.181`
 - **AxeLive** (`willitmod-axelive`) - `1.4.3`
 - **AxeMIG** (`willitmod-axemig`) - `0.1.24`

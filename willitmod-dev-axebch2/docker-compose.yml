@@ -52,7 +52,7 @@ services:
       APP_REVISION: 5531b5e6e2e4c55353454665af9fc1950f9f0844
       MUX_IDENTITY_URL: "http://172.17.0.1:21222/api/integrations/workers"
       APP_ID: "willitmod-dev-axebch2"
-      APP_VERSION: "0.2.0.12"
+      APP_VERSION: "0.2.1"
       APP_CHANNEL: "MAIN"
       APP_RELEASE_PHASE: "STABLE"
       APP_SELF_RESTART_ENABLED: "1"

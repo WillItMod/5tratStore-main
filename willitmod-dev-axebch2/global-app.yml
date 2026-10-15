@@ -2,7 +2,7 @@ manifestVersion: 1
 id: willitmod-dev-axebch2
 category: altcoin
 name: "AxeBCH2"
-version: "0.2.0.12"
+version: "0.2.1"
 tagline: BCH2 node + solo pool (alpha)
 description: >-
   ALPHA RELEASE (DEV CHANNEL)
@@ -33,6 +33,8 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
+  Standardizes the app version to 0.2.1. The running interface and catalogue use the same version. Existing ports, images, mining configuration and stored data are retained.
+
   Pool restarts stop cleanly while waiting for a payout address. On Umbrel, the app now uses the existing Docker socket group to verify that saved settings reached the restarted node or pool. The app interface, node image, pool binary, payout settings and stored chain data are retained.
 
   Fresh installations using this node image retain their synced chain on later normal restarts. The recipe pins a reviewed entrypoint-only node image over the tested node binaries and libraries. App and pool images, wallets, payouts and configuration are retained. The existing required one-time resync/reindex policy remains active for unmarked legacy chain data.

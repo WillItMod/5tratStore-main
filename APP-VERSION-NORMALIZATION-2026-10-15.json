@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "channel": "MAIN",
+  "baselineCommit": "08c0620ee99fd3c861f54610b32ec564c3501816",
+  "publishedPortsSHA256": "cb0f737d9bc0968c9e2eaeaa05400d4703961fa2cfd71355f8f407e2d69c7813",
+  "apps": {
+    "willitmod-dev-axebch2": {
+      "beforeVersion": "0.2.0.12",
+      "version": "0.2.1",
+      "beforeModelSHA256": "5189e1a3169528c9c4240d3577872f135042541ab25080af66491d7399b22b15",
+      "afterModelSHA256": "8be63c5a5e0fec27ba6b9fb3ac2866047f27488af6ec9bb28994a882214dbcb2",
+      "changes": [
+        {
+          "path": [
+            "services",
+            "app",
+            "environment",
+            "APP_VERSION"
+          ],
+          "before": "0.2.0.12",
+          "after": "0.2.1"
+        }
+      ]
+    },
+    "willitmod-btc": {
+      "beforeVersion": "0.7.82.17",
+      "version": "0.7.83",
+      "beforeModelSHA256": "1868b18c4d002cf8c75ef1a591a77bd6042c7df72893082b8e09f26e8e48eb2a",
+      "afterModelSHA256": "cfd50ba78f6b7fa49f6f7e01e0a0fc3d3cd3761934c445a3dd83388059a95410",
+      "releaseNotePrefix": "Standardizes the app version to 0.7.83 in the running interface and catalogue. Existing ports, mining code, node and pool images, configuration and stored data are retained.",
+      "changes": [
+        {
+          "path": [
+            "services",
+            "app",
+            "image"
+          ],
+          "before": "ghcr.io/willitmod/axebtc-app-umbrel-dev:0.7.82.17@sha256:21334b67d803987a3ae4e79242ba2d74da0415d22e786783c73723a460d9c174",
+          "after": "ghcr.io/willitmod/axebtc-app-umbrel-dev:0.7.83-dev@sha256:e2a213be2c2ff13fbf13c065d361b5a7a0be9601df05aa1edf9c68660802a698"
+        }
+      ]
+    }
+  },
+  "releaseNotePrefix": "Standardizes the app version to 0.2.1. The running interface and catalogue use the same version. Existing ports, images, mining configuration and stored data are retained.",
+  "scope": "BCH2 recipe APP_VERSION metadata plus one BTC application image pin. Published ports, mounts, node and pool images/policies, environment, and all frozen historical records are retained.",
+  "btcPublication": {
+    "publicationRecord": "release-records/btc-0.7.83-dev-image.json",
+    "publicationRecordSHA256": "f6c5ef4bc5682afc2392a6d3e5f36a492745e30e0eca68a29dadd70d99bc1308",
+    "sourceRepository": "https://github.com/WillItMod/AxeBTC_Build",
+    "sourceRevision": "93915c555621ec1aff80ac42cf3335201c670edb",
+    "sourceTree": "4505888a70cf54e4b9ad31371ede97365b393662",
+    "workflowRun": 38750325672,
+    "publicationURL": "https://github.com/WillItMod/AxeBTC_Build/actions/runs/38750325672",
+    "imageRef": "ghcr.io/willitmod/axebtc-app-umbrel-dev:0.7.83-dev@sha256:e2a213be2c2ff13fbf13c065d361b5a7a0be9601df05aa1edf9c68660802a698",
+    "versionLiteral": "0.7.83",
+    "applicationSourceSHA256": "54731405f387f6c8ecddd827e6571c1390ca998feb87edb7d43ac66c55f1e269",
+    "previousApplicationSourceSHA256": "7cfb220103093497f4afaffbec74c6f56e2159d6df53045528e62ec9c9f1a781",
+    "applicationModeUidGid": [
+      436,
+      0,
+      0
+    ],
+    "images": {
+      "amd64": {
+        "manifestDigest": "sha256:80832b8c1e93fa2b93141d5e1eac5a80729b0b5606e2eab0d3fe13c22478f7ce",
+        "configDigest": "sha256:72e532728ec3ef6413ff030c80c0d5e24aad6953075a366591299ab3199a34d1"
+      },
+      "arm64": {
+        "manifestDigest": "sha256:c3e418fc7882bb215ab522c8262804bd5a0532c02284199421f16868eaa310ce",
+        "configDigest": "sha256:5ffa7f1d6af3b59fc231ea5a2b12ce552c28ab895edfcf9087b9bde3f2773c38"
+      }
+    },
+    "actualNativePreAndPostPublicationVerified": true,
+    "anonymousIndexAndBothPlatformConfigsVerified": true,
+    "changedRuntimeFile": "/app/app.py",
+    "runtimeChangeScope": "Only APP_VERSION literal; all other rootfs bytes, modes, owners, links and runtime config retained except source labels.",
+    "guestUpdateQualificationClaimed": false
+  }
+}

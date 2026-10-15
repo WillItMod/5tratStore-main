@@ -1,0 +1,24 @@
+{
+  "image": "ghcr.io/willitmod/axebch2-app:0.2.0.12-dev@sha256:65891eb60db568ca9f9ee21e00869769b5bc475a94f2af5f215dfdc55857e2d1",
+  "network": "none",
+  "mounts": "private tmpfs only",
+  "proofs": [
+    {
+      "APP_VERSION": "0.2.1",
+      "DISPLAY_VERSION": "0.2.1",
+      "channel": "MAIN",
+      "htmlStatus": 200,
+      "renderedHTMLSHA256": "b10eaa4093895b9ec4e2a560e07f175f2a615ac09501e6ae13f7ba459b975204",
+      "appSHA256": "91520a1d7f68bed3279e4eb54fe3b641949d1ddeaa33c8c4b3c76f26d5e0289b"
+    },
+    {
+      "APP_VERSION": "0.2.1-dev",
+      "DISPLAY_VERSION": "0.2.1-dev",
+      "channel": "DEV",
+      "htmlStatus": 200,
+      "renderedHTMLSHA256": "a1042e012322f4da85534c8d817d4e053fb9eddbe238205bef64a463da6fa0c9",
+      "appSHA256": "91520a1d7f68bed3279e4eb54fe3b641949d1ddeaa33c8c4b3c76f26d5e0289b"
+    }
+  ],
+  "scope": "ARM64 actual published application import and rendered HTML with MAIN/DEV recipe version settings. No node or miner started; original immutable image retained."
+}
