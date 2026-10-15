@@ -10,7 +10,8 @@ import sys
 import tempfile
 import unittest
 import argparse
-from axebc2_release_state import validate as validate_release_state
+import yaml
+from axebc2_release_state import validate_promoted_compose, validate_promoted_sources
 from axebc2_mount_contract import effective_mounts
 
 
@@ -25,24 +26,24 @@ def require(condition, message):
 
 compose = (APP / "docker-compose.yml").read_text(encoding="utf-8")
 parser=argparse.ArgumentParser(); parser.add_argument("--phase",required=True,choices=("prefinalization","finalized")); phase=parser.parse_args().phase
-try: validate_release_state(compose,phase)
+try:
+    require(phase == "finalized", "the promoted BC2 package requires finalized immutable images")
+    validate_promoted_compose(yaml.safe_load(compose))
+    validate_promoted_compose(yaml.safe_load((APP / "docker-compose.yml.template").read_text()), template=True)
+    validate_promoted_sources(APP)
 except ValueError as exc: raise SystemExit(str(exc))
 manifest = (APP / "umbrel-app.yml").read_text(encoding="utf-8")
 node_config = (APP / "data/templates/bitcoinII.conf.template").read_text(encoding="utf-8")
 
 # Application and package versions align; Core and pool images retain their accepted pins.
-require('version: "0.1.15"' in manifest, "manifest must be stable 0.1.15")
+require(yaml.safe_load(manifest)["version"] == "0.1.22", "manifest must be stable 0.1.22")
 require('id: willitmod-dev-bc2' in manifest, "stable store identity must remain unchanged")
 require('APP_CHANNEL: "MAIN"' in compose, "stable app channel must be MAIN")
 require('APP_VERSION_SUFFIX: ""' in compose, "stable app must have no DEV suffix")
-require("beginning with 1, 3, or bc1" in manifest, "release notes must describe valid payout families")
-require("misleading payout warning from MAIN builds" in manifest, "release notes must describe the MAIN banner fix")
-require(
-    "keeps CKPool /config writable on" in manifest
-    and "conditionally repairs /www ownership" in manifest,
-    "release notes must accurately describe the config and sharelog repairs",
-)
-require("does not trigger another blockchain reindex" in manifest, "release notes must rule out a repeated reindex")
+require("Fresh installations retain their Core31 chain across ordinary restarts" in manifest,
+        "release notes must describe the retained fresh-chain restart fix")
+require("Existing chain data still follows the required migration, checkpoint and rollback checks" in manifest,
+        "release notes must retain the existing-chain safety requirements")
 require("on 5tratumOS, version 0.7.12 or newer is required" in manifest, "OS prerequisite must be disclosed")
 require('"2345:3333/tcp"' in compose, "Stratum host port 2345 must be retained")
 require("SUPPORT_CHECKIN_ENABLED: \"false\"" in compose, "telemetry must default off")

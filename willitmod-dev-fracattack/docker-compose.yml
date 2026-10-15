@@ -29,6 +29,74 @@ services:
       - |-
         set -eu
 
+        # BEGIN REVIEWED POOL SUPERVISOR MIGRATION
+        # Compose is replaced on ordinary updates; persistent data/templates is not.
+        pool_migration_refuse() {
+          echo "Pool supervisor migration refused: keep custom files unchanged and restore the reviewed regular template before updating." >&2
+          exit 1
+        }
+        pool_migration_check() {
+          [ -d /data ] && [ ! -L /data ] || return 1
+          [ -d /data/templates ] && [ ! -L /data/templates ] || return 1
+          [ -f "$$pool_wrapper" ] && [ ! -L "$$pool_wrapper" ] || return 1
+          [ "$$(stat -c '%h' "$$pool_wrapper")" = 1 ] || return 1
+          [ "$$(stat -c '%s' "$$pool_wrapper")" -le 16384 ] || return 1
+          pool_wrapper_metadata="$$(stat -c '%d:%i:%h:%s:%a:%u:%g:%Y:%Z' "$$pool_wrapper")" || return 1
+          pool_wrapper_hash="$$(sha256sum "$$pool_wrapper" | awk '{print $$1}')" || return 1
+        }
+        pool_wrapper=/data/templates/ckpool-entrypoint.sh
+        pool_migration_check || pool_migration_refuse
+        case "$$pool_wrapper_hash" in
+          6f142ccb5716c160dcfe260425f6a8dbb9a9338149c02c5613961875b573429c) ;;
+          a17c89602cf108cf11a5106cabf4d2b7a20520ec69b84198006a59ad9b60c7ae)
+            pool_old_metadata="$$pool_wrapper_metadata"
+            pool_migration_tmp="$$(mktemp /data/templates/.ckpool-entrypoint.XXXXXXXX)" || pool_migration_refuse
+            trap 'rm -f "$$pool_migration_tmp"' EXIT
+            trap 'exit 1' TERM INT
+            cp -p "$$pool_wrapper" "$$pool_migration_tmp" || pool_migration_refuse
+            [ "$$(sha256sum "$$pool_migration_tmp" | awk '{print $$1}')" = a17c89602cf108cf11a5106cabf4d2b7a20520ec69b84198006a59ad9b60c7ae ] || pool_migration_refuse
+            base64 -d >"$$pool_migration_tmp" <<'REVIEWED_POOL_SUPERVISOR'
+        IyEvYmluL3NoCnNldCAtZXUKCkNGRz0iL2NvbmZpZy9ja3Bvb2wuY29uZiIKQVJHU19GSUxFPSIv
+        Y29uZmlnL2NrcG9vbC5hcmdzIgoKcm0gLWYgL3RtcC9ja3Bvb2wvKi5waWQgMj4vZGV2L251bGwg
+        fHwgdHJ1ZQoKY2twb29sX2Jpbj0iIgppZiBjb21tYW5kIC12IGNrcG9vbCA+L2Rldi9udWxsIDI+
+        JjE7IHRoZW4KICBja3Bvb2xfYmluPSJja3Bvb2wiCmVsaWYgWyAteCAvYmluL2NrcG9vbCBdOyB0
+        aGVuCiAgY2twb29sX2Jpbj0iL2Jpbi9ja3Bvb2wiCmVsaWYgWyAteCAvdXNyL2Jpbi9ja3Bvb2wg
+        XTsgdGhlbgogIGNrcG9vbF9iaW49Ii91c3IvYmluL2NrcG9vbCIKZWxzZQogIGVjaG8gIltmcmFj
+        YXR0YWNrXSBFUlJPUjogY2twb29sIGJpbmFyeSBub3QgZm91bmQgaW4gaW1hZ2UiID4mMgogIGV4
+        aXQgMQpmaQoKY2hlY2tzdW0oKSB7CiAgaWYgWyAhIC1mICIkQ0ZHIiBdOyB0aGVuCiAgICBlY2hv
+        ICIiCiAgICByZXR1cm4gMAogIGZpCiAgY2tzdW0gIiRDRkciIDI+L2Rldi9udWxsIHwgYXdrICd7
+        cHJpbnQgJDEgIjoiICQyfScKfQoKc3RhcnRfY2twb29sKCkgewogIGlmIFsgISAtZiAiJENGRyIg
+        XTsgdGhlbgogICAgcmV0dXJuIDAKICBmaQogIEFSR1M9IiQoY2F0ICIkQVJHU19GSUxFIiAyPi9k
+        ZXYvbnVsbCB8fCB0cnVlKSIKICAjIHNoZWxsY2hlY2sgZGlzYWJsZT1TQzIwODYKICAiJGNrcG9v
+        bF9iaW4iIC1rIC1MIC1jICIkQ0ZHIiAkQVJHUyAmCiAgcGlkPSIkISIKfQoKbGFzdD0iIgpwaWQ9
+        IiIKcG9sbF9waWQ9IiIKCnN0b3BfY2twb29sKCkgewogIGlmIFsgLW4gIiRwaWQiIF07IHRoZW4K
+        ICAgIGtpbGwgLVRFUk0gIiRwaWQiIDI+L2Rldi9udWxsIHx8IHRydWUKICAgIHdhaXQgIiRwaWQi
+        IDI+L2Rldi9udWxsIHx8IHRydWUKICAgIHBpZD0iIgogIGZpCn0KCnRlcm1pbmF0ZV9wb29sKCkg
+        ewogIHRyYXAgJycgVEVSTSBJTlQKICBpZiBbIC1uICIkcG9sbF9waWQiIF07IHRoZW4KICAgIGtp
+        bGwgLVRFUk0gIiRwb2xsX3BpZCIgMj4vZGV2L251bGwgfHwgdHJ1ZQogICAgd2FpdCAiJHBvbGxf
+        cGlkIiAyPi9kZXYvbnVsbCB8fCB0cnVlCiAgICBwb2xsX3BpZD0iIgogIGZpCiAgc3RvcF9ja3Bv
+        b2wKICBleGl0IDAKfQoKdHJhcCB0ZXJtaW5hdGVfcG9vbCBURVJNIElOVAoKd2hpbGUgdHJ1ZTsg
+        ZG8KICBzdW09IiQoY2hlY2tzdW0pIgoKICBpZiBbICIkc3VtIiAhPSAiJGxhc3QiIF07IHRoZW4K
+        ICAgIGxhc3Q9IiRzdW0iCiAgICBzdG9wX2NrcG9vbAogICAgc3RhcnRfY2twb29sCiAgICBpZiBb
+        IC1uICIke3BpZDotfSIgXTsgdGhlbgogICAgICBlY2hvICJbZnJhY2F0dGFja10gY2twb29sIHN0
+        YXJ0ZWQgKHBpZCAke3BpZH0pIgogICAgZWxzZQogICAgICBlY2hvICJbZnJhY2F0dGFja10gd2Fp
+        dGluZyBmb3IgY2twb29sLmNvbmYuLi4iCiAgICBmaQogIGZpCgogIGlmIFsgLW4gIiR7cGlkOi19
+        IiBdICYmICEga2lsbCAtMCAiJHBpZCIgMj4vZGV2L251bGw7IHRoZW4KICAgIHdhaXQgIiRwaWQi
+        IDI+L2Rldi9udWxsIHx8IHRydWUKICAgIHBpZD0iIgogIGZpCgogIHNsZWVwIDIgJgogIHBvbGxf
+        cGlkPSIkISIKICB3YWl0ICIkcG9sbF9waWQiIDI+L2Rldi9udWxsIHx8IHRydWUKICBwb2xsX3Bp
+        ZD0iIgpkb25lCg==
+        REVIEWED_POOL_SUPERVISOR
+            [ "$$(sha256sum "$$pool_migration_tmp" | awk '{print $$1}')" = 6f142ccb5716c160dcfe260425f6a8dbb9a9338149c02c5613961875b573429c ] || pool_migration_refuse
+            touch -r "$$pool_wrapper" "$$pool_migration_tmp" || pool_migration_refuse
+            pool_migration_check || pool_migration_refuse
+            [ "$$pool_wrapper_hash" = a17c89602cf108cf11a5106cabf4d2b7a20520ec69b84198006a59ad9b60c7ae ] && [ "$$pool_wrapper_metadata" = "$$pool_old_metadata" ] || pool_migration_refuse
+            mv -f "$$pool_migration_tmp" "$$pool_wrapper" || pool_migration_refuse
+            trap - EXIT TERM INT
+            ;;
+          *) pool_migration_refuse ;;
+        esac
+        # END REVIEWED POOL SUPERVISOR MIGRATION
+
         apk add --no-cache bind-tools envsubst jq >/dev/null
 
         # Persist JWT secret into ${APP_DATA_DIR}/.env so that SSH restarts
@@ -216,12 +284,12 @@ services:
     entrypoint: ["/bin/sh", "/ckpool-entrypoint.sh"]
 
   app:
-    image: ghcr.io/willitmod/fracattack-app-umbrel-dev:0.1.6
+    stop_signal: SIGINT
+    hostname: fracattack-app
+    image: ghcr.io/willitmod/fracattack-app-umbrel-dev:0.1.11@sha256:fffd78f12ca68f6f5a2565e6c4ca3f2657c7b916b0cbdffa60261c64d85b6830
     user: "1000:1000"
     restart: on-failure
     stop_grace_period: 30s
-    ports:
-      - "21225:3000/tcp"
     depends_on:
       - fractald
       - ckpool
@@ -235,6 +303,7 @@ services:
     volumes:
       - ${APP_DATA_DIR}/data:/data
     environment:
+      APP_REVISION: 7c08e3e4d4585386eb764e91ed2ba73b40c351f3
       BTC_RPC_HOST: "fractald"
       BTC_RPC_PORT: "28342"
       BTC_P2P_PORT: "28343"
@@ -243,7 +312,8 @@ services:
       CKPOOL_STATUS_DIR: "/data/pool/www/pool"
       CKPOOL_STRATUM_HOST: "ckpool"
       CKPOOL_STRATUM_PORT: "3333"
-      APP_VERSION: "0.1.6"
+      APP_VERSION: "0.1.11"
+      MUX_IDENTITY_URL: "http://172.17.0.1:21222/api/integrations/workers"
       APP_CHANNEL: "MAIN"
       APP_VERSION_SUFFIX: ""
       FRACTAL_IMAGE: "ghcr.io/willitmod/fracattack-fractald:0.4.0"

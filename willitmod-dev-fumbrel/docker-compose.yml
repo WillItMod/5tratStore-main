@@ -1,0 +1,24 @@
+version: "3.7"
+services:
+  app_proxy:
+    environment:
+      APP_HOST: fumbrel-app
+      APP_PORT: 3000
+  server:
+    image: ghcr.io/willitmod/fumbrel:0.1.3-dev@sha256:06cc15c514acd9bec8ca3d3af70f6ba9e7fc369441a726ab9d84e87756b8c444
+    hostname: fumbrel-app
+    restart: on-failure
+    init: true
+    user: "1000:1000"
+    read_only: true
+    cap_drop: [ALL]
+    security_opt:
+      - no-new-privileges:true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=32m,uid=1000,gid=1000
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      FUMBREL_APP_PATH: "${APP_DATA_DIR}"
+    volumes:
+      - /etc/ssh/ssh_host_ed25519_key.pub:/host/ssh_host_ed25519_key.pub:ro

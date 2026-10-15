@@ -2,23 +2,62 @@ manifestVersion: 1
 id: willitmod-dev-powpow
 category: altcoin
 name: "PowPow"
-version: "0.2.32"
+version: "0.2.37"
 releaseNotes: >-
-  Upgrades the bundled Litecoin node from Litecoin Core 0.21.4 to 0.21.5.8,
-  including upstream security, MWEB validation, and mining fixes for the
-  consensus rule activated at block 3,172,640. AMD64 and ARM64 release archives are
-  verified against pinned SHA-256 checksums. Existing chain data is retained.
-tagline: LTC + DOGE merged mining
-description: >-
-  RC1 RELEASE
+  Apply the existing 15 minute 30 second blockchain shutdown allowance to Umbrel as well as 5tratumOS. Litecoin and Dogecoin receive SIGTERM and time to flush their data before the platform shutdown deadline. Images, wallets, pool settings, layouts and full-sync requirements are unchanged.
 
-  PowPow is functional, has successfully found blocks, and has completed
-  extended DEV-channel merged-mining tests.
+  Pool startup now handles stop requests while waiting for configuration,
+  PostgreSQL or node RPC, with bounded RPC attempts. This revision changes only
+  the pool entrypoint; compiled pool and node binaries, application and UI,
+  PostgreSQL, existing data and full-sync requirements are retained.
+
+  Recipe revision: delivers the reviewed PostgreSQL initialization SQL during
+  ordinary Umbrel updates through copied templates and a pre-start hook. Missing
+  seeds are created without replacing existing SQL. Seed integrity is checked
+  before permissions setup; database files are retained and scripts run only for
+  an empty PostgreSQL data directory. Application, pool and node images are unchanged.
+
+  Recipe revision: seeds the existing PostgreSQL initialization SQL through the
+  app data directory so fresh installs also initialize on 5tratumOS. Existing
+  database files are retained; these scripts run only for an empty PostgreSQL
+  data directory. Application, pool and node images are unchanged.
+
+  Direct and mixed miners now keep their accepted-share hashrate visible
+  when MUX is empty, offline, or routing other miners elsewhere. MUX-only
+  headlines require matched worker identities; pool estimates and routed
+  telemetry remain separately labelled. Worker cards also retain pool estimates
+  when a previously MUX-connected miner reconnects directly. Accepted shares
+  and history are unchanged.
+
+  Current miner hash rate from 5tratMux appears separately from accepted-share
+  estimates, with stale or unavailable telemetry handled explicitly. Block
+  history checks the full block hash against the correct chain and refreshes
+  confirmation and reorganisation status before showing a confirmed find.
+  Unverified reports remain distinguishable from confirmed pool blocks.
+
+  Block alerts in this browser is a separate local preference. Recent verified
+  blocks queue across app tabs, with browser-only Close acknowledgements.
+  Reorgs or unavailable proof retract the alert without acknowledging it.
+  OS and MUX delivery and acknowledgements remain independently managed.
+
+  The app and pool are updated together. Litecoin and Dogecoin events retain
+  separate chain identities; rejected RPC submissions are not counted as accepted.
+tagline: LTC + DOGE merged mining (alpha dev)
+description: >-
+  ALPHA RELEASE (DEV CHANNEL)
+
+  PowPow is functional and has successfully found blocks, but it is still under
+  active development. Expect rough edges, occasional breaking changes, and
+  mining/pool behavior that may still need tuning.
+
+  Use this build if you are happy to test, mine, and send helpful feedback.
+  For known-good production setups, use stable/main channel apps.
 
   Miner connection:
     - URL: `stratum+tcp://<your-5tratumos-host-ip>:9555`
     - Username: `solo.workername`
     - Password: anything
+
 developer: WillItMod
 website: https://github.com/WillItMod/PowPow
 repo: https://github.com/WillItMod/PowPow
@@ -29,7 +68,6 @@ icon: https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod
 gallery:
   - https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-dev-powpow/images/1.png
   - https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-dev-powpow/images/2.png
-  - https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-dev-powpow/images/3.png
 path: ""
 defaultUsername: ""
 defaultPassword: ""

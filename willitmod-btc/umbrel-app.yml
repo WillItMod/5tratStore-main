@@ -2,13 +2,12 @@ manifestVersion: 1
 id: willitmod-btc
 category: bitcoin
 name: AxeBTC
-version: "0.7.82.8"
+version: "0.7.82.17"
 tagline: BTC node + solo pool
 description: >-
-  RC1 RELEASE
+  BETA RELEASE (DEV CHANNEL)
 
-  AxeBTC is functional and has completed extended DEV-channel testing. It has
-  not hit a solo block yet, but
+  AxeBTC is functional and in beta testing. It has not hit a solo block yet, but
   that is expected at typical solo-mining odds and is not a sign that the app is
   failing.
 
@@ -47,6 +46,35 @@ gallery:
 path: ""
 defaultUsername: ""
 defaultPassword: ""
+releaseNotes: >-
+  Keeps pool shutdown responsive while waiting for configuration or node sync. The update migrates the known public supervisor and refuses custom or linked scripts. Existing initialization, images, UI, payout settings and chain data are unchanged.
+
+  Adds safe pool log retention with 5tratumOS 0.8.23. Complete block and pool accounting records are saved before old raw log bytes are retired. The active log uses a 20 MiB rolling target with two recent archives. Unread or unresolved evidence is retained, and the app reports backlog or blockers. Existing mining, wallet and chain data are preserved.
+
+  Best-share records now retain complete pool-log entries that arrive across
+  separate reads. BCH and BCH2 also start their best-share tracker reliably.
+  Existing records and direct/MUX hashrate support are retained; node and
+  pool images, mining configuration and payouts are unchanged.
+
+  Direct and mixed miners now keep their accepted-share hashrate visible
+  when MUX is empty, offline, or routing other miners elsewhere. MUX-only
+  headlines require matched worker identities; pool estimates and routed
+  telemetry remain separately labelled. Worker cards also retain pool estimates
+  when a previously MUX-connected miner reconnects directly. Accepted shares
+  and history are unchanged.
+
+  Current miner hash rate from 5tratMux appears separately from accepted-share
+  estimates, with stale or unavailable telemetry handled explicitly. Block
+  history checks the full block hash against the correct chain and refreshes
+  confirmation and reorganisation status before showing a confirmed find.
+  Unverified reports remain distinguishable from confirmed pool blocks.
+
+  Block alerts in this browser is a separate local preference. Recent verified
+  blocks queue across app tabs, with browser-only Close acknowledgements.
+  Reorgs or unavailable proof retract the alert without acknowledging it.
+  OS and MUX delivery and acknowledgements remain independently managed.
+
+  Pool statistics use the canonical status file, keeping the dashboard responsive.
 widgets:
   - id: "sync"
     type: "text-with-progress"

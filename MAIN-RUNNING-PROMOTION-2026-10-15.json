@@ -1,0 +1,200 @@
+{
+  "at": "2026-10-15T07:56:35.188624+00:00",
+  "MAINbase": "2035cee9bf9c1be200924b4198a21584082f56ff",
+  "promotionGate": "User-authorized verified running status",
+  "qualificationScope": "Promotion uses observed running packages. Full feature and real-miner qualification remain incomplete.",
+  "sourceDEVMergeForFumbrel": "bee5c1c7bd2d267b55c8d597b29fa18a97fe2fcd",
+  "apps": [
+    {
+      "appId": "willitmod-dev-ppc",
+      "version": "0.2.37",
+      "DEVVersion": "0.2.37-dev.1",
+      "sourceCommit": "94801dcd23fda52be1eb193637a13d73243b04f1",
+      "sourceDirectory": "willitmod-dev-ppc",
+      "images": {
+        "init": "alpine:3.22.1",
+        "ppcd": "ghcr.io/willitmod/axeppc-peercoind:0.15.1ppc-node.602518e559df@sha256:41bebfa7003bfc3073cae18345abd55da8831288277b1c4185114e91ef437e75",
+        "redis": "redis:7-alpine",
+        "pool": "ghcr.io/willitmod/axeppc-pool:0.2.30",
+        "app": "ghcr.io/willitmod/axeppc-app-umbrel-dev:0.2.37-mux.5b0aac96a475@sha256:df22d1f1ba4f607d7422945cbdb0ec4ad348b9ce7ddd578d8179849db45d536d"
+      },
+      "runningEvidence": "Current two-platform inventory and/or retained successful running receipts for deliberately stopped tests"
+    },
+    {
+      "appId": "willitmod-dev-axebch2",
+      "version": "0.2.0.12",
+      "DEVVersion": "0.2.0.12-dev.2",
+      "sourceCommit": "94801dcd23fda52be1eb193637a13d73243b04f1",
+      "sourceDirectory": "willitmod-dev-axebch2",
+      "images": {
+        "init_permissions": "alpine:3.22.1",
+        "app": "ghcr.io/willitmod/axebch2-app:0.2.0.12-dev@sha256:65891eb60db568ca9f9ee21e00869769b5bc475a94f2af5f215dfdc55857e2d1",
+        "bch2": "ghcr.io/willitmod/axebch2-node:0.1.34-fresh-entrypoint-dev-20261014@sha256:f90cbc4bc844a773b864c6f33300289a362b6ccd48aa014fd738578a608ca697",
+        "ckpool": "ghcr.io/willitmod/axebch2-ckpool:0.1.34-idle-stop-dev-20261014@sha256:de3dca9f94f73aa9fb46812aa8ef65556e3ffa14b25ef3273bf4523753ea555c"
+      },
+      "runningEvidence": "Current two-platform inventory and/or retained successful running receipts for deliberately stopped tests"
+    },
+    {
+      "appId": "willitmod-dev-bc2",
+      "version": "0.1.22",
+      "DEVVersion": "0.1.22-dev.1",
+      "sourceCommit": "94801dcd23fda52be1eb193637a13d73243b04f1",
+      "sourceDirectory": "willitmod-dev-bc2",
+      "images": {
+        "init": "alpine:3.22.1@sha256:4bcff63911fcb4448bd4fdacec207030997caf25e9bea4045fa6c8c44de311d1",
+        "btc2d": "ghcr.io/willitmod/bitcoinii-core:31.1.0-rc.cdf44542dde2@sha256:8875917ece57668fe9925d40a256ce8d429a3071511bb555d4ace1fa4370afc6",
+        "ckpool": "ghcr.io/willitmod/docker-ckpool-solo:590fb2a@sha256:8a9a7f10c8138d0f55533132ee7710a06715a42a49f75efb39be3350ada4fa6e",
+        "app": "ghcr.io/willitmod/axebc2-app-umbrel-dev:0.1.22@sha256:bfb899d13f063b46d95e6aa70ea5edb8596b61a8e3d2967b0dad2499627cbdb0"
+      },
+      "runningEvidence": "Current two-platform inventory and/or retained successful running receipts for deliberately stopped tests"
+    },
+    {
+      "appId": "willitmod-btc",
+      "version": "0.7.82.17",
+      "DEVVersion": "0.7.82.17-dev.1",
+      "sourceCommit": "94801dcd23fda52be1eb193637a13d73243b04f1",
+      "sourceDirectory": "willitmod-dev-btc",
+      "images": {
+        "init": "alpine:3.22.1",
+        "bitcoind": "ghcr.io/willitmod/axebtc-bitcoind-switch:0.7.44",
+        "ckpool": "ghcr.io/willitmod/docker-ckpool-solo:590fb2a",
+        "app": "ghcr.io/willitmod/axebtc-app-umbrel-dev:0.7.82.17@sha256:21334b67d803987a3ae4e79242ba2d74da0415d22e786783c73723a460d9c174"
+      },
+      "runningEvidence": "Current two-platform inventory and/or retained successful running receipts for deliberately stopped tests"
+    },
+    {
+      "appId": "willitmod-dev-bch",
+      "version": "0.9.26",
+      "DEVVersion": "0.9.26-dev",
+      "sourceCommit": "94801dcd23fda52be1eb193637a13d73243b04f1",
+      "sourceDirectory": "willitmod-dev-bch",
+      "images": {
+        "init": "alpine:3.22.1",
+        "bchn": "ghcr.io/willitmod/bitcoin-cash-node:v29.0.0-wm3",
+        "ckpool": "ghcr.io/willitmod/wim-solo-ckpool:0.8.3-rc1-590fb2a",
+        "app": "ghcr.io/willitmod/axebch-app-umbrel-dev:0.9.26@sha256:394297a80226096657253df460c69f5945c270a56c01aa39f57c98dde3ef3824"
+      },
+      "runningEvidence": "Current two-platform inventory and/or retained successful running receipts for deliberately stopped tests"
+    },
+    {
+      "appId": "willitmod-dev-xec",
+      "version": "0.1.24",
+      "DEVVersion": "0.1.24-dev.1",
+      "sourceCommit": "94801dcd23fda52be1eb193637a13d73243b04f1",
+      "sourceDirectory": "willitmod-dev-xec",
+      "images": {
+        "init": "alpine:3.22.1",
+        "xecd": "ghcr.io/willitmod/xecd-abc:0.33.4-nojemalloc-r1",
+        "ckpool": "ghcr.io/willitmod/ecash-ckpool-solo:18b38ad-portable-dev-20261014@sha256:20069e6ac004af010b20ca9aeb056ebbaf48a8656ad858ad69c8deba7f590d61",
+        "app": "ghcr.io/willitmod/axexec-app-umbrel-dev:0.1.24@sha256:ae783ceb68f7768314b0eb8864ce1b22b188eb29e706d32e6f87575df9b58b7f"
+      },
+      "runningEvidence": "Current two-platform inventory and/or retained successful running receipts for deliberately stopped tests"
+    },
+    {
+      "appId": "willitmod-dev-fracattack",
+      "version": "0.1.12",
+      "DEVVersion": "0.1.12-dev",
+      "sourceCommit": "94801dcd23fda52be1eb193637a13d73243b04f1",
+      "sourceDirectory": "willitmod-dev-fracattack",
+      "images": {
+        "init": "alpine:3.22.1",
+        "fractald": "ghcr.io/willitmod/fracattack-fractald:0.4.0",
+        "ckpool": "ghcr.io/willitmod/docker-ckpool-solo:590fb2a",
+        "app": "ghcr.io/willitmod/fracattack-app-umbrel-dev:0.1.11@sha256:fffd78f12ca68f6f5a2565e6c4ca3f2657c7b916b0cbdffa60261c64d85b6830"
+      },
+      "runningEvidence": "Current two-platform inventory and/or retained successful running receipts for deliberately stopped tests"
+    },
+    {
+      "appId": "willitmod-dev-powpow",
+      "version": "0.2.37",
+      "DEVVersion": "0.2.37-dev.4",
+      "sourceCommit": "94801dcd23fda52be1eb193637a13d73243b04f1",
+      "sourceDirectory": "willitmod-dev-powpow",
+      "images": {
+        "init_permissions": "alpine:3.22.1",
+        "app": "ghcr.io/willitmod/powpow-app:0.2.37-mux.88f8fc0af57e@sha256:59994fb26f1b9b1daf2bf25bf528d190d3beda89acd65d80bd674b49696bed8d",
+        "litecoin": "ghcr.io/willitmod/powpow-litecoin:0.2.32-dev",
+        "dogecoin": "ghcr.io/willitmod/powpow-dogecoin:0.2.26-dev",
+        "pool": "ghcr.io/willitmod/powpow-pool:0.2.37-pool-startup.a443d6f3e552@sha256:b89d5e8c8e078fb200690b1b7ce941c2c995b18ba9cfa699ccac08ff6ddebea8",
+        "postgres": "postgres:16-alpine"
+      },
+      "runningEvidence": "Current two-platform inventory and/or retained successful running receipts for deliberately stopped tests"
+    },
+    {
+      "appId": "willitmod-dev-5tratsmack",
+      "version": "0.11.22",
+      "DEVVersion": "0.11.22-dev",
+      "sourceCommit": "94801dcd23fda52be1eb193637a13d73243b04f1",
+      "sourceDirectory": "willitmod-dev-5tratsmack",
+      "images": {
+        "init_permissions": "alpine:3.22.1@sha256:4bcff63911fcb4448bd4fdacec207030997caf25e9bea4045fa6c8c44de311d1",
+        "p2p-helper": "ghcr.io/willitmod/5tratsmack-upnp:0.11.1@sha256:c85d527b8a12007be2565b200b99dfe46781ddaa773831852414d2cc5ad041d0",
+        "node-a": "ghcr.io/willitmod/5tratsmack-core:0.11.2@sha256:7bf02513144c7a157965fb8e9ad5865f5e84fa679afa7cb61fc0a8e140a40070",
+        "swap": "ghcr.io/willitmod/5tratsmack-kdf:0.11.17-rc.99a34a0ef5f5@sha256:c3ce7e638bdf55710fbfb607145d76c7d6e00b81a35e4c843645d9815f862087",
+        "ckpool": "ghcr.io/willitmod/5tratsmack-ckpool:0.11.3-rc.a992f40e96d4@sha256:95a1a5f343d579206a0f8bb3c961cafa7500b5d487211a0cfb7b989cf34b895e",
+        "app": "ghcr.io/willitmod/5tratsmack-app:0.11.22-hero.6fc6597c3aba@sha256:304566aaf4374398d10e53612f1b1ccce89344e6fcf4a51293006d9c8f2111e9"
+      },
+      "runningEvidence": "Current two-platform inventory and/or retained successful running receipts for deliberately stopped tests"
+    },
+    {
+      "appId": "willitmod-axemig",
+      "version": "0.1.24",
+      "DEVVersion": "0.1.24-dev",
+      "sourceCommit": "94801dcd23fda52be1eb193637a13d73243b04f1",
+      "sourceDirectory": "willitmod-dev-axemig",
+      "images": {
+        "server": "ghcr.io/willitmod/axemig:0.1.24-dev@sha256:e20d2d002567980e24000263464576d06a7afd0f35f477b7d77374f4ee2774f3"
+      },
+      "runningEvidence": "Current two-platform inventory and/or retained successful running receipts for deliberately stopped tests"
+    },
+    {
+      "appId": "willitmod-dev-fumbrel",
+      "version": "0.1.3",
+      "DEVVersion": "0.1.3-dev",
+      "sourceCommit": "8c90bd4007cf9720afb72d594e033873ec014e80",
+      "publishedRuntimeSource": "6648c00297b0953d9867ca338fbd81f0655a3591",
+      "images": {
+        "server": "ghcr.io/willitmod/fumbrel:0.1.3-dev@sha256:06cc15c514acd9bec8ca3d3af70f6ba9e7fc369441a726ab9d84e87756b8c444"
+      },
+      "supportedPlatforms": [
+        "Umbrel1.7",
+        "Umbrel2.0"
+      ],
+      "runningEvidence": "One normal Umbrel2.0 owner update; actual server ready and health/UI/assets200; data/history/public hostkey and unrelated app generations preserved"
+    }
+  ],
+  "preservation": [
+    "Existing app IDs and data namespaces retained",
+    "Exact tested DEV app images and code/layouts retained; only MAIN metadata/identity substitutions",
+    "BC2 migration/checkpoint/rollback and fresh-chain provenance guards retained",
+    "BTC/Frac hash-admitted persistent supervisor migration retained",
+    "Pow SQL seeds, pre-start hook and930-second node shutdown policies retained",
+    "Fumbrel baked identity and native exclusion retained"
+  ],
+  "unchangedMAIN": {
+    "AxeBench": "4.0.30 current",
+    "AxeLive": "1.4.3 same actual DEV app image",
+    "AxeDGB": "0.9.181 retained; latest candidate native node paused/unhealthy after OOM",
+    "AxeSim": "1.0.9"
+  },
+  "validation": {
+    "exactRuntimePackageComparisonAndComposeCLI": 11,
+    "BC2ExistingTests": 49,
+    "BC2SkippedTests": 0,
+    "SmackMAINMetadata": "PASS",
+    "FumbrelSourceTests": 104,
+    "FumbrelCrossVersionTests": 6,
+    "FumbrelPublishedNativeArchitectures": [
+      "amd64",
+      "arm64"
+    ],
+    "FumbrelOrdinaryRunningUpdate": "PASS",
+    "BC2EvidenceScope": "Local complete49tests/0skips include Linux runtime and live platform contract. Isolated GitHub CI also executes the Linux fixture; only its live platform checkout comparison may be unavailable."
+  },
+  "knownLimits": [
+    "Current Umbrel1.7 host login is unavailable; retained exact-version running receipts are used",
+    "MIG historical official proxy forced-stop observations remain unresolved",
+    "Several lab chains remain in IBD; no fresh real-miner/share claim",
+    "Fumbrel current running receipt is Umbrel2.0; full new recovery on both Umbrel versions remains unverified"
+  ]
+}

@@ -1,0 +1,119 @@
+#!/bin/sh
+set -eu
+# Ordinary Umbrel updates copy *.template and hooks, but never replace data/.
+exec python3 - "${APP_DATA_DIR:?APP_DATA_DIR must name the app directory}" <<'PY'
+import contextlib
+import hashlib
+import os
+from pathlib import Path
+import stat
+import sys
+
+SEEDS = {
+    '2-schema.sql': 'c9a0e0c871ddb7fe198e154903c053db1a26c614c5062d660af0add0e2fc8427',
+    '3-multi-pool-partition.sql': '83a380949be2a2dd7b67a667575fc06133eae7be885ce458e0687803edc2f4bf',
+}
+MAX_SEED = 2 * 1024 * 1024
+
+
+def open_directory(stack, name, parent=None):
+    descriptor = os.open(name, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=parent)
+    stack.callback(os.close, descriptor)
+    return descriptor
+
+
+def read_seed(parent, name, expected):
+    descriptor = os.open(name, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK, dir_fd=parent)
+    try:
+        info = os.fstat(descriptor)
+        if not stat.S_ISREG(info.st_mode) or info.st_nlink != 1 or info.st_size > MAX_SEED:
+            raise ValueError('Seed is not a bounded regular single-link file')
+        blocks, total = [], 0
+        while block := os.read(descriptor, 64 * 1024):
+            total += len(block)
+            if total > MAX_SEED:
+                raise ValueError('Seed exceeds the read limit')
+            blocks.append(block)
+        body = b''.join(blocks)
+        if hashlib.sha256(body).hexdigest() != expected:
+            raise ValueError('Seed differs from the reviewed SQL')
+        return body
+    finally:
+        os.close(descriptor)
+
+
+def ensure_directory(stack, parent, name):
+    created = False
+    try:
+        os.mkdir(name, 0o755, dir_fd=parent)
+        created = True
+    except FileExistsError:
+        pass
+    descriptor = open_directory(stack, name, parent)
+    if created:
+        # Only a newly created seed directory is assigned to the app owner.
+        os.fchmod(descriptor, 0o755)
+        os.fchown(descriptor, 1000, 1000)
+        os.fsync(parent)
+    return descriptor
+
+
+def deliver():
+    root = Path(sys.argv[1])
+    if (os.geteuid() != 0 or not root.is_absolute()
+            or root.resolve(strict=True) != root or not root.is_dir()):
+        raise ValueError('Expected a canonical app directory and administrator context')
+    with contextlib.ExitStack() as stack:
+        root_fd = open_directory(stack, root)
+        # Verify both immutable template sources before creating anything.
+        sources = {name: read_seed(root_fd, 'powpow-' + name + '.template', expected)
+                   for name, expected in SEEDS.items()}
+        data_fd = seeds_fd = None
+        try:
+            data_fd = open_directory(stack, 'data', root_fd)
+        except FileNotFoundError:
+            pass
+        if data_fd is not None:
+            try:
+                seeds_fd = open_directory(stack, 'postgres-init', data_fd)
+            except FileNotFoundError:
+                pass
+        missing = []
+        for name, expected in SEEDS.items():
+            if seeds_fd is None:
+                missing.append(name)
+            else:
+                try:
+                    read_seed(seeds_fd, name, expected)
+                except FileNotFoundError:
+                    missing.append(name)
+        # Conflicting existing SQL was rejected above, before any data write.
+        if not missing:
+            return
+        if data_fd is None:
+            data_fd = ensure_directory(stack, root_fd, 'data')
+        if seeds_fd is None:
+            seeds_fd = ensure_directory(stack, data_fd, 'postgres-init')
+        for name in missing:
+            try:
+                descriptor = os.open(name, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW,
+                                     0o644, dir_fd=seeds_fd)
+            except FileExistsError:
+                # A concurrent legitimate creation must match; never replace it.
+                read_seed(seeds_fd, name, SEEDS[name])
+                continue
+            with os.fdopen(descriptor, 'wb') as stream:
+                stream.write(sources[name])
+                stream.flush()
+                os.fchmod(stream.fileno(), 0o644)
+                os.fchown(stream.fileno(), 1000, 1000)
+                os.fsync(stream.fileno())
+            os.fsync(seeds_fd)
+
+
+try:
+    deliver()
+except (OSError, ValueError, IndexError):
+    print('PowPow SQL seed delivery refused: verify the reviewed templates and regular app-data paths. Existing SQL is never replaced.', file=sys.stderr)
+    sys.exit(1)
+PY

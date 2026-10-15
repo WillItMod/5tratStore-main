@@ -6,22 +6,23 @@ import re
 REPO_ROOT = Path(__file__).resolve().parents[1]
 APP_DIR = REPO_ROOT / "willitmod-dev-5tratsmack"
 
-EXPECTED_VERSION = "0.11.13"
+EXPECTED_VERSION = "0.11.22"
+EXPECTED_RUNTIME_VERSION = "0.11.21"
 EXPECTED_PHASE = "STABLE"
-EXPECTED_SOURCE_REVISION = "53f0415e517952a98d21f02b11009976a16a1d20"
+EXPECTED_SOURCE_REVISION = "f41e154a74afbd54f67545d0b95d18506a336fa1"
 EXPECTED_APP_REF = (
-    "ghcr.io/willitmod/5tratsmack-app:0.11.13@"
-    "sha256:70d007cf7a65fcdbee82d50c70d48aacb63af66b4cd9985e919bd99387401a42"
+    "ghcr.io/willitmod/5tratsmack-app:0.11.22-hero.6fc6597c3aba@"
+    "sha256:304566aaf4374398d10e53612f1b1ccce89344e6fcf4a51293006d9c8f2111e9"
 )
 EXPECTED_CKPOOL_REF = (
-    "ghcr.io/willitmod/5tratsmack-ckpool:0.11.3@"
+    "ghcr.io/willitmod/5tratsmack-ckpool:0.11.3-rc.a992f40e96d4@"
     "sha256:95a1a5f343d579206a0f8bb3c961cafa7500b5d487211a0cfb7b989cf34b895e"
 )
 EXPECTED_NON_APP_IMAGE_LINES = (
     "    image: alpine:3.22.1@sha256:4bcff63911fcb4448bd4fdacec207030997caf25e9bea4045fa6c8c44de311d1",
     "    image: ghcr.io/willitmod/5tratsmack-upnp:0.11.1@sha256:c85d527b8a12007be2565b200b99dfe46781ddaa773831852414d2cc5ad041d0",
     "    image: ghcr.io/willitmod/5tratsmack-core:0.11.2@sha256:7bf02513144c7a157965fb8e9ad5865f5e84fa679afa7cb61fc0a8e140a40070",
-    "    image: ghcr.io/willitmod/5tratsmack-kdf:0.11.1@sha256:9eff0bfdc330bb997eacbce2b98500a52a084d682aec3644b73e663d54e6606a",
+    "    image: ghcr.io/willitmod/5tratsmack-kdf:0.11.17-rc.99a34a0ef5f5@sha256:c3ce7e638bdf55710fbfb607145d76c7d6e00b81a35e4c843645d9815f862087",
     "      BCH2_NODE_IMAGE: ghcr.io/willitmod/5tratsmack-core:0.11.2@sha256:7bf02513144c7a157965fb8e9ad5865f5e84fa679afa7cb61fc0a8e140a40070",
 )
 
@@ -79,11 +80,11 @@ app_revision = one(
 
 if manifest_id != "willitmod-dev-5tratsmack":
     raise SystemExit(f"unexpected manifest id: {manifest_id}")
-if {manifest_version, app_version, release_tag} != {EXPECTED_VERSION}:
+if manifest_version != EXPECTED_VERSION or {app_version, release_tag} != {EXPECTED_RUNTIME_VERSION}:
     raise SystemExit(
         "store version mismatch: "
         f"manifest={manifest_version}, APP_VERSION={app_version}, "
-        f"FIVETRAT_RELEASE_TAG={release_tag}, expected={EXPECTED_VERSION}"
+        f"FIVETRAT_RELEASE_TAG={release_tag}, package={EXPECTED_VERSION}, runtime={EXPECTED_RUNTIME_VERSION}"
     )
 if release_phase != EXPECTED_PHASE:
     raise SystemExit(
@@ -97,7 +98,7 @@ if source_revision != EXPECTED_SOURCE_REVISION or app_revision != EXPECTED_SOURC
     )
 
 app_refs = re.findall(
-    r"^\s+(?:image|APP_IMAGE):\s*(ghcr\.io/willitmod/5tratsmack-app:\S+)$",
+    r"^\s+(?:image|APP_IMAGE):\s*[\"']?(ghcr\.io/willitmod/5tratsmack-app:[^\"'\s]+)[\"']?$",
     compose_text,
     flags=re.MULTILINE,
 )
@@ -105,7 +106,7 @@ if app_refs != [EXPECTED_APP_REF, EXPECTED_APP_REF]:
     raise SystemExit(f"app image references are not the promoted stable image: {app_refs}")
 
 ckpool_refs = re.findall(
-    r"^\s+(?:image|CKPOOL_IMAGE):\s*(ghcr\.io/willitmod/5tratsmack-ckpool:\S+)$",
+    r"^\s+(?:image|CKPOOL_IMAGE):\s*[\"']?(ghcr\.io/willitmod/5tratsmack-ckpool:[^\"'\s]+)[\"']?$",
     compose_text,
     flags=re.MULTILINE,
 )
@@ -119,6 +120,7 @@ for line in EXPECTED_NON_APP_IMAGE_LINES:
 required_compose_lines = (
     "      APP_CHANNEL: MAIN",
     "      FIVETRAT_STORE_UPDATE_CHANNEL: main",
+    "      FIVETRAT_INSTALL_REVISION: main-store",
     '      FIVETRAT_UPDATER_ENABLED: "0"',
 )
 for line in required_compose_lines:
@@ -126,18 +128,18 @@ for line in required_compose_lines:
         raise SystemExit(f"expected one exact compose line: {line}")
 
 expected_readme_line = (
-    "- **5tratSmack** (`willitmod-dev-5tratsmack`) - `0.11.13`"
+    "- **5tratSmack** (`willitmod-dev-5tratsmack`) - `0.11.22`"
 )
 if readme_text.count(expected_readme_line) != 1:
-    raise SystemExit("README current-version entry is not exactly 0.11.13")
+    raise SystemExit("README current-version entry is not exactly 0.11.22")
 
 for release_note_fragment in (
-    "Quarterly recovery checks",
-    "test your",
-    "Optional unencrypted files require an explicit warning",
-    "downloading alone does not complete a quarterly check",
-    "cryptography dependency is",
-    "only the application image changes.",
+    "bounded recent feed",
+    "coinbase output zero",
+    "Trade Pulse",
+    "final transaction approval",
+    "Block alerts in this browser",
+    "OS and MUX notification acknowledgements remain separate",
 ):
     if release_note_fragment not in manifest_text:
         raise SystemExit(f"release notes missing: {release_note_fragment}")
@@ -145,5 +147,5 @@ for release_note_fragment in (
 print(
     "5tratSmack MAIN metadata verified: "
     f"version={EXPECTED_VERSION} source={EXPECTED_SOURCE_REVISION} "
-    "promoted stable app pinned; CKPool and non-app images unchanged"
+    f"runtime={EXPECTED_RUNTIME_VERSION}; exact tested DEV app, broker and node images retained"
 )

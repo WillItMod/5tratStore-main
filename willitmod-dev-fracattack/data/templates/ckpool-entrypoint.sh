@@ -33,22 +33,41 @@ start_ckpool() {
   ARGS="$(cat "$ARGS_FILE" 2>/dev/null || true)"
   # shellcheck disable=SC2086
   "$ckpool_bin" -k -L -c "$CFG" $ARGS &
-  echo $!
+  pid="$!"
 }
 
 last=""
 pid=""
+poll_pid=""
+
+stop_ckpool() {
+  if [ -n "$pid" ]; then
+    kill -TERM "$pid" 2>/dev/null || true
+    wait "$pid" 2>/dev/null || true
+    pid=""
+  fi
+}
+
+terminate_pool() {
+  trap '' TERM INT
+  if [ -n "$poll_pid" ]; then
+    kill -TERM "$poll_pid" 2>/dev/null || true
+    wait "$poll_pid" 2>/dev/null || true
+    poll_pid=""
+  fi
+  stop_ckpool
+  exit 0
+}
+
+trap terminate_pool TERM INT
 
 while true; do
   sum="$(checksum)"
 
   if [ "$sum" != "$last" ]; then
     last="$sum"
-    if [ -n "${pid:-}" ] && kill -0 "$pid" 2>/dev/null; then
-      kill "$pid" 2>/dev/null || true
-      wait "$pid" 2>/dev/null || true
-    fi
-    pid="$(start_ckpool || true)"
+    stop_ckpool
+    start_ckpool
     if [ -n "${pid:-}" ]; then
       echo "[fracattack] ckpool started (pid ${pid})"
     else
@@ -61,5 +80,8 @@ while true; do
     pid=""
   fi
 
-  sleep 2
+  sleep 2 &
+  poll_pid="$!"
+  wait "$poll_pid" 2>/dev/null || true
+  poll_pid=""
 done

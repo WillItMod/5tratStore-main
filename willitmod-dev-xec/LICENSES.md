@@ -8,3 +8,4 @@ This app composes upstream components without patching their source.
   - Source: https://github.com/WillItMod/ecash-ckpool-solo
 
 For full license texts and corresponding source for each component, see the upstream repositories linked above.
+

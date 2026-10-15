@@ -1,6 +1,6 @@
 # 5tratSmack runtime components
 
-The MAIN store package distributes compiled runtime images while the private
+The DEV store package distributes compiled runtime images while the private
 application repository remains private.
 
 - **5TRAT Core** — MIT License. The complete copyright and permission notice is
@@ -22,4 +22,4 @@ application repository remains private.
   rights not granted by an accompanying licence are reserved.
 
 The public release page must contain the matching ckpool source archive before
-the public ckpool image or MAIN store entry is announced.
+the public ckpool image or DEV store entry is announced.
