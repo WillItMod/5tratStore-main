@@ -247,7 +247,7 @@ services:
   app:
     stop_signal: SIGINT
     hostname: axebtc-app
-    image: ghcr.io/willitmod/axebtc-app-umbrel-dev:0.7.82.17@sha256:21334b67d803987a3ae4e79242ba2d74da0415d22e786783c73723a460d9c174
+    image: ghcr.io/willitmod/axebtc-app-umbrel-dev:0.7.83-dev@sha256:e2a213be2c2ff13fbf13c065d361b5a7a0be9601df05aa1edf9c68660802a698
     user: "1000:1000"
     restart: on-failure
     stop_grace_period: 30s

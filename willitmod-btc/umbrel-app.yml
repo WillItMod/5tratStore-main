@@ -2,7 +2,7 @@ manifestVersion: 1
 id: willitmod-btc
 category: bitcoin
 name: AxeBTC
-version: "0.7.82.17"
+version: "0.7.83"
 tagline: BTC node + solo pool
 description: >-
   BETA RELEASE (DEV CHANNEL)
@@ -47,6 +47,8 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
+  Standardizes the app version to 0.7.83 in the running interface and catalogue. Existing ports, mining code, node and pool images, configuration and stored data are retained.
+
   Keeps pool shutdown responsive while waiting for configuration or node sync. The update migrates the known public supervisor and refuses custom or linked scripts. Existing initialization, images, UI, payout settings and chain data are unchanged.
 
   Adds safe pool log retention with 5tratumOS 0.8.23. Complete block and pool accounting records are saved before old raw log bytes are retired. The active log uses a 20 MiB rolling target with two recent archives. Unread or unresolved evidence is retained, and the app reports backlog or blockers. Existing mining, wallet and chain data are preserved.

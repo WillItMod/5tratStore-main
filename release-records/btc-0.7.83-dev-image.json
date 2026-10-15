@@ -1,0 +1,215 @@
+{
+  "schema": 1,
+  "recorded_at_utc": "2026-10-15T14:27:06.303941+00:00",
+  "status": "published-and-anonymously-admitted",
+  "image": "ghcr.io/willitmod/axebtc-app-umbrel-dev:0.7.83-dev@sha256:e2a213be2c2ff13fbf13c065d361b5a7a0be9601df05aa1edf9c68660802a698",
+  "index_digest": "sha256:e2a213be2c2ff13fbf13c065d361b5a7a0be9601df05aa1edf9c68660802a698",
+  "tag": "0.7.83-dev",
+  "runtime_core_version": "0.7.83",
+  "display_versions": {
+    "MAIN": "0.7.83",
+    "DEV": "0.7.83-dev"
+  },
+  "source_repository": "https://github.com/WillItMod/AxeBTC_Build",
+  "source_commit": "93915c555621ec1aff80ac42cf3335201c670edb",
+  "source_tree": "4505888a70cf54e4b9ad31371ede97365b393662",
+  "source_pr": "https://github.com/WillItMod/AxeBTC_Build/pull/5",
+  "app_py_sha256": "54731405f387f6c8ecddd827e6571c1390ca998feb87edb7d43ac66c55f1e269",
+  "base_index": "sha256:21334b67d803987a3ae4e79242ba2d74da0415d22e786783c73723a460d9c174",
+  "runtime_delta": "Only APP_VERSION literal 0.7.82.17 to 0.7.83; all other app.py bytes retained. One COPY app.py layer over immutable current base.",
+  "architectures": [
+    {
+      "platform": {
+        "architecture": "amd64",
+        "os": "linux"
+      },
+      "manifest": "sha256:80832b8c1e93fa2b93141d5e1eac5a80729b0b5606e2eab0d3fe13c22478f7ce",
+      "config": "sha256:72e532728ec3ef6413ff030c80c0d5e24aad6953075a366591299ab3199a34d1",
+      "source_labels": {
+        "io.willitmod.axebtc.source-tree": "4505888a70cf54e4b9ad31371ede97365b393662",
+        "org.opencontainers.image.base.digest": "sha256:21334b67d803987a3ae4e79242ba2d74da0415d22e786783c73723a460d9c174",
+        "org.opencontainers.image.revision": "93915c555621ec1aff80ac42cf3335201c670edb",
+        "org.opencontainers.image.source": "https://github.com/WillItMod/AxeBTC_Build",
+        "org.opencontainers.image.version": "0.7.83"
+      },
+      "entrypoint": null,
+      "user": null,
+      "preservation_proof_log_line": 2300,
+      "native_runtime_log_line": 2299,
+      "preserved_rootfs_entries": 4028,
+      "candidate_rootfs_inventory_sha256": "aa9df6f182a2c2868c4679223e74165071b2f1521f368b4c4483c136e4a38323",
+      "base_rootfs_inventory_sha256": "dce0160e00c0e815034a8d7614f764eaabe030dc32b74b3feab2ce8922b19c93",
+      "only_rootfs_difference": [
+        "app/app.py"
+      ],
+      "all_other_files_modes_owners_links_exact": true,
+      "runtime_config_exact_except_five_source_labels": true,
+      "base_layer_prefix_exact": true,
+      "one_copy_diffid": "sha256:4b7a1eaa1d83177e7c208f9e9b346bfb5e81e14c9890db5443e525d5dc1e67a4",
+      "backend": {
+        "bytes": 194257,
+        "gid": 0,
+        "link": "",
+        "mode": 436,
+        "sha256": "54731405f387f6c8ecddd827e6571c1390ca998feb87edb7d43ac66c55f1e269",
+        "type": "0",
+        "uid": 0
+      },
+      "real_handler_proofs": [
+        {
+          "about_server_header": "axebtc-app/0.7.83 Python/3.11.16",
+          "about_channel": "MAIN",
+          "displayed_version": "0.7.83",
+          "unconfigured_real_backend": true
+        },
+        {
+          "about_server_header": "axebtc-app/0.7.83 Python/3.11.16",
+          "about_channel": "BETA",
+          "displayed_version": "0.7.83-dev",
+          "unconfigured_real_backend": true
+        }
+      ]
+    },
+    {
+      "platform": {
+        "architecture": "arm64",
+        "os": "linux"
+      },
+      "manifest": "sha256:c3e418fc7882bb215ab522c8262804bd5a0532c02284199421f16868eaa310ce",
+      "config": "sha256:5ffa7f1d6af3b59fc231ea5a2b12ce552c28ab895edfcf9087b9bde3f2773c38",
+      "source_labels": {
+        "io.willitmod.axebtc.source-tree": "4505888a70cf54e4b9ad31371ede97365b393662",
+        "org.opencontainers.image.base.digest": "sha256:21334b67d803987a3ae4e79242ba2d74da0415d22e786783c73723a460d9c174",
+        "org.opencontainers.image.revision": "93915c555621ec1aff80ac42cf3335201c670edb",
+        "org.opencontainers.image.source": "https://github.com/WillItMod/AxeBTC_Build",
+        "org.opencontainers.image.version": "0.7.83"
+      },
+      "entrypoint": null,
+      "user": null,
+      "preservation_proof_log_line": 3009,
+      "native_runtime_log_line": 3008,
+      "preserved_rootfs_entries": 4027,
+      "candidate_rootfs_inventory_sha256": "679759ce19f5e6c4521f85a67b5ae4211c7ff2b878afd9b28f34857ab74dc82f",
+      "base_rootfs_inventory_sha256": "50a0791195b72705d8896af42d76245c6c83de2555210e9ead31bb37cfe8a634",
+      "only_rootfs_difference": [
+        "app/app.py"
+      ],
+      "all_other_files_modes_owners_links_exact": true,
+      "runtime_config_exact_except_five_source_labels": true,
+      "base_layer_prefix_exact": true,
+      "one_copy_diffid": "sha256:99affcd43f19113c0b10ab0edb7608579cd4a5eb923b3ad0b7cd1c80f63b3613",
+      "backend": {
+        "bytes": 194257,
+        "gid": 0,
+        "link": "",
+        "mode": 436,
+        "sha256": "54731405f387f6c8ecddd827e6571c1390ca998feb87edb7d43ac66c55f1e269",
+        "type": "0",
+        "uid": 0
+      },
+      "real_handler_proofs": [
+        {
+          "about_server_header": "axebtc-app/0.7.83 Python/3.11.16",
+          "about_channel": "MAIN",
+          "displayed_version": "0.7.83",
+          "unconfigured_real_backend": true
+        },
+        {
+          "about_server_header": "axebtc-app/0.7.83 Python/3.11.16",
+          "about_channel": "BETA",
+          "displayed_version": "0.7.83-dev",
+          "unconfigured_real_backend": true
+        }
+      ]
+    }
+  ],
+  "publication_run": {
+    "url": "https://github.com/WillItMod/AxeBTC_Build/actions/runs/38750325672",
+    "conclusion": "success",
+    "head_sha": "93915c555621ec1aff80ac42cf3335201c670edb",
+    "jobs": [
+      {
+        "name": "version-verify",
+        "conclusion": "success",
+        "url": "https://github.com/WillItMod/AxeBTC_Build/actions/runs/38750325672/job/116474740378"
+      },
+      {
+        "name": "build-app",
+        "conclusion": "skipped",
+        "url": "https://github.com/WillItMod/AxeBTC_Build/actions/runs/38750325672/job/116474742400"
+      },
+      {
+        "name": "mux-verify",
+        "conclusion": "skipped",
+        "url": "https://github.com/WillItMod/AxeBTC_Build/actions/runs/38750325672/job/116474743212"
+      },
+      {
+        "name": "mux-native",
+        "conclusion": "skipped",
+        "url": "https://github.com/WillItMod/AxeBTC_Build/actions/runs/38750325672/job/116474743730"
+      },
+      {
+        "name": "mux-manifest",
+        "conclusion": "skipped",
+        "url": "https://github.com/WillItMod/AxeBTC_Build/actions/runs/38750325672/job/116474745366"
+      },
+      {
+        "name": "version-native (arm64, ubuntu-24.04-arm, sha256:321c9653f37efc8261f277e69e2625dec896ccd18ea79f4b0...",
+        "conclusion": "success",
+        "url": "https://github.com/WillItMod/AxeBTC_Build/actions/runs/38750325672/job/116474855652"
+      },
+      {
+        "name": "version-native (amd64, ubuntu-24.04, sha256:be42b0b0b3447975e04c61ec2c3fe1c4d248748e90d60dc144804...",
+        "conclusion": "success",
+        "url": "https://github.com/WillItMod/AxeBTC_Build/actions/runs/38750325672/job/116474855834"
+      },
+      {
+        "name": "version-publication-preflight",
+        "conclusion": "success",
+        "url": "https://github.com/WillItMod/AxeBTC_Build/actions/runs/38750325672/job/116475269414"
+      },
+      {
+        "name": "version-publication-native (amd64, ubuntu-24.04, sha256:be42b0b0b3447975e04c61ec2c3fe1c4d248748e9...",
+        "conclusion": "success",
+        "url": "https://github.com/WillItMod/AxeBTC_Build/actions/runs/38750325672/job/116475362581"
+      },
+      {
+        "name": "version-publication-native (arm64, ubuntu-24.04-arm, sha256:321c9653f37efc8261f277e69e2625dec896c...",
+        "conclusion": "success",
+        "url": "https://github.com/WillItMod/AxeBTC_Build/actions/runs/38750325672/job/116475362713"
+      },
+      {
+        "name": "version-combine",
+        "conclusion": "success",
+        "url": "https://github.com/WillItMod/AxeBTC_Build/actions/runs/38750325672/job/116475936603"
+      }
+    ]
+  },
+  "anonymous_registry_metadata_verified": true,
+  "native_actual_published_runtime_proofs": true,
+  "tests": {
+    "existing_source": 111,
+    "publication_payload": 14,
+    "native_platforms": [
+      "amd64",
+      "arm64"
+    ],
+    "browser_and_static_javascript": "passed"
+  },
+  "attestations": {
+    "slsa_source_revision_and_spdx_metadata_verified_by_successful_combine_job": true,
+    "cryptographic_signature_verified": false,
+    "anonymous_metadata_and_platform_subjects_verified": true,
+    "anonymous_evidence": "btc-0783-candidate/anonymous-published-attestations.json"
+  },
+  "scope_limits": [
+    "Version-only image change; no installed guest rollout or new mining qualification in this task.",
+    "Original Mac symlink-temp test failure and first incorrect0644-metadata assumption are retained in earlier receipts; corrected environment and actual0664 metadata were verified without weakening payload checks."
+  ],
+  "evidence": {
+    "anonymous_registry": "btc-0783-candidate/anonymous-published-registry.json",
+    "ci": "btc-0783-candidate/published-ci.json",
+    "native_log": "btc-0783-candidate/published-native.log"
+  },
+  "unchanged_ports_pool_node_dependencies_ui_and_other_payload": true
+}
