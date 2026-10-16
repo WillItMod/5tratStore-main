@@ -6,6 +6,9 @@ on:
       - "DGB-BACKEND-SAFETY-2026-10-16.json"
       - "release-records/dgb-backend-safety-fixtures-2026-10-16.json"
       - "scripts/dgb_backend_release.py"
+      - "scripts/dgb_gateway_release.py"
+      - "release-records/dgb-gateway-hostname-delivery-2026-10-16.json"
+      - "tests/test_dgb_gateway_release.py"
       - "tests/test_dgb_backend_safety.py"
       - "tests/test_dgb_backend_release.py"
       - ".github/workflows/validate-dgb-backend-safety.yml"
@@ -16,6 +19,9 @@ on:
       - "DGB-BACKEND-SAFETY-2026-10-16.json"
       - "release-records/dgb-backend-safety-fixtures-2026-10-16.json"
       - "scripts/dgb_backend_release.py"
+      - "scripts/dgb_gateway_release.py"
+      - "release-records/dgb-gateway-hostname-delivery-2026-10-16.json"
+      - "tests/test_dgb_gateway_release.py"
       - "tests/test_dgb_backend_safety.py"
       - "tests/test_dgb_backend_release.py"
       - ".github/workflows/validate-dgb-backend-safety.yml"
@@ -32,5 +38,6 @@ jobs:
         with:
           python-version: "3.11"
       - run: python3 -m pip install PyYAML==6.0.3
+      - run: python3 scripts/dgb_gateway_release.py
       - run: python3 scripts/dgb_backend_release.py
       - run: python3 -m unittest discover -s tests -p 'test_dgb*.py' -v
