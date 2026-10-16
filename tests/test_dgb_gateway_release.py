@@ -4,6 +4,7 @@ import importlib.util
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -44,7 +45,7 @@ class DgbGatewayHostnameTests(unittest.TestCase):
         cls.current = yaml.safe_load(cls.current_raw)
 
     def test_exact_package_successor_and_all_historical_proofs_are_preserved(self):
-        gateway.validate(ROOT, check_baseline=True)
+        gateway.validate(ROOT)
         self.assertEqual(gateway.previous_gateway_model(self.current, ROOT), self.before)
         self.assertEqual(gateway.previous_compose_bytes(self.current_raw, ROOT), self.before_raw)
         self.assertFalse(self.row['nativeGatewayRetryQualified'])
@@ -58,6 +59,19 @@ class DgbGatewayHostnameTests(unittest.TestCase):
         else:
             self.assertFalse(self.row['hostnameAlreadyPresent'])
             self.assertEqual(self.current_raw, self.before_raw.replace(b'  app:\n', b'  app:\n    hostname: axedgb-app\n', 1))
+
+    def test_whole_catalogue_baseline_remains_opt_in_and_detects_other_app_drift(self):
+        original = gateway.git
+        def changed(root, *args):
+            if args[:2] == ('diff', '--name-only'):
+                return b'willitmod-dev-bch/docker-compose.yml\n'
+            return original(root, *args)
+        with patch.object(gateway, 'git', side_effect=changed):
+            # Ordinary recurring admission ignores unrelated app evolution.
+            gateway.validate(ROOT)
+            # Explicit initial-release admission still rejects catalogue drift.
+            with self.assertRaisesRegex(AssertionError, 'Other app changed'):
+                gateway.validate(ROOT, check_baseline=True)
 
     def test_alias_only_native2_failure_and_declared_hostname_admission(self):
         alias_only = copy.deepcopy(self.current['services']['app'])
