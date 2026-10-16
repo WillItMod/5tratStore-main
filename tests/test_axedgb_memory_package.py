@@ -1,4 +1,5 @@
 """Packaging contracts for the memory supervisor and offline startup."""
+import importlib.util
 import subprocess
 import unittest
 from pathlib import Path
@@ -6,6 +7,9 @@ from pathlib import Path
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1] / "willitmod-dev-dgb"
+SPEC = importlib.util.spec_from_file_location("dgb_app_successor", ROOT.parent / "scripts/dgb_umbrel_release.py")
+release = importlib.util.module_from_spec(SPEC)
+SPEC.loader.exec_module(release)
 
 
 class AxeDgbPackageTests(unittest.TestCase):
@@ -31,10 +35,13 @@ class AxeDgbPackageTests(unittest.TestCase):
         self.assertIn("--single-transaction", self.init)
         self.assertIn("axedgb-init:", self.services["init"]["image"])
 
-    def test_all_changed_images_match_release_version(self):
-        version = yaml.safe_load((ROOT / "umbrel-app.yml").read_text())["version"]
-        for service in ["app", "init", "dgbd"]:
-            self.assertTrue(self.services[service]["image"].endswith(":" + version), service)
+    def test_exact_app_only_successor_preserves_core_init_and_memory_supervisor(self):
+        admitted = release.record()
+        self.assertEqual(yaml.safe_load((ROOT / "umbrel-app.yml").read_text())["version"], "0.9.182")
+        self.assertEqual(self.services["app"]["image"], admitted["imageRef"])
+        self.assertEqual(self.services["init"]["image"], "ghcr.io/willitmod/axedgb-init:0.9.181")
+        self.assertEqual(self.services["dgbd"]["image"], "ghcr.io/willitmod/axedgb-core:0.9.181")
+        release.admit_model(self.compose, admitted)
         self.assertEqual(self.services["app"]["environment"]["DGB_IMAGE"], self.services["dgbd"]["image"])
         self.assertEqual(self.services["dgbd"]["stop_grace_period"], "15m30s")
         self.assertNotIn("dgbd", self.services["app"]["depends_on"])
