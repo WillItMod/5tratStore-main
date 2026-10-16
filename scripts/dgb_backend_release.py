@@ -2,6 +2,7 @@
 import argparse
 import copy
 import hashlib
+import importlib.util
 import json
 from pathlib import Path
 import stat
@@ -50,7 +51,16 @@ def record(root=ROOT):
     return value
 
 
-def admit_model(current, before, release):
+def gateway_adapter(root):
+    spec = importlib.util.spec_from_file_location('dgb_gateway_successor', root / 'scripts/dgb_gateway_release.py')
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def admit_model(current, before, release, root=ROOT):
+    if 'hostname' in current.get('services', {}).get('app', {}):
+        current = gateway_adapter(root).previous_gateway_model(current, root)
     expected = copy.deepcopy(before)
     for service, alias in ALIASES.items():
         expected['services'][service]['networks'] = {'default': {'aliases': [alias]}}
@@ -79,12 +89,15 @@ def validate_package(root=ROOT, release=None):
         baseline_mode = git(root, 'ls-tree', BASELINE, '--', name).decode().split()[0]
         assert ('100755' if path.stat().st_mode & 0o111 else '100644') == baseline_mode, 'DGB package mode changed'
         if name in CHANGED:
-            assert sha(path.read_bytes()) == release['changedPackageFiles'][name], 'Unreviewed DGB repair bytes'
+            raw = path.read_bytes()
+            if name == APP + '/docker-compose.yml' and sha(raw) != release['changedPackageFiles'][name]:
+                raw = gateway_adapter(root).previous_compose_bytes(raw, root)
+            assert sha(raw) == release['changedPackageFiles'][name], 'Unreviewed DGB repair bytes'
         else:
             assert path.read_bytes() == baseline_bytes(root, name), 'Unrelated DGB file changed'
     before = yaml.safe_load(baseline_bytes(root, APP + '/docker-compose.yml'))
     current = yaml.safe_load((root / APP / 'docker-compose.yml').read_text())
-    admit_model(current, before, release)
+    admit_model(current, before, release, root)
     template = APP + '/data/templates/miningcore.json.template'
     assert (root / template).read_bytes() == baseline_bytes(root, template).replace(b'"host": "dgbd"', b'"host": "${DGB_RPC_HOST}"'), 'Only generic template daemon hosts may change'
     assert yaml.safe_load((root / APP / 'umbrel-app.yml').read_text())['version'] == VERSION
@@ -125,7 +138,7 @@ def previous_backend_model(app_id, current, root=ROOT):
     if app_id != APP:
         return copy.deepcopy(current)
     before = yaml.safe_load(baseline_bytes(root, APP + '/docker-compose.yml'))
-    admit_model(current, before, record(root))
+    admit_model(current, before, record(root), root)
     return copy.deepcopy(before)
 
 
