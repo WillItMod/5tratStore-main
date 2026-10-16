@@ -2,7 +2,7 @@ manifestVersion: 1
 id: willitmod-dev-axebch2
 category: altcoin
 name: "AxeBCH2"
-version: "0.2.1"
+version: "0.2.2"
 tagline: BCH2 node + solo pool (alpha)
 description: >-
   ALPHA RELEASE (DEV CHANNEL)
@@ -33,6 +33,8 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
+  Application health checks now respond without waiting for the node RPC. Slow or unavailable nodes remain visible in the detailed status APIs. Timed-out clients no longer produce broken-pipe tracebacks. Existing ports, node and pool images, mining configuration, payouts and stored data are retained. On 5tratumOS, update the OS to 0.8.36 before updating this app. OS 0.8.34 and 0.8.35 refuse this app update before pulling images, stopping apps or replacing the live Compose definition. Users on earlier OS versions must upgrade the OS first. Umbrel does not require this OS update.
+
   Standardizes the app version to 0.2.1. The running interface and catalogue use the same version. Existing ports, images, mining configuration and stored data are retained.
 
   Pool restarts stop cleanly while waiting for a payout address. On Umbrel, the app now uses the existing Docker socket group to verify that saved settings reached the restarted node or pool. The app interface, node image, pool binary, payout settings and stored chain data are retained.

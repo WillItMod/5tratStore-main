@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "status": "qualified",
+  "channel": "MAIN",
+  "appId": "willitmod-dev-5tratmux",
+  "version": "0.9.80",
+  "baselineCommit": "778a9005bfc3047e3ee1488b747d3a1032fbcc4c",
+  "sourceRevision": "8e5868d4b86ca7a56a436684158c64dc17b120c8",
+  "sourceTree": "a3c29335cf4680f38d95707814063ffba0298a89",
+  "canonicalBase": "d7d1ee750f440cf31cec4b0ca70af91269281f91",
+  "imageRef": "ghcr.io/willitmod/5tratmux-app:0.9.80-umbrel@sha256:1838e5458a56ddc208419cd2fb6d3b9c7979492e66ed52ccb177e5cc4c7d2a7a",
+  "publication": {
+    "path": "release-records/mux-umbrel-0.9.80-delivery.json",
+    "sha256": "053ab5acb86cb71e129b1d622b926bacfef950406b4ce844f137ad0ec485d514"
+  },
+  "packageFiles": {
+    "willitmod-dev-5tratmux/icon.png": {
+      "sha256": "3eef68f8307de4df7a43386b2dbc3cdaa2b9e97423c93945c18e6be3256ad9e8",
+      "mode": "0o644"
+    },
+    "willitmod-dev-5tratmux/umbrel-app.yml": {
+      "sha256": "d02577d33b60178373000f793da8324e5b30ca338195d09ebb071b2c2530463a",
+      "mode": "0o644"
+    },
+    "willitmod-dev-5tratmux/docker-compose.yml": {
+      "sha256": "c09dfd171eaff04aaa862218df9aeda4bf15684fc5c48b68c7efaf7b4dd15ac4",
+      "mode": "0o644"
+    },
+    "willitmod-dev-5tratmux/hooks/pre-start": {
+      "sha256": "fefa82989c4646016643f78ff6a4efea179b712c5485fca64c3bbf1bb484737f",
+      "mode": "0o755"
+    },
+    "willitmod-dev-5tratmux/data/.gitkeep": {
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "mode": "0o644"
+    }
+  },
+  "predecessor": {
+    "record": "MUX-UMBREL-0.9.79-2026-10-15.json",
+    "sha256": "88d8d549d71fc041565bca4113278a85c684a177f42f928067467d53e1145ad5",
+    "delivery": {
+      "path": "release-records/mux-umbrel-0.9.79-delivery.json",
+      "sha256": "013db0c1bb44c35075a1bc1c1c8a26772984b951c1c878746cf0a12f0459bdbb"
+    }
+  },
+  "platforms": {
+    "amd64": {
+      "manifestDigest": "sha256:3ac4d4d01a307e988e8e9098c44dd16601ee5539fc18bf668e22650ae0c05a4f",
+      "configDigest": "sha256:5690e50ccecf41d97ce3613033f6a46a4eed6444f3a5f33ae2cd8dc11d970487"
+    },
+    "arm64": {
+      "manifestDigest": "sha256:4107fa94fb7b0f83f261aa6cbddbfb954fb37f750ffe4b89b707840b04b1bb7d",
+      "configDigest": "sha256:af49d307a3038589bd1e62a83cafacbae2a4aef2088506745a80f388d82a0271"
+    }
+  }
+}

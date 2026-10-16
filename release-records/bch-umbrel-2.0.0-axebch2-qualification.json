@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "result": "PASS",
+  "appId": "willitmod-dev-axebch2",
+  "osVersion": "2.0.0",
+  "platform": "linux/amd64",
+  "sourceRevision": "611287fd9d41656a3fd19651dcb2ce98dbebf5d3",
+  "configDigest": "sha256:86f8b9191f480c45393a0c32b7aa97256261a5172539383c7a58b11d3aaa1083",
+  "observedVersion": "0.2.2",
+  "observationChannel": "MAIN",
+  "healthUnderBlockedRpcVerified": true,
+  "clientDisconnectVerified": true,
+  "unchangedPortsVerified": true,
+  "persistentStatePreserved": true,
+  "nativeAppManagerRestartVerified": true,
+  "nativeGatewayAndBrowserVerified": true,
+  "noAppOOMOrExit137": true,
+  "evidence": [
+    {
+      "basename": "native-semantic-643-axebch2.json",
+      "kind": "native-compiled-blocked-rpc-and-client-reset",
+      "sha256": "f376898335cd716db80cdaa155267f150dac46234ec2248e2c4a02047882a9a2"
+    },
+    {
+      "basename": "bch-native-643-axebch2-restart-final-acceptance.json",
+      "kind": "normal-native-restart",
+      "sha256": "3f3eb9e7e9187ae5e9881aa04928c20d75fe07cecbe6cd2fb6d5937417cbc2b1"
+    },
+    {
+      "basename": "bch-native-643-axebch2-restart-final-before.json",
+      "kind": "native-restart-before",
+      "sha256": "2dc423083db10bb0c4dd2dc0980c05cf9397df78ea64d7818b5ed5abd441b466"
+    },
+    {
+      "basename": "bch-native-643-axebch2-restart-final-after.json",
+      "kind": "native-restart-after",
+      "sha256": "aad0e7237b6de9286b5104f846c08598e6a16d39f2cda49d307cb0b19f73d520"
+    },
+    {
+      "basename": "bch-native-643-axebch2-restart-final-events.json",
+      "kind": "actual-docker-stop-events",
+      "sha256": "b472fcb01951b09be5bf6703fa1ab82769aebac782d1b3b0e9973668c820af04"
+    },
+    {
+      "basename": "receipt.json",
+      "kind": "native-owner-desktop-launch-gateway-browser",
+      "sha256": "da4bb9ff07ba0e507312e397130af6bc50f4e304a317116976afe51dc453623f"
+    },
+    {
+      "basename": "axebch2-ports-preservation.json",
+      "kind": "recipe-and-native-port-bindings",
+      "sha256": "c47fe2ed641a6954c0477894a64ee322a582a13d31ab4419ddf75402d29a9500"
+    },
+    {
+      "basename": "bch-native-643-axebch2-install-after.json",
+      "kind": "actual-fresh-native-install-observation",
+      "sha256": "ef0847b24b7d27ca8e57e65417c1a2b957d03313afbd505cf1301c4ab07eb56a"
+    }
+  ],
+  "scope": [
+    "Health/lifecycle qualification on the native OS; full chain synchronization and physical mining are outside this fix.",
+    "Persistent-state assertion covers the selected saved node/pool/application configuration and original volume sources; ordinary liveness caches are excluded.",
+    "The host-managed settings.yml state marker and initial node maxconnections normalization are separately retained initial observations.",
+    "DEV runtime metadata was checked separately with exact catalogue environment on the same immutable binary."
+  ]
+}

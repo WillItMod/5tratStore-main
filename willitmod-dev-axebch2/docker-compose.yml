@@ -28,7 +28,7 @@ services:
   app:
     stop_signal: SIGINT
     hostname: axebch2-app
-    image: ghcr.io/willitmod/axebch2-app:0.2.0.12-dev@sha256:65891eb60db568ca9f9ee21e00869769b5bc475a94f2af5f215dfdc55857e2d1
+    image: ghcr.io/willitmod/axebch2-app:0.2.2@sha256:9cb51bc7d9cec105eab1dbbf4c448dc2f757f340d50b08effff5f57c8102729b
     user: "1000:1000"
     group_add:
       - "${AXEBCH2_DOCKER_GID:-1000}"
@@ -49,10 +49,10 @@ services:
       - ${APP_DATA_DIR}/data:/data
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
-      APP_REVISION: 5531b5e6e2e4c55353454665af9fc1950f9f0844
+      APP_REVISION: 611287fd9d41656a3fd19651dcb2ce98dbebf5d3
       MUX_IDENTITY_URL: "http://172.17.0.1:21222/api/integrations/workers"
       APP_ID: "willitmod-dev-axebch2"
-      APP_VERSION: "0.2.1"
+      APP_VERSION: "0.2.2"
       APP_CHANNEL: "MAIN"
       APP_RELEASE_PHASE: "STABLE"
       APP_SELF_RESTART_ENABLED: "1"
@@ -69,7 +69,7 @@ services:
     healthcheck:
       test:
         - CMD-SHELL
-        - python -c "import sys, urllib.request; r=urllib.request.urlopen('http://127.0.0.1:3000/api/about', timeout=3); sys.exit(0 if r.status == 200 else 1)"
+        - python -c "import json, urllib.request; r=urllib.request.urlopen('http://127.0.0.1:3000/api/health', timeout=3); assert r.status == 200 and json.load(r).get('ok') is True"
       interval: 15s
       timeout: 5s
       retries: 20
@@ -153,3 +153,21 @@ networks:
   umbrel_main_network:
     external: true
     name: umbrel_main_network
+
+# 5tratumOS 0.8.36 verifies these exact retention bindings before any app update.
+# Umbrel ignores this Compose extension.
+x-5tratumos-stop-policy:
+  version: 2
+  services: {}
+  requiresRetention:
+    appId: axebch2
+    appService: app
+    appSourceRevision: 611287fd9d41656a3fd19651dcb2ce98dbebf5d3
+    appImage: ghcr.io/willitmod/axebch2-app:0.2.2@sha256:9cb51bc7d9cec105eab1dbbf4c448dc2f757f340d50b08effff5f57c8102729b
+    platforms:
+      amd64:
+        appConfigDigest: sha256:86f8b9191f480c45393a0c32b7aa97256261a5172539383c7a58b11d3aaa1083
+        appManifestDigest: sha256:c20ba7778a1c219e9761e21e429eba9f802791161103729a20103370e8d03746
+      arm64:
+        appConfigDigest: sha256:d39d31fe67145711781e3f97386a1e0eacde605105d4dca6748daeb88045a24a
+        appManifestDigest: sha256:a1cec1665cb11e33826363eac07055e7029dec903a7395d9c5399d33cea8af57

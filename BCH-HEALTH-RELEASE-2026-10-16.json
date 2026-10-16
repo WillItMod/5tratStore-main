@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 1,
+  "status": "qualified",
+  "channel": "MAIN",
+  "baselineCommit": "778a9005bfc3047e3ee1488b747d3a1032fbcc4c",
+  "apps": {
+    "willitmod-dev-bch": {
+      "version": "0.9.27",
+      "sourceRevision": "8e41868dc639d35376c1889f94871db79a05e251",
+      "sourceTree": "86d35dc632aa32d7492ca53c7adb44190e5f4143",
+      "imageRef": "ghcr.io/willitmod/axebch-app-umbrel-dev:0.9.27@sha256:6b76139b539887484268b3d6301254395c553095f3873abe0c4b44df5278251a",
+      "publication": {
+        "path": "release-records/bch-0.9.27-health-delivery.json",
+        "sha256": "b7bacfc3e425b9f0220707d439dc30718e3b64bd2490f78f63d9a5715a7fb718"
+      },
+      "packageFiles": {
+        "willitmod-dev-bch/icon.png": {
+          "sha256": "b93ad97ab7adf9bffc4f1a86521f2e08b4f16cddf53f38be0349f523df471b5e",
+          "mode": "0o644"
+        },
+        "willitmod-dev-bch/icon.svg": {
+          "sha256": "c92ae95d786cd446cb9f267a64c0837db5a843d92f6ab617c08edeadb9bafe22",
+          "mode": "0o644"
+        },
+        "willitmod-dev-bch/LICENSES.md": {
+          "sha256": "f9a62a7af0306c4c8c1bcaae805bb2ef847dd610f511c56468617eac009b7b4d",
+          "mode": "0o644"
+        },
+        "willitmod-dev-bch/global-app.yml": {
+          "sha256": "0ccdfa28f6cbe688ec1beb4558819e1897365fecb9ddfaf22e68b17c209f456f",
+          "mode": "0o644"
+        },
+        "willitmod-dev-bch/umbrel-app.yml": {
+          "sha256": "0ccdfa28f6cbe688ec1beb4558819e1897365fecb9ddfaf22e68b17c209f456f",
+          "mode": "0o644"
+        },
+        "willitmod-dev-bch/docker-compose.yml": {
+          "sha256": "4cc9b3aff40aa20b6444be2769c599dc8d307bd1402aaefd6096460c7327e998",
+          "mode": "0o644"
+        },
+        "willitmod-dev-bch/images/2.png": {
+          "sha256": "b741a9e9d8126eb7f6d8d3d125bac8ea0bce9f6865232d4cb9885187e0e33ae4",
+          "mode": "0o644"
+        },
+        "willitmod-dev-bch/images/3.png": {
+          "sha256": "d83c301687415416f81c39a375c2a7069977746bc5fa36befc40ecdd0358e885",
+          "mode": "0o644"
+        },
+        "willitmod-dev-bch/images/1.png": {
+          "sha256": "47491a4fd471d32b96a004f392ae7d1c34707441780702175e0933209e395853",
+          "mode": "0o644"
+        },
+        "willitmod-dev-bch/data/templates/bchn-entrypoint.sh": {
+          "sha256": "8433d062ea202302553e0ce1e90672e70d9af1899fddced1ec9ee2041d4ccc22",
+          "mode": "0o644"
+        },
+        "willitmod-dev-bch/data/templates/bitcoin.conf.template": {
+          "sha256": "b4fc4636242321669812479d03c0ffa5538feb1aaff21e0b0f55dff002a3f884",
+          "mode": "0o644"
+        },
+        "willitmod-dev-bch/data/templates/ckpool.conf.template": {
+          "sha256": "b2773c0040fa650861b330583a69ca01470ce050f7023fdeda3ab178454432e5",
+          "mode": "0o644"
+        }
+      },
+      "retentionRequirement": {
+        "appId": "axebch",
+        "appService": "app",
+        "appSourceRevision": "8e41868dc639d35376c1889f94871db79a05e251",
+        "appImage": "ghcr.io/willitmod/axebch-app-umbrel-dev:0.9.27@sha256:6b76139b539887484268b3d6301254395c553095f3873abe0c4b44df5278251a",
+        "platforms": {
+          "amd64": {
+            "appConfigDigest": "sha256:0d12860caa70eb918c89e6d8dc5352326cbf622d2d2680774b8d74f9c9d10914",
+            "appManifestDigest": "sha256:f15bf94d8e35d227cbf2c2958aa70dc387ab9cd4ae994be9819c03c4b0ec8026"
+          },
+          "arm64": {
+            "appConfigDigest": "sha256:b6e4251d80797bfdd22360e33c8b7df4ca8197ff5e4f5f1fda0377207af315ad",
+            "appManifestDigest": "sha256:6f0f540711d130df92ae3f0608aea4f5bc1c9bca8fb1ca823633866f49609b51"
+          }
+        }
+      }
+    },
+    "willitmod-dev-axebch2": {
+      "version": "0.2.2",
+      "sourceRevision": "611287fd9d41656a3fd19651dcb2ce98dbebf5d3",
+      "sourceTree": "01bcf8f40403305aa2673f23eb3e6fd1c670e8ec",
+      "imageRef": "ghcr.io/willitmod/axebch2-app:0.2.2@sha256:9cb51bc7d9cec105eab1dbbf4c448dc2f757f340d50b08effff5f57c8102729b",
+      "publication": {
+        "path": "release-records/bch2-0.2.2-health-delivery.json",
+        "sha256": "210682d4432df8249bf28347af2e78f35791f7789951608f6bfda3e9932efd39"
+      },
+      "packageFiles": {
+        "willitmod-dev-axebch2/icon.png": {
+          "sha256": "d62d9d0cb6ddd3eb8779dc10a162444d23f1d6dc3453f3fc0ef648396d09286c",
+          "mode": "0o644"
+        },
+        "willitmod-dev-axebch2/LICENSES.md": {
+          "sha256": "111d7be24fae760e9d28ca3ee13041a0d041a7a129dda0c23d4070ef98c1db2b",
+          "mode": "0o644"
+        },
+        "willitmod-dev-axebch2/global-app.yml": {
+          "sha256": "e206cbddb98461d2d840037645c005096b4de8ea43060d55303dc1e84aecfd03",
+          "mode": "0o644"
+        },
+        "willitmod-dev-axebch2/umbrel-app.yml": {
+          "sha256": "e206cbddb98461d2d840037645c005096b4de8ea43060d55303dc1e84aecfd03",
+          "mode": "0o644"
+        },
+        "willitmod-dev-axebch2/exports.sh": {
+          "sha256": "4b1ffe5ed6f521e6425a2a91e846aba614c5ad620e2db30388911e71d4000a9a",
+          "mode": "0o755"
+        },
+        "willitmod-dev-axebch2/docker-compose.yml": {
+          "sha256": "8ad4b8ba20d9c44b9bc94648d001b7e11a8066907ce892a72479105dc717f408",
+          "mode": "0o644"
+        },
+        "willitmod-dev-axebch2/images/2.png": {
+          "sha256": "d62d9d0cb6ddd3eb8779dc10a162444d23f1d6dc3453f3fc0ef648396d09286c",
+          "mode": "0o644"
+        },
+        "willitmod-dev-axebch2/images/1.png": {
+          "sha256": "d62d9d0cb6ddd3eb8779dc10a162444d23f1d6dc3453f3fc0ef648396d09286c",
+          "mode": "0o644"
+        }
+      },
+      "retentionRequirement": {
+        "appId": "axebch2",
+        "appService": "app",
+        "appSourceRevision": "611287fd9d41656a3fd19651dcb2ce98dbebf5d3",
+        "appImage": "ghcr.io/willitmod/axebch2-app:0.2.2@sha256:9cb51bc7d9cec105eab1dbbf4c448dc2f757f340d50b08effff5f57c8102729b",
+        "platforms": {
+          "amd64": {
+            "appConfigDigest": "sha256:86f8b9191f480c45393a0c32b7aa97256261a5172539383c7a58b11d3aaa1083",
+            "appManifestDigest": "sha256:c20ba7778a1c219e9761e21e429eba9f802791161103729a20103370e8d03746"
+          },
+          "arm64": {
+            "appConfigDigest": "sha256:d39d31fe67145711781e3f97386a1e0eacde605105d4dca6748daeb88045a24a",
+            "appManifestDigest": "sha256:a1cec1665cb11e33826363eac07055e7029dec903a7395d9c5399d33cea8af57"
+          }
+        }
+      }
+    }
+  }
+}

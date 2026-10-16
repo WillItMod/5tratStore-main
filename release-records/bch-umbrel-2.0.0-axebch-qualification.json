@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "result": "PASS",
+  "appId": "willitmod-dev-bch",
+  "osVersion": "2.0.0",
+  "platform": "linux/amd64",
+  "sourceRevision": "8e41868dc639d35376c1889f94871db79a05e251",
+  "configDigest": "sha256:0d12860caa70eb918c89e6d8dc5352326cbf622d2d2680774b8d74f9c9d10914",
+  "observedVersion": "0.9.27",
+  "observationChannel": "MAIN",
+  "healthUnderBlockedRpcVerified": true,
+  "clientDisconnectVerified": true,
+  "unchangedPortsVerified": true,
+  "persistentStatePreserved": true,
+  "nativeAppManagerRestartVerified": true,
+  "nativeGatewayAndBrowserVerified": true,
+  "noAppOOMOrExit137": true,
+  "evidence": [
+    {
+      "basename": "native-semantic-643-axebch.json",
+      "kind": "native-compiled-blocked-rpc-and-client-reset",
+      "sha256": "fc1cfcffe746abde9224950e737bc7deb7efa2c98551c64766d1d0a92fd60ca6"
+    },
+    {
+      "basename": "bch-native-643-axebch-restart-stable-final-acceptance.json",
+      "kind": "normal-native-restart",
+      "sha256": "66a54a7168f249c77e01528e273de01112ef97cf425085b989852d8f35632911"
+    },
+    {
+      "basename": "bch-native-643-axebch-restart-stable-final-before.json",
+      "kind": "native-restart-before",
+      "sha256": "1ee245ad606d2cb604a866237ad78da2e1fd21005f615f5652d79418ddf1e18d"
+    },
+    {
+      "basename": "bch-native-643-axebch-restart-stable-final-after.json",
+      "kind": "native-restart-after",
+      "sha256": "06efab4197468ea7ea77cb7f400a74130ee6a605b54d95bbaa9375cddb04e26e"
+    },
+    {
+      "basename": "bch-native-643-axebch-restart-stable-final-events.json",
+      "kind": "actual-docker-stop-events",
+      "sha256": "389ea256a718c9c6ea70308ade77c9b8cbd32c7a24670b4c85f40a636c5394e3"
+    },
+    {
+      "basename": "receipt.json",
+      "kind": "native-owner-desktop-launch-gateway-browser",
+      "sha256": "368647931649f25dd5839a8c32cfb23898f9066ce95f5ccc09412cf94f562c72"
+    },
+    {
+      "basename": "axebch-ports-preservation.json",
+      "kind": "recipe-and-native-port-bindings",
+      "sha256": "a4f66535b2e962491b003f695f0d997982beb2e8dde326354b48610966599e51"
+    },
+    {
+      "basename": "bch-native-643-axebch-install-after.json",
+      "kind": "actual-fresh-native-install-observation",
+      "sha256": "1c391f6dd50fd214f1004fc6825f5aa87e585a356b968262bde8d5f63309ab7b"
+    },
+    {
+      "basename": "bch-native-643-actual-startup-failure.json",
+      "kind": "retained-initial-test-stager-ownership-failure",
+      "sha256": "4f983e807b366c741bc6820652b942f10a2c829bd77b2a2d8cc2de08ef085a96"
+    },
+    {
+      "basename": "bch-native-643-source-data-owner-attribution.json",
+      "kind": "proven-test-stager-directory-ownership-cause",
+      "sha256": "e6a4080e485ff327a14648b5e748ee1a6cc14c0d777bb6ae307040cc0dfec0b2"
+    },
+    {
+      "basename": "native643-official-copy-ownership-source.json",
+      "kind": "official-native-checkout-ownership-behavior",
+      "sha256": "58ff96c985e8cdb17ad82de9ae42b120e49ad8d84ef06fbf4fc2da4480afc4da"
+    },
+    {
+      "basename": "bch-native-643-stager-metadata-repair.json",
+      "kind": "bounded-stager-parent-metadata-correction",
+      "sha256": "995562d55ef67c9aa6836d4ed24cffa7f03ff726408fd000c98c06b77bdcfb27"
+    }
+  ],
+  "scope": [
+    "Health/lifecycle qualification on the native OS; full chain synchronization and physical mining are outside this fix.",
+    "Persistent-state assertion covers the selected saved node/pool/application configuration and original volume sources; ordinary liveness caches are excluded.",
+    "The host-managed settings.yml state marker and initial node maxconnections normalization are separately retained initial observations.",
+    "DEV runtime metadata was checked separately with exact catalogue environment on the same immutable binary.",
+    "The first test checkout had root-owned parent directories unlike official checkout ownership; exact fixture metadata correction preceded a normal app-manager restart. Fresh native1.7 installation used corrected faithful ownership. No application code or installed node/pool content was repaired."
+  ]
+}

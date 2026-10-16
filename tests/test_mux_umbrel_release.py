@@ -20,6 +20,20 @@ CHANNEL = json.loads((ROOT / mux.RECORD_NAME).read_text())["channel"]
 SYNTHETIC_IMAGE = "ghcr.io/willitmod/5tratmux-app:synthetic-unit-test@sha256:" + "1" * 64
 
 
+def synthetic_icon_coverage(delivery_channel, observation_channel=None):
+    observation_channel = observation_channel or delivery_channel
+    return {"desktopIconRenderedVerified": True, "iconObservationChannel": observation_channel,
+        "absoluteIconURL": mux.ICON_URLS[observation_channel], "iconObservedVersion": mux.VERSIONS[observation_channel],
+        "iconNaturalWidth": 783, "sharedIconSHA256": mux.ICON_SHA256,
+        "nativeIconObservationReceiptSHA256": "8" * 64, "storeCardExercised": False,
+        "decodedChannelAsset": {"channel": delivery_channel, "absoluteIconURL": mux.ICON_URLS[delivery_channel],
+            "sha256": mux.ICON_SHA256, "browserDecodedVerified": True,
+            "naturalWidth": 783, "naturalHeight": 783,
+            "fetchEvidenceSHA256": mux.ICON_FETCH_EVIDENCE_SHA256,
+            "decodeEvidenceSHA256": mux.ICON_DECODE_EVIDENCE_SHA256}}
+
+
+
 class MuxUmbrelReleaseTests(unittest.TestCase):
     def test_pending_metadata_cannot_be_admitted_as_a_published_release(self):
         if mux.LOCKS[CHANNEL] is None:
@@ -54,10 +68,10 @@ class MuxUmbrelReleaseTests(unittest.TestCase):
             def git(*arguments):
                 return subprocess.check_output(["git", *arguments], cwd=root, stderr=subprocess.DEVNULL)
             git("init", "--quiet")
+            shutil.copytree(ROOT / mux.APP, root / mux.APP)
             git("add", ".")
             git("-c", "user.name=Disposable Test", "-c", "user.email=unit@example.invalid", "commit", "--quiet", "-m", "Synthetic baseline")
             baseline = git("rev-parse", "HEAD").decode().strip()
-            shutil.copytree(ROOT / mux.APP, root / mux.APP)
             with patch.dict(mux.BASELINES, {CHANNEL: baseline}):
                 mux.validate_baseline(root, CHANNEL)
                 for name, raw in originals.items():
@@ -192,6 +206,34 @@ class MuxUmbrelReleaseTests(unittest.TestCase):
                 with self.subTest(field=field), self.assertRaises(AssertionError):
                     mux.record(root)
 
+    def test_shared_artwork_requires_actual_native_rendering_and_exact_decoded_delivery_asset(self):
+        other_channel = "DEV" if CHANNEL == "MAIN" else "MAIN"
+        original = synthetic_icon_coverage(CHANNEL, other_channel)
+        self.assertEqual(mux.validate_icon_coverage(original, CHANNEL), original)
+        # The observation stays visibly on its actual channel. Same bytes and a
+        # separately decoded delivery URL support the bounded renderer coverage.
+        self.assertNotEqual(original["iconObservationChannel"], CHANNEL)
+        self.assertNotEqual(original["absoluteIconURL"], original["decodedChannelAsset"]["absoluteIconURL"])
+        for case in ("missing-native", "native-false", "native-receipt", "unknown-channel", "wrong-observed-url",
+                     "wrong-observed-version", "different-shared-artwork", "different-decoded-artwork",
+                     "decode-absent", "wrong-delivery-url", "wrong-decode-evidence", "wrong-geometry", "claimed-store-card"):
+            row = copy.deepcopy(original)
+            if case == "missing-native": del row["desktopIconRenderedVerified"]
+            elif case == "native-false": row["desktopIconRenderedVerified"] = False
+            elif case == "native-receipt": row["nativeIconObservationReceiptSHA256"] = "missing"
+            elif case == "unknown-channel": row["iconObservationChannel"] = "unobserved"
+            elif case == "wrong-observed-url": row["absoluteIconURL"] = mux.ICON_URLS[CHANNEL]
+            elif case == "wrong-observed-version": row["iconObservedVersion"] = mux.VERSIONS[CHANNEL]
+            elif case == "different-shared-artwork": row["sharedIconSHA256"] = "0" * 64
+            elif case == "different-decoded-artwork": row["decodedChannelAsset"]["sha256"] = "0" * 64
+            elif case == "decode-absent": row["decodedChannelAsset"]["browserDecodedVerified"] = False
+            elif case == "wrong-delivery-url": row["decodedChannelAsset"]["absoluteIconURL"] = mux.ICON_URLS[other_channel]
+            elif case == "wrong-decode-evidence": row["decodedChannelAsset"]["decodeEvidenceSHA256"] = "0" * 64
+            elif case == "wrong-geometry": row["decodedChannelAsset"]["naturalWidth"] = 0
+            else: row["storeCardExercised"] = True
+            with self.subTest(case=case), self.assertRaises((AssertionError, KeyError)):
+                mux.validate_icon_coverage(row, CHANNEL)
+
     def test_even_a_rehashed_receipt_cannot_claim_missing_arch_source_protection_or_qualification(self):
         # Synthetic, disposable schema exercise. This never becomes a catalogue
         # receipt and does not contact or claim to qualify any running image.
@@ -199,9 +241,10 @@ class MuxUmbrelReleaseTests(unittest.TestCase):
         row = {"manifestDigest": "sha256:" + "2" * 64, "configDigest": "sha256:" + "3" * 64,
                "protectedExecutableSHA256": "4" * 64, "noApplicationPythonSources": True,
                "noSourceMaps": True, "nativeStartupVerified": True,
-               "operatorAuthenticationVerified": True, "httpHealthVersion": version}
+               "operatorAuthenticationVerified": True, "httpHealthVersion": version, "wrapperOnlyUpdateVerified": True}
         qualification = {"result": "PASS", "architecture": "amd64",
                          "nativeUpdateStopStartPersistenceVerified": True,
+                         **synthetic_icon_coverage(CHANNEL),
                          "receiptSHA256": "5" * 64, "receipt": "synthetic-unit-test.json"}
         original = {"schemaVersion": 1, "result": "PASS", "sourceRevision": mux.SOURCE,
                     "sourceTree": mux.TREE, "imageRef": SYNTHETIC_IMAGE,
@@ -213,19 +256,39 @@ class MuxUmbrelReleaseTests(unittest.TestCase):
             name = f"release-records/mux-umbrel-{version}-delivery.json"
             path = root / name
             path.parent.mkdir()
-            release = {"channel": CHANNEL, "imageRef": SYNTHETIC_IMAGE, "publication": {"path": name}}
+            qualification_raw = b'{"result":"PASS","syntheticUnitFixture":true}\n'
+            (root / "release-records/synthetic-unit-test.json").write_bytes(qualification_raw)
+            for qualified in original["umbrelQualification"].values():qualified["receiptSHA256"] = mux.sha256(qualification_raw)
+            release = {"channel": CHANNEL, "imageRef": SYNTHETIC_IMAGE, "publication": {"path": name},
+                       "platforms": {arch: {key: row[key] for key in ("manifestDigest", "configDigest")} for arch in ("amd64", "arm64")}}
+            old_record = json.loads((ROOT / mux.PREDECESSOR_NAME).read_text())
+            (root / mux.PREDECESSOR_NAME).write_bytes((ROOT / mux.PREDECESSOR_NAME).read_bytes())
+            old_delivery = old_record["publication"]["path"]
+            (root / old_delivery).write_bytes((ROOT / old_delivery).read_bytes())
+            prior_platforms = json.loads((ROOT / old_delivery).read_text())["platforms"]
+            for architecture in ("amd64", "arm64"):
+                original["platforms"][architecture]["protectedExecutableSHA256"] = prior_platforms[architecture]["protectedExecutableSHA256"]
             mutations = [("sourceRevision", "0" * 40), ("anonymousIndexAndBothPlatformsVerified", False),
                          ("platforms.amd64.noApplicationPythonSources", False),
+                         ("platforms.amd64.configDigest", "sha256:" + "0"*64),
+                         ("platforms.arm64.manifestDigest", "sha256:" + "0"*64),
                          ("platforms.arm64.noSourceMaps", False),
                          ("platforms.arm64.nativeStartupVerified", False),
+                         ("platforms.arm64.wrapperOnlyUpdateVerified", False),
+                         ("platforms.amd64.protectedExecutableSHA256", "0" * 64),
                          ("platforms.amd64.operatorAuthenticationVerified", False),
                          ("platforms.amd64.httpHealthVersion", "0.9.78"),
-                         ("umbrelQualification.1.7.4.result", "pending")]
+                         ("umbrelQualification.1.7.4.result", "pending"),
+                         ("umbrelQualification.1.7.4.desktopIconRenderedVerified", False),
+                         ("umbrelQualification.1.7.4.absoluteIconURL", "icon.png"),
+                         ("umbrelQualification.1.7.4.iconNaturalWidth", 0),
+                         ("umbrelQualification.1.7.4.storeCardExercised", True),
+                         ("umbrelQualification.1.7.4.receiptSHA256", "0" * 64)]
             for field, value in [(None, None), *mutations]:
                 proof = copy.deepcopy(original)
                 if field:
                     keys = (field.split(".") if not field.startswith("umbrelQualification.")
-                            else ["umbrelQualification", "1.7.4", "result"])
+                            else ["umbrelQualification", *field[len("umbrelQualification."):].rsplit(".", 1)])
                     node = proof
                     for key in keys[:-1]:
                         node = node[key]
