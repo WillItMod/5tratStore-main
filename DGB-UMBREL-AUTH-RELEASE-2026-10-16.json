@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "status": "qualified",
+  "appId": "willitmod-dev-dgb",
+  "channel": "MAIN",
+  "version": "0.9.182",
+  "baselineCommit": "e2609aa61aa4c854de1453c2a23b0b3fedbc40d2",
+  "sourceRevision": "d42a2e9b3314c7f8b1859837ae319104395759fb",
+  "sourceTree": "61825b8384e8b76847803295a06c862325ace28c",
+  "imageRef": "ghcr.io/willitmod/axedgb-app:0.9.182-umbrel-authfix.1@sha256:514e426281259905ba7d3dd0258e11a9fdf8393b2a7a4307b03db11e68dcc0ef",
+  "platforms": {
+    "arm64": {
+      "manifestDigest": "sha256:a79314196e549cd2c21cf1bade0e9c4199e11f4cf2b2ac0ecb5ae6d26bca9a9f",
+      "configDigest": "sha256:b6bd01de58fe0eb17bfa170fe4b5e1251282dd03958239c326e5a53d13bedacb"
+    },
+    "amd64": {
+      "manifestDigest": "sha256:6fd184c1c123ca1e98994f7c9d975717f4d64e0543ecf9558676997d93327d9f",
+      "configDigest": "sha256:6e17ec287ba648b6e36671ee5b1a671e29abc8b7dc31baba05967ae5254d4799"
+    }
+  },
+  "publication": {
+    "path": "release-records/dgb-0.9.182-umbrel-authfix-delivery.json",
+    "sha256": "eddc0c850e5d1ab0c64452e15584eccb4c6b190882d0736e9d3700443e82b504"
+  },
+  "packageFiles": {
+    "willitmod-dev-dgb/LICENSES.md": {
+      "sha256": "04839cc4847c40c4a54fa6dcd1d30665d606ef734ca6b97665e4a24813426751",
+      "mode": "0o644"
+    },
+    "willitmod-dev-dgb/data/templates/dgb-entrypoint.sh": {
+      "sha256": "5d624ff4f4ae604ca80c4d13adcd4ce306ecb0876aca3d87b3f60f079812442f",
+      "mode": "0o644"
+    },
+    "willitmod-dev-dgb/data/templates/digibyte.conf.template": {
+      "sha256": "2e050983e27f70313d178b1f31f21cafc94ee81e67a30a157f61519e94d6e01b",
+      "mode": "0o644"
+    },
+    "willitmod-dev-dgb/data/templates/miningcore-createdb.sql": {
+      "sha256": "74bbc2fd6da65d75ceb69ee00fa20f2ee927b785d774e4eea7fdf908072a2a4d",
+      "mode": "0o644"
+    },
+    "willitmod-dev-dgb/data/templates/miningcore.json.template": {
+      "sha256": "4061ff093c870cdde131d53f84e5a64d8d7ec900b0398feaa4c4177e402ba96b",
+      "mode": "0o644"
+    },
+    "willitmod-dev-dgb/docker-compose.yml": {
+      "sha256": "f4ed470552525f90123ec0e9f4feb5acad435aff44eaba84df12929da0c73cbe",
+      "mode": "0o644"
+    },
+    "willitmod-dev-dgb/exports.sh": {
+      "sha256": "6d21c61f8c413ce7921b0b6ba0d76987ae8c27b9ed25a8fd957b77fffff50809",
+      "mode": "0o644"
+    },
+    "willitmod-dev-dgb/icon.png": {
+      "sha256": "59ed240d80186c142b796d9bf4a4c8a31f7d80982990b34844ff8d14ec57290b",
+      "mode": "0o644"
+    },
+    "willitmod-dev-dgb/icon.svg": {
+      "sha256": "007dc20b758672cde8de2d693bbe304774308244cdda79af6ef8428c91fdfe30",
+      "mode": "0o644"
+    },
+    "willitmod-dev-dgb/images/1.png": {
+      "sha256": "d82298ab1e141c2da8f1db42b9697ac1d188e95789573d3ed57e988a7b9e4cf6",
+      "mode": "0o644"
+    },
+    "willitmod-dev-dgb/images/2.png": {
+      "sha256": "cf549e818b47690ae91605356a1a45e01689403779d9d34542c7365eaf544409",
+      "mode": "0o644"
+    },
+    "willitmod-dev-dgb/images/3.png": {
+      "sha256": "ff2e14ec6be8f413abea1f6225161e67c61442189df3c56e5e718c14a30b4df8",
+      "mode": "0o644"
+    },
+    "willitmod-dev-dgb/images/digibyte/Dockerfile": {
+      "sha256": "df1da62207c98902ab8cbe291f094947c98ac7038845fd28c838fccfdf1c8ded",
+      "mode": "0o644"
+    },
+    "willitmod-dev-dgb/images/miningcore/Dockerfile": {
+      "sha256": "e0f673b564b08660c9e4725ce9ceac37dbf8047ff085e0e8f24a66f6ff114745",
+      "mode": "0o644"
+    },
+    "willitmod-dev-dgb/images/miningcore/VERSION": {
+      "sha256": "8a675759d8be779898f0fd04d313a86aa0571f8459cdc004f80ca71e5332a64e",
+      "mode": "0o644"
+    },
+    "willitmod-dev-dgb/images/miningcore/patches/axedgb-best-share.patch": {
+      "sha256": "5d26d4420afa9d6dcdb3cd6fd0e26707ea0fb11bbe45c2cd87f3ef1e5927653c",
+      "mode": "0o644"
+    },
+    "willitmod-dev-dgb/images/miningcore/patches/axedgb-dgb-v9-compat.patch": {
+      "sha256": "822751f6789719c71e9413fda2f4ebf36823faaa7029b65619ddcf6f1f82a8a0",
+      "mode": "0o644"
+    },
+    "willitmod-dev-dgb/umbrel-app.yml": {
+      "sha256": "3625fcc09a2056583d84f5e11c271795524604fe52786f84afe582fa537ce0e8",
+      "mode": "0o644"
+    }
+  }
+}

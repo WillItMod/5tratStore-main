@@ -2,7 +2,7 @@ manifestVersion: 1
 id: willitmod-dev-dgb
 category: altcoin
 name: AxeDGB
-version: "0.9.181"
+version: "0.9.182"
 tagline: DGB node + solo pool
 description: >-
   RC6 RELEASE
@@ -102,3 +102,11 @@ backupIgnore:
   - data/node/chainstate
   - data/node/indexes
 submitter: WillItMod
+
+releaseNotes: >-
+  Fixes Umbrel 2 updates when the legacy authentication container is absent.
+  Installations already blocked by the old authentication hook need that installed
+  hook repaired once before retrying Update.
+  Uses guarded optional authentication lookups and a compiled application with
+  minified browser assets. Existing ports, node/pool/init images, settings and
+  stored chain data are preserved.

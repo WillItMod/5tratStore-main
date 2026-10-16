@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "result": "PASS",
+  "version": "0.9.182",
+  "sourceRevision": "d42a2e9b3314c7f8b1859837ae319104395759fb",
+  "sourceTree": "61825b8384e8b76847803295a06c862325ace28c",
+  "imageRef": "ghcr.io/willitmod/axedgb-app:0.9.182-umbrel-authfix.1@sha256:514e426281259905ba7d3dd0258e11a9fdf8393b2a7a4307b03db11e68dcc0ef",
+  "anonymousIndexAndBothPlatformsVerified": true,
+  "platforms": {
+    "amd64": {
+      "manifestDigest": "sha256:6fd184c1c123ca1e98994f7c9d975717f4d64e0543ecf9558676997d93327d9f",
+      "configDigest": "sha256:6e17ec287ba648b6e36671ee5b1a671e29abc8b7dc31baba05967ae5254d4799",
+      "protectedExecutableSHA256": "971718f3ec2ca99470ccfdca6eb2951bbba54549c2a7966d8be89cf8ae75f6a2",
+      "nativeStartupVerified": true,
+      "noApplicationPythonSources": true,
+      "noSourceMaps": true,
+      "allDistributedLayersAudited": true,
+      "httpVersion": "0.9.182",
+      "pg8000Available": true,
+      "nativeProof": {
+        "receipt": "native-startup-normalized.json",
+        "sha256": "858b477ada8bb98624ce2fbc8b41ba728e819daf6c5e0979706faf1024483f9e"
+      },
+      "layerAudit": {
+        "receipt": "independent-all-layer-audit.json",
+        "sha256": "47e50adbe11aec19a92527c405fbc62226ef700e0ba0b9e1290a9cbced7fbe7c"
+      }
+    },
+    "arm64": {
+      "manifestDigest": "sha256:a79314196e549cd2c21cf1bade0e9c4199e11f4cf2b2ac0ecb5ae6d26bca9a9f",
+      "configDigest": "sha256:b6bd01de58fe0eb17bfa170fe4b5e1251282dd03958239c326e5a53d13bedacb",
+      "protectedExecutableSHA256": "57faa38f8feb0e73ab03ef231123476ea04909b8a22816d15d81b52bfe394d15",
+      "nativeStartupVerified": true,
+      "noApplicationPythonSources": true,
+      "noSourceMaps": true,
+      "allDistributedLayersAudited": true,
+      "httpVersion": "0.9.182",
+      "pg8000Available": true,
+      "nativeProof": {
+        "receipt": "native-startup-normalized.json",
+        "sha256": "f63edccda0923e9d367f9cf88f76f3805108e41be33e60ca25b8dbdd28d853da"
+      },
+      "layerAudit": {
+        "receipt": "all-layer-audit.json",
+        "sha256": "595ac4c99179d5fa811f50ba17878ad6e0c2c58e5454cd881c43cf2b5d9dd247"
+      }
+    }
+  },
+  "strictBashAuthRegressionVerified": true,
+  "nativeUmbrelAppManagerInstallQualified": false,
+  "physicalMiningQualified": false,
+  "scope": "Native AMD64/ARM64 compiled app runtime and public immutable images verified. The guarded auth exports are exercised under strict Bash, including the exact legacy MAIN failure. Native Umbrel app-manager installation follows catalogue publication; full chain sync and physical mining are not qualified.",
+  "publicationEvidence": {
+    "journalSHA256": "7182c71a4e8cbe9ea7616bea92abb7810eec561590e512720fa083cbdace4227",
+    "anonymousPullReceiptSHA256": "71cd8b24bd17cefc07e88d2540d5994b3d6d22993738936eed08e34449d3f84f",
+    "planSHA256": "2546e49a51e830f4f86f5c47de798b5d6de188f0d650b26f226a004e876d69d2"
+  },
+  "strictBashAuthRegressionEvidence": {
+    "receipt": "dev-auth-regression-ci.json",
+    "sha256": "f7927d3f867dd76b0a230368f9399e859f6baa8698cb17fdeffaf55695b0a512",
+    "sameExportsAndSixRegressionTestsVerified": true
+  },
+  "bootstrapScope": "An installation already blocked by the old authentication hook needs that installed hook repaired once before retrying Update; the catalogue alone cannot bypass the installed pre-update hook.",
+  "sourceProtectionScope": "Nuitka-compiled application and minified browser assets; application Python sources and source maps absent from every distributed layer.",
+  "nativeTransportScope": {
+    "runtimeCheckoutRevision": "d42a2e9b3314c7f8b1859837ae319104395759fb",
+    "workflowOnlyRevision": "463da7de05b10c208a63716dfab0a2ce13368178",
+    "amd64NativeRun": 38896255719,
+    "amd64ExecutionOnArmPerformed": false
+  }
+}

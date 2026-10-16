@@ -1,12 +1,14 @@
 """Exercise sourced AxeDGB auth exports under Umbrel's strict Bash caller."""
 import os
+import hashlib
 from pathlib import Path
 import subprocess
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 EXPORTS = ROOT / 'willitmod-dev-dgb/exports.sh'
-BASELINE = '119e24b66a9badb820911d2e0ef384b1a118c537'
+BASELINE = ROOT / 'tests/fixtures/dgb-legacy-main-exports.sh'
+BASELINE_SHA256 = '2206ee3269f996409aee62da4dab552f853194a9e8b33505137dba223f6f108e'
 SCRIPT = r'''
 if [[ "$TEST_STRICT" == yes ]]; then
   set -euo pipefail
@@ -80,7 +82,8 @@ class DgbExportsTests(unittest.TestCase):
 
     def test_previous_published_main_reproduces_exit_one_without_auth(self):
         import tempfile
-        previous = subprocess.check_output(['git', 'show', f'{BASELINE}:willitmod-dev-dgb/exports.sh'], cwd=ROOT)
+        previous = BASELINE.read_bytes()
+        self.assertEqual(hashlib.sha256(previous).hexdigest(), BASELINE_SHA256)
         with tempfile.TemporaryDirectory() as temp:
             source = Path(temp) / 'exports.sh'
             source.write_bytes(previous)

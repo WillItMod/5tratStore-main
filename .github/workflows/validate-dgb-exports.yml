@@ -5,12 +5,14 @@ on:
     paths:
       - "willitmod-dev-dgb/exports.sh"
       - "tests/test_dgb_exports.py"
+      - "tests/fixtures/dgb-legacy-main-exports.sh"
       - ".github/workflows/validate-dgb-exports.yml"
   push:
     branches: [main]
     paths:
       - "willitmod-dev-dgb/exports.sh"
       - "tests/test_dgb_exports.py"
+      - "tests/fixtures/dgb-legacy-main-exports.sh"
       - ".github/workflows/validate-dgb-exports.yml"
 
 permissions:
