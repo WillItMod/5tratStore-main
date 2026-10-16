@@ -29,6 +29,10 @@ IMAGE_REFS = {'MAIN': 'ghcr.io/willitmod/5tratmux-app:0.9.79-umbrel@sha256:13b78
 FILES = frozenset({"data/.gitkeep", "docker-compose.yml", "hooks/pre-start", "icon.png", "umbrel-app.yml"})
 HOOK_SHA256 = "fefa82989c4646016643f78ff6a4efea179b712c5485fca64c3bbf1bb484737f"
 ICON_SHA256 = "3eef68f8307de4df7a43386b2dbc3cdaa2b9e97423c93945c18e6be3256ad9e8"
+# Umbrel passes an explicit icon URL directly to its browser image component.
+# Relative paths resolve against the dashboard, not the community store.
+ICON_URLS = {channel: f"https://raw.githubusercontent.com/WillItMod/5tratStore-{channel.lower()}/main/{APP}/icon.png"
+             for channel in VERSIONS}
 SHA256 = re.compile(r"[0-9a-f]{64}\Z")
 DIGEST = re.compile(r"sha256:[0-9a-f]{64}\Z")
 PORTS = {"umbrel-app.yml": 21222,
@@ -87,7 +91,7 @@ def validate_recipe(model, image, channel):
 
 def validate_manifest(model, channel):
     expected = {"manifestVersion": 1, "id": APP, "name": "5tratMux" + (" DEV" if channel == "DEV" else ""),
-                "version": VERSIONS[channel], "port": 21222, "icon": "icon.png", "category": "crypto",
+                "version": VERSIONS[channel], "port": 21222, "icon": ICON_URLS[channel], "category": "crypto",
                 "developer": "WillItMod", "website": "https://5tratum.com",
                 "repo": "https://github.com/WillItMod/5tratMux", "support": "https://github.com/WillItMod/5tratMux/issues",
                 "dependencies": [], "permissions": [], "gallery": [], "path": "", "defaultUsername": "",

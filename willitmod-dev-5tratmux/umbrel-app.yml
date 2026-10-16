@@ -2,7 +2,7 @@ manifestVersion: 1
 id: willitmod-dev-5tratmux
 name: 5tratMux
 tagline: Route miners through one stable Stratum endpoint
-icon: icon.png
+icon: https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-dev-5tratmux/icon.png
 category: crypto
 version: 0.9.79
 port: 21222

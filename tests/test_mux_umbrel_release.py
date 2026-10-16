@@ -115,6 +115,21 @@ class MuxUmbrelReleaseTests(unittest.TestCase):
             with self.subTest(field=field), self.assertRaises(AssertionError):
                 mux.validate_manifest(changed, CHANNEL)
 
+    def test_manifest_requires_channel_specific_absolute_public_icon(self):
+        original = yaml.safe_load((ROOT / mux.APP / "umbrel-app.yml").read_text())
+        expected = f"https://raw.githubusercontent.com/WillItMod/5tratStore-{CHANNEL.lower()}/main/{mux.APP}/icon.png"
+        self.assertEqual(original["icon"], expected)
+        mux.validate_manifest(original, CHANNEL)
+        wrong_channel = "dev" if CHANNEL == "MAIN" else "main"
+        for icon in ("icon.png", "/icon.png", "icon.svg", "//raw.githubusercontent.com/icon.png",
+                     expected.replace("https:", "http:"),
+                     expected.replace(f"5tratStore-{CHANNEL.lower()}", f"5tratStore-{wrong_channel}"),
+                     expected.replace("icon.png", "icon.svg")):
+            changed = copy.deepcopy(original)
+            changed["icon"] = icon
+            with self.subTest(icon=icon), self.assertRaises(AssertionError):
+                mux.validate_manifest(changed, CHANNEL)
+
     def package_fixture(self):
         temporary = tempfile.TemporaryDirectory()
         self.addCleanup(temporary.cleanup)
