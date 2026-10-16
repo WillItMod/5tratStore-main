@@ -2,6 +2,7 @@
 import argparse
 import copy
 import hashlib
+import importlib.util
 import json
 from pathlib import Path
 import re
@@ -55,6 +56,13 @@ def record(root=ROOT):
     return value
 
 
+def backend_adapter(root):
+    spec = importlib.util.spec_from_file_location('dgb_backend_successor', root / 'scripts/dgb_backend_release.py')
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
 def model(before, release):
     after = copy.deepcopy(before)
     after['services']['app']['image'] = release['imageRef']
@@ -63,7 +71,10 @@ def model(before, release):
 
 def admit_model(current, release, root=ROOT):
     before = predecessor(root, 'docker-compose.yml')
-    assert current == model(before, release), 'Only the exact protected DGB app image may change'
+    expected = model(before, release)
+    if current != expected:
+        adapter = backend_adapter(root)
+        adapter.admit_model(current, expected, adapter.record(root))
     assert current['services']['init']['image'] == 'ghcr.io/willitmod/axedgb-init:0.9.181'
     assert current['services']['dgbd']['image'] == 'ghcr.io/willitmod/axedgb-core:0.9.181'
     return before
@@ -77,7 +88,10 @@ def package_files(root):
 def validate_package(root, release):
     names = git(root, 'ls-tree', '-r', '--name-only', BASELINE, '--', APP).decode().splitlines()
     actual = package_files(root)
-    assert set(actual) == set(names) and actual == release['packageFiles'], 'Unreviewed DGB package inventory or bytes'
+    assert set(actual) == set(names), 'Unreviewed DGB package inventory'
+    if actual != release['packageFiles']:
+        backend_adapter(root).validate_package(root)
+        return
     for name in names:
         path = root / name
         assert stat.S_ISREG(path.lstat().st_mode), 'DGB package symlink forbidden'

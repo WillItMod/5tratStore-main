@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "result": "PASS",
+  "scope": "Only the actual extracted DGB SQL setup ran against isolated native PostgreSQL fixtures. No live app-manager installation, node/miner execution, real data access or physical mining is qualified.",
+  "sourceReceiptSHA256": "ec1d3433d6b8a15d8b85e6725cf4a05e5c65e33ecd485b1355ca50e8094727a4",
+  "postgresVersion": "postgres (PostgreSQL) 16.15",
+  "clientVersion": "psql (PostgreSQL) 16.15",
+  "sqlBlockSHA256": "f12c19e164c338144affca2fe0dd3d93854736e6625f61c401c45c02d2fd2403",
+  "composeSHA256": {
+    "MAIN": "f9086db5db9d3da10b6990c681426aa437bfb5c19e59bc2cbae356a5096f0249",
+    "DEV": "c4d73ee8f7961f4f9ce7db49a4824e381768dffb7b6f0709cfd0d0af09b82c09"
+  },
+  "cases": [
+    {
+      "case": "pristine",
+      "exitCode": 0,
+      "expectedSuccess": true,
+      "beforeSHA256": "9bf049b5b35213262c37e19099761a0ef4e51b93f802c6f67678a35dad463bd0",
+      "afterSHA256": "307a119c0ad977ac0bb95d073043e1237884b90d9a8765ed48642eaf695c567e",
+      "existingSchemaRowsSequencesPreserved": false,
+      "foreignDatabaseUnchanged": true,
+      "stdoutSHA256": "ee4a609de11b80a8721856a889119e328e4f0fe10a531cff54a65dc08be0f1fd",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "complete",
+      "exitCode": 0,
+      "expectedSuccess": true,
+      "beforeSHA256": "6968dce6ce3991819b18dd5576b0461b998a57e75a71a9eab1c4c46eb134cea6",
+      "afterSHA256": "6968dce6ce3991819b18dd5576b0461b998a57e75a71a9eab1c4c46eb134cea6",
+      "existingSchemaRowsSequencesPreserved": true,
+      "foreignDatabaseUnchanged": true,
+      "stdoutSHA256": "ed01a4b424113eb0decf3f091596dca32d2fb821680f6abdfdfbfcbd8a49f6e9",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "partial",
+      "exitCode": 1,
+      "expectedSuccess": false,
+      "beforeSHA256": "7d17f14205a07221824bb14be70c7b8d4d2b93e72c9feebc2ee924f8fc2d24d6",
+      "afterSHA256": "7d17f14205a07221824bb14be70c7b8d4d2b93e72c9feebc2ee924f8fc2d24d6",
+      "existingSchemaRowsSequencesPreserved": true,
+      "foreignDatabaseUnchanged": true,
+      "stdoutSHA256": "ed01a4b424113eb0decf3f091596dca32d2fb821680f6abdfdfbfcbd8a49f6e9",
+      "stderrSHA256": "5c201c41a588d04e6f9cb271fe4631b68a946effac12208b8e1f68bbfed83aba"
+    },
+    {
+      "case": "auth_failure",
+      "exitCode": 1,
+      "expectedSuccess": false,
+      "beforeSHA256": "9bf049b5b35213262c37e19099761a0ef4e51b93f802c6f67678a35dad463bd0",
+      "afterSHA256": "9bf049b5b35213262c37e19099761a0ef4e51b93f802c6f67678a35dad463bd0",
+      "existingSchemaRowsSequencesPreserved": true,
+      "foreignDatabaseUnchanged": true,
+      "stdoutSHA256": "ed01a4b424113eb0decf3f091596dca32d2fb821680f6abdfdfbfcbd8a49f6e9",
+      "stderrSHA256": "6ea48febb69c909037c002a5e7eed22bd6a3d5b20855de17dafc01bf5efedea5"
+    },
+    {
+      "case": "wrong_host",
+      "exitCode": 1,
+      "expectedSuccess": false,
+      "beforeSHA256": "a5fdf1ba4ffc7cf91fc92f7ca298efd0a09d6f4c9e520fea8b1e042b1e9b48bd",
+      "afterSHA256": "a5fdf1ba4ffc7cf91fc92f7ca298efd0a09d6f4c9e520fea8b1e042b1e9b48bd",
+      "existingSchemaRowsSequencesPreserved": true,
+      "foreignDatabaseUnchanged": true,
+      "stdoutSHA256": "ed01a4b424113eb0decf3f091596dca32d2fb821680f6abdfdfbfcbd8a49f6e9",
+      "stderrSHA256": "5c201c41a588d04e6f9cb271fe4631b68a946effac12208b8e1f68bbfed83aba"
+    },
+    {
+      "case": "sql_import_error",
+      "exitCode": 3,
+      "expectedSuccess": false,
+      "beforeSHA256": "9bf049b5b35213262c37e19099761a0ef4e51b93f802c6f67678a35dad463bd0",
+      "afterSHA256": "9bf049b5b35213262c37e19099761a0ef4e51b93f802c6f67678a35dad463bd0",
+      "existingSchemaRowsSequencesPreserved": true,
+      "foreignDatabaseUnchanged": true,
+      "stdoutSHA256": "c88a7b3d75d4e876fe0621e7f69379756fd5b161b2d63a7ffea9b7adfefeeb20",
+      "stderrSHA256": "81b4784c10a7df1e479ae3be5722b704038c294cce22ec513c68b8430238b415"
+    },
+    {
+      "case": "unsupported_blocks_poolid",
+      "exitCode": 1,
+      "expectedSuccess": false,
+      "beforeSHA256": "86d5e656a1ec9e5a45257ed39cb4749266ad5377a439fabcaac54a70c76ec562",
+      "afterSHA256": "86d5e656a1ec9e5a45257ed39cb4749266ad5377a439fabcaac54a70c76ec562",
+      "existingSchemaRowsSequencesPreserved": true,
+      "foreignDatabaseUnchanged": true,
+      "stdoutSHA256": "ed01a4b424113eb0decf3f091596dca32d2fb821680f6abdfdfbfcbd8a49f6e9",
+      "stderrSHA256": "4ca1c5940da7c9a8bbf013dbc3a34ce30ddddb5904b4ea2a76a0cbdf23f5f25b"
+    }
+  ],
+  "foreignSourceWriteStatements": 0,
+  "foreignSchemaRowsSequencesUnchanged": true,
+  "onlyExtractedMarkedDbSetupExecuted": true,
+  "wholeInitOrNodeOrMinerExecuted": false,
+  "liveDataAccessed": false,
+  "hostPortsPublished": false,
+  "nativeUmbrelRetryQualified": false,
+  "physicalMiningQualified": false
+}
