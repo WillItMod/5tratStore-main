@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "status": "qualified-package-and-fixtures",
+  "appId": "willitmod-dev-dgb",
+  "channel": "MAIN",
+  "version": "0.9.182",
+  "baselineCommit": "2807a919bbd677b3f2a7f64c7521fdaa58419736",
+  "runtimeBuildChanged": false,
+  "nativeUmbrelRetryQualified": false,
+  "physicalMiningQualified": false,
+  "scope": "Exact catalogue repair and isolated native PostgreSQL fixtures verified. Existing DGB database has a complete schema; no live schema reconstruction or credential reset is authorized. Native app-manager retry and physical mining remain unqualified.",
+  "backendAliases": {
+    "postgres": "axedgb-postgres",
+    "dgbd": "axedgb-core",
+    "miningcore": "axedgb-miningcore"
+  },
+  "runtimeImages": {
+    "init_permissions": "alpine:3.22.1",
+    "perm_watchdog": "alpine:3.22.1",
+    "init": "ghcr.io/willitmod/axedgb-init:0.9.181",
+    "dgbd": "ghcr.io/willitmod/axedgb-core:0.9.181",
+    "postgres": "postgres:16-alpine",
+    "miningcore": "ghcr.io/willitmod/axedgb-miningcore:axedgb-0.8.10-r26",
+    "app": "ghcr.io/willitmod/axedgb-app:0.9.182-umbrel-authfix.1@sha256:514e426281259905ba7d3dd0258e11a9fdf8393b2a7a4307b03db11e68dcc0ef"
+  },
+  "changedPackageFiles": {
+    "willitmod-dev-dgb/docker-compose.yml": "f9086db5db9d3da10b6990c681426aa437bfb5c19e59bc2cbae356a5096f0249",
+    "willitmod-dev-dgb/data/templates/miningcore.json.template": "8b30f0f252e74035c16d8c2e860e54479b89b248233423d5ce3889ccaa72584b"
+  },
+  "initCommandSHA256": "3840344abfc442f28ee9e0f33d804d5a630536b7eb31106e189b40126453a013",
+  "initSectionsSHA256": {
+    "DGB_DATABASE_SETUP": "f12c19e164c338144affca2fe0dd3d93854736e6625f61c401c45c02d2fd2403",
+    "DGB_BACKEND_HOST_MIGRATION": "0cf8a1e73b40cb2fd36e6120139b733e01157766095a68528205b83d70e4a7c1",
+    "DGB_RPC_CAPACITY": "f877fa50c55aad01b5f53309c7d259eeb03b707a757a8957a775b97422d2b8dc"
+  },
+  "historicalRecordsSHA256": {
+    "APP-VERSION-NORMALIZATION-2026-10-15.json": "84004b9e8757c0631ef03166bfafc01619a424d8dadbe47987b19e6e75f1827f",
+    "BCH-HEALTH-RELEASE-2026-10-16.json": "00b2034983ba6f07578f21da557688ba3d9bcb26bbb1e4d8835eefa4be133e82",
+    "DGB-UMBREL-AUTH-RELEASE-2026-10-16.json": "df5b4f4fac4288082dfce7d7121bb3d18b20b81b00770c9ff80ea7ab89be0071",
+    "MAIN-RUNNING-PROMOTION-2026-10-15.json": "b5616df7ccc7cc447f5fd19fe91cbf1362c294a6718336cfb5612844f06f5318",
+    "MUX-UMBREL-0.9.79-2026-10-15.json": "88d8d549d71fc041565bca4113278a85c684a177f42f928067467d53e1145ad5",
+    "MUX-UMBREL-0.9.80-2026-10-16.json": "2f80bd07c6281d83fed7b98a782e03356871356fd68cbff27e811a01c03c9a5b",
+    "SMACK-STORE-UPDATE-2026-10-15.json": "8ad3b52b42692289c68310662633a9742e489346243eaefcc05365c2c0252b04",
+    "release-records/axebch2-0.2.1-version.json": "959629d43714d861114724fd4641ee87ca76177d0e8b5c07528f30d15458f9e6",
+    "release-records/bch-0.9.27-health-delivery.json": "b7bacfc3e425b9f0220707d439dc30718e3b64bd2490f78f63d9a5715a7fb718",
+    "release-records/bch-umbrel-1.7.4-axebch-qualification.json": "aa876e95dad7befbb615158b6232f4f8c27eaa83782f9e13998f2fdf8060c8c9",
+    "release-records/bch-umbrel-1.7.4-axebch2-qualification.json": "94e641d12febaecd67207b0af18784c6b5c03746eb084deb1383b069df18567f",
+    "release-records/bch-umbrel-2.0.0-axebch-qualification.json": "2599d72eda43f0d6645e8578b1f12f1963196eb2f9c23044dd6be3770458a445",
+    "release-records/bch-umbrel-2.0.0-axebch2-qualification.json": "4d96aa3b7391d14901bc12e118ffe090f07074b120180ecf1fa2ad716f7029c0",
+    "release-records/bch2-0.2.2-health-delivery.json": "210682d4432df8249bf28347af2e78f35791f7789951608f6bfda3e9932efd39",
+    "release-records/btc-0.7.83-dev-image.json": "f6c5ef4bc5682afc2392a6d3e5f36a492745e30e0eca68a29dadd70d99bc1308",
+    "release-records/dgb-0.9.182-umbrel-authfix-delivery.json": "eddc0c850e5d1ab0c64452e15584eccb4c6b190882d0736e9d3700443e82b504",
+    "release-records/fumbrel-0.1.2-dev-image.json": "ed0915cd88b8af90f0cca37a96f61857052ca3529f2e5e6c7040b791abd11c19",
+    "release-records/fumbrel-0.1.3-dev-image.json": "d6abd6d6745cbdda4eaa7948b100449e2f8a8ec849451167381c57f025fee9b1",
+    "release-records/mux-umbrel-0.9.79-delivery.json": "013db0c1bb44c35075a1bc1c1c8a26772984b951c1c878746cf0a12f0459bdbb",
+    "release-records/mux-umbrel-0.9.80-delivery.json": "053ab5acb86cb71e129b1d622b926bacfef950406b4ce844f137ad0ec485d514",
+    "release-records/mux-umbrel-1.7.4-0.9.80-qualification.json": "a34d16928dfcd25259a815554aa46dccc941a1c27d78b4baf92dc14fde3d986f",
+    "release-records/mux-umbrel-2.0.0-0.9.80-qualification.json": "37ccb99c4b7f329123542568e2fb1471cf2d7fc1413635699673f92ea1c95c89",
+    "release-records/native624-axebch-qualification-redacted.json": "b3f93b559933dee79f9bb505269cb8bc1c080982c15ad1e7458f36ff0d214901",
+    "release-records/native624-axebch2-qualification-redacted.json": "618d1a3d20f61ca40628dc8e908bdee8fa5028ba28f41318aab3c9423c6741e4",
+    "release-records/smack-0.11.23-platform-delivery.json": "a5068beb1ca459443237d5c83f44e7506d63ebcac79e8ea6779fa7e001de643d",
+    "release-records/smack-0.11.23-store-image.json": "aa342c83324aea9e3d453170371a97a4371eb16e8dc5c8928b38909a51fe3664"
+  },
+  "nativePostgresqlFixtures": {
+    "path": "release-records/dgb-backend-safety-fixtures-2026-10-16.json",
+    "sha256": "07b90d43cda09cec8d63fdc32b7dff8e1cf636265d5c3a2e4cd9272ff6e481e5"
+  }
+}

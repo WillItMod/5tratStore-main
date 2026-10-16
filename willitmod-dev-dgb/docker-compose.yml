@@ -101,7 +101,8 @@ services:
       DGB_ZMQ_HASHBLOCK_PORT: "28344"
       # Miningcore requires a syntactically valid payout address to start.
       # This is a deterministic placeholder ("burn") address; the pool binds Stratum to localhost until the user sets a real payout address in Settings.
-      DB_HOST: "postgres"
+      DB_HOST: "axedgb-postgres"
+      DGB_RPC_HOST: "axedgb-core"
       DB_USER: "miningcore"
       DB_PASSWORD: "${APP_PASSWORD}"
       DB_NAME: "miningcore"
@@ -328,30 +329,34 @@ services:
               printf "upnp=1\n"
             } >> /data/node/digibyte.conf
           fi
-          if ! awk 'BEGIN{inTest=0; found=0} /^\\[test\\][[:space:]]*$/{inTest=1} /axedgb-rpc-defaults-v2/{if(!inTest) found=1} END{exit(found?0:1)}' /data/node/digibyte.conf; then
-            echo "[axedgb] Adding RPC capacity defaults to digibyte.conf"
-            if grep -q '^\\[test\\][[:space:]]*$' /data/node/digibyte.conf; then
-              awk 'BEGIN{added=0}
-                /^\\[test\\][[:space:]]*$/{if(!added){
-                  print "";
-                  print "# axedgb-rpc-defaults-v2";
-                  print "# AxeDGB defaults (Miningcore + UI increase RPC load)";
-                  print "rpcworkqueue=1024";
-                  print "rpcthreads=32";
-                  added=1
-                }}
-                {print}
-              ' /data/node/digibyte.conf > /data/node/digibyte.conf.tmp && mv /data/node/digibyte.conf.tmp /data/node/digibyte.conf
-            else
-              {
-                printf "\n"
-                printf "# axedgb-rpc-defaults-v2\n"
-                printf "# AxeDGB defaults (Miningcore + UI increase RPC load)\n"
-                printf "rpcworkqueue=1024\n"
-                printf "rpcthreads=32\n"
-              } >> /data/node/digibyte.conf
-            fi
+          # DGB_RPC_CAPACITY_BEGIN: preserve existing mainnet values and section scope.
+          if ! awk 'BEGIN{queue=0; threads=0}
+            /^[[:space:]]*\[/ {exit}
+            /^[[:space:]]*rpcworkqueue[[:space:]]*=/ {queue=1}
+            /^[[:space:]]*rpcthreads[[:space:]]*=/ {threads=1}
+            END{exit(queue && threads ? 0 : 1)}
+          ' /data/node/digibyte.conf; then
+            echo "[axedgb] Adding missing mainnet RPC capacity defaults"
+            cp -p /data/node/digibyte.conf /data/node/digibyte.conf.tmp
+            awk '
+              BEGIN{queue=0; threads=0; in_section=0; added=0}
+              function emit_missing(){
+                if(!queue) print "rpcworkqueue=1024"
+                if(!threads) print "rpcthreads=32"
+                added=1
+              }
+              /^[[:space:]]*\[/ {
+                if(!in_section) emit_missing()
+                in_section=1
+              }
+              !in_section && /^[[:space:]]*rpcworkqueue[[:space:]]*=/ {queue=1}
+              !in_section && /^[[:space:]]*rpcthreads[[:space:]]*=/ {threads=1}
+              {print}
+              END{if(!added) emit_missing()}
+            ' /data/node/digibyte.conf > /data/node/digibyte.conf.tmp
+            mv /data/node/digibyte.conf.tmp /data/node/digibyte.conf
           fi
+          # DGB_RPC_CAPACITY_END
 
           # Ensure mainnet RPC is reachable from other containers.
           # Older installs can have rpcbind=127.0.0.1 (or missing rpcallowip for the apps subnet),
@@ -540,6 +545,9 @@ services:
             rm -f "$$conf.txindex.tmp"
           fi
         fi
+
+        # Atomic config replacements run as root; restore only the node config owner.
+        if [ -f "$$conf" ]; then chown 1000:1000 "$$conf"; fi
 
         miningcore_conf="/data/pool/config/miningcore.json"
         miningcore_tpl="/data/templates/miningcore.json.template"
@@ -896,20 +904,79 @@ services:
           chown 1000:1000 /data/pool/config/coins.json || true
         fi
 
+        # DGB_BACKEND_HOST_MIGRATION_BEGIN: change only legacy generic destinations.
+        # Explicit custom endpoints, credentials, payout and difficulty remain intact.
+        host_migration_needed="$$(jq -r '
+          (.persistence.postgres.host == "postgres") or
+          any(.pools[]?.daemons[]?; .host == "dgbd")
+          | if . then "1" else "0" end
+        ' "$$miningcore_conf")"
+        if [ "$$host_migration_needed" = 1 ]; then
+          host_tmp="$$miningcore_conf.hosts.tmp"
+          cp -p "$$miningcore_conf" "$$host_tmp"
+          if jq --arg db "$$DB_HOST" --arg rpc "$$DGB_RPC_HOST" '
+            (if .persistence.postgres.host == "postgres" then .persistence.postgres.host = $$db else . end)
+            | .pools |= map(if (.daemons | type) == "array" then
+                .daemons |= map(if .host == "dgbd" then .host = $$rpc else . end)
+              else . end)
+          ' "$$miningcore_conf" > "$$host_tmp"; then
+            chown 1000:1000 "$$host_tmp"
+            mv "$$host_tmp" "$$miningcore_conf"
+          else
+            rm -f "$$host_tmp"
+            echo "[axedgb] ERROR: Could not migrate DGB backend destinations; original configuration preserved." >&2
+            exit 1
+          fi
+        fi
+        # DGB_BACKEND_HOST_MIGRATION_END
+
         init_phase="Preparing Miningcore database"
         init_status running
-        # Ensure Miningcore DB schema exists (poolstats etc). This is safe to re-run when missing.
+        # DGB_DATABASE_SETUP_BEGIN: SQL failures are never schema-absence evidence.
         export PGPASSWORD="$$DB_PASSWORD"
-        echo "[axedgb] Waiting for postgres..."
+        export PGCONNECT_TIMEOUT=5
+        db_psql() {
+          psql -X -w -v ON_ERROR_STOP=1 -h "$$DB_HOST" -p 5432 -U "$$DB_USER" -d "$$DB_NAME" "$$@"
+        }
+        db_query() {
+          if db_result="$$(db_psql -tA -c "$$1")"; then
+            printf '%s' "$$db_result"
+          else
+            echo "[axedgb] ERROR: DGB database query failed; refusing schema changes. Check this app's PostgreSQL endpoint and credentials." >&2
+            return 1
+          fi
+        }
+        db_count() {
+          db_count_result="$$(db_query "$$1")" || return 1
+          case "$$db_count_result" in
+            ''|*[!0-9]*) echo "[axedgb] ERROR: Invalid database schema probe result; refusing schema changes." >&2; return 1 ;;
+          esac
+          printf '%s' "$$db_count_result"
+        }
+        echo "[axedgb] Waiting for DGB postgres..."
+        db_ready=0
         for i in $$(seq 1 60); do
           if pg_isready -h "$$DB_HOST" -p 5432 -U "$$DB_USER" >/dev/null 2>&1; then
+            db_ready=1
             break
           fi
           sleep 1
         done
+        if [ "$$db_ready" != 1 ]; then
+          echo "[axedgb] ERROR: DGB PostgreSQL did not become ready; refusing schema changes." >&2
+          exit 1
+        fi
 
-        if ! psql -h "$$DB_HOST" -p 5432 -U "$$DB_USER" -d "$$DB_NAME" -tA -c "SELECT 1 FROM information_schema.tables WHERE table_schema='public' AND table_name='poolstats';" 2>/dev/null | grep -q '^1$'; then
-          echo "[axedgb] Initializing Miningcore database schema"
+        # Authenticate and inspect the complete public schema before any write.
+        # A failed query, missing poolstats, or partially populated schema is not empty.
+        schema_objects="$$(db_count "SELECT COUNT(*) FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname='public' AND c.relkind IN ('r','p','v','m','S','f');")"
+        required_tables="$$(db_count "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema='public' AND table_type='BASE TABLE' AND table_name IN ('shares','blocks','balances','balance_changes','miner_settings','payments','poolstats','minerstats');")"
+        if [ "$$schema_objects" = 0 ]; then
+          if [ "$$required_tables" != 0 ]; then
+            echo "[axedgb] ERROR: Inconsistent database schema inventory; refusing schema changes." >&2
+            exit 1
+          fi
+          echo "[axedgb] Initializing verified empty Miningcore database schema"
           if [ ! -f /data/templates/miningcore-createdb.sql ]; then
             echo "[axedgb] miningcore-createdb.sql missing; writing built-in schema"
             mkdir -p /data/templates
@@ -950,66 +1017,60 @@ services:
               printf '\n'
             } > /data/templates/miningcore-createdb.sql
           fi
-          psql --single-transaction -v ON_ERROR_STOP=1 -h "$$DB_HOST" -p 5432 -U "$$DB_USER" -d "$$DB_NAME" < /data/templates/miningcore-createdb.sql >/dev/null
+          db_psql --single-transaction < /data/templates/miningcore-createdb.sql >/dev/null
+        elif [ "$$required_tables" != 8 ]; then
+          echo "[axedgb] ERROR: Existing DGB database has a partial schema. Preserve its data and inspect the DGB database before applying a targeted migration; refusing full schema import." >&2
+          exit 1
         fi
 
-        # Add new columns when upgrading (safe to re-run).
-        if ! psql -h "$$DB_HOST" -p 5432 -U "$$DB_USER" -d "$$DB_NAME" -tA -c "SELECT 1 FROM information_schema.columns WHERE table_schema='public' AND table_name='shares' AND column_name='actualdifficulty';" 2>/dev/null | grep -q '^1$'; then
+        # Known additive upgrades run only after successful authenticated probes.
+        actualdifficulty_exists="$$(db_count "SELECT COUNT(*) FROM information_schema.columns WHERE table_schema='public' AND table_name='shares' AND column_name='actualdifficulty';")"
+        if [ "$$actualdifficulty_exists" = 0 ]; then
           echo "[axedgb] Migrating DB: adding shares.actualdifficulty"
-          psql -v ON_ERROR_STOP=1 -h "$$DB_HOST" -p 5432 -U "$$DB_USER" -d "$$DB_NAME" -c "ALTER TABLE shares ADD COLUMN actualdifficulty DOUBLE PRECISION;" >/dev/null
+          db_psql -c "ALTER TABLE shares ADD COLUMN actualdifficulty DOUBLE PRECISION;" >/dev/null
         fi
-        if ! psql -h "$$DB_HOST" -p 5432 -U "$$DB_USER" -d "$$DB_NAME" -tA -c "SELECT 1 FROM information_schema.columns WHERE table_schema='public' AND table_name='minerstats' AND column_name='worker';" 2>/dev/null | grep -q '^1$'; then
+        worker_exists="$$(db_count "SELECT COUNT(*) FROM information_schema.columns WHERE table_schema='public' AND table_name='minerstats' AND column_name='worker';")"
+        if [ "$$worker_exists" = 0 ]; then
           echo "[axedgb] Migrating DB: adding minerstats.worker"
-          psql -v ON_ERROR_STOP=1 -h "$$DB_HOST" -p 5432 -U "$$DB_USER" -d "$$DB_NAME" -c "ALTER TABLE minerstats ADD COLUMN worker TEXT;" >/dev/null
-          psql -v ON_ERROR_STOP=1 -h "$$DB_HOST" -p 5432 -U "$$DB_USER" -d "$$DB_NAME" -c "CREATE INDEX IF NOT EXISTS IX_minerstats_poolid_miner_worker_created ON minerstats(poolid, miner, worker, created);" >/dev/null
+          db_psql -c "ALTER TABLE minerstats ADD COLUMN worker TEXT;" >/dev/null
+          db_psql -c "CREATE INDEX IF NOT EXISTS IX_minerstats_poolid_miner_worker_created ON minerstats(poolid, miner, worker, created);" >/dev/null
         fi
 
-        # Repair older DBs where *poolid* was created as an integer. This breaks Miningcore APIs and the UI
-        # (Postgres error: operator does not exist: integer = text).
-        #
-        # We prefer an in-place type normalization (lossless for numeric IDs) rather than dropping tables.
+        # Preserve legacy rows while normalizing only known integer pool IDs.
+        # An unsupported shape or failed conversion stops setup; no table is rebuilt.
         normalize_poolid_to_text() {
           table="$$1"
-          # Read data_type; normalize spaces/case for comparisons.
-          t="$$(psql -h "$$DB_HOST" -p 5432 -U "$$DB_USER" -d "$$DB_NAME" -tA -c "SELECT data_type FROM information_schema.columns WHERE table_schema='public' AND table_name='$$table' AND column_name='poolid' LIMIT 1;" 2>/dev/null || true)"
-          t="$$(echo "$$t" | tr -d '[:space:]' | tr '[:upper:]' '[:lower:]' || true)"
-          if [ -z "$$t" ]; then
-            return 0
-          fi
-          if [ "$$t" = "text" ] || [ "$$t" = "charactervarying" ]; then
-            return 0
-          fi
-          echo "[axedgb] Migrating DB: $$table.poolid $$t -> text"
-          psql -v ON_ERROR_STOP=1 -h "$$DB_HOST" -p 5432 -U "$$DB_USER" -d "$$DB_NAME" -c "ALTER TABLE $$table ALTER COLUMN poolid TYPE TEXT USING poolid::text;" >/dev/null
+          t="$$(db_query "SELECT data_type FROM information_schema.columns WHERE table_schema='public' AND table_name='$$table' AND column_name='poolid' LIMIT 1;")" || return 1
+          case "$$t" in
+            text|'character varying') return 0 ;;
+            smallint|integer|bigint)
+              echo "[axedgb] Migrating DB: $$table.poolid $$t -> text"
+              db_psql -c "ALTER TABLE $$table ALTER COLUMN poolid TYPE TEXT USING poolid::text;" >/dev/null || return 1
+              ;;
+            *) echo "[axedgb] ERROR: Unsupported or missing $$table.poolid type; preserve existing data and inspect the schema." >&2; return 1 ;;
+          esac
         }
-
         for t in shares blocks balances balance_changes miner_settings payments poolstats minerstats; do
-          normalize_poolid_to_text "$$t" || true
+          normalize_poolid_to_text "$$t"
         done
 
-        # Backstop: some very old installs may have a malformed blocks table; if poolid still isn't text,
-        # rebuild only that table.
-        poolid_type="$$(psql -h "$$DB_HOST" -p 5432 -U "$$DB_USER" -d "$$DB_NAME" -tA -c "SELECT data_type FROM information_schema.columns WHERE table_schema='public' AND table_name='blocks' AND column_name='poolid' LIMIT 1;" 2>/dev/null || true)"
-        poolid_type="$$(echo "$$poolid_type" | tr -d '[:space:]' | tr '[:upper:]' '[:lower:]' || true)"
-        if [ -n "$$poolid_type" ] && [ "$$poolid_type" != "text" ] && [ "$$poolid_type" != "charactervarying" ]; then
-          echo "[axedgb] Migrating DB: rebuilding blocks table (poolid type=$$poolid_type)"
-          psql -v ON_ERROR_STOP=1 -h "$$DB_HOST" -p 5432 -U "$$DB_USER" -d "$$DB_NAME" -c "DROP TABLE IF EXISTS blocks;" >/dev/null
-          psql -v ON_ERROR_STOP=1 -h "$$DB_HOST" -p 5432 -U "$$DB_USER" -d "$$DB_NAME" -c "CREATE TABLE blocks (id BIGSERIAL PRIMARY KEY NOT NULL, poolid TEXT NOT NULL, blockheight BIGINT NOT NULL, networkdifficulty DOUBLE PRECISION NOT NULL, status INT NOT NULL, type INT NOT NULL, transactionconfirmationdata TEXT, miner TEXT NOT NULL, worker TEXT, effort DOUBLE PRECISION NOT NULL, rewardamount DOUBLE PRECISION NOT NULL, info TEXT, hash TEXT NOT NULL, created TIMESTAMP NOT NULL);" >/dev/null
-          psql -v ON_ERROR_STOP=1 -h "$$DB_HOST" -p 5432 -U "$$DB_USER" -d "$$DB_NAME" -c "CREATE INDEX IF NOT EXISTS IX_blocks_poolid_created ON blocks(poolid, created);" >/dev/null
-          psql -v ON_ERROR_STOP=1 -h "$$DB_HOST" -p 5432 -U "$$DB_USER" -d "$$DB_NAME" -c "CREATE INDEX IF NOT EXISTS IX_blocks_poolid_height ON blocks(poolid, blockheight);" >/dev/null
-        fi
-
-        # Seed an initial poolstats row so Miningcore's API does not error before the first stats tick.
-        if psql -h "$$DB_HOST" -p 5432 -U "$$DB_USER" -d "$$DB_NAME" -tA -c "SELECT COUNT(*) FROM poolstats WHERE poolid='dgb-sha256-1';" 2>/dev/null | grep -q '^0$'; then
+        # Seed only after a successful count. Query failures stop setup.
+        poolstats_rows="$$(db_count "SELECT COUNT(*) FROM poolstats WHERE poolid='dgb-sha256-1';")"
+        if [ "$$poolstats_rows" = 0 ]; then
           echo "[axedgb] Seeding initial poolstats row"
-          psql -v ON_ERROR_STOP=1 -h "$$DB_HOST" -p 5432 -U "$$DB_USER" -d "$$DB_NAME" -c "INSERT INTO poolstats (poolid, connectedminers, poolhashrate, networkhashrate, networkdifficulty, lastnetworkblocktime, blockheight, connectedpeers, sharespersecond, created) VALUES ('dgb-sha256-1', 0, 0, 0, 0, NULL, 0, 0, 0, NOW());" >/dev/null
+          db_psql -c "INSERT INTO poolstats (poolid, connectedminers, poolhashrate, networkhashrate, networkdifficulty, lastnetworkblocktime, blockheight, connectedpeers, sharespersecond, created) VALUES ('dgb-sha256-1', 0, 0, 0, 0, NULL, 0, 0, 0, NOW());" >/dev/null
         fi
+        # DGB_DATABASE_SETUP_END
 
         init_phase="Setup complete"
         init_status ready
 
   dgbd:
     image: ghcr.io/willitmod/axedgb-core:0.9.181
+    networks:
+      default:
+        aliases:
+          - axedgb-core
     user: "1000:1000"
     restart: unless-stopped
     stop_grace_period: 15m30s
@@ -1037,6 +1098,10 @@ services:
 
   postgres:
     image: postgres:16-alpine
+    networks:
+      default:
+        aliases:
+          - axedgb-postgres
     restart: unless-stopped
     shm_size: "256mb"
     depends_on:
@@ -1051,6 +1116,10 @@ services:
 
   miningcore:
     image: ghcr.io/willitmod/axedgb-miningcore:axedgb-0.8.10-r26
+    networks:
+      default:
+        aliases:
+          - axedgb-miningcore
     restart: unless-stopped
     depends_on:
       - postgres
@@ -1083,17 +1152,17 @@ services:
     volumes:
       - ${APP_DATA_DIR}/data:/data
     environment:
-      DGB_RPC_HOST: "dgbd"
+      DGB_RPC_HOST: "axedgb-core"
       DGB_RPC_PORT: "14022"
       DGB_RPC_USER: "dgb"
       DGB_RPC_PASS: "${APP_PASSWORD}"
       NETWORK_IP: "${NETWORK_IP}"
-      PGHOST: "postgres"
+      PGHOST: "axedgb-postgres"
       PGPORT: "5432"
       PGDATABASE: "miningcore"
       PGUSER: "miningcore"
       PGPASSWORD: "${APP_PASSWORD}"
-      MININGCORE_API_URL: "http://miningcore:4000"
+      MININGCORE_API_URL: "http://axedgb-miningcore:4000"
       MININGCORE_POOL_ID: "dgb-sha256-1"
       MININGCORE_POOL_IDS: "sha256:dgb-sha256-1,scrypt:dgb-scrypt-1"
       STRATUM_PORTS: "sha256:5678,scrypt:5679"

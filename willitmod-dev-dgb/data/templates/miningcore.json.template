@@ -71,7 +71,7 @@
       },
       "daemons": [
         {
-          "host": "dgbd",
+          "host": "${DGB_RPC_HOST}",
           "port": ${DGB_RPC_PORT},
           "user": "${RPC_USER}",
           "password": "${RPC_PASSWORD}"
@@ -110,7 +110,7 @@
       },
       "daemons": [
         {
-          "host": "dgbd",
+          "host": "${DGB_RPC_HOST}",
           "port": ${DGB_RPC_PORT},
           "user": "${RPC_USER}",
           "password": "${RPC_PASSWORD}"
