@@ -1,0 +1,53 @@
+name: Validate protected BCH health releases
+
+on:
+  pull_request:
+    paths:
+      - "willitmod-dev-bch/**"
+      - "willitmod-dev-axebch2/**"
+      - "BCH-HEALTH-RELEASE-2026-10-16.json"
+      - "release-records/bch-*-health-delivery.json"
+      - "release-records/bch2-*-health-delivery.json"
+      - "release-records/bch-*-qualification.json"
+      - "release-records/native624-*-qualification-redacted.json"
+      - "scripts/health_release.py"
+      - "tests/test_health_release.py"
+      - "tests/app_version_normalization.py"
+      - "tests/test_app_version_normalization.py"
+      - ".github/workflows/validate-bch-health.yml"
+  push:
+    branches: [main]
+    paths:
+      - "willitmod-dev-bch/**"
+      - "willitmod-dev-axebch2/**"
+      - "BCH-HEALTH-RELEASE-2026-10-16.json"
+      - "release-records/bch-*-health-delivery.json"
+      - "release-records/bch2-*-health-delivery.json"
+      - "release-records/bch-*-qualification.json"
+      - "release-records/native624-*-qualification-redacted.json"
+      - "scripts/health_release.py"
+      - "tests/test_health_release.py"
+      - "tests/app_version_normalization.py"
+      - "tests/test_app_version_normalization.py"
+      - ".github/workflows/validate-bch-health.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.11"
+      - run: python3 -m pip install PyYAML==6.0.3
+      - name: Require actual protected images and all three platform qualifications
+        run: python3 scripts/health_release.py
+      - name: Check exact successors and negative admission cases
+        run: |
+          python3 -m unittest discover -s tests -p test_health_release.py -v
+          python3 -m unittest discover -s tests -p test_app_version_normalization.py -v

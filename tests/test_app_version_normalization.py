@@ -11,6 +11,8 @@ import yaml
 import app_version_normalization as normalization
 from test_mux_umbrel_release import mux as mux_release
 
+health_release = normalization.health_release
+
 ROOT = Path(__file__).resolve().parents[1]
 APP = normalization.APP
 
@@ -21,10 +23,10 @@ class AppVersionNormalizationTests(unittest.TestCase):
         current = yaml.safe_load((ROOT / APP / "docker-compose.yml").read_text())
         old = yaml.safe_load(normalization.source_bytes(APP + "/docker-compose.yml", normalization.contract()["baselineCommit"]))
         self.assertEqual(normalization.previous_app_version_model(APP, current), old)
-        self.assertEqual(normalization.digest(current), row["afterModelSHA256"])
+        self.assertEqual(normalization.digest(health_release.previous_model(APP, current, ROOT)), row["afterModelSHA256"])
         self.assertEqual(normalization.previous_app_version_model(APP, old), old)
-        self.assertEqual(normalization.package_version(APP, row["beforeVersion"]), row["version"])
-        self.assertEqual(normalization.package_version(APP, row["version"]), row["version"])
+        self.assertEqual(normalization.package_version(APP, row["beforeVersion"]), health_release.version(APP, normalization.RECORD["channel"]))
+        self.assertEqual(normalization.package_version(APP, row["version"]), health_release.version(APP, normalization.RECORD["channel"]))
         with self.assertRaises(AssertionError):
             normalization.package_version(APP, "arbitrary-old-version")
 
@@ -61,7 +63,7 @@ class AppVersionNormalizationTests(unittest.TestCase):
             path = ROOT / APP / filename
             if not path.exists():
                 continue
-            current = yaml.safe_load(path.read_text())
+            current = health_release.previous_manifest(APP, yaml.safe_load(path.read_text()), filename, ROOT)
             old = yaml.safe_load(normalization.source_bytes(APP + "/" + filename, normalization.contract()["baselineCommit"]))
             self.assertEqual(current.pop("version"), row["version"])
             self.assertEqual(old.pop("version"), row["beforeVersion"])

@@ -7,6 +7,11 @@ import re
 import subprocess
 
 import yaml
+import importlib.util
+
+_HEALTH_SPEC = importlib.util.spec_from_file_location("health_release_successor", Path(__file__).resolve().parents[1] / "scripts/health_release.py")
+health_release = importlib.util.module_from_spec(_HEALTH_SPEC)
+_HEALTH_SPEC.loader.exec_module(health_release)
 
 ROOT = Path(__file__).resolve().parents[1]
 RECORD = json.loads((ROOT / "APP-VERSION-NORMALIZATION-2026-10-15.json").read_text())
@@ -99,8 +104,10 @@ def contract():
 
 
 def previous_app_version_model(app_id, current):
-    restored = copy.deepcopy(current)
     row = contract()["apps"].get(app_id)
+    historical = () if row is None else (row["beforeModelSHA256"], row["afterModelSHA256"])
+    current = health_release.previous_model(app_id, current, ROOT, historical_models=historical)
+    restored = copy.deepcopy(current)
     if row is None:
         return restored
     if digest(current) == row["beforeModelSHA256"]:
@@ -119,10 +126,12 @@ def previous_app_version_model(app_id, current):
 
 def package_version(app_id, historical):
     row = contract()["apps"].get(app_id)
-    if row is None:
-        return historical
-    assert historical in (row["beforeVersion"], row["version"]), "Unreviewed preceding package version"
-    return row["version"]
+    if row is not None:
+        current_health_version = health_release.version(app_id, RECORD["channel"]) if app_id in health_release.APPS else None
+        accepted = (row["beforeVersion"], row["version"]) + ((current_health_version,) if current_health_version else ())
+        assert historical in accepted, "Unreviewed preceding package version"
+        historical = row["version"]
+    return health_release.package_version(app_id, historical, ROOT)
 
 
 def source_bytes(path, revision=None):

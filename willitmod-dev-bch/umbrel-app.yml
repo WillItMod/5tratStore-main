@@ -2,7 +2,7 @@ manifestVersion: 1
 id: willitmod-dev-bch
 category: bitcoin
 name: AxeBCH
-version: "0.9.26"
+version: "0.9.27"
 tagline: BCH node + solo pool
 description: >-
   RC1 RELEASE (DEV CHANNEL)
@@ -70,6 +70,8 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
+  Application health checks now respond without waiting for the node RPC. Slow or unavailable nodes remain visible in the detailed status APIs. Timed-out clients no longer produce broken-pipe tracebacks. Existing ports, node and pool images, mining configuration, payouts and stored data are retained. On 5tratumOS, update the OS to 0.8.36 before updating this app. OS 0.8.34 and 0.8.35 refuse this app update before pulling images, stopping apps or replacing the live Compose definition. Users on earlier OS versions must upgrade the OS first. Umbrel does not require this OS update.
+
   Adds safe pool log retention with 5tratumOS 0.8.23. Complete block and pool accounting records are saved before old raw log bytes are retired. The active log uses a 20 MiB rolling target with two recent archives. Unread or unresolved evidence is retained, and the app reports backlog or blockers. Existing mining, wallet and chain data are preserved. BCH round history now uses lossless chunks, retaining every timestamp, counter and difficulty observation. The OS protects the compatible reader version before conversion; older app versions cannot read the new managed accounting format.
 
   Best-share records now retain complete pool-log entries that arrive across

@@ -219,7 +219,7 @@ services:
   app:
     stop_signal: SIGINT
     hostname: axebch-app
-    image: ghcr.io/willitmod/axebch-app-umbrel-dev:0.9.26@sha256:394297a80226096657253df460c69f5945c270a56c01aa39f57c98dde3ef3824
+    image: ghcr.io/willitmod/axebch-app-umbrel-dev:0.9.27@sha256:6b76139b539887484268b3d6301254395c553095f3873abe0c4b44df5278251a
     user: "1000:1000"
     restart: on-failure
     stop_grace_period: 30s
@@ -236,7 +236,7 @@ services:
     volumes:
       - ${APP_DATA_DIR}/data:/data
     environment:
-      APP_REVISION: 2d80da8af2549b4a67da7692c6d3806348fa8f11
+      APP_REVISION: 8e41868dc639d35376c1889f94871db79a05e251
       MUX_IDENTITY_URL: "http://172.17.0.1:21222/api/integrations/workers"
       NETWORK_IP: "${NETWORK_IP}"
       BCH_RPC_HOST: "bchn"
@@ -252,7 +252,34 @@ services:
       CKPOOL_IMAGE: "ghcr.io/willitmod/wim-solo-ckpool:0.8.3-rc1-590fb2a"
       STATIC_DIR: "/app/static"
 
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - python -c "import json, urllib.request; r=urllib.request.urlopen('http://127.0.0.1:3000/api/health', timeout=3); assert r.status == 200 and json.load(r).get('ok') is True"
+      interval: 15s
+      timeout: 5s
+      retries: 20
+      start_period: 90s
+
 networks:
   umbrel_main_network:
     external: true
     name: umbrel_main_network
+
+# 5tratumOS 0.8.36 verifies these exact retention bindings before any app update.
+# Umbrel ignores this Compose extension.
+x-5tratumos-stop-policy:
+  version: 2
+  services: {}
+  requiresRetention:
+    appId: axebch
+    appService: app
+    appSourceRevision: 8e41868dc639d35376c1889f94871db79a05e251
+    appImage: ghcr.io/willitmod/axebch-app-umbrel-dev:0.9.27@sha256:6b76139b539887484268b3d6301254395c553095f3873abe0c4b44df5278251a
+    platforms:
+      amd64:
+        appConfigDigest: sha256:0d12860caa70eb918c89e6d8dc5352326cbf622d2d2680774b8d74f9c9d10914
+        appManifestDigest: sha256:f15bf94d8e35d227cbf2c2958aa70dc387ab9cd4ae994be9819c03c4b0ec8026
+      arm64:
+        appConfigDigest: sha256:b6e4251d80797bfdd22360e33c8b7df4ca8197ff5e4f5f1fda0377207af315ad
+        appManifestDigest: sha256:6f0f540711d130df92ae3f0608aea4f5bc1c9bca8fb1ca823633866f49609b51

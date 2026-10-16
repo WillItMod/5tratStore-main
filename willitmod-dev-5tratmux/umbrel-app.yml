@@ -2,9 +2,9 @@ manifestVersion: 1
 id: willitmod-dev-5tratmux
 name: 5tratMux
 tagline: Route miners through one stable Stratum endpoint
-icon: icon.png
+icon: https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-dev-5tratmux/icon.png
 category: crypto
-version: 0.9.79
+version: 0.9.80
 port: 21222
 description: >-
   Standalone Stratum routing for Umbrel. Configure a pool endpoint and account,
@@ -28,6 +28,8 @@ deterministicPassword: true
 storage:
   dataRoot: data
 releaseNotes: >-
+  Fixes the Umbrel app thumbnail with an absolute artwork URL. The generated app password, compiled backend, layout, mining configuration and ports are retained.
+
   Adds standalone 5tratMux for Umbrel with an application password, persistent
   connection settings, optional directly reachable local pool APIs and cloud AI.
   Preserves current miner layouts and routing fixes. Use Umbrel to start, stop

@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "result": "PASS",
+  "sourceRevision": "8e5868d4b86ca7a56a436684158c64dc17b120c8",
+  "sourceTree": "a3c29335cf4680f38d95707814063ffba0298a89",
+  "imageRef": "ghcr.io/willitmod/5tratmux-app:0.9.80-umbrel@sha256:1838e5458a56ddc208419cd2fb6d3b9c7979492e66ed52ccb177e5cc4c7d2a7a",
+  "anonymousIndexAndBothPlatformsVerified": true,
+  "platforms": {
+    "amd64": {
+      "manifestDigest": "sha256:3ac4d4d01a307e988e8e9098c44dd16601ee5539fc18bf668e22650ae0c05a4f",
+      "configDigest": "sha256:5690e50ccecf41d97ce3613033f6a46a4eed6444f3a5f33ae2cd8dc11d970487",
+      "protectedExecutableSHA256": "b8aaa0a8079394c167a8cc46090c88e70319bad1f0e37568b4a1c063e4ee9cdd",
+      "noApplicationPythonSources": true,
+      "noSourceMaps": true,
+      "nativeStartupVerified": true,
+      "sourceProtectionAuditSHA256": "3215ed58a4321f6581773df620b8b76850f23eb914519557d4d57bb731c10e89",
+      "nativeCompiledRuntimeSHA256": "31a4bc2208add92fbda7dd9f7e19c5f393dd4247ed458a682cd0449fdd04bc74",
+      "wrapperOnlyUpdateVerified": true,
+      "operatorAuthenticationVerified": true,
+      "httpHealthVersion": "0.9.80"
+    },
+    "arm64": {
+      "manifestDigest": "sha256:4107fa94fb7b0f83f261aa6cbddbfb954fb37f750ffe4b89b707840b04b1bb7d",
+      "configDigest": "sha256:af49d307a3038589bd1e62a83cafacbae2a4aef2088506745a80f388d82a0271",
+      "protectedExecutableSHA256": "70f7fb8122bfd10b2f65e64407043c8ed04a337c540dac3c3414db494e326eb8",
+      "noApplicationPythonSources": true,
+      "noSourceMaps": true,
+      "nativeStartupVerified": true,
+      "sourceProtectionAuditSHA256": "9635a785625b72e997e520b4909a8a7d341fe8953906d9ca212f6d7361842474",
+      "nativeCompiledRuntimeSHA256": "0e7f795436c024dfa0705f11909669be3a487533aba76e51ddcd75ea4824b5f6",
+      "wrapperOnlyUpdateVerified": true,
+      "operatorAuthenticationVerified": true,
+      "httpHealthVersion": "0.9.80"
+    }
+  },
+  "umbrelQualification": {
+    "1.7.4": {
+      "result": "PASS",
+      "architecture": "amd64",
+      "nativeUpdateStopStartPersistenceVerified": true,
+      "desktopIconRenderedVerified": true,
+      "absoluteIconURL": "https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-dev-5tratmux/icon.png",
+      "iconNaturalWidth": 783,
+      "storeCardExercised": false,
+      "receipt": "mux-umbrel-1.7.4-0.9.80-qualification.json",
+      "receiptSHA256": "a34d16928dfcd25259a815554aa46dccc941a1c27d78b4baf92dc14fde3d986f",
+      "independentBrowserReviewSHA256": "f24b863521ce7a0e93bc246c99a32d8fb4d86fd5a8ddb7aeac9f3d0631118496",
+      "iconObservationChannel": "MAIN",
+      "iconObservedVersion": "0.9.80",
+      "sharedIconSHA256": "3eef68f8307de4df7a43386b2dbc3cdaa2b9e97423c93945c18e6be3256ad9e8",
+      "nativeIconObservationReceiptSHA256": "a92c2f1c165abb7ebe33e4e1ff79c7ad4f6fbc56615035486872eb594eef089c",
+      "decodedChannelAsset": {
+        "channel": "MAIN",
+        "absoluteIconURL": "https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-dev-5tratmux/icon.png",
+        "sha256": "3eef68f8307de4df7a43386b2dbc3cdaa2b9e97423c93945c18e6be3256ad9e8",
+        "browserDecodedVerified": true,
+        "naturalWidth": 783,
+        "naturalHeight": 783,
+        "fetchEvidenceSHA256": "7f00ecd436df9195046d12d14ae76fc4860d9bfe713158587c60b8f3aca84c51",
+        "decodeEvidenceSHA256": "dc78521c8b088335ae3674e8cd814cfd08d7dcb3a968bf368d4ff816ae644456"
+      },
+      "nativeManagerObservationChannel": "MAIN",
+      "nativeManagerObservedVersion": "0.9.80"
+    },
+    "2.0.0": {
+      "result": "PASS",
+      "architecture": "amd64",
+      "nativeUpdateStopStartPersistenceVerified": true,
+      "desktopIconRenderedVerified": true,
+      "absoluteIconURL": "https://raw.githubusercontent.com/WillItMod/5tratStore-dev/main/willitmod-dev-5tratmux/icon.png",
+      "iconNaturalWidth": 783,
+      "storeCardExercised": false,
+      "receipt": "mux-umbrel-2.0.0-0.9.80-qualification.json",
+      "receiptSHA256": "37ccb99c4b7f329123542568e2fb1471cf2d7fc1413635699673f92ea1c95c89",
+      "iconObservationChannel": "DEV",
+      "iconObservedVersion": "0.9.80-dev",
+      "sharedIconSHA256": "3eef68f8307de4df7a43386b2dbc3cdaa2b9e97423c93945c18e6be3256ad9e8",
+      "nativeIconObservationReceiptSHA256": "d94d9e7a8f2bc6b67fe0aece35a4802d26f15682eb3b8ac3a796a8b65e06341a",
+      "decodedChannelAsset": {
+        "channel": "MAIN",
+        "absoluteIconURL": "https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-dev-5tratmux/icon.png",
+        "sha256": "3eef68f8307de4df7a43386b2dbc3cdaa2b9e97423c93945c18e6be3256ad9e8",
+        "browserDecodedVerified": true,
+        "naturalWidth": 783,
+        "naturalHeight": 783,
+        "fetchEvidenceSHA256": "7f00ecd436df9195046d12d14ae76fc4860d9bfe713158587c60b8f3aca84c51",
+        "decodeEvidenceSHA256": "dc78521c8b088335ae3674e8cd814cfd08d7dcb3a968bf368d4ff816ae644456"
+      },
+      "nativeManagerObservationChannel": "MAIN",
+      "nativeManagerObservedVersion": "0.9.80"
+    }
+  },
+  "scope": "Actual protected wrapper images, credential-free published pulls and channel-specific native app-manager updates on Umbrel 1.7.4 and 2.0.0 are verified. Icon observations and same-asset inference are explicit. Official remote store cards were not exercised. No new physical mining claim.",
+  "iconCoverageScope": "Actual native icon observations: MAIN on Umbrel 1.7.4; DEV on Umbrel 2.0.0. Both absolute channel URLs independently decode the same 783x783 PNG bytes. Observation channels remain explicit; cross-channel desktop sessions are not claimed.",
+  "anonymousDockerPullBothPlatformsVerified": true,
+  "anonymousDockerPullReceiptSHA256": "27fddb03d253d3b12b16749d87ae310a6e38142c1199e1dc8a157619e5a39f55"
+}

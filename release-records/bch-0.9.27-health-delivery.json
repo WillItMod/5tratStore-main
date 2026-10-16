@@ -1,0 +1,148 @@
+{
+  "schemaVersion": 1,
+  "result": "PASS",
+  "appId": "willitmod-dev-bch",
+  "version": "0.9.27",
+  "sourceRevision": "8e41868dc639d35376c1889f94871db79a05e251",
+  "sourceTree": "86d35dc632aa32d7492ca53c7adb44190e5f4143",
+  "imageRef": "ghcr.io/willitmod/axebch-app-umbrel-dev:0.9.27@sha256:6b76139b539887484268b3d6301254395c553095f3873abe0c4b44df5278251a",
+  "anonymousIndexAndBothPlatformsVerified": true,
+  "platforms": {
+    "amd64": {
+      "manifestDigest": "sha256:f15bf94d8e35d227cbf2c2958aa70dc387ab9cd4ae994be9819c03c4b0ec8026",
+      "configDigest": "sha256:0d12860caa70eb918c89e6d8dc5352326cbf622d2d2680774b8d74f9c9d10914",
+      "protectedExecutableSHA256": "c0a9dbdd06012f13259a2d63ba67dc4abe5e15e8fa89c36b2ac7bfaa07507e4f",
+      "noApplicationPythonSources": true,
+      "noSourceMaps": true,
+      "nativeStartupVerified": true,
+      "sourceProtectionAuditSHA256": "327d56c317ff15f77c24326bf2d38422eb73b2b2e5b02a4b203def91bd58c111",
+      "nativeCompiledRuntimeSHA256": "59706d9ec2c9460dc25735b86f9f8dbfb68451bef3e2fd9eb3b4882b8c8288bb",
+      "healthIndependentOfNodeRpcVerified": true,
+      "clientDisconnectVerified": true,
+      "httpHealthVersion": "0.9.27"
+    },
+    "arm64": {
+      "manifestDigest": "sha256:6f0f540711d130df92ae3f0608aea4f5bc1c9bca8fb1ca823633866f49609b51",
+      "configDigest": "sha256:b6e4251d80797bfdd22360e33c8b7df4ca8197ff5e4f5f1fda0377207af315ad",
+      "protectedExecutableSHA256": "1e7bb24d0f3c901b7ce8acbd2ca5a2195b43a84e14faf897359347b0df54bb1e",
+      "noApplicationPythonSources": true,
+      "noSourceMaps": true,
+      "nativeStartupVerified": true,
+      "sourceProtectionAuditSHA256": "7454aadf5d0a528e0683a8c8325d24641a8042808c55926df7a0290650b517c9",
+      "nativeCompiledRuntimeSHA256": "09340ebb0b4234e94796bf051bef9e4d8cb0eed0de26c1c980ba6b34e81a76e4",
+      "healthIndependentOfNodeRpcVerified": true,
+      "clientDisconnectVerified": true,
+      "httpHealthVersion": "0.9.27"
+    }
+  },
+  "qualification": {
+    "umbrel1.7.4": {
+      "result": "PASS",
+      "receipt": "bch-umbrel-1.7.4-axebch-qualification.json",
+      "receiptSHA256": "aa876e95dad7befbb615158b6232f4f8c27eaa83782f9e13998f2fdf8060c8c9",
+      "healthUnderBlockedRpcVerified": true,
+      "clientDisconnectVerified": true,
+      "unchangedPortsVerified": true,
+      "persistentStatePreserved": true,
+      "nativeAppManagerRestartVerified": true,
+      "nativeGatewayAndBrowserVerified": true,
+      "noAppOOMOrExit137": true,
+      "nativeManagerObservationChannel": "MAIN",
+      "nativeManagerObservedVersion": "0.9.27",
+      "managerEvidence": [
+        {
+          "receipt": "bch-native-642-axebch-restart-stable-final-acceptance.json",
+          "sha256": "bbcf77b7e392fa5cc2f163194ab49dd3e10da05b6be51d5e04d8314b1a296c08"
+        },
+        {
+          "receipt": "bch-native-642-axebch-restart-stable-final-before.json",
+          "sha256": "d52abed48a93f611222848840201bd5027479b4bdf249a51ac261c9515917349"
+        },
+        {
+          "receipt": "bch-native-642-axebch-restart-stable-final-after.json",
+          "sha256": "b057ba960f35242b40c2e2bc312300547f85bb45adaebd6ae53ad3ec5940319c"
+        },
+        {
+          "receipt": "bch-native-642-axebch-restart-stable-final-events.json",
+          "sha256": "8a4cd0bee38cea701a3592b8f9e22167838bcf4ad22ba49cf62dac48d5e0aa6c"
+        }
+      ],
+      "gatewayReceiptSHA256": "2f3642a6661571dc9456e461ad7be4fe774f0db006661a503eeb2be231b2fcee",
+      "semanticReceiptSHA256": "295da9e248e794a0efbd144013533441959312769835910b6ba42cacbae60ca4",
+      "scope": "Native MAIN installation, stable restart, selected persistence and gateway/browser verified against the exact immutable image. DEV delivery metadata is independently exercised on the same native compiled image. Full chain sync and physical mining are not qualified.",
+      "sharedImageRef": "ghcr.io/willitmod/axebch-app-umbrel-dev:0.9.27@sha256:6b76139b539887484268b3d6301254395c553095f3873abe0c4b44df5278251a",
+      "sharedConfigDigest": "sha256:0d12860caa70eb918c89e6d8dc5352326cbf622d2d2680774b8d74f9c9d10914"
+    },
+    "umbrel2.0.0": {
+      "result": "PASS",
+      "receipt": "bch-umbrel-2.0.0-axebch-qualification.json",
+      "receiptSHA256": "2599d72eda43f0d6645e8578b1f12f1963196eb2f9c23044dd6be3770458a445",
+      "healthUnderBlockedRpcVerified": true,
+      "clientDisconnectVerified": true,
+      "unchangedPortsVerified": true,
+      "persistentStatePreserved": true,
+      "nativeAppManagerRestartVerified": true,
+      "nativeGatewayAndBrowserVerified": true,
+      "noAppOOMOrExit137": true,
+      "nativeManagerObservationChannel": "MAIN",
+      "nativeManagerObservedVersion": "0.9.27",
+      "managerEvidence": [
+        {
+          "receipt": "bch-native-643-axebch-restart-stable-final-acceptance.json",
+          "sha256": "66a54a7168f249c77e01528e273de01112ef97cf425085b989852d8f35632911"
+        },
+        {
+          "receipt": "bch-native-643-axebch-restart-stable-final-before.json",
+          "sha256": "1ee245ad606d2cb604a866237ad78da2e1fd21005f615f5652d79418ddf1e18d"
+        },
+        {
+          "receipt": "bch-native-643-axebch-restart-stable-final-after.json",
+          "sha256": "06efab4197468ea7ea77cb7f400a74130ee6a605b54d95bbaa9375cddb04e26e"
+        },
+        {
+          "receipt": "bch-native-643-axebch-restart-stable-final-events.json",
+          "sha256": "389ea256a718c9c6ea70308ade77c9b8cbd32c7a24670b4c85f40a636c5394e3"
+        }
+      ],
+      "gatewayReceiptSHA256": "368647931649f25dd5839a8c32cfb23898f9066ce95f5ccc09412cf94f562c72",
+      "semanticReceiptSHA256": "fc1cfcffe746abde9224950e737bc7deb7efa2c98551c64766d1d0a92fd60ca6",
+      "scope": "Native MAIN installation, stable restart, selected persistence and gateway/browser verified against the exact immutable image. DEV delivery metadata is independently exercised on the same native compiled image. Full chain sync and physical mining are not qualified.",
+      "sharedImageRef": "ghcr.io/willitmod/axebch-app-umbrel-dev:0.9.27@sha256:6b76139b539887484268b3d6301254395c553095f3873abe0c4b44df5278251a",
+      "sharedConfigDigest": "sha256:0d12860caa70eb918c89e6d8dc5352326cbf622d2d2680774b8d74f9c9d10914"
+    },
+    "5tratumOS": {
+      "result": "PASS",
+      "receipt": "native624-axebch-qualification-redacted.json",
+      "receiptSHA256": "b3f93b559933dee79f9bb505269cb8bc1c080982c15ad1e7458f36ff0d214901",
+      "healthUnderBlockedRpcVerified": true,
+      "clientDisconnectVerified": true,
+      "unchangedPortsVerified": true,
+      "persistentStatePreserved": true,
+      "osVersion": "0.8.36",
+      "requiredOsVersion": "0.8.36",
+      "retentionAdmissionVerified": true,
+      "oldOsRejectedBeforeMutationVerified": true,
+      "oldOsRejectionScope": "OS 0.8.34 and 0.8.35 reject before application deployment: image pull, app stop/start or live Compose replacement. Lifecycle bookkeeping may still update locks, leases, environment repair or rollback copies.",
+      "oldOsRejectionObservedScope": "OS 0.8.34 and 0.8.35 reject version 2 before image pull, app stop/start, or live Compose replacement; lifecycle bookkeeping may occur. Earlier OS versions must upgrade first.",
+      "oldOsRejectionEvidenceKind": "frozen-published-CLI-with-fake-Docker; published archive CLI/parser bytes verified",
+      "nativeManagerObservationChannel": "MAIN",
+      "nativeManagerObservedVersion": "0.9.27",
+      "nodePoolIdentityAndStartTimesPreserved": true,
+      "unrelatedContainersPreserved": true,
+      "actualDaemonRetentionLeaseVerified": true,
+      "readerStatusObserved": "blocked",
+      "actualRawLogRotationClaimed": false,
+      "normalNativeApiUpdateVerified": true,
+      "sharedImageRef": "ghcr.io/willitmod/axebch-app-umbrel-dev:0.9.27@sha256:6b76139b539887484268b3d6301254395c553095f3873abe0c4b44df5278251a",
+      "sharedConfigDigest": "sha256:0d12860caa70eb918c89e6d8dc5352326cbf622d2d2680774b8d74f9c9d10914",
+      "readerFinalReasonObserved": "[Errno 11] Resource temporarily unavailable",
+      "readerFinalObservationReceiptSHA256": "7076b5d8c55e5777a0b6ac37dd72eaef628c0d85c1c4789e79bf47a88778e8f6",
+      "readerEarlierPostUpdateStatusObserved": "within_target",
+      "readerEarlierObservationReceiptSHA256": "a4971b4b5b5347380d24669d3e8576dac53843a147458d48e3c0753869bcd7e8",
+      "readerObservationScope": "Earlier post-update observation was within_target; final fresh observation was blocked with Errno11. The exact lock or holder was not observed. No prior blocked baseline, later recovery or raw-log rotation is claimed. Exact producer/writer lease trust was granted independently."
+    }
+  },
+  "scope": "Actual protected compiled runtimes, published immutable image pulls and health/lifecycle qualifications on native Umbrel 1.7.4, Umbrel 2.0.0 and 5tratumOS 0.8.36. Native app-manager observations use MAIN metadata; DEV metadata is independently verified on both native architectures using the exact same immutable image. Existing node readiness remains distinct from application liveness. No native DEV OS update, full chain synchronization, physical mining or raw-log rotation is claimed.",
+  "anonymousDockerPullBothPlatformsVerified": true,
+  "anonymousDockerPullReceiptSHA256": "fbe6e024bb99684d5be57a05e27fd09aa1e6222ceeefccd0e0d66d1f2fb19075"
+}
