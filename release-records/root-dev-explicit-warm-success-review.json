@@ -1,0 +1,27 @@
+{
+  "status": "ROOT_GENUINE_UNLICENSED_DEV_NORMAL_PACKAGE_EXPLICIT_WARM_INTENT_ACCEPTED",
+  "reviewer": "/root",
+  "at": "2026-10-16T19:40:36.769804+00:00",
+  "rawWarmResult": {
+    "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/fresh649/normal649-dev-canonical-intent-explicit-warm-after-reviewed600.json",
+    "sha256": "4ca28302e91990183c244b5c09451c2e61ae90f5427862ef7cb26357e312befe"
+  },
+  "warmIntentSeconds": 149.944,
+  "sameHealthyPid": 89,
+  "coldPassed": false,
+  "originalColdFailureRootReview": {
+    "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/fresh649/root-dev-first-cold-failure-and-660-review.json",
+    "sha256": "96423a505682f67a9d195e06e51b2b3cc128a37f55cef164ec51fde33412640d"
+  },
+  "warmAdmission": {
+    "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/fresh649/root-normal649-dev-one-explicit-warm-admission.json",
+    "sha256": "36c315b7e6e832b479cd684ca0f305caf9f7bf4401284d0121d099ca7ddcfdb0"
+  },
+  "firstColdFailurePreserved": true,
+  "warmSubmissionCount": 1,
+  "automaticRetries": 0,
+  "withoutLicenceOrTrialActivation": true,
+  "providerApplied": false,
+  "protectedStatePreserved": true,
+  "remainingProviderLifecycleMAINStillRequired": true
+}

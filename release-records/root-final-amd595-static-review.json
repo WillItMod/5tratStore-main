@@ -1,0 +1,123 @@
+{
+  "reviewer": "/root",
+  "status": "FROZEN_AMD595_STATIC_AND_MODEL_FREE_ADMITTED",
+  "sourceRevision": "595bd51be79995642da846afa2206d2ccb96bd08",
+  "sourceTree": "fd8fdcb99068c3d7fb4185aff0260a86b43876a2",
+  "imageId": "sha256:8788b993b93cf5a2cc0cb3f66773171184669e19f4cb4edbd54145b639b1ba5e",
+  "archiveReview": {
+    "archiveSha256": "354dcf6ea0e94d4c7bca1648fd80cfa464d86ea5936e9383eb99d05ac509edbf",
+    "imageId": "sha256:8788b993b93cf5a2cc0cb3f66773171184669e19f4cb4edbd54145b639b1ba5e",
+    "configurationSha256": "sha256:8788b993b93cf5a2cc0cb3f66773171184669e19f4cb4edbd54145b639b1ba5e",
+    "ociDescriptorGraphVerified": [],
+    "architecture": "amd64",
+    "publicDebianPythonExactHashAndPackageVerified": [
+      {
+        "path": "usr/share/gcc/python/libstdcxx/__init__.py",
+        "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "md5": "68b329da9893e34099c7d8ad5cb9c940"
+      },
+      {
+        "path": "usr/share/gcc/python/libstdcxx/v6/__init__.py",
+        "sha256": "f904daea3a5c91d7b336377a93a85eaa0060842810230704f4c0b702b4154c6a",
+        "md5": "9b4aa298a5559f01a31b4252b2ca34c7"
+      },
+      {
+        "path": "usr/share/gcc/python/libstdcxx/v6/printers.py",
+        "sha256": "a11707c4086bfff865bb6533fe4a64729cea151955d692f4b7c71d050d09013b",
+        "md5": "51dc070f3c393db97de3424daef0400e"
+      },
+      {
+        "path": "usr/share/gcc/python/libstdcxx/v6/xmethods.py",
+        "sha256": "ca0a5c9a7f946784e1bc97407fce251f481bfbbd9813a85d628ad602af4b3847",
+        "md5": "715a28ac117c1e22d8fa5710c31fb527"
+      },
+      {
+        "path": "usr/share/gdb/auto-load/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30-gdb.py",
+        "sha256": "6990e32948295b48e5732bb3eaa49a2833343bdd0b254f5fb4d91ca92aac4168",
+        "md5": "cbe6b58eb0c20a3785b88204f52447c0"
+      }
+    ],
+    "layersVerifiedAgainstRootfs": [
+      {
+        "archiveBlobSha256": "e58989146fcec76699871403b9897b5c014af1ccd85f5a9300a215e7975525d7",
+        "uncompressedSha256": "e58989146fcec76699871403b9897b5c014af1ccd85f5a9300a215e7975525d7",
+        "regularFiles": 3263
+      },
+      {
+        "archiveBlobSha256": "578d1b0cb748e09c3bd0d85dbfaa1f1f3d0f9239798b8e89d822279f35dea29f",
+        "uncompressedSha256": "578d1b0cb748e09c3bd0d85dbfaa1f1f3d0f9239798b8e89d822279f35dea29f",
+        "regularFiles": 226
+      },
+      {
+        "archiveBlobSha256": "1c1eb7d02ead7bbd7894e2bbb108c812c4089c04ad129639eacddea3407ce6e6",
+        "uncompressedSha256": "1c1eb7d02ead7bbd7894e2bbb108c812c4089c04ad129639eacddea3407ce6e6",
+        "regularFiles": 160
+      },
+      {
+        "archiveBlobSha256": "e73203c7453a4553d4efddb097e4b6d7efe34058f73370ae78301fca9b57508f",
+        "uncompressedSha256": "e73203c7453a4553d4efddb097e4b6d7efe34058f73370ae78301fca9b57508f",
+        "regularFiles": 1
+      },
+      {
+        "archiveBlobSha256": "ec7345f35fd8bc90ee363c864e23966acba30d77dbb5dbb06d0f128a5247a5a1",
+        "uncompressedSha256": "ec7345f35fd8bc90ee363c864e23966acba30d77dbb5dbb06d0f128a5247a5a1",
+        "regularFiles": 8
+      },
+      {
+        "archiveBlobSha256": "f9c959d1b8906cbd6a5cd9f343fa309002192dec27786718b8dc8c4094c8ff6d",
+        "uncompressedSha256": "f9c959d1b8906cbd6a5cd9f343fa309002192dec27786718b8dc8c4094c8ff6d",
+        "regularFiles": 1
+      },
+      {
+        "archiveBlobSha256": "7f99b7f9d0adedf75bdf9487758ce11a3497e91b442651b895c7e8a2ae5e2231",
+        "uncompressedSha256": "7f99b7f9d0adedf75bdf9487758ce11a3497e91b442651b895c7e8a2ae5e2231",
+        "regularFiles": 10
+      }
+    ],
+    "executables": {
+      "opt/5tratmux-local-ai/bin/llama-server": "034a22de64cc6abf39039fcb29f3c3529c98a910c6b849b5fe15e768f2544fa4",
+      "opt/5tratmux-local-ai/bin/local-ai-service": "ed2fb9e08f2217753e2b25c54d2f81546013eb9f8b5dc7e0fd028967cadd2916",
+      "usr/local/bin/local-ai-supervisor": "46a738b1f941af33d816a8fac3bb9e8ebec8ce9f6d904a3e4c0c8b497a0d042f"
+    },
+    "expectedFilesRehashed": 9,
+    "privateSourceWeightsKeysAbsent": true,
+    "prototypeOnly": false,
+    "finalSourceRestageRequired": false,
+    "targetDeploymentAcceptanceStillRequired": true
+  },
+  "deliveryMetadataFilesRehashed": 35,
+  "rawEvidenceFilesRehashed": 17,
+  "frozenContextFilesRehashed": 45,
+  "productFileOccurrencesRehashed": 18,
+  "exactProductPathAllowlistVerified": true,
+  "identity": {
+    "architecture": "amd64",
+    "configSha256": "29fa7e714e19961613bd9f8c6ab775696dfae02c0b9d0d86d36da75fe06bedf9",
+    "cpuProfile": "amd64-v2",
+    "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+    "llamaSha256": "034a22de64cc6abf39039fcb29f3c3529c98a910c6b849b5fe15e768f2544fa4",
+    "manifestSha256": "191fcf673a10f55a9c2526f58b85fe264111563a3d3dae43012e18f2de21c5b4",
+    "releaseVersion": "local-ai-0.1.9-umbrel-amd64-v2",
+    "schemaVersion": "1.0",
+    "serviceSha256": "ed2fb9e08f2217753e2b25c54d2f81546013eb9f8b5dc7e0fd028967cadd2916"
+  },
+  "publicDebianKeyFixtureByteProof": [
+    {
+      "path": "usr/lib/x86_64-linux-gnu/libgnutls.so.30.34.3",
+      "sha256": "779b25d20249988bea2c1aa6bbeb218f5ae7ea8a9d30ce4f54ea37372965cc4b",
+      "privatePemMarkers": 10,
+      "exactOfficialPublicDebianBinary": true
+    }
+  ],
+  "publicDebianProofSha256": "b1b2be42edb5b740be130dbc3e2e1659032b37ed689cc9b00715038b6c12c2a0",
+  "noticeFilesRehashed": 159,
+  "combinedUpstreamLicencesAndPatchNoticeVerified": true,
+  "actualTwoSequentialCompilerCgroupsVerified": true,
+  "modelFreeQaSha256": "fd3c5e64504968ba86fe4bd969735445dc4c1f052780a55d4c76eb1833e2585a",
+  "sourceCiAndRootSourceReviewSeparatelyRequired": true,
+  "fullResearchCorpusAcceptanceGranted": false,
+  "compiledInferenceAcceptanceGranted": false,
+  "publicationGranted": false,
+  "normalPackageQualificationGranted": false,
+  "actual69DeploymentAcceptanceGranted": false
+}

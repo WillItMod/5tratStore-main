@@ -1,0 +1,189 @@
+{
+  "armConfigurationSha256": "a412ebd600f4e7cc72c7495a74262e8aa9af0d461f6f097db1057f0961ef4ccc",
+  "compiledExecutables": {
+    "opt/5tratmux-local-ai/bin/llama-server": {
+      "bytes": 12422104,
+      "elfMachine": 183,
+      "sha256": "e7a1fe417870f5bdbc826376ef1afae3986c8bb4de3dd3dce71e2ac4e2bf337b"
+    },
+    "opt/5tratmux-local-ai/bin/local-ai-service": {
+      "bytes": 7670416,
+      "elfMachine": 183,
+      "sha256": "57782241c49af84d788846c4c2bcf547e24ed7878e9327bca96e029b3d37d77a"
+    },
+    "usr/local/bin/local-ai-supervisor": {
+      "bytes": 6818448,
+      "elfMachine": 183,
+      "sha256": "73b8f69e65d0e8ff2c56c92a243d408adbc44f8b82bf5adc6c673b9b3e459ccb"
+    }
+  },
+  "compiler": {
+    "cpuLimitEach": 2,
+    "exitCodes": [
+      0,
+      0
+    ],
+    "memoryBytesEach": 8589934592,
+    "name": "Nuitka",
+    "networkModeEach": "none",
+    "oomKilled": false,
+    "rootFilesystemReadOnlyEach": true,
+    "sdistSha256": "8b102c6bf30d9504e82e69674d396972729092b25cefa680e8fd05678fdfa30b",
+    "sequentialServiceAndSupervisor": true,
+    "version": "4.3"
+  },
+  "contextArchiveBytes": 12933120,
+  "contextManifestSha256": "aec7ec6dfd88c0a95252a4d29bc38e678ab3af025b266de9b42faab063a73347",
+  "contextSha256": "e1136e59bafaed0fbf76ad478f9a123568fcb0dd236623a7883f820363cdc301",
+  "cpuProfile": "arm64",
+  "createdAt": "2026-10-16T16:47:53.358641+00:00",
+  "defaultDockerContextPreserved": true,
+  "deploymentAccepted": false,
+  "engineId": "a3278052-a96e-45dd-83e2-53da13afe806",
+  "engineSettingsPreserved": true,
+  "finalSourceRestageRequired": false,
+  "imageArchiveBytes": 70788096,
+  "imageArchivePath": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/runtime-producer/arm64-final-138fd/audit/image.docker.tar",
+  "imageArchiveSha256": "3c4b8f61132202cd0788f6c88df37c07183241800d91a239c49f17959ce0d225",
+  "imageBytes": 70769925,
+  "imageBytesMeaning": "Exact containerd Docker image.inspect.Size; not relabelled as uncompressed installed size; archive transport byte count separately pinned",
+  "imageConfigId": "sha256:6a2d44c4ef1f3dea9dcf35ff9233926c5edef28c8c50976408fab26f974e7899",
+  "imageId": "sha256:d76d097ede033be441d7861c02182d9b0aa8ea58f28746af3e2873a67b89c810",
+  "imageRef": null,
+  "imageRefState": "pending-root-admission-and-actual-registry-push",
+  "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+  "modelCatalogueSha256": "191fcf673a10f55a9c2526f58b85fe264111563a3d3dae43012e18f2de21c5b4",
+  "modelFreeQa": {
+    "bodyAndActionGuards": 9,
+    "cpus": 2,
+    "dockerSocketMounted": false,
+    "generalIntent4BEligibleWithoutModelFiles": true,
+    "installOffRestartOffRemovePreservePreferences": true,
+    "memoryBytes": 8589934592,
+    "modelStarted": false,
+    "modelWeightsMounted": false,
+    "nativeControllerMounted": false,
+    "networkMode": "none",
+    "publishedPorts": [],
+    "removedStateRestoredAcrossRestart": true,
+    "tmpfsBytes": 536870912,
+    "tmpfsExec": true,
+    "tokenPersistedInReceipt": false,
+    "uid": "1000:1000",
+    "wrongPeerCredentialRejected": true,
+    "wrongUidPermissionDenied": true
+  },
+  "modelInferenceAccepted": false,
+  "nativeConfigurationAndModelCatalogueRetained": true,
+  "ownedDisposableObjectsRemoved": true,
+  "platform": "linux/arm64",
+  "protectedAudit": {
+    "allFinalLayersChecked": true,
+    "forbiddenFiles": [],
+    "independentDescriptorAndConfigRootfsChecksPassed": true,
+    "layers": 7,
+    "modelWeightsIncluded": false,
+    "noticeFilesHashVerified": 159,
+    "ociDescriptorGraphVerified": 13,
+    "privateKeysIncluded": false,
+    "privateSourceIncluded": false
+  },
+  "prototypeOnly": false,
+  "publicationPerformed": false,
+  "rawEvidence": {
+    "audit/layer-audit.json": {
+      "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/runtime-producer/arm64-final-138fd/audit/layer-audit.json",
+      "sha256": "c8d43d0b1c4a7e88f3c03e370b7e190de81e45dfbe7cdcba2e18c09694bab3ec"
+    },
+    "compiled-inventory.json": {
+      "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/runtime-producer/arm64-final-138fd/compiled-inventory.json",
+      "sha256": "da75f5b857263cbd198ba47ba576a3752d4d6a8925c7030667307e3d97538feb"
+    },
+    "compiler-service-after.json": {
+      "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/runtime-producer/arm64-final-138fd/compiler-service-after.json",
+      "sha256": "f85220ec6c13a207eb39d7f784c6fdb984f4be86e02432d3fc37c5ec6a00c9a7"
+    },
+    "compiler-service-before.json": {
+      "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/runtime-producer/arm64-final-138fd/compiler-service-before.json",
+      "sha256": "6961111d02756aae44513a40687aa002dbec028e250950b5522432993093fe88"
+    },
+    "compiler-supervisor-after.json": {
+      "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/runtime-producer/arm64-final-138fd/compiler-supervisor-after.json",
+      "sha256": "20a8bd2de56d93b2c57c8b4133d06856cb0de8e4049c26456bd9352e6c1028fc"
+    },
+    "compiler-supervisor-before.json": {
+      "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/runtime-producer/arm64-final-138fd/compiler-supervisor-before.json",
+      "sha256": "7dfe69687577c9b68d120c1899ae7fd498bce79b3863d7ee2eb609c576dba4ae"
+    },
+    "context-export.json": {
+      "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/runtime-producer/arm64-final-138fd/context-export.json",
+      "sha256": "58d99bcdfef812fd1eef867b4dd5a0ba83712bb638a7dc5ddfed31e72597e8a0"
+    },
+    "context-manifest.json": {
+      "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/runtime-producer/arm64-final-138fd/context-manifest.json",
+      "sha256": "aec7ec6dfd88c0a95252a4d29bc38e678ab3af025b266de9b42faab063a73347"
+    },
+    "descriptor-and-layer-review.json": {
+      "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/runtime-producer/arm64-final-138fd/descriptor-and-layer-review.json",
+      "sha256": "8c9e274985a097cbc68f580a8db077411ad89c20166ac2b2a1f014d0c9097b26"
+    },
+    "engine-after-build.json": {
+      "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/runtime-producer/arm64-final-138fd/engine-after-build.json",
+      "sha256": "e8fd3df037f31e388bef541f492a9b94e8123a42547fe2c3e25a1bfd218d803c"
+    },
+    "engine-before.json": {
+      "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/runtime-producer/arm64-final-138fd/engine-before.json",
+      "sha256": "e8fd3df037f31e388bef541f492a9b94e8123a42547fe2c3e25a1bfd218d803c"
+    },
+    "image.history.txt": {
+      "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/runtime-producer/arm64-final-138fd/image.history.txt",
+      "sha256": "855670906858be6da44759f2f027506ad22bf13a69c51a7abc10028ddcd3f729"
+    },
+    "image.inspect.json": {
+      "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/runtime-producer/arm64-final-138fd/image.inspect.json",
+      "sha256": "c2ff98d3341a624bf29f74f52fa11059d71e4a445c11ac8f01b630a5cafaa835"
+    },
+    "qa/cleanup.json": {
+      "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/runtime-producer/arm64-final-138fd/qa/cleanup.json",
+      "sha256": "5935c9c86326919f7fbc778d1fa4d7cb68fcaafd65286b616c454fc704943a6a"
+    },
+    "qa/qa-receipt.json": {
+      "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/runtime-producer/arm64-final-138fd/qa/qa-receipt.json",
+      "sha256": "c10de294a0042caeb3f0d6213c81185f384aef2bbca26694dc88d2c7152f4b4f"
+    },
+    "runner-review.json": {
+      "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/runtime-producer/arm64-final-138fd/runner-review.json",
+      "sha256": "8a81027a491395615d7c0d10b9d46f94f8aaf54a2b047a280eae5f9a44e64374"
+    }
+  },
+  "rootFinalArtifactAdmissionRequired": true,
+  "rootImageOnlyPublicationStaticAcceptance": false,
+  "runtimeBinarySha256": "e7a1fe417870f5bdbc826376ef1afae3986c8bb4de3dd3dce71e2ac4e2bf337b",
+  "runtimeRequestTimeoutSeconds": 180,
+  "schemaVersion": 1,
+  "sharedArmSemanticEvidence": {
+    "cases": 25,
+    "finalProtectedImageInferencePerformed": false,
+    "rawEvidence": {
+      "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/runtime-producer/arm64-20261016/lab/output/qualification.json",
+      "sha256": "008dfae21487e2fbe577f87aa927c4037af97d37092469ca51b0eeac8aeea98f"
+    },
+    "reviews": [
+      {
+        "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/runtime-producer/arm64-20261016/lab/independent-review-runtime.json",
+        "sha256": "681820af564e0867eb66250f4943e65fb31b33557c274321a4e117648b20b538"
+      },
+      {
+        "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/runtime-producer/arm64-independent-root-review.json",
+        "sha256": "d29c3197e46056fd2c214529cd782b87405fb148f2fbf023be810a4c53195ab9"
+      }
+    ]
+  },
+  "sourceCheckpointCiRun": 38929350590,
+  "sourceExportSha256": "8a02c35e95fd261f8278db493e3b59e22226ec147a487c9ca73002d657cd45ca",
+  "sourceFingerprintSha256": "a8279c57791060015e539ce8f0c7d92247c213614e7da8d04859ce3da063bca3",
+  "sourceRevision": "138fd6cfd1b99cea858f19f39f8976015da1de1b",
+  "sourceTree": "75ed4c702490df1f168bf590ba055768c260d236",
+  "status": "FINAL_ARM_PROTECTED_COMPONENT_MODEL_FREE_QA_PASSED_ROOT_ADMISSION_PENDING",
+  "version": "local-ai-0.1.9-umbrel-arm64"
+}

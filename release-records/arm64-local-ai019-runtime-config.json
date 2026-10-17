@@ -1,0 +1,139 @@
+{
+  "schemaVersion": "1.0",
+  "featureEnabled": true,
+  "service": {
+    "host": "127.0.0.1",
+    "port": 18080,
+    "tokenEnv": "LOCAL_AI_CONTROL_TOKEN",
+    "allowedOrigins": [],
+    "maxRequestBytes": 16384
+  },
+  "selectedModel": "qwen3.5-0.8b",
+  "network": {
+    "enabled": true
+  },
+  "automation": {
+    "enabled": true,
+    "partialEvidence": true
+  },
+  "runtime": {
+    "binary": "/opt/5tratmux-local-ai/bin/llama-server",
+    "binarySha256": "e7a1fe417870f5bdbc826376ef1afae3986c8bb4de3dd3dce71e2ac4e2bf337b",
+    "binarySha256File": "",
+    "host": "127.0.0.1",
+    "port": 18081,
+    "threads": 2,
+    "contextTokens": 4096,
+    "maxOutputTokens": 512,
+    "batchTokens": 256,
+    "microBatchTokens": 64,
+    "modelDirectory": "/data/local-ai/models",
+    "downloadEnabled": true,
+    "downloadTimeoutSeconds": 3600,
+    "startupTimeoutSeconds": 180,
+    "requestTimeoutSeconds": 180,
+    "cpuProfile": "arm64"
+  },
+  "resources": {
+    "reserveBytes": 1073741824,
+    "reserveFraction": 0.15,
+    "monitorSeconds": 5,
+    "allowUnvalidatedModels": true
+  },
+  "assets": {
+    "bitcoin": {
+      "providerId": "bitcoin",
+      "chain": "bitcoin",
+      "label": "Bitcoin",
+      "officialUrls": []
+    },
+    "bitcoin-cash": {
+      "providerId": "bitcoin-cash",
+      "chain": "bitcoin-cash",
+      "label": "Bitcoin Cash",
+      "officialUrls": []
+    },
+    "digibyte": {
+      "providerId": "digibyte",
+      "chain": "digibyte",
+      "label": "DigiByte",
+      "officialUrls": []
+    },
+    "litecoin": {
+      "providerId": "litecoin",
+      "chain": "litecoin",
+      "label": "Litecoin",
+      "officialUrls": []
+    },
+    "dogecoin": {
+      "providerId": "dogecoin",
+      "chain": "dogecoin",
+      "label": "Dogecoin",
+      "officialUrls": []
+    },
+    "ecash": {
+      "providerId": "ecash",
+      "chain": "ecash",
+      "label": "eCash",
+      "officialUrls": []
+    },
+    "peercoin": {
+      "providerId": "peercoin",
+      "chain": "peercoin",
+      "label": "Peercoin",
+      "officialUrls": []
+    },
+    "fractal-bitcoin": {
+      "providerId": "fractal-bitcoin",
+      "chain": "fractal-bitcoin",
+      "label": "Fractal Bitcoin",
+      "officialUrls": []
+    },
+    "bitcoinii": {
+      "providerId": "bitcoinii",
+      "chain": "bitcoin-ii-mainnet",
+      "label": "BitcoinII (BC2)",
+      "officialUrls": []
+    }
+  },
+  "research": {
+    "promptProfileDirectory": "/opt/5tratmux-local-ai/profiles",
+    "networkEnabled": true,
+    "priceApiUrl": "https://api.coingecko.com/api/v3/simple/price",
+    "priceCurrency": "usd",
+    "priceApiKeyEnv": "",
+    "priceApiKeyHeader": "x-cg-demo-api-key",
+    "includeOfficialPages": false,
+    "allowedHosts": [
+      "api.coingecko.com"
+    ],
+    "timeoutSeconds": 10,
+    "maxResponseBytes": 262144,
+    "maxSources": 6,
+    "maxEvidenceChars": 6000,
+    "maxSourceChars": 1500,
+    "maxQuestionChars": 500,
+    "maxOutputChars": 8000,
+    "maxPriceAgeSeconds": 3600,
+    "modelOptions": {
+      "num_ctx": 4096,
+      "num_predict": 256,
+      "temperature": 0
+    },
+    "search": {
+      "enabled": false,
+      "url": "",
+      "queryParam": "q",
+      "resultsKey": "results",
+      "maxResults": 3
+    }
+  },
+  "preferences": {
+    "stateDirectory": "/data/local-ai/preferences",
+    "compatibilityRevision": "local-ai-preferences-v1"
+  },
+  "semanticIntent": {
+    "contractVersion": "preferences_v2",
+    "revision": "semantic-inventory-2"
+  }
+}

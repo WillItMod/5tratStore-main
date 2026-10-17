@@ -1,0 +1,45 @@
+{
+  "kind": "prepared-not-executed-existing-lab-authority-qa-source",
+  "targetVmid": 642,
+  "preparedAt": "2026-10-16T19:21:12.310374+00:00",
+  "result": "PREPARED_NOT_EXECUTED",
+  "paidIdentityScope": "pre-existing-owned-lab-paid-identity",
+  "defaultProductionAuthorityPaidProofClaimed": false,
+  "normalPackagePreparation": {
+    "path": "/Users/johnny/Documents/AI LLM/local-ai-free-evidence-20261016/normal-package-396-main-final/package-preparation.json",
+    "sha256": "faf2c1d89ce9a0674bbfc74b782628da1ef9bca08032d97cd84170c94314e355"
+  },
+  "packageProducerSourceRevision": "396c137930d27fb39251147426a70bd61307bf98",
+  "packageProducerSourceTree": "ec2daf28cc1920be3e83bc791e25f3e6443769cc",
+  "packageProducerInputs": {
+    "packaging/umbrel-local-ai-release/prepare_package.py": "7c3deed5b8aa35777d1776a6a15ce0be7217dc98d40a1e082af21e88c4cb0f1c",
+    "packaging/umbrel-local-ai-release/pre-start": "fb25f9246aff606a00567ec0a0333b49397bf988b30deaff0c3da5baaaa4eb6e"
+  },
+  "transformerSHA256": "81aae4d93dc3c76790aa49d5d70c5bfef667130240ee4e172f7ab39469335436",
+  "originalPackageRecipeSHA256": "6373d3f099e9f27c1fe6a8b5fd34c8872f93eadbfb8240e3718e8385abd2de54",
+  "qaOverlaySHA256": "4cba35bb502fff8a2e727eac549907ffc13eab132d29553243427f8b59e28ae5",
+  "adaptedQaSourceRecipeSHA256": "968ea347403b60fa15ace30552a8c8768da9307a00b69c305afc49343911c201",
+  "minimalDifference": [
+    {
+      "operation": "add",
+      "path": "/services/server/env_file",
+      "value": [
+        "${APP_DATA_DIR}/testoverride.env"
+      ]
+    }
+  ],
+  "preExistingSourceReceipts": {
+    "authority-source-642-readonly.json": {
+      "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/authority-source-642-readonly.json",
+      "sha256": "315c0275c7e2d9f9e4358c07727bdd9699a9d0ba98c57570d08a91a60db157be"
+    },
+    "authority-env-file-reference-642-readonly.json": {
+      "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/authority-env-file-reference-642-readonly.json",
+      "sha256": "1dad8d7f8e76144fe4b8be1578bcc3b894b23437ab3bc9d5390afd4a595e8ec5"
+    }
+  },
+  "normalPublicPackageChanged": false,
+  "guestOrStoreChangesPerformed": false,
+  "authorityFileOrValuesReadCopiedOrWritten": false,
+  "licenceGrantOrProofChangesPerformed": false
+}

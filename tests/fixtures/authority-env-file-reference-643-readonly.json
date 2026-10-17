@@ -1,0 +1,22 @@
+{
+  "kind": "exact-existing-env-file-reference-read-only",
+  "composeSha256": "7007743185b8bb5c173ad5d25c89e1d425c18df0f15f6a22dfc132740622103b",
+  "serverEnvFileReferences": [
+    "${APP_DATA_DIR}/testoverride.env"
+  ],
+  "serverEnvironmentKeyNames": [
+    "APP_CHANNEL",
+    "APP_HOST",
+    "APP_PORT",
+    "APP_VERSION",
+    "MUX_AUTH_TRUSTED_PROXIES",
+    "MUX_HTTP_ALLOWED_HOSTS",
+    "MUX_HTTP_STRICT_HOST",
+    "MUX_OPERATOR_PASSWORD",
+    "MUX_PLATFORM",
+    "STATE_DIR"
+  ],
+  "authorityValuesReadOrCopiedOut": false,
+  "mutationsPerformed": false,
+  "targetVmid": 643
+}

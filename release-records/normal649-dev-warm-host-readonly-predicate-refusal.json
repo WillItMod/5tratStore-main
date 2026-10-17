@@ -1,0 +1,8 @@
+{
+  "kind": "host-read-only-prewarm-predicate-refusal",
+  "runtimeGenerationIsDictionary": true,
+  "correction": "require runtime.generation.sequence==1",
+  "guestMutationOrInferenceSent": false,
+  "frozenHelperChanged": false,
+  "sealedActionConsumed": false
+}

@@ -1,0 +1,41 @@
+{
+  "kind": "read-only-first-valid660-monitor-sample649",
+  "firstHealthySample": {
+    "at": "2026-10-16T19:24:38.002838+00:00",
+    "elapsedSeconds": 0.042687706999458896,
+    "requestStartedElapsedSeconds": 0.0003701549994730158,
+    "responseReceivedElapsedSeconds": 0.042687706999458896,
+    "enabled": true,
+    "phase": "ready",
+    "busy": false,
+    "selectedModel": "qwen3.5-4b",
+    "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+    "runtime": {
+      "pid": 89,
+      "modelId": "qwen3.5-4b",
+      "binarySha256": "034a22de64cc6abf39039fcb29f3c3529c98a910c6b849b5fe15e768f2544fa4",
+      "running": true,
+      "healthy": true
+    },
+    "desiredEnabled": true,
+    "generationSequence": 0,
+    "entitlement": {
+      "allowed": true,
+      "licenceRequired": false,
+      "policy": "licence-free",
+      "reason": "Local AI is available without a licence. MUX routing keeps its existing licence requirements."
+    },
+    "memoryEvents": {
+      "low": 0,
+      "high": 0,
+      "max": 0,
+      "oom": 0,
+      "oom_kill": 0,
+      "oom_group_kill": 0
+    },
+    "cgroupMemoryCurrentBytes": 392867840
+  },
+  "monitorStartedAt": "2026-10-16T19:24:37.960056+00:00",
+  "targetVmid": 649,
+  "controlsOrInferenceSent": 0
+}

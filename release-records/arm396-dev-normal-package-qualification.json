@@ -1,0 +1,3829 @@
+{
+  "actualContainerIds": {
+    "local_ai": "f563b262d21ecfe18004beb346bd8584ceba25d984653fb42ebca852e20a7888",
+    "server": "d9f5b894d70a9182de72e7a1b9e42a51f377c892af5222a692b5ca41f88273a6"
+  },
+  "actualImageBindings": {
+    "local_ai": {
+      "actualConfigurationDigest": "sha256:6a2d44c4ef1f3dea9dcf35ff9233926c5edef28c8c50976408fab26f974e7899",
+      "actualDescriptor": {
+        "digest": "sha256:b8050920c408eab295ba5848f209d560b5207f821901e09d7a6788c1e2b175d3",
+        "mediaType": "application/vnd.oci.image.index.v1+json",
+        "size": 493
+      },
+      "actualImageId": "sha256:b8050920c408eab295ba5848f209d560b5207f821901e09d7a6788c1e2b175d3",
+      "engineRepoDigestVerified": true,
+      "expectedPlatformManifestDigestFromRootReviewedPublicGraph": "sha256:665cf51df9cbf8b17edaaefcdbbfffb2a0534339c7fa6819a4a82f1a8e7e7d8a",
+      "productBytesExtractedAndRehashed": true,
+      "requestedImmutableImageRef": "ghcr.io/willitmod/5tratmux-app:local-ai-0.1.9-umbrel@sha256:b8050920c408eab295ba5848f209d560b5207f821901e09d7a6788c1e2b175d3"
+    },
+    "server": {
+      "actualConfigurationDigest": "sha256:32e761e4e942095ed87df4f56404ad4fab3f92e185aa56076a8e827fd07f5bf2",
+      "actualDescriptor": {
+        "digest": "sha256:5eb55feec01de1a3b4bdf16027dd22a4fdf5844c83c016996eeeace0e876ca5e",
+        "mediaType": "application/vnd.oci.image.index.v1+json",
+        "size": 493
+      },
+      "actualImageId": "sha256:5eb55feec01de1a3b4bdf16027dd22a4fdf5844c83c016996eeeace0e876ca5e",
+      "engineRepoDigestVerified": true,
+      "expectedPlatformManifestDigestFromRootReviewedPublicGraph": "sha256:984dc7bb99dcddbea915dd30f78412005741f77c4c947f2782cd3bb4350f6a88",
+      "productBytesExtractedAndRehashed": true,
+      "requestedImmutableImageRef": "ghcr.io/willitmod/5tratmux-app:0.9.82-umbrel-dev@sha256:5eb55feec01de1a3b4bdf16027dd22a4fdf5844c83c016996eeeace0e876ca5e"
+    }
+  },
+  "actualIntent": {
+    "actualIdentityMatches": true,
+    "initialResponse": {
+      "httpStatus": 202,
+      "value": {
+        "accepted": true,
+        "inputSha256": "ba5dfabe9f8dbe25be55aeada3dd77f148455114742665c9de628e7ab756e688",
+        "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+        "modelId": "qwen3.5-4b",
+        "phase": "intent",
+        "requestId": "arm396-dev-minimal-home"
+      }
+    },
+    "operation": {
+      "inputSha256": "ba5dfabe9f8dbe25be55aeada3dd77f148455114742665c9de628e7ab756e688",
+      "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+      "kind": "intent",
+      "modelId": "qwen3.5-4b",
+      "requestId": "arm396-dev-minimal-home",
+      "startedAt": "2026-10-16T19:14:39.199948+00:00",
+      "state": "complete"
+    },
+    "passed": true,
+    "requestId": "arm396-dev-minimal-home",
+    "resources": {
+      "architecture": "aarch64",
+      "available": true,
+      "availableBytes": 7001833472,
+      "containerHeadroomBytes": 5790478336,
+      "cpu": {
+        "available": true,
+        "intervalSeconds": 2.014,
+        "normalization": "100_percent_per_logical_cpu",
+        "sampledAt": "2026-10-16T19:16:25.747595+00:00",
+        "scope": "llama_process",
+        "source": "linux_proc_stat",
+        "usagePercent": 106.77
+      },
+      "cpuFlags": null,
+      "reserveBytes": 1246075084,
+      "sampledAt": "2026-10-16T19:16:25.746653+00:00",
+      "serviceMemoryBytes": 3248742400,
+      "servicePeakMemoryBytes": 3248742400,
+      "totalBytes": 8307167232
+    },
+    "result": {
+      "actualInference": true,
+      "contractValid": true,
+      "contractVersion": "preferences_v2",
+      "elapsedSeconds": 105.63,
+      "generationAttempted": true,
+      "goalSha256": "33618b10e789b1f6065197e838e5e6ce5ebfad2073be0598090aac6ea3ba2530",
+      "inputSha256": "ba5dfabe9f8dbe25be55aeada3dd77f148455114742665c9de628e7ab756e688",
+      "intent": {
+        "c": [
+          {
+            "a": "5trat",
+            "k": "deprioritize",
+            "q": "minimize allocation to 5trat",
+            "u": null,
+            "v": null,
+            "w": "all"
+          }
+        ],
+        "reason": "",
+        "s": "resolved"
+      },
+      "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+      "intentProvenance": {
+        "attempts": [
+          {
+            "attempt": 1,
+            "completedSources": [
+              1
+            ],
+            "outcome": "resolved",
+            "sourceOutputs": [
+              {
+                "outputSha256": "3e4abbcc070f8c34fdfc6211eaf131c4e6d7e3e6cdc88a52f9ad5077d191c19b",
+                "requirementCount": 1,
+                "sourceId": 1,
+                "status": "resolved"
+              }
+            ],
+            "validatorError": null
+          }
+        ],
+        "compilerRevision": "semantic-inventory-2",
+        "completedSources": [
+          1
+        ],
+        "contract": "preferences_v2",
+        "correctionUsed": false,
+        "extractionRevision": "source-by-source-6",
+        "holdOrigin": null,
+        "sourceCount": 1
+      },
+      "inventorySha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+      "kind": "mission_intent",
+      "lastRunAt": "2026-10-16T19:14:39.200818+00:00",
+      "modelId": "qwen3.5-4b",
+      "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+      "registrySha256": "53daff05d80a253e3900aff4e58b9f8f4bf56541ea952a43c0b74e43378fe606",
+      "requestId": "arm396-dev-minimal-home",
+      "routingAuthority": "none",
+      "runtimeBinarySha256": "e7a1fe417870f5bdbc826376ef1afae3986c8bb4de3dd3dce71e2ac4e2bf337b",
+      "scopeSha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+      "synthetic": false,
+      "validUntil": 1792178304.8302877
+    },
+    "runtime": {
+      "binarySha256": "e7a1fe417870f5bdbc826376ef1afae3986c8bb4de3dd3dce71e2ac4e2bf337b",
+      "detail": "Local model process is running.",
+      "download": null,
+      "exitCode": null,
+      "generation": {
+        "active": false,
+        "completedAt": "2026-10-16T19:16:24.806990+00:00",
+        "completionReceived": true,
+        "current": null,
+        "elapsedSeconds": 105.556,
+        "inferenceObserved": true,
+        "jobId": "addb47171bb341b5868eb08e7d8befdd",
+        "kind": "intent",
+        "lastCompleted": {
+          "active": false,
+          "completedAt": "2026-10-16T19:16:24.806990+00:00",
+          "completionReceived": true,
+          "jobId": "addb47171bb341b5868eb08e7d8befdd",
+          "kind": "intent",
+          "measurements": {
+            "generatedTokens": 34,
+            "generationMilliseconds": 3193.373,
+            "generationTokensPerSecond": 10.334,
+            "measurement": "completed_response",
+            "promptMilliseconds": 102314.679,
+            "promptTokens": 1460,
+            "source": "llama.cpp.timings",
+            "streaming": true
+          },
+          "modelId": "qwen3.5-4b",
+          "requestId": "arm396-dev-minimal-home",
+          "sequence": 1
+        },
+        "measurements": {
+          "generatedTokens": 34,
+          "generationMilliseconds": 3193.373,
+          "generationTokensPerSecond": 10.334,
+          "measurement": "completed_response",
+          "promptMilliseconds": 102314.679,
+          "promptTokens": 1460,
+          "source": "llama.cpp.timings",
+          "streaming": true
+        },
+        "modelId": "qwen3.5-4b",
+        "requestId": "arm396-dev-minimal-home",
+        "sequence": 1,
+        "stage": "complete",
+        "startedAt": "2026-10-16T19:14:39.251294+00:00"
+      },
+      "healthy": true,
+      "modelId": "qwen3.5-4b",
+      "pid": 28,
+      "running": true,
+      "starting": false,
+      "stopping": false
+    },
+    "scope": "first-fresh-model-process-intent",
+    "seconds": 106.562,
+    "submittedAt": "2026-10-16T19:14:39.191718+00:00"
+  },
+  "afterProviderTest": {
+    "appQueue": {
+      "active": false,
+      "maxPending": 4,
+      "maxWaitSeconds": 120,
+      "oldestWaitSeconds": null,
+      "pending": 0
+    },
+    "automation": {
+      "actualInference": true,
+      "contractValid": true,
+      "contractVersion": "1.0",
+      "dataFreshness": {
+        "assets": [],
+        "evaluatedAt": "2026-10-16T19:16:51.721752Z",
+        "latestReview": {
+          "blockedAssetIds": [],
+          "checkedAt": "2026-10-16T19:16:51.721752Z",
+          "policy": {
+            "basis": "provider_as_of",
+            "cadenceSeconds": null,
+            "futureToleranceSeconds": 60,
+            "maxAgeSeconds": 3600
+          },
+          "requestId": "mux-8dd75ba3ed06457ea7bdfd6f1c128696",
+          "requiredAssetIds": [],
+          "retrievalCached": false
+        },
+        "policy": {
+          "basis": "provider_as_of",
+          "cadenceSeconds": null,
+          "futureToleranceSeconds": 60,
+          "maxAgeSeconds": 3600
+        }
+      },
+      "decision": "select",
+      "elapsedSeconds": 25.95,
+      "evidenceSha256": "763ec470d763018fe1c078ea5df6e9e642138d88df02a3d89509bb6e61d8e8cb",
+      "facts": [],
+      "generationAttempted": true,
+      "inputSha256": "4e4fa497fb76d090f762803abbd424cc8452a505c6c5d93b9b9c7810f9c23ed5",
+      "kind": "candidate_comparison",
+      "lastRunAt": "2026-10-16T19:16:25.771804+00:00",
+      "modelId": "qwen3.5-4b",
+      "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+      "observations": [
+        {
+          "quote": "Connection test only. Retain existing routes. No change to any mining allocation is authorized by this test.",
+          "sourceId": "candidate-1"
+        }
+      ],
+      "reason": "The local model selected a supplied candidate with an exact supporting excerpt; the app must revalidate its unchanged plan and scope.",
+      "requestId": "mux-8dd75ba3ed06457ea7bdfd6f1c128696",
+      "retrievalCached": false,
+      "retrievalMode": "cached_node_only",
+      "routingAuthority": "app_guardrails_only",
+      "runtimeBinarySha256": "e7a1fe417870f5bdbc826376ef1afae3986c8bb4de3dd3dce71e2ac4e2bf337b",
+      "selectedCandidateId": "retain-current",
+      "sources": [
+        {
+          "id": "candidate-1",
+          "origin": "app_projected_candidate",
+          "suppliedAt": "2026-10-16T19:16:25.771804+00:00",
+          "title": "Retain current routes"
+        }
+      ],
+      "summary": "Selected app candidate retain-current: Connection test only. Retain existing routes. No change to any mining allocation is authorized by this test.",
+      "synthetic": false,
+      "validUntil": 1792178331.7217495,
+      "warnings": []
+    },
+    "busy": false,
+    "capabilities": {
+      "automation": true,
+      "automationContractVersion": "1.0",
+      "automationMaxAssets": 9,
+      "automationMaxAssetsPerCandidate": 5,
+      "automationMaxCandidates": 4,
+      "automationPartialEvidence": "advisory_v1",
+      "automationReady": true,
+      "automationReviewPolicy": "cadence_v1",
+      "automationTasks": [
+        "candidate_comparison"
+      ],
+      "control": true,
+      "download": true,
+      "evidence": true,
+      "missionIntent": "preferences_v1",
+      "missionIntentCompilerRevision": "semantic-inventory-2",
+      "missionIntentContracts": [
+        "preferences_v1",
+        "preferences_v2"
+      ],
+      "missionIntentEligibility": {
+        "eligible": true,
+        "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+        "modelId": "qwen3.5-4b",
+        "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+        "reason": "Qualified for general mining instructions."
+      },
+      "missionIntentExtractionRevision": "source-by-source-6",
+      "missionIntentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+      "missionIntentV2Ready": true,
+      "preferencePersistence": true,
+      "preferencePersistenceVersion": "1.0",
+      "preferenceRestoreAuthority": "host",
+      "registeredAssetIds": [
+        "bitcoin",
+        "bitcoin-cash",
+        "digibyte",
+        "litecoin",
+        "dogecoin",
+        "ecash",
+        "peercoin",
+        "fractal-bitcoin",
+        "bitcoinii"
+      ],
+      "registeredAssets": [
+        {
+          "chain": "bitcoin",
+          "id": "bitcoin",
+          "label": "Bitcoin",
+          "providerId": "bitcoin"
+        },
+        {
+          "chain": "bitcoin-cash",
+          "id": "bitcoin-cash",
+          "label": "Bitcoin Cash",
+          "providerId": "bitcoin-cash"
+        },
+        {
+          "chain": "digibyte",
+          "id": "digibyte",
+          "label": "DigiByte",
+          "providerId": "digibyte"
+        },
+        {
+          "chain": "litecoin",
+          "id": "litecoin",
+          "label": "Litecoin",
+          "providerId": "litecoin"
+        },
+        {
+          "chain": "dogecoin",
+          "id": "dogecoin",
+          "label": "Dogecoin",
+          "providerId": "dogecoin"
+        },
+        {
+          "chain": "ecash",
+          "id": "ecash",
+          "label": "eCash",
+          "providerId": "ecash"
+        },
+        {
+          "chain": "peercoin",
+          "id": "peercoin",
+          "label": "Peercoin",
+          "providerId": "peercoin"
+        },
+        {
+          "chain": "fractal-bitcoin",
+          "id": "fractal-bitcoin",
+          "label": "Fractal Bitcoin",
+          "providerId": "fractal-bitcoin"
+        },
+        {
+          "chain": "bitcoin-ii-mainnet",
+          "id": "bitcoinii",
+          "label": "BitcoinII (BC2)",
+          "providerId": "bitcoinii"
+        }
+      ],
+      "remove": true,
+      "research": true,
+      "researchMaxAssets": 9,
+      "selfTest": true,
+      "unsupportedAutomationTasks": [
+        "arbitrary_allocations",
+        "rule_programming",
+        "mission_builder",
+        "unrestricted_web_search"
+      ]
+    },
+    "dataFreshness": {
+      "assets": [
+        {
+          "admissibleNow": false,
+          "admission": "not_checked",
+          "admittedAtFetch": false,
+          "ageSeconds": null,
+          "assetId": "bitcoin",
+          "chain": "bitcoin",
+          "fetchedAt": null,
+          "label": "Bitcoin",
+          "lastAttemptAt": null,
+          "providerAsOf": null,
+          "providerId": "bitcoin",
+          "reason": "not_checked",
+          "requiredForLastReview": false
+        },
+        {
+          "admissibleNow": false,
+          "admission": "not_checked",
+          "admittedAtFetch": false,
+          "ageSeconds": null,
+          "assetId": "bitcoin-cash",
+          "chain": "bitcoin-cash",
+          "fetchedAt": null,
+          "label": "Bitcoin Cash",
+          "lastAttemptAt": null,
+          "providerAsOf": null,
+          "providerId": "bitcoin-cash",
+          "reason": "not_checked",
+          "requiredForLastReview": false
+        },
+        {
+          "admissibleNow": false,
+          "admission": "not_checked",
+          "admittedAtFetch": false,
+          "ageSeconds": null,
+          "assetId": "digibyte",
+          "chain": "digibyte",
+          "fetchedAt": null,
+          "label": "DigiByte",
+          "lastAttemptAt": null,
+          "providerAsOf": null,
+          "providerId": "digibyte",
+          "reason": "not_checked",
+          "requiredForLastReview": false
+        },
+        {
+          "admissibleNow": false,
+          "admission": "not_checked",
+          "admittedAtFetch": false,
+          "ageSeconds": null,
+          "assetId": "litecoin",
+          "chain": "litecoin",
+          "fetchedAt": null,
+          "label": "Litecoin",
+          "lastAttemptAt": null,
+          "providerAsOf": null,
+          "providerId": "litecoin",
+          "reason": "not_checked",
+          "requiredForLastReview": false
+        },
+        {
+          "admissibleNow": false,
+          "admission": "not_checked",
+          "admittedAtFetch": false,
+          "ageSeconds": null,
+          "assetId": "dogecoin",
+          "chain": "dogecoin",
+          "fetchedAt": null,
+          "label": "Dogecoin",
+          "lastAttemptAt": null,
+          "providerAsOf": null,
+          "providerId": "dogecoin",
+          "reason": "not_checked",
+          "requiredForLastReview": false
+        },
+        {
+          "admissibleNow": false,
+          "admission": "not_checked",
+          "admittedAtFetch": false,
+          "ageSeconds": null,
+          "assetId": "ecash",
+          "chain": "ecash",
+          "fetchedAt": null,
+          "label": "eCash",
+          "lastAttemptAt": null,
+          "providerAsOf": null,
+          "providerId": "ecash",
+          "reason": "not_checked",
+          "requiredForLastReview": false
+        },
+        {
+          "admissibleNow": false,
+          "admission": "not_checked",
+          "admittedAtFetch": false,
+          "ageSeconds": null,
+          "assetId": "peercoin",
+          "chain": "peercoin",
+          "fetchedAt": null,
+          "label": "Peercoin",
+          "lastAttemptAt": null,
+          "providerAsOf": null,
+          "providerId": "peercoin",
+          "reason": "not_checked",
+          "requiredForLastReview": false
+        },
+        {
+          "admissibleNow": false,
+          "admission": "not_checked",
+          "admittedAtFetch": false,
+          "ageSeconds": null,
+          "assetId": "fractal-bitcoin",
+          "chain": "fractal-bitcoin",
+          "fetchedAt": null,
+          "label": "Fractal Bitcoin",
+          "lastAttemptAt": null,
+          "providerAsOf": null,
+          "providerId": "fractal-bitcoin",
+          "reason": "not_checked",
+          "requiredForLastReview": false
+        },
+        {
+          "admissibleNow": false,
+          "admission": "not_checked",
+          "admittedAtFetch": false,
+          "ageSeconds": null,
+          "assetId": "bitcoinii",
+          "chain": "bitcoin-ii-mainnet",
+          "fetchedAt": null,
+          "label": "BitcoinII (BC2)",
+          "lastAttemptAt": null,
+          "providerAsOf": null,
+          "providerId": "bitcoinii",
+          "reason": "not_checked",
+          "requiredForLastReview": false
+        }
+      ],
+      "evaluatedAt": "2026-10-16T19:16:51.924984Z",
+      "latestReview": {
+        "blockedAssetIds": [],
+        "checkedAt": "2026-10-16T19:16:51.721752Z",
+        "policy": {
+          "basis": "provider_as_of",
+          "cadenceSeconds": null,
+          "futureToleranceSeconds": 60,
+          "maxAgeSeconds": 3600
+        },
+        "requestId": "mux-8dd75ba3ed06457ea7bdfd6f1c128696",
+        "requiredAssetIds": [],
+        "retrievalCached": false
+      },
+      "policy": {
+        "basis": "provider_as_of",
+        "cadenceSeconds": null,
+        "futureToleranceSeconds": 60,
+        "maxAgeSeconds": 3600
+      }
+    },
+    "download": null,
+    "enabled": true,
+    "entitlement": {
+      "allowed": true,
+      "licenceRequired": false,
+      "policy": "licence-free",
+      "reason": "Local AI is available without a licence. MUX routing keeps its existing licence requirements."
+    },
+    "error": null,
+    "installation": {
+      "busy": false,
+      "configurationMatches": true,
+      "cpuProfile": "arm64",
+      "error": null,
+      "installed": true,
+      "modelFilesRetained": true,
+      "phase": "installed",
+      "reason": "64-bit ARM CPU profile.",
+      "releaseVersion": "local-ai-0.1.9-umbrel-arm64",
+      "running": true,
+      "supported": true,
+      "updateRequired": false
+    },
+    "intent": {
+      "actualInference": true,
+      "contractValid": true,
+      "contractVersion": "preferences_v2",
+      "elapsedSeconds": 105.63,
+      "generationAttempted": true,
+      "goalSha256": "33618b10e789b1f6065197e838e5e6ce5ebfad2073be0598090aac6ea3ba2530",
+      "inputSha256": "ba5dfabe9f8dbe25be55aeada3dd77f148455114742665c9de628e7ab756e688",
+      "intent": {
+        "c": [
+          {
+            "a": "5trat",
+            "k": "deprioritize",
+            "q": "minimize allocation to 5trat",
+            "u": null,
+            "v": null,
+            "w": "all"
+          }
+        ],
+        "reason": "",
+        "s": "resolved"
+      },
+      "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+      "intentProvenance": {
+        "attempts": [
+          {
+            "attempt": 1,
+            "completedSources": [
+              1
+            ],
+            "outcome": "resolved",
+            "sourceOutputs": [
+              {
+                "outputSha256": "3e4abbcc070f8c34fdfc6211eaf131c4e6d7e3e6cdc88a52f9ad5077d191c19b",
+                "requirementCount": 1,
+                "sourceId": 1,
+                "status": "resolved"
+              }
+            ],
+            "validatorError": null
+          }
+        ],
+        "compilerRevision": "semantic-inventory-2",
+        "completedSources": [
+          1
+        ],
+        "contract": "preferences_v2",
+        "correctionUsed": false,
+        "extractionRevision": "source-by-source-6",
+        "holdOrigin": null,
+        "sourceCount": 1
+      },
+      "inventorySha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+      "kind": "mission_intent",
+      "lastRunAt": "2026-10-16T19:14:39.200818+00:00",
+      "modelId": "qwen3.5-4b",
+      "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+      "registrySha256": "53daff05d80a253e3900aff4e58b9f8f4bf56541ea952a43c0b74e43378fe606",
+      "requestId": "arm396-dev-minimal-home",
+      "routingAuthority": "none",
+      "runtimeBinarySha256": "e7a1fe417870f5bdbc826376ef1afae3986c8bb4de3dd3dce71e2ac4e2bf337b",
+      "scopeSha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+      "synthetic": false,
+      "validUntil": 1792178304.8302877
+    },
+    "mode": "live",
+    "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+    "models": [
+      {
+        "diskRequiredBytes": 599625984,
+        "diskSupported": true,
+        "downloadBytes": 532517120,
+        "id": "qwen3.5-0.8b",
+        "installed": false,
+        "intentEligibility": {
+          "eligible": false,
+          "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+          "modelId": "qwen3.5-0.8b",
+          "modelSha256": "bd258782e35f7f458f8aced1adc053e6e92e89bc735ba3be89d38a06121dc517",
+          "reason": "This model is available for research but is not qualified for general mining instructions in this release. Select a model marked General intent before reviewing this goal. If none is listed, use another provider or wait for a qualified Local AI release. Your selected model and existing routes are unchanged."
+        },
+        "label": "Qwen3.5 0.8B",
+        "quantization": "Q4_K_M",
+        "ramBudgetBytes": 2147483648,
+        "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+        "sha256": "bd258782e35f7f458f8aced1adc053e6e92e89bc735ba3be89d38a06121dc517",
+        "supported": true,
+        "validated": false
+      },
+      {
+        "diskRequiredBytes": 1347944704,
+        "diskSupported": true,
+        "downloadBytes": 1280835840,
+        "id": "qwen3.5-2b",
+        "installed": false,
+        "intentEligibility": {
+          "eligible": false,
+          "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+          "modelId": "qwen3.5-2b",
+          "modelSha256": "aaf42c8b7c3cab2bf3d69c355048d4a0ee9973d48f16c731c0520ee914699223",
+          "reason": "This model is available for research but is not qualified for general mining instructions in this release. Select a model marked General intent before reviewing this goal. If none is listed, use another provider or wait for a qualified Local AI release. Your selected model and existing routes are unchanged."
+        },
+        "label": "Qwen3.5 2B",
+        "quantization": "Q4_K_M",
+        "ramBudgetBytes": 3221225472,
+        "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+        "sha256": "aaf42c8b7c3cab2bf3d69c355048d4a0ee9973d48f16c731c0520ee914699223",
+        "supported": true,
+        "validated": false
+      },
+      {
+        "diskRequiredBytes": 2808046752,
+        "diskSupported": true,
+        "downloadBytes": 2740937888,
+        "id": "qwen3.5-4b",
+        "installed": true,
+        "intentEligibility": {
+          "eligible": true,
+          "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+          "modelId": "qwen3.5-4b",
+          "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+          "reason": "Qualified for general mining instructions."
+        },
+        "label": "Qwen3.5 4B",
+        "quantization": "Q4_K_M",
+        "ramBudgetBytes": 5368709120,
+        "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+        "sha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+        "supported": true,
+        "validated": false
+      }
+    ],
+    "operation": {
+      "inputSha256": "4e4fa497fb76d090f762803abbd424cc8452a505c6c5d93b9b9c7810f9c23ed5",
+      "kind": "automation",
+      "modelId": "qwen3.5-4b",
+      "requestId": "mux-8dd75ba3ed06457ea7bdfd6f1c128696",
+      "startedAt": "2026-10-16T19:16:25.771536+00:00",
+      "state": "complete"
+    },
+    "phase": "ready",
+    "preferences": {
+      "configured": true,
+      "desiredEnabled": true,
+      "error": null,
+      "restoreAuthority": "host",
+      "resumeState": "off",
+      "state": "saved",
+      "updatedAt": "2026-10-16T19:14:37.179138+00:00"
+    },
+    "research": {
+      "lastRunAt": null,
+      "sources": [],
+      "summary": "No research has run.",
+      "validationStatus": "insufficient_data"
+    },
+    "resources": {
+      "architecture": "aarch64",
+      "available": true,
+      "availableBytes": 7006752768,
+      "containerHeadroomBytes": 5790560256,
+      "cpu": {
+        "available": true,
+        "intervalSeconds": 1.007,
+        "normalization": "100_percent_per_logical_cpu",
+        "sampledAt": "2026-10-16T19:16:51.916846+00:00",
+        "scope": "llama_process",
+        "source": "linux_proc_stat",
+        "usagePercent": 161.83
+      },
+      "cpuFlags": null,
+      "reserveBytes": 1246075084,
+      "sampledAt": "2026-10-16T19:16:51.924001+00:00",
+      "serviceMemoryBytes": 3248926720,
+      "servicePeakMemoryBytes": 3248926720,
+      "totalBytes": 8307167232
+    },
+    "runtime": {
+      "binarySha256": "e7a1fe417870f5bdbc826376ef1afae3986c8bb4de3dd3dce71e2ac4e2bf337b",
+      "detail": "Local model process is running.",
+      "download": null,
+      "exitCode": null,
+      "generation": {
+        "active": false,
+        "completedAt": "2026-10-16T19:16:51.721390+00:00",
+        "completionReceived": true,
+        "current": null,
+        "elapsedSeconds": 25.95,
+        "inferenceObserved": true,
+        "jobId": "05969176ac1d4ddb9d3a120adaf1171b",
+        "kind": "automation",
+        "lastCompleted": {
+          "active": false,
+          "completedAt": "2026-10-16T19:16:51.721390+00:00",
+          "completionReceived": true,
+          "jobId": "05969176ac1d4ddb9d3a120adaf1171b",
+          "kind": "automation",
+          "measurements": {
+            "generatedTokens": 39,
+            "generationMilliseconds": 3620.93,
+            "generationTokensPerSecond": 10.495,
+            "measurement": "completed_response",
+            "promptMilliseconds": 22322.396,
+            "promptTokens": 315,
+            "source": "llama.cpp.timings",
+            "streaming": true
+          },
+          "modelId": "qwen3.5-4b",
+          "requestId": "mux-8dd75ba3ed06457ea7bdfd6f1c128696",
+          "sequence": 2
+        },
+        "measurements": {
+          "generatedTokens": 39,
+          "generationMilliseconds": 3620.93,
+          "generationTokensPerSecond": 10.495,
+          "measurement": "completed_response",
+          "promptMilliseconds": 22322.396,
+          "promptTokens": 315,
+          "source": "llama.cpp.timings",
+          "streaming": true
+        },
+        "modelId": "qwen3.5-4b",
+        "requestId": "mux-8dd75ba3ed06457ea7bdfd6f1c128696",
+        "sequence": 2,
+        "stage": "complete",
+        "startedAt": "2026-10-16T19:16:25.771867+00:00"
+      },
+      "healthy": true,
+      "modelId": "qwen3.5-4b",
+      "pid": 28,
+      "running": true,
+      "starting": false,
+      "stopping": false
+    },
+    "schemaVersion": "1.0",
+    "selectedModel": "qwen3.5-4b",
+    "storage": {
+      "available": true,
+      "freeBytes": 15663702016,
+      "sampledAt": "2026-10-16T19:16:51.924729+00:00",
+      "storedModelBytes": 2740937888,
+      "totalBytes": 19682557952,
+      "usedBytes": 4002078720,
+      "writable": true
+    },
+    "telemetry": {
+      "activity": "idle",
+      "currentJob": null,
+      "lastJob": {
+        "actualInference": true,
+        "completedAt": "2026-10-16T19:16:51.721799+00:00",
+        "durationSeconds": 25.95,
+        "generation": {
+          "generatedTokens": 39,
+          "generationMilliseconds": 3620.93,
+          "generationTokensPerSecond": 10.495,
+          "measurement": "completed_response",
+          "promptMilliseconds": 22322.396,
+          "promptTokens": 315,
+          "source": "llama.cpp.timings",
+          "streaming": true
+        },
+        "generationSequence": 2,
+        "jobId": "05969176ac1d4ddb9d3a120adaf1171b",
+        "kind": "automation",
+        "modelId": "qwen3.5-4b",
+        "outcome": "selected",
+        "requestId": "mux-8dd75ba3ed06457ea7bdfd6f1c128696",
+        "stage": "complete",
+        "startedAt": "2026-10-16T19:16:25.771711+00:00",
+        "state": "completed",
+        "summary": "The model selected an app-supplied candidate with a validated supporting excerpt.",
+        "triggeredAt": "2026-10-16T19:16:25.771562+00:00"
+      },
+      "lastRejected": null,
+      "lastTriggeredAt": "2026-10-16T19:16:25.771562+00:00",
+      "ratesAreLive": false,
+      "telemetrySince": "2026-10-16T19:14:37.119620+00:00"
+    }
+  },
+  "applicationPlatform": {
+    "configDigest": "sha256:32e761e4e942095ed87df4f56404ad4fab3f92e185aa56076a8e827fd07f5bf2",
+    "manifestDigest": "sha256:984dc7bb99dcddbea915dd30f78412005741f77c4c947f2782cd3bb4350f6a88"
+  },
+  "architecture": "arm64",
+  "automaticWarmRetries": 0,
+  "beforeInstall": {
+    "appQueue": {
+      "active": false,
+      "maxPending": 4,
+      "maxWaitSeconds": 120,
+      "oldestWaitSeconds": null,
+      "pending": 0
+    },
+    "automation": null,
+    "busy": false,
+    "capabilities": {
+      "automation": false,
+      "automationContractVersion": "1.0",
+      "automationMaxAssets": 9,
+      "automationMaxAssetsPerCandidate": 5,
+      "automationMaxCandidates": 4,
+      "automationPartialEvidence": "advisory_v1",
+      "automationReady": false,
+      "automationReviewPolicy": "cadence_v1",
+      "automationTasks": [
+        "candidate_comparison"
+      ],
+      "control": false,
+      "download": false,
+      "evidence": false,
+      "missionIntent": "preferences_v1",
+      "missionIntentCompilerRevision": "semantic-inventory-2",
+      "missionIntentContracts": [
+        "preferences_v1",
+        "preferences_v2"
+      ],
+      "missionIntentEligibility": {
+        "eligible": false,
+        "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+        "modelId": "qwen3.5-0.8b",
+        "modelSha256": "bd258782e35f7f458f8aced1adc053e6e92e89bc735ba3be89d38a06121dc517",
+        "reason": "This model is available for research but is not qualified for general mining instructions in this release. Select a model marked General intent before reviewing this goal. If none is listed, use another provider or wait for a qualified Local AI release. Your selected model and existing routes are unchanged."
+      },
+      "missionIntentExtractionRevision": "source-by-source-6",
+      "missionIntentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+      "missionIntentV2Ready": true,
+      "preferencePersistence": true,
+      "preferencePersistenceVersion": "1.0",
+      "preferenceRestoreAuthority": "host",
+      "registeredAssetIds": [
+        "bitcoin",
+        "bitcoin-cash",
+        "digibyte",
+        "litecoin",
+        "dogecoin",
+        "ecash",
+        "peercoin",
+        "fractal-bitcoin",
+        "bitcoinii"
+      ],
+      "registeredAssets": [
+        {
+          "chain": "bitcoin",
+          "id": "bitcoin",
+          "label": "Bitcoin",
+          "providerId": "bitcoin"
+        },
+        {
+          "chain": "bitcoin-cash",
+          "id": "bitcoin-cash",
+          "label": "Bitcoin Cash",
+          "providerId": "bitcoin-cash"
+        },
+        {
+          "chain": "digibyte",
+          "id": "digibyte",
+          "label": "DigiByte",
+          "providerId": "digibyte"
+        },
+        {
+          "chain": "litecoin",
+          "id": "litecoin",
+          "label": "Litecoin",
+          "providerId": "litecoin"
+        },
+        {
+          "chain": "dogecoin",
+          "id": "dogecoin",
+          "label": "Dogecoin",
+          "providerId": "dogecoin"
+        },
+        {
+          "chain": "ecash",
+          "id": "ecash",
+          "label": "eCash",
+          "providerId": "ecash"
+        },
+        {
+          "chain": "peercoin",
+          "id": "peercoin",
+          "label": "Peercoin",
+          "providerId": "peercoin"
+        },
+        {
+          "chain": "fractal-bitcoin",
+          "id": "fractal-bitcoin",
+          "label": "Fractal Bitcoin",
+          "providerId": "fractal-bitcoin"
+        },
+        {
+          "chain": "bitcoin-ii-mainnet",
+          "id": "bitcoinii",
+          "label": "BitcoinII (BC2)",
+          "providerId": "bitcoinii"
+        }
+      ],
+      "remove": false,
+      "research": false,
+      "researchMaxAssets": 9,
+      "selfTest": false,
+      "unsupportedAutomationTasks": [
+        "arbitrary_allocations",
+        "rule_programming",
+        "mission_builder",
+        "unrestricted_web_search"
+      ]
+    },
+    "dataFreshness": {
+      "assets": [
+        {
+          "admissibleNow": false,
+          "admission": "not_checked",
+          "admittedAtFetch": false,
+          "ageSeconds": null,
+          "assetId": "bitcoin",
+          "chain": "bitcoin",
+          "fetchedAt": null,
+          "label": "Bitcoin",
+          "lastAttemptAt": null,
+          "providerAsOf": null,
+          "providerId": "bitcoin",
+          "reason": "not_checked",
+          "requiredForLastReview": false
+        },
+        {
+          "admissibleNow": false,
+          "admission": "not_checked",
+          "admittedAtFetch": false,
+          "ageSeconds": null,
+          "assetId": "bitcoin-cash",
+          "chain": "bitcoin-cash",
+          "fetchedAt": null,
+          "label": "Bitcoin Cash",
+          "lastAttemptAt": null,
+          "providerAsOf": null,
+          "providerId": "bitcoin-cash",
+          "reason": "not_checked",
+          "requiredForLastReview": false
+        },
+        {
+          "admissibleNow": false,
+          "admission": "not_checked",
+          "admittedAtFetch": false,
+          "ageSeconds": null,
+          "assetId": "digibyte",
+          "chain": "digibyte",
+          "fetchedAt": null,
+          "label": "DigiByte",
+          "lastAttemptAt": null,
+          "providerAsOf": null,
+          "providerId": "digibyte",
+          "reason": "not_checked",
+          "requiredForLastReview": false
+        },
+        {
+          "admissibleNow": false,
+          "admission": "not_checked",
+          "admittedAtFetch": false,
+          "ageSeconds": null,
+          "assetId": "litecoin",
+          "chain": "litecoin",
+          "fetchedAt": null,
+          "label": "Litecoin",
+          "lastAttemptAt": null,
+          "providerAsOf": null,
+          "providerId": "litecoin",
+          "reason": "not_checked",
+          "requiredForLastReview": false
+        },
+        {
+          "admissibleNow": false,
+          "admission": "not_checked",
+          "admittedAtFetch": false,
+          "ageSeconds": null,
+          "assetId": "dogecoin",
+          "chain": "dogecoin",
+          "fetchedAt": null,
+          "label": "Dogecoin",
+          "lastAttemptAt": null,
+          "providerAsOf": null,
+          "providerId": "dogecoin",
+          "reason": "not_checked",
+          "requiredForLastReview": false
+        },
+        {
+          "admissibleNow": false,
+          "admission": "not_checked",
+          "admittedAtFetch": false,
+          "ageSeconds": null,
+          "assetId": "ecash",
+          "chain": "ecash",
+          "fetchedAt": null,
+          "label": "eCash",
+          "lastAttemptAt": null,
+          "providerAsOf": null,
+          "providerId": "ecash",
+          "reason": "not_checked",
+          "requiredForLastReview": false
+        },
+        {
+          "admissibleNow": false,
+          "admission": "not_checked",
+          "admittedAtFetch": false,
+          "ageSeconds": null,
+          "assetId": "peercoin",
+          "chain": "peercoin",
+          "fetchedAt": null,
+          "label": "Peercoin",
+          "lastAttemptAt": null,
+          "providerAsOf": null,
+          "providerId": "peercoin",
+          "reason": "not_checked",
+          "requiredForLastReview": false
+        },
+        {
+          "admissibleNow": false,
+          "admission": "not_checked",
+          "admittedAtFetch": false,
+          "ageSeconds": null,
+          "assetId": "fractal-bitcoin",
+          "chain": "fractal-bitcoin",
+          "fetchedAt": null,
+          "label": "Fractal Bitcoin",
+          "lastAttemptAt": null,
+          "providerAsOf": null,
+          "providerId": "fractal-bitcoin",
+          "reason": "not_checked",
+          "requiredForLastReview": false
+        },
+        {
+          "admissibleNow": false,
+          "admission": "not_checked",
+          "admittedAtFetch": false,
+          "ageSeconds": null,
+          "assetId": "bitcoinii",
+          "chain": "bitcoin-ii-mainnet",
+          "fetchedAt": null,
+          "label": "BitcoinII (BC2)",
+          "lastAttemptAt": null,
+          "providerAsOf": null,
+          "providerId": "bitcoinii",
+          "reason": "not_checked",
+          "requiredForLastReview": false
+        }
+      ],
+      "evaluatedAt": "2026-10-16T19:14:37.040360Z",
+      "latestReview": null,
+      "policy": {
+        "basis": "provider_as_of",
+        "cadenceSeconds": null,
+        "futureToleranceSeconds": 60,
+        "maxAgeSeconds": 3600
+      }
+    },
+    "download": null,
+    "enabled": false,
+    "entitlement": {
+      "allowed": true,
+      "licenceRequired": false,
+      "policy": "licence-free",
+      "reason": "Local AI is available without a licence. MUX routing keeps its existing licence requirements."
+    },
+    "error": null,
+    "installation": {
+      "busy": false,
+      "configurationMatches": true,
+      "cpuProfile": "arm64",
+      "error": null,
+      "installed": false,
+      "modelFilesRetained": true,
+      "phase": "not_installed",
+      "reason": "64-bit ARM CPU profile.",
+      "releaseVersion": "local-ai-0.1.9-umbrel-arm64",
+      "running": false,
+      "supported": true,
+      "updateRequired": false
+    },
+    "intent": null,
+    "mode": "live",
+    "modelSha256": "bd258782e35f7f458f8aced1adc053e6e92e89bc735ba3be89d38a06121dc517",
+    "models": [
+      {
+        "diskRequiredBytes": 599625984,
+        "diskSupported": true,
+        "downloadBytes": 532517120,
+        "id": "qwen3.5-0.8b",
+        "installed": false,
+        "intentEligibility": {
+          "eligible": false,
+          "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+          "modelId": "qwen3.5-0.8b",
+          "modelSha256": "bd258782e35f7f458f8aced1adc053e6e92e89bc735ba3be89d38a06121dc517",
+          "reason": "This model is available for research but is not qualified for general mining instructions in this release. Select a model marked General intent before reviewing this goal. If none is listed, use another provider or wait for a qualified Local AI release. Your selected model and existing routes are unchanged."
+        },
+        "label": "Qwen3.5 0.8B",
+        "quantization": "Q4_K_M",
+        "ramBudgetBytes": 2147483648,
+        "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+        "sha256": "bd258782e35f7f458f8aced1adc053e6e92e89bc735ba3be89d38a06121dc517",
+        "supported": true,
+        "validated": false
+      },
+      {
+        "diskRequiredBytes": 1347944704,
+        "diskSupported": true,
+        "downloadBytes": 1280835840,
+        "id": "qwen3.5-2b",
+        "installed": false,
+        "intentEligibility": {
+          "eligible": false,
+          "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+          "modelId": "qwen3.5-2b",
+          "modelSha256": "aaf42c8b7c3cab2bf3d69c355048d4a0ee9973d48f16c731c0520ee914699223",
+          "reason": "This model is available for research but is not qualified for general mining instructions in this release. Select a model marked General intent before reviewing this goal. If none is listed, use another provider or wait for a qualified Local AI release. Your selected model and existing routes are unchanged."
+        },
+        "label": "Qwen3.5 2B",
+        "quantization": "Q4_K_M",
+        "ramBudgetBytes": 3221225472,
+        "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+        "sha256": "aaf42c8b7c3cab2bf3d69c355048d4a0ee9973d48f16c731c0520ee914699223",
+        "supported": true,
+        "validated": false
+      },
+      {
+        "diskRequiredBytes": 2808046752,
+        "diskSupported": true,
+        "downloadBytes": 2740937888,
+        "id": "qwen3.5-4b",
+        "installed": true,
+        "intentEligibility": {
+          "eligible": true,
+          "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+          "modelId": "qwen3.5-4b",
+          "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+          "reason": "Qualified for general mining instructions."
+        },
+        "label": "Qwen3.5 4B",
+        "quantization": "Q4_K_M",
+        "ramBudgetBytes": 5368709120,
+        "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+        "sha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+        "supported": true,
+        "validated": false
+      }
+    ],
+    "operation": null,
+    "phase": "not_installed",
+    "preferences": {
+      "configured": true,
+      "desiredEnabled": false,
+      "error": null,
+      "restoreAuthority": "host",
+      "resumeState": "off",
+      "state": "empty",
+      "updatedAt": null
+    },
+    "research": {
+      "lastRunAt": null,
+      "sources": [],
+      "summary": "No research has run.",
+      "validationStatus": "insufficient_data"
+    },
+    "resources": {
+      "architecture": "aarch64",
+      "available": true,
+      "availableBytes": 7421739008,
+      "containerHeadroomBytes": 6346719232,
+      "cpu": {
+        "available": false,
+        "intervalSeconds": null,
+        "normalization": "100_percent_per_logical_cpu",
+        "sampledAt": "2026-10-16T19:14:37.039849+00:00",
+        "scope": "llama_process",
+        "source": "linux_proc_stat",
+        "usagePercent": null
+      },
+      "cpuFlags": null,
+      "reserveBytes": 1246075084,
+      "sampledAt": "2026-10-16T19:14:37.039521+00:00",
+      "serviceMemoryBytes": null,
+      "servicePeakMemoryBytes": null,
+      "totalBytes": 8307167232
+    },
+    "runtime": {
+      "binarySha256": null,
+      "detail": "Local model is stopped.",
+      "download": null,
+      "exitCode": null,
+      "generation": {
+        "active": false,
+        "completedAt": null,
+        "completionReceived": false,
+        "elapsedSeconds": null,
+        "measurements": null,
+        "sequence": 0,
+        "stage": "idle",
+        "startedAt": null
+      },
+      "healthy": false,
+      "modelId": null,
+      "pid": null,
+      "running": false,
+      "starting": false,
+      "stopping": false
+    },
+    "schemaVersion": "1.0",
+    "selectedModel": "qwen3.5-0.8b",
+    "storage": {
+      "available": true,
+      "freeBytes": 15663763456,
+      "sampledAt": "2026-10-16T19:14:37.039866+00:00",
+      "storedModelBytes": 2740937888,
+      "totalBytes": 19682557952,
+      "usedBytes": 4002017280,
+      "writable": true
+    },
+    "telemetry": {
+      "activity": "off",
+      "currentJob": null,
+      "lastJob": null,
+      "lastRejected": null,
+      "lastTriggeredAt": null,
+      "ratesAreLive": false,
+      "telemetrySince": "2026-10-16T19:14:37.039269+00:00"
+    }
+  },
+  "companionLifecycleReusedFromDEV": false,
+  "companionPlatform": {
+    "configDigest": "sha256:6a2d44c4ef1f3dea9dcf35ff9233926c5edef28c8c50976408fab26f974e7899",
+    "manifestDigest": "sha256:665cf51df9cbf8b17edaaefcdbbfffb2a0534339c7fa6819a4a82f1a8e7e7d8a",
+    "companionSourceRevision": "138fd6cfd1b99cea858f19f39f8976015da1de1b",
+    "companionSourceTree": "75ed4c702490df1f168bf590ba055768c260d236"
+  },
+  "companionSourceRevision": "138fd6cfd1b99cea858f19f39f8976015da1de1b",
+  "companionSourceTree": "75ed4c702490df1f168bf590ba055768c260d236",
+  "componentFull25EvidenceReusedOnlyForUnchangedCompanionSemantics": true,
+  "configSHA256": "a412ebd600f4e7cc72c7495a74262e8aa9af0d461f6f097db1057f0961ef4ccc",
+  "corpusSHA256": "701b5199b342bb5fe5f32bd367078475dc6805e768527a64d12273a73b816b24",
+  "durableOffAfterNormalPackageRestart": true,
+  "enabled": {
+    "appQueue": {
+      "active": false,
+      "maxPending": 4,
+      "maxWaitSeconds": 120,
+      "oldestWaitSeconds": null,
+      "pending": 0
+    },
+    "automation": null,
+    "busy": false,
+    "capabilities": {
+      "automation": true,
+      "automationContractVersion": "1.0",
+      "automationMaxAssets": 9,
+      "automationMaxAssetsPerCandidate": 5,
+      "automationMaxCandidates": 4,
+      "automationPartialEvidence": "advisory_v1",
+      "automationReady": true,
+      "automationReviewPolicy": "cadence_v1",
+      "automationTasks": [
+        "candidate_comparison"
+      ],
+      "control": true,
+      "download": true,
+      "evidence": true,
+      "missionIntent": "preferences_v1",
+      "missionIntentCompilerRevision": "semantic-inventory-2",
+      "missionIntentContracts": [
+        "preferences_v1",
+        "preferences_v2"
+      ],
+      "missionIntentEligibility": {
+        "eligible": true,
+        "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+        "modelId": "qwen3.5-4b",
+        "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+        "reason": "Qualified for general mining instructions."
+      },
+      "missionIntentExtractionRevision": "source-by-source-6",
+      "missionIntentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+      "missionIntentV2Ready": true,
+      "preferencePersistence": true,
+      "preferencePersistenceVersion": "1.0",
+      "preferenceRestoreAuthority": "host",
+      "registeredAssetIds": [
+        "bitcoin",
+        "bitcoin-cash",
+        "digibyte",
+        "litecoin",
+        "dogecoin",
+        "ecash",
+        "peercoin",
+        "fractal-bitcoin",
+        "bitcoinii"
+      ],
+      "registeredAssets": [
+        {
+          "chain": "bitcoin",
+          "id": "bitcoin",
+          "label": "Bitcoin",
+          "providerId": "bitcoin"
+        },
+        {
+          "chain": "bitcoin-cash",
+          "id": "bitcoin-cash",
+          "label": "Bitcoin Cash",
+          "providerId": "bitcoin-cash"
+        },
+        {
+          "chain": "digibyte",
+          "id": "digibyte",
+          "label": "DigiByte",
+          "providerId": "digibyte"
+        },
+        {
+          "chain": "litecoin",
+          "id": "litecoin",
+          "label": "Litecoin",
+          "providerId": "litecoin"
+        },
+        {
+          "chain": "dogecoin",
+          "id": "dogecoin",
+          "label": "Dogecoin",
+          "providerId": "dogecoin"
+        },
+        {
+          "chain": "ecash",
+          "id": "ecash",
+          "label": "eCash",
+          "providerId": "ecash"
+        },
+        {
+          "chain": "peercoin",
+          "id": "peercoin",
+          "label": "Peercoin",
+          "providerId": "peercoin"
+        },
+        {
+          "chain": "fractal-bitcoin",
+          "id": "fractal-bitcoin",
+          "label": "Fractal Bitcoin",
+          "providerId": "fractal-bitcoin"
+        },
+        {
+          "chain": "bitcoin-ii-mainnet",
+          "id": "bitcoinii",
+          "label": "BitcoinII (BC2)",
+          "providerId": "bitcoinii"
+        }
+      ],
+      "remove": true,
+      "research": true,
+      "researchMaxAssets": 9,
+      "selfTest": true,
+      "unsupportedAutomationTasks": [
+        "arbitrary_allocations",
+        "rule_programming",
+        "mission_builder",
+        "unrestricted_web_search"
+      ]
+    },
+    "dataFreshness": {
+      "assets": [
+        {
+          "admissibleNow": false,
+          "admission": "not_checked",
+          "admittedAtFetch": false,
+          "ageSeconds": null,
+          "assetId": "bitcoin",
+          "chain": "bitcoin",
+          "fetchedAt": null,
+          "label": "Bitcoin",
+          "lastAttemptAt": null,
+          "providerAsOf": null,
+          "providerId": "bitcoin",
+          "reason": "not_checked",
+          "requiredForLastReview": false
+        },
+        {
+          "admissibleNow": false,
+          "admission": "not_checked",
+          "admittedAtFetch": false,
+          "ageSeconds": null,
+          "assetId": "bitcoin-cash",
+          "chain": "bitcoin-cash",
+          "fetchedAt": null,
+          "label": "Bitcoin Cash",
+          "lastAttemptAt": null,
+          "providerAsOf": null,
+          "providerId": "bitcoin-cash",
+          "reason": "not_checked",
+          "requiredForLastReview": false
+        },
+        {
+          "admissibleNow": false,
+          "admission": "not_checked",
+          "admittedAtFetch": false,
+          "ageSeconds": null,
+          "assetId": "digibyte",
+          "chain": "digibyte",
+          "fetchedAt": null,
+          "label": "DigiByte",
+          "lastAttemptAt": null,
+          "providerAsOf": null,
+          "providerId": "digibyte",
+          "reason": "not_checked",
+          "requiredForLastReview": false
+        },
+        {
+          "admissibleNow": false,
+          "admission": "not_checked",
+          "admittedAtFetch": false,
+          "ageSeconds": null,
+          "assetId": "litecoin",
+          "chain": "litecoin",
+          "fetchedAt": null,
+          "label": "Litecoin",
+          "lastAttemptAt": null,
+          "providerAsOf": null,
+          "providerId": "litecoin",
+          "reason": "not_checked",
+          "requiredForLastReview": false
+        },
+        {
+          "admissibleNow": false,
+          "admission": "not_checked",
+          "admittedAtFetch": false,
+          "ageSeconds": null,
+          "assetId": "dogecoin",
+          "chain": "dogecoin",
+          "fetchedAt": null,
+          "label": "Dogecoin",
+          "lastAttemptAt": null,
+          "providerAsOf": null,
+          "providerId": "dogecoin",
+          "reason": "not_checked",
+          "requiredForLastReview": false
+        },
+        {
+          "admissibleNow": false,
+          "admission": "not_checked",
+          "admittedAtFetch": false,
+          "ageSeconds": null,
+          "assetId": "ecash",
+          "chain": "ecash",
+          "fetchedAt": null,
+          "label": "eCash",
+          "lastAttemptAt": null,
+          "providerAsOf": null,
+          "providerId": "ecash",
+          "reason": "not_checked",
+          "requiredForLastReview": false
+        },
+        {
+          "admissibleNow": false,
+          "admission": "not_checked",
+          "admittedAtFetch": false,
+          "ageSeconds": null,
+          "assetId": "peercoin",
+          "chain": "peercoin",
+          "fetchedAt": null,
+          "label": "Peercoin",
+          "lastAttemptAt": null,
+          "providerAsOf": null,
+          "providerId": "peercoin",
+          "reason": "not_checked",
+          "requiredForLastReview": false
+        },
+        {
+          "admissibleNow": false,
+          "admission": "not_checked",
+          "admittedAtFetch": false,
+          "ageSeconds": null,
+          "assetId": "fractal-bitcoin",
+          "chain": "fractal-bitcoin",
+          "fetchedAt": null,
+          "label": "Fractal Bitcoin",
+          "lastAttemptAt": null,
+          "providerAsOf": null,
+          "providerId": "fractal-bitcoin",
+          "reason": "not_checked",
+          "requiredForLastReview": false
+        },
+        {
+          "admissibleNow": false,
+          "admission": "not_checked",
+          "admittedAtFetch": false,
+          "ageSeconds": null,
+          "assetId": "bitcoinii",
+          "chain": "bitcoin-ii-mainnet",
+          "fetchedAt": null,
+          "label": "BitcoinII (BC2)",
+          "lastAttemptAt": null,
+          "providerAsOf": null,
+          "providerId": "bitcoinii",
+          "reason": "not_checked",
+          "requiredForLastReview": false
+        }
+      ],
+      "evaluatedAt": "2026-10-16T19:14:39.189209Z",
+      "latestReview": null,
+      "policy": {
+        "basis": "provider_as_of",
+        "cadenceSeconds": null,
+        "futureToleranceSeconds": 60,
+        "maxAgeSeconds": 3600
+      }
+    },
+    "download": null,
+    "enabled": true,
+    "entitlement": {
+      "allowed": true,
+      "licenceRequired": false,
+      "policy": "licence-free",
+      "reason": "Local AI is available without a licence. MUX routing keeps its existing licence requirements."
+    },
+    "error": null,
+    "installation": {
+      "busy": false,
+      "configurationMatches": true,
+      "cpuProfile": "arm64",
+      "error": null,
+      "installed": true,
+      "modelFilesRetained": true,
+      "phase": "installed",
+      "reason": "64-bit ARM CPU profile.",
+      "releaseVersion": "local-ai-0.1.9-umbrel-arm64",
+      "running": true,
+      "supported": true,
+      "updateRequired": false
+    },
+    "intent": null,
+    "mode": "live",
+    "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+    "models": [
+      {
+        "diskRequiredBytes": 599625984,
+        "diskSupported": true,
+        "downloadBytes": 532517120,
+        "id": "qwen3.5-0.8b",
+        "installed": false,
+        "intentEligibility": {
+          "eligible": false,
+          "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+          "modelId": "qwen3.5-0.8b",
+          "modelSha256": "bd258782e35f7f458f8aced1adc053e6e92e89bc735ba3be89d38a06121dc517",
+          "reason": "This model is available for research but is not qualified for general mining instructions in this release. Select a model marked General intent before reviewing this goal. If none is listed, use another provider or wait for a qualified Local AI release. Your selected model and existing routes are unchanged."
+        },
+        "label": "Qwen3.5 0.8B",
+        "quantization": "Q4_K_M",
+        "ramBudgetBytes": 2147483648,
+        "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+        "sha256": "bd258782e35f7f458f8aced1adc053e6e92e89bc735ba3be89d38a06121dc517",
+        "supported": true,
+        "validated": false
+      },
+      {
+        "diskRequiredBytes": 1347944704,
+        "diskSupported": true,
+        "downloadBytes": 1280835840,
+        "id": "qwen3.5-2b",
+        "installed": false,
+        "intentEligibility": {
+          "eligible": false,
+          "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+          "modelId": "qwen3.5-2b",
+          "modelSha256": "aaf42c8b7c3cab2bf3d69c355048d4a0ee9973d48f16c731c0520ee914699223",
+          "reason": "This model is available for research but is not qualified for general mining instructions in this release. Select a model marked General intent before reviewing this goal. If none is listed, use another provider or wait for a qualified Local AI release. Your selected model and existing routes are unchanged."
+        },
+        "label": "Qwen3.5 2B",
+        "quantization": "Q4_K_M",
+        "ramBudgetBytes": 3221225472,
+        "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+        "sha256": "aaf42c8b7c3cab2bf3d69c355048d4a0ee9973d48f16c731c0520ee914699223",
+        "supported": true,
+        "validated": false
+      },
+      {
+        "diskRequiredBytes": 2808046752,
+        "diskSupported": true,
+        "downloadBytes": 2740937888,
+        "id": "qwen3.5-4b",
+        "installed": true,
+        "intentEligibility": {
+          "eligible": true,
+          "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+          "modelId": "qwen3.5-4b",
+          "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+          "reason": "Qualified for general mining instructions."
+        },
+        "label": "Qwen3.5 4B",
+        "quantization": "Q4_K_M",
+        "ramBudgetBytes": 5368709120,
+        "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+        "sha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+        "supported": true,
+        "validated": false
+      }
+    ],
+    "operation": null,
+    "phase": "ready",
+    "preferences": {
+      "configured": true,
+      "desiredEnabled": true,
+      "error": null,
+      "restoreAuthority": "host",
+      "resumeState": "off",
+      "state": "saved",
+      "updatedAt": "2026-10-16T19:14:37.179138+00:00"
+    },
+    "research": {
+      "lastRunAt": null,
+      "sources": [],
+      "summary": "No research has run.",
+      "validationStatus": "insufficient_data"
+    },
+    "resources": {
+      "architecture": "aarch64",
+      "available": true,
+      "availableBytes": 7226503168,
+      "containerHeadroomBytes": 6012301312,
+      "cpu": {
+        "available": false,
+        "intervalSeconds": null,
+        "normalization": "100_percent_per_logical_cpu",
+        "sampledAt": "2026-10-16T19:14:39.188710+00:00",
+        "scope": "llama_process",
+        "source": "linux_proc_stat",
+        "usagePercent": null
+      },
+      "cpuFlags": null,
+      "reserveBytes": 1246075084,
+      "sampledAt": "2026-10-16T19:14:39.188364+00:00",
+      "serviceMemoryBytes": 3028267008,
+      "servicePeakMemoryBytes": 3028267008,
+      "totalBytes": 8307167232
+    },
+    "runtime": {
+      "binarySha256": "e7a1fe417870f5bdbc826376ef1afae3986c8bb4de3dd3dce71e2ac4e2bf337b",
+      "detail": "Local model process is running.",
+      "download": null,
+      "exitCode": null,
+      "generation": {
+        "active": false,
+        "completedAt": null,
+        "completionReceived": false,
+        "elapsedSeconds": null,
+        "measurements": null,
+        "sequence": 0,
+        "stage": "idle",
+        "startedAt": null
+      },
+      "healthy": true,
+      "modelId": "qwen3.5-4b",
+      "pid": 28,
+      "running": true,
+      "starting": false,
+      "stopping": false
+    },
+    "schemaVersion": "1.0",
+    "selectedModel": "qwen3.5-4b",
+    "storage": {
+      "available": true,
+      "freeBytes": 15663751168,
+      "sampledAt": "2026-10-16T19:14:39.189002+00:00",
+      "storedModelBytes": 2740937888,
+      "totalBytes": 19682557952,
+      "usedBytes": 4002029568,
+      "writable": true
+    },
+    "telemetry": {
+      "activity": "idle",
+      "currentJob": null,
+      "lastJob": null,
+      "lastRejected": null,
+      "lastTriggeredAt": null,
+      "ratesAreLive": false,
+      "telemetrySince": "2026-10-16T19:14:37.119620+00:00"
+    }
+  },
+  "endedAt": "2026-10-16T19:25:47.043367+00:00",
+  "existingMuxStatePreserved": true,
+  "firstColdIntentPassed": true,
+  "freshModelProcessForEachChannel": true,
+  "full25Repeated": false,
+  "health": {
+    "app": "5tratMux",
+    "channel": "DEV",
+    "observedAt": 1792178076,
+    "ok": true,
+    "version": "0.9.82-dev"
+  },
+  "hostPageCacheEvictionClaimed": false,
+  "imageRef": "ghcr.io/willitmod/5tratmux-app:0.9.82-umbrel-dev@sha256:5eb55feec01de1a3b4bdf16027dd22a4fdf5844c83c016996eeeace0e876ca5e",
+  "intentAttempts": [
+    {
+      "actualIdentityMatches": true,
+      "initialResponse": {
+        "httpStatus": 202,
+        "value": {
+          "accepted": true,
+          "inputSha256": "ba5dfabe9f8dbe25be55aeada3dd77f148455114742665c9de628e7ab756e688",
+          "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+          "modelId": "qwen3.5-4b",
+          "phase": "intent",
+          "requestId": "arm396-dev-minimal-home"
+        }
+      },
+      "operation": {
+        "inputSha256": "ba5dfabe9f8dbe25be55aeada3dd77f148455114742665c9de628e7ab756e688",
+        "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+        "kind": "intent",
+        "modelId": "qwen3.5-4b",
+        "requestId": "arm396-dev-minimal-home",
+        "startedAt": "2026-10-16T19:14:39.199948+00:00",
+        "state": "complete"
+      },
+      "passed": true,
+      "requestId": "arm396-dev-minimal-home",
+      "resources": {
+        "architecture": "aarch64",
+        "available": true,
+        "availableBytes": 7001833472,
+        "containerHeadroomBytes": 5790478336,
+        "cpu": {
+          "available": true,
+          "intervalSeconds": 2.014,
+          "normalization": "100_percent_per_logical_cpu",
+          "sampledAt": "2026-10-16T19:16:25.747595+00:00",
+          "scope": "llama_process",
+          "source": "linux_proc_stat",
+          "usagePercent": 106.77
+        },
+        "cpuFlags": null,
+        "reserveBytes": 1246075084,
+        "sampledAt": "2026-10-16T19:16:25.746653+00:00",
+        "serviceMemoryBytes": 3248742400,
+        "servicePeakMemoryBytes": 3248742400,
+        "totalBytes": 8307167232
+      },
+      "result": {
+        "actualInference": true,
+        "contractValid": true,
+        "contractVersion": "preferences_v2",
+        "elapsedSeconds": 105.63,
+        "generationAttempted": true,
+        "goalSha256": "33618b10e789b1f6065197e838e5e6ce5ebfad2073be0598090aac6ea3ba2530",
+        "inputSha256": "ba5dfabe9f8dbe25be55aeada3dd77f148455114742665c9de628e7ab756e688",
+        "intent": {
+          "c": [
+            {
+              "a": "5trat",
+              "k": "deprioritize",
+              "q": "minimize allocation to 5trat",
+              "u": null,
+              "v": null,
+              "w": "all"
+            }
+          ],
+          "reason": "",
+          "s": "resolved"
+        },
+        "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+        "intentProvenance": {
+          "attempts": [
+            {
+              "attempt": 1,
+              "completedSources": [
+                1
+              ],
+              "outcome": "resolved",
+              "sourceOutputs": [
+                {
+                  "outputSha256": "3e4abbcc070f8c34fdfc6211eaf131c4e6d7e3e6cdc88a52f9ad5077d191c19b",
+                  "requirementCount": 1,
+                  "sourceId": 1,
+                  "status": "resolved"
+                }
+              ],
+              "validatorError": null
+            }
+          ],
+          "compilerRevision": "semantic-inventory-2",
+          "completedSources": [
+            1
+          ],
+          "contract": "preferences_v2",
+          "correctionUsed": false,
+          "extractionRevision": "source-by-source-6",
+          "holdOrigin": null,
+          "sourceCount": 1
+        },
+        "inventorySha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "kind": "mission_intent",
+        "lastRunAt": "2026-10-16T19:14:39.200818+00:00",
+        "modelId": "qwen3.5-4b",
+        "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+        "registrySha256": "53daff05d80a253e3900aff4e58b9f8f4bf56541ea952a43c0b74e43378fe606",
+        "requestId": "arm396-dev-minimal-home",
+        "routingAuthority": "none",
+        "runtimeBinarySha256": "e7a1fe417870f5bdbc826376ef1afae3986c8bb4de3dd3dce71e2ac4e2bf337b",
+        "scopeSha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "synthetic": false,
+        "validUntil": 1792178304.8302877
+      },
+      "runtime": {
+        "binarySha256": "e7a1fe417870f5bdbc826376ef1afae3986c8bb4de3dd3dce71e2ac4e2bf337b",
+        "detail": "Local model process is running.",
+        "download": null,
+        "exitCode": null,
+        "generation": {
+          "active": false,
+          "completedAt": "2026-10-16T19:16:24.806990+00:00",
+          "completionReceived": true,
+          "current": null,
+          "elapsedSeconds": 105.556,
+          "inferenceObserved": true,
+          "jobId": "addb47171bb341b5868eb08e7d8befdd",
+          "kind": "intent",
+          "lastCompleted": {
+            "active": false,
+            "completedAt": "2026-10-16T19:16:24.806990+00:00",
+            "completionReceived": true,
+            "jobId": "addb47171bb341b5868eb08e7d8befdd",
+            "kind": "intent",
+            "measurements": {
+              "generatedTokens": 34,
+              "generationMilliseconds": 3193.373,
+              "generationTokensPerSecond": 10.334,
+              "measurement": "completed_response",
+              "promptMilliseconds": 102314.679,
+              "promptTokens": 1460,
+              "source": "llama.cpp.timings",
+              "streaming": true
+            },
+            "modelId": "qwen3.5-4b",
+            "requestId": "arm396-dev-minimal-home",
+            "sequence": 1
+          },
+          "measurements": {
+            "generatedTokens": 34,
+            "generationMilliseconds": 3193.373,
+            "generationTokensPerSecond": 10.334,
+            "measurement": "completed_response",
+            "promptMilliseconds": 102314.679,
+            "promptTokens": 1460,
+            "source": "llama.cpp.timings",
+            "streaming": true
+          },
+          "modelId": "qwen3.5-4b",
+          "requestId": "arm396-dev-minimal-home",
+          "sequence": 1,
+          "stage": "complete",
+          "startedAt": "2026-10-16T19:14:39.251294+00:00"
+        },
+        "healthy": true,
+        "modelId": "qwen3.5-4b",
+        "pid": 28,
+        "running": true,
+        "starting": false,
+        "stopping": false
+      },
+      "scope": "first-fresh-model-process-intent",
+      "seconds": 106.562,
+      "submittedAt": "2026-10-16T19:14:39.191718+00:00"
+    }
+  ],
+  "intentPayload": {
+    "contractVersion": "preferences_v2",
+    "goal": "minimize allocation to 5trat",
+    "goalSha256": "33618b10e789b1f6065197e838e5e6ce5ebfad2073be0598090aac6ea3ba2530",
+    "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+    "inventory": {
+      "apps": [
+        {
+          "assetIds": [
+            "bitcoin-cash"
+          ],
+          "group": "sha256",
+          "id": "axebch",
+          "name": "AxeBCH"
+        },
+        {
+          "assetIds": [
+            "bitcoin"
+          ],
+          "group": "sha256",
+          "id": "axebtc",
+          "name": "AxeBTC"
+        },
+        {
+          "assetIds": [
+            "digibyte"
+          ],
+          "group": "sha256",
+          "id": "axedgb",
+          "name": "AxeDGB"
+        },
+        {
+          "assetIds": [
+            "bitcoinii"
+          ],
+          "group": "sha256",
+          "id": "axebc2",
+          "name": "AxeBC2"
+        },
+        {
+          "assetIds": [
+            "5trat"
+          ],
+          "group": "sha256",
+          "id": "5tratsmack",
+          "name": "5tratSmack"
+        }
+      ],
+      "workers": [
+        {
+          "group": "sha256",
+          "hashrateHps": 100000000000000.0,
+          "id": "garage",
+          "name": "Garage Avalon"
+        },
+        {
+          "group": "sha256",
+          "hashrateHps": 10000000000000.0,
+          "id": "desk",
+          "name": "Desk Miner"
+        },
+        {
+          "group": "sha256",
+          "hashrateHps": 1000000000000.0,
+          "id": "small",
+          "name": "Small Miner"
+        },
+        {
+          "group": "sha256",
+          "hashrateHps": 100000000000.0,
+          "id": "tiny",
+          "name": "Tiny Miner"
+        }
+      ]
+    },
+    "registry": [
+      {
+        "aliases": [
+          "BTC",
+          "Bitcoin",
+          "xBTC",
+          "AxeBTC"
+        ],
+        "assetId": "bitcoin",
+        "label": "Bitcoin",
+        "routeGroups": [
+          "sha256"
+        ]
+      },
+      {
+        "aliases": [
+          "BCH",
+          "Bitcoin Cash",
+          "xBCH",
+          "AxeBCH"
+        ],
+        "assetId": "bitcoin-cash",
+        "label": "Bitcoin Cash",
+        "routeGroups": [
+          "sha256"
+        ]
+      },
+      {
+        "aliases": [
+          "DGB",
+          "DigiByte",
+          "AxeDGB",
+          "xDGB"
+        ],
+        "assetId": "digibyte",
+        "label": "DigiByte",
+        "routeGroups": [
+          "sha256"
+        ]
+      },
+      {
+        "aliases": [
+          "LTC",
+          "Litecoin",
+          "PowPow"
+        ],
+        "assetId": "litecoin",
+        "label": "Litecoin",
+        "routeGroups": [
+          "scrypt"
+        ]
+      },
+      {
+        "aliases": [
+          "DOGE",
+          "Dogecoin"
+        ],
+        "assetId": "dogecoin",
+        "label": "Dogecoin",
+        "routeGroups": [
+          "scrypt"
+        ]
+      },
+      {
+        "aliases": [
+          "XEC",
+          "eCash",
+          "AxeXEC"
+        ],
+        "assetId": "ecash",
+        "label": "eCash",
+        "routeGroups": [
+          "sha256"
+        ]
+      },
+      {
+        "aliases": [
+          "PPC",
+          "Peercoin",
+          "AxePPC"
+        ],
+        "assetId": "peercoin",
+        "label": "Peercoin",
+        "routeGroups": [
+          "sha256"
+        ]
+      },
+      {
+        "aliases": [
+          "FB",
+          "Fractal Bitcoin",
+          "FracAttack",
+          "axefracattack"
+        ],
+        "assetId": "fractal-bitcoin",
+        "label": "Fractal Bitcoin",
+        "routeGroups": [
+          "sha256"
+        ]
+      },
+      {
+        "aliases": [
+          "BC2",
+          "Bitcoin II",
+          "BitcoinII",
+          "AxeBC2"
+        ],
+        "assetId": "bitcoinii",
+        "label": "Bitcoin II",
+        "routeGroups": [
+          "sha256"
+        ]
+      },
+      {
+        "aliases": [
+          "5TRAT",
+          "StratSmack",
+          "5tratSmack"
+        ],
+        "assetId": "5trat",
+        "label": "5TRAT",
+        "routeGroups": [
+          "sha256"
+        ]
+      }
+    ],
+    "requestId": "arm396-dev-minimal-home",
+    "scopeSha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462"
+  },
+  "intentProfileSHA256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+  "kind": "native-container-package-qualification",
+  "licenceStillInactiveAfterLifecycle": true,
+  "llamaSHA256": "e7a1fe417870f5bdbc826376ef1afae3986c8bb4de3dd3dce71e2ac4e2bf337b",
+  "localAIImageRef": "ghcr.io/willitmod/5tratmux-app:local-ai-0.1.9-umbrel@sha256:b8050920c408eab295ba5848f209d560b5207f821901e09d7a6788c1e2b175d3",
+  "localAiOnOffRemovalVerified": true,
+  "modelDownloadsPerformed": false,
+  "newOperatorPasswordWithheld": true,
+  "noHostControllerOrDockerSocket": true,
+  "normalCompareViaFrozenProviderTestPassed": true,
+  "normalPackageOutcome": "first-intent-passed",
+  "normalRecipeNetworkMode": "default-compose-network",
+  "off": {
+    "appQueue": {
+      "active": false,
+      "maxPending": 4,
+      "maxWaitSeconds": 120,
+      "oldestWaitSeconds": null,
+      "pending": 0
+    },
+    "automation": {
+      "actualInference": true,
+      "contractValid": true,
+      "contractVersion": "1.0",
+      "dataFreshness": {
+        "assets": [],
+        "evaluatedAt": "2026-10-16T19:16:51.721752Z",
+        "latestReview": {
+          "blockedAssetIds": [],
+          "checkedAt": "2026-10-16T19:16:51.721752Z",
+          "policy": {
+            "basis": "provider_as_of",
+            "cadenceSeconds": null,
+            "futureToleranceSeconds": 60,
+            "maxAgeSeconds": 3600
+          },
+          "requestId": "mux-8dd75ba3ed06457ea7bdfd6f1c128696",
+          "requiredAssetIds": [],
+          "retrievalCached": false
+        },
+        "policy": {
+          "basis": "provider_as_of",
+          "cadenceSeconds": null,
+          "futureToleranceSeconds": 60,
+          "maxAgeSeconds": 3600
+        }
+      },
+      "decision": "select",
+      "elapsedSeconds": 25.95,
+      "evidenceSha256": "763ec470d763018fe1c078ea5df6e9e642138d88df02a3d89509bb6e61d8e8cb",
+      "facts": [],
+      "generationAttempted": true,
+      "inputSha256": "4e4fa497fb76d090f762803abbd424cc8452a505c6c5d93b9b9c7810f9c23ed5",
+      "kind": "candidate_comparison",
+      "lastRunAt": "2026-10-16T19:16:25.771804+00:00",
+      "modelId": "qwen3.5-4b",
+      "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+      "observations": [
+        {
+          "quote": "Connection test only. Retain existing routes. No change to any mining allocation is authorized by this test.",
+          "sourceId": "candidate-1"
+        }
+      ],
+      "reason": "The local model selected a supplied candidate with an exact supporting excerpt; the app must revalidate its unchanged plan and scope.",
+      "requestId": "mux-8dd75ba3ed06457ea7bdfd6f1c128696",
+      "retrievalCached": false,
+      "retrievalMode": "cached_node_only",
+      "routingAuthority": "app_guardrails_only",
+      "runtimeBinarySha256": "e7a1fe417870f5bdbc826376ef1afae3986c8bb4de3dd3dce71e2ac4e2bf337b",
+      "selectedCandidateId": "retain-current",
+      "sources": [
+        {
+          "id": "candidate-1",
+          "origin": "app_projected_candidate",
+          "suppliedAt": "2026-10-16T19:16:25.771804+00:00",
+          "title": "Retain current routes"
+        }
+      ],
+      "summary": "Selected app candidate retain-current: Connection test only. Retain existing routes. No change to any mining allocation is authorized by this test.",
+      "synthetic": false,
+      "validUntil": 1792178331.7217495,
+      "warnings": []
+    },
+    "busy": false,
+    "capabilities": {
+      "automation": true,
+      "automationContractVersion": "1.0",
+      "automationMaxAssets": 9,
+      "automationMaxAssetsPerCandidate": 5,
+      "automationMaxCandidates": 4,
+      "automationPartialEvidence": "advisory_v1",
+      "automationReady": false,
+      "automationReviewPolicy": "cadence_v1",
+      "automationTasks": [
+        "candidate_comparison"
+      ],
+      "control": true,
+      "download": true,
+      "evidence": true,
+      "missionIntent": "preferences_v1",
+      "missionIntentCompilerRevision": "semantic-inventory-2",
+      "missionIntentContracts": [
+        "preferences_v1",
+        "preferences_v2"
+      ],
+      "missionIntentEligibility": {
+        "eligible": true,
+        "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+        "modelId": "qwen3.5-4b",
+        "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+        "reason": "Qualified for general mining instructions."
+      },
+      "missionIntentExtractionRevision": "source-by-source-6",
+      "missionIntentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+      "missionIntentV2Ready": true,
+      "preferencePersistence": true,
+      "preferencePersistenceVersion": "1.0",
+      "preferenceRestoreAuthority": "host",
+      "registeredAssetIds": [
+        "bitcoin",
+        "bitcoin-cash",
+        "digibyte",
+        "litecoin",
+        "dogecoin",
+        "ecash",
+        "peercoin",
+        "fractal-bitcoin",
+        "bitcoinii"
+      ],
+      "registeredAssets": [
+        {
+          "chain": "bitcoin",
+          "id": "bitcoin",
+          "label": "Bitcoin",
+          "providerId": "bitcoin"
+        },
+        {
+          "chain": "bitcoin-cash",
+          "id": "bitcoin-cash",
+          "label": "Bitcoin Cash",
+          "providerId": "bitcoin-cash"
+        },
+        {
+          "chain": "digibyte",
+          "id": "digibyte",
+          "label": "DigiByte",
+          "providerId": "digibyte"
+        },
+        {
+          "chain": "litecoin",
+          "id": "litecoin",
+          "label": "Litecoin",
+          "providerId": "litecoin"
+        },
+        {
+          "chain": "dogecoin",
+          "id": "dogecoin",
+          "label": "Dogecoin",
+          "providerId": "dogecoin"
+        },
+        {
+          "chain": "ecash",
+          "id": "ecash",
+          "label": "eCash",
+          "providerId": "ecash"
+        },
+        {
+          "chain": "peercoin",
+          "id": "peercoin",
+          "label": "Peercoin",
+          "providerId": "peercoin"
+        },
+        {
+          "chain": "fractal-bitcoin",
+          "id": "fractal-bitcoin",
+          "label": "Fractal Bitcoin",
+          "providerId": "fractal-bitcoin"
+        },
+        {
+          "chain": "bitcoin-ii-mainnet",
+          "id": "bitcoinii",
+          "label": "BitcoinII (BC2)",
+          "providerId": "bitcoinii"
+        }
+      ],
+      "remove": true,
+      "research": true,
+      "researchMaxAssets": 9,
+      "selfTest": true,
+      "unsupportedAutomationTasks": [
+        "arbitrary_allocations",
+        "rule_programming",
+        "mission_builder",
+        "unrestricted_web_search"
+      ]
+    },
+    "dataFreshness": {
+      "assets": [
+        {
+          "admissibleNow": false,
+          "admission": "not_checked",
+          "admittedAtFetch": false,
+          "ageSeconds": null,
+          "assetId": "bitcoin",
+          "chain": "bitcoin",
+          "fetchedAt": null,
+          "label": "Bitcoin",
+          "lastAttemptAt": null,
+          "providerAsOf": null,
+          "providerId": "bitcoin",
+          "reason": "not_checked",
+          "requiredForLastReview": false
+        },
+        {
+          "admissibleNow": false,
+          "admission": "not_checked",
+          "admittedAtFetch": false,
+          "ageSeconds": null,
+          "assetId": "bitcoin-cash",
+          "chain": "bitcoin-cash",
+          "fetchedAt": null,
+          "label": "Bitcoin Cash",
+          "lastAttemptAt": null,
+          "providerAsOf": null,
+          "providerId": "bitcoin-cash",
+          "reason": "not_checked",
+          "requiredForLastReview": false
+        },
+        {
+          "admissibleNow": false,
+          "admission": "not_checked",
+          "admittedAtFetch": false,
+          "ageSeconds": null,
+          "assetId": "digibyte",
+          "chain": "digibyte",
+          "fetchedAt": null,
+          "label": "DigiByte",
+          "lastAttemptAt": null,
+          "providerAsOf": null,
+          "providerId": "digibyte",
+          "reason": "not_checked",
+          "requiredForLastReview": false
+        },
+        {
+          "admissibleNow": false,
+          "admission": "not_checked",
+          "admittedAtFetch": false,
+          "ageSeconds": null,
+          "assetId": "litecoin",
+          "chain": "litecoin",
+          "fetchedAt": null,
+          "label": "Litecoin",
+          "lastAttemptAt": null,
+          "providerAsOf": null,
+          "providerId": "litecoin",
+          "reason": "not_checked",
+          "requiredForLastReview": false
+        },
+        {
+          "admissibleNow": false,
+          "admission": "not_checked",
+          "admittedAtFetch": false,
+          "ageSeconds": null,
+          "assetId": "dogecoin",
+          "chain": "dogecoin",
+          "fetchedAt": null,
+          "label": "Dogecoin",
+          "lastAttemptAt": null,
+          "providerAsOf": null,
+          "providerId": "dogecoin",
+          "reason": "not_checked",
+          "requiredForLastReview": false
+        },
+        {
+          "admissibleNow": false,
+          "admission": "not_checked",
+          "admittedAtFetch": false,
+          "ageSeconds": null,
+          "assetId": "ecash",
+          "chain": "ecash",
+          "fetchedAt": null,
+          "label": "eCash",
+          "lastAttemptAt": null,
+          "providerAsOf": null,
+          "providerId": "ecash",
+          "reason": "not_checked",
+          "requiredForLastReview": false
+        },
+        {
+          "admissibleNow": false,
+          "admission": "not_checked",
+          "admittedAtFetch": false,
+          "ageSeconds": null,
+          "assetId": "peercoin",
+          "chain": "peercoin",
+          "fetchedAt": null,
+          "label": "Peercoin",
+          "lastAttemptAt": null,
+          "providerAsOf": null,
+          "providerId": "peercoin",
+          "reason": "not_checked",
+          "requiredForLastReview": false
+        },
+        {
+          "admissibleNow": false,
+          "admission": "not_checked",
+          "admittedAtFetch": false,
+          "ageSeconds": null,
+          "assetId": "fractal-bitcoin",
+          "chain": "fractal-bitcoin",
+          "fetchedAt": null,
+          "label": "Fractal Bitcoin",
+          "lastAttemptAt": null,
+          "providerAsOf": null,
+          "providerId": "fractal-bitcoin",
+          "reason": "not_checked",
+          "requiredForLastReview": false
+        },
+        {
+          "admissibleNow": false,
+          "admission": "not_checked",
+          "admittedAtFetch": false,
+          "ageSeconds": null,
+          "assetId": "bitcoinii",
+          "chain": "bitcoin-ii-mainnet",
+          "fetchedAt": null,
+          "label": "BitcoinII (BC2)",
+          "lastAttemptAt": null,
+          "providerAsOf": null,
+          "providerId": "bitcoinii",
+          "reason": "not_checked",
+          "requiredForLastReview": false
+        }
+      ],
+      "evaluatedAt": "2026-10-16T19:25:39.349409Z",
+      "latestReview": {
+        "blockedAssetIds": [],
+        "checkedAt": "2026-10-16T19:16:51.721752Z",
+        "policy": {
+          "basis": "provider_as_of",
+          "cadenceSeconds": null,
+          "futureToleranceSeconds": 60,
+          "maxAgeSeconds": 3600
+        },
+        "requestId": "mux-8dd75ba3ed06457ea7bdfd6f1c128696",
+        "requiredAssetIds": [],
+        "retrievalCached": false
+      },
+      "policy": {
+        "basis": "provider_as_of",
+        "cadenceSeconds": null,
+        "futureToleranceSeconds": 60,
+        "maxAgeSeconds": 3600
+      }
+    },
+    "download": null,
+    "enabled": false,
+    "entitlement": {
+      "allowed": true,
+      "licenceRequired": false,
+      "policy": "licence-free",
+      "reason": "Local AI is available without a licence. MUX routing keeps its existing licence requirements."
+    },
+    "error": null,
+    "installation": {
+      "busy": false,
+      "configurationMatches": true,
+      "cpuProfile": "arm64",
+      "error": null,
+      "installed": true,
+      "modelFilesRetained": true,
+      "phase": "installed",
+      "reason": "64-bit ARM CPU profile.",
+      "releaseVersion": "local-ai-0.1.9-umbrel-arm64",
+      "running": true,
+      "supported": true,
+      "updateRequired": false
+    },
+    "intent": {
+      "actualInference": true,
+      "contractValid": true,
+      "contractVersion": "preferences_v2",
+      "elapsedSeconds": 105.63,
+      "generationAttempted": true,
+      "goalSha256": "33618b10e789b1f6065197e838e5e6ce5ebfad2073be0598090aac6ea3ba2530",
+      "inputSha256": "ba5dfabe9f8dbe25be55aeada3dd77f148455114742665c9de628e7ab756e688",
+      "intent": {
+        "c": [
+          {
+            "a": "5trat",
+            "k": "deprioritize",
+            "q": "minimize allocation to 5trat",
+            "u": null,
+            "v": null,
+            "w": "all"
+          }
+        ],
+        "reason": "",
+        "s": "resolved"
+      },
+      "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+      "intentProvenance": {
+        "attempts": [
+          {
+            "attempt": 1,
+            "completedSources": [
+              1
+            ],
+            "outcome": "resolved",
+            "sourceOutputs": [
+              {
+                "outputSha256": "3e4abbcc070f8c34fdfc6211eaf131c4e6d7e3e6cdc88a52f9ad5077d191c19b",
+                "requirementCount": 1,
+                "sourceId": 1,
+                "status": "resolved"
+              }
+            ],
+            "validatorError": null
+          }
+        ],
+        "compilerRevision": "semantic-inventory-2",
+        "completedSources": [
+          1
+        ],
+        "contract": "preferences_v2",
+        "correctionUsed": false,
+        "extractionRevision": "source-by-source-6",
+        "holdOrigin": null,
+        "sourceCount": 1
+      },
+      "inventorySha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+      "kind": "mission_intent",
+      "lastRunAt": "2026-10-16T19:14:39.200818+00:00",
+      "modelId": "qwen3.5-4b",
+      "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+      "registrySha256": "53daff05d80a253e3900aff4e58b9f8f4bf56541ea952a43c0b74e43378fe606",
+      "requestId": "arm396-dev-minimal-home",
+      "routingAuthority": "none",
+      "runtimeBinarySha256": "e7a1fe417870f5bdbc826376ef1afae3986c8bb4de3dd3dce71e2ac4e2bf337b",
+      "scopeSha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+      "synthetic": false,
+      "validUntil": 1792178304.8302877
+    },
+    "mode": "live",
+    "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+    "models": [
+      {
+        "diskRequiredBytes": 599625984,
+        "diskSupported": true,
+        "downloadBytes": 532517120,
+        "id": "qwen3.5-0.8b",
+        "installed": false,
+        "intentEligibility": {
+          "eligible": false,
+          "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+          "modelId": "qwen3.5-0.8b",
+          "modelSha256": "bd258782e35f7f458f8aced1adc053e6e92e89bc735ba3be89d38a06121dc517",
+          "reason": "This model is available for research but is not qualified for general mining instructions in this release. Select a model marked General intent before reviewing this goal. If none is listed, use another provider or wait for a qualified Local AI release. Your selected model and existing routes are unchanged."
+        },
+        "label": "Qwen3.5 0.8B",
+        "quantization": "Q4_K_M",
+        "ramBudgetBytes": 2147483648,
+        "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+        "sha256": "bd258782e35f7f458f8aced1adc053e6e92e89bc735ba3be89d38a06121dc517",
+        "supported": true,
+        "validated": false
+      },
+      {
+        "diskRequiredBytes": 1347944704,
+        "diskSupported": true,
+        "downloadBytes": 1280835840,
+        "id": "qwen3.5-2b",
+        "installed": false,
+        "intentEligibility": {
+          "eligible": false,
+          "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+          "modelId": "qwen3.5-2b",
+          "modelSha256": "aaf42c8b7c3cab2bf3d69c355048d4a0ee9973d48f16c731c0520ee914699223",
+          "reason": "This model is available for research but is not qualified for general mining instructions in this release. Select a model marked General intent before reviewing this goal. If none is listed, use another provider or wait for a qualified Local AI release. Your selected model and existing routes are unchanged."
+        },
+        "label": "Qwen3.5 2B",
+        "quantization": "Q4_K_M",
+        "ramBudgetBytes": 3221225472,
+        "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+        "sha256": "aaf42c8b7c3cab2bf3d69c355048d4a0ee9973d48f16c731c0520ee914699223",
+        "supported": true,
+        "validated": false
+      },
+      {
+        "diskRequiredBytes": 2808046752,
+        "diskSupported": true,
+        "downloadBytes": 2740937888,
+        "id": "qwen3.5-4b",
+        "installed": true,
+        "intentEligibility": {
+          "eligible": true,
+          "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+          "modelId": "qwen3.5-4b",
+          "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+          "reason": "Qualified for general mining instructions."
+        },
+        "label": "Qwen3.5 4B",
+        "quantization": "Q4_K_M",
+        "ramBudgetBytes": 5368709120,
+        "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+        "sha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+        "supported": true,
+        "validated": false
+      }
+    ],
+    "operation": {
+      "inputSha256": "4e4fa497fb76d090f762803abbd424cc8452a505c6c5d93b9b9c7810f9c23ed5",
+      "kind": "automation",
+      "modelId": "qwen3.5-4b",
+      "requestId": "mux-8dd75ba3ed06457ea7bdfd6f1c128696",
+      "startedAt": "2026-10-16T19:16:25.771536+00:00",
+      "state": "complete"
+    },
+    "phase": "off",
+    "preferences": {
+      "configured": true,
+      "desiredEnabled": false,
+      "error": null,
+      "restoreAuthority": "host",
+      "resumeState": "off",
+      "state": "saved",
+      "updatedAt": "2026-10-16T19:25:39.210726+00:00"
+    },
+    "research": {
+      "lastRunAt": null,
+      "sources": [],
+      "summary": "No research has run.",
+      "validationStatus": "insufficient_data"
+    },
+    "resources": {
+      "architecture": "aarch64",
+      "available": true,
+      "availableBytes": 7580110848,
+      "containerHeadroomBytes": 6304542720,
+      "cpu": {
+        "available": false,
+        "intervalSeconds": null,
+        "normalization": "100_percent_per_logical_cpu",
+        "sampledAt": "2026-10-16T19:25:39.349127+00:00",
+        "scope": "llama_process",
+        "source": "linux_proc_stat",
+        "usagePercent": null
+      },
+      "cpuFlags": null,
+      "reserveBytes": 1246075084,
+      "sampledAt": "2026-10-16T19:25:39.348749+00:00",
+      "serviceMemoryBytes": null,
+      "servicePeakMemoryBytes": null,
+      "totalBytes": 8307167232
+    },
+    "runtime": {
+      "binarySha256": "e7a1fe417870f5bdbc826376ef1afae3986c8bb4de3dd3dce71e2ac4e2bf337b",
+      "detail": "Local model is stopped.",
+      "download": null,
+      "exitCode": null,
+      "generation": {
+        "active": false,
+        "completedAt": "2026-10-16T19:16:51.721390+00:00",
+        "completionReceived": true,
+        "current": null,
+        "elapsedSeconds": 25.95,
+        "inferenceObserved": true,
+        "jobId": "05969176ac1d4ddb9d3a120adaf1171b",
+        "kind": "automation",
+        "lastCompleted": {
+          "active": false,
+          "completedAt": "2026-10-16T19:16:51.721390+00:00",
+          "completionReceived": true,
+          "jobId": "05969176ac1d4ddb9d3a120adaf1171b",
+          "kind": "automation",
+          "measurements": {
+            "generatedTokens": 39,
+            "generationMilliseconds": 3620.93,
+            "generationTokensPerSecond": 10.495,
+            "measurement": "completed_response",
+            "promptMilliseconds": 22322.396,
+            "promptTokens": 315,
+            "source": "llama.cpp.timings",
+            "streaming": true
+          },
+          "modelId": "qwen3.5-4b",
+          "requestId": "mux-8dd75ba3ed06457ea7bdfd6f1c128696",
+          "sequence": 2
+        },
+        "measurements": {
+          "generatedTokens": 39,
+          "generationMilliseconds": 3620.93,
+          "generationTokensPerSecond": 10.495,
+          "measurement": "completed_response",
+          "promptMilliseconds": 22322.396,
+          "promptTokens": 315,
+          "source": "llama.cpp.timings",
+          "streaming": true
+        },
+        "modelId": "qwen3.5-4b",
+        "requestId": "mux-8dd75ba3ed06457ea7bdfd6f1c128696",
+        "sequence": 2,
+        "stage": "complete",
+        "startedAt": "2026-10-16T19:16:25.771867+00:00"
+      },
+      "healthy": false,
+      "modelId": null,
+      "pid": null,
+      "running": false,
+      "starting": false,
+      "stopping": false
+    },
+    "schemaVersion": "1.0",
+    "selectedModel": "qwen3.5-4b",
+    "storage": {
+      "available": true,
+      "freeBytes": 15663656960,
+      "sampledAt": "2026-10-16T19:25:39.349150+00:00",
+      "storedModelBytes": 2740937888,
+      "totalBytes": 19682557952,
+      "usedBytes": 4002123776,
+      "writable": true
+    },
+    "telemetry": {
+      "activity": "off",
+      "currentJob": null,
+      "lastJob": {
+        "actualInference": true,
+        "completedAt": "2026-10-16T19:16:51.721799+00:00",
+        "durationSeconds": 25.95,
+        "generation": {
+          "generatedTokens": 39,
+          "generationMilliseconds": 3620.93,
+          "generationTokensPerSecond": 10.495,
+          "measurement": "completed_response",
+          "promptMilliseconds": 22322.396,
+          "promptTokens": 315,
+          "source": "llama.cpp.timings",
+          "streaming": true
+        },
+        "generationSequence": 2,
+        "jobId": "05969176ac1d4ddb9d3a120adaf1171b",
+        "kind": "automation",
+        "modelId": "qwen3.5-4b",
+        "outcome": "selected",
+        "requestId": "mux-8dd75ba3ed06457ea7bdfd6f1c128696",
+        "stage": "complete",
+        "startedAt": "2026-10-16T19:16:25.771711+00:00",
+        "state": "completed",
+        "summary": "The model selected an app-supplied candidate with a validated supporting excerpt.",
+        "triggeredAt": "2026-10-16T19:16:25.771562+00:00"
+      },
+      "lastRejected": null,
+      "lastTriggeredAt": "2026-10-16T19:16:25.771562+00:00",
+      "ratesAreLive": false,
+      "telemetrySince": "2026-10-16T19:14:37.119620+00:00"
+    }
+  },
+  "on660Verified": true,
+  "onMonitorSamples": [
+    {
+      "at": "2026-10-16T19:16:51.934448+00:00",
+      "elapsedSeconds": 132.743,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 132.738,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:16:56.944482+00:00",
+      "elapsedSeconds": 137.753,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 137.748,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:17:01.967561+00:00",
+      "elapsedSeconds": 142.776,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 142.764,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:17:06.981134+00:00",
+      "elapsedSeconds": 147.79,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 147.78,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:17:11.994058+00:00",
+      "elapsedSeconds": 152.803,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 152.792,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:17:17.010710+00:00",
+      "elapsedSeconds": 157.82,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 157.812,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:17:22.025009+00:00",
+      "elapsedSeconds": 162.834,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 162.821,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:17:27.045657+00:00",
+      "elapsedSeconds": 167.855,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 167.845,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:17:32.060275+00:00",
+      "elapsedSeconds": 172.869,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 172.857,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:17:37.078172+00:00",
+      "elapsedSeconds": 177.887,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 177.879,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:17:42.098218+00:00",
+      "elapsedSeconds": 182.907,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 182.897,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:17:47.119324+00:00",
+      "elapsedSeconds": 187.928,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 187.917,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:17:52.137277+00:00",
+      "elapsedSeconds": 192.946,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 192.936,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:17:57.144431+00:00",
+      "elapsedSeconds": 197.953,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 197.948,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:18:02.161425+00:00",
+      "elapsedSeconds": 202.97,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 202.962,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:18:07.179181+00:00",
+      "elapsedSeconds": 207.988,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 207.975,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:18:12.201654+00:00",
+      "elapsedSeconds": 213.011,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 212.998,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:18:17.219476+00:00",
+      "elapsedSeconds": 218.028,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 218.02,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:18:22.232434+00:00",
+      "elapsedSeconds": 223.041,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 223.031,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:18:27.254878+00:00",
+      "elapsedSeconds": 228.064,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 228.053,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:18:32.272146+00:00",
+      "elapsedSeconds": 233.081,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 233.068,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:18:37.296202+00:00",
+      "elapsedSeconds": 238.105,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 238.093,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:18:42.306713+00:00",
+      "elapsedSeconds": 243.116,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 243.107,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:18:47.315881+00:00",
+      "elapsedSeconds": 248.125,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 248.118,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:18:52.329494+00:00",
+      "elapsedSeconds": 253.138,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 253.133,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:18:57.344759+00:00",
+      "elapsedSeconds": 258.154,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 258.145,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:19:02.356685+00:00",
+      "elapsedSeconds": 263.166,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 263.155,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:19:07.367405+00:00",
+      "elapsedSeconds": 268.176,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 268.169,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:19:12.380585+00:00",
+      "elapsedSeconds": 273.189,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 273.179,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:19:17.399196+00:00",
+      "elapsedSeconds": 278.208,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 278.195,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:19:22.419153+00:00",
+      "elapsedSeconds": 283.228,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 283.216,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:19:27.433156+00:00",
+      "elapsedSeconds": 288.242,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 288.232,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:19:32.451388+00:00",
+      "elapsedSeconds": 293.26,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 293.248,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:19:37.466949+00:00",
+      "elapsedSeconds": 298.276,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 298.267,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:19:42.481417+00:00",
+      "elapsedSeconds": 303.29,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 303.281,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:19:47.494808+00:00",
+      "elapsedSeconds": 308.304,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 308.293,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:19:52.511356+00:00",
+      "elapsedSeconds": 313.32,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 313.311,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:19:57.532205+00:00",
+      "elapsedSeconds": 318.341,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 318.33,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:20:02.552434+00:00",
+      "elapsedSeconds": 323.361,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 323.349,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:20:07.574540+00:00",
+      "elapsedSeconds": 328.383,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 328.373,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:20:12.599120+00:00",
+      "elapsedSeconds": 333.408,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 333.394,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:20:17.610581+00:00",
+      "elapsedSeconds": 338.419,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 338.41,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:20:22.623310+00:00",
+      "elapsedSeconds": 343.432,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 343.423,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:20:27.636486+00:00",
+      "elapsedSeconds": 348.445,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 348.435,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:20:32.655965+00:00",
+      "elapsedSeconds": 353.465,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 353.457,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:20:37.665017+00:00",
+      "elapsedSeconds": 358.474,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 358.466,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:20:42.681802+00:00",
+      "elapsedSeconds": 363.491,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 363.485,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:20:47.695713+00:00",
+      "elapsedSeconds": 368.505,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 368.493,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:20:52.702896+00:00",
+      "elapsedSeconds": 373.512,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 373.506,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:20:57.718192+00:00",
+      "elapsedSeconds": 378.527,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 378.517,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:21:02.734268+00:00",
+      "elapsedSeconds": 383.543,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 383.537,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:21:07.747896+00:00",
+      "elapsedSeconds": 388.557,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 388.55,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:21:12.770203+00:00",
+      "elapsedSeconds": 393.579,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 393.568,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:21:17.788088+00:00",
+      "elapsedSeconds": 398.597,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 398.591,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:21:22.804769+00:00",
+      "elapsedSeconds": 403.614,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 403.604,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:21:27.818932+00:00",
+      "elapsedSeconds": 408.628,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 408.619,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:21:32.843239+00:00",
+      "elapsedSeconds": 413.652,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 413.639,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:21:37.869198+00:00",
+      "elapsedSeconds": 418.678,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 418.664,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:21:42.878652+00:00",
+      "elapsedSeconds": 423.688,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 423.681,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:21:47.891467+00:00",
+      "elapsedSeconds": 428.7,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 428.691,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:21:52.904182+00:00",
+      "elapsedSeconds": 433.713,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 433.708,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:21:57.920839+00:00",
+      "elapsedSeconds": 438.73,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 438.724,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:22:02.943990+00:00",
+      "elapsedSeconds": 443.753,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 443.74,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:22:07.961167+00:00",
+      "elapsedSeconds": 448.77,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 448.759,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:22:12.987016+00:00",
+      "elapsedSeconds": 453.796,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 453.782,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:22:18.013637+00:00",
+      "elapsedSeconds": 458.823,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 458.808,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:22:23.033293+00:00",
+      "elapsedSeconds": 463.842,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 463.83,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:22:28.046947+00:00",
+      "elapsedSeconds": 468.856,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 468.845,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:22:33.063032+00:00",
+      "elapsedSeconds": 473.872,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 473.858,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:22:38.076270+00:00",
+      "elapsedSeconds": 478.885,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 478.876,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:22:43.090957+00:00",
+      "elapsedSeconds": 483.9,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 483.889,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:22:48.105932+00:00",
+      "elapsedSeconds": 488.915,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 488.909,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:22:53.115537+00:00",
+      "elapsedSeconds": 493.924,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 493.916,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:22:58.141336+00:00",
+      "elapsedSeconds": 498.95,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 498.936,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:23:03.163758+00:00",
+      "elapsedSeconds": 503.973,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 503.963,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:23:08.181146+00:00",
+      "elapsedSeconds": 508.99,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 508.984,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:23:13.191204+00:00",
+      "elapsedSeconds": 514.0,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 513.992,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:23:18.208109+00:00",
+      "elapsedSeconds": 519.017,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 519.003,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:23:23.223432+00:00",
+      "elapsedSeconds": 524.032,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 524.022,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:23:28.237537+00:00",
+      "elapsedSeconds": 529.046,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 529.035,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:23:33.260891+00:00",
+      "elapsedSeconds": 534.07,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 534.056,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:23:38.284592+00:00",
+      "elapsedSeconds": 539.093,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 539.081,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:23:43.298890+00:00",
+      "elapsedSeconds": 544.108,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 544.102,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:23:48.319188+00:00",
+      "elapsedSeconds": 549.128,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 549.119,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:23:53.331972+00:00",
+      "elapsedSeconds": 554.141,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 554.131,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:23:58.340994+00:00",
+      "elapsedSeconds": 559.15,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 559.144,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:24:03.358262+00:00",
+      "elapsedSeconds": 564.167,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 564.161,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:24:08.373397+00:00",
+      "elapsedSeconds": 569.182,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 569.172,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:24:13.389076+00:00",
+      "elapsedSeconds": 574.198,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 574.186,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:24:18.397262+00:00",
+      "elapsedSeconds": 579.206,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 579.2,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:24:23.418393+00:00",
+      "elapsedSeconds": 584.227,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 584.214,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:24:28.430315+00:00",
+      "elapsedSeconds": 589.239,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 589.232,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:24:33.447105+00:00",
+      "elapsedSeconds": 594.256,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 594.249,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:24:38.465132+00:00",
+      "elapsedSeconds": 599.274,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 599.26,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:24:43.484467+00:00",
+      "elapsedSeconds": 604.293,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 604.283,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:24:48.504253+00:00",
+      "elapsedSeconds": 609.313,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 609.305,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:24:53.523949+00:00",
+      "elapsedSeconds": 614.333,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 614.323,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:24:58.540561+00:00",
+      "elapsedSeconds": 619.349,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 619.34,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:25:03.562091+00:00",
+      "elapsedSeconds": 624.371,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 624.361,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:25:08.575160+00:00",
+      "elapsedSeconds": 629.384,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 629.374,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:25:13.597025+00:00",
+      "elapsedSeconds": 634.406,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 634.392,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:25:18.613309+00:00",
+      "elapsedSeconds": 639.422,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 639.414,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:25:23.634730+00:00",
+      "elapsedSeconds": 644.444,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 644.432,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:25:28.651331+00:00",
+      "elapsedSeconds": 649.46,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 649.447,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:25:33.675025+00:00",
+      "elapsedSeconds": 654.484,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 654.472,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:25:38.701284+00:00",
+      "elapsedSeconds": 659.51,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 659.496,
+      "runtimePid": 28
+    },
+    {
+      "at": "2026-10-16T19:25:39.207049+00:00",
+      "elapsedSeconds": 660.016,
+      "enabled": true,
+      "healthy": true,
+      "requestStartedElapsedSeconds": 660.004,
+      "runtimePid": 28
+    }
+  ],
+  "onMonitorSeconds": 660.016,
+  "onMonitorStartedAt": "2026-10-16T19:14:39.191125+00:00",
+  "operatorAuthenticationVerified": true,
+  "packageProducerInputs": {
+    "packaging/umbrel-local-ai-release/pre-start": "fb25f9246aff606a00567ec0a0333b49397bf988b30deaff0c3da5baaaa4eb6e",
+    "packaging/umbrel-local-ai-release/prepare_package.py": "7c3deed5b8aa35777d1776a6a15ce0be7217dc98d40a1e082af21e88c4cb0f1c"
+  },
+  "packageProducerSourceRevision": "396c137930d27fb39251147426a70bd61307bf98",
+  "packageProducerSourceTree": "ec2daf28cc1920be3e83bc791e25f3e6443769cc",
+  "packageRecipeSHA256": "d05e15851ef0376fc2967cdbcbc33fbf796fa3251fb24726df1b8177ff82dcbf",
+  "paidRoutingRemainsDenied": true,
+  "protectedExecutableSHA256": "f24bc8c141473e9273007fb4d20eb1f7990f024a90eedd6749d7585ba8902496",
+  "providerTest": {
+    "canApply": true,
+    "elapsedSeconds": 26.164,
+    "httpStatus": 200,
+    "message": "Local 5TRATMUX completed a real bounded inference and validated its result. Existing routes and the active provider are unchanged.",
+    "ok": true,
+    "providerApplied": false,
+    "qualificationCredentialPresentButDiscarded": true,
+    "ready": true,
+    "reason": "qualified",
+    "testResult": {
+      "actualInference": true,
+      "contractValid": true,
+      "decision": "select",
+      "inputSha256": "4e4fa497fb76d090f762803abbd424cc8452a505c6c5d93b9b9c7810f9c23ed5",
+      "modelId": "qwen3.5-4b",
+      "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+      "requestId": "mux-8dd75ba3ed06457ea7bdfd6f1c128696"
+    }
+  },
+  "requestTimeoutSeconds": 180,
+  "result": "PASS",
+  "runtimeCpuLimit": 2,
+  "runtimeMemoryLimitBytes": 6442450944,
+  "runtimeMemorySwapLimitBytes": 6442450944,
+  "runtimeReadOnlyRootfsVerified": true,
+  "runtimeRemovedPreservingModelCache": true,
+  "runtimeUser": "1000:1000",
+  "scope": "normal generated APP+companion native-container linkage; no Umbrel OS/gateway/store-install claim",
+  "serviceSHA256": "57782241c49af84d788846c4c2bcf547e24ed7878e9327bca96e029b3d37d77a",
+  "sidecarPublishedPorts": [],
+  "socketPeerEvidence": {
+    "correctUID1000CompiledApplicationClientSucceeded": true,
+    "privateDirectoryMode": "0700",
+    "serverPeerUID": 1000,
+    "socketMode": "0600",
+    "wrongHostRootUIDRejected": true
+  },
+  "socketPeerIdentityVerified": true,
+  "sourceCorpusHarnessSHA256": "5ea807bd0511394c2f9d669b0927e8784df4535825da50ee1ecbc608dda85385",
+  "sourceRevision": "138fd6cfd1b99cea858f19f39f8976015da1de1b",
+  "sourceTree": "75ed4c702490df1f168bf590ba055768c260d236",
+  "stableMuxStateBeforeLocalAI": {
+    "licensing_device_key.pem": {
+      "bytes": 119,
+      "gid": 1000,
+      "mode": "0o600",
+      "sha256": "c71a482535a61805fc07eaa8e8f26d3c0d636128e83334c84ec94bb86eef1d6a",
+      "uid": 1000
+    },
+    "licensing_installation_id": {
+      "bytes": 64,
+      "gid": 1000,
+      "mode": "0o600",
+      "sha256": "f0b5a8cd4a9a07f5385bb12967b6552f67283993a0349c762794e475f69c85d4",
+      "uid": 1000
+    },
+    "mux-lab-persistence-canary.json": {
+      "bytes": 56,
+      "gid": 1000,
+      "mode": "0o644",
+      "sha256": "3905c833a80b2e02bf8492c37fdf42c7c073ae261e6222fce6988945db3d3b62",
+      "uid": 1000
+    },
+    "mux_settings.json": {
+      "bytes": 472,
+      "gid": 1000,
+      "mode": "0o600",
+      "sha256": "87962e06b1084b749e0c6d5d154ed8284f80018e7ffbe5f6c6ff536d33efd0f5",
+      "uid": 1000
+    },
+    "standalone_auth/integration-token": {
+      "bytes": 43,
+      "gid": 1000,
+      "mode": "0o600",
+      "sha256": "bd1321aa6056cc9b6b68ad97a4c2ac2d956ee7d6f98246cb71fa611513205b37",
+      "uid": 1000
+    },
+    "standalone_auth/session-key": {
+      "bytes": 32,
+      "gid": 1000,
+      "mode": "0o600",
+      "sha256": "3f7cbad9f9453ae58d8f0c474f5d595b26649e02ddf906bc4df7cb3b434c59a3",
+      "uid": 1000
+    }
+  },
+  "stableMuxStateHashes": {
+    "licensing_device_key.pem": {
+      "bytes": 119,
+      "gid": 1000,
+      "mode": "0o600",
+      "sha256": "c71a482535a61805fc07eaa8e8f26d3c0d636128e83334c84ec94bb86eef1d6a",
+      "uid": 1000
+    },
+    "licensing_installation_id": {
+      "bytes": 64,
+      "gid": 1000,
+      "mode": "0o600",
+      "sha256": "f0b5a8cd4a9a07f5385bb12967b6552f67283993a0349c762794e475f69c85d4",
+      "uid": 1000
+    },
+    "mux-lab-persistence-canary.json": {
+      "bytes": 56,
+      "gid": 1000,
+      "mode": "0o644",
+      "sha256": "3905c833a80b2e02bf8492c37fdf42c7c073ae261e6222fce6988945db3d3b62",
+      "uid": 1000
+    },
+    "mux_settings.json": {
+      "bytes": 472,
+      "gid": 1000,
+      "mode": "0o600",
+      "sha256": "87962e06b1084b749e0c6d5d154ed8284f80018e7ffbe5f6c6ff536d33efd0f5",
+      "uid": 1000
+    },
+    "standalone_auth/integration-token": {
+      "bytes": 43,
+      "gid": 1000,
+      "mode": "0o600",
+      "sha256": "bd1321aa6056cc9b6b68ad97a4c2ac2d956ee7d6f98246cb71fa611513205b37",
+      "uid": 1000
+    },
+    "standalone_auth/session-key": {
+      "bytes": 32,
+      "gid": 1000,
+      "mode": "0o600",
+      "sha256": "3f7cbad9f9453ae58d8f0c474f5d595b26649e02ddf906bc4df7cb3b434c59a3",
+      "uid": 1000
+    }
+  },
+  "startedAt": "2026-10-16T19:14:32.484307+00:00",
+  "supervisorSHA256": "73b8f69e65d0e8ff2c56c92a243d408adbc44f8b82bf5adc6c673b9b3e459ccb",
+  "testedChannel": "DEV",
+  "testedVersion": "0.9.82-dev",
+  "transportHarnessSHA256": "fb7c85c71b0798c26088028753a983a135a1d7b3785ffc1cdedfaaf6d1dd1086",
+  "unlicensed": {
+    "accessAllowed": false,
+    "accessState": "locked",
+    "mode": "enforce",
+    "recordedState": "inactive",
+    "source": "none",
+    "trialLifecycle": "eligible"
+  },
+  "storeEvidenceDerivation": {
+    "rawEvidence": {
+      "path": "release-records/arm396-dev-normal-package-raw.json",
+      "sha256": "b7878c796286c364cea23e27d5e2831fd3b6ba7670a53843d9ef7f19067840ce"
+    },
+    "independentRootReview": {
+      "path": "release-records/root-arm-normal-package396-final-review.json",
+      "sha256": "3cb54b258911ff1989aadde56ce1c133e05bd008446d5fba9b9b932eabebd35b"
+    },
+    "changes": [
+      "companionPlatform sourceRevision/sourceTree renamed to companionSourceRevision/companionSourceTree"
+    ],
+    "originalRawBytesChanged": false
+  }
+}

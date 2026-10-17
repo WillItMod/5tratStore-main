@@ -1,0 +1,203 @@
+{
+  "actual69ProofClaimed": false,
+  "amd64ConfigurationSha256": "29fa7e714e19961613bd9f8c6ab775696dfae02c0b9d0d86d36da75fe06bedf9",
+  "compiledExecutables": {
+    "opt/5tratmux-local-ai/bin/llama-server": {
+      "bytes": 15653840,
+      "elfMachine": 62,
+      "sha256": "034a22de64cc6abf39039fcb29f3c3529c98a910c6b849b5fe15e768f2544fa4"
+    },
+    "opt/5tratmux-local-ai/bin/local-ai-service": {
+      "bytes": 7998224,
+      "elfMachine": 62,
+      "sha256": "ed2fb9e08f2217753e2b25c54d2f81546013eb9f8b5dc7e0fd028967cadd2916"
+    },
+    "usr/local/bin/local-ai-supervisor": {
+      "bytes": 7142160,
+      "elfMachine": 62,
+      "sha256": "46a738b1f941af33d816a8fac3bb9e8ebec8ce9f6d904a3e4c0c8b497a0d042f"
+    }
+  },
+  "compiler": {
+    "additionalSwapBytesEach": 0,
+    "cpuLimitEach": 2,
+    "exitCodes": [
+      0,
+      0
+    ],
+    "memoryBytesEach": 8589934592,
+    "name": "Nuitka",
+    "networkModeEach": "none",
+    "oomKilled": false,
+    "rootFilesystemReadOnlyEach": true,
+    "sdistSha256": "8b102c6bf30d9504e82e69674d396972729092b25cefa680e8fd05678fdfa30b",
+    "sequentialServiceAndSupervisor": true,
+    "version": "4.3"
+  },
+  "contextArchiveBytes": 16168960,
+  "contextFileCount": 45,
+  "contextManifestSha256": "16bc2d20df9cdd46836862920755ac1bcf41e29a5844baea19d6aa67c8211c10",
+  "contextSha256": "e6e3a9ed999fc0e090b09b311c690dffa9fbec59d4b285c5b5b7e9e829f4656e",
+  "cpuProfile": "amd64-v2",
+  "createdAt": "2026-10-16T18:15:26.635024+00:00",
+  "defaultDockerEngineUsed": false,
+  "deploymentAccepted": false,
+  "engineHardwareSettingsChanged": false,
+  "engineId": "b4b82558-3bef-4351-a47c-7a02a690476b",
+  "finalSourceRestageRequired": false,
+  "imageArchiveBytes": 152740352,
+  "imageArchivePath": "/forge/local-ai-free-20261016/amd64-v2-final-595bd51-02/audit/image.docker.tar",
+  "imageArchiveSha256": "354dcf6ea0e94d4c7bca1648fd80cfa464d86ea5936e9383eb99d05ac509edbf",
+  "imageBytes": 149136976,
+  "imageBytesMeaning": "Exact Docker image.inspect.Size; archive transport byte count separately pinned",
+  "imageConfigId": "sha256:8788b993b93cf5a2cc0cb3f66773171184669e19f4cb4edbd54145b639b1ba5e",
+  "imageId": "sha256:8788b993b93cf5a2cc0cb3f66773171184669e19f4cb4edbd54145b639b1ba5e",
+  "imageRef": null,
+  "imageRefState": "pending-root-admission-and-actual-registry-push",
+  "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+  "modelCatalogueSha256": "191fcf673a10f55a9c2526f58b85fe264111563a3d3dae43012e18f2de21c5b4",
+  "modelFreeQa": {
+    "bodyAndActionGuards": 9,
+    "cpus": 2,
+    "dockerSocketMounted": false,
+    "generalIntent4BEligibleWithoutModelFiles": true,
+    "installOffRestartOffRemovePreservePreferences": true,
+    "memoryBytes": 6442450944,
+    "modelStarted": false,
+    "modelWeightsMounted": false,
+    "nativeControllerMounted": false,
+    "networkMode": "none",
+    "publishedPorts": [],
+    "removedStateRestoredAcrossRestart": true,
+    "tmpfsBytes": 536870912,
+    "tmpfsExec": true,
+    "tokenPersistedInReceipt": false,
+    "uid": "1000:1000",
+    "wrongPeerCredentialRejected": true,
+    "wrongUidPermissionDenied": true
+  },
+  "modelInferenceAccepted": false,
+  "nativeConfigurationAndModelCatalogueRetained": true,
+  "ownedModelFreeDisposableObjectsRemoved": true,
+  "platform": "linux/amd64",
+  "protectedAudit": {
+    "allFinalLayersChecked": true,
+    "descriptorAndConfigRootfsChecksPassed": true,
+    "forbiddenFiles": [],
+    "layers": 7,
+    "modelWeightsIncluded": false,
+    "noticeFilesHashVerified": 159,
+    "ociDescriptorGraphVerified": 0,
+    "privateKeysIncluded": false,
+    "privateSourceIncluded": false,
+    "runtimeNoticesSha256": "75701c2ed5e2a0e2b6448e7a51d410ce1b764346a7b8732f5e9f255f385e4fe5"
+  },
+  "prototypeOnly": false,
+  "publicationPerformed": false,
+  "rawEvidence": {
+    "audit/layer-audit.json": {
+      "path": "/forge/local-ai-free-20261016/amd64-v2-final-595bd51-02/audit/layer-audit.json",
+      "sha256": "ec3e57ff9dd43f29a5e803398dc12d294f2761565fa264765d5c20bd458fa4b5"
+    },
+    "compiled-inventory.json": {
+      "path": "/forge/local-ai-free-20261016/amd64-v2-final-595bd51-02/compiled-inventory.json",
+      "sha256": "6b08afbd71c6cf62ff4b96e5c0ca12711343423217f263d701e51f60c25629e8"
+    },
+    "compiler-service-after.json": {
+      "path": "/forge/local-ai-free-20261016/amd64-v2-final-595bd51-02/compiler-service-after.json",
+      "sha256": "aa1cd166bd2edf77283bd37eeaa804f75238a414935e4e226a909b9d97ec3476"
+    },
+    "compiler-service-before.json": {
+      "path": "/forge/local-ai-free-20261016/amd64-v2-final-595bd51-02/compiler-service-before.json",
+      "sha256": "0fb3c808f176e9c053cdce332f598ca48269eeffb540fbebf16b22b3ee767635"
+    },
+    "compiler-supervisor-after.json": {
+      "path": "/forge/local-ai-free-20261016/amd64-v2-final-595bd51-02/compiler-supervisor-after.json",
+      "sha256": "ac3cbc6e65a4bec882a9a5ab5c204f667b5d68020e1494ef1ddf3d5e3e164feb"
+    },
+    "compiler-supervisor-before.json": {
+      "path": "/forge/local-ai-free-20261016/amd64-v2-final-595bd51-02/compiler-supervisor-before.json",
+      "sha256": "8fe322480e73551670784194d250a15809aff6da241c9dfa4707ef92a386a235"
+    },
+    "context-export.json": {
+      "path": "/forge/local-ai-free-20261016/amd64-v2-final-595bd51-02/context-export.json",
+      "sha256": "369874645c0ebb22fce00c81cf09e80c570232e1d941e9428bc774d790e8dae4"
+    },
+    "context-manifest.json": {
+      "path": "/forge/local-ai-free-20261016/amd64-v2-final-595bd51-02/context-manifest.json",
+      "sha256": "16bc2d20df9cdd46836862920755ac1bcf41e29a5844baea19d6aa67c8211c10"
+    },
+    "descriptor-and-layer-review.json": {
+      "path": "/forge/local-ai-free-20261016/amd64-v2-final-595bd51-02/descriptor-and-layer-review.json",
+      "sha256": "86e7119efb46a470d323369353b82e2888021b0468b01c40a998e1145151109e"
+    },
+    "image.history.txt": {
+      "path": "/forge/local-ai-free-20261016/amd64-v2-final-595bd51-02/image.history.txt",
+      "sha256": "d80adfea73b0176762e500b46834c6dea291cc64ba56c657b3f31b657b243783"
+    },
+    "image.inspect.json": {
+      "path": "/forge/local-ai-free-20261016/amd64-v2-final-595bd51-02/image.inspect.json",
+      "sha256": "671354a63df5ec118314fce246b01943200ea857c0244befb4cd136ff440c345"
+    },
+    "producer.exit": {
+      "path": "/forge/local-ai-free-20261016/amd64-v2-final-595bd51-02/producer.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "producer.log": {
+      "path": "/forge/local-ai-free-20261016/amd64-v2-final-595bd51-02/producer.log",
+      "sha256": "647c8136adc0f9c342ea9bc07da86371df7580968204a75b567864db5e0f72f4"
+    },
+    "producer.py": {
+      "path": "/forge/local-ai-free-20261016/amd64-v2-final-595bd51-02/producer.py",
+      "sha256": "0193b6ce7085c2f5ca4f97e184c0118b3cbcddb96275ce8e8d41fb3cfee6f07d"
+    },
+    "qa/cleanup.json": {
+      "path": "/forge/local-ai-free-20261016/amd64-v2-final-595bd51-02/qa/cleanup.json",
+      "sha256": "d4c47978139b6fe7d83e37e789f2824901508a5e01f00ddbd15a1106ac220fb9"
+    },
+    "qa/container-after-stop.json": {
+      "path": "/forge/local-ai-free-20261016/amd64-v2-final-595bd51-02/qa/container-after-stop.json",
+      "sha256": "eb8ade18120f868080250f9ddfeab37b09e0cf59790bf74a5865be1f4b138f55"
+    },
+    "qa/qa-receipt.json": {
+      "path": "/forge/local-ai-free-20261016/amd64-v2-final-595bd51-02/qa/qa-receipt.json",
+      "sha256": "fd3c5e64504968ba86fe4bd969735445dc4c1f052780a55d4c76eb1833e2585a"
+    }
+  },
+  "rootCpuOnlyAdmissionSha256": "2763e7452b826c465565263fa989f847ca681e445760b935ed53b103160cb1fd",
+  "rootFinalArtifactAdmissionRequired": true,
+  "rootFrozenSourceReviewSha256": "f47c1a79db59bd5738ab0b86811486a41c199c7ca740d16253781efaa25933f7",
+  "rootImageOnlyPublicationStaticAcceptance": false,
+  "runtimeBinarySha256": "034a22de64cc6abf39039fcb29f3c3529c98a910c6b849b5fe15e768f2544fa4",
+  "runtimeRequestTimeoutSeconds": 600,
+  "schemaVersion": 1,
+  "sourceCheckpointCiPassed": true,
+  "sourceCheckpointCiRun": 38943881108,
+  "sourceExportSha256": "db21500da44a81fd6c008b1dd96d2ca08de5ac6efb0bf8d36167a56b8a1050ef",
+  "sourceFingerprintSha256": "c88a7637e3a3abfa50be7fabcf05ef20e5f0ac586e4d0d5906a37aaf14636fb9",
+  "sourceRevision": "595bd51be79995642da846afa2206d2ccb96bd08",
+  "sourceTree": "fd8fdcb99068c3d7fb4185aff0260a86b43876a2",
+  "staticOpenBlas": {
+    "admissionScope": "minimum-cpu-only",
+    "compiledInitialThreadTimeoutTicks": 16,
+    "licenceSha256": "190b5a9c8d9723fe958ad33916bd7346d96fab3c5ea90832bb02d854f620fcff",
+    "mathTeamIncludesCallingThread": true,
+    "mathTeamMaximumThreads": 2,
+    "performanceQualificationGranted": false,
+    "sourceCommit": "e0166008be8e466242aa76b2ff75ce3f0fbf574a",
+    "threadTimeoutExponent": 4,
+    "version": "0.3.34"
+  },
+  "status": "FINAL_AMD64_V2_PROTECTED_COMPONENT_MODEL_FREE_PASSED_ROOT_AND_INFERENCE_REVIEW_PENDING",
+  "thirdPartyNoticesSha256": "75701c2ed5e2a0e2b6448e7a51d410ce1b764346a7b8732f5e9f255f385e4fe5",
+  "upstreamBaseCommit": "465e49b9cea78a68b9c244ffb48d0ee24a82873d",
+  "upstreamPatch": {
+    "afterSha256": "5e741b1b0e0826b075e9d6582207a5251ad112c75c4a02a81d395d9b56d3734c",
+    "beforeSha256": "7cfcc6a57122702ea35d04ed20861aef162bd94f55cfbbf9fd23ee3127fe6cb4",
+    "defaultPollingLevel": 0,
+    "path": "common/common.h",
+    "sha256": "461eb4eb61e5a01f282c996f86ef7c679d23363ec37ed6dfe5b21ed9e72fb94f"
+  },
+  "upstreamSourceModified": true,
+  "version": "local-ai-0.1.9-umbrel-amd64-v2"
+}

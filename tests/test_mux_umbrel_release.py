@@ -17,6 +17,7 @@ SPEC = importlib.util.spec_from_file_location("mux_umbrel_release", ROOT / "scri
 mux = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(mux)
 CHANNEL = json.loads((ROOT / mux.RECORD_NAME).read_text())["channel"]
+HISTORICAL_PACKAGE = ROOT / "tests/fixtures/mux-umbrel-0.9.80"
 SYNTHETIC_IMAGE = "ghcr.io/willitmod/5tratmux-app:synthetic-unit-test@sha256:" + "1" * 64
 
 
@@ -44,16 +45,17 @@ class MuxUmbrelReleaseTests(unittest.TestCase):
 
     def test_permanent_mux_admission_does_not_freeze_unrelated_app_updates(self):
         release = {"channel": CHANNEL}
-        with patch.object(mux, "record", return_value=release), \
+        with tempfile.TemporaryDirectory() as directory, patch.object(mux, "record", return_value=release), \
              patch.object(mux, "validate_package_files") as package, \
              patch.object(mux, "validate_publication") as publication, \
              patch.object(mux, "validate_baseline") as baseline:
-            mux.validate(ROOT)
-            package.assert_called_once_with(ROOT, release)
-            publication.assert_called_once_with(ROOT, release)
+            root = Path(directory)
+            mux.validate(root)
+            package.assert_called_once_with(root, release)
+            publication.assert_called_once_with(root, release)
             baseline.assert_not_called()
-            mux.validate(ROOT, check_baseline=True)
-            baseline.assert_called_once_with(ROOT, CHANNEL)
+            mux.validate(root, check_baseline=True)
+            baseline.assert_called_once_with(root, CHANNEL)
 
     def test_real_git_baseline_rejects_old_recipe_json_fumbrel_and_added_apps(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -119,7 +121,7 @@ class MuxUmbrelReleaseTests(unittest.TestCase):
             mux.validate_recipe(changed, SYNTHETIC_IMAGE, CHANNEL)
 
     def test_manifest_keeps_password_storage_and_umbrel_only_contract(self):
-        original = yaml.safe_load((ROOT / mux.APP / "umbrel-app.yml").read_text())
+        original = yaml.safe_load((HISTORICAL_PACKAGE / "umbrel-app.yml").read_text())
         mux.validate_manifest(original, CHANNEL)
         for field, value in (("version", "0.9.7.9"), ("port", 7331), ("deterministicPassword", False),
                              ("defaultPassword", "shared"), ("storage", {"dataRoot": "/"}),
@@ -130,7 +132,7 @@ class MuxUmbrelReleaseTests(unittest.TestCase):
                 mux.validate_manifest(changed, CHANNEL)
 
     def test_manifest_requires_channel_specific_absolute_public_icon(self):
-        original = yaml.safe_load((ROOT / mux.APP / "umbrel-app.yml").read_text())
+        original = yaml.safe_load((HISTORICAL_PACKAGE / "umbrel-app.yml").read_text())
         expected = f"https://raw.githubusercontent.com/WillItMod/5tratStore-{CHANNEL.lower()}/main/{mux.APP}/icon.png"
         self.assertEqual(original["icon"], expected)
         mux.validate_manifest(original, CHANNEL)
@@ -149,6 +151,11 @@ class MuxUmbrelReleaseTests(unittest.TestCase):
         self.addCleanup(temporary.cleanup)
         root = Path(temporary.name)
         shutil.copytree(ROOT / mux.APP, root / mux.APP)
+        # Retain the predecessor contract even when the current app is 0.9.82.
+        # Only these public text files changed; artwork and data placeholder
+        # remain the same independently pinned bytes.
+        for name in ("docker-compose.yml", "umbrel-app.yml", "hooks/pre-start"):
+            shutil.copyfile(HISTORICAL_PACKAGE / name, root / mux.APP / name)
         recipe = root / mux.APP / "docker-compose.yml"
         model = mux.recipe_model(SYNTHETIC_IMAGE, CHANNEL)
         recipe.write_text(yaml.safe_dump(model, sort_keys=False))

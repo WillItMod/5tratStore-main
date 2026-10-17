@@ -1,0 +1,54 @@
+{
+  "status": "ROOT_ARM_ACTUAL_NORMAL_GENERATED396_DEV_MAIN_CONTAINER_LINKAGE_ACCEPTED",
+  "reviewedAt": "2026-10-16T19:30:45.679318+00:00",
+  "reviewer": "/root",
+  "channels": {
+    "DEV": {
+      "raw": {
+        "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/runtime-producer/arm-normal-package-396-smoke/final/evidence/DEV-qualification.json",
+        "sha256": "b7878c796286c364cea23e27d5e2831fd3b6ba7670a53843d9ef7f19067840ce"
+      },
+      "intentSeconds": 105.63,
+      "providerTestSeconds": 26.164,
+      "recipeSHA256": "d05e15851ef0376fc2967cdbcbc33fbf796fa3251fb24726df1b8177ff82dcbf",
+      "actualContainers": {
+        "local_ai": "f563b262d21ecfe18004beb346bd8584ceba25d984653fb42ebca852e20a7888",
+        "server": "d9f5b894d70a9182de72e7a1b9e42a51f377c892af5222a692b5ca41f88273a6"
+      }
+    },
+    "MAIN": {
+      "raw": {
+        "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/runtime-producer/arm-normal-package-396-smoke/final/evidence/MAIN-qualification.json",
+        "sha256": "86d68f9c92acc7fe4aa36358ae986028e43da65ae563a1fd8173444f58de871f"
+      },
+      "intentSeconds": 105.519,
+      "providerTestSeconds": 26.222,
+      "recipeSHA256": "6373d3f099e9f27c1fe6a8b5fd34c8872f93eadbfb8240e3718e8385abd2de54",
+      "actualContainers": {
+        "local_ai": "f563b262d21ecfe18004beb346bd8584ceba25d984653fb42ebca852e20a7888",
+        "server": "67f7eb6b5aa5a3301aeac7dac52d48da897c5e6e6c352bcec78b97491ec1563e"
+      }
+    }
+  },
+  "inventory": {
+    "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/runtime-producer/arm-normal-package-396-smoke/final/collection-inventory.json",
+    "sha256": "89a2b6bfdbfe83b5f7b31e0558d1089611df4100887a457847b70bbfdd36de84"
+  },
+  "peer": {
+    "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/runtime-producer/arm-normal-package-396-smoke/final/independent-runtime-review.json",
+    "sha256": "27a83e17a5e181c07251a640ad8fbc93a464334e4b62de43c73d34272fcfefb3"
+  },
+  "allInventoryFilesRehashed": 14,
+  "actualUnlicensedIntentAndProviderTestBothChannels": true,
+  "DEVFinalHealthyRequestStartedAtElapsedSeconds": 660.004,
+  "DEVOnSamples": 107,
+  "sameUnchangedCompanionLifecycleReusedByMAIN": true,
+  "normalRecipeOnlyOfficialAppProxyTransform": true,
+  "operatorAuthAndUidBoundaryVerified": true,
+  "nativeArmFull25ProofSeparate": true,
+  "realArmUmbrelOsOrGatewayOrStoreInstallClaimed": false,
+  "filesystemCacheEvictionClaimed": false,
+  "allOwnedContainersRemoved": true,
+  "privateTaskStateCleanupStillRequired": true,
+  "productionDeploymentOrStorePromotionGrantedByThisReceipt": false
+}

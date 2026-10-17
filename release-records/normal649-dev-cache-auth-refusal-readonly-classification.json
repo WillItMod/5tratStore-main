@@ -1,0 +1,13 @@
+{
+  "kind": "read-only649-auth-boundary-and-filtered-login-log-classification",
+  "containerId": "f1ad8d4a8276a66d356bd71ad3fd9a05bbeab349a8db1ca57c945a8a5cda2c99",
+  "unauthenticatedGETStatuses": {
+    "/api/health": 200,
+    "/api/status": 401,
+    "/api/local-ai/status": 401
+  },
+  "filteredLoginEvents": [],
+  "rawLogsOrCredentialsCopiedOut": false,
+  "loginPOSTsSent": 0,
+  "controlOrInferenceRequestsSent": 0
+}

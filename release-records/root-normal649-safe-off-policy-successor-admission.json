@@ -1,0 +1,208 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "/root",
+  "status": "ROOT_NORMAL_PACKAGE649_EXECUTION_ADMITTED",
+  "targetVmid": 649,
+  "normalPackageAndCompanionDeliveryAdmitted": true,
+  "sourceFull25Accepted": true,
+  "packageProducerSourceRevision": "396c137930d27fb39251147426a70bd61307bf98",
+  "packageProducerSourceTree": "ec2daf28cc1920be3e83bc791e25f3e6443769cc",
+  "applicationSourceRevision": "138fd6cfd1b99cea858f19f39f8976015da1de1b",
+  "applicationSourceTree": "75ed4c702490df1f168bf590ba055768c260d236",
+  "amd64CompanionSourceRevision": "595bd51be79995642da846afa2206d2ccb96bd08",
+  "amd64CompanionSourceTree": "fd8fdcb99068c3d7fb4185aff0260a86b43876a2",
+  "localAIImageRef": "ghcr.io/willitmod/5tratmux-app:local-ai-0.1.9-umbrel@sha256:b8050920c408eab295ba5848f209d560b5207f821901e09d7a6788c1e2b175d3",
+  "companionConfigDigest": "sha256:8788b993b93cf5a2cc0cb3f66773171184669e19f4cb4edbd54145b639b1ba5e",
+  "serviceSha256": "ed2fb9e08f2217753e2b25c54d2f81546013eb9f8b5dc7e0fd028967cadd2916",
+  "rootCompanionDeliveryReview": {
+    "path": "/Users/johnny/Documents/AI LLM/local-ai-free-evidence-20261016/root-companion019-public-delivery-admission.json",
+    "sha256": "332878d507efeda316a533597839874533e77e2505c1d2a0777d9a69912e4818"
+  },
+  "rootNormalPackageReview": {
+    "path": "/Users/johnny/Documents/AI LLM/local-ai-free-evidence-20261016/root-normal-package396-final-review.json",
+    "sha256": "f8fb0ac36a2c312bfbf375cb3756382a6b599b465a9c613fc9dc3fd364549a43"
+  },
+  "expectedStoreHead": "088250e9acdbaa5ec16d4dda9f507762330d7775",
+  "approvedHelperSHA256": {
+    "normal_package649.py": "e6b515d67b40a97ba0db7095bc85796492305490dbd11bda8d7261a75510d02e",
+    "stage_normal_template649.py": "2a4a16a4c74afed080160918c87ca64fc31928ef82d067643b6ff235b49ae378",
+    "monitor_on649.py": "33f5e28be6188b485b07c849cafca69f0044dfc41e7b6a3f76fce2beadf041cb",
+    "copy_verified_model_cache649.py": "2a54f24adca51489e89463840afb069d1ff0e7420e42b9c2e143d41ee329fd18",
+    "normal_package649_policy_v2.py": "26b03b8771b557715e9cff9ea9303c56e3a0277037bb1964b57ac4231d9d3090"
+  },
+  "packagePreparations": {
+    "DEV": {
+      "path": "/Users/johnny/Documents/AI LLM/local-ai-free-evidence-20261016/normal-package-396-dev-final/package-preparation.json",
+      "sha256": "02aaa5632af2a65083cd348748ac09013b6ab315fd400ac315ddc8f882aeabeb"
+    },
+    "MAIN": {
+      "path": "/Users/johnny/Documents/AI LLM/local-ai-free-evidence-20261016/normal-package-396-main-final/package-preparation.json",
+      "sha256": "faf2c1d89ce9a0674bbfc74b782628da1ef9bca08032d97cd84170c94314e355"
+    }
+  },
+  "actions": {
+    "dev-reconcile-saved-on-restart-safe-off": {
+      "operation": "reconcile-saved-on-restart",
+      "channel": "DEV",
+      "priorRestartEvidence": {
+        "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/fresh649/normal649-dev-restart-on.json",
+        "sha256": "b5b82eeec80388fd3fc8bbe527947db781850bc531cbec0927e44f728916f677"
+      }
+    },
+    "dev-explicit-owner-resume-after-restart": {
+      "operation": "operator",
+      "channel": "DEV",
+      "operatorAction": "enable",
+      "explicitOwnerStart": true
+    },
+    "dev-disable": {
+      "operation": "operator",
+      "channel": "DEV",
+      "operatorAction": "disable"
+    },
+    "dev-restart-off": {
+      "operation": "stop-start",
+      "channel": "DEV",
+      "expectedDesiredEnabled": false
+    },
+    "dev-remove": {
+      "operation": "operator",
+      "channel": "DEV",
+      "operatorAction": "remove"
+    },
+    "dev-reinstall-off": {
+      "operation": "operator",
+      "channel": "DEV",
+      "operatorAction": "install"
+    },
+    "dev-cache-retained": {
+      "operation": "operator",
+      "channel": "DEV",
+      "operatorAction": "model-hash"
+    },
+    "dev-reenable-before-main": {
+      "operation": "operator",
+      "channel": "DEV",
+      "operatorAction": "enable"
+    },
+    "main-normal-dev-to-main": {
+      "operation": "update",
+      "channel": "MAIN"
+    },
+    "main-capture": {
+      "operation": "operator",
+      "channel": "MAIN",
+      "operatorAction": "capture"
+    },
+    "main-provider-comparison": {
+      "operation": "operator",
+      "channel": "MAIN",
+      "operatorAction": "provider-test"
+    },
+    "main-canonical-intent-first": {
+      "operation": "operator",
+      "channel": "MAIN",
+      "operatorAction": "minimal-home-intent"
+    },
+    "main-disable": {
+      "operation": "operator",
+      "channel": "MAIN",
+      "operatorAction": "disable"
+    },
+    "main-restart-off": {
+      "operation": "stop-start",
+      "channel": "MAIN",
+      "expectedDesiredEnabled": false
+    },
+    "main-final-cache-hash": {
+      "operation": "operator",
+      "channel": "MAIN",
+      "operatorAction": "model-hash"
+    },
+    "main-explicit-owner-resume-after-update": {
+      "operation": "operator",
+      "channel": "MAIN",
+      "operatorAction": "enable",
+      "explicitOwnerStart": true
+    }
+  },
+  "verifiedPublicModelTransfer": {
+    "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/fresh649/verified-public-model649-transfer.json",
+    "sha256": "828c86c0e02cbdedecab2f7168b0c3e458110042f40566ae15cf24178c0b4710"
+  },
+  "optionalUnsealedActions": {
+    "main-660-observation": {
+      "operation": "monitor",
+      "channel": "MAIN"
+    }
+  },
+  "sharedDevCompanionLifecycleReuse": {
+    "actualMAINIntentProviderAuthRequired": true,
+    "independentlyAdmittedDEVImageRef": "ghcr.io/willitmod/5tratmux-app:0.9.82-umbrel-dev@sha256:5eb55feec01de1a3b4bdf16027dd22a4fdf5844c83c016996eeeace0e876ca5e",
+    "independentlyAdmittedDEVConfigDigest": "sha256:3cd72ad4d37a9a21ac7cca0a2cd085ea6eccc908c3a091df4af8ec40426c53bf",
+    "actualGeneratedDEVRecipeSHA256": "d05e15851ef0376fc2967cdbcbc33fbf796fa3251fb24726df1b8177ff82dcbf",
+    "actualDEVLifecycleReceipt": null,
+    "sameAdmittedCompanionConfigSourceELFsAndModelRequired": true,
+    "MAIN660PerformedByReuse": false
+  },
+  "finalPublisherBeforeAfterReceiptPending": false,
+  "at": "2026-10-16T19:53:09.303014+00:00",
+  "scope": "Unexecuted normal649qualificationphases with corrected documentedSafeOff startup expectation. Product/source/profile/config/limits unchanged. Preserve every prior failure and cold/warmdisclosure. No target69/storepublication grant.",
+  "sharedMainCompanionLifecycle": {
+    "allowedOnlyWithActualCommonCompanionAndCompletedDevProof": true,
+    "independentDevImageRef": "ghcr.io/willitmod/5tratmux-app:0.9.82-umbrel-dev@sha256:5eb55feec01de1a3b4bdf16027dd22a4fdf5844c83c016996eeeace0e876ca5e",
+    "independentDevAppConfigDigest": "sha256:3cd72ad4d37a9a21ac7cca0a2cd085ea6eccc908c3a091df4af8ec40426c53bf",
+    "independentDevRecipeSHA256": "d05e15851ef0376fc2967cdbcbc33fbf796fa3251fb24726df1b8177ff82dcbf",
+    "actualMainIntentProviderTestRequired": true,
+    "secondFullCorpusOrMain660Required": false
+  },
+  "automaticWarmRetriesAllowed": 0,
+  "anyFirstFailureStopsDependentActionsPendingRootReview": true,
+  "hardwareChangesAllowed": false,
+  "storePublicationAllowed": false,
+  "productionHostDeploymentAllowed": false,
+  "supersededSealForUnexecutedActions": {
+    "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/fresh649/root-normal649-execution-admission.json",
+    "sha256": "f87284f2a56fadd0c92ef0556e9b87fa3f29ccb5d77a756ba7d1fcc0498907c6"
+  },
+  "operatorSetupFailureRecovery": {
+    "failedJournal": {
+      "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/fresh649/normal649-dev-normal080-to082.json",
+      "sha256": "efabfbdb36a3dbd30b03421540c80732577a40413d60fcabfb55bcf97a084866"
+    },
+    "cause": "Unchanged publicicon is960862bytes and was incorrectly subject to a256KiB textfile bound. Decode check failed before any cachedtemplate writes or apps.update calls.",
+    "productOrRuntimeFailure": false,
+    "apiMutationAttemptsBeforeRecovery": 0,
+    "correction": "Only exact publicicon permits exact960862B while retaining exact3eefhash; textfiles retain256KiB bound. Backup bound corrected similarly.",
+    "newDistinctRecoveryAction": "dev-normal080-to082-icon-bound-fix",
+    "automaticMutationRetryPerformed": false
+  },
+  "priorExecutionAdmission": {
+    "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/fresh649/root-normal649-execution-admission-v2-icon-bound-fix.json",
+    "sha256": "eb73431ddf318dbf31ffcafda964083ce4ae31483069037375d411ce0f25bf4e"
+  },
+  "frozenOriginalHelper": {
+    "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/fresh649/normal_package649.py",
+    "sha256": "e6b515d67b40a97ba0db7095bc85796492305490dbd11bda8d7261a75510d02e"
+  },
+  "originalFailedAutomaticOnExpectation": {
+    "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/fresh649/normal649-dev-restart-on.json",
+    "sha256": "b5b82eeec80388fd3fc8bbe527947db781850bc531cbec0927e44f728916f677"
+  },
+  "reviewedPolicyExpectationCorrection": {
+    "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/fresh649/normal649-restart-safe-off-helper-review-ready-v2.json",
+    "sha256": "dbb5e2677efab50511ccf3df9c0548ae8b40452153d736ed792acf91053ebd02"
+  },
+  "policy": "Frozen Umbrel supervisor intentionally starts its internalservice with modelOff after app/containerrestart; saveddesiredOn is retained pending host/owner authority. No automaticmodelstartup behavior added. NativeOS host-controller restoration remains separate.",
+  "automaticModelRestoreVerified": false,
+  "requiredRestartEvidence": "ModelOff/noPID/noerror/noOOM, actual internalinstallationrunning+supported/configmatched/nonbusy/no update, saveddesiredOn/pending/hostauthority, physical00femodelcache and4statefiles unchanged. Reconcile originalsingleSTOP+START withGETonly; no replay.",
+  "requiredExplicitOwnerStart": "Separate once-only normalenable afterDEVrestart andafterMAINupdate; recordasexplicitownerStart, neverautomaticrestore.",
+  "automaticMutationRetriesAllowed": 0,
+  "mainPairOrder": [
+    "main-normal-dev-to-main",
+    "main-capture",
+    "main-explicit-owner-resume-after-update",
+    "main-provider-comparison",
+    "main-canonical-intent-first"
+  ]
+}

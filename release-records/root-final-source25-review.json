@@ -1,0 +1,287 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "/root",
+  "createdAt": "2026-10-16T19:00:02.191244+00:00",
+  "status": "SELECTED034_SOURCE_FULL25_ACTUAL_CORPUS_ACCEPTED",
+  "rawEvidence": {
+    "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/runtime-producer/blas-idle-prototype-20261016/lab/final/inference.json",
+    "sha256": "932fad2f742df9a233e4b74ffd5e0770c1ba8410ba0a2fb716e82371491097ae",
+    "bytes": 181313
+  },
+  "inventory": {
+    "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/runtime-producer/blas-idle-prototype-20261016/lab/final/final-collection-inventory.json",
+    "sha256": "b7179ea7a1cf3ce433ad7a1de0c8af3725860cf4e7d9277ce762597027ef4dbf",
+    "bytes": 1770
+  },
+  "filesRehashed": 13,
+  "sourceHarness": {
+    "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/runtime-producer/arm64-20261016/lab/source/local_ai_runtime/qualification/low_priority_successor.py",
+    "sha256": "5ea807bd0511394c2f9d669b0927e8784df4535825da50ee1ecbc608dda85385",
+    "bytes": 16319
+  },
+  "runtimeBinarySha256": "034a22de64cc6abf39039fcb29f3c3529c98a910c6b849b5fe15e768f2544fa4",
+  "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+  "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+  "corpusSha256": "701b5199b342bb5fe5f32bd367078475dc6805e768527a64d12273a73b816b24",
+  "sourceCasesReviewed": 25,
+  "supportedExpectedMultisetsPassed": 16,
+  "safeHolds": 9,
+  "holdOrigins": {
+    "validator_capability": 8,
+    "validator_conflict": 1
+  },
+  "rawModelOutputsRehashed": 33,
+  "allActualInference": true,
+  "timeoutSeconds": 600,
+  "cpuLimit": 2,
+  "memoryLimitBytes": 6442450944,
+  "firstColdGenerationSeconds": 596.829,
+  "firstColdOuterSeconds": 596.83,
+  "coldScope": "Fresh model process; filesystem page cache was not evicted.",
+  "automaticWarmRetries": 0,
+  "firstColdMarginSeconds": 3.17,
+  "ownedRuntimeStopped": true,
+  "containerExitCode": 0,
+  "oomKilled": false,
+  "completedContainerRemoved": false,
+  "hostInspectDefaultRepresentationDifference": {
+    "OomKillDisable": [
+      false,
+      null
+    ]
+  },
+  "safeHoldDoesNotProveUnsupportedModelUnderstanding": true,
+  "compiled595ColdFailureSuperseded": false,
+  "compiled595ScopeReviewSeparatelyRequired": true,
+  "minimumCpuProofSeparatelyRequired": true,
+  "actual69PerformanceAccepted": false,
+  "normalPackageQualificationAccepted": false,
+  "publicationGranted": false,
+  "reviewedCases": [
+    {
+      "id": "minimal-home",
+      "decision": "resolved",
+      "holdOrigin": null,
+      "generationSeconds": 596.829,
+      "outerSeconds": 596.83,
+      "actualInference": true,
+      "expectedMultisetPassed": true
+    },
+    {
+      "id": "low-priority-home",
+      "decision": "resolved",
+      "holdOrigin": null,
+      "generationSeconds": 126.576,
+      "outerSeconds": 126.576,
+      "actualInference": true,
+      "expectedMultisetPassed": true
+    },
+    {
+      "id": "low-priority-app",
+      "decision": "resolved",
+      "holdOrigin": null,
+      "generationSeconds": 120.49,
+      "outerSeconds": 120.49,
+      "actualInference": true,
+      "expectedMultisetPassed": true
+    },
+    {
+      "id": "primary-lottery-low-app",
+      "decision": "resolved",
+      "holdOrigin": null,
+      "generationSeconds": 330.403,
+      "outerSeconds": 330.403,
+      "actualInference": true,
+      "expectedMultisetPassed": true
+    },
+    {
+      "id": "exact-home",
+      "decision": "resolved",
+      "holdOrigin": null,
+      "generationSeconds": 119.174,
+      "outerSeconds": 119.175,
+      "actualInference": true,
+      "expectedMultisetPassed": true
+    },
+    {
+      "id": "exact-reduced-home",
+      "decision": "resolved",
+      "holdOrigin": null,
+      "generationSeconds": 123.32,
+      "outerSeconds": 123.32,
+      "actualInference": true,
+      "expectedMultisetPassed": true
+    },
+    {
+      "id": "exact-plus-minimize",
+      "decision": "resolved",
+      "holdOrigin": null,
+      "generationSeconds": 329.386,
+      "outerSeconds": 329.387,
+      "actualInference": true,
+      "expectedMultisetPassed": true
+    },
+    {
+      "id": "coordinated-targets",
+      "decision": "resolved",
+      "holdOrigin": null,
+      "generationSeconds": 139.033,
+      "outerSeconds": 139.033,
+      "actualInference": true,
+      "expectedMultisetPassed": true
+    },
+    {
+      "id": "negated-minimize",
+      "decision": "unsupported",
+      "holdOrigin": "validator_capability",
+      "generationSeconds": 106.875,
+      "outerSeconds": 106.875,
+      "actualInference": true,
+      "expectedMultisetPassed": true
+    },
+    {
+      "id": "negated-coordinated",
+      "decision": "unsupported",
+      "holdOrigin": "validator_capability",
+      "generationSeconds": 132.355,
+      "outerSeconds": 132.355,
+      "actualInference": true,
+      "expectedMultisetPassed": true
+    },
+    {
+      "id": "contradictory-priority",
+      "decision": "clarify",
+      "holdOrigin": "validator_conflict",
+      "generationSeconds": 218.777,
+      "outerSeconds": 218.778,
+      "actualInference": true,
+      "expectedMultisetPassed": true
+    },
+    {
+      "id": "unsupported-subset",
+      "decision": "unsupported",
+      "holdOrigin": "validator_capability",
+      "generationSeconds": 129.482,
+      "outerSeconds": 129.482,
+      "actualInference": true,
+      "expectedMultisetPassed": true
+    },
+    {
+      "id": "unsupported-upper-percentage",
+      "decision": "unsupported",
+      "holdOrigin": "validator_capability",
+      "generationSeconds": 145.153,
+      "outerSeconds": 145.153,
+      "actualInference": true,
+      "expectedMultisetPassed": true
+    },
+    {
+      "id": "unsupported-lower-percentage",
+      "decision": "unsupported",
+      "holdOrigin": "validator_capability",
+      "generationSeconds": 130.884,
+      "outerSeconds": 130.884,
+      "actualInference": true,
+      "expectedMultisetPassed": true
+    },
+    {
+      "id": "unsupported-percentage-range",
+      "decision": "unsupported",
+      "holdOrigin": "validator_capability",
+      "generationSeconds": 234.253,
+      "outerSeconds": 234.253,
+      "actualInference": true,
+      "expectedMultisetPassed": true
+    },
+    {
+      "id": "unsupported-percentage-inequality",
+      "decision": "unsupported",
+      "holdOrigin": "validator_capability",
+      "generationSeconds": 146.072,
+      "outerSeconds": 146.072,
+      "actualInference": true,
+      "expectedMultisetPassed": true
+    },
+    {
+      "id": "baseline-primary-lottery",
+      "decision": "resolved",
+      "holdOrigin": null,
+      "generationSeconds": 246.654,
+      "outerSeconds": 246.654,
+      "actualInference": true,
+      "expectedMultisetPassed": true
+    },
+    {
+      "id": "baseline-fixed-remainder",
+      "decision": "resolved",
+      "holdOrigin": null,
+      "generationSeconds": 255.591,
+      "outerSeconds": 255.591,
+      "actualInference": true,
+      "expectedMultisetPassed": true
+    },
+    {
+      "id": "baseline-named-app",
+      "decision": "resolved",
+      "holdOrigin": null,
+      "generationSeconds": 138.663,
+      "outerSeconds": 138.663,
+      "actualInference": true,
+      "expectedMultisetPassed": true
+    },
+    {
+      "id": "baseline-rank",
+      "decision": "resolved",
+      "holdOrigin": null,
+      "generationSeconds": 147.633,
+      "outerSeconds": 147.634,
+      "actualInference": true,
+      "expectedMultisetPassed": true
+    },
+    {
+      "id": "baseline-rank-half",
+      "decision": "resolved",
+      "holdOrigin": null,
+      "generationSeconds": 137.243,
+      "outerSeconds": 137.244,
+      "actualInference": true,
+      "expectedMultisetPassed": true
+    },
+    {
+      "id": "baseline-hash",
+      "decision": "resolved",
+      "holdOrigin": null,
+      "generationSeconds": 176.585,
+      "outerSeconds": 176.585,
+      "actualInference": true,
+      "expectedMultisetPassed": true
+    },
+    {
+      "id": "baseline-group",
+      "decision": "resolved",
+      "holdOrigin": null,
+      "generationSeconds": 126.224,
+      "outerSeconds": 126.224,
+      "actualInference": true,
+      "expectedMultisetPassed": true
+    },
+    {
+      "id": "low-priority-group",
+      "decision": "resolved",
+      "holdOrigin": null,
+      "generationSeconds": 137.924,
+      "outerSeconds": 137.924,
+      "actualInference": true,
+      "expectedMultisetPassed": true
+    },
+    {
+      "id": "unsupported-temperature",
+      "decision": "unsupported",
+      "holdOrigin": "validator_capability",
+      "generationSeconds": 130.718,
+      "outerSeconds": 130.718,
+      "actualInference": true,
+      "expectedMultisetPassed": true
+    }
+  ]
+}

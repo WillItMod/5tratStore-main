@@ -1,0 +1,146 @@
+{
+  "kind": "read-only649-first-intent-and-monitor-progress",
+  "targetVmid": 649,
+  "intent": {
+    "result": "IN_PROGRESS",
+    "startedAt": "2026-10-16T19:25:12.647145+00:00",
+    "initialIntentResponse": {
+      "httpStatus": 202,
+      "value": {
+        "accepted": true,
+        "phase": "intent",
+        "requestId": "qa649-5535182662c9325f45a9873411737504",
+        "inputSha256": "6cb5f5b0e4f51ea2aa33195f0b66e8d06b25cec75ee5ff4836b82ee3dbbcb008",
+        "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+        "modelId": "qwen3.5-4b"
+      },
+      "elapsedSeconds": 0.05389069400007429
+    },
+    "intentElapsedSeconds": null,
+    "intentTerminalOperation": null,
+    "intentTerminalServiceError": null
+  },
+  "latestIntentPoll": {
+    "at": "2026-10-16T19:27:47.577100+00:00",
+    "elapsedSeconds": 153.72229801899994,
+    "phase": "intent",
+    "busy": true,
+    "operation": {
+      "kind": "intent",
+      "state": "running",
+      "requestId": "qa649-5535182662c9325f45a9873411737504",
+      "inputSha256": "6cb5f5b0e4f51ea2aa33195f0b66e8d06b25cec75ee5ff4836b82ee3dbbcb008",
+      "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+      "modelId": "qwen3.5-4b",
+      "startedAt": "2026-10-16T19:25:13.903969+00:00"
+    },
+    "error": null,
+    "telemetry": {
+      "telemetrySince": "2026-10-16T19:20:35.238560+00:00",
+      "activity": "prompt",
+      "lastTriggeredAt": "2026-10-16T19:25:13.904037+00:00",
+      "currentJob": {
+        "jobId": "15cf96431bf140f2a50670ba92cfe476",
+        "kind": "intent",
+        "modelId": "qwen3.5-4b",
+        "requestId": "qa649-5535182662c9325f45a9873411737504",
+        "triggeredAt": "2026-10-16T19:25:13.904037+00:00",
+        "startedAt": "2026-10-16T19:25:13.904904+00:00",
+        "completedAt": null,
+        "durationSeconds": 153.656,
+        "state": "running",
+        "stage": "prompt",
+        "summary": null,
+        "actualInference": false,
+        "generation": {
+          "promptTokens": 1460,
+          "generatedTokens": null,
+          "generationTokensPerSecond": null,
+          "promptMilliseconds": null,
+          "generationMilliseconds": null,
+          "source": "llama.cpp.tokenize",
+          "streaming": false,
+          "measurement": "prompt_only"
+        },
+        "generationSequence": 1,
+        "outcome": null
+      },
+      "lastJob": null,
+      "lastRejected": null,
+      "ratesAreLive": false
+    }
+  },
+  "monitorResult": "IN_PROGRESS",
+  "monitorFirstSample": {
+    "at": "2026-10-16T19:24:38.002838+00:00",
+    "elapsedSeconds": 0.042687706999458896,
+    "requestStartedElapsedSeconds": 0.0003701549994730158,
+    "responseReceivedElapsedSeconds": 0.042687706999458896,
+    "enabled": true,
+    "phase": "ready",
+    "busy": false,
+    "selectedModel": "qwen3.5-4b",
+    "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+    "runtime": {
+      "pid": 89,
+      "modelId": "qwen3.5-4b",
+      "binarySha256": "034a22de64cc6abf39039fcb29f3c3529c98a910c6b849b5fe15e768f2544fa4",
+      "running": true,
+      "healthy": true
+    },
+    "desiredEnabled": true,
+    "generationSequence": 0,
+    "entitlement": {
+      "allowed": true,
+      "licenceRequired": false,
+      "policy": "licence-free",
+      "reason": "Local AI is available without a licence. MUX routing keeps its existing licence requirements."
+    },
+    "memoryEvents": {
+      "low": 0,
+      "high": 0,
+      "max": 0,
+      "oom": 0,
+      "oom_kill": 0,
+      "oom_group_kill": 0
+    },
+    "cgroupMemoryCurrentBytes": 392867840
+  },
+  "monitorLatestSample": {
+    "at": "2026-10-16T19:27:45.173220+00:00",
+    "elapsedSeconds": 187.21305954599939,
+    "requestStartedElapsedSeconds": 187.1603494689998,
+    "responseReceivedElapsedSeconds": 187.21305954599939,
+    "enabled": true,
+    "phase": "intent",
+    "busy": true,
+    "selectedModel": "qwen3.5-4b",
+    "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+    "runtime": {
+      "pid": 89,
+      "modelId": "qwen3.5-4b",
+      "binarySha256": "034a22de64cc6abf39039fcb29f3c3529c98a910c6b849b5fe15e768f2544fa4",
+      "running": true,
+      "healthy": true
+    },
+    "desiredEnabled": true,
+    "generationSequence": 1,
+    "entitlement": {
+      "allowed": true,
+      "licenceRequired": false,
+      "policy": "licence-free",
+      "reason": "Local AI is available without a licence. MUX routing keeps its existing licence requirements."
+    },
+    "memoryEvents": {
+      "low": 0,
+      "high": 0,
+      "max": 0,
+      "oom": 0,
+      "oom_kill": 0,
+      "oom_group_kill": 0
+    },
+    "cgroupMemoryCurrentBytes": 500228096
+  },
+  "monitorSampleCount": 38,
+  "controlsOrInferenceSentByThisCapture": 0
+}

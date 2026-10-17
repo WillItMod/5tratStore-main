@@ -1,0 +1,181 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "/root",
+  "createdAt": "2026-10-16T19:12:42.516619+00:00",
+  "status": "FROZEN_COMPANION019_PUBLIC_DELIVERY_ACCEPTED_PACKAGE_GENERATION_ADMITTED",
+  "imageRef": "ghcr.io/willitmod/5tratmux-app:local-ai-0.1.9-umbrel@sha256:b8050920c408eab295ba5848f209d560b5207f821901e09d7a6788c1e2b175d3",
+  "indexDigest": "sha256:b8050920c408eab295ba5848f209d560b5207f821901e09d7a6788c1e2b175d3",
+  "images": {
+    "amd64": {
+      "manifestDigest": "sha256:67344ce981b43db67ab704aac20f06311d1ea66a4f89b754ca0554edc374fa83",
+      "manifestBytes": 1353,
+      "indexDescriptorSizeVerified": true,
+      "configurationDigest": "sha256:8788b993b93cf5a2cc0cb3f66773171184669e19f4cb4edbd54145b639b1ba5e",
+      "configurationBytes": 4352,
+      "archiveSha256": "354dcf6ea0e94d4c7bca1648fd80cfa464d86ea5936e9383eb99d05ac509edbf",
+      "sourceRevision": "595bd51be79995642da846afa2206d2ccb96bd08",
+      "sourceTree": "fd8fdcb99068c3d7fb4185aff0260a86b43876a2",
+      "layers": [
+        {
+          "digest": "sha256:ed6c2e9218e3463e0f5509288d57c33e9209d718b2afdad3407cdf9be22ffc19",
+          "compressedBytes": 28386301,
+          "diffId": "sha256:e58989146fcec76699871403b9897b5c014af1ccd85f5a9300a215e7975525d7",
+          "anonymousFullCompressedHashVerified": true,
+          "archiveDiffIdMatched": true
+        },
+        {
+          "digest": "sha256:eff851d18078f16a50cae19cdea269883b2a017780513e413f41a78fe43630ff",
+          "compressedBytes": 3580064,
+          "diffId": "sha256:578d1b0cb748e09c3bd0d85dbfaa1f1f3d0f9239798b8e89d822279f35dea29f",
+          "anonymousFullCompressedHashVerified": true,
+          "archiveDiffIdMatched": true
+        },
+        {
+          "digest": "sha256:206c54a4447826ac868675c2e73f4ba7731c16eeb70e1f9fc992f1739549f617",
+          "compressedBytes": 585881,
+          "diffId": "sha256:1c1eb7d02ead7bbd7894e2bbb108c812c4089c04ad129639eacddea3407ce6e6",
+          "anonymousFullCompressedHashVerified": true,
+          "archiveDiffIdMatched": true
+        },
+        {
+          "digest": "sha256:4018b3a0484d73be09e400645b8f1348ab8b83dfaf39011bfd66954d7173b09b",
+          "compressedBytes": 7034373,
+          "diffId": "sha256:e73203c7453a4553d4efddb097e4b6d7efe34058f73370ae78301fca9b57508f",
+          "anonymousFullCompressedHashVerified": true,
+          "archiveDiffIdMatched": true
+        },
+        {
+          "digest": "sha256:83b1ec3ee28c6a1a593d75a948de2b84ed63b179053eca059b720a8a62ba65ff",
+          "compressedBytes": 13679922,
+          "diffId": "sha256:ec7345f35fd8bc90ee363c864e23966acba30d77dbb5dbb06d0f128a5247a5a1",
+          "anonymousFullCompressedHashVerified": true,
+          "archiveDiffIdMatched": true
+        },
+        {
+          "digest": "sha256:d55162d510be481bbe855e7f01096edb083dcae537e7ab4737df99904ffe9b1d",
+          "compressedBytes": 3099,
+          "diffId": "sha256:f9c959d1b8906cbd6a5cd9f343fa309002192dec27786718b8dc8c4094c8ff6d",
+          "anonymousFullCompressedHashVerified": true,
+          "archiveDiffIdMatched": true
+        },
+        {
+          "digest": "sha256:f4e77b13bdd94417f1236b99f439ee268adc171b033be4e277a2b14cdc7bb079",
+          "compressedBytes": 20717003,
+          "diffId": "sha256:7f99b7f9d0adedf75bdf9487758ce11a3497e91b442651b895c7e8a2ae5e2231",
+          "anonymousFullCompressedHashVerified": true,
+          "archiveDiffIdMatched": true
+        }
+      ]
+    },
+    "arm64": {
+      "manifestDigest": "sha256:665cf51df9cbf8b17edaaefcdbbfffb2a0534339c7fa6819a4a82f1a8e7e7d8a",
+      "manifestBytes": 1353,
+      "indexDescriptorSizeVerified": true,
+      "configurationDigest": "sha256:6a2d44c4ef1f3dea9dcf35ff9233926c5edef28c8c50976408fab26f974e7899",
+      "configurationBytes": 4495,
+      "archiveSha256": "3c4b8f61132202cd0788f6c88df37c07183241800d91a239c49f17959ce0d225",
+      "sourceRevision": "138fd6cfd1b99cea858f19f39f8976015da1de1b",
+      "sourceTree": "75ed4c702490df1f168bf590ba055768c260d236",
+      "layers": [
+        {
+          "digest": "sha256:c75f989a229d12b2d2613a5997de9ff3546f664c22da9248720033a2410220f6",
+          "compressedBytes": 28137179,
+          "diffId": "sha256:dca69811453d69d10b6c0345a5c49147162abe20a2f77802d66efc60667949ea",
+          "anonymousFullCompressedHashVerified": true,
+          "archiveDiffIdMatched": true
+        },
+        {
+          "digest": "sha256:53a2939c57eae456e698e629474fb1b21d8fec252bf2ad988b63d5baf87cea47",
+          "compressedBytes": 3314057,
+          "diffId": "sha256:fb25a2bda8b097352d4e6c04003ec7c5c91c57a09cd1bedd12b7d83dd3e99900",
+          "anonymousFullCompressedHashVerified": true,
+          "archiveDiffIdMatched": true
+        },
+        {
+          "digest": "sha256:9b4137a80c60bdaf03ce15d34aa6a3d0d833250feadb29c6e8e7b0db3534341a",
+          "compressedBytes": 586156,
+          "diffId": "sha256:ec4d3b73292be40f55649a8d74ead87907772b154a7b2918170c196b7e96d8ea",
+          "anonymousFullCompressedHashVerified": true,
+          "archiveDiffIdMatched": true
+        },
+        {
+          "digest": "sha256:2dd208683893b7245cb2fa7eb1a10d3268ac6eba7e8cbc972d8b17a771e83e8b",
+          "compressedBytes": 6746304,
+          "diffId": "sha256:4dbc46a75ed432fed29cece168cfd5ae096fa97671a273bddc113d37e3f1936d",
+          "anonymousFullCompressedHashVerified": true,
+          "archiveDiffIdMatched": true
+        },
+        {
+          "digest": "sha256:b2a3f16d21e190067b94ad6a0d7a538603ae8ed1c587fbcec8daa3edae8371e3",
+          "compressedBytes": 12617360,
+          "diffId": "sha256:222a712f174347f0056bbf79717676802b7f99a8621f91c37249daa635bad85d",
+          "anonymousFullCompressedHashVerified": true,
+          "archiveDiffIdMatched": true
+        },
+        {
+          "digest": "sha256:daa7b8f4d9ce887742f93ee3d00bc24a64dcb3f3734e20a5f590265fe197335e",
+          "compressedBytes": 2507,
+          "diffId": "sha256:ba7b6494233ea99bad7327e83c75cad2588cc7a29e4fa9705fec99642faf9d7a",
+          "anonymousFullCompressedHashVerified": true,
+          "archiveDiffIdMatched": true
+        },
+        {
+          "digest": "sha256:fdcab5a596a5b422f96367fddd5e3338600a3c2e5d734c0da4e91533b518e33e",
+          "compressedBytes": 19359379,
+          "diffId": "sha256:0f0441bfef9c48668a0f4f3afc063a2cb831977a673e138541e4bb7b05a423c9",
+          "anonymousFullCompressedHashVerified": true,
+          "archiveDiffIdMatched": true
+        }
+      ]
+    }
+  },
+  "rootIndependentAnonymousFullDownload": {
+    "path": "/Users/johnny/Documents/AI LLM/local-ai-free-evidence-20261016/companion019-root-anonymous-public-delivery/root-public-delivery-review.json",
+    "sha256": "f8ba6f22d50807811f039ac9f2a0766153b9348b5c25fe348d999ec6daef754c",
+    "bytes": 7144
+  },
+  "macDeliveryInventory": {
+    "path": "/Users/johnny/Documents/AI LLM/local-ai-free-evidence-20261016/mac-companion019-publication-return/delivery-files.json",
+    "sha256": "52b31ca4ce444d14bd38534b5c03df5c26d67b560bdf45ff5fbcd8e95d55087b",
+    "bytes": 5618
+  },
+  "macPublicationResult": {
+    "path": "/Users/johnny/Documents/AI LLM/local-ai-free-evidence-20261016/mac-companion019-publication-return/publication-result.json",
+    "sha256": "c836f225a08525d6e1e60c9926d99e5003cee1d3ab05fe99d61ac0fc8f357f60",
+    "bytes": 14275
+  },
+  "macPrepublicationReview": {
+    "path": "/Users/johnny/Documents/AI LLM/local-ai-free-evidence-20261016/mac-companion019-publication-return/root-prepublication-review.json",
+    "sha256": "494ff51698ffd7a9286be6337d314fb06be501e0d097cca15cd167a378d27eb2",
+    "bytes": 3030
+  },
+  "macDeliveryReview": {
+    "path": "/Users/johnny/Documents/AI LLM/local-ai-free-evidence-20261016/mac-companion019-publication-return/root-delivery-review.json",
+    "sha256": "a843824e496133743f3fc0b3ada825bd3328d76b8b98d6ee4b26c4423ca3b2e5",
+    "bytes": 3417
+  },
+  "filesRehashed": 36,
+  "all16ConfigsAndCompressedLayersVerifiedBeforeAndAfterPublication": true,
+  "all14ArchiveDiffIdsIndependentlyVerified": true,
+  "freshTagAbsenceChecks": 2,
+  "singleTagPut": true,
+  "old58TagsUnchanged": true,
+  "native019VersionTagPreserved": true,
+  "engineSettingsPreserved": true,
+  "packageGenerationAllowed": true,
+  "packageProducerSourceRevision": "396c137930d27fb39251147426a70bd61307bf98",
+  "packageProducerSourceTree": "ec2daf28cc1920be3e83bc791e25f3e6443769cc",
+  "packageGenerationInputs": {
+    "path": "/Users/johnny/Documents/AI LLM/local-ai-free-evidence-20261016/normal-package-396-actual-inputs-PENDING-GENERATION.json",
+    "sha256": "d2497c602fd500821ae4ec332b55fc52c4bbb1e9101297a4c82cb32cae57600a",
+    "bytes": 7245
+  },
+  "generationScope": "Generate exact DEV and MAIN immutable packages into fresh outside-checkout paths from clean396 and unchanged shared artwork. Root review required before normalQA.",
+  "compiledAmdColdDeadlinePassed": false,
+  "materialColdLimitationRetained": true,
+  "normalPackageQualificationAccepted": false,
+  "normalPackageGuestExecutionAllowedByThisReceipt": false,
+  "storePointersAllowed": false,
+  "targetDeploymentAllowedByThisReceipt": false,
+  "sourceOrLayoutOrOtherReleaseChangesAllowed": false
+}

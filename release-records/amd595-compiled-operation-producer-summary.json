@@ -1,0 +1,165 @@
+{
+  "actual69InferenceClaimed": false,
+  "actualV2TargetInferenceClaimed": false,
+  "automaticWarmRetries": 0,
+  "cold": {
+    "actualInference": false,
+    "caseId": "minimal-home",
+    "completionReceived": false,
+    "contractValid": false,
+    "error": {
+      "code": "runtime_timeout",
+      "message": "The local model did not finish the complete instruction within the interpretation time limit.",
+      "reason": "intent_deadline"
+    },
+    "firstColdPassClaimed": false,
+    "freshModelProcessAndEmptyPromptContext": true,
+    "generationElapsedSeconds": 600.002,
+    "hostPageCacheEvictionClaimed": false,
+    "outerSeconds": 600.99,
+    "requestStartedAt": "2026-10-16T18:17:23.888173+00:00",
+    "runtimeHealthyAfterTimeout": true,
+    "verdict": "FAIL"
+  },
+  "compiledServiceSha256": "ed2fb9e08f2217753e2b25c54d2f81546013eb9f8b5dc7e0fd028967cadd2916",
+  "compiledSupervisorSha256": "46a738b1f941af33d816a8fac3bb9e8ebec8ce9f6d904a3e4c0c8b497a0d042f",
+  "completeFull25CorpusClaimed": false,
+  "corpusSha256": "701b5199b342bb5fe5f32bd367078475dc6805e768527a64d12273a73b816b24",
+  "createdAt": "2026-10-16T18:36:08.187289+00:00",
+  "entitlementAtEnable": {
+    "allowed": true,
+    "licenceRequired": false,
+    "reason": "Local AI does not require a licence."
+  },
+  "imageArchiveSha256": "354dcf6ea0e94d4c7bca1648fd80cfa464d86ea5936e9383eb99d05ac509edbf",
+  "imageConfigId": "sha256:8788b993b93cf5a2cc0cb3f66773171184669e19f4cb4edbd54145b639b1ba5e",
+  "imageId": "sha256:8788b993b93cf5a2cc0cb3f66773171184669e19f4cb4edbd54145b639b1ba5e",
+  "imagePublicationAuthorizedByThisReceipt": false,
+  "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+  "kind": "producer-scoped-compiled-amd595-cold-timeout-and-same-process-recovery-outcome",
+  "labNetworkMode": "none",
+  "limitations": [
+    "The original fresh cold request failed safely at600.002seconds. This outcome does not relabel it as a pass.",
+    "Recovery uses a distinct planned goal and a separately planned synthetic retain-current comparison in the same owned container and reported model PID; it is not an identical cold-request retry.",
+    "Evidence exercises compiled service+supervisor through private UDS on the owned Forge host; actual compiled APP package and minimum-CPU target inference remain separate acceptance gates.",
+    "On elapsed time includes planned active jobs and successful comparison; status polls during jobs were not retained as a separate periodic passive sample series.",
+    "Failed-model-process cancellation may preserve completed prefix/checkpoints; later warm success cannot prove the timed-out request completed.",
+    "No new model downloads, production routing, signing or publication occurred."
+  ],
+  "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+  "newColdRunsOrTimerChanges": false,
+  "normalComparison": {
+    "actualInference": true,
+    "contractValid": true,
+    "decision": "select",
+    "elapsedSeconds": 193.017,
+    "liveRoutingOrPaidAccessGranted": false,
+    "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+    "requestId": "compiled-amd64-v2-final-compare",
+    "requestStartedAt": "2026-10-16T18:29:44.237679+00:00",
+    "routingAuthority": "app_guardrails_only",
+    "runtimeBinarySha256": "034a22de64cc6abf39039fcb29f3c3529c98a910c6b849b5fe15e768f2544fa4",
+    "selectedCandidateId": "retain-current"
+  },
+  "normalProductionNetworkMode": "default-compose-network-no-published-companion-ports",
+  "offAndCleanup": {
+    "cachedModelUnchanged": true,
+    "clientExit": 1,
+    "disableAccepted": true,
+    "exactOwnedContainersAbsent": {
+      "codexqa-local-ai-amd64-v2-final-595bd51-operation-6g": true,
+      "codexqa-local-ai-amd64-v2-final-595bd51-operation-6g-client": true
+    },
+    "failedRunScopedVolumesRetained": true,
+    "ownedModelStopped": true,
+    "phase": "off",
+    "sidecarFinalState": {
+      "Dead": false,
+      "Error": "",
+      "ExitCode": 0,
+      "FinishedAt": "2026-10-16T18:33:03.092223361Z",
+      "OOMKilled": false,
+      "Paused": false,
+      "Pid": 0,
+      "Restarting": false,
+      "Running": false,
+      "StartedAt": "2026-10-16T18:17:00.212337055Z",
+      "Status": "exited"
+    }
+  },
+  "onEvidence": {
+    "enabledAndHealthyAtStart": true,
+    "endedAt": "2026-10-16T18:32:58.293841+00:00",
+    "intermediateStatusPollsPersisted": false,
+    "plannedInferenceAndComparisonSpannedMoreThan660Seconds": true,
+    "reportedElapsedSeconds": 934.461,
+    "runtimeHealthyAtBothCaseCompletions": true,
+    "separatePassive660SampleSweepPerformed": false,
+    "startedAt": "2026-10-16T18:17:23.833132+00:00"
+  },
+  "originalAutomaticPasses": 1,
+  "originalCompiledBoundedOperationExecutionPassed": false,
+  "originalCompleteRequestedCases": true,
+  "originalDriverExit": 1,
+  "productionPerformanceAcceptedByThisReceipt": false,
+  "rawEvidenceSHA256": "04ea1742894c9e5a1e73e8d316a7c2191fa68f13d88dd4a607c2879b5030e55c",
+  "rawReceipts": {
+    "client-after.json": "5fbf51aa56bff0911af4a76491ac0bca58cc38573f0053e57ea54fb2f919e21f",
+    "container-absence.json": "15ef046c2fa63812fd3843efd6efee5a855307fe7b43f0f1294ff7a2c7bff894",
+    "evidence.json": "04ea1742894c9e5a1e73e8d316a7c2191fa68f13d88dd4a607c2879b5030e55c",
+    "final-operation-inventory.json": "6b4bab7231834e66a20b5572ba6b677f6b16ff4ea98b973fa71099d553c721df",
+    "first-cold-observation.json": "7058af2a1c3726c2d903c22653c9c0182ba61078b4cf45d8add7a6c443b4b953",
+    "first-cold-result-snapshot.json": "1b691c777227f728fe400f45c8061483253d35950b04c808a6b3c8fd218c4386",
+    "model-cache-preservation.json": "36ffeb0bf38d9f61fab9969a460a302fe3e1a819c9b06ff57719352c890836fb",
+    "sidecar-after-stop.json": "74c65db14fb5db256970ecdfceae32568e711c2787afc21d62415a15f1d1c6a4"
+  },
+  "requestTimeoutSeconds": 600,
+  "reviewer": "/root/umbrel_runtime",
+  "rootIndependentReview": null,
+  "rootIndependentReviewRequired": true,
+  "runtimeBinarySha256": "034a22de64cc6abf39039fcb29f3c3529c98a910c6b849b5fe15e768f2544fa4",
+  "runtimeCpuLimit": 2,
+  "runtimeMemoryLimitBytes": 6442450944,
+  "runtimeMemorySwapLimitBytes": 6442450944,
+  "schemaVersion": 1,
+  "selectedCanonicalCaseIds": [
+    "minimal-home",
+    "coordinated-targets"
+  ],
+  "sourceCorpusHarnessSha256": "5ea807bd0511394c2f9d669b0927e8784df4535825da50ee1ecbc608dda85385",
+  "sourceQualificationRemainsSeparate": true,
+  "sourceRevision": "595bd51be79995642da846afa2206d2ccb96bd08",
+  "sourceTree": "fd8fdcb99068c3d7fb4185aff0260a86b43876a2",
+  "transportHarnessSha256": "66fd536c532a7aa1d98132784c5f190454d8d121d446e841b7cf79dd03b72c2a",
+  "warmRecovery": {
+    "actualInference": true,
+    "actualRequirements": [
+      {
+        "a": "5trat",
+        "k": "deprioritize",
+        "q": "Minimize BTC and 5trat",
+        "u": null,
+        "v": null,
+        "w": "all"
+      },
+      {
+        "a": "bitcoin",
+        "k": "deprioritize",
+        "q": "Minimize BTC and 5trat",
+        "u": null,
+        "v": null,
+        "w": "all"
+      }
+    ],
+    "caseId": "coordinated-targets",
+    "contractValid": true,
+    "distinctPlannedCaseOnly": true,
+    "generationElapsedSeconds": 137.701,
+    "identicalMinimalHomeRetryPerformed": false,
+    "lifecycleRestartActionsBetweenCases": 0,
+    "outerSeconds": 138.72,
+    "requestStartedAt": "2026-10-16T18:27:25.315244+00:00",
+    "sameContainerAndReportedRuntimePid": 37,
+    "verdict": "PASS"
+  }
+}

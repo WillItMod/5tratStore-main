@@ -1,0 +1,92 @@
+{
+  "allFinalLayersChecked": true,
+  "contextSha256": "e6e3a9ed999fc0e090b09b311c690dffa9fbec59d4b285c5b5b7e9e829f4656e",
+  "deploymentAccepted": false,
+  "executables": {
+    "opt/5tratmux-local-ai/bin/llama-server": {
+      "bytes": 15653840,
+      "elfMachine": 62,
+      "sha256": "034a22de64cc6abf39039fcb29f3c3529c98a910c6b849b5fe15e768f2544fa4"
+    },
+    "opt/5tratmux-local-ai/bin/local-ai-service": {
+      "bytes": 7998224,
+      "elfMachine": 62,
+      "sha256": "ed2fb9e08f2217753e2b25c54d2f81546013eb9f8b5dc7e0fd028967cadd2916"
+    },
+    "usr/local/bin/local-ai-supervisor": {
+      "bytes": 7142160,
+      "elfMachine": 62,
+      "sha256": "46a738b1f941af33d816a8fac3bb9e8ebec8ce9f6d904a3e4c0c8b497a0d042f"
+    }
+  },
+  "finalSourceRestageRequired": false,
+  "forbiddenFiles": [],
+  "identity": {
+    "architecture": "amd64",
+    "configSha256": "29fa7e714e19961613bd9f8c6ab775696dfae02c0b9d0d86d36da75fe06bedf9",
+    "cpuProfile": "amd64-v2",
+    "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+    "llamaSha256": "034a22de64cc6abf39039fcb29f3c3529c98a910c6b849b5fe15e768f2544fa4",
+    "manifestSha256": "191fcf673a10f55a9c2526f58b85fe264111563a3d3dae43012e18f2de21c5b4",
+    "releaseVersion": "local-ai-0.1.9-umbrel-amd64-v2",
+    "schemaVersion": "1.0",
+    "serviceSha256": "ed2fb9e08f2217753e2b25c54d2f81546013eb9f8b5dc7e0fd028967cadd2916"
+  },
+  "imageArchiveBytes": 152740352,
+  "imageArchiveSha256": "354dcf6ea0e94d4c7bca1648fd80cfa464d86ea5936e9383eb99d05ac509edbf",
+  "imageId": "sha256:8788b993b93cf5a2cc0cb3f66773171184669e19f4cb4edbd54145b639b1ba5e",
+  "kind": "actual-protected-amd64-v2-final-layer-audit",
+  "layers": [
+    {
+      "bytes": 77936640,
+      "path": "blobs/sha256/e58989146fcec76699871403b9897b5c014af1ccd85f5a9300a215e7975525d7",
+      "regularFiles": 3263,
+      "sha256": "e58989146fcec76699871403b9897b5c014af1ccd85f5a9300a215e7975525d7"
+    },
+    {
+      "bytes": 9946112,
+      "path": "blobs/sha256/578d1b0cb748e09c3bd0d85dbfaa1f1f3d0f9239798b8e89d822279f35dea29f",
+      "regularFiles": 226,
+      "sha256": "578d1b0cb748e09c3bd0d85dbfaa1f1f3d0f9239798b8e89d822279f35dea29f"
+    },
+    {
+      "bytes": 3172864,
+      "path": "blobs/sha256/1c1eb7d02ead7bbd7894e2bbb108c812c4089c04ad129639eacddea3407ce6e6",
+      "regularFiles": 160,
+      "sha256": "1c1eb7d02ead7bbd7894e2bbb108c812c4089c04ad129639eacddea3407ce6e6"
+    },
+    {
+      "bytes": 7145472,
+      "path": "blobs/sha256/e73203c7453a4553d4efddb097e4b6d7efe34058f73370ae78301fca9b57508f",
+      "regularFiles": 1,
+      "sha256": "e73203c7453a4553d4efddb097e4b6d7efe34058f73370ae78301fca9b57508f"
+    },
+    {
+      "bytes": 23670784,
+      "path": "blobs/sha256/ec7345f35fd8bc90ee363c864e23966acba30d77dbb5dbb06d0f128a5247a5a1",
+      "regularFiles": 8,
+      "sha256": "ec7345f35fd8bc90ee363c864e23966acba30d77dbb5dbb06d0f128a5247a5a1"
+    },
+    {
+      "bytes": 12800,
+      "path": "blobs/sha256/f9c959d1b8906cbd6a5cd9f343fa309002192dec27786718b8dc8c4094c8ff6d",
+      "regularFiles": 1,
+      "sha256": "f9c959d1b8906cbd6a5cd9f343fa309002192dec27786718b8dc8c4094c8ff6d"
+    },
+    {
+      "bytes": 30828544,
+      "path": "blobs/sha256/7f99b7f9d0adedf75bdf9487758ce11a3497e91b442651b895c7e8a2ae5e2231",
+      "regularFiles": 10,
+      "sha256": "7f99b7f9d0adedf75bdf9487758ce11a3497e91b442651b895c7e8a2ae5e2231"
+    }
+  ],
+  "modelInferenceAccepted": false,
+  "modelWeightsIncluded": false,
+  "nativeControllerOrDockerSocketRequired": false,
+  "noticeFilesHashVerified": 159,
+  "privateKeysIncluded": false,
+  "privateSourceIncluded": false,
+  "prototypeOnly": false,
+  "sourceRevision": "595bd51be79995642da846afa2206d2ccb96bd08",
+  "sourceTree": "fd8fdcb99068c3d7fb4185aff0260a86b43876a2"
+}

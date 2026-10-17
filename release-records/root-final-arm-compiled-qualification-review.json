@@ -1,0 +1,230 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "root",
+  "createdAt": "2026-10-16T17:10:55.386553+00:00",
+  "status": "FINAL_COMPILED_ARM_6G_CORPUS_AND_COMPARISON_ACCEPTED",
+  "sourceRevision": "138fd6cfd1b99cea858f19f39f8976015da1de1b",
+  "sourceTree": "75ed4c702490df1f168bf590ba055768c260d236",
+  "imageId": "sha256:d76d097ede033be441d7861c02182d9b0aa8ea58f28746af3e2873a67b89c810",
+  "imageConfigId": "sha256:6a2d44c4ef1f3dea9dcf35ff9233926c5edef28c8c50976408fab26f974e7899",
+  "imageArchiveSha256": "3c4b8f61132202cd0788f6c88df37c07183241800d91a239c49f17959ce0d225",
+  "runtimeBinarySha256": "e7a1fe417870f5bdbc826376ef1afae3986c8bb4de3dd3dce71e2ac4e2bf337b",
+  "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+  "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+  "corpusSha256": "701b5199b342bb5fe5f32bd367078475dc6805e768527a64d12273a73b816b24",
+  "rawEvidence": {
+    "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/runtime-producer/arm64-final-138fd/compiled-inference-6g-02/evidence.json",
+    "sha256": "11fb0843f1830546fc7a6b710ad797b966e25ef615c3ba8309d3e33363a5f191"
+  },
+  "producerRecord": {
+    "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/runtime-producer/arm64-final-138fd/producer-record.json",
+    "sha256": "b14f556aa0ecdf96682cd2f2f9fe8af5f594015fe74b1b7156178d5434816a17"
+  },
+  "priorStaticReview": {
+    "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/runtime-producer/arm64-final-138fd/root-final-arm-static-review.json",
+    "sha256": "7cffaef087a49697b40dc618fab95102d46eea5fd45f0bffbcf50b676342c6f0"
+  },
+  "executionReview": {
+    "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/runtime-producer/arm64-final-138fd/compiled-inference-6g-02/compiled-execution-review.json",
+    "sha256": "08c2f35455315c5edc61dd6486e3ae210af714921b493e190ee42d0f3361b510"
+  },
+  "cleanup": {
+    "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/runtime-producer/arm64-final-138fd/compiled-inference-6g-02/cleanup-and-engine-preservation.json",
+    "sha256": "5afa582e3bba87c249852b2aa9aae50d3053dc74ca558dea284280bb3c200971"
+  },
+  "actualCasesReviewed": 25,
+  "resolvedCases": 16,
+  "safeHoldCases": 9,
+  "allCasesActualInference": true,
+  "safeHoldMeaning": "End-to-end safe outcomes include validator capability/conflict holds; these do not separately prove model understanding of unsupported instructions.",
+  "firstColdGenerationSeconds": 121.522,
+  "automaticWarmRetries": 0,
+  "memoryLimitBytes": 6442450944,
+  "cpuLimit": 2,
+  "normalComparisonPassed": true,
+  "normalOffPassed": true,
+  "cachePreserved": true,
+  "engineResourcesPreserved": true,
+  "reviewedCases": [
+    {
+      "id": "minimal-home",
+      "decision": "resolved",
+      "holdOrigin": null,
+      "generationSeconds": 121.522,
+      "actualInference": true
+    },
+    {
+      "id": "low-priority-home",
+      "decision": "resolved",
+      "holdOrigin": null,
+      "generationSeconds": 16.607,
+      "actualInference": true
+    },
+    {
+      "id": "low-priority-app",
+      "decision": "resolved",
+      "holdOrigin": null,
+      "generationSeconds": 16.721,
+      "actualInference": true
+    },
+    {
+      "id": "primary-lottery-low-app",
+      "decision": "resolved",
+      "holdOrigin": null,
+      "generationSeconds": 16.951,
+      "actualInference": true
+    },
+    {
+      "id": "exact-home",
+      "decision": "resolved",
+      "holdOrigin": null,
+      "generationSeconds": 17.313,
+      "actualInference": true
+    },
+    {
+      "id": "exact-reduced-home",
+      "decision": "resolved",
+      "holdOrigin": null,
+      "generationSeconds": 19.915,
+      "actualInference": true
+    },
+    {
+      "id": "exact-plus-minimize",
+      "decision": "resolved",
+      "holdOrigin": null,
+      "generationSeconds": 16.545,
+      "actualInference": true
+    },
+    {
+      "id": "coordinated-targets",
+      "decision": "resolved",
+      "holdOrigin": null,
+      "generationSeconds": 21.268,
+      "actualInference": true
+    },
+    {
+      "id": "negated-minimize",
+      "decision": "unsupported",
+      "holdOrigin": "validator_capability",
+      "generationSeconds": 18.189,
+      "actualInference": true
+    },
+    {
+      "id": "negated-coordinated",
+      "decision": "unsupported",
+      "holdOrigin": "validator_capability",
+      "generationSeconds": 21.47,
+      "actualInference": true
+    },
+    {
+      "id": "contradictory-priority",
+      "decision": "clarify",
+      "holdOrigin": "validator_conflict",
+      "generationSeconds": 16.067,
+      "actualInference": true
+    },
+    {
+      "id": "unsupported-subset",
+      "decision": "unsupported",
+      "holdOrigin": "validator_capability",
+      "generationSeconds": 19.159,
+      "actualInference": true
+    },
+    {
+      "id": "unsupported-upper-percentage",
+      "decision": "unsupported",
+      "holdOrigin": "validator_capability",
+      "generationSeconds": 22.605,
+      "actualInference": true
+    },
+    {
+      "id": "unsupported-lower-percentage",
+      "decision": "unsupported",
+      "holdOrigin": "validator_capability",
+      "generationSeconds": 20.639,
+      "actualInference": true
+    },
+    {
+      "id": "unsupported-percentage-range",
+      "decision": "unsupported",
+      "holdOrigin": "validator_capability",
+      "generationSeconds": 18.677,
+      "actualInference": true
+    },
+    {
+      "id": "unsupported-percentage-inequality",
+      "decision": "unsupported",
+      "holdOrigin": "model_explanation",
+      "generationSeconds": 19.763,
+      "actualInference": true
+    },
+    {
+      "id": "baseline-primary-lottery",
+      "decision": "resolved",
+      "holdOrigin": null,
+      "generationSeconds": 14.62,
+      "actualInference": true
+    },
+    {
+      "id": "baseline-fixed-remainder",
+      "decision": "resolved",
+      "holdOrigin": null,
+      "generationSeconds": 14.837,
+      "actualInference": true
+    },
+    {
+      "id": "baseline-named-app",
+      "decision": "resolved",
+      "holdOrigin": null,
+      "generationSeconds": 16.986,
+      "actualInference": true
+    },
+    {
+      "id": "baseline-rank",
+      "decision": "resolved",
+      "holdOrigin": null,
+      "generationSeconds": 18.26,
+      "actualInference": true
+    },
+    {
+      "id": "baseline-rank-half",
+      "decision": "resolved",
+      "holdOrigin": null,
+      "generationSeconds": 20.212,
+      "actualInference": true
+    },
+    {
+      "id": "baseline-hash",
+      "decision": "resolved",
+      "holdOrigin": null,
+      "generationSeconds": 19.294,
+      "actualInference": true
+    },
+    {
+      "id": "baseline-group",
+      "decision": "resolved",
+      "holdOrigin": null,
+      "generationSeconds": 18.026,
+      "actualInference": true
+    },
+    {
+      "id": "low-priority-group",
+      "decision": "resolved",
+      "holdOrigin": null,
+      "generationSeconds": 19.967,
+      "actualInference": true
+    },
+    {
+      "id": "unsupported-temperature",
+      "decision": "unsupported",
+      "holdOrigin": "validator_capability",
+      "generationSeconds": 17.008,
+      "actualInference": true
+    }
+  ],
+  "compiledArmQualificationAccepted": true,
+  "nativeOrPortableAmd64PerformanceAccepted": false,
+  "normalUmbrelOsUpdateAndLifecycleAccepted": false,
+  "targetDeploymentAccepted": false,
+  "publicationPerformed": false
+}

@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "kind": "root-admitted-normal-package649-phase",
+  "targetVmid": 649,
+  "actionId": "dev-normal080-to082",
+  "operation": "update",
+  "channel": "DEV",
+  "startedAt": "2026-10-16T19:15:23.037636+00:00",
+  "rootAdmission": {
+    "path": "umbrel-local-ai-evidence-20261016/qa-vms/fresh649/root-normal649-execution-admission.json",
+    "sha256": "f87284f2a56fadd0c92ef0556e9b87fa3f29ccb5d77a756ba7d1fcc0498907c6"
+  },
+  "result": "STOPPED_REQUIRES_REVIEW",
+  "apiMutationAttempts": [],
+  "polls": [],
+  "licenceOrTrialActivationRequested": false,
+  "hardwareChangeRequested": false,
+  "upstreamStorePublicationRequested": false,
+  "automaticMutationRetries": 0,
+  "beforeSnapshot": {
+    "kind": "read-only-normal649-public-app-state-snapshot",
+    "targetVmid": 649,
+    "version": "0.9.80-dev",
+    "channel": "DEV",
+    "imageId": "sha256:a6ad30ca54d65a0d8f76691774c5cae9fd2b144c9b95cf42dae5eb4ceae77a5a",
+    "containerId": "3065cb00b27b02f654ddc99340eac1e3dae45fa3f9479dc916fc31fb5e05f4a2",
+    "running": true,
+    "stateFiles": {
+      "mux_settings.json": {
+        "sha256": "87962e06b1084b749e0c6d5d154ed8284f80018e7ffbe5f6c6ff536d33efd0f5",
+        "bytes": 472,
+        "uid": 1000,
+        "gid": 1000,
+        "mode": "0o600"
+      },
+      "licensing_device_key.pem": {
+        "sha256": "3e991af3778d2c96f4e5e9f21d7777e70d86ae06a0fa0157077622ee358bf19e",
+        "bytes": 119,
+        "uid": 1000,
+        "gid": 1000,
+        "mode": "0o600"
+      },
+      "licensing_installation_id": {
+        "sha256": "548ec4b6a9d8d9356ddb7bad38527829df952a49d402d6118875dd1eac846626",
+        "bytes": 64,
+        "uid": 1000,
+        "gid": 1000,
+        "mode": "0o600"
+      },
+      "standalone_auth/session-key": {
+        "sha256": "cb60b421552e97029d6be431720a92bba8a218cb6e6ea53171853cd01cb7d93a",
+        "bytes": 32,
+        "uid": 1000,
+        "gid": 1000,
+        "mode": "0o600"
+      }
+    },
+    "authorityOverridesPresent": false,
+    "credentialBytesCopiedOut": false
+  },
+  "templateStageIntentAt": "2026-10-16T19:15:29.113233+00:00",
+  "templateStaging": {
+    "kind": "template649-preflight-refused",
+    "errorType": "AssertionError",
+    "rawExceptionWithheld": true
+  },
+  "endedAt": "2026-10-16T19:15:32.726282+00:00",
+  "errorType": "AssertionError",
+  "rawExceptionWithheld": true,
+  "modelMayRemainOn": true
+}
