@@ -1,0 +1,262 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "/root/access_evidence",
+  "at": "2026-10-17T06:05:32.031598+00:00",
+  "status": "UI083_MAIN_DEV_FOUR_PLATFORM_OVERLAY_RAW_GRAPH_REVIEW_PASS",
+  "reviewTargetCalls": 0,
+  "reviewNetworkCalls": 0,
+  "buildsOrTestsRunByReviewer": 0,
+  "sourceRevision": "abe3c818c74102eebb971c3e5af1aeb39f408d3d",
+  "sourceTree": "c8b3d996be016c5f88b6aed8fc7bb7c52dc55825",
+  "priorScopeReview": {
+    "path": "/Users/johnny/Documents/AI LLM/local-ai-free-evidence-20261016/ui083-hotfix/peer-overlay-scope-and-base-review.json",
+    "sha256": "15e3839f77de314fbd9c59badc5c7f5d35b08c40fc1e9a552e4cec61fb5e1dbf",
+    "bytes": 10727
+  },
+  "reviewedVerifier": {
+    "path": "/Users/johnny/Documents/AI LLM/local-ai-free-evidence-20261016/ui083-hotfix/verify_overlay.py",
+    "sha256": "fd81b719bfcd331983bf7715e1305fdafd11ad2b5646145f873190a54a40e6fa",
+    "bytes": 6393
+  },
+  "sourceComputedVisibility": {
+    "path": "/Users/johnny/Documents/AI LLM/local-ai-free-evidence-20261016/ui-visibility-20261017/source-css-computed-visibility.json",
+    "sha256": "e1adb52bfeaad596034f36d707fe8b85e034488a1f58f68650587360d2ebcb0a",
+    "bytes": 1276
+  },
+  "newIndexes": {
+    "MAIN": "483de527d1de5b50a52b466f7875d31f3a2251177fd7bcff80dbf63ae06c2794",
+    "DEV": "3e2067975c7b29d12a075a7947d3bd238db0702bc4ba826ffc2e1e2479a329e3"
+  },
+  "platformResults": [
+    {
+      "channel": "MAIN",
+      "architecture": "amd64",
+      "basePlatformManifestDigest": "sha256:1c02e6a5c54d6213de3f783255e993b631e3e4cca942b075bb890825cb1fe920",
+      "baseConfigurationDigest": "sha256:73fc590eb227a54fb945ac0579b9af54b6d82db97b09a86d9be30aecddf232ba",
+      "newPlatformManifestDigest": "sha256:f40bb610d07b440c79b99b193cbe12812fbde99c25ed028c03506eec950ab439",
+      "newConfigurationDigest": "sha256:af91c1c26ed8c2e746e9d90abc556829c5d69dc2d5747d80a70427516a2dbfbe",
+      "overlayLayerDigest": "sha256:5d52949f47a227bc59793c1813edcce11361404697e6e13bf583af9b943ecb95",
+      "overlayDiffID": "sha256:cb5c146ae5a0c34556cc9e690772e601f9eb53a10c43333e04680d50ed8efa30",
+      "allSixBaseLayersAndDiffIDsRetained": true,
+      "onlyOciDockerLayerAliasChanges": true,
+      "onlyTwoRegularWebFiles": {
+        "app/static/index.html": "e29bcfe2d4628f13b27cac3334329112c3e257e1bdc54e679965b22dee2db656",
+        "app/static/standalone-ui.css": "8439fa0a36fde0e2ea3bc690136de522195417c146b11b534c752e322a3d0456"
+      },
+      "safeParentDirectoryHeaders": [
+        "app",
+        "app/static"
+      ],
+      "runtimeConfigChangesOnlyAppVersionAndUiLabels": true,
+      "protectedExecutableAndOther55StaticFilesInheritedUnchanged": true
+    },
+    {
+      "channel": "MAIN",
+      "architecture": "arm64",
+      "basePlatformManifestDigest": "sha256:f33a9a70d14f9ea1465232e87137d849b346addb3589d7b4e4231247fe4332d5",
+      "baseConfigurationDigest": "sha256:e5c89729436bc7632488938dc7861980e10f14c2a6f469af85891de2632c2abe",
+      "newPlatformManifestDigest": "sha256:cd886ac4d6c9beb69f7b55ca32a000a4746db4f6be81109e1c17c7efe819cdc9",
+      "newConfigurationDigest": "sha256:250fe991f1a70fafddd411ad528480bc09468daeeae137df35a5e8105c235bd8",
+      "overlayLayerDigest": "sha256:cf74985990ab9d13a094243261a2898de934e820ed65a3674b91fc94a566b9c2",
+      "overlayDiffID": "sha256:92cd2e48e06bfcc8bdd2056e4d6a9c3ac67816949017810cc201c6c0032b23aa",
+      "allSixBaseLayersAndDiffIDsRetained": true,
+      "onlyOciDockerLayerAliasChanges": true,
+      "onlyTwoRegularWebFiles": {
+        "app/static/index.html": "e29bcfe2d4628f13b27cac3334329112c3e257e1bdc54e679965b22dee2db656",
+        "app/static/standalone-ui.css": "8439fa0a36fde0e2ea3bc690136de522195417c146b11b534c752e322a3d0456"
+      },
+      "safeParentDirectoryHeaders": [
+        "app",
+        "app/static"
+      ],
+      "runtimeConfigChangesOnlyAppVersionAndUiLabels": true,
+      "protectedExecutableAndOther55StaticFilesInheritedUnchanged": true
+    },
+    {
+      "channel": "DEV",
+      "architecture": "amd64",
+      "basePlatformManifestDigest": "sha256:7b989399a0241ec14560add97728316c7e9c67f515a589a55f6bb8573dfb98eb",
+      "baseConfigurationDigest": "sha256:3cd72ad4d37a9a21ac7cca0a2cd085ea6eccc908c3a091df4af8ec40426c53bf",
+      "newPlatformManifestDigest": "sha256:ee985273cfa1c574375cdf3bc61ff8b54b078a2679e63fe632822f507f8dfd3d",
+      "newConfigurationDigest": "sha256:7cb6524edc761c1a012f9f110725ebb7f5353f43bec6cc403766d4bb00743a07",
+      "overlayLayerDigest": "sha256:b71c835b3bb6b1f234300b3761e0306ef15650a31e0c5041a1bd5bcc27b35c28",
+      "overlayDiffID": "sha256:722d461aaeac06589ba00f82ec8637ea5ba75205ecfe38cbc09c5fff4ec3835b",
+      "allSixBaseLayersAndDiffIDsRetained": true,
+      "onlyOciDockerLayerAliasChanges": true,
+      "onlyTwoRegularWebFiles": {
+        "app/static/index.html": "e29bcfe2d4628f13b27cac3334329112c3e257e1bdc54e679965b22dee2db656",
+        "app/static/standalone-ui.css": "8439fa0a36fde0e2ea3bc690136de522195417c146b11b534c752e322a3d0456"
+      },
+      "safeParentDirectoryHeaders": [
+        "app",
+        "app/static"
+      ],
+      "runtimeConfigChangesOnlyAppVersionAndUiLabels": true,
+      "protectedExecutableAndOther55StaticFilesInheritedUnchanged": true
+    },
+    {
+      "channel": "DEV",
+      "architecture": "arm64",
+      "basePlatformManifestDigest": "sha256:984dc7bb99dcddbea915dd30f78412005741f77c4c947f2782cd3bb4350f6a88",
+      "baseConfigurationDigest": "sha256:32e761e4e942095ed87df4f56404ad4fab3f92e185aa56076a8e827fd07f5bf2",
+      "newPlatformManifestDigest": "sha256:526003d523a38f45bc62d70a3ceb6662027f92a9544cbfa3742a4d101dd6956d",
+      "newConfigurationDigest": "sha256:e87de399a12f1d52d32450bbad3b5c2e79fa311621ac06bcb449c80964d0f47b",
+      "overlayLayerDigest": "sha256:22c6b4b29cd96213a1a1568788e2dec013532323b07183a8735158ba410e40d1",
+      "overlayDiffID": "sha256:13592896a0c4580f8ad8b55ec9640781c94c0013239bb035010b45cef35a6fbd",
+      "allSixBaseLayersAndDiffIDsRetained": true,
+      "onlyOciDockerLayerAliasChanges": true,
+      "onlyTwoRegularWebFiles": {
+        "app/static/index.html": "e29bcfe2d4628f13b27cac3334329112c3e257e1bdc54e679965b22dee2db656",
+        "app/static/standalone-ui.css": "8439fa0a36fde0e2ea3bc690136de522195417c146b11b534c752e322a3d0456"
+      },
+      "safeParentDirectoryHeaders": [
+        "app",
+        "app/static"
+      ],
+      "runtimeConfigChangesOnlyAppVersionAndUiLabels": true,
+      "protectedExecutableAndOther55StaticFilesInheritedUnchanged": true
+    }
+  ],
+  "rawPins": [
+    {
+      "path": "/Users/johnny/Documents/AI LLM/local-ai-free-evidence-20261016/ui083-hotfix/main/amd64-manifest.json",
+      "sha256": "f40bb610d07b440c79b99b193cbe12812fbde99c25ed028c03506eec950ab439",
+      "bytes": 1661
+    },
+    {
+      "path": "/Users/johnny/Documents/AI LLM/local-ai-free-evidence-20261016/ui083-hotfix/main/amd64-base-manifest.json",
+      "sha256": "1c02e6a5c54d6213de3f783255e993b631e3e4cca942b075bb890825cb1fe920",
+      "bytes": 1168
+    },
+    {
+      "path": "/Users/johnny/Documents/AI LLM/local-ai-free-evidence-20261016/ui083-hotfix/main/amd64-config.json",
+      "sha256": "af91c1c26ed8c2e746e9d90abc556829c5d69dc2d5747d80a70427516a2dbfbe",
+      "bytes": 5378
+    },
+    {
+      "path": "/Users/johnny/Documents/AI LLM/local-ai-free-evidence-20261016/ui083-hotfix/main/amd64-base-config.json",
+      "sha256": "73fc590eb227a54fb945ac0579b9af54b6d82db97b09a86d9be30aecddf232ba",
+      "bytes": 4344
+    },
+    {
+      "path": "/Users/johnny/Documents/AI LLM/local-ai-free-evidence-20261016/ui083-hotfix/main/amd64-overlay.tar.gz",
+      "sha256": "5d52949f47a227bc59793c1813edcce11361404697e6e13bf583af9b943ecb95",
+      "bytes": 27764
+    },
+    {
+      "path": "/Users/johnny/Documents/AI LLM/local-ai-free-evidence-20261016/ui083-hotfix/main/arm64-manifest.json",
+      "sha256": "cd886ac4d6c9beb69f7b55ca32a000a4746db4f6be81109e1c17c7efe819cdc9",
+      "bytes": 1688
+    },
+    {
+      "path": "/Users/johnny/Documents/AI LLM/local-ai-free-evidence-20261016/ui083-hotfix/main/arm64-base-manifest.json",
+      "sha256": "f33a9a70d14f9ea1465232e87137d849b346addb3589d7b4e4231247fe4332d5",
+      "bytes": 1440
+    },
+    {
+      "path": "/Users/johnny/Documents/AI LLM/local-ai-free-evidence-20261016/ui083-hotfix/main/arm64-config.json",
+      "sha256": "250fe991f1a70fafddd411ad528480bc09468daeeae137df35a5e8105c235bd8",
+      "bytes": 5451
+    },
+    {
+      "path": "/Users/johnny/Documents/AI LLM/local-ai-free-evidence-20261016/ui083-hotfix/main/arm64-base-config.json",
+      "sha256": "e5c89729436bc7632488938dc7861980e10f14c2a6f469af85891de2632c2abe",
+      "bytes": 4416
+    },
+    {
+      "path": "/Users/johnny/Documents/AI LLM/local-ai-free-evidence-20261016/ui083-hotfix/main/arm64-overlay.tar.gz",
+      "sha256": "cf74985990ab9d13a094243261a2898de934e820ed65a3674b91fc94a566b9c2",
+      "bytes": 27767
+    },
+    {
+      "path": "/Users/johnny/Documents/AI LLM/local-ai-free-evidence-20261016/ui083-hotfix/main/verification.json",
+      "sha256": "8e0a596f5723643ecb4e92bfefde0a9434164dcc162cb4085a9cc5114f030432",
+      "bytes": 2528
+    },
+    {
+      "path": "/Users/johnny/Documents/AI LLM/local-ai-free-evidence-20261016/ui083-hotfix/main/base-index.json",
+      "sha256": "9ef5ac209472b9f57cfb74eeda3e96e5a03f77747cab19a12cbfdf8abaafbe15",
+      "bytes": 493
+    },
+    {
+      "path": "/Users/johnny/Documents/AI LLM/local-ai-free-evidence-20261016/ui083-hotfix/main/index.json",
+      "sha256": "483de527d1de5b50a52b466f7875d31f3a2251177fd7bcff80dbf63ae06c2794",
+      "bytes": 685
+    },
+    {
+      "path": "/Users/johnny/Documents/AI LLM/local-ai-free-evidence-20261016/ui083-hotfix/dev/amd64-manifest.json",
+      "sha256": "ee985273cfa1c574375cdf3bc61ff8b54b078a2679e63fe632822f507f8dfd3d",
+      "bytes": 1661
+    },
+    {
+      "path": "/Users/johnny/Documents/AI LLM/local-ai-free-evidence-20261016/ui083-hotfix/dev/amd64-base-manifest.json",
+      "sha256": "7b989399a0241ec14560add97728316c7e9c67f515a589a55f6bb8573dfb98eb",
+      "bytes": 1168
+    },
+    {
+      "path": "/Users/johnny/Documents/AI LLM/local-ai-free-evidence-20261016/ui083-hotfix/dev/amd64-config.json",
+      "sha256": "7cb6524edc761c1a012f9f110725ebb7f5353f43bec6cc403766d4bb00743a07",
+      "bytes": 5428
+    },
+    {
+      "path": "/Users/johnny/Documents/AI LLM/local-ai-free-evidence-20261016/ui083-hotfix/dev/amd64-base-config.json",
+      "sha256": "3cd72ad4d37a9a21ac7cca0a2cd085ea6eccc908c3a091df4af8ec40426c53bf",
+      "bytes": 4376
+    },
+    {
+      "path": "/Users/johnny/Documents/AI LLM/local-ai-free-evidence-20261016/ui083-hotfix/dev/amd64-overlay.tar.gz",
+      "sha256": "b71c835b3bb6b1f234300b3761e0306ef15650a31e0c5041a1bd5bcc27b35c28",
+      "bytes": 27767
+    },
+    {
+      "path": "/Users/johnny/Documents/AI LLM/local-ai-free-evidence-20261016/ui083-hotfix/dev/arm64-manifest.json",
+      "sha256": "526003d523a38f45bc62d70a3ceb6662027f92a9544cbfa3742a4d101dd6956d",
+      "bytes": 1688
+    },
+    {
+      "path": "/Users/johnny/Documents/AI LLM/local-ai-free-evidence-20261016/ui083-hotfix/dev/arm64-base-manifest.json",
+      "sha256": "984dc7bb99dcddbea915dd30f78412005741f77c4c947f2782cd3bb4350f6a88",
+      "bytes": 1440
+    },
+    {
+      "path": "/Users/johnny/Documents/AI LLM/local-ai-free-evidence-20261016/ui083-hotfix/dev/arm64-config.json",
+      "sha256": "e87de399a12f1d52d32450bbad3b5c2e79fa311621ac06bcb449c80964d0f47b",
+      "bytes": 5496
+    },
+    {
+      "path": "/Users/johnny/Documents/AI LLM/local-ai-free-evidence-20261016/ui083-hotfix/dev/arm64-base-config.json",
+      "sha256": "32e761e4e942095ed87df4f56404ad4fab3f92e185aa56076a8e827fd07f5bf2",
+      "bytes": 4449
+    },
+    {
+      "path": "/Users/johnny/Documents/AI LLM/local-ai-free-evidence-20261016/ui083-hotfix/dev/arm64-overlay.tar.gz",
+      "sha256": "22c6b4b29cd96213a1a1568788e2dec013532323b07183a8735158ba410e40d1",
+      "bytes": 27767
+    },
+    {
+      "path": "/Users/johnny/Documents/AI LLM/local-ai-free-evidence-20261016/ui083-hotfix/dev/verification.json",
+      "sha256": "8c1e4c60c9a29892fed77be895bb60bbb5b9ed30836fa659ece05e2d7ca72261",
+      "bytes": 2539
+    },
+    {
+      "path": "/Users/johnny/Documents/AI LLM/local-ai-free-evidence-20261016/ui083-hotfix/dev/base-index.json",
+      "sha256": "5eb55feec01de1a3b4bdf16027dd22a4fdf5844c83c016996eeeace0e876ca5e",
+      "bytes": 493
+    },
+    {
+      "path": "/Users/johnny/Documents/AI LLM/local-ai-free-evidence-20261016/ui083-hotfix/dev/index.json",
+      "sha256": "3e2067975c7b29d12a075a7947d3bd238db0702bc4ba826ffc2e1e2479a329e3",
+      "bytes": 685
+    }
+  ],
+  "originalCheckerFindingsClosedByRawRecomputation": true,
+  "noFullBaseLayerRedownloadNeededOrPerformed": true,
+  "runtimeCompanionUnchangedRequiredForPriorInferenceReuse": true,
+  "newModelInferenceOrTargetDeploymentProvedByThisReview": false,
+  "remainingMinimalOperationalChecks": [
+    "Builtimagehealth/auth + servedindex/CSSexactbytes andmanagedpanelvisible; native-only/unsupportedcontrolsremainhidden.",
+    "Store083manifest/image/composeAPP_VERSION agree; companion/policy/bounds remain pinned.",
+    "Private task Docker credential namespace cleanup receipt retained."
+  ],
+  "storeOrHostActionsGrantedByThisReview": false
+}

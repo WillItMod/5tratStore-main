@@ -209,6 +209,12 @@ def validate_publication(root, release):
 
 
 def validate(root=ROOT, *, check_baseline=False):
+    if (root / "MUX-UMBREL-0.9.83-2026-10-17.json").exists():
+        assert not check_baseline, "0.9.83 retains the qualified 0.9.82 history"
+        import sys
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        import mux_local_ai_umbrel_ui_release
+        return mux_local_ai_umbrel_ui_release.validate(root)
     # The new delivery owns its own exact locks; retain every 0.9.80 historical
     # record and validator function unchanged for predecessor verification.
     if (root / "MUX-UMBREL-0.9.82-2026-10-16.json").exists():

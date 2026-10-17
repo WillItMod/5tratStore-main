@@ -1,0 +1,60 @@
+{
+  "scope": "actual-browser-computed-source-CSS-with-frozen-standalone-JS-in-inert-fixture",
+  "apiCalls": 0,
+  "modelsOrRuntimeStarted": false,
+  "packagedMinifiedBuildOrHostClaimed": false,
+  "results": [
+    {
+      "name": "before-managed",
+      "settingsLocalAi": {
+        "hidden": false,
+        "display": "none",
+        "rectCount": 0
+      },
+      "settingsLicence": {
+        "hidden": false,
+        "display": "grid",
+        "rectCount": 1
+      }
+    },
+    {
+      "name": "after-managed",
+      "settingsLocalAi": {
+        "hidden": false,
+        "display": "grid",
+        "rectCount": 1
+      },
+      "settingsLicence": {
+        "hidden": false,
+        "display": "grid",
+        "rectCount": 1
+      }
+    },
+    {
+      "name": "after-unsupported",
+      "settingsLocalAi": {
+        "hidden": true,
+        "display": "none",
+        "rectCount": 0
+      },
+      "settingsLicence": {
+        "hidden": false,
+        "display": "grid",
+        "rectCount": 1
+      }
+    },
+    {
+      "name": "after-native",
+      "settingsLocalAi": {
+        "hidden": false,
+        "display": "grid",
+        "rectCount": 1
+      },
+      "settingsLicence": {
+        "hidden": false,
+        "display": "grid",
+        "rectCount": 1
+      }
+    }
+  ]
+}
