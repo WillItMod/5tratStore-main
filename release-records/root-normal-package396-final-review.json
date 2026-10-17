@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "/root",
+  "at": "2026-10-16T19:13:45.098313+00:00",
+  "status": "EXACT_GENERATED396_DEV_MAIN_PACKAGES_REVIEWED_NORMAL_QA_ADMISSION_PREPARATION_ALLOWED",
+  "generationReceipt": {
+    "path": "/Users/johnny/Documents/AI LLM/local-ai-free-evidence-20261016/normal-package-396-final-generation.json",
+    "sha256": "60da173b7c47474cf97803825d56cddc0b69cc5962aaed6f1e6b1e2eaab2c47a",
+    "bytes": 5306
+  },
+  "rootCompanionDeliveryAdmission": {
+    "path": "/Users/johnny/Documents/AI LLM/local-ai-free-evidence-20261016/root-companion019-public-delivery-admission.json",
+    "sha256": "332878d507efeda316a533597839874533e77e2505c1d2a0777d9a69912e4818",
+    "bytes": 9078
+  },
+  "packageProducerSourceRevision": "396c137930d27fb39251147426a70bd61307bf98",
+  "packageProducerSourceTree": "ec2daf28cc1920be3e83bc791e25f3e6443769cc",
+  "packageProducerInputs": {
+    "packaging/umbrel-local-ai-release/prepare_package.py": "7c3deed5b8aa35777d1776a6a15ce0be7217dc98d40a1e082af21e88c4cb0f1c",
+    "packaging/umbrel-local-ai-release/pre-start": "fb25f9246aff606a00567ec0a0333b49397bf988b30deaff0c3da5baaaa4eb6e"
+  },
+  "packagePreparations": {
+    "DEV": {
+      "path": "/Users/johnny/Documents/AI LLM/local-ai-free-evidence-20261016/normal-package-396-dev-final/package-preparation.json",
+      "sha256": "02aaa5632af2a65083cd348748ac09013b6ab315fd400ac315ddc8f882aeabeb",
+      "bytes": 1879
+    },
+    "MAIN": {
+      "path": "/Users/johnny/Documents/AI LLM/local-ai-free-evidence-20261016/normal-package-396-main-final/package-preparation.json",
+      "sha256": "faf2c1d89ce9a0674bbfc74b782628da1ef9bca08032d97cd84170c94314e355",
+      "bytes": 1872
+    }
+  },
+  "recipeSHA256": {
+    "DEV": "d05e15851ef0376fc2967cdbcbc33fbf796fa3251fb24726df1b8177ff82dcbf",
+    "MAIN": "6373d3f099e9f27c1fe6a8b5fd34c8872f93eadbfb8240e3718e8385abd2de54"
+  },
+  "allTenPackageFilesModesRehashed": true,
+  "exactRecipeAndManifestModelsVerified": true,
+  "originalArtworkAndHookVerified": true,
+  "companionRecipeByteIdenticalAcrossChannels": true,
+  "normalQaConcreteAdmissionMayBeSealed": true,
+  "existingLabQaSourcePreparationAllowed": true,
+  "guestExecutionAllowedWithoutSeparateSealedActionGate": false,
+  "storePublicationAllowed": false,
+  "targetDeploymentAllowed": false,
+  "compiledAmdColdDeadlinePassed": false
+}

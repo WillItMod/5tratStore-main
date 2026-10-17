@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "/root",
+  "reviewedAt": "2026-10-16T20:21:00.032593+00:00",
+  "result": "ORIGINAL_MAIN_MISSION_TIMEOUT_PRESERVED_ONE_EXPLICIT_WARM_JUSTIFIED",
+  "attemptWasCold": false,
+  "scope": "Original MAIN mission follows its successful actual provider comparison; not a first cold inference. No usable instruction or source output produced.",
+  "firstIntent": {
+    "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/fresh649/normal649-main-canonical-intent-first.json",
+    "sha256": "4b334e011e9df200486d1320a456fbdd88ea12290195eae424b149e8e964ba58"
+  },
+  "firstGuest": {
+    "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/fresh649/normal649-main-canonical-intent-first-guest.json",
+    "sha256": "257dda3d72ba79a76f5b4a5cc2e5d43af2ed0ee34dc4f3416dcab983062f5650"
+  },
+  "priorProviderComparison": {
+    "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/fresh649/normal649-main-provider-comparison.json",
+    "sha256": "bc25d961fe6dbb175808e89a178795adde39ba0f4313e5df0044dc51b11862fc"
+  },
+  "postFailureReadOnlyReadiness": {
+    "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/fresh649/normal649-main-after-first-intent-timeout-readonly-health.json",
+    "sha256": "ea6d474a795494aacc8f285e2b61bc33344d20b9e78f229e4efc6538ed73ec21"
+  },
+  "postFailureReadOnlyBoundaries": {
+    "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/fresh649/normal649-main-after-first-intent-timeout-readonly-boundaries.json",
+    "sha256": "743ea8705dba8b71e8ece748e6aa6be33c4e92f4f65cb3a0ea7838988a9f2e74"
+  },
+  "coldPassed": false,
+  "coldSeconds": 600.002,
+  "legacyColdNamedFieldsMeaning": "Compatibility fields retain failed600.002 duration; no MAIN cold test or pass is claimed.",
+  "noUsableOutput": true,
+  "sameHealthyModelPid": 33,
+  "generationSequenceAfterFailure": 2,
+  "sameFourProtectedFiles": true,
+  "allMemoryEventsZero": true,
+  "noControlsOrAutomaticRetries": true,
+  "boundaryComparison": "Exact values including every mount after sorting unordered Docker mount lists by Source/Destination. Initial raw array-order guard refused before any review write or target action.",
+  "oneSubsequentWarmAttemptMayBeSeparatelySealed": true
+}

@@ -1,0 +1,2888 @@
+{
+  "kind": "unreviewed-real-inference-successor-evidence",
+  "startedAt": "2026-10-16T15:37:13.740998+00:00",
+  "modelId": "qwen3.5-4b",
+  "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+  "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+  "compilerRevision": "semantic-inventory-2",
+  "extractionRevision": "source-by-source-6",
+  "harnessSha256": "5ea807bd0511394c2f9d669b0927e8784df4535825da50ee1ecbc608dda85385",
+  "configurationSha256": "662cc5e3afaf9e7587b1e8e67a5ab60cd790d28e4d2c1ee24acaddc8f73df737",
+  "expectedRuntimeBinarySha256": "e7a1fe417870f5bdbc826376ef1afae3986c8bb4de3dd3dce71e2ac4e2bf337b",
+  "runtimeCpuProfile": null,
+  "corpusSha256": "701b5199b342bb5fe5f32bd367078475dc6805e768527a64d12273a73b816b24",
+  "plannedCaseIds": [
+    "minimal-home",
+    "low-priority-home",
+    "low-priority-app",
+    "primary-lottery-low-app",
+    "exact-home",
+    "exact-reduced-home",
+    "exact-plus-minimize",
+    "coordinated-targets",
+    "negated-minimize",
+    "negated-coordinated",
+    "contradictory-priority",
+    "unsupported-subset",
+    "unsupported-upper-percentage",
+    "unsupported-lower-percentage",
+    "unsupported-percentage-range",
+    "unsupported-percentage-inequality",
+    "baseline-primary-lottery",
+    "baseline-fixed-remainder",
+    "baseline-named-app",
+    "baseline-rank",
+    "baseline-rank-half",
+    "baseline-hash",
+    "baseline-group",
+    "low-priority-group",
+    "unsupported-temperature"
+  ],
+  "expectedCorpusCaseIds": [
+    "minimal-home",
+    "low-priority-home",
+    "low-priority-app",
+    "primary-lottery-low-app",
+    "exact-home",
+    "exact-reduced-home",
+    "exact-plus-minimize",
+    "coordinated-targets",
+    "negated-minimize",
+    "negated-coordinated",
+    "contradictory-priority",
+    "unsupported-subset",
+    "unsupported-upper-percentage",
+    "unsupported-lower-percentage",
+    "unsupported-percentage-range",
+    "unsupported-percentage-inequality",
+    "baseline-primary-lottery",
+    "baseline-fixed-remainder",
+    "baseline-named-app",
+    "baseline-rank",
+    "baseline-rank-half",
+    "baseline-hash",
+    "baseline-group",
+    "low-priority-group",
+    "unsupported-temperature"
+  ],
+  "inventorySha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+  "resourcePolicy": {
+    "reserveBytes": 1073741824,
+    "reserveFraction": 0.15,
+    "monitorSeconds": 5,
+    "allowUnvalidatedModels": true
+  },
+  "admissionBeforeStart": {
+    "allowed": true,
+    "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+    "snapshot": {
+      "sampledAt": "2026-10-16T15:37:13.740167+00:00",
+      "totalBytes": 8307167232,
+      "availableBytes": 7850590208,
+      "serviceMemoryBytes": null,
+      "servicePeakMemoryBytes": null,
+      "containerHeadroomBytes": 8567640064,
+      "architecture": "aarch64",
+      "available": true,
+      "cpuFlags": null
+    }
+  },
+  "productionEligible": false,
+  "routingAuthority": "none",
+  "qualificationDecision": "Pending independent review; no allowlist changes made.",
+  "cases": [
+    {
+      "id": "minimal-home",
+      "goal": "minimize allocation to 5trat",
+      "expected": [
+        {
+          "k": "deprioritize",
+          "a": "5trat",
+          "w": "all",
+          "v": null,
+          "u": null
+        }
+      ],
+      "goalSha256": "33618b10e789b1f6065197e838e5e6ce5ebfad2073be0598090aac6ea3ba2530",
+      "verdict": "pass",
+      "result": {
+        "contractVersion": "preferences_v2",
+        "kind": "mission_intent",
+        "requestId": "qualify-minimal-home",
+        "inputSha256": "14cd23258413e5cc578150208e487b02d500c7e0caff67ad146cb9160d88f1ea",
+        "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+        "goalSha256": "33618b10e789b1f6065197e838e5e6ce5ebfad2073be0598090aac6ea3ba2530",
+        "scopeSha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "registrySha256": "53daff05d80a253e3900aff4e58b9f8f4bf56541ea952a43c0b74e43378fe606",
+        "modelId": "qwen3.5-4b",
+        "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+        "runtimeBinarySha256": "e7a1fe417870f5bdbc826376ef1afae3986c8bb4de3dd3dce71e2ac4e2bf337b",
+        "lastRunAt": "2026-10-16T15:37:16.834929+00:00",
+        "actualInference": true,
+        "generationAttempted": true,
+        "contractValid": true,
+        "intent": {
+          "s": "resolved",
+          "reason": "",
+          "c": [
+            {
+              "k": "deprioritize",
+              "a": "5trat",
+              "w": "all",
+              "v": null,
+              "u": null,
+              "q": "minimize allocation to 5trat"
+            }
+          ]
+        },
+        "validUntil": 1792165286.6863732,
+        "routingAuthority": "none",
+        "synthetic": false,
+        "intentProvenance": {
+          "compilerRevision": "semantic-inventory-2",
+          "extractionRevision": "source-by-source-6",
+          "sourceCount": 1,
+          "completedSources": [
+            1
+          ],
+          "holdOrigin": null,
+          "contract": "preferences_v2",
+          "correctionUsed": false,
+          "attempts": [
+            {
+              "attempt": 1,
+              "completedSources": [
+                1
+              ],
+              "sourceOutputs": [
+                {
+                  "sourceId": 1,
+                  "outputSha256": "3e4abbcc070f8c34fdfc6211eaf131c4e6d7e3e6cdc88a52f9ad5077d191c19b",
+                  "status": "resolved",
+                  "requirementCount": 1
+                }
+              ],
+              "outcome": "resolved",
+              "validatorError": null
+            }
+          ]
+        },
+        "inventorySha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "elapsedSeconds": 129.852
+      },
+      "modelOutputs": [
+        {
+          "output": "{\"sources\":{\"1\":[{\"relation\":\"deprioritize\",\"target\":\"5trat\",\"selection\":\"all\",\"quantity\":null}]},\"status\":\"resolved\",\"reason\":\"\"}",
+          "outputSha256": "3e4abbcc070f8c34fdfc6211eaf131c4e6d7e3e6cdc88a52f9ad5077d191c19b"
+        }
+      ],
+      "resourceAdmissionChecks": [
+        {
+          "allowed": true,
+          "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+          "snapshot": {
+            "sampledAt": "2026-10-16T15:37:16.883235+00:00",
+            "totalBytes": 8307167232,
+            "availableBytes": 7551225856,
+            "serviceMemoryBytes": null,
+            "servicePeakMemoryBytes": null,
+            "containerHeadroomBytes": 5518372864,
+            "architecture": "aarch64",
+            "available": true,
+            "cpuFlags": null
+          }
+        }
+      ],
+      "seconds": 129.852
+    },
+    {
+      "id": "low-priority-home",
+      "goal": "5trat has low priority",
+      "expected": [
+        {
+          "k": "deprioritize",
+          "a": "5trat",
+          "w": "all",
+          "v": null,
+          "u": null
+        }
+      ],
+      "goalSha256": "c0a21d60a970df967bc1f86f6036c42b8432d54628fd4b5925277198c9d60596",
+      "verdict": "pass",
+      "result": {
+        "contractVersion": "preferences_v2",
+        "kind": "mission_intent",
+        "requestId": "qualify-low-priority-home",
+        "inputSha256": "2c72641a54b9776166f3f9d800ff51998dd7dbc4d0c09482eb5acee3e3a9efcc",
+        "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+        "goalSha256": "c0a21d60a970df967bc1f86f6036c42b8432d54628fd4b5925277198c9d60596",
+        "scopeSha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "registrySha256": "53daff05d80a253e3900aff4e58b9f8f4bf56541ea952a43c0b74e43378fe606",
+        "modelId": "qwen3.5-4b",
+        "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+        "runtimeBinarySha256": "e7a1fe417870f5bdbc826376ef1afae3986c8bb4de3dd3dce71e2ac4e2bf337b",
+        "lastRunAt": "2026-10-16T15:39:26.690468+00:00",
+        "actualInference": true,
+        "generationAttempted": true,
+        "contractValid": true,
+        "intent": {
+          "s": "resolved",
+          "reason": "",
+          "c": [
+            {
+              "k": "deprioritize",
+              "a": "5trat",
+              "w": "all",
+              "v": null,
+              "u": null,
+              "q": "5trat has low priority"
+            }
+          ]
+        },
+        "validUntil": 1792165308.4689481,
+        "routingAuthority": "none",
+        "synthetic": false,
+        "intentProvenance": {
+          "compilerRevision": "semantic-inventory-2",
+          "extractionRevision": "source-by-source-6",
+          "sourceCount": 1,
+          "completedSources": [
+            1
+          ],
+          "holdOrigin": null,
+          "contract": "preferences_v2",
+          "correctionUsed": false,
+          "attempts": [
+            {
+              "attempt": 1,
+              "completedSources": [
+                1
+              ],
+              "sourceOutputs": [
+                {
+                  "sourceId": 1,
+                  "outputSha256": "3e4abbcc070f8c34fdfc6211eaf131c4e6d7e3e6cdc88a52f9ad5077d191c19b",
+                  "status": "resolved",
+                  "requirementCount": 1
+                }
+              ],
+              "outcome": "resolved",
+              "validatorError": null
+            }
+          ]
+        },
+        "inventorySha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "elapsedSeconds": 21.781
+      },
+      "modelOutputs": [
+        {
+          "output": "{\"sources\":{\"1\":[{\"relation\":\"deprioritize\",\"target\":\"5trat\",\"selection\":\"all\",\"quantity\":null}]},\"status\":\"resolved\",\"reason\":\"\"}",
+          "outputSha256": "3e4abbcc070f8c34fdfc6211eaf131c4e6d7e3e6cdc88a52f9ad5077d191c19b"
+        }
+      ],
+      "resourceAdmissionChecks": [
+        {
+          "allowed": true,
+          "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+          "snapshot": {
+            "sampledAt": "2026-10-16T15:39:26.744823+00:00",
+            "totalBytes": 8307167232,
+            "availableBytes": 7330127872,
+            "serviceMemoryBytes": null,
+            "servicePeakMemoryBytes": null,
+            "containerHeadroomBytes": 5297905664,
+            "architecture": "aarch64",
+            "available": true,
+            "cpuFlags": null
+          }
+        }
+      ],
+      "seconds": 21.781
+    },
+    {
+      "id": "low-priority-app",
+      "goal": "5tratSmack has low priority",
+      "expected": [
+        {
+          "k": "deprioritize",
+          "a": "app:5tratsmack",
+          "w": "all",
+          "v": null,
+          "u": null
+        }
+      ],
+      "goalSha256": "cf6f4c044e8d6fc84b8577c0e5f1ea404846730b1db3c17e48951a8fcc69cc67",
+      "verdict": "pass",
+      "result": {
+        "contractVersion": "preferences_v2",
+        "kind": "mission_intent",
+        "requestId": "qualify-low-priority-app",
+        "inputSha256": "bee4bcb3c39e0e5ef7de939684e113795e1e3b440cbadd3214afa719034816fa",
+        "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+        "goalSha256": "cf6f4c044e8d6fc84b8577c0e5f1ea404846730b1db3c17e48951a8fcc69cc67",
+        "scopeSha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "registrySha256": "53daff05d80a253e3900aff4e58b9f8f4bf56541ea952a43c0b74e43378fe606",
+        "modelId": "qwen3.5-4b",
+        "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+        "runtimeBinarySha256": "e7a1fe417870f5bdbc826376ef1afae3986c8bb4de3dd3dce71e2ac4e2bf337b",
+        "lastRunAt": "2026-10-16T15:39:48.470872+00:00",
+        "actualInference": true,
+        "generationAttempted": true,
+        "contractValid": true,
+        "intent": {
+          "s": "resolved",
+          "reason": "",
+          "c": [
+            {
+              "k": "deprioritize",
+              "a": "app:5tratsmack",
+              "w": "all",
+              "v": null,
+              "u": null,
+              "q": "5tratSmack has low priority"
+            }
+          ]
+        },
+        "validUntil": 1792165330.5369523,
+        "routingAuthority": "none",
+        "synthetic": false,
+        "intentProvenance": {
+          "compilerRevision": "semantic-inventory-2",
+          "extractionRevision": "source-by-source-6",
+          "sourceCount": 1,
+          "completedSources": [
+            1
+          ],
+          "holdOrigin": null,
+          "contract": "preferences_v2",
+          "correctionUsed": false,
+          "attempts": [
+            {
+              "attempt": 1,
+              "completedSources": [
+                1
+              ],
+              "sourceOutputs": [
+                {
+                  "sourceId": 1,
+                  "outputSha256": "1a2654a4f9b0f07ccbf699946c66100bee744aebc858e273bc16d11fa36cf408",
+                  "status": "resolved",
+                  "requirementCount": 1
+                }
+              ],
+              "outcome": "resolved",
+              "validatorError": null
+            }
+          ]
+        },
+        "inventorySha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "elapsedSeconds": 22.067
+      },
+      "modelOutputs": [
+        {
+          "output": "{\"sources\":{\"1\":[{\"relation\":\"deprioritize\",\"target\":\"5tratSmack\",\"selection\":\"all\",\"quantity\":null}]},\"status\":\"resolved\",\"reason\":\"\"}",
+          "outputSha256": "1a2654a4f9b0f07ccbf699946c66100bee744aebc858e273bc16d11fa36cf408"
+        }
+      ],
+      "resourceAdmissionChecks": [
+        {
+          "allowed": true,
+          "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+          "snapshot": {
+            "sampledAt": "2026-10-16T15:39:48.520662+00:00",
+            "totalBytes": 8307167232,
+            "availableBytes": 7327326208,
+            "serviceMemoryBytes": null,
+            "servicePeakMemoryBytes": null,
+            "containerHeadroomBytes": 5288747008,
+            "architecture": "aarch64",
+            "available": true,
+            "cpuFlags": null
+          }
+        }
+      ],
+      "seconds": 22.067
+    },
+    {
+      "id": "primary-lottery-low-app",
+      "goal": "BCH is goal; BTC is lottery; minimize allocation to 5tratSmack",
+      "expected": [
+        {
+          "k": "primary",
+          "a": "bitcoin-cash",
+          "w": "all",
+          "v": null,
+          "u": null
+        },
+        {
+          "k": "lottery",
+          "a": "bitcoin",
+          "w": "all",
+          "v": null,
+          "u": null
+        },
+        {
+          "k": "deprioritize",
+          "a": "app:5tratsmack",
+          "w": "all",
+          "v": null,
+          "u": null
+        }
+      ],
+      "goalSha256": "542130ec0d2a7d44891e1819062fdfa09307f8eb887bdc70ff66ae66279f1665",
+      "verdict": "pass",
+      "result": {
+        "contractVersion": "preferences_v2",
+        "kind": "mission_intent",
+        "requestId": "qualify-primary-lottery-low-app",
+        "inputSha256": "4e8c3f7740ca35543aa220952d35c40352b1c4e912f63dbe246e87d0d9713ba4",
+        "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+        "goalSha256": "542130ec0d2a7d44891e1819062fdfa09307f8eb887bdc70ff66ae66279f1665",
+        "scopeSha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "registrySha256": "53daff05d80a253e3900aff4e58b9f8f4bf56541ea952a43c0b74e43378fe606",
+        "modelId": "qwen3.5-4b",
+        "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+        "runtimeBinarySha256": "e7a1fe417870f5bdbc826376ef1afae3986c8bb4de3dd3dce71e2ac4e2bf337b",
+        "lastRunAt": "2026-10-16T15:40:10.538576+00:00",
+        "actualInference": true,
+        "generationAttempted": true,
+        "contractValid": true,
+        "intent": {
+          "s": "resolved",
+          "reason": "",
+          "c": [
+            {
+              "k": "primary",
+              "a": "bitcoin-cash",
+              "w": "all",
+              "v": null,
+              "u": null,
+              "q": "BCH is goal"
+            },
+            {
+              "k": "lottery",
+              "a": "bitcoin",
+              "w": "all",
+              "v": null,
+              "u": null,
+              "q": "BTC is lottery"
+            },
+            {
+              "k": "deprioritize",
+              "a": "app:5tratsmack",
+              "w": "all",
+              "v": null,
+              "u": null,
+              "q": "minimize allocation to 5tratSmack"
+            }
+          ]
+        },
+        "validUntil": 1792165391.8404858,
+        "routingAuthority": "none",
+        "synthetic": false,
+        "intentProvenance": {
+          "compilerRevision": "semantic-inventory-2",
+          "extractionRevision": "source-by-source-6",
+          "sourceCount": 3,
+          "completedSources": [
+            1,
+            2,
+            3
+          ],
+          "holdOrigin": null,
+          "contract": "preferences_v2",
+          "correctionUsed": false,
+          "attempts": [
+            {
+              "attempt": 1,
+              "completedSources": [
+                1,
+                2,
+                3
+              ],
+              "sourceOutputs": [
+                {
+                  "sourceId": 1,
+                  "outputSha256": "6c578b6a543f84080cf395120ffa959594033051e168181280a60b982a8b78bc",
+                  "status": "resolved",
+                  "requirementCount": 1
+                },
+                {
+                  "sourceId": 2,
+                  "outputSha256": "e73fbb1dfa0e26a6f13b49086cdd85089f69e8bfeb318399fea1a5e66b497fe8",
+                  "status": "resolved",
+                  "requirementCount": 1
+                },
+                {
+                  "sourceId": 3,
+                  "outputSha256": "2eda2db29485a3e7420ba207f893a9d94db7b1d12237b9b020e0ace7f9ef4fcc",
+                  "status": "resolved",
+                  "requirementCount": 1
+                }
+              ],
+              "outcome": "resolved",
+              "validatorError": null
+            }
+          ]
+        },
+        "inventorySha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "elapsedSeconds": 61.303
+      },
+      "modelOutputs": [
+        {
+          "output": "{\"sources\":{\"1\":[{\"relation\":\"primary\",\"target\":\"BCH\",\"selection\":\"all\",\"quantity\":null}]},\"status\":\"resolved\",\"reason\":\"\"}",
+          "outputSha256": "6c578b6a543f84080cf395120ffa959594033051e168181280a60b982a8b78bc"
+        },
+        {
+          "output": "{\"sources\":{\"2\":[{\"relation\":\"lottery\",\"target\":\"BTC\",\"selection\":\"all\",\"quantity\":null}]},\"status\":\"resolved\",\"reason\":\"\"}",
+          "outputSha256": "e73fbb1dfa0e26a6f13b49086cdd85089f69e8bfeb318399fea1a5e66b497fe8"
+        },
+        {
+          "output": "{\"sources\":{\"3\":[{\"relation\":\"deprioritize\",\"target\":\"5tratSmack\",\"selection\":\"all\",\"quantity\":null}]},\"status\":\"resolved\",\"reason\":\"\"}",
+          "outputSha256": "2eda2db29485a3e7420ba207f893a9d94db7b1d12237b9b020e0ace7f9ef4fcc"
+        }
+      ],
+      "resourceAdmissionChecks": [
+        {
+          "allowed": true,
+          "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+          "snapshot": {
+            "sampledAt": "2026-10-16T15:40:10.651627+00:00",
+            "totalBytes": 8307167232,
+            "availableBytes": 7331975168,
+            "serviceMemoryBytes": null,
+            "servicePeakMemoryBytes": null,
+            "containerHeadroomBytes": 5288652800,
+            "architecture": "aarch64",
+            "available": true,
+            "cpuFlags": null
+          }
+        },
+        {
+          "allowed": true,
+          "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+          "snapshot": {
+            "sampledAt": "2026-10-16T15:40:31.272630+00:00",
+            "totalBytes": 8307167232,
+            "availableBytes": 7328346112,
+            "serviceMemoryBytes": null,
+            "servicePeakMemoryBytes": null,
+            "containerHeadroomBytes": 5288546304,
+            "architecture": "aarch64",
+            "available": true,
+            "cpuFlags": null
+          }
+        },
+        {
+          "allowed": true,
+          "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+          "snapshot": {
+            "sampledAt": "2026-10-16T15:40:50.028911+00:00",
+            "totalBytes": 8307167232,
+            "availableBytes": 7326699520,
+            "serviceMemoryBytes": null,
+            "servicePeakMemoryBytes": null,
+            "containerHeadroomBytes": 5288144896,
+            "architecture": "aarch64",
+            "available": true,
+            "cpuFlags": null
+          }
+        }
+      ],
+      "seconds": 61.303
+    },
+    {
+      "id": "exact-home",
+      "goal": "5% to 5trat",
+      "expected": [
+        {
+          "k": "allocate",
+          "a": "5trat",
+          "w": "all",
+          "v": 5,
+          "u": "percent"
+        }
+      ],
+      "goalSha256": "ccb659cdbae0d9ee8f0006a57e6865fa83277a32c815f3a26718536635250291",
+      "verdict": "pass",
+      "result": {
+        "contractVersion": "preferences_v2",
+        "kind": "mission_intent",
+        "requestId": "qualify-exact-home",
+        "inputSha256": "355699626d7372331e7750ae3f7d71185745d748c7155dbc4b4db176707f1d09",
+        "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+        "goalSha256": "ccb659cdbae0d9ee8f0006a57e6865fa83277a32c815f3a26718536635250291",
+        "scopeSha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "registrySha256": "53daff05d80a253e3900aff4e58b9f8f4bf56541ea952a43c0b74e43378fe606",
+        "modelId": "qwen3.5-4b",
+        "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+        "runtimeBinarySha256": "e7a1fe417870f5bdbc826376ef1afae3986c8bb4de3dd3dce71e2ac4e2bf337b",
+        "lastRunAt": "2026-10-16T15:41:11.842255+00:00",
+        "actualInference": true,
+        "generationAttempted": true,
+        "contractValid": true,
+        "intent": {
+          "s": "resolved",
+          "reason": "",
+          "c": [
+            {
+              "k": "allocate",
+              "a": "5trat",
+              "w": "all",
+              "v": 5.0,
+              "u": "percent",
+              "q": "5% to 5trat"
+            }
+          ]
+        },
+        "validUntil": 1792165413.7115095,
+        "routingAuthority": "none",
+        "synthetic": false,
+        "intentProvenance": {
+          "compilerRevision": "semantic-inventory-2",
+          "extractionRevision": "source-by-source-6",
+          "sourceCount": 1,
+          "completedSources": [
+            1
+          ],
+          "holdOrigin": null,
+          "contract": "preferences_v2",
+          "correctionUsed": false,
+          "attempts": [
+            {
+              "attempt": 1,
+              "completedSources": [
+                1
+              ],
+              "sourceOutputs": [
+                {
+                  "sourceId": 1,
+                  "outputSha256": "279df71966ae9c7914f8bbd191e6984c1eedfa0d348c50526485af1bc75d585a",
+                  "status": "resolved",
+                  "requirementCount": 1
+                }
+              ],
+              "outcome": "resolved",
+              "validatorError": null
+            }
+          ]
+        },
+        "inventorySha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "elapsedSeconds": 21.87
+      },
+      "modelOutputs": [
+        {
+          "output": "{\"sources\":{\"1\":[{\"relation\":\"allocate\",\"target\":\"5trat\",\"selection\":\"all\",\"quantity\": \"5%\"}]},\"status\":\"resolved\",\"reason\":\"\"}",
+          "outputSha256": "279df71966ae9c7914f8bbd191e6984c1eedfa0d348c50526485af1bc75d585a"
+        }
+      ],
+      "resourceAdmissionChecks": [
+        {
+          "allowed": true,
+          "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+          "snapshot": {
+            "sampledAt": "2026-10-16T15:41:11.865371+00:00",
+            "totalBytes": 8307167232,
+            "availableBytes": 7325822976,
+            "serviceMemoryBytes": null,
+            "servicePeakMemoryBytes": null,
+            "containerHeadroomBytes": 5288480768,
+            "architecture": "aarch64",
+            "available": true,
+            "cpuFlags": null
+          }
+        }
+      ],
+      "seconds": 21.87
+    },
+    {
+      "id": "exact-reduced-home",
+      "goal": "Minimize 5trat to 5%",
+      "expected": [
+        {
+          "k": "allocate",
+          "a": "5trat",
+          "w": "all",
+          "v": 5,
+          "u": "percent"
+        }
+      ],
+      "goalSha256": "4883ca54792b8f5c73a5ce3d9e68ddfaae5b922be8bce068435b613a72b2fa95",
+      "verdict": "pass",
+      "result": {
+        "contractVersion": "preferences_v2",
+        "kind": "mission_intent",
+        "requestId": "qualify-exact-reduced-home",
+        "inputSha256": "c52e85eaff57c84e371f633e6185824f43391c6722999a765814d048f079693a",
+        "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+        "goalSha256": "4883ca54792b8f5c73a5ce3d9e68ddfaae5b922be8bce068435b613a72b2fa95",
+        "scopeSha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "registrySha256": "53daff05d80a253e3900aff4e58b9f8f4bf56541ea952a43c0b74e43378fe606",
+        "modelId": "qwen3.5-4b",
+        "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+        "runtimeBinarySha256": "e7a1fe417870f5bdbc826376ef1afae3986c8bb4de3dd3dce71e2ac4e2bf337b",
+        "lastRunAt": "2026-10-16T15:41:33.713965+00:00",
+        "actualInference": true,
+        "generationAttempted": true,
+        "contractValid": true,
+        "intent": {
+          "s": "resolved",
+          "reason": "",
+          "c": [
+            {
+              "k": "allocate",
+              "a": "5trat",
+              "w": "all",
+              "v": 5.0,
+              "u": "percent",
+              "q": "Minimize 5trat to 5%"
+            }
+          ]
+        },
+        "validUntil": 1792165433.9006,
+        "routingAuthority": "none",
+        "synthetic": false,
+        "intentProvenance": {
+          "compilerRevision": "semantic-inventory-2",
+          "extractionRevision": "source-by-source-6",
+          "sourceCount": 1,
+          "completedSources": [
+            1
+          ],
+          "holdOrigin": null,
+          "contract": "preferences_v2",
+          "correctionUsed": false,
+          "attempts": [
+            {
+              "attempt": 1,
+              "completedSources": [
+                1
+              ],
+              "sourceOutputs": [
+                {
+                  "sourceId": 1,
+                  "outputSha256": "279df71966ae9c7914f8bbd191e6984c1eedfa0d348c50526485af1bc75d585a",
+                  "status": "resolved",
+                  "requirementCount": 1
+                }
+              ],
+              "outcome": "resolved",
+              "validatorError": null
+            }
+          ]
+        },
+        "inventorySha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "elapsedSeconds": 20.188
+      },
+      "modelOutputs": [
+        {
+          "output": "{\"sources\":{\"1\":[{\"relation\":\"allocate\",\"target\":\"5trat\",\"selection\":\"all\",\"quantity\": \"5%\"}]},\"status\":\"resolved\",\"reason\":\"\"}",
+          "outputSha256": "279df71966ae9c7914f8bbd191e6984c1eedfa0d348c50526485af1bc75d585a"
+        }
+      ],
+      "resourceAdmissionChecks": [
+        {
+          "allowed": true,
+          "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+          "snapshot": {
+            "sampledAt": "2026-10-16T15:41:33.759528+00:00",
+            "totalBytes": 8307167232,
+            "availableBytes": 7332442112,
+            "serviceMemoryBytes": null,
+            "servicePeakMemoryBytes": null,
+            "containerHeadroomBytes": 5295525888,
+            "architecture": "aarch64",
+            "available": true,
+            "cpuFlags": null
+          }
+        }
+      ],
+      "seconds": 20.188
+    },
+    {
+      "id": "exact-plus-minimize",
+      "goal": "BCH is goal; 5% to 5trat; minimize 5trat",
+      "expected": [
+        {
+          "k": "primary",
+          "a": "bitcoin-cash",
+          "w": "all",
+          "v": null,
+          "u": null
+        },
+        {
+          "k": "allocate",
+          "a": "5trat",
+          "w": "all",
+          "v": 5,
+          "u": "percent"
+        },
+        {
+          "k": "deprioritize",
+          "a": "5trat",
+          "w": "all",
+          "v": null,
+          "u": null
+        }
+      ],
+      "goalSha256": "13aadfc1cf140531d271329b1b48558d8653184fcb4bfbbc4a9a75c6d6b80ebc",
+      "verdict": "pass",
+      "result": {
+        "contractVersion": "preferences_v2",
+        "kind": "mission_intent",
+        "requestId": "qualify-exact-plus-minimize",
+        "inputSha256": "17518cc7060eba33526fccfd753eb6708fbc2f7e6dadd71831ab57b6f0ac6b35",
+        "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+        "goalSha256": "13aadfc1cf140531d271329b1b48558d8653184fcb4bfbbc4a9a75c6d6b80ebc",
+        "scopeSha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "registrySha256": "53daff05d80a253e3900aff4e58b9f8f4bf56541ea952a43c0b74e43378fe606",
+        "modelId": "qwen3.5-4b",
+        "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+        "runtimeBinarySha256": "e7a1fe417870f5bdbc826376ef1afae3986c8bb4de3dd3dce71e2ac4e2bf337b",
+        "lastRunAt": "2026-10-16T15:41:53.902396+00:00",
+        "actualInference": true,
+        "generationAttempted": true,
+        "contractValid": true,
+        "intent": {
+          "s": "resolved",
+          "reason": "",
+          "c": [
+            {
+              "k": "primary",
+              "a": "bitcoin-cash",
+              "w": "all",
+              "v": null,
+              "u": null,
+              "q": "BCH is goal"
+            },
+            {
+              "k": "allocate",
+              "a": "5trat",
+              "w": "all",
+              "v": 5.0,
+              "u": "percent",
+              "q": "5% to 5trat"
+            },
+            {
+              "k": "deprioritize",
+              "a": "5trat",
+              "w": "all",
+              "v": null,
+              "u": null,
+              "q": "minimize 5trat"
+            }
+          ]
+        },
+        "validUntil": 1792165482.2391057,
+        "routingAuthority": "none",
+        "synthetic": false,
+        "intentProvenance": {
+          "compilerRevision": "semantic-inventory-2",
+          "extractionRevision": "source-by-source-6",
+          "sourceCount": 3,
+          "completedSources": [
+            1,
+            2,
+            3
+          ],
+          "holdOrigin": null,
+          "contract": "preferences_v2",
+          "correctionUsed": false,
+          "attempts": [
+            {
+              "attempt": 1,
+              "completedSources": [
+                1,
+                2,
+                3
+              ],
+              "sourceOutputs": [
+                {
+                  "sourceId": 1,
+                  "outputSha256": "6c578b6a543f84080cf395120ffa959594033051e168181280a60b982a8b78bc",
+                  "status": "resolved",
+                  "requirementCount": 1
+                },
+                {
+                  "sourceId": 2,
+                  "outputSha256": "cbe71950405c541511ab545666a75764cf2f4dfca96e5afeae09582a871abb69",
+                  "status": "resolved",
+                  "requirementCount": 1
+                },
+                {
+                  "sourceId": 3,
+                  "outputSha256": "69bf1e70b4151a5bc2592d3cf63974d1e5336ddf59778b690a30d715f5736209",
+                  "status": "resolved",
+                  "requirementCount": 1
+                }
+              ],
+              "outcome": "resolved",
+              "validatorError": null
+            }
+          ]
+        },
+        "inventorySha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "elapsedSeconds": 48.337
+      },
+      "modelOutputs": [
+        {
+          "output": "{\"sources\":{\"1\":[{\"relation\":\"primary\",\"target\":\"BCH\",\"selection\":\"all\",\"quantity\":null}]},\"status\":\"resolved\",\"reason\":\"\"}",
+          "outputSha256": "6c578b6a543f84080cf395120ffa959594033051e168181280a60b982a8b78bc"
+        },
+        {
+          "output": "{\"sources\":{\"2\":[{\"relation\":\"allocate\",\"target\":\"5trat\",\"selection\":\"all\",\"quantity\": \"5%\"}]},\"status\":\"resolved\",\"reason\":\"\"}",
+          "outputSha256": "cbe71950405c541511ab545666a75764cf2f4dfca96e5afeae09582a871abb69"
+        },
+        {
+          "output": "{\"sources\":{\"3\":[{\"relation\":\"deprioritize\",\"target\":\"5trat\",\"selection\":\"all\",\"quantity\":null}]},\"status\":\"resolved\",\"reason\":\"\"}",
+          "outputSha256": "69bf1e70b4151a5bc2592d3cf63974d1e5336ddf59778b690a30d715f5736209"
+        }
+      ],
+      "resourceAdmissionChecks": [
+        {
+          "allowed": true,
+          "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+          "snapshot": {
+            "sampledAt": "2026-10-16T15:41:53.948334+00:00",
+            "totalBytes": 8307167232,
+            "availableBytes": 7338659840,
+            "serviceMemoryBytes": null,
+            "servicePeakMemoryBytes": null,
+            "containerHeadroomBytes": 5295603712,
+            "architecture": "aarch64",
+            "available": true,
+            "cpuFlags": null
+          }
+        },
+        {
+          "allowed": true,
+          "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+          "snapshot": {
+            "sampledAt": "2026-10-16T15:42:08.943318+00:00",
+            "totalBytes": 8307167232,
+            "availableBytes": 7342215168,
+            "serviceMemoryBytes": null,
+            "servicePeakMemoryBytes": null,
+            "containerHeadroomBytes": 5295058944,
+            "architecture": "aarch64",
+            "available": true,
+            "cpuFlags": null
+          }
+        },
+        {
+          "allowed": true,
+          "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+          "snapshot": {
+            "sampledAt": "2026-10-16T15:42:26.352369+00:00",
+            "totalBytes": 8307167232,
+            "availableBytes": 7345889280,
+            "serviceMemoryBytes": null,
+            "servicePeakMemoryBytes": null,
+            "containerHeadroomBytes": 5295050752,
+            "architecture": "aarch64",
+            "available": true,
+            "cpuFlags": null
+          }
+        }
+      ],
+      "seconds": 48.337
+    },
+    {
+      "id": "coordinated-targets",
+      "goal": "Minimize BTC and 5trat",
+      "expected": [
+        {
+          "k": "deprioritize",
+          "a": "bitcoin",
+          "w": "all",
+          "v": null,
+          "u": null
+        },
+        {
+          "k": "deprioritize",
+          "a": "5trat",
+          "w": "all",
+          "v": null,
+          "u": null
+        }
+      ],
+      "goalSha256": "254f81534c8703930d4afbac525addb63dc89c2919603d73f335427dcdf0dcee",
+      "verdict": "pass",
+      "result": {
+        "contractVersion": "preferences_v2",
+        "kind": "mission_intent",
+        "requestId": "qualify-coordinated-targets",
+        "inputSha256": "b82cadef7ad1ec9337a530db8bbea561dcf400ed5d395ec0caf07dbb59f27b9d",
+        "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+        "goalSha256": "254f81534c8703930d4afbac525addb63dc89c2919603d73f335427dcdf0dcee",
+        "scopeSha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "registrySha256": "53daff05d80a253e3900aff4e58b9f8f4bf56541ea952a43c0b74e43378fe606",
+        "modelId": "qwen3.5-4b",
+        "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+        "runtimeBinarySha256": "e7a1fe417870f5bdbc826376ef1afae3986c8bb4de3dd3dce71e2ac4e2bf337b",
+        "lastRunAt": "2026-10-16T15:42:42.240757+00:00",
+        "actualInference": true,
+        "generationAttempted": true,
+        "contractValid": true,
+        "intent": {
+          "s": "resolved",
+          "reason": "",
+          "c": [
+            {
+              "k": "deprioritize",
+              "a": "5trat",
+              "w": "all",
+              "v": null,
+              "u": null,
+              "q": "Minimize BTC and 5trat"
+            },
+            {
+              "k": "deprioritize",
+              "a": "bitcoin",
+              "w": "all",
+              "v": null,
+              "u": null,
+              "q": "Minimize BTC and 5trat"
+            }
+          ]
+        },
+        "validUntil": 1792165502.0601058,
+        "routingAuthority": "none",
+        "synthetic": false,
+        "intentProvenance": {
+          "compilerRevision": "semantic-inventory-2",
+          "extractionRevision": "source-by-source-6",
+          "sourceCount": 1,
+          "completedSources": [
+            1
+          ],
+          "holdOrigin": null,
+          "contract": "preferences_v2",
+          "correctionUsed": false,
+          "attempts": [
+            {
+              "attempt": 1,
+              "completedSources": [
+                1
+              ],
+              "sourceOutputs": [
+                {
+                  "sourceId": 1,
+                  "outputSha256": "3b561623b522465b3b014d491a89dd2988aedee88f616198346a42fa345e5fa0",
+                  "status": "resolved",
+                  "requirementCount": 2
+                }
+              ],
+              "outcome": "resolved",
+              "validatorError": null
+            }
+          ]
+        },
+        "inventorySha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "elapsedSeconds": 19.82
+      },
+      "modelOutputs": [
+        {
+          "output": "{\"sources\":{\"1\":[{\"relation\":\"deprioritize\",\"target\":\"5trat\",\"selection\":\"all\",\"quantity\":null},{\"relation\":\"deprioritize\",\"target\":\"BTC\",\"selection\":\"all\",\"quantity\":null}]},\"status\":\"resolved\",\"reason\":\"\"}",
+          "outputSha256": "3b561623b522465b3b014d491a89dd2988aedee88f616198346a42fa345e5fa0"
+        }
+      ],
+      "resourceAdmissionChecks": [
+        {
+          "allowed": true,
+          "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+          "snapshot": {
+            "sampledAt": "2026-10-16T15:42:42.270111+00:00",
+            "totalBytes": 8307167232,
+            "availableBytes": 7347838976,
+            "serviceMemoryBytes": null,
+            "servicePeakMemoryBytes": null,
+            "containerHeadroomBytes": 5295230976,
+            "architecture": "aarch64",
+            "available": true,
+            "cpuFlags": null
+          }
+        }
+      ],
+      "seconds": 19.82
+    },
+    {
+      "id": "negated-minimize",
+      "goal": "Do not minimize BCH",
+      "expected": null,
+      "goalSha256": "a3ad1477f1b538273331082d4b7adc08cf5f53837ca09651e9cb27f7b9819826",
+      "verdict": "pass",
+      "result": {
+        "contractVersion": "preferences_v2",
+        "kind": "mission_intent",
+        "requestId": "qualify-negated-minimize",
+        "inputSha256": "77c00e6f615cb97890e181565a777a65a27d8a64d0c78c3de0cd505941c31740",
+        "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+        "goalSha256": "a3ad1477f1b538273331082d4b7adc08cf5f53837ca09651e9cb27f7b9819826",
+        "scopeSha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "registrySha256": "53daff05d80a253e3900aff4e58b9f8f4bf56541ea952a43c0b74e43378fe606",
+        "modelId": "qwen3.5-4b",
+        "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+        "runtimeBinarySha256": "e7a1fe417870f5bdbc826376ef1afae3986c8bb4de3dd3dce71e2ac4e2bf337b",
+        "lastRunAt": "2026-10-16T15:43:02.061592+00:00",
+        "actualInference": true,
+        "generationAttempted": true,
+        "contractValid": true,
+        "intent": {
+          "s": "unsupported",
+          "reason": "The planner cannot preserve a target's current share through a negated minimize request. State an exact percentage in a separate allocation instruction, or ask to hold current routing.",
+          "c": []
+        },
+        "validUntil": 1792165519.6013846,
+        "routingAuthority": "none",
+        "synthetic": false,
+        "intentProvenance": {
+          "compilerRevision": "semantic-inventory-2",
+          "extractionRevision": "source-by-source-6",
+          "sourceCount": 1,
+          "completedSources": [
+            1
+          ],
+          "holdOrigin": "validator_capability",
+          "contract": "preferences_v2",
+          "correctionUsed": false,
+          "attempts": [
+            {
+              "attempt": 1,
+              "completedSources": [
+                1
+              ],
+              "sourceOutputs": [
+                {
+                  "sourceId": 1,
+                  "outputSha256": "bae2b6e3a9a7aa8dfcb48cee2e5da0ac5def0904635d5ab45cd10bb0fe844a90",
+                  "status": "resolved",
+                  "requirementCount": 1
+                }
+              ],
+              "outcome": "unsupported",
+              "validatorError": "The planner cannot preserve a target's current share through a negated minimize request. State an exact percentage in a separate allocation instruction, or ask to hold current routing.",
+              "validatorSourceIds": [
+                1
+              ],
+              "terminal": true
+            }
+          ]
+        },
+        "inventorySha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "elapsedSeconds": 17.54
+      },
+      "modelOutputs": [
+        {
+          "output": "{\"sources\":{\"1\":[{\"relation\":\"strategy\",\"target\":\"value-hunter\",\"selection\":\"all\",\"quantity\":null}]},\"status\":\"resolved\",\"reason\":\"\"}",
+          "outputSha256": "bae2b6e3a9a7aa8dfcb48cee2e5da0ac5def0904635d5ab45cd10bb0fe844a90"
+        }
+      ],
+      "resourceAdmissionChecks": [
+        {
+          "allowed": true,
+          "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+          "snapshot": {
+            "sampledAt": "2026-10-16T15:43:02.092878+00:00",
+            "totalBytes": 8307167232,
+            "availableBytes": 7346425856,
+            "serviceMemoryBytes": null,
+            "servicePeakMemoryBytes": null,
+            "containerHeadroomBytes": 5295149056,
+            "architecture": "aarch64",
+            "available": true,
+            "cpuFlags": null
+          }
+        }
+      ],
+      "seconds": 17.54
+    },
+    {
+      "id": "negated-coordinated",
+      "goal": "Do not minimize BTC and 5trat",
+      "expected": null,
+      "goalSha256": "9766e18d4e16eceae4a2b49abe419c7bc59ac409378162716aae52beb1cacfda",
+      "verdict": "pass",
+      "result": {
+        "contractVersion": "preferences_v2",
+        "kind": "mission_intent",
+        "requestId": "qualify-negated-coordinated",
+        "inputSha256": "4664f06d6c0035791b8776c59b5c2df46a36fef1cb089a80b0d88ef76ac0c0cc",
+        "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+        "goalSha256": "9766e18d4e16eceae4a2b49abe419c7bc59ac409378162716aae52beb1cacfda",
+        "scopeSha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "registrySha256": "53daff05d80a253e3900aff4e58b9f8f4bf56541ea952a43c0b74e43378fe606",
+        "modelId": "qwen3.5-4b",
+        "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+        "runtimeBinarySha256": "e7a1fe417870f5bdbc826376ef1afae3986c8bb4de3dd3dce71e2ac4e2bf337b",
+        "lastRunAt": "2026-10-16T15:43:19.602992+00:00",
+        "actualInference": true,
+        "generationAttempted": true,
+        "contractValid": true,
+        "intent": {
+          "s": "unsupported",
+          "reason": "A negated minimize request is a routing constraint, not conversation. State an exact percentage in a separate allocation instruction, or ask to hold current routing.",
+          "c": []
+        },
+        "validUntil": 1792165541.0579965,
+        "routingAuthority": "none",
+        "synthetic": false,
+        "intentProvenance": {
+          "compilerRevision": "semantic-inventory-2",
+          "extractionRevision": "source-by-source-6",
+          "sourceCount": 1,
+          "completedSources": [
+            1
+          ],
+          "holdOrigin": "validator_capability",
+          "contract": "preferences_v2",
+          "correctionUsed": false,
+          "attempts": [
+            {
+              "attempt": 1,
+              "completedSources": [
+                1
+              ],
+              "sourceOutputs": [
+                {
+                  "sourceId": 1,
+                  "outputSha256": "a2f93cb6c758b847db5685afe10b7ea25d0dc6a5d0e411a57e77bd368f5cc88f",
+                  "status": "resolved",
+                  "requirementCount": 1
+                }
+              ],
+              "outcome": "unsupported",
+              "validatorError": "A negated minimize request is a routing constraint, not conversation. State an exact percentage in a separate allocation instruction, or ask to hold current routing.",
+              "validatorSourceIds": [
+                1
+              ],
+              "terminal": true
+            }
+          ]
+        },
+        "inventorySha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "elapsedSeconds": 21.456
+      },
+      "modelOutputs": [
+        {
+          "output": "{\"sources\":{\"1\":[{\"relation\":\"context\",\"target\":null,\"selection\":\"all\",\"quantity\":null}]},\"status\":\"resolved\",\"reason\":\"\"}",
+          "outputSha256": "a2f93cb6c758b847db5685afe10b7ea25d0dc6a5d0e411a57e77bd368f5cc88f"
+        }
+      ],
+      "resourceAdmissionChecks": [
+        {
+          "allowed": true,
+          "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+          "snapshot": {
+            "sampledAt": "2026-10-16T15:43:19.642134+00:00",
+            "totalBytes": 8307167232,
+            "availableBytes": 7344893952,
+            "serviceMemoryBytes": null,
+            "servicePeakMemoryBytes": null,
+            "containerHeadroomBytes": 5295394816,
+            "architecture": "aarch64",
+            "available": true,
+            "cpuFlags": null
+          }
+        }
+      ],
+      "seconds": 21.456
+    },
+    {
+      "id": "contradictory-priority",
+      "goal": "BCH is goal; minimize BCH",
+      "expected": null,
+      "goalSha256": "b0ba070d26db1c1c75d0d7f87d0f19f45c9923122b782209202c926344fc2272",
+      "verdict": "pass",
+      "result": {
+        "contractVersion": "preferences_v2",
+        "kind": "mission_intent",
+        "requestId": "qualify-contradictory-priority",
+        "inputSha256": "774b71d683228b73d1369ebf8f09f185f92e433c5f5d0c31bdb5b757b5d3abe1",
+        "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+        "goalSha256": "b0ba070d26db1c1c75d0d7f87d0f19f45c9923122b782209202c926344fc2272",
+        "scopeSha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "registrySha256": "53daff05d80a253e3900aff4e58b9f8f4bf56541ea952a43c0b74e43378fe606",
+        "modelId": "qwen3.5-4b",
+        "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+        "runtimeBinarySha256": "e7a1fe417870f5bdbc826376ef1afae3986c8bb4de3dd3dce71e2ac4e2bf337b",
+        "lastRunAt": "2026-10-16T15:43:41.059775+00:00",
+        "actualInference": true,
+        "generationAttempted": true,
+        "contractValid": true,
+        "intent": {
+          "s": "clarify",
+          "reason": "The same target is both prioritized and marked low priority; choose its role or state an exact allocation.",
+          "c": []
+        },
+        "validUntil": 1792165572.9957438,
+        "routingAuthority": "none",
+        "synthetic": false,
+        "intentProvenance": {
+          "compilerRevision": "semantic-inventory-2",
+          "extractionRevision": "source-by-source-6",
+          "sourceCount": 2,
+          "completedSources": [
+            1,
+            2
+          ],
+          "holdOrigin": "validator_conflict",
+          "contract": "preferences_v2",
+          "correctionUsed": false,
+          "attempts": [
+            {
+              "attempt": 1,
+              "completedSources": [
+                1,
+                2
+              ],
+              "sourceOutputs": [
+                {
+                  "sourceId": 1,
+                  "outputSha256": "6c578b6a543f84080cf395120ffa959594033051e168181280a60b982a8b78bc",
+                  "status": "resolved",
+                  "requirementCount": 1
+                },
+                {
+                  "sourceId": 2,
+                  "outputSha256": "59b75e6835df2e459cb7c9ffd101444b3fcee30a693859143725932fcda7027f",
+                  "status": "resolved",
+                  "requirementCount": 1
+                }
+              ],
+              "outcome": "clarify",
+              "validatorError": "The same target is both prioritized and marked low priority; choose its role or state an exact allocation.",
+              "validatorSourceIds": [],
+              "terminal": true
+            }
+          ]
+        },
+        "inventorySha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "elapsedSeconds": 31.937
+      },
+      "modelOutputs": [
+        {
+          "output": "{\"sources\":{\"1\":[{\"relation\":\"primary\",\"target\":\"BCH\",\"selection\":\"all\",\"quantity\":null}]},\"status\":\"resolved\",\"reason\":\"\"}",
+          "outputSha256": "6c578b6a543f84080cf395120ffa959594033051e168181280a60b982a8b78bc"
+        },
+        {
+          "output": "{\"sources\":{\"2\":[{\"relation\":\"deprioritize\",\"target\":\"BCH\",\"selection\":\"all\",\"quantity\":null}]},\"status\":\"resolved\",\"reason\":\"\"}",
+          "outputSha256": "59b75e6835df2e459cb7c9ffd101444b3fcee30a693859143725932fcda7027f"
+        }
+      ],
+      "resourceAdmissionChecks": [
+        {
+          "allowed": true,
+          "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+          "snapshot": {
+            "sampledAt": "2026-10-16T15:43:41.092685+00:00",
+            "totalBytes": 8307167232,
+            "availableBytes": 7342809088,
+            "serviceMemoryBytes": null,
+            "servicePeakMemoryBytes": null,
+            "containerHeadroomBytes": 5294940160,
+            "architecture": "aarch64",
+            "available": true,
+            "cpuFlags": null
+          }
+        },
+        {
+          "allowed": true,
+          "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+          "snapshot": {
+            "sampledAt": "2026-10-16T15:43:56.004329+00:00",
+            "totalBytes": 8307167232,
+            "availableBytes": 7347875840,
+            "serviceMemoryBytes": null,
+            "servicePeakMemoryBytes": null,
+            "containerHeadroomBytes": 5295132672,
+            "architecture": "aarch64",
+            "available": true,
+            "cpuFlags": null
+          }
+        }
+      ],
+      "seconds": 31.937
+    },
+    {
+      "id": "unsupported-subset",
+      "goal": "Garage Avalon should minimize 5trat",
+      "expected": null,
+      "goalSha256": "f26f7638e3e7a6af24f874f69ea8c693c4a79498a1d43c992a192802bbc2ed63",
+      "verdict": "pass",
+      "result": {
+        "contractVersion": "preferences_v2",
+        "kind": "mission_intent",
+        "requestId": "qualify-unsupported-subset",
+        "inputSha256": "63759284563170375424674361cef0a2cc27ff7f9f49b8f0e4efd9ae2942af9c",
+        "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+        "goalSha256": "f26f7638e3e7a6af24f874f69ea8c693c4a79498a1d43c992a192802bbc2ed63",
+        "scopeSha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "registrySha256": "53daff05d80a253e3900aff4e58b9f8f4bf56541ea952a43c0b74e43378fe606",
+        "modelId": "qwen3.5-4b",
+        "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+        "runtimeBinarySha256": "e7a1fe417870f5bdbc826376ef1afae3986c8bb4de3dd3dce71e2ac4e2bf337b",
+        "lastRunAt": "2026-10-16T15:44:12.997459+00:00",
+        "actualInference": true,
+        "generationAttempted": true,
+        "contractValid": true,
+        "intent": {
+          "s": "unsupported",
+          "reason": "Minimizing allocation currently applies to a whole compatible fleet or algorithm group, not selected miners.",
+          "c": []
+        },
+        "validUntil": 1792165593.664725,
+        "routingAuthority": "none",
+        "synthetic": false,
+        "intentProvenance": {
+          "compilerRevision": "semantic-inventory-2",
+          "extractionRevision": "source-by-source-6",
+          "sourceCount": 1,
+          "completedSources": [
+            1
+          ],
+          "holdOrigin": "validator_capability",
+          "contract": "preferences_v2",
+          "correctionUsed": false,
+          "attempts": [
+            {
+              "attempt": 1,
+              "completedSources": [
+                1
+              ],
+              "sourceOutputs": [
+                {
+                  "sourceId": 1,
+                  "outputSha256": "bae2b6e3a9a7aa8dfcb48cee2e5da0ac5def0904635d5ab45cd10bb0fe844a90",
+                  "status": "resolved",
+                  "requirementCount": 1
+                }
+              ],
+              "outcome": "unsupported",
+              "validatorError": "Minimizing allocation currently applies to a whole compatible fleet or algorithm group, not selected miners.",
+              "validatorSourceIds": [
+                1
+              ],
+              "terminal": true
+            }
+          ]
+        },
+        "inventorySha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "elapsedSeconds": 20.668
+      },
+      "modelOutputs": [
+        {
+          "output": "{\"sources\":{\"1\":[{\"relation\":\"strategy\",\"target\":\"value-hunter\",\"selection\":\"all\",\"quantity\":null}]},\"status\":\"resolved\",\"reason\":\"\"}",
+          "outputSha256": "bae2b6e3a9a7aa8dfcb48cee2e5da0ac5def0904635d5ab45cd10bb0fe844a90"
+        }
+      ],
+      "resourceAdmissionChecks": [
+        {
+          "allowed": true,
+          "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+          "snapshot": {
+            "sampledAt": "2026-10-16T15:44:13.059711+00:00",
+            "totalBytes": 8307167232,
+            "availableBytes": 7343448064,
+            "serviceMemoryBytes": null,
+            "servicePeakMemoryBytes": null,
+            "containerHeadroomBytes": 5295058944,
+            "architecture": "aarch64",
+            "available": true,
+            "cpuFlags": null
+          }
+        }
+      ],
+      "seconds": 20.668
+    },
+    {
+      "id": "unsupported-upper-percentage",
+      "goal": "Minimize 5trat to at most 5%",
+      "expected": null,
+      "goalSha256": "d2e9b2b15c3c8aa5d4080d0c5c219f8ab30c13391d076e296b1c53be6c06417e",
+      "verdict": "pass",
+      "result": {
+        "contractVersion": "preferences_v2",
+        "kind": "mission_intent",
+        "requestId": "qualify-unsupported-upper-percentage",
+        "inputSha256": "5031c3a3a65eed5689311848633e57b0b1218cbe943e85b6823a3a42e750798c",
+        "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+        "goalSha256": "d2e9b2b15c3c8aa5d4080d0c5c219f8ab30c13391d076e296b1c53be6c06417e",
+        "scopeSha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "registrySha256": "53daff05d80a253e3900aff4e58b9f8f4bf56541ea952a43c0b74e43378fe606",
+        "modelId": "qwen3.5-4b",
+        "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+        "runtimeBinarySha256": "e7a1fe417870f5bdbc826376ef1afae3986c8bb4de3dd3dce71e2ac4e2bf337b",
+        "lastRunAt": "2026-10-16T15:44:33.666522+00:00",
+        "actualInference": true,
+        "generationAttempted": true,
+        "contractValid": true,
+        "intent": {
+          "s": "unsupported",
+          "reason": "Percentage minimums, maximums and inequality bounds are not supported; use a fixed coin/app percentage.",
+          "c": []
+        },
+        "validUntil": 1792165617.2459276,
+        "routingAuthority": "none",
+        "synthetic": false,
+        "intentProvenance": {
+          "compilerRevision": "semantic-inventory-2",
+          "extractionRevision": "source-by-source-6",
+          "sourceCount": 1,
+          "completedSources": [
+            1
+          ],
+          "holdOrigin": "validator_capability",
+          "contract": "preferences_v2",
+          "correctionUsed": false,
+          "attempts": [
+            {
+              "attempt": 1,
+              "completedSources": [
+                1
+              ],
+              "sourceOutputs": [
+                {
+                  "sourceId": 1,
+                  "outputSha256": "3e4abbcc070f8c34fdfc6211eaf131c4e6d7e3e6cdc88a52f9ad5077d191c19b",
+                  "status": "resolved",
+                  "requirementCount": 1
+                }
+              ],
+              "outcome": "unsupported",
+              "validatorError": "Percentage minimums, maximums and inequality bounds are not supported; use a fixed coin/app percentage.",
+              "validatorSourceIds": [],
+              "terminal": true
+            }
+          ]
+        },
+        "inventorySha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "elapsedSeconds": 23.58
+      },
+      "modelOutputs": [
+        {
+          "output": "{\"sources\":{\"1\":[{\"relation\":\"deprioritize\",\"target\":\"5trat\",\"selection\":\"all\",\"quantity\":null}]},\"status\":\"resolved\",\"reason\":\"\"}",
+          "outputSha256": "3e4abbcc070f8c34fdfc6211eaf131c4e6d7e3e6cdc88a52f9ad5077d191c19b"
+        }
+      ],
+      "resourceAdmissionChecks": [
+        {
+          "allowed": true,
+          "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+          "snapshot": {
+            "sampledAt": "2026-10-16T15:44:33.712379+00:00",
+            "totalBytes": 8307167232,
+            "availableBytes": 7346696192,
+            "serviceMemoryBytes": null,
+            "servicePeakMemoryBytes": null,
+            "containerHeadroomBytes": 5294891008,
+            "architecture": "aarch64",
+            "available": true,
+            "cpuFlags": null
+          }
+        }
+      ],
+      "seconds": 23.58
+    },
+    {
+      "id": "unsupported-lower-percentage",
+      "goal": "Keep at least 10% DGB",
+      "expected": null,
+      "goalSha256": "9ca138dd8bd954d464211c0e7078bd3c041729b2f4695e458fe4352b59edfbdb",
+      "verdict": "pass",
+      "result": {
+        "contractVersion": "preferences_v2",
+        "kind": "mission_intent",
+        "requestId": "qualify-unsupported-lower-percentage",
+        "inputSha256": "0f190ef644a869449fe5dd2a162789fad2456184578e26bb2b2d5a10f67fbce7",
+        "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+        "goalSha256": "9ca138dd8bd954d464211c0e7078bd3c041729b2f4695e458fe4352b59edfbdb",
+        "scopeSha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "registrySha256": "53daff05d80a253e3900aff4e58b9f8f4bf56541ea952a43c0b74e43378fe606",
+        "modelId": "qwen3.5-4b",
+        "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+        "runtimeBinarySha256": "e7a1fe417870f5bdbc826376ef1afae3986c8bb4de3dd3dce71e2ac4e2bf337b",
+        "lastRunAt": "2026-10-16T15:44:57.247865+00:00",
+        "actualInference": true,
+        "generationAttempted": true,
+        "contractValid": true,
+        "intent": {
+          "s": "unsupported",
+          "reason": "Percentage minimums, maximums and inequality bounds are not supported; use a fixed coin/app percentage.",
+          "c": []
+        },
+        "validUntil": 1792165639.2834578,
+        "routingAuthority": "none",
+        "synthetic": false,
+        "intentProvenance": {
+          "compilerRevision": "semantic-inventory-2",
+          "extractionRevision": "source-by-source-6",
+          "sourceCount": 1,
+          "completedSources": [
+            1
+          ],
+          "holdOrigin": "validator_capability",
+          "contract": "preferences_v2",
+          "correctionUsed": false,
+          "attempts": [
+            {
+              "attempt": 1,
+              "completedSources": [
+                1
+              ],
+              "sourceOutputs": [
+                {
+                  "sourceId": 1,
+                  "outputSha256": "455170d4293c1f9719740ef01a956445860f1431d570b5acf3b817cc1338b8fb",
+                  "status": "resolved",
+                  "requirementCount": 1
+                }
+              ],
+              "outcome": "unsupported",
+              "validatorError": "Percentage minimums, maximums and inequality bounds are not supported; use a fixed coin/app percentage.",
+              "validatorSourceIds": [],
+              "terminal": true
+            }
+          ]
+        },
+        "inventorySha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "elapsedSeconds": 22.036
+      },
+      "modelOutputs": [
+        {
+          "output": "{\"sources\":{\"1\":[{\"relation\":\"allocate\",\"target\":\"DGB\",\"selection\":\"all\",\"quantity\":\"10%\"}]},\"status\":\"resolved\",\"reason\":\"\"}",
+          "outputSha256": "455170d4293c1f9719740ef01a956445860f1431d570b5acf3b817cc1338b8fb"
+        }
+      ],
+      "resourceAdmissionChecks": [
+        {
+          "allowed": true,
+          "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+          "snapshot": {
+            "sampledAt": "2026-10-16T15:44:57.290212+00:00",
+            "totalBytes": 8307167232,
+            "availableBytes": 7343898624,
+            "serviceMemoryBytes": null,
+            "servicePeakMemoryBytes": null,
+            "containerHeadroomBytes": 5295038464,
+            "architecture": "aarch64",
+            "available": true,
+            "cpuFlags": null
+          }
+        }
+      ],
+      "seconds": 22.036
+    },
+    {
+      "id": "unsupported-percentage-range",
+      "goal": "Keep 5trat between 5 and 10%",
+      "expected": null,
+      "goalSha256": "b02222952f437715b995f675263a23c5ea7c4fbb4091522bd06804b5bd8e18b6",
+      "verdict": "pass",
+      "result": {
+        "contractVersion": "preferences_v2",
+        "kind": "mission_intent",
+        "requestId": "qualify-unsupported-percentage-range",
+        "inputSha256": "6ab308c546721e2364c9cf4b3cf0c806f9618c8e0c715b20de8c8e225ba392e0",
+        "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+        "goalSha256": "b02222952f437715b995f675263a23c5ea7c4fbb4091522bd06804b5bd8e18b6",
+        "scopeSha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "registrySha256": "53daff05d80a253e3900aff4e58b9f8f4bf56541ea952a43c0b74e43378fe606",
+        "modelId": "qwen3.5-4b",
+        "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+        "runtimeBinarySha256": "e7a1fe417870f5bdbc826376ef1afae3986c8bb4de3dd3dce71e2ac4e2bf337b",
+        "lastRunAt": "2026-10-16T15:45:19.285408+00:00",
+        "actualInference": true,
+        "generationAttempted": true,
+        "contractValid": true,
+        "intent": {
+          "s": "unsupported",
+          "reason": "Percentage ranges and deviation bands are not supported; use a fixed coin/app percentage.",
+          "c": []
+        },
+        "validUntil": 1792165675.8472762,
+        "routingAuthority": "none",
+        "synthetic": false,
+        "intentProvenance": {
+          "compilerRevision": "semantic-inventory-2",
+          "extractionRevision": "source-by-source-6",
+          "sourceCount": 2,
+          "completedSources": [
+            1,
+            2
+          ],
+          "holdOrigin": "validator_capability",
+          "contract": "preferences_v2",
+          "correctionUsed": false,
+          "attempts": [
+            {
+              "attempt": 1,
+              "completedSources": [
+                1,
+                2
+              ],
+              "sourceOutputs": [
+                {
+                  "sourceId": 1,
+                  "outputSha256": "5124aadfdafaf505636030b155d49eb5d89e1ab7ff84f65032344beee51ddd02",
+                  "status": "resolved",
+                  "requirementCount": 1
+                },
+                {
+                  "sourceId": 2,
+                  "outputSha256": "f1da6f462bc337cf6b63e0f033d8ffab74f2c45e570643d5c0dce71860cd3bb4",
+                  "status": "resolved",
+                  "requirementCount": 1
+                }
+              ],
+              "outcome": "unsupported",
+              "validatorError": "Percentage ranges and deviation bands are not supported; use a fixed coin/app percentage.",
+              "validatorSourceIds": [],
+              "terminal": true
+            }
+          ]
+        },
+        "inventorySha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "elapsedSeconds": 36.562
+      },
+      "modelOutputs": [
+        {
+          "output": "{\"sources\":{\"1\":[{\"relation\":\"hold\",\"target\":null,\"selection\":\"all\",\"quantity\":null}]},\"status\":\"resolved\",\"reason\":\"\"}",
+          "outputSha256": "5124aadfdafaf505636030b155d49eb5d89e1ab7ff84f65032344beee51ddd02"
+        },
+        {
+          "output": "{\"sources\":{\"2\":[{\"relation\":\"hold\",\"target\":null,\"selection\":\"all\",\"quantity\":null}]},\"status\":\"resolved\",\"reason\":\"\"}",
+          "outputSha256": "f1da6f462bc337cf6b63e0f033d8ffab74f2c45e570643d5c0dce71860cd3bb4"
+        }
+      ],
+      "resourceAdmissionChecks": [
+        {
+          "allowed": true,
+          "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+          "snapshot": {
+            "sampledAt": "2026-10-16T15:45:19.336607+00:00",
+            "totalBytes": 8307167232,
+            "availableBytes": 7351779328,
+            "serviceMemoryBytes": null,
+            "servicePeakMemoryBytes": null,
+            "containerHeadroomBytes": 5294952448,
+            "architecture": "aarch64",
+            "available": true,
+            "cpuFlags": null
+          }
+        },
+        {
+          "allowed": true,
+          "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+          "snapshot": {
+            "sampledAt": "2026-10-16T15:45:36.059729+00:00",
+            "totalBytes": 8307167232,
+            "availableBytes": 7350607872,
+            "serviceMemoryBytes": null,
+            "servicePeakMemoryBytes": null,
+            "containerHeadroomBytes": 5294972928,
+            "architecture": "aarch64",
+            "available": true,
+            "cpuFlags": null
+          }
+        }
+      ],
+      "seconds": 36.563
+    },
+    {
+      "id": "unsupported-percentage-inequality",
+      "goal": "Keep 5trat <= 5%",
+      "expected": null,
+      "goalSha256": "0bf54a1b7650259e981ffbb630ce8c6956db800ba000a7e2cdd5690501e37420",
+      "verdict": "pass",
+      "result": {
+        "contractVersion": "preferences_v2",
+        "kind": "mission_intent",
+        "requestId": "qualify-unsupported-percentage-inequality",
+        "inputSha256": "c23c3aa165a017d316a63b0c21a8f49d189d3e9a005df4ed8f72d0f7f1902c9d",
+        "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+        "goalSha256": "0bf54a1b7650259e981ffbb630ce8c6956db800ba000a7e2cdd5690501e37420",
+        "scopeSha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "registrySha256": "53daff05d80a253e3900aff4e58b9f8f4bf56541ea952a43c0b74e43378fe606",
+        "modelId": "qwen3.5-4b",
+        "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+        "runtimeBinarySha256": "e7a1fe417870f5bdbc826376ef1afae3986c8bb4de3dd3dce71e2ac4e2bf337b",
+        "lastRunAt": "2026-10-16T15:45:55.849301+00:00",
+        "actualInference": true,
+        "generationAttempted": true,
+        "contractValid": true,
+        "intent": {
+          "s": "unsupported",
+          "reason": "Percentage minimums, maximums and inequality bounds are not supported; use a fixed coin/app percentage.",
+          "c": []
+        },
+        "validUntil": 1792165697.1629748,
+        "routingAuthority": "none",
+        "synthetic": false,
+        "intentProvenance": {
+          "compilerRevision": "semantic-inventory-2",
+          "extractionRevision": "source-by-source-6",
+          "sourceCount": 1,
+          "completedSources": [],
+          "holdOrigin": "model_explanation",
+          "contract": "preferences_v2",
+          "correctionUsed": false,
+          "attempts": [
+            {
+              "attempt": 1,
+              "completedSources": [],
+              "sourceOutputs": [
+                {
+                  "sourceId": 1,
+                  "outputSha256": "70fa8b1789a4bc23523cf626eb07b63eb1e8a46038d0cac04ed9ce15b0df0394",
+                  "status": "unsupported",
+                  "requirementCount": null
+                }
+              ],
+              "outcome": "unsupported",
+              "validatorError": null
+            }
+          ]
+        },
+        "inventorySha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "elapsedSeconds": 21.314
+      },
+      "modelOutputs": [
+        {
+          "output": "{\"sources\":{},\"status\":\"unsupported\",\"reason\":\"Percentage minimums, maximums and inequality bounds are not supported; use a fixed coin/app percentage.\"}",
+          "outputSha256": "70fa8b1789a4bc23523cf626eb07b63eb1e8a46038d0cac04ed9ce15b0df0394"
+        }
+      ],
+      "resourceAdmissionChecks": [
+        {
+          "allowed": true,
+          "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+          "snapshot": {
+            "sampledAt": "2026-10-16T15:45:55.869615+00:00",
+            "totalBytes": 8307167232,
+            "availableBytes": 7356547072,
+            "serviceMemoryBytes": null,
+            "servicePeakMemoryBytes": null,
+            "containerHeadroomBytes": 5294993408,
+            "architecture": "aarch64",
+            "available": true,
+            "cpuFlags": null
+          }
+        }
+      ],
+      "seconds": 21.314
+    },
+    {
+      "id": "baseline-primary-lottery",
+      "goal": "BCH is goal; BTC is lottery",
+      "expected": [
+        {
+          "k": "primary",
+          "a": "bitcoin-cash",
+          "w": "all",
+          "v": null,
+          "u": null
+        },
+        {
+          "k": "lottery",
+          "a": "bitcoin",
+          "w": "all",
+          "v": null,
+          "u": null
+        }
+      ],
+      "goalSha256": "bd280c405401b5f0ac55a83e1feebd1a1640c22706045f1c02b33cbaf2cfbf9a",
+      "verdict": "pass",
+      "result": {
+        "contractVersion": "preferences_v2",
+        "kind": "mission_intent",
+        "requestId": "qualify-baseline-primary-lottery",
+        "inputSha256": "e8aa14dd86cb5885a85132960fe5604a205c7ddfb5f064b547f73324712d2410",
+        "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+        "goalSha256": "bd280c405401b5f0ac55a83e1feebd1a1640c22706045f1c02b33cbaf2cfbf9a",
+        "scopeSha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "registrySha256": "53daff05d80a253e3900aff4e58b9f8f4bf56541ea952a43c0b74e43378fe606",
+        "modelId": "qwen3.5-4b",
+        "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+        "runtimeBinarySha256": "e7a1fe417870f5bdbc826376ef1afae3986c8bb4de3dd3dce71e2ac4e2bf337b",
+        "lastRunAt": "2026-10-16T15:46:17.164907+00:00",
+        "actualInference": true,
+        "generationAttempted": true,
+        "contractValid": true,
+        "intent": {
+          "s": "resolved",
+          "reason": "",
+          "c": [
+            {
+              "k": "primary",
+              "a": "bitcoin-cash",
+              "w": "all",
+              "v": null,
+              "u": null,
+              "q": "BCH is goal"
+            },
+            {
+              "k": "lottery",
+              "a": "bitcoin",
+              "w": "all",
+              "v": null,
+              "u": null,
+              "q": "BTC is lottery"
+            }
+          ]
+        },
+        "validUntil": 1792165727.9639735,
+        "routingAuthority": "none",
+        "synthetic": false,
+        "intentProvenance": {
+          "compilerRevision": "semantic-inventory-2",
+          "extractionRevision": "source-by-source-6",
+          "sourceCount": 2,
+          "completedSources": [
+            1,
+            2
+          ],
+          "holdOrigin": null,
+          "contract": "preferences_v2",
+          "correctionUsed": false,
+          "attempts": [
+            {
+              "attempt": 1,
+              "completedSources": [
+                1,
+                2
+              ],
+              "sourceOutputs": [
+                {
+                  "sourceId": 1,
+                  "outputSha256": "6c578b6a543f84080cf395120ffa959594033051e168181280a60b982a8b78bc",
+                  "status": "resolved",
+                  "requirementCount": 1
+                },
+                {
+                  "sourceId": 2,
+                  "outputSha256": "e73fbb1dfa0e26a6f13b49086cdd85089f69e8bfeb318399fea1a5e66b497fe8",
+                  "status": "resolved",
+                  "requirementCount": 1
+                }
+              ],
+              "outcome": "resolved",
+              "validatorError": null
+            }
+          ]
+        },
+        "inventorySha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "elapsedSeconds": 30.8
+      },
+      "modelOutputs": [
+        {
+          "output": "{\"sources\":{\"1\":[{\"relation\":\"primary\",\"target\":\"BCH\",\"selection\":\"all\",\"quantity\":null}]},\"status\":\"resolved\",\"reason\":\"\"}",
+          "outputSha256": "6c578b6a543f84080cf395120ffa959594033051e168181280a60b982a8b78bc"
+        },
+        {
+          "output": "{\"sources\":{\"2\":[{\"relation\":\"lottery\",\"target\":\"BTC\",\"selection\":\"all\",\"quantity\":null}]},\"status\":\"resolved\",\"reason\":\"\"}",
+          "outputSha256": "e73fbb1dfa0e26a6f13b49086cdd85089f69e8bfeb318399fea1a5e66b497fe8"
+        }
+      ],
+      "resourceAdmissionChecks": [
+        {
+          "allowed": true,
+          "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+          "snapshot": {
+            "sampledAt": "2026-10-16T15:46:17.207301+00:00",
+            "totalBytes": 8307167232,
+            "availableBytes": 7350996992,
+            "serviceMemoryBytes": null,
+            "servicePeakMemoryBytes": null,
+            "containerHeadroomBytes": 5295116288,
+            "architecture": "aarch64",
+            "available": true,
+            "cpuFlags": null
+          }
+        },
+        {
+          "allowed": true,
+          "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+          "snapshot": {
+            "sampledAt": "2026-10-16T15:46:32.709566+00:00",
+            "totalBytes": 8307167232,
+            "availableBytes": 7350575104,
+            "serviceMemoryBytes": null,
+            "servicePeakMemoryBytes": null,
+            "containerHeadroomBytes": 5294817280,
+            "architecture": "aarch64",
+            "available": true,
+            "cpuFlags": null
+          }
+        }
+      ],
+      "seconds": 30.8
+    },
+    {
+      "id": "baseline-fixed-remainder",
+      "goal": "Keep 10% DGB; remainder BCH",
+      "expected": [
+        {
+          "k": "allocate",
+          "a": "digibyte",
+          "w": "all",
+          "v": 10,
+          "u": "percent"
+        },
+        {
+          "k": "remainder",
+          "a": "bitcoin-cash",
+          "w": "all",
+          "v": null,
+          "u": null
+        }
+      ],
+      "goalSha256": "d50a8951b8e1598dda089f1c76446307f690bfe10956d711354e11a28745c015",
+      "verdict": "pass",
+      "result": {
+        "contractVersion": "preferences_v2",
+        "kind": "mission_intent",
+        "requestId": "qualify-baseline-fixed-remainder",
+        "inputSha256": "7020852dd0d2b8f9a19a6f2a77f311d89165312bd2f10d2015ba3ebb755dcd06",
+        "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+        "goalSha256": "d50a8951b8e1598dda089f1c76446307f690bfe10956d711354e11a28745c015",
+        "scopeSha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "registrySha256": "53daff05d80a253e3900aff4e58b9f8f4bf56541ea952a43c0b74e43378fe606",
+        "modelId": "qwen3.5-4b",
+        "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+        "runtimeBinarySha256": "e7a1fe417870f5bdbc826376ef1afae3986c8bb4de3dd3dce71e2ac4e2bf337b",
+        "lastRunAt": "2026-10-16T15:46:47.966229+00:00",
+        "actualInference": true,
+        "generationAttempted": true,
+        "contractValid": true,
+        "intent": {
+          "s": "resolved",
+          "reason": "",
+          "c": [
+            {
+              "k": "allocate",
+              "a": "digibyte",
+              "w": "all",
+              "v": 10.0,
+              "u": "percent",
+              "q": "Keep 10% DGB"
+            },
+            {
+              "k": "remainder",
+              "a": "bitcoin-cash",
+              "w": "all",
+              "v": null,
+              "u": null,
+              "q": "remainder BCH"
+            }
+          ]
+        },
+        "validUntil": 1792165762.9152117,
+        "routingAuthority": "none",
+        "synthetic": false,
+        "intentProvenance": {
+          "compilerRevision": "semantic-inventory-2",
+          "extractionRevision": "source-by-source-6",
+          "sourceCount": 2,
+          "completedSources": [
+            1,
+            2
+          ],
+          "holdOrigin": null,
+          "contract": "preferences_v2",
+          "correctionUsed": false,
+          "attempts": [
+            {
+              "attempt": 1,
+              "completedSources": [
+                1,
+                2
+              ],
+              "sourceOutputs": [
+                {
+                  "sourceId": 1,
+                  "outputSha256": "455170d4293c1f9719740ef01a956445860f1431d570b5acf3b817cc1338b8fb",
+                  "status": "resolved",
+                  "requirementCount": 1
+                },
+                {
+                  "sourceId": 2,
+                  "outputSha256": "0a8eeaa701902adb3ba95860c2c3e84588b548cc4236093d7eab7ecc1496aef6",
+                  "status": "resolved",
+                  "requirementCount": 1
+                }
+              ],
+              "outcome": "resolved",
+              "validatorError": null
+            }
+          ]
+        },
+        "inventorySha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "elapsedSeconds": 34.95
+      },
+      "modelOutputs": [
+        {
+          "output": "{\"sources\":{\"1\":[{\"relation\":\"allocate\",\"target\":\"DGB\",\"selection\":\"all\",\"quantity\":\"10%\"}]},\"status\":\"resolved\",\"reason\":\"\"}",
+          "outputSha256": "455170d4293c1f9719740ef01a956445860f1431d570b5acf3b817cc1338b8fb"
+        },
+        {
+          "output": "{\"sources\":{\"2\":[{\"relation\":\"remainder\",\"target\":\"BCH\",\"selection\":\"all\",\"quantity\":null}]},\"status\":\"resolved\",\"reason\":\"\"}",
+          "outputSha256": "0a8eeaa701902adb3ba95860c2c3e84588b548cc4236093d7eab7ecc1496aef6"
+        }
+      ],
+      "resourceAdmissionChecks": [
+        {
+          "allowed": true,
+          "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+          "snapshot": {
+            "sampledAt": "2026-10-16T15:46:48.005377+00:00",
+            "totalBytes": 8307167232,
+            "availableBytes": 7353499648,
+            "serviceMemoryBytes": null,
+            "servicePeakMemoryBytes": null,
+            "containerHeadroomBytes": 5295017984,
+            "architecture": "aarch64",
+            "available": true,
+            "cpuFlags": null
+          }
+        },
+        {
+          "allowed": true,
+          "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+          "snapshot": {
+            "sampledAt": "2026-10-16T15:47:07.660080+00:00",
+            "totalBytes": 8307167232,
+            "availableBytes": 7356354560,
+            "serviceMemoryBytes": null,
+            "servicePeakMemoryBytes": null,
+            "containerHeadroomBytes": 5294727168,
+            "architecture": "aarch64",
+            "available": true,
+            "cpuFlags": null
+          }
+        }
+      ],
+      "seconds": 34.95
+    },
+    {
+      "id": "baseline-named-app",
+      "goal": "Put Garage Avalon exclusively on AxeBCH",
+      "expected": [
+        {
+          "k": "only",
+          "a": "app:axebch",
+          "w": "worker:garage",
+          "v": null,
+          "u": null
+        }
+      ],
+      "goalSha256": "1e0bd438b494e1b1c5256340fe7babf6359ed8c6d6f8aecf5efe454b1a1a8377",
+      "verdict": "pass",
+      "result": {
+        "contractVersion": "preferences_v2",
+        "kind": "mission_intent",
+        "requestId": "qualify-baseline-named-app",
+        "inputSha256": "7feeace7fa9d36c518db8a108b9d1d7d2820c2c43fb38043ee80ad9afdc0da5e",
+        "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+        "goalSha256": "1e0bd438b494e1b1c5256340fe7babf6359ed8c6d6f8aecf5efe454b1a1a8377",
+        "scopeSha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "registrySha256": "53daff05d80a253e3900aff4e58b9f8f4bf56541ea952a43c0b74e43378fe606",
+        "modelId": "qwen3.5-4b",
+        "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+        "runtimeBinarySha256": "e7a1fe417870f5bdbc826376ef1afae3986c8bb4de3dd3dce71e2ac4e2bf337b",
+        "lastRunAt": "2026-10-16T15:47:22.917357+00:00",
+        "actualInference": true,
+        "generationAttempted": true,
+        "contractValid": true,
+        "intent": {
+          "s": "resolved",
+          "reason": "",
+          "c": [
+            {
+              "k": "only",
+              "a": "app:axebch",
+              "w": "worker:garage",
+              "v": null,
+              "u": null,
+              "q": "Put Garage Avalon exclusively on AxeBCH"
+            }
+          ]
+        },
+        "validUntil": 1792165779.9513276,
+        "routingAuthority": "none",
+        "synthetic": false,
+        "intentProvenance": {
+          "compilerRevision": "semantic-inventory-2",
+          "extractionRevision": "source-by-source-6",
+          "sourceCount": 1,
+          "completedSources": [
+            1
+          ],
+          "holdOrigin": null,
+          "contract": "preferences_v2",
+          "correctionUsed": false,
+          "attempts": [
+            {
+              "attempt": 1,
+              "completedSources": [
+                1
+              ],
+              "sourceOutputs": [
+                {
+                  "sourceId": 1,
+                  "outputSha256": "52c0585aeb89a04857bf923a9539e1accda264d2342bd560a2c43ab7b7267f90",
+                  "status": "resolved",
+                  "requirementCount": 1
+                }
+              ],
+              "outcome": "resolved",
+              "validatorError": null
+            }
+          ]
+        },
+        "inventorySha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "elapsedSeconds": 17.035
+      },
+      "modelOutputs": [
+        {
+          "output": "{\"sources\":{\"1\":[{\"relation\":\"only\",\"target\":\"AxeBCH\",\"selection\":\"miner:Garage Avalon\",\"quantity\":null}]},\"status\":\"resolved\",\"reason\":\"\"}",
+          "outputSha256": "52c0585aeb89a04857bf923a9539e1accda264d2342bd560a2c43ab7b7267f90"
+        }
+      ],
+      "resourceAdmissionChecks": [
+        {
+          "allowed": true,
+          "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+          "snapshot": {
+            "sampledAt": "2026-10-16T15:47:22.986676+00:00",
+            "totalBytes": 8307167232,
+            "availableBytes": 7349706752,
+            "serviceMemoryBytes": null,
+            "servicePeakMemoryBytes": null,
+            "containerHeadroomBytes": 5294637056,
+            "architecture": "aarch64",
+            "available": true,
+            "cpuFlags": null
+          }
+        }
+      ],
+      "seconds": 17.035
+    },
+    {
+      "id": "baseline-rank",
+      "goal": "The two largest miners should favour BCH",
+      "expected": [
+        {
+          "k": "prefer",
+          "a": "bitcoin-cash",
+          "w": "largest",
+          "v": 2,
+          "u": "miners"
+        }
+      ],
+      "goalSha256": "cc6f76d7c3255aab99ab421d7829bcbf5c3a7a480b90ebf222f952520e6e62da",
+      "verdict": "pass",
+      "result": {
+        "contractVersion": "preferences_v2",
+        "kind": "mission_intent",
+        "requestId": "qualify-baseline-rank",
+        "inputSha256": "b5c7c1b78c8706e03202f0d77be039accacb5c9eeea8b024a8b906827d89c152",
+        "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+        "goalSha256": "cc6f76d7c3255aab99ab421d7829bcbf5c3a7a480b90ebf222f952520e6e62da",
+        "scopeSha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "registrySha256": "53daff05d80a253e3900aff4e58b9f8f4bf56541ea952a43c0b74e43378fe606",
+        "modelId": "qwen3.5-4b",
+        "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+        "runtimeBinarySha256": "e7a1fe417870f5bdbc826376ef1afae3986c8bb4de3dd3dce71e2ac4e2bf337b",
+        "lastRunAt": "2026-10-16T15:47:39.953232+00:00",
+        "actualInference": true,
+        "generationAttempted": true,
+        "contractValid": true,
+        "intent": {
+          "s": "resolved",
+          "reason": "",
+          "c": [
+            {
+              "k": "prefer",
+              "a": "bitcoin-cash",
+              "w": "largest",
+              "v": 2,
+              "u": "miners",
+              "q": "The two largest miners should favour BCH"
+            }
+          ]
+        },
+        "validUntil": 1792165797.815396,
+        "routingAuthority": "none",
+        "synthetic": false,
+        "intentProvenance": {
+          "compilerRevision": "semantic-inventory-2",
+          "extractionRevision": "source-by-source-6",
+          "sourceCount": 1,
+          "completedSources": [
+            1
+          ],
+          "holdOrigin": null,
+          "contract": "preferences_v2",
+          "correctionUsed": false,
+          "attempts": [
+            {
+              "attempt": 1,
+              "completedSources": [
+                1
+              ],
+              "sourceOutputs": [
+                {
+                  "sourceId": 1,
+                  "outputSha256": "c244b92eb29aadf792d58706fc2ec8060992e1440f6ece6119ef2fdbee8111e2",
+                  "status": "resolved",
+                  "requirementCount": 1
+                }
+              ],
+              "outcome": "resolved",
+              "validatorError": null
+            }
+          ]
+        },
+        "inventorySha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "elapsedSeconds": 17.863
+      },
+      "modelOutputs": [
+        {
+          "output": "{\"sources\":{\"1\":[{\"relation\":\"prefer\",\"target\":\"BCH\",\"selection\":\"largest\",\"quantity\":\"two\"}]},\"status\":\"resolved\",\"reason\":\"\"}",
+          "outputSha256": "c244b92eb29aadf792d58706fc2ec8060992e1440f6ece6119ef2fdbee8111e2"
+        }
+      ],
+      "resourceAdmissionChecks": [
+        {
+          "allowed": true,
+          "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+          "snapshot": {
+            "sampledAt": "2026-10-16T15:47:40.032890+00:00",
+            "totalBytes": 8307167232,
+            "availableBytes": 7350018048,
+            "serviceMemoryBytes": null,
+            "servicePeakMemoryBytes": null,
+            "containerHeadroomBytes": 5294723072,
+            "architecture": "aarch64",
+            "available": true,
+            "cpuFlags": null
+          }
+        }
+      ],
+      "seconds": 17.863
+    },
+    {
+      "id": "baseline-rank-half",
+      "goal": "The largest half of miners should favour BCH",
+      "expected": [
+        {
+          "k": "prefer",
+          "a": "bitcoin-cash",
+          "w": "largest",
+          "v": null,
+          "u": null
+        }
+      ],
+      "goalSha256": "906226412a147a2135c3acf064d8375498e4fa347c27534833f229b003514876",
+      "verdict": "pass",
+      "result": {
+        "contractVersion": "preferences_v2",
+        "kind": "mission_intent",
+        "requestId": "qualify-baseline-rank-half",
+        "inputSha256": "4ea11c200e6f02ef47e0c5bb10ac1218dbef37b5a2400a6edca93a1137b4949b",
+        "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+        "goalSha256": "906226412a147a2135c3acf064d8375498e4fa347c27534833f229b003514876",
+        "scopeSha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "registrySha256": "53daff05d80a253e3900aff4e58b9f8f4bf56541ea952a43c0b74e43378fe606",
+        "modelId": "qwen3.5-4b",
+        "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+        "runtimeBinarySha256": "e7a1fe417870f5bdbc826376ef1afae3986c8bb4de3dd3dce71e2ac4e2bf337b",
+        "lastRunAt": "2026-10-16T15:47:57.817337+00:00",
+        "actualInference": true,
+        "generationAttempted": true,
+        "contractValid": true,
+        "intent": {
+          "s": "resolved",
+          "reason": "",
+          "c": [
+            {
+              "k": "prefer",
+              "a": "bitcoin-cash",
+              "w": "largest",
+              "v": null,
+              "u": null,
+              "q": "The largest half of miners should favour BCH"
+            }
+          ]
+        },
+        "validUntil": 1792165818.1803706,
+        "routingAuthority": "none",
+        "synthetic": false,
+        "intentProvenance": {
+          "compilerRevision": "semantic-inventory-2",
+          "extractionRevision": "source-by-source-6",
+          "sourceCount": 1,
+          "completedSources": [
+            1
+          ],
+          "holdOrigin": null,
+          "contract": "preferences_v2",
+          "correctionUsed": false,
+          "attempts": [
+            {
+              "attempt": 1,
+              "completedSources": [
+                1
+              ],
+              "sourceOutputs": [
+                {
+                  "sourceId": 1,
+                  "outputSha256": "07033893bb81553b4c3a97add9f71fbeb1d7754c13419ac13f5d2c4c69f1f05e",
+                  "status": "resolved",
+                  "requirementCount": 2
+                }
+              ],
+              "outcome": "resolved",
+              "validatorError": null
+            }
+          ]
+        },
+        "inventorySha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "elapsedSeconds": 20.364
+      },
+      "modelOutputs": [
+        {
+          "output": "{\"sources\":{\"1\":[{\"relation\":\"prefer\",\"target\":\"BCH\",\"selection\":\"largest\",\"quantity\":\"half\"},{\"relation\":\"prefer\",\"target\":\"BCH\",\"selection\":\"largest\",\"quantity\":\"half\"}]},\"status\":\"resolved\",\"reason\":\"\"}",
+          "outputSha256": "07033893bb81553b4c3a97add9f71fbeb1d7754c13419ac13f5d2c4c69f1f05e"
+        }
+      ],
+      "resourceAdmissionChecks": [
+        {
+          "allowed": true,
+          "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+          "snapshot": {
+            "sampledAt": "2026-10-16T15:47:57.899726+00:00",
+            "totalBytes": 8307167232,
+            "availableBytes": 7349977088,
+            "serviceMemoryBytes": null,
+            "servicePeakMemoryBytes": null,
+            "containerHeadroomBytes": 5295067136,
+            "architecture": "aarch64",
+            "available": true,
+            "cpuFlags": null
+          }
+        }
+      ],
+      "seconds": 20.364
+    },
+    {
+      "id": "baseline-hash",
+      "goal": "Miners below 2TH/s should favour BTC",
+      "expected": [
+        {
+          "k": "prefer",
+          "a": "bitcoin",
+          "w": "below",
+          "v": 2,
+          "u": "TH/s"
+        }
+      ],
+      "goalSha256": "720a711de51d12e86bf8a7b726e1b456ec3f990bd652379592edcbbae8b17cd5",
+      "verdict": "pass",
+      "result": {
+        "contractVersion": "preferences_v2",
+        "kind": "mission_intent",
+        "requestId": "qualify-baseline-hash",
+        "inputSha256": "a1173eee0fd65842c68ba35d6dcea04c49bf14e5a267d1f02b47e510b8508328",
+        "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+        "goalSha256": "720a711de51d12e86bf8a7b726e1b456ec3f990bd652379592edcbbae8b17cd5",
+        "scopeSha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "registrySha256": "53daff05d80a253e3900aff4e58b9f8f4bf56541ea952a43c0b74e43378fe606",
+        "modelId": "qwen3.5-4b",
+        "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+        "runtimeBinarySha256": "e7a1fe417870f5bdbc826376ef1afae3986c8bb4de3dd3dce71e2ac4e2bf337b",
+        "lastRunAt": "2026-10-16T15:48:18.182439+00:00",
+        "actualInference": true,
+        "generationAttempted": true,
+        "contractValid": true,
+        "intent": {
+          "s": "resolved",
+          "reason": "",
+          "c": [
+            {
+              "k": "prefer",
+              "a": "bitcoin",
+              "w": "below",
+              "v": 2.0,
+              "u": "TH/s",
+              "q": "Miners below 2TH/s should favour BTC"
+            }
+          ]
+        },
+        "validUntil": 1792165836.796118,
+        "routingAuthority": "none",
+        "synthetic": false,
+        "intentProvenance": {
+          "compilerRevision": "semantic-inventory-2",
+          "extractionRevision": "source-by-source-6",
+          "sourceCount": 1,
+          "completedSources": [
+            1
+          ],
+          "holdOrigin": null,
+          "contract": "preferences_v2",
+          "correctionUsed": false,
+          "attempts": [
+            {
+              "attempt": 1,
+              "completedSources": [
+                1
+              ],
+              "sourceOutputs": [
+                {
+                  "sourceId": 1,
+                  "outputSha256": "bb1794e132345edcddb68f60006b5bce06e1a528af969d73b58408e8c9683172",
+                  "status": "resolved",
+                  "requirementCount": 1
+                }
+              ],
+              "outcome": "resolved",
+              "validatorError": null
+            }
+          ]
+        },
+        "inventorySha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "elapsedSeconds": 18.614
+      },
+      "modelOutputs": [
+        {
+          "output": "{\"sources\":{\"1\":[{\"relation\":\"prefer\",\"target\":\"BTC\",\"selection\":\"below\",\"quantity\":\"2TH/s\"}]},\"status\":\"resolved\",\"reason\":\"\"}",
+          "outputSha256": "bb1794e132345edcddb68f60006b5bce06e1a528af969d73b58408e8c9683172"
+        }
+      ],
+      "resourceAdmissionChecks": [
+        {
+          "allowed": true,
+          "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+          "snapshot": {
+            "sampledAt": "2026-10-16T15:48:18.256678+00:00",
+            "totalBytes": 8307167232,
+            "availableBytes": 7355850752,
+            "serviceMemoryBytes": null,
+            "servicePeakMemoryBytes": null,
+            "containerHeadroomBytes": 5294784512,
+            "architecture": "aarch64",
+            "available": true,
+            "cpuFlags": null
+          }
+        }
+      ],
+      "seconds": 18.614
+    },
+    {
+      "id": "baseline-group",
+      "goal": "SHA256 miners should favour BCH",
+      "expected": [
+        {
+          "k": "prefer",
+          "a": "bitcoin-cash",
+          "w": "group:sha256",
+          "v": null,
+          "u": null
+        }
+      ],
+      "goalSha256": "a4ff0bb701dbf34c2050b71419f75317bc7131ccde855321ed5492483ac65e08",
+      "verdict": "pass",
+      "result": {
+        "contractVersion": "preferences_v2",
+        "kind": "mission_intent",
+        "requestId": "qualify-baseline-group",
+        "inputSha256": "7d145cc85cef7a00dd0cdbf61d3b429ddbd889425dfc8b4b13bd288d819dbcd0",
+        "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+        "goalSha256": "a4ff0bb701dbf34c2050b71419f75317bc7131ccde855321ed5492483ac65e08",
+        "scopeSha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "registrySha256": "53daff05d80a253e3900aff4e58b9f8f4bf56541ea952a43c0b74e43378fe606",
+        "modelId": "qwen3.5-4b",
+        "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+        "runtimeBinarySha256": "e7a1fe417870f5bdbc826376ef1afae3986c8bb4de3dd3dce71e2ac4e2bf337b",
+        "lastRunAt": "2026-10-16T15:48:36.798363+00:00",
+        "actualInference": true,
+        "generationAttempted": true,
+        "contractValid": true,
+        "intent": {
+          "s": "resolved",
+          "reason": "",
+          "c": [
+            {
+              "k": "prefer",
+              "a": "bitcoin-cash",
+              "w": "group:sha256",
+              "v": null,
+              "u": null,
+              "q": "SHA256 miners should favour BCH"
+            }
+          ]
+        },
+        "validUntil": 1792165853.9690013,
+        "routingAuthority": "none",
+        "synthetic": false,
+        "intentProvenance": {
+          "compilerRevision": "semantic-inventory-2",
+          "extractionRevision": "source-by-source-6",
+          "sourceCount": 1,
+          "completedSources": [
+            1
+          ],
+          "holdOrigin": null,
+          "contract": "preferences_v2",
+          "correctionUsed": false,
+          "attempts": [
+            {
+              "attempt": 1,
+              "completedSources": [
+                1
+              ],
+              "sourceOutputs": [
+                {
+                  "sourceId": 1,
+                  "outputSha256": "a152707341cd8495e3211375ebb9ccaf54cfa52c5c31bf6ea7291a0bfd52d22c",
+                  "status": "resolved",
+                  "requirementCount": 1
+                }
+              ],
+              "outcome": "resolved",
+              "validatorError": null
+            }
+          ]
+        },
+        "inventorySha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "elapsedSeconds": 17.171
+      },
+      "modelOutputs": [
+        {
+          "output": "{\"sources\":{\"1\":[{\"relation\":\"prefer\",\"target\":\"BCH\",\"selection\":\"group:SHA256 miners\",\"quantity\":null}]},\"status\":\"resolved\",\"reason\":\"\"}",
+          "outputSha256": "a152707341cd8495e3211375ebb9ccaf54cfa52c5c31bf6ea7291a0bfd52d22c"
+        }
+      ],
+      "resourceAdmissionChecks": [
+        {
+          "allowed": true,
+          "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+          "snapshot": {
+            "sampledAt": "2026-10-16T15:48:36.858605+00:00",
+            "totalBytes": 8307167232,
+            "availableBytes": 7350317056,
+            "serviceMemoryBytes": null,
+            "servicePeakMemoryBytes": null,
+            "containerHeadroomBytes": 5295099904,
+            "architecture": "aarch64",
+            "available": true,
+            "cpuFlags": null
+          }
+        }
+      ],
+      "seconds": 17.171
+    },
+    {
+      "id": "low-priority-group",
+      "goal": "SHA256 miners should minimize 5tratSmack",
+      "expected": [
+        {
+          "k": "deprioritize",
+          "a": "app:5tratsmack",
+          "w": "group:sha256",
+          "v": null,
+          "u": null
+        }
+      ],
+      "goalSha256": "7d352fb2decabadef9c2daef0b8f1a6d4854a2b1198f5fc26925de0dc82debe7",
+      "verdict": "pass",
+      "result": {
+        "contractVersion": "preferences_v2",
+        "kind": "mission_intent",
+        "requestId": "qualify-low-priority-group",
+        "inputSha256": "8694c43896de0692a52cb3686877304a68934ac1681c859b5cd36c9fc8c719fd",
+        "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+        "goalSha256": "7d352fb2decabadef9c2daef0b8f1a6d4854a2b1198f5fc26925de0dc82debe7",
+        "scopeSha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "registrySha256": "53daff05d80a253e3900aff4e58b9f8f4bf56541ea952a43c0b74e43378fe606",
+        "modelId": "qwen3.5-4b",
+        "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+        "runtimeBinarySha256": "e7a1fe417870f5bdbc826376ef1afae3986c8bb4de3dd3dce71e2ac4e2bf337b",
+        "lastRunAt": "2026-10-16T15:48:53.971158+00:00",
+        "actualInference": true,
+        "generationAttempted": true,
+        "contractValid": true,
+        "intent": {
+          "s": "resolved",
+          "reason": "",
+          "c": [
+            {
+              "k": "deprioritize",
+              "a": "app:5tratsmack",
+              "w": "group:sha256",
+              "v": null,
+              "u": null,
+              "q": "SHA256 miners should minimize 5tratSmack"
+            }
+          ]
+        },
+        "validUntil": 1792165873.2374368,
+        "routingAuthority": "none",
+        "synthetic": false,
+        "intentProvenance": {
+          "compilerRevision": "semantic-inventory-2",
+          "extractionRevision": "source-by-source-6",
+          "sourceCount": 1,
+          "completedSources": [
+            1
+          ],
+          "holdOrigin": null,
+          "contract": "preferences_v2",
+          "correctionUsed": false,
+          "attempts": [
+            {
+              "attempt": 1,
+              "completedSources": [
+                1
+              ],
+              "sourceOutputs": [
+                {
+                  "sourceId": 1,
+                  "outputSha256": "b1af61b97e77543419836f2e7892c32375a8f805a0e44d475ce98aa3b4b7ab91",
+                  "status": "resolved",
+                  "requirementCount": 1
+                }
+              ],
+              "outcome": "resolved",
+              "validatorError": null
+            }
+          ]
+        },
+        "inventorySha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "elapsedSeconds": 19.267
+      },
+      "modelOutputs": [
+        {
+          "output": "{\"sources\":{\"1\":[{\"relation\":\"deprioritize\",\"target\":\"5tratSmack\",\"selection\":\"group:SHA256 miners\",\"quantity\":null}]},\"status\":\"resolved\",\"reason\":\"\"}",
+          "outputSha256": "b1af61b97e77543419836f2e7892c32375a8f805a0e44d475ce98aa3b4b7ab91"
+        }
+      ],
+      "resourceAdmissionChecks": [
+        {
+          "allowed": true,
+          "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+          "snapshot": {
+            "sampledAt": "2026-10-16T15:48:54.033163+00:00",
+            "totalBytes": 8307167232,
+            "availableBytes": 7356309504,
+            "serviceMemoryBytes": null,
+            "servicePeakMemoryBytes": null,
+            "containerHeadroomBytes": 5294956544,
+            "architecture": "aarch64",
+            "available": true,
+            "cpuFlags": null
+          }
+        }
+      ],
+      "seconds": 19.267
+    },
+    {
+      "id": "unsupported-temperature",
+      "goal": "BCH only below 60 degrees",
+      "expected": null,
+      "goalSha256": "34490edc53dc454981cb4ac5cb6697c4814881308760aab5cfab88489a416ad5",
+      "verdict": "pass",
+      "result": {
+        "contractVersion": "preferences_v2",
+        "kind": "mission_intent",
+        "requestId": "qualify-unsupported-temperature",
+        "inputSha256": "a0eaa7b2e3528249b22de3709acce83e468ad400d2f1f7f3a911d14734f1d261",
+        "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+        "goalSha256": "34490edc53dc454981cb4ac5cb6697c4814881308760aab5cfab88489a416ad5",
+        "scopeSha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "registrySha256": "53daff05d80a253e3900aff4e58b9f8f4bf56541ea952a43c0b74e43378fe606",
+        "modelId": "qwen3.5-4b",
+        "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+        "runtimeBinarySha256": "e7a1fe417870f5bdbc826376ef1afae3986c8bb4de3dd3dce71e2ac4e2bf337b",
+        "lastRunAt": "2026-10-16T15:49:13.239606+00:00",
+        "actualInference": true,
+        "generationAttempted": true,
+        "contractValid": true,
+        "intent": {
+          "s": "unsupported",
+          "reason": "The instruction contains a condition or measurement the routing planner cannot execute (temperature, costs or a custom threshold); separate it from the supported routing goal.",
+          "c": []
+        },
+        "validUntil": 1792165889.3719995,
+        "routingAuthority": "none",
+        "synthetic": false,
+        "intentProvenance": {
+          "compilerRevision": "semantic-inventory-2",
+          "extractionRevision": "source-by-source-6",
+          "sourceCount": 1,
+          "completedSources": [
+            1
+          ],
+          "holdOrigin": "validator_capability",
+          "contract": "preferences_v2",
+          "correctionUsed": false,
+          "attempts": [
+            {
+              "attempt": 1,
+              "completedSources": [
+                1
+              ],
+              "sourceOutputs": [
+                {
+                  "sourceId": 1,
+                  "outputSha256": "6adc12ec89253b0554cc7cf7daf147435254e444356ce26ff6d55f0e8218e970",
+                  "status": "resolved",
+                  "requirementCount": 1
+                }
+              ],
+              "outcome": "unsupported",
+              "validatorError": "The instruction contains a condition or measurement the routing planner cannot execute (temperature, costs or a custom threshold); separate it from the supported routing goal.",
+              "validatorSourceIds": [
+                1
+              ],
+              "terminal": true
+            }
+          ]
+        },
+        "inventorySha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "elapsedSeconds": 16.133
+      },
+      "modelOutputs": [
+        {
+          "output": "{\"sources\":{\"1\":[{\"relation\":\"only\",\"target\":\"BCH\",\"selection\":\"all\",\"quantity\":null}]},\"status\":\"resolved\",\"reason\":\"\"}",
+          "outputSha256": "6adc12ec89253b0554cc7cf7daf147435254e444356ce26ff6d55f0e8218e970"
+        }
+      ],
+      "resourceAdmissionChecks": [
+        {
+          "allowed": true,
+          "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+          "snapshot": {
+            "sampledAt": "2026-10-16T15:49:13.291164+00:00",
+            "totalBytes": 8307167232,
+            "availableBytes": 7354093568,
+            "serviceMemoryBytes": null,
+            "servicePeakMemoryBytes": null,
+            "containerHeadroomBytes": 5294833664,
+            "architecture": "aarch64",
+            "available": true,
+            "cpuFlags": null
+          }
+        }
+      ],
+      "seconds": 16.133
+    }
+  ],
+  "runtimeBinarySha256": "e7a1fe417870f5bdbc826376ef1afae3986c8bb4de3dd3dce71e2ac4e2bf337b",
+  "endedAt": "2026-10-16T15:49:29.495003+00:00",
+  "automaticPasses": 25,
+  "completeCorpus": true,
+  "ownedRuntimeStopped": true
+}

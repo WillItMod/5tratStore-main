@@ -1,0 +1,1405 @@
+{
+  "schemaVersion": 1,
+  "kind": "root-admitted-normal-package649-phase",
+  "targetVmid": 649,
+  "actionId": "main-restart-off",
+  "operation": "stop-start",
+  "channel": "MAIN",
+  "startedAt": "2026-10-16T20:26:22.479140+00:00",
+  "rootAdmission": {
+    "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/fresh649/root-normal649-auth-preflight-recovery-admission.json",
+    "sha256": "485569862ef42f36428a702389b36d30cd35fd551a57eeda8657cdc31cf1d7db"
+  },
+  "result": "PASS",
+  "apiMutationAttempts": [
+    {
+      "route": "apps.stop",
+      "at": "2026-10-16T20:26:31.576334+00:00",
+      "attempts": 1,
+      "response": true
+    },
+    {
+      "route": "apps.start",
+      "at": "2026-10-16T20:26:40.189905+00:00",
+      "attempts": 1,
+      "response": true
+    }
+  ],
+  "polls": [
+    {
+      "at": "2026-10-16T20:26:40.189374+00:00",
+      "state": {
+        "state": "stopped",
+        "progress": 0
+      },
+      "version": "0.9.82"
+    },
+    {
+      "at": "2026-10-16T20:26:47.393498+00:00",
+      "state": {
+        "state": "ready",
+        "progress": 0
+      },
+      "version": "0.9.82"
+    }
+  ],
+  "licenceOrTrialActivationRequested": false,
+  "hardwareChangeRequested": false,
+  "upstreamStorePublicationRequested": false,
+  "automaticMutationRetries": 0,
+  "beforeSnapshot": {
+    "kind": "read-only-normal649-public-app-state-snapshot",
+    "targetVmid": 649,
+    "version": "0.9.82",
+    "channel": "MAIN",
+    "imageId": "sha256:73fc590eb227a54fb945ac0579b9af54b6d82db97b09a86d9be30aecddf232ba",
+    "containerId": "aa00474043a729c87cd07daf186f98c9c329a14a9104c375544d64fd444577fb",
+    "running": true,
+    "stateFiles": {
+      "mux_settings.json": {
+        "sha256": "87962e06b1084b749e0c6d5d154ed8284f80018e7ffbe5f6c6ff536d33efd0f5",
+        "bytes": 472,
+        "uid": 1000,
+        "gid": 1000,
+        "mode": "0o600"
+      },
+      "licensing_device_key.pem": {
+        "sha256": "3e991af3778d2c96f4e5e9f21d7777e70d86ae06a0fa0157077622ee358bf19e",
+        "bytes": 119,
+        "uid": 1000,
+        "gid": 1000,
+        "mode": "0o600"
+      },
+      "licensing_installation_id": {
+        "sha256": "548ec4b6a9d8d9356ddb7bad38527829df952a49d402d6118875dd1eac846626",
+        "bytes": 64,
+        "uid": 1000,
+        "gid": 1000,
+        "mode": "0o600"
+      },
+      "standalone_auth/session-key": {
+        "sha256": "cb60b421552e97029d6be431720a92bba8a218cb6e6ea53171853cd01cb7d93a",
+        "bytes": 32,
+        "uid": 1000,
+        "gid": 1000,
+        "mode": "0o600"
+      }
+    },
+    "authorityOverridesPresent": false,
+    "credentialBytesCopiedOut": false
+  },
+  "beforeLocalAI": {
+    "result": "PASS",
+    "status": {
+      "schemaVersion": "1.0",
+      "mode": "live",
+      "phase": "off",
+      "enabled": false,
+      "selectedModel": "qwen3.5-4b",
+      "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+      "models": [
+        {
+          "id": "qwen3.5-0.8b",
+          "label": "Qwen3.5 0.8B",
+          "downloadBytes": 532517120,
+          "ramBudgetBytes": 2147483648,
+          "validated": false,
+          "quantization": "Q4_K_M",
+          "sha256": "bd258782e35f7f458f8aced1adc053e6e92e89bc735ba3be89d38a06121dc517",
+          "installed": false,
+          "supported": true,
+          "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+          "intentEligibility": {
+            "modelId": "qwen3.5-0.8b",
+            "modelSha256": "bd258782e35f7f458f8aced1adc053e6e92e89bc735ba3be89d38a06121dc517",
+            "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+            "eligible": false,
+            "reason": "This model is available for research but is not qualified for general mining instructions in this release. Select a model marked General intent before reviewing this goal. If none is listed, use another provider or wait for a qualified Local AI release. Your selected model and existing routes are unchanged."
+          },
+          "diskRequiredBytes": 599625984,
+          "diskSupported": true
+        },
+        {
+          "id": "qwen3.5-2b",
+          "label": "Qwen3.5 2B",
+          "downloadBytes": 1280835840,
+          "ramBudgetBytes": 3221225472,
+          "validated": false,
+          "quantization": "Q4_K_M",
+          "sha256": "aaf42c8b7c3cab2bf3d69c355048d4a0ee9973d48f16c731c0520ee914699223",
+          "installed": false,
+          "supported": true,
+          "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+          "intentEligibility": {
+            "modelId": "qwen3.5-2b",
+            "modelSha256": "aaf42c8b7c3cab2bf3d69c355048d4a0ee9973d48f16c731c0520ee914699223",
+            "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+            "eligible": false,
+            "reason": "This model is available for research but is not qualified for general mining instructions in this release. Select a model marked General intent before reviewing this goal. If none is listed, use another provider or wait for a qualified Local AI release. Your selected model and existing routes are unchanged."
+          },
+          "diskRequiredBytes": 1347944704,
+          "diskSupported": true
+        },
+        {
+          "id": "qwen3.5-4b",
+          "label": "Qwen3.5 4B",
+          "downloadBytes": 2740937888,
+          "ramBudgetBytes": 5368709120,
+          "validated": false,
+          "quantization": "Q4_K_M",
+          "sha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+          "installed": true,
+          "supported": true,
+          "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+          "intentEligibility": {
+            "modelId": "qwen3.5-4b",
+            "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+            "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+            "eligible": true,
+            "reason": "Qualified for general mining instructions."
+          },
+          "diskRequiredBytes": 2808046752,
+          "diskSupported": true
+        }
+      ],
+      "resources": {
+        "sampledAt": "2026-10-16T20:26:31.497847+00:00",
+        "totalBytes": 16705867776,
+        "availableBytes": 14660341760,
+        "serviceMemoryBytes": null,
+        "servicePeakMemoryBytes": null,
+        "containerHeadroomBytes": 6340026368,
+        "architecture": "x86_64",
+        "available": true,
+        "cpuFlags": [
+          "aes",
+          "apic",
+          "clflush",
+          "cmov",
+          "constant_tsc",
+          "cpuid",
+          "cpuid_fault",
+          "cx16",
+          "cx8",
+          "de",
+          "fpu",
+          "fxsr",
+          "ht",
+          "hypervisor",
+          "lahf_lm",
+          "lm",
+          "mca",
+          "mce",
+          "mmx",
+          "msr",
+          "mtrr",
+          "nopl",
+          "nx",
+          "pae",
+          "pat",
+          "pge",
+          "pni",
+          "popcnt",
+          "pse",
+          "pse36",
+          "pti",
+          "sep",
+          "sse",
+          "sse2",
+          "sse4_1",
+          "sse4_2",
+          "ssse3",
+          "syscall",
+          "tsc",
+          "tsc_known_freq",
+          "x2apic",
+          "xtopology"
+        ],
+        "cpu": {
+          "available": false,
+          "usagePercent": null,
+          "intervalSeconds": null,
+          "sampledAt": "2026-10-16T20:26:31.500547+00:00",
+          "scope": "llama_process",
+          "normalization": "100_percent_per_logical_cpu",
+          "source": "linux_proc_stat"
+        },
+        "reserveBytes": 2505880166
+      },
+      "storage": {
+        "available": true,
+        "totalBytes": 78410153984,
+        "freeBytes": 71909912576,
+        "usedBytes": 6082158592,
+        "storedModelBytes": 2740937888,
+        "writable": true,
+        "sampledAt": "2026-10-16T20:26:31.500657+00:00"
+      },
+      "runtime": {
+        "running": false,
+        "healthy": false,
+        "pid": null,
+        "modelId": null,
+        "download": null,
+        "starting": false,
+        "stopping": false,
+        "exitCode": null,
+        "binarySha256": "034a22de64cc6abf39039fcb29f3c3529c98a910c6b849b5fe15e768f2544fa4",
+        "generation": {
+          "sequence": 3,
+          "active": false,
+          "stage": "complete",
+          "startedAt": "2026-10-16T20:22:06.567188+00:00",
+          "completedAt": "2026-10-16T20:24:29.272275+00:00",
+          "elapsedSeconds": 142.705,
+          "completionReceived": true,
+          "inferenceObserved": true,
+          "modelId": "qwen3.5-4b",
+          "jobId": "9eeb55cebad1474fafe3bc59d775eb51",
+          "requestId": "qa649-38b207bf0e65f3729014fcf2e3756251",
+          "kind": "intent",
+          "measurements": {
+            "promptTokens": 1460,
+            "generatedTokens": 34,
+            "generationTokensPerSecond": 0.805,
+            "promptMilliseconds": 101250.535,
+            "generationMilliseconds": 40975.639,
+            "source": "llama.cpp.timings",
+            "streaming": true,
+            "measurement": "completed_response"
+          },
+          "current": null,
+          "lastCompleted": {
+            "sequence": 3,
+            "modelId": "qwen3.5-4b",
+            "jobId": "9eeb55cebad1474fafe3bc59d775eb51",
+            "requestId": "qa649-38b207bf0e65f3729014fcf2e3756251",
+            "kind": "intent",
+            "active": false,
+            "completionReceived": true,
+            "completedAt": "2026-10-16T20:24:29.272275+00:00",
+            "measurements": {
+              "promptTokens": 1460,
+              "generatedTokens": 34,
+              "generationTokensPerSecond": 0.805,
+              "promptMilliseconds": 101250.535,
+              "generationMilliseconds": 40975.639,
+              "source": "llama.cpp.timings",
+              "streaming": true,
+              "measurement": "completed_response"
+            }
+          }
+        },
+        "detail": "Local model is stopped."
+      },
+      "download": null,
+      "research": {
+        "lastRunAt": null,
+        "summary": "No research has run.",
+        "sources": [],
+        "validationStatus": "insufficient_data"
+      },
+      "error": null,
+      "busy": false,
+      "automation": {
+        "contractVersion": "1.0",
+        "requestId": "mux-ac9c0c6816064ec898ef2164e102d633",
+        "inputSha256": "d1a612cb371397bf1ea265047ff798dd6f5ce097ad412263e2fdfc8b85fe2b2e",
+        "lastRunAt": "2026-10-16T20:04:27.326309+00:00",
+        "kind": "candidate_comparison",
+        "synthetic": false,
+        "modelId": "qwen3.5-4b",
+        "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+        "actualInference": true,
+        "generationAttempted": true,
+        "contractValid": true,
+        "validUntil": 1792181391.1442258,
+        "decision": "select",
+        "selectedCandidateId": "retain-current",
+        "observations": [
+          {
+            "sourceId": "candidate-1",
+            "quote": "Connection test only. Retain existing routes. No change to any mining allocation is authorized by this test."
+          }
+        ],
+        "facts": [],
+        "sources": [
+          {
+            "id": "candidate-1",
+            "title": "Retain current routes",
+            "origin": "app_projected_candidate",
+            "suppliedAt": "2026-10-16T20:04:27.326309+00:00"
+          }
+        ],
+        "warnings": [],
+        "retrievalMode": "cached_node_only",
+        "retrievalCached": false,
+        "summary": "Selected app candidate retain-current: Connection test only. Retain existing routes. No change to any mining allocation is authorized by this test.",
+        "reason": "The local model selected a supplied candidate with an exact supporting excerpt; the app must revalidate its unchanged plan and scope.",
+        "routingAuthority": "app_guardrails_only",
+        "dataFreshness": {
+          "policy": {
+            "basis": "provider_as_of",
+            "cadenceSeconds": null,
+            "maxAgeSeconds": 3600,
+            "futureToleranceSeconds": 60
+          },
+          "evaluatedAt": "2026-10-16T20:07:51.144302Z",
+          "latestReview": {
+            "requestId": "mux-ac9c0c6816064ec898ef2164e102d633",
+            "checkedAt": "2026-10-16T20:07:51.144302Z",
+            "requiredAssetIds": [],
+            "blockedAssetIds": [],
+            "retrievalCached": false,
+            "policy": {
+              "basis": "provider_as_of",
+              "cadenceSeconds": null,
+              "maxAgeSeconds": 3600,
+              "futureToleranceSeconds": 60
+            }
+          },
+          "assets": []
+        },
+        "evidenceSha256": "763ec470d763018fe1c078ea5df6e9e642138d88df02a3d89509bb6e61d8e8cb",
+        "runtimeBinarySha256": "034a22de64cc6abf39039fcb29f3c3529c98a910c6b849b5fe15e768f2544fa4",
+        "elapsedSeconds": 203.819
+      },
+      "intent": {
+        "contractVersion": "preferences_v2",
+        "kind": "mission_intent",
+        "requestId": "qa649-38b207bf0e65f3729014fcf2e3756251",
+        "inputSha256": "1542513b2a4fbfe36bbd1706ca130b9e9b027e248f5c81991c347d1144ec227d",
+        "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+        "goalSha256": "33618b10e789b1f6065197e838e5e6ce5ebfad2073be0598090aac6ea3ba2530",
+        "scopeSha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "registrySha256": "53daff05d80a253e3900aff4e58b9f8f4bf56541ea952a43c0b74e43378fe606",
+        "modelId": "qwen3.5-4b",
+        "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+        "runtimeBinarySha256": "034a22de64cc6abf39039fcb29f3c3529c98a910c6b849b5fe15e768f2544fa4",
+        "lastRunAt": "2026-10-16T20:22:06.011011+00:00",
+        "actualInference": true,
+        "generationAttempted": true,
+        "contractValid": true,
+        "intent": {
+          "s": "resolved",
+          "reason": "",
+          "c": [
+            {
+              "k": "deprioritize",
+              "a": "5trat",
+              "w": "all",
+              "v": null,
+              "u": null,
+              "q": "minimize allocation to 5trat"
+            }
+          ]
+        },
+        "validUntil": 1792182389.438788,
+        "routingAuthority": "none",
+        "synthetic": false,
+        "intentProvenance": {
+          "compilerRevision": "semantic-inventory-2",
+          "extractionRevision": "source-by-source-6",
+          "sourceCount": 1,
+          "completedSources": [
+            1
+          ],
+          "holdOrigin": null,
+          "contract": "preferences_v2",
+          "correctionUsed": false,
+          "attempts": [
+            {
+              "attempt": 1,
+              "completedSources": [
+                1
+              ],
+              "sourceOutputs": [
+                {
+                  "sourceId": 1,
+                  "outputSha256": "3e4abbcc070f8c34fdfc6211eaf131c4e6d7e3e6cdc88a52f9ad5077d191c19b",
+                  "status": "resolved",
+                  "requirementCount": 1
+                }
+              ],
+              "outcome": "resolved",
+              "validatorError": null
+            }
+          ]
+        },
+        "inventorySha256": "9433cddbc9c5d4014ee4074aabeb736826e3f759d467d7f54d12cc594c58f462",
+        "elapsedSeconds": 143.432
+      },
+      "operation": {
+        "kind": "intent",
+        "state": "complete",
+        "requestId": "qa649-38b207bf0e65f3729014fcf2e3756251",
+        "inputSha256": "1542513b2a4fbfe36bbd1706ca130b9e9b027e248f5c81991c347d1144ec227d",
+        "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+        "modelId": "qwen3.5-4b",
+        "startedAt": "2026-10-16T20:22:06.006230+00:00"
+      },
+      "telemetry": {
+        "telemetrySince": "2026-10-16T20:01:59.388488+00:00",
+        "activity": "off",
+        "lastTriggeredAt": "2026-10-16T20:22:06.006345+00:00",
+        "currentJob": null,
+        "lastJob": {
+          "jobId": "9eeb55cebad1474fafe3bc59d775eb51",
+          "kind": "intent",
+          "modelId": "qwen3.5-4b",
+          "requestId": "qa649-38b207bf0e65f3729014fcf2e3756251",
+          "triggeredAt": "2026-10-16T20:22:06.006345+00:00",
+          "startedAt": "2026-10-16T20:22:06.007151+00:00",
+          "completedAt": "2026-10-16T20:24:29.438976+00:00",
+          "durationSeconds": 143.432,
+          "state": "completed",
+          "stage": "complete",
+          "summary": "The model extracted mission preferences with exact goal excerpts; allocation remains app-owned.",
+          "actualInference": true,
+          "generation": {
+            "promptTokens": 1460,
+            "generatedTokens": 34,
+            "generationTokensPerSecond": 0.805,
+            "promptMilliseconds": 101250.535,
+            "generationMilliseconds": 40975.639,
+            "source": "llama.cpp.timings",
+            "streaming": true,
+            "measurement": "completed_response"
+          },
+          "generationSequence": 3,
+          "outcome": "resolved"
+        },
+        "lastRejected": null,
+        "ratesAreLive": false
+      },
+      "preferences": {
+        "configured": true,
+        "state": "saved",
+        "desiredEnabled": false,
+        "resumeState": "off",
+        "restoreAuthority": "host",
+        "updatedAt": "2026-10-16T20:25:32.353603+00:00",
+        "error": null
+      },
+      "dataFreshness": {
+        "policy": {
+          "basis": "provider_as_of",
+          "cadenceSeconds": null,
+          "maxAgeSeconds": 3600,
+          "futureToleranceSeconds": 60
+        },
+        "evaluatedAt": "2026-10-16T20:26:31.502791Z",
+        "latestReview": {
+          "requestId": "mux-ac9c0c6816064ec898ef2164e102d633",
+          "checkedAt": "2026-10-16T20:07:51.144302Z",
+          "requiredAssetIds": [],
+          "blockedAssetIds": [],
+          "retrievalCached": false,
+          "policy": {
+            "basis": "provider_as_of",
+            "cadenceSeconds": null,
+            "maxAgeSeconds": 3600,
+            "futureToleranceSeconds": 60
+          }
+        },
+        "assets": [
+          {
+            "assetId": "bitcoin",
+            "providerId": "bitcoin",
+            "chain": "bitcoin",
+            "label": "Bitcoin",
+            "providerAsOf": null,
+            "ageSeconds": null,
+            "admission": "not_checked",
+            "admissibleNow": false,
+            "reason": "not_checked",
+            "fetchedAt": null,
+            "lastAttemptAt": null,
+            "admittedAtFetch": false,
+            "requiredForLastReview": false
+          },
+          {
+            "assetId": "bitcoin-cash",
+            "providerId": "bitcoin-cash",
+            "chain": "bitcoin-cash",
+            "label": "Bitcoin Cash",
+            "providerAsOf": null,
+            "ageSeconds": null,
+            "admission": "not_checked",
+            "admissibleNow": false,
+            "reason": "not_checked",
+            "fetchedAt": null,
+            "lastAttemptAt": null,
+            "admittedAtFetch": false,
+            "requiredForLastReview": false
+          },
+          {
+            "assetId": "digibyte",
+            "providerId": "digibyte",
+            "chain": "digibyte",
+            "label": "DigiByte",
+            "providerAsOf": null,
+            "ageSeconds": null,
+            "admission": "not_checked",
+            "admissibleNow": false,
+            "reason": "not_checked",
+            "fetchedAt": null,
+            "lastAttemptAt": null,
+            "admittedAtFetch": false,
+            "requiredForLastReview": false
+          },
+          {
+            "assetId": "litecoin",
+            "providerId": "litecoin",
+            "chain": "litecoin",
+            "label": "Litecoin",
+            "providerAsOf": null,
+            "ageSeconds": null,
+            "admission": "not_checked",
+            "admissibleNow": false,
+            "reason": "not_checked",
+            "fetchedAt": null,
+            "lastAttemptAt": null,
+            "admittedAtFetch": false,
+            "requiredForLastReview": false
+          },
+          {
+            "assetId": "dogecoin",
+            "providerId": "dogecoin",
+            "chain": "dogecoin",
+            "label": "Dogecoin",
+            "providerAsOf": null,
+            "ageSeconds": null,
+            "admission": "not_checked",
+            "admissibleNow": false,
+            "reason": "not_checked",
+            "fetchedAt": null,
+            "lastAttemptAt": null,
+            "admittedAtFetch": false,
+            "requiredForLastReview": false
+          },
+          {
+            "assetId": "ecash",
+            "providerId": "ecash",
+            "chain": "ecash",
+            "label": "eCash",
+            "providerAsOf": null,
+            "ageSeconds": null,
+            "admission": "not_checked",
+            "admissibleNow": false,
+            "reason": "not_checked",
+            "fetchedAt": null,
+            "lastAttemptAt": null,
+            "admittedAtFetch": false,
+            "requiredForLastReview": false
+          },
+          {
+            "assetId": "peercoin",
+            "providerId": "peercoin",
+            "chain": "peercoin",
+            "label": "Peercoin",
+            "providerAsOf": null,
+            "ageSeconds": null,
+            "admission": "not_checked",
+            "admissibleNow": false,
+            "reason": "not_checked",
+            "fetchedAt": null,
+            "lastAttemptAt": null,
+            "admittedAtFetch": false,
+            "requiredForLastReview": false
+          },
+          {
+            "assetId": "fractal-bitcoin",
+            "providerId": "fractal-bitcoin",
+            "chain": "fractal-bitcoin",
+            "label": "Fractal Bitcoin",
+            "providerAsOf": null,
+            "ageSeconds": null,
+            "admission": "not_checked",
+            "admissibleNow": false,
+            "reason": "not_checked",
+            "fetchedAt": null,
+            "lastAttemptAt": null,
+            "admittedAtFetch": false,
+            "requiredForLastReview": false
+          },
+          {
+            "assetId": "bitcoinii",
+            "providerId": "bitcoinii",
+            "chain": "bitcoin-ii-mainnet",
+            "label": "BitcoinII (BC2)",
+            "providerAsOf": null,
+            "ageSeconds": null,
+            "admission": "not_checked",
+            "admissibleNow": false,
+            "reason": "not_checked",
+            "fetchedAt": null,
+            "lastAttemptAt": null,
+            "admittedAtFetch": false,
+            "requiredForLastReview": false
+          }
+        ]
+      },
+      "capabilities": {
+        "control": true,
+        "download": true,
+        "research": true,
+        "remove": true,
+        "selfTest": true,
+        "preferencePersistence": true,
+        "preferencePersistenceVersion": "1.0",
+        "preferenceRestoreAuthority": "host",
+        "automation": true,
+        "automationContractVersion": "1.0",
+        "missionIntent": "preferences_v1",
+        "missionIntentContracts": [
+          "preferences_v1",
+          "preferences_v2"
+        ],
+        "missionIntentV2Ready": true,
+        "missionIntentCompilerRevision": "semantic-inventory-2",
+        "missionIntentExtractionRevision": "source-by-source-6",
+        "missionIntentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+        "missionIntentEligibility": {
+          "modelId": "qwen3.5-4b",
+          "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+          "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+          "eligible": true,
+          "reason": "Qualified for general mining instructions."
+        },
+        "automationMaxCandidates": 4,
+        "automationMaxAssetsPerCandidate": 5,
+        "automationMaxAssets": 9,
+        "researchMaxAssets": 9,
+        "automationReviewPolicy": "cadence_v1",
+        "automationPartialEvidence": "advisory_v1",
+        "automationReady": false,
+        "registeredAssetIds": [
+          "bitcoin",
+          "bitcoin-cash",
+          "digibyte",
+          "litecoin",
+          "dogecoin",
+          "ecash",
+          "peercoin",
+          "fractal-bitcoin",
+          "bitcoinii"
+        ],
+        "registeredAssets": [
+          {
+            "id": "bitcoin",
+            "providerId": "bitcoin",
+            "chain": "bitcoin",
+            "label": "Bitcoin"
+          },
+          {
+            "id": "bitcoin-cash",
+            "providerId": "bitcoin-cash",
+            "chain": "bitcoin-cash",
+            "label": "Bitcoin Cash"
+          },
+          {
+            "id": "digibyte",
+            "providerId": "digibyte",
+            "chain": "digibyte",
+            "label": "DigiByte"
+          },
+          {
+            "id": "litecoin",
+            "providerId": "litecoin",
+            "chain": "litecoin",
+            "label": "Litecoin"
+          },
+          {
+            "id": "dogecoin",
+            "providerId": "dogecoin",
+            "chain": "dogecoin",
+            "label": "Dogecoin"
+          },
+          {
+            "id": "ecash",
+            "providerId": "ecash",
+            "chain": "ecash",
+            "label": "eCash"
+          },
+          {
+            "id": "peercoin",
+            "providerId": "peercoin",
+            "chain": "peercoin",
+            "label": "Peercoin"
+          },
+          {
+            "id": "fractal-bitcoin",
+            "providerId": "fractal-bitcoin",
+            "chain": "fractal-bitcoin",
+            "label": "Fractal Bitcoin"
+          },
+          {
+            "id": "bitcoinii",
+            "providerId": "bitcoinii",
+            "chain": "bitcoin-ii-mainnet",
+            "label": "BitcoinII (BC2)"
+          }
+        ],
+        "automationTasks": [
+          "candidate_comparison"
+        ],
+        "unsupportedAutomationTasks": [
+          "arbitrary_allocations",
+          "rule_programming",
+          "mission_builder",
+          "unrestricted_web_search"
+        ],
+        "evidence": true
+      },
+      "installation": {
+        "supported": true,
+        "installed": true,
+        "running": true,
+        "busy": false,
+        "phase": "installed",
+        "releaseVersion": "local-ai-0.1.9-umbrel-amd64-v2",
+        "configurationMatches": true,
+        "updateRequired": false,
+        "modelFilesRetained": true,
+        "error": null,
+        "cpuProfile": "amd64-v2",
+        "reason": "Verified AMD64 x86-64-v2 CPU profile checks passed."
+      },
+      "entitlement": {
+        "allowed": true,
+        "licenceRequired": false,
+        "policy": "licence-free",
+        "reason": "Local AI is available without a licence. MUX routing keeps its existing licence requirements."
+      },
+      "appQueue": {
+        "active": false,
+        "pending": 0,
+        "maxPending": 4,
+        "maxWaitSeconds": 120,
+        "oldestWaitSeconds": null
+      }
+    },
+    "stateFiles": {
+      "mux_settings.json": {
+        "sha256": "87962e06b1084b749e0c6d5d154ed8284f80018e7ffbe5f6c6ff536d33efd0f5",
+        "bytes": 472,
+        "mode": "0o600",
+        "uid": 1000,
+        "gid": 1000
+      },
+      "licensing_device_key.pem": {
+        "sha256": "3e991af3778d2c96f4e5e9f21d7777e70d86ae06a0fa0157077622ee358bf19e",
+        "bytes": 119,
+        "mode": "0o600",
+        "uid": 1000,
+        "gid": 1000
+      },
+      "licensing_installation_id": {
+        "sha256": "548ec4b6a9d8d9356ddb7bad38527829df952a49d402d6118875dd1eac846626",
+        "bytes": 64,
+        "mode": "0o600",
+        "uid": 1000,
+        "gid": 1000
+      },
+      "standalone_auth/session-key": {
+        "sha256": "cb60b421552e97029d6be431720a92bba8a218cb6e6ea53171853cd01cb7d93a",
+        "bytes": 32,
+        "mode": "0o600",
+        "uid": 1000,
+        "gid": 1000
+      }
+    },
+    "applicationContainerId": "aa00474043a729c87cd07daf186f98c9c329a14a9104c375544d64fd444577fb",
+    "companionContainerId": "968646c54e69416d9a13d46f4762f23f41c6a09384750dc2712c1c77ba3c6c49",
+    "readOnlyReadinessPolls": [
+      {
+        "phase": "local-ai-readiness",
+        "httpStatus": 200,
+        "enabled": false,
+        "running": false,
+        "healthy": false,
+        "busy": false,
+        "desiredEnabled": false
+      }
+    ],
+    "controlRequestsSent": 0,
+    "credentialBytesCopiedOut": false
+  },
+  "latestRestoredLocalAI": {
+    "result": "PASS",
+    "status": {
+      "schemaVersion": "1.0",
+      "mode": "live",
+      "phase": "off",
+      "enabled": false,
+      "selectedModel": "qwen3.5-4b",
+      "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+      "models": [
+        {
+          "id": "qwen3.5-0.8b",
+          "label": "Qwen3.5 0.8B",
+          "downloadBytes": 532517120,
+          "ramBudgetBytes": 2147483648,
+          "validated": false,
+          "quantization": "Q4_K_M",
+          "sha256": "bd258782e35f7f458f8aced1adc053e6e92e89bc735ba3be89d38a06121dc517",
+          "installed": false,
+          "supported": true,
+          "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+          "intentEligibility": {
+            "modelId": "qwen3.5-0.8b",
+            "modelSha256": "bd258782e35f7f458f8aced1adc053e6e92e89bc735ba3be89d38a06121dc517",
+            "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+            "eligible": false,
+            "reason": "This model is available for research but is not qualified for general mining instructions in this release. Select a model marked General intent before reviewing this goal. If none is listed, use another provider or wait for a qualified Local AI release. Your selected model and existing routes are unchanged."
+          },
+          "diskRequiredBytes": 599625984,
+          "diskSupported": true
+        },
+        {
+          "id": "qwen3.5-2b",
+          "label": "Qwen3.5 2B",
+          "downloadBytes": 1280835840,
+          "ramBudgetBytes": 3221225472,
+          "validated": false,
+          "quantization": "Q4_K_M",
+          "sha256": "aaf42c8b7c3cab2bf3d69c355048d4a0ee9973d48f16c731c0520ee914699223",
+          "installed": false,
+          "supported": true,
+          "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+          "intentEligibility": {
+            "modelId": "qwen3.5-2b",
+            "modelSha256": "aaf42c8b7c3cab2bf3d69c355048d4a0ee9973d48f16c731c0520ee914699223",
+            "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+            "eligible": false,
+            "reason": "This model is available for research but is not qualified for general mining instructions in this release. Select a model marked General intent before reviewing this goal. If none is listed, use another provider or wait for a qualified Local AI release. Your selected model and existing routes are unchanged."
+          },
+          "diskRequiredBytes": 1347944704,
+          "diskSupported": true
+        },
+        {
+          "id": "qwen3.5-4b",
+          "label": "Qwen3.5 4B",
+          "downloadBytes": 2740937888,
+          "ramBudgetBytes": 5368709120,
+          "validated": false,
+          "quantization": "Q4_K_M",
+          "sha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+          "installed": true,
+          "supported": true,
+          "reason": "Planning budget fits. Hardware certification is not recorded for this experimental model.",
+          "intentEligibility": {
+            "modelId": "qwen3.5-4b",
+            "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+            "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+            "eligible": true,
+            "reason": "Qualified for general mining instructions."
+          },
+          "diskRequiredBytes": 2808046752,
+          "diskSupported": true
+        }
+      ],
+      "resources": {
+        "sampledAt": "2026-10-16T20:26:53.175603+00:00",
+        "totalBytes": 16705867776,
+        "availableBytes": 14578499584,
+        "serviceMemoryBytes": null,
+        "servicePeakMemoryBytes": null,
+        "containerHeadroomBytes": 6355832832,
+        "architecture": "x86_64",
+        "available": true,
+        "cpuFlags": [
+          "aes",
+          "apic",
+          "clflush",
+          "cmov",
+          "constant_tsc",
+          "cpuid",
+          "cpuid_fault",
+          "cx16",
+          "cx8",
+          "de",
+          "fpu",
+          "fxsr",
+          "ht",
+          "hypervisor",
+          "lahf_lm",
+          "lm",
+          "mca",
+          "mce",
+          "mmx",
+          "msr",
+          "mtrr",
+          "nopl",
+          "nx",
+          "pae",
+          "pat",
+          "pge",
+          "pni",
+          "popcnt",
+          "pse",
+          "pse36",
+          "pti",
+          "sep",
+          "sse",
+          "sse2",
+          "sse4_1",
+          "sse4_2",
+          "ssse3",
+          "syscall",
+          "tsc",
+          "tsc_known_freq",
+          "x2apic",
+          "xtopology"
+        ],
+        "cpu": {
+          "available": false,
+          "usagePercent": null,
+          "intervalSeconds": null,
+          "sampledAt": "2026-10-16T20:26:53.179271+00:00",
+          "scope": "llama_process",
+          "normalization": "100_percent_per_logical_cpu",
+          "source": "linux_proc_stat"
+        },
+        "reserveBytes": 2505880166
+      },
+      "storage": {
+        "available": true,
+        "totalBytes": 78410153984,
+        "freeBytes": 71909908480,
+        "usedBytes": 6082162688,
+        "storedModelBytes": 2740937888,
+        "writable": true,
+        "sampledAt": "2026-10-16T20:26:53.179362+00:00"
+      },
+      "runtime": {
+        "running": false,
+        "healthy": false,
+        "pid": null,
+        "modelId": null,
+        "download": null,
+        "starting": false,
+        "stopping": false,
+        "exitCode": null,
+        "binarySha256": null,
+        "generation": {
+          "sequence": 0,
+          "active": false,
+          "stage": "idle",
+          "startedAt": null,
+          "completedAt": null,
+          "elapsedSeconds": null,
+          "completionReceived": false,
+          "measurements": null
+        },
+        "detail": "Local model is stopped."
+      },
+      "download": null,
+      "research": {
+        "lastRunAt": null,
+        "summary": "No research has run.",
+        "sources": [],
+        "validationStatus": "insufficient_data"
+      },
+      "error": null,
+      "busy": false,
+      "automation": null,
+      "intent": null,
+      "operation": null,
+      "telemetry": {
+        "telemetrySince": "2026-10-16T20:26:47.138845+00:00",
+        "activity": "off",
+        "lastTriggeredAt": null,
+        "currentJob": null,
+        "lastJob": null,
+        "lastRejected": null,
+        "ratesAreLive": false
+      },
+      "preferences": {
+        "configured": true,
+        "state": "loaded",
+        "desiredEnabled": false,
+        "resumeState": "off",
+        "restoreAuthority": "host",
+        "updatedAt": "2026-10-16T20:25:32.353603+00:00",
+        "error": null
+      },
+      "dataFreshness": {
+        "policy": {
+          "basis": "provider_as_of",
+          "cadenceSeconds": null,
+          "maxAgeSeconds": 3600,
+          "futureToleranceSeconds": 60
+        },
+        "evaluatedAt": "2026-10-16T20:26:53.182286Z",
+        "latestReview": null,
+        "assets": [
+          {
+            "assetId": "bitcoin",
+            "providerId": "bitcoin",
+            "chain": "bitcoin",
+            "label": "Bitcoin",
+            "providerAsOf": null,
+            "ageSeconds": null,
+            "admission": "not_checked",
+            "admissibleNow": false,
+            "reason": "not_checked",
+            "fetchedAt": null,
+            "lastAttemptAt": null,
+            "admittedAtFetch": false,
+            "requiredForLastReview": false
+          },
+          {
+            "assetId": "bitcoin-cash",
+            "providerId": "bitcoin-cash",
+            "chain": "bitcoin-cash",
+            "label": "Bitcoin Cash",
+            "providerAsOf": null,
+            "ageSeconds": null,
+            "admission": "not_checked",
+            "admissibleNow": false,
+            "reason": "not_checked",
+            "fetchedAt": null,
+            "lastAttemptAt": null,
+            "admittedAtFetch": false,
+            "requiredForLastReview": false
+          },
+          {
+            "assetId": "digibyte",
+            "providerId": "digibyte",
+            "chain": "digibyte",
+            "label": "DigiByte",
+            "providerAsOf": null,
+            "ageSeconds": null,
+            "admission": "not_checked",
+            "admissibleNow": false,
+            "reason": "not_checked",
+            "fetchedAt": null,
+            "lastAttemptAt": null,
+            "admittedAtFetch": false,
+            "requiredForLastReview": false
+          },
+          {
+            "assetId": "litecoin",
+            "providerId": "litecoin",
+            "chain": "litecoin",
+            "label": "Litecoin",
+            "providerAsOf": null,
+            "ageSeconds": null,
+            "admission": "not_checked",
+            "admissibleNow": false,
+            "reason": "not_checked",
+            "fetchedAt": null,
+            "lastAttemptAt": null,
+            "admittedAtFetch": false,
+            "requiredForLastReview": false
+          },
+          {
+            "assetId": "dogecoin",
+            "providerId": "dogecoin",
+            "chain": "dogecoin",
+            "label": "Dogecoin",
+            "providerAsOf": null,
+            "ageSeconds": null,
+            "admission": "not_checked",
+            "admissibleNow": false,
+            "reason": "not_checked",
+            "fetchedAt": null,
+            "lastAttemptAt": null,
+            "admittedAtFetch": false,
+            "requiredForLastReview": false
+          },
+          {
+            "assetId": "ecash",
+            "providerId": "ecash",
+            "chain": "ecash",
+            "label": "eCash",
+            "providerAsOf": null,
+            "ageSeconds": null,
+            "admission": "not_checked",
+            "admissibleNow": false,
+            "reason": "not_checked",
+            "fetchedAt": null,
+            "lastAttemptAt": null,
+            "admittedAtFetch": false,
+            "requiredForLastReview": false
+          },
+          {
+            "assetId": "peercoin",
+            "providerId": "peercoin",
+            "chain": "peercoin",
+            "label": "Peercoin",
+            "providerAsOf": null,
+            "ageSeconds": null,
+            "admission": "not_checked",
+            "admissibleNow": false,
+            "reason": "not_checked",
+            "fetchedAt": null,
+            "lastAttemptAt": null,
+            "admittedAtFetch": false,
+            "requiredForLastReview": false
+          },
+          {
+            "assetId": "fractal-bitcoin",
+            "providerId": "fractal-bitcoin",
+            "chain": "fractal-bitcoin",
+            "label": "Fractal Bitcoin",
+            "providerAsOf": null,
+            "ageSeconds": null,
+            "admission": "not_checked",
+            "admissibleNow": false,
+            "reason": "not_checked",
+            "fetchedAt": null,
+            "lastAttemptAt": null,
+            "admittedAtFetch": false,
+            "requiredForLastReview": false
+          },
+          {
+            "assetId": "bitcoinii",
+            "providerId": "bitcoinii",
+            "chain": "bitcoin-ii-mainnet",
+            "label": "BitcoinII (BC2)",
+            "providerAsOf": null,
+            "ageSeconds": null,
+            "admission": "not_checked",
+            "admissibleNow": false,
+            "reason": "not_checked",
+            "fetchedAt": null,
+            "lastAttemptAt": null,
+            "admittedAtFetch": false,
+            "requiredForLastReview": false
+          }
+        ]
+      },
+      "capabilities": {
+        "control": true,
+        "download": true,
+        "research": true,
+        "remove": true,
+        "selfTest": true,
+        "preferencePersistence": true,
+        "preferencePersistenceVersion": "1.0",
+        "preferenceRestoreAuthority": "host",
+        "automation": true,
+        "automationContractVersion": "1.0",
+        "missionIntent": "preferences_v1",
+        "missionIntentContracts": [
+          "preferences_v1",
+          "preferences_v2"
+        ],
+        "missionIntentV2Ready": true,
+        "missionIntentCompilerRevision": "semantic-inventory-2",
+        "missionIntentExtractionRevision": "source-by-source-6",
+        "missionIntentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+        "missionIntentEligibility": {
+          "modelId": "qwen3.5-4b",
+          "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+          "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+          "eligible": true,
+          "reason": "Qualified for general mining instructions."
+        },
+        "automationMaxCandidates": 4,
+        "automationMaxAssetsPerCandidate": 5,
+        "automationMaxAssets": 9,
+        "researchMaxAssets": 9,
+        "automationReviewPolicy": "cadence_v1",
+        "automationPartialEvidence": "advisory_v1",
+        "automationReady": false,
+        "registeredAssetIds": [
+          "bitcoin",
+          "bitcoin-cash",
+          "digibyte",
+          "litecoin",
+          "dogecoin",
+          "ecash",
+          "peercoin",
+          "fractal-bitcoin",
+          "bitcoinii"
+        ],
+        "registeredAssets": [
+          {
+            "id": "bitcoin",
+            "providerId": "bitcoin",
+            "chain": "bitcoin",
+            "label": "Bitcoin"
+          },
+          {
+            "id": "bitcoin-cash",
+            "providerId": "bitcoin-cash",
+            "chain": "bitcoin-cash",
+            "label": "Bitcoin Cash"
+          },
+          {
+            "id": "digibyte",
+            "providerId": "digibyte",
+            "chain": "digibyte",
+            "label": "DigiByte"
+          },
+          {
+            "id": "litecoin",
+            "providerId": "litecoin",
+            "chain": "litecoin",
+            "label": "Litecoin"
+          },
+          {
+            "id": "dogecoin",
+            "providerId": "dogecoin",
+            "chain": "dogecoin",
+            "label": "Dogecoin"
+          },
+          {
+            "id": "ecash",
+            "providerId": "ecash",
+            "chain": "ecash",
+            "label": "eCash"
+          },
+          {
+            "id": "peercoin",
+            "providerId": "peercoin",
+            "chain": "peercoin",
+            "label": "Peercoin"
+          },
+          {
+            "id": "fractal-bitcoin",
+            "providerId": "fractal-bitcoin",
+            "chain": "fractal-bitcoin",
+            "label": "Fractal Bitcoin"
+          },
+          {
+            "id": "bitcoinii",
+            "providerId": "bitcoinii",
+            "chain": "bitcoin-ii-mainnet",
+            "label": "BitcoinII (BC2)"
+          }
+        ],
+        "automationTasks": [
+          "candidate_comparison"
+        ],
+        "unsupportedAutomationTasks": [
+          "arbitrary_allocations",
+          "rule_programming",
+          "mission_builder",
+          "unrestricted_web_search"
+        ],
+        "evidence": true
+      },
+      "installation": {
+        "supported": true,
+        "installed": true,
+        "running": true,
+        "busy": false,
+        "phase": "installed",
+        "releaseVersion": "local-ai-0.1.9-umbrel-amd64-v2",
+        "configurationMatches": true,
+        "updateRequired": false,
+        "modelFilesRetained": true,
+        "error": null,
+        "cpuProfile": "amd64-v2",
+        "reason": "Verified AMD64 x86-64-v2 CPU profile checks passed."
+      },
+      "entitlement": {
+        "allowed": true,
+        "licenceRequired": false,
+        "policy": "licence-free",
+        "reason": "Local AI is available without a licence. MUX routing keeps its existing licence requirements."
+      },
+      "appQueue": {
+        "active": false,
+        "pending": 0,
+        "maxPending": 4,
+        "maxWaitSeconds": 120,
+        "oldestWaitSeconds": null
+      }
+    },
+    "stateFiles": {
+      "mux_settings.json": {
+        "sha256": "87962e06b1084b749e0c6d5d154ed8284f80018e7ffbe5f6c6ff536d33efd0f5",
+        "bytes": 472,
+        "mode": "0o600",
+        "uid": 1000,
+        "gid": 1000
+      },
+      "licensing_device_key.pem": {
+        "sha256": "3e991af3778d2c96f4e5e9f21d7777e70d86ae06a0fa0157077622ee358bf19e",
+        "bytes": 119,
+        "mode": "0o600",
+        "uid": 1000,
+        "gid": 1000
+      },
+      "licensing_installation_id": {
+        "sha256": "548ec4b6a9d8d9356ddb7bad38527829df952a49d402d6118875dd1eac846626",
+        "bytes": 64,
+        "mode": "0o600",
+        "uid": 1000,
+        "gid": 1000
+      },
+      "standalone_auth/session-key": {
+        "sha256": "cb60b421552e97029d6be431720a92bba8a218cb6e6ea53171853cd01cb7d93a",
+        "bytes": 32,
+        "mode": "0o600",
+        "uid": 1000,
+        "gid": 1000
+      }
+    },
+    "applicationContainerId": "687422df27047a462fde0f5fa8693804ad9139de24bbbf5aaf617b2987b47f96",
+    "companionContainerId": "2f95e0bca13241ce0928917710dc43b2762ce0eebc62bd5cefc85d484f68f267",
+    "readOnlyReadinessPolls": [
+      {
+        "phase": "local-ai-readiness",
+        "httpStatus": 200,
+        "enabled": false,
+        "running": false,
+        "healthy": false,
+        "busy": false,
+        "desiredEnabled": false
+      }
+    ],
+    "controlRequestsSent": 0,
+    "credentialBytesCopiedOut": false
+  },
+  "restartSafeOffVerified": true,
+  "automaticModelRestoreVerified": false,
+  "afterSnapshot": {
+    "kind": "read-only-normal649-public-app-state-snapshot",
+    "targetVmid": 649,
+    "version": "0.9.82",
+    "channel": "MAIN",
+    "imageId": "sha256:73fc590eb227a54fb945ac0579b9af54b6d82db97b09a86d9be30aecddf232ba",
+    "containerId": "687422df27047a462fde0f5fa8693804ad9139de24bbbf5aaf617b2987b47f96",
+    "running": true,
+    "stateFiles": {
+      "mux_settings.json": {
+        "sha256": "87962e06b1084b749e0c6d5d154ed8284f80018e7ffbe5f6c6ff536d33efd0f5",
+        "bytes": 472,
+        "uid": 1000,
+        "gid": 1000,
+        "mode": "0o600"
+      },
+      "licensing_device_key.pem": {
+        "sha256": "3e991af3778d2c96f4e5e9f21d7777e70d86ae06a0fa0157077622ee358bf19e",
+        "bytes": 119,
+        "uid": 1000,
+        "gid": 1000,
+        "mode": "0o600"
+      },
+      "licensing_installation_id": {
+        "sha256": "548ec4b6a9d8d9356ddb7bad38527829df952a49d402d6118875dd1eac846626",
+        "bytes": 64,
+        "uid": 1000,
+        "gid": 1000,
+        "mode": "0o600"
+      },
+      "standalone_auth/session-key": {
+        "sha256": "cb60b421552e97029d6be431720a92bba8a218cb6e6ea53171853cd01cb7d93a",
+        "bytes": 32,
+        "uid": 1000,
+        "gid": 1000,
+        "mode": "0o600"
+      }
+    },
+    "authorityOverridesPresent": false,
+    "credentialBytesCopiedOut": false
+  },
+  "endedAt": "2026-10-16T20:26:57.396476+00:00"
+}

@@ -1,0 +1,231 @@
+{
+  "kind": "fresh-unlicensed-normal-umbrel-package-qualification",
+  "result": "PASS",
+  "architecture": "amd64",
+  "osVersion": "2.0.0",
+  "targetVmid": 649,
+  "configuredMemoryMiB": 16384,
+  "sourceRevision": "138fd6cfd1b99cea858f19f39f8976015da1de1b",
+  "sourceTree": "75ed4c702490df1f168bf590ba055768c260d236",
+  "testedChannel": "MAIN",
+  "testedVersion": "0.9.82",
+  "testedImageRef": "ghcr.io/willitmod/5tratmux-app:0.9.82-umbrel@sha256:9ef5ac209472b9f57cfb74eeda3e96e5a03f77747cab19a12cbfdf8abaafbe15",
+  "localAIImageRef": "ghcr.io/willitmod/5tratmux-app:local-ai-0.1.9-umbrel@sha256:b8050920c408eab295ba5848f209d560b5207f821901e09d7a6788c1e2b175d3",
+  "testedApplicationConfigDigest": "sha256:73fc590eb227a54fb945ac0579b9af54b6d82db97b09a86d9be30aecddf232ba",
+  "testedPackageRecipeSHA256": "6373d3f099e9f27c1fe6a8b5fd34c8872f93eadbfb8240e3718e8385abd2de54",
+  "protectedExecutableSHA256": "e14b3b4bcf1e30686cc7d9040b0c9a441e582ab182c6766396233c335d0b5b7c",
+  "freshNormalOwnerVerified": true,
+  "normalBaselineToCandidateTransitionVerified": true,
+  "operatorAuthenticationVerified": true,
+  "actualChannelInferenceVerified": true,
+  "onPreferenceRetained": true,
+  "actualModelAndConfigurationVerified": true,
+  "socketPeerIdentityVerified": true,
+  "noHostControllerOrDockerSocket": true,
+  "hardwareUnchanged": true,
+  "hostReserveUnchanged": true,
+  "rootFilesystemReadOnlyVerified": true,
+  "transitionPreservedState": true,
+  "transitionKind": "DEV-to-MAIN-normal-app-manager-update",
+  "priorVersion": "0.9.82-dev",
+  "licenceOrTrialActivationPerformed": false,
+  "licenceState": {
+    "registered": true,
+    "recordedState": "inactive",
+    "accessAllowed": false,
+    "source": "none"
+  },
+  "paidRoutingGuardHttpStatuses": {
+    "settings": 402,
+    "workerAllocation": 402
+  },
+  "runtimeCpuLimit": 2,
+  "runtimeMemoryLimitBytes": 6442450944,
+  "runtimeMemorySwapLimitBytes": 6442450944,
+  "runtimeBinarySha256": "034a22de64cc6abf39039fcb29f3c3529c98a910c6b849b5fe15e768f2544fa4",
+  "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+  "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+  "requestTimeoutSeconds": 600,
+  "lifecycleScope": "explicit-shared-DEV-companion-lifecycle",
+  "firstIntentOutcome": {
+    "firstHostEvidence": {
+      "path": "release-records/normal649-main-canonical-intent-first.json",
+      "sha256": "4b334e011e9df200486d1320a456fbdd88ea12290195eae424b149e8e964ba58"
+    },
+    "firstGuestEvidence": {
+      "path": "release-records/normal649-main-canonical-intent-first-guest.json",
+      "sha256": "257dda3d72ba79a76f5b4a5cc2e5d43af2ed0ee34dc4f3416dcab983062f5650"
+    },
+    "successfulHostEvidence": {
+      "path": "release-records/normal649-main-canonical-intent-explicit-warm-after-reviewed600.json",
+      "sha256": "6af0cd8bf6e8dc12fb9eeb6703fa1cbc96cfc5579a9345b58ec3623ed6d22469"
+    },
+    "successfulGuestEvidence": {
+      "path": "release-records/normal649-main-canonical-intent-explicit-warm-guest.json",
+      "sha256": "90de84a05acd7fc61dd797331abe182e28a96a16f7b6e256780f67e06d3c5663"
+    },
+    "independentFirstFailureReview": {
+      "path": "release-records/root-main-first-mission-timeout-review.json",
+      "sha256": "b327421d8283e8b9e6e8aa8a3542c9b028cd64947c569a98896568f7f137b19a"
+    },
+    "explicitWarmAdmission": {
+      "path": "release-records/root-normal649-main-one-explicit-warm-admission.json",
+      "sha256": "a1390d3ce65f7ff800d70d751fbe9ee026e1f1add58a61a32a3446cb079484fa"
+    },
+    "firstAttemptPassed": false,
+    "firstAttemptElapsedSeconds": 600.002,
+    "successfulGenerationSeconds": 143.432,
+    "automaticWarmRetries": 0,
+    "firstMissionIntentColdClaimed": false,
+    "sameModelPid": 33,
+    "priorProviderComparison": {
+      "path": "release-records/normal649-main-provider-comparison.json",
+      "sha256": "bc25d961fe6dbb175808e89a178795adde39ba0f4313e5df0044dc51b11862fc"
+    }
+  },
+  "restartPolicyEvidence": {
+    "safeOffEvidence": {
+      "path": "release-records/normal649-main-normal-dev-to-main.json",
+      "sha256": "df9e1c9d4783b363ce97a55f08d7974eaedd80d7abb3f7207378a06090311b07"
+    },
+    "explicitOwnerStartEvidence": {
+      "path": "release-records/normal649-main-explicit-owner-resume-after-update.json",
+      "sha256": "01167171f716c645acca3b47d5a556493281ab2e6397812b2b9388bc82e9ee9e"
+    },
+    "explicitOwnerStartReadiness": {
+      "path": "release-records/normal649-main-explicit-owner-resume-after-update-settled-readiness.json",
+      "sha256": "3f7faa1e9033ebf1cfa1bb7f48f3e8a4d2612bb07d9f7ce59967932ba0957d80"
+    }
+  },
+  "savedOnAndOffPreferencesRetained": true,
+  "restartSafeOffVerified": true,
+  "explicitOwnerStartVerified": true,
+  "automaticModelRestoreVerified": false,
+  "modelRestartPolicy": "model-Off-on-service-restart-explicit-owner-Start",
+  "modelAcquisitionScope": "verified-public-cache-reuse-then-normal-physical-hash-admission",
+  "wanDownloadClaimed": false,
+  "uncachedFilesystemColdStartClaimed": false,
+  "authLimitsOrCredentialsChanged": false,
+  "rawEvidence": {
+    "normal649-main-after-first-intent-timeout-readonly-boundaries.json": {
+      "path": "release-records/normal649-main-after-first-intent-timeout-readonly-boundaries.json",
+      "sha256": "743ea8705dba8b71e8ece748e6aa6be33c4e92f4f65cb3a0ea7838988a9f2e74"
+    },
+    "normal649-main-after-first-intent-timeout-readonly-health.json": {
+      "path": "release-records/normal649-main-after-first-intent-timeout-readonly-health.json",
+      "sha256": "ea6d474a795494aacc8f285e2b61bc33344d20b9e78f229e4efc6538ed73ec21"
+    },
+    "normal649-main-canonical-intent-explicit-warm-after-reviewed600.json": {
+      "path": "release-records/normal649-main-canonical-intent-explicit-warm-after-reviewed600.json",
+      "sha256": "6af0cd8bf6e8dc12fb9eeb6703fa1cbc96cfc5579a9345b58ec3623ed6d22469"
+    },
+    "normal649-main-canonical-intent-explicit-warm-guest.json": {
+      "path": "release-records/normal649-main-canonical-intent-explicit-warm-guest.json",
+      "sha256": "90de84a05acd7fc61dd797331abe182e28a96a16f7b6e256780f67e06d3c5663"
+    },
+    "normal649-main-canonical-intent-first-guest.json": {
+      "path": "release-records/normal649-main-canonical-intent-first-guest.json",
+      "sha256": "257dda3d72ba79a76f5b4a5cc2e5d43af2ed0ee34dc4f3416dcab983062f5650"
+    },
+    "normal649-main-canonical-intent-first.json": {
+      "path": "release-records/normal649-main-canonical-intent-first.json",
+      "sha256": "4b334e011e9df200486d1320a456fbdd88ea12290195eae424b149e8e964ba58"
+    },
+    "normal649-main-capture.json": {
+      "path": "release-records/normal649-main-capture.json",
+      "sha256": "04c1f8a747b3fec1e8bcd409cc4f3af73e5957168a94b35e56d783527b17a837"
+    },
+    "normal649-main-disable-settled-readiness.json": {
+      "path": "release-records/normal649-main-disable-settled-readiness.json",
+      "sha256": "0c3af355cf87b4fdad646eb5730d3dd1fa684f4a989f33afa224125d559561c1"
+    },
+    "normal649-main-disable.json": {
+      "path": "release-records/normal649-main-disable.json",
+      "sha256": "9dde4b3d40cef36cc076314740d7a925e1f18c02daba81d3157edef75458441e"
+    },
+    "normal649-main-explicit-owner-resume-after-update-settled-readiness.json": {
+      "path": "release-records/normal649-main-explicit-owner-resume-after-update-settled-readiness.json",
+      "sha256": "3f7faa1e9033ebf1cfa1bb7f48f3e8a4d2612bb07d9f7ce59967932ba0957d80"
+    },
+    "normal649-main-explicit-owner-resume-after-update.json": {
+      "path": "release-records/normal649-main-explicit-owner-resume-after-update.json",
+      "sha256": "01167171f716c645acca3b47d5a556493281ab2e6397812b2b9388bc82e9ee9e"
+    },
+    "normal649-main-explicit-warm-preflight-readiness.json": {
+      "path": "release-records/normal649-main-explicit-warm-preflight-readiness.json",
+      "sha256": "de5abc5129e04d507b5de64eae6a9d41dd4ccb3635bc501d1bd2bb0a5c21cf4e"
+    },
+    "normal649-main-final-cache-hash.json": {
+      "path": "release-records/normal649-main-final-cache-hash.json",
+      "sha256": "c9d0e1d67698fe488f966f4a0a009112c88bf19ffc2853ac9fbf001ea2181630"
+    },
+    "normal649-main-first-intent-progress-01.json": {
+      "path": "release-records/normal649-main-first-intent-progress-01.json",
+      "sha256": "a16996e46fcd3f1bc5598b78f613f34058a20112135e3c5249018e597eb597be"
+    },
+    "normal649-main-normal-dev-to-main.json": {
+      "path": "release-records/normal649-main-normal-dev-to-main.json",
+      "sha256": "df9e1c9d4783b363ce97a55f08d7974eaedd80d7abb3f7207378a06090311b07"
+    },
+    "normal649-main-post-explicit-warm-readonly-boundaries.json": {
+      "path": "release-records/normal649-main-post-explicit-warm-readonly-boundaries.json",
+      "sha256": "ad2290a96fd343653f6299dd47312350a774213a2d36acecb9e456e9deb1e2b2"
+    },
+    "normal649-main-provider-comparison.json": {
+      "path": "release-records/normal649-main-provider-comparison.json",
+      "sha256": "bc25d961fe6dbb175808e89a178795adde39ba0f4313e5df0044dc51b11862fc"
+    },
+    "normal649-main-restart-off.json": {
+      "path": "release-records/normal649-main-restart-off.json",
+      "sha256": "31376402082f730228af08dd4f9b36a614827b5b7bff2c034777ff3f88f60cd0"
+    }
+  },
+  "storePublicationGrantedByThisDerivedRecord": false,
+  "sharedLifecycleReuseExplicit": true,
+  "sharedLifecycleEvidence": {
+    "path": "release-records/umbrel649-normal-dev082-unlicensed-qualification.json",
+    "sha256": "5df849b70eeca328a35d1dfa9d2647e3a711fd02d984fe434068df8c0ad9f29d"
+  },
+  "recipeParityVerified": true,
+  "missionIntentScope": "first-provider-first-mission-failed600-then-one-separately-root-admitted-warm-success",
+  "originalDEVColdFailureSharedAndRetained": {
+    "firstHostEvidence": {
+      "path": "release-records/normal649-dev-canonical-intent-first.json",
+      "sha256": "d69be0973807594b5935978bbb2bcd0571900943c1ee03f6506229691827925d"
+    },
+    "firstGuestEvidence": {
+      "path": "release-records/normal649-dev-canonical-intent-first-guest.json",
+      "sha256": "3c6d4858a43ac255338e9f5ae53fcb8e7769622d6ccb1c20431d01fd83a53451"
+    },
+    "independentFirstFailureReview": {
+      "path": "release-records/root-dev-first-cold-failure-and-660-review.json",
+      "sha256": "96423a505682f67a9d195e06e51b2b3cc128a37f55cef164ec51fde33412640d"
+    },
+    "explicitWarmAdmission": {
+      "path": "release-records/root-normal649-dev-one-explicit-warm-admission.json",
+      "sha256": "36c315b7e6e832b479cd684ca0f305caf9f7bf4401284d0121d099ca7ddcfdb0"
+    },
+    "successfulHostEvidence": {
+      "path": "release-records/normal649-dev-canonical-intent-explicit-warm-after-reviewed600.json",
+      "sha256": "4ca28302e91990183c244b5c09451c2e61ae90f5427862ef7cb26357e312befe"
+    },
+    "successfulGuestEvidence": {
+      "path": "release-records/normal649-dev-canonical-intent-explicit-warm-guest.json",
+      "sha256": "8745506dc8f60a7bf939a7c9787bf7dd487aedc20ebd15361b31a25f545e52eb"
+    },
+    "independentWarmSuccessReview": {
+      "path": "release-records/root-dev-explicit-warm-success-review.json",
+      "sha256": "9bda77215419bf7ac40eb6dd67be64e0226d3228441b0cb7e6111d44955bfaae"
+    },
+    "firstAttemptPassed": false,
+    "firstAttemptElapsedSeconds": 600.002,
+    "firstColdDeadlinePassed": false,
+    "successfulGenerationSeconds": 149.944,
+    "automaticWarmRetries": 0,
+    "sameModelPid": 89,
+    "firstUsableOutputProduced": false,
+    "filesystemOrPromptCacheCleared": false
+  },
+  "ownMAINContinuous660ObservationClaimed": false,
+  "actualFinalOffAndNormalOffRestartVerified": true
+}

@@ -1,0 +1,167 @@
+{
+  "schemaVersion": 1,
+  "kind": "normal-umbrel-update-with-memory-guard",
+  "result": "PASS",
+  "architecture": "amd64",
+  "osVersion": "1.7.4",
+  "targetVmid": 642,
+  "configuredMemoryMiB": 8192,
+  "runtimeCpuLimit": 2,
+  "runtimeMemoryLimitBytes": 6442450944,
+  "runtimeMemorySwapLimitBytes": 6442450944,
+  "nativeUpdateStopStartPersistenceVerified": true,
+  "operatorAuthenticationVerified": true,
+  "localAiOffCleanupVerified": true,
+  "socketPeerIdentityVerified": true,
+  "existingMuxStatePreserved": true,
+  "existingPaidIdentityPreserved": true,
+  "hardwareUnchanged": true,
+  "storageRootContractVerified": true,
+  "noHostControllerOrDockerSocket": true,
+  "memoryGuardRefusedEnable": true,
+  "runtimeRunningAfterRefusal": false,
+  "onOrInferenceClaimed": false,
+  "memoryAdmission": {
+    "hostTotalBytes": 8262787072,
+    "hostAvailableBytes": 4769153024,
+    "hostReserveBytes": 1239418060,
+    "modelBudgetBytes": 5368709120,
+    "requiredHostBytes": 6608127180,
+    "allowed": false
+  },
+  "sourceRevision": "138fd6cfd1b99cea858f19f39f8976015da1de1b",
+  "sourceTree": "75ed4c702490df1f168bf590ba055768c260d236",
+  "testedChannel": "MAIN",
+  "testedVersion": "0.9.82",
+  "testedImageRef": "ghcr.io/willitmod/5tratmux-app:0.9.82-umbrel@sha256:9ef5ac209472b9f57cfb74eeda3e96e5a03f77747cab19a12cbfdf8abaafbe15",
+  "localAIImageRef": "ghcr.io/willitmod/5tratmux-app:local-ai-0.1.9-umbrel@sha256:b8050920c408eab295ba5848f209d560b5207f821901e09d7a6788c1e2b175d3",
+  "testedApplicationConfigDigest": "sha256:73fc590eb227a54fb945ac0579b9af54b6d82db97b09a86d9be30aecddf232ba",
+  "testedPackageRecipeSHA256": "6373d3f099e9f27c1fe6a8b5fd34c8872f93eadbfb8240e3718e8385abd2de54",
+  "protectedExecutableSHA256": "e14b3b4bcf1e30686cc7d9040b0c9a441e582ab182c6766396233c335d0b5b7c",
+  "reuseForChannel": "DEV",
+  "reuseScope": "identical-protected-ELF-and-normal-package-contract",
+  "recipeParityVerified": true,
+  "crossChannelReuseDoesNotClaimActualDevNormalUpdate": true,
+  "paidIdentityScope": "pre-existing-owned-lab-paid-identity",
+  "defaultProductionAuthorityPaidProofClaimed": false,
+  "existingLabAuthorityAdaptation": {
+    "kind": "retained-existing-lab-authority-env-file-reference",
+    "serverEnvFileReferences": [
+      "${APP_DATA_DIR}/testoverride.env"
+    ],
+    "authorityValuesUnchanged": true,
+    "authorityKeysCopied": false,
+    "licenceGrantOrProofEdited": false,
+    "classificationEvidence": {
+      "path": "release-records/authority-source-642-readonly.json",
+      "sha256": "315c0275c7e2d9f9e4358c07727bdd9699a9d0ba98c57570d08a91a60db157be"
+    },
+    "referenceEvidence": {
+      "path": "release-records/authority-env-file-reference-642-readonly.json",
+      "sha256": "1dad8d7f8e76144fe4b8be1578bcc3b894b23437ab3bc9d5390afd4a595e8ec5"
+    },
+    "fileBefore": {
+      "sha256": "47ac86e0a951db644f687a5e5336a33b83ae1387eabd669c965b78467b885383",
+      "bytes": 181,
+      "mode": "0o600",
+      "uid": 0,
+      "licensingKeyNamesOnly": [
+        "MUX_LICENSING_FALLBACK_IP",
+        "MUX_LICENSING_FALLBACK_IPS",
+        "MUX_LICENSING_PUBLIC_KEY",
+        "MUX_LICENSING_URL"
+      ]
+    },
+    "fileAfter": {
+      "sha256": "47ac86e0a951db644f687a5e5336a33b83ae1387eabd669c965b78467b885383",
+      "bytes": 181,
+      "mode": "0o600",
+      "uid": 0,
+      "licensingKeyNamesOnly": [
+        "MUX_LICENSING_FALLBACK_IP",
+        "MUX_LICENSING_FALLBACK_IPS",
+        "MUX_LICENSING_PUBLIC_KEY",
+        "MUX_LICENSING_URL"
+      ]
+    },
+    "licensingEnvironmentMappingSha256Before": "4898afbd65a4e32b88886c2cda9d863b2d3c153d09f1ac93cdd042c1056f5eda",
+    "licensingEnvironmentMappingSha256After": "4898afbd65a4e32b88886c2cda9d863b2d3c153d09f1ac93cdd042c1056f5eda",
+    "preExistingInstalledComposeSha256": "3f7482082efa5f7d4f0c23ba96e428a6ceb84f365f56404f86a140826350f6be",
+    "originalPackageRecipeSHA256": "6373d3f099e9f27c1fe6a8b5fd34c8872f93eadbfb8240e3718e8385abd2de54",
+    "qaOverlaySHA256": "4cba35bb502fff8a2e727eac549907ffc13eab132d29553243427f8b59e28ae5",
+    "adaptedQaSourceRecipeSHA256": "968ea347403b60fa15ace30552a8c8768da9307a00b69c305afc49343911c201",
+    "minimalDifference": [
+      {
+        "operation": "add",
+        "path": "/services/server/env_file",
+        "value": [
+          "${APP_DATA_DIR}/testoverride.env"
+        ]
+      }
+    ]
+  },
+  "rawPhases": [
+    {
+      "path": "release-records/normal-existing-642-normal080-to082-old-layout-fix.json",
+      "sha256": "64c7f48cb7fff722ae88c3b843a131e5b32609005b75cdbf1a5ff6d484c527d7"
+    },
+    {
+      "path": "release-records/normal-existing-642-capture.json",
+      "sha256": "a248fbce3d78ce91d82b36370dc9f778dfef8f315862a9a952d8a5749a0bf527"
+    },
+    {
+      "path": "release-records/normal-existing-642-install-off.json",
+      "sha256": "14023f01d5f944553006516a2e6606c875a031a7376b321359d0c9434e30f68c"
+    },
+    {
+      "path": "release-records/normal-existing-642-select4b-off.json",
+      "sha256": "f7046c8ca052af6b41d546a5141914ecbcecf81688f25a841f68a3f8c858d900"
+    },
+    {
+      "path": "release-records/normal-existing-642-actual-memory-capacity-hold.json",
+      "sha256": "6acf88672d20d7ee0fd99ca39280762561a25faaa0987a019bdddea4a8494a17"
+    },
+    {
+      "path": "release-records/normal-existing-642-private-socket-peer-check.json",
+      "sha256": "6d02200140c5cc9c2e8fcee34114d964f33ed04766fa15eb0769500bef0a67b6"
+    },
+    {
+      "path": "release-records/normal-existing-642-restart-off.json",
+      "sha256": "17612f4e62a2ae5fc8543f6afe1c58008ede33c6ee0d0f76183be381efc2e149"
+    },
+    {
+      "path": "release-records/normal-existing-642-explicit-off.json",
+      "sha256": "3ef0279039c3ee7eb5bea70a3161f7913402139607cd12320fcb402b2ba0f33d"
+    },
+    {
+      "path": "release-records/normal-existing-642-remove-off.json",
+      "sha256": "7194f57c084f03c914466f1e0b6cb51b5e7482da3c1429500ee5058161e1af4d"
+    },
+    {
+      "path": "release-records/normal-existing-642-reinstall-off.json",
+      "sha256": "8f6e82caa8a1e3eaf59cb3df9ee2544eb56b76b2c72dd768b8453df0ea473996"
+    },
+    {
+      "path": "release-records/normal-existing-642-final-off-capture.json",
+      "sha256": "341ce29910e43bf87f64d83e3d48f210a3ee2015324048d8755fc4c4d2760a45"
+    }
+  ],
+  "independentRootReview": {
+    "path": "release-records/root-existing642643-normal-main-final-acceptance.json",
+    "sha256": "8995e24592244b8e6120ee97442bac9b2a466d2d850fe9983742c31b6d574354"
+  },
+  "peerReview": {
+    "path": "release-records/existing642643-normal-main-qa-peer-review.json",
+    "sha256": "2504436514d9ee01ab2140c63b14f68d0a36a24a15bbdc4c07bf0bac9b34b991"
+  },
+  "qaAdaptedSourcePreparation": {
+    "path": "release-records/normal-package396-main-lab-642-preparation.json",
+    "sha256": "4096f1cf3ee471ecc1c035cec4f17128810fa1419e25bd20260c4bc2b3f66f46"
+  },
+  "hardwareConfigurationSHA256": "bb648b08da3cdc19d6d06eed65eec077bfe66be012c1c46458601953b027ad44",
+  "normalUpdateAttempts": 1,
+  "modelDownloadsPerformed": false,
+  "modelInferencePerformed": false,
+  "capacityHoldHttpStatus": 409,
+  "actualNormalMainPackageOnly": true
+}

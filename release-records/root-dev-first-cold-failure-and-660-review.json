@@ -1,0 +1,25 @@
+{
+  "status": "ROOT_FIRST_COLD_GUARD_FAILURE_RETAINED_AND_660_HEALTH_ACCEPTED",
+  "reviewer": "/root",
+  "at": "2026-10-16T19:36:09.115492+00:00",
+  "firstIntent": {
+    "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/fresh649/normal649-dev-canonical-intent-first.json",
+    "sha256": "d69be0973807594b5935978bbb2bcd0571900943c1ee03f6506229691827925d"
+  },
+  "strictOnObservation": {
+    "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/fresh649/normal649-dev-660-observation.json",
+    "sha256": "f7d1bb0c681002136844e13c36c9ced930ea232d30365e970b4a40a6952a9bbf"
+  },
+  "coldPassed": false,
+  "coldSeconds": 600.002,
+  "noUsableOutput": true,
+  "sameHealthyModelPid": 89,
+  "noOom": true,
+  "unlicensedOnHealthSeconds": 660.0477377460002,
+  "sampleCount": 132,
+  "protectedFilesPreserved": true,
+  "concurrentIntentDisclosed": true,
+  "singleDistinctWarmAttemptMayBeSeparatelyAdmitted": true,
+  "automaticRetriesAllowed": 0,
+  "qualificationOrPublicationAccepted": false
+}

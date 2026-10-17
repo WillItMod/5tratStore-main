@@ -1,40 +1,78 @@
-version: "3.7"
-services:
-  # Umbrel 1.7 runs this proxy; 2.0 renders it into the host app gateway.
-  # Keep it declarative, with no dependencies or namespace sharing.
-  app_proxy:
-    environment:
-      APP_HOST: willitmod-dev-5tratmux_server_1
-      APP_PORT: "21222"
-  server:
-    # Protected runtime; release metadata binds the immutable multi-platform index.
-    image: ghcr.io/willitmod/5tratmux-app:0.9.80-umbrel@sha256:1838e5458a56ddc208419cd2fb6d3b9c7979492e66ed52ccb177e5cc4c7d2a7a
-    user: "1000:1000"
-    init: true
-    restart: unless-stopped
-    read_only: true
-    cap_drop: [ALL]
-    security_opt: ["no-new-privileges:true"]
-    pids_limit: 256
-    mem_limit: 1536m
-    stop_grace_period: 30s
-    tmpfs:
-      # The protected onefile executable needs an executable extraction path.
-      - /tmp:rw,nosuid,nodev,exec,size=256m,mode=1777
-    ports:
-      - "7331:7331/tcp"
-    expose:
-      - "21222"
-    volumes:
-      - ${APP_DATA_DIR}/data:/data
-    environment:
-      MUX_PLATFORM: umbrel
-      APP_HOST: 0.0.0.0
-      APP_PORT: "21222"
-      STATE_DIR: /data/state
-      MUX_OPERATOR_PASSWORD: ${APP_PASSWORD}
-      MUX_AUTH_TRUSTED_PROXIES: ${GATEWAY_IP}
-      MUX_HTTP_STRICT_HOST: "1"
-      MUX_HTTP_ALLOWED_HOSTS: ${DEVICE_DOMAIN_NAME},${DEVICE_HOSTNAME},localhost
-      APP_VERSION: 0.9.80
-      APP_CHANNEL: MAIN
+{
+  "version": "3.7",
+  "services": {
+    "app_proxy": {
+      "environment": {
+        "APP_HOST": "willitmod-dev-5tratmux_server_1",
+        "APP_PORT": "21222"
+      }
+    },
+    "server": {
+      "image": "ghcr.io/willitmod/5tratmux-app:0.9.82-umbrel@sha256:9ef5ac209472b9f57cfb74eeda3e96e5a03f77747cab19a12cbfdf8abaafbe15",
+      "user": "1000:1000",
+      "init": true,
+      "restart": "unless-stopped",
+      "read_only": true,
+      "cap_drop": [
+        "ALL"
+      ],
+      "security_opt": [
+        "no-new-privileges:true"
+      ],
+      "pids_limit": 256,
+      "mem_limit": "1536m",
+      "stop_grace_period": "30s",
+      "tmpfs": [
+        "/tmp:rw,nosuid,nodev,exec,size=256m,mode=1777"
+      ],
+      "ports": [
+        "7331:7331/tcp"
+      ],
+      "expose": [
+        "21222"
+      ],
+      "volumes": [
+        "${APP_DATA_DIR}/data/state:/data/state",
+        "${APP_DATA_DIR}/data/local-ai-control:/run/5tratmux-local-ai:ro"
+      ],
+      "environment": {
+        "MUX_PLATFORM": "umbrel",
+        "APP_HOST": "0.0.0.0",
+        "APP_PORT": "21222",
+        "STATE_DIR": "/data/state",
+        "MUX_OPERATOR_PASSWORD": "${APP_PASSWORD}",
+        "MUX_AUTH_TRUSTED_PROXIES": "${GATEWAY_IP}",
+        "MUX_HTTP_STRICT_HOST": "1",
+        "MUX_HTTP_ALLOWED_HOSTS": "${DEVICE_DOMAIN_NAME},${DEVICE_HOSTNAME},localhost",
+        "APP_VERSION": "0.9.82",
+        "APP_CHANNEL": "MAIN",
+        "LOCAL_AI_SUPERVISOR_SOCKET": "/run/5tratmux-local-ai/control.sock"
+      }
+    },
+    "local_ai": {
+      "image": "ghcr.io/willitmod/5tratmux-app:local-ai-0.1.9-umbrel@sha256:b8050920c408eab295ba5848f209d560b5207f821901e09d7a6788c1e2b175d3",
+      "user": "1000:1000",
+      "init": true,
+      "restart": "unless-stopped",
+      "read_only": true,
+      "cap_drop": [
+        "ALL"
+      ],
+      "security_opt": [
+        "no-new-privileges:true"
+      ],
+      "pids_limit": 128,
+      "mem_limit": "6g",
+      "memswap_limit": "6g",
+      "cpus": 2,
+      "stop_grace_period": "45s",
+      "tmpfs": [
+        "/tmp:rw,nosuid,nodev,exec,size=512m,mode=1777"
+      ],
+      "volumes": [
+        "${APP_DATA_DIR}/data/local-ai-control:/run/5tratmux-local-ai",
+        "${APP_DATA_DIR}/data/local-ai:/data/local-ai"
+      ]
+    }
+  }
+}

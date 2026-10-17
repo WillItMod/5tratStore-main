@@ -1,0 +1,44 @@
+{
+  "kind": "one-normal-login-after-window-and-public-cache-read-only-diagnostic",
+  "normalLoginRequestsMaximum": 1,
+  "controlOrInferenceRequests": 0,
+  "keyOrSessionCredentialCopiedOut": false,
+  "authLimitsChanged": false,
+  "events": [
+    {
+      "at": "2026-10-16T19:57:57.084841+00:00",
+      "route": "/api/status",
+      "httpStatus": 401,
+      "errorCode": "operator_auth_required"
+    },
+    {
+      "at": "2026-10-16T19:57:57.087337+00:00",
+      "route": "/api/local-ai/status",
+      "httpStatus": 401,
+      "errorCode": "operator_auth_required"
+    },
+    {
+      "at": "2026-10-16T19:57:57.413122+00:00",
+      "route": "/api/auth/login",
+      "httpStatus": 200,
+      "errorCode": null
+    },
+    {
+      "at": "2026-10-16T19:57:57.465406+00:00",
+      "route": "/api/local-ai/status",
+      "httpStatus": 200,
+      "errorCode": null
+    }
+  ],
+  "result": "PASS",
+  "runtimeOff": true,
+  "desiredEnabled": false,
+  "publicModelPhysicalHash": {
+    "sha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+    "bytes": 2740937888,
+    "uid": 1000,
+    "gid": 1000,
+    "mode": "0o600"
+  },
+  "originalFailedPhaseRecastAsPass": false
+}

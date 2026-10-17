@@ -1,0 +1,342 @@
+{
+  "schemaVersion": 1,
+  "appId": "willitmod-dev-5tratmux",
+  "channel": "DEV",
+  "version": "0.9.82-dev",
+  "sourceRevision": "138fd6cfd1b99cea858f19f39f8976015da1de1b",
+  "sourceTree": "75ed4c702490df1f168bf590ba055768c260d236",
+  "packageProducerSourceRevision": "396c137930d27fb39251147426a70bd61307bf98",
+  "packageProducerSourceTree": "ec2daf28cc1920be3e83bc791e25f3e6443769cc",
+  "packageProducerInputs": {
+    "packaging/umbrel-local-ai-release/prepare_package.py": "7c3deed5b8aa35777d1776a6a15ce0be7217dc98d40a1e082af21e88c4cb0f1c",
+    "packaging/umbrel-local-ai-release/pre-start": "fb25f9246aff606a00567ec0a0333b49397bf988b30deaff0c3da5baaaa4eb6e"
+  },
+  "imageRef": "ghcr.io/willitmod/5tratmux-app:0.9.82-umbrel-dev@sha256:5eb55feec01de1a3b4bdf16027dd22a4fdf5844c83c016996eeeace0e876ca5e",
+  "localAIImageRef": "ghcr.io/willitmod/5tratmux-app:local-ai-0.1.9-umbrel@sha256:b8050920c408eab295ba5848f209d560b5207f821901e09d7a6788c1e2b175d3",
+  "packageFiles": {
+    "willitmod-dev-5tratmux/data/.gitkeep": {
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "mode": "0o644"
+    },
+    "willitmod-dev-5tratmux/docker-compose.yml": {
+      "sha256": "d05e15851ef0376fc2967cdbcbc33fbf796fa3251fb24726df1b8177ff82dcbf",
+      "mode": "0o644"
+    },
+    "willitmod-dev-5tratmux/hooks/pre-start": {
+      "sha256": "fb25f9246aff606a00567ec0a0333b49397bf988b30deaff0c3da5baaaa4eb6e",
+      "mode": "0o755"
+    },
+    "willitmod-dev-5tratmux/icon.png": {
+      "sha256": "3eef68f8307de4df7a43386b2dbc3cdaa2b9e97423c93945c18e6be3256ad9e8",
+      "mode": "0o644"
+    },
+    "willitmod-dev-5tratmux/umbrel-app.yml": {
+      "sha256": "82d2e002f319c21d3e790cb4e2a42384f96f8c59ad1b3ea49c9a4fc4df41ceea",
+      "mode": "0o644"
+    }
+  },
+  "platforms": {
+    "amd64": {
+      "manifestDigest": "sha256:7b989399a0241ec14560add97728316c7e9c67f515a589a55f6bb8573dfb98eb",
+      "configDigest": "sha256:3cd72ad4d37a9a21ac7cca0a2cd085ea6eccc908c3a091df4af8ec40426c53bf",
+      "allDistributedLayersAudited": true,
+      "allLayerDigestsVerified": true,
+      "noApplicationPythonSources": true,
+      "noSourceMaps": true,
+      "noApplicationPrivateKeyMaterial": true,
+      "protectedExecutableSHA256": "e14b3b4bcf1e30686cc7d9040b0c9a441e582ab182c6766396233c335d0b5b7c",
+      "nativeStartupVerified": true,
+      "operatorAuthenticationVerified": true,
+      "httpHealthVersion": "0.9.82-dev",
+      "freshNativeBaseRootfsVerified": true,
+      "privateBuildAudit": {
+        "path": "release-records/amd64-application082-native-audit.json",
+        "sha256": "a5b0070eb64b23123b559f4dfa623e7402a26e1d356ee61360a6f4204aad8a9e"
+      }
+    },
+    "arm64": {
+      "manifestDigest": "sha256:984dc7bb99dcddbea915dd30f78412005741f77c4c947f2782cd3bb4350f6a88",
+      "configDigest": "sha256:32e761e4e942095ed87df4f56404ad4fab3f92e185aa56076a8e827fd07f5bf2",
+      "allDistributedLayersAudited": true,
+      "allLayerDigestsVerified": true,
+      "noApplicationPythonSources": true,
+      "noSourceMaps": true,
+      "noApplicationPrivateKeyMaterial": true,
+      "protectedExecutableSHA256": "f24bc8c141473e9273007fb4d20eb1f7990f024a90eedd6749d7585ba8902496",
+      "nativeStartupVerified": true,
+      "operatorAuthenticationVerified": true,
+      "httpHealthVersion": "0.9.82-dev",
+      "freshNativeBaseRootfsVerified": true,
+      "privateBuildAudit": {
+        "path": "release-records/arm64-application082-native-audit.json",
+        "sha256": "a9ea405fe82e2f3924f09156bbb574602a480810baf3260380f9cb0afe6eeccc"
+      }
+    }
+  },
+  "localAIPlatforms": {
+    "amd64": {
+      "manifestDigest": "sha256:67344ce981b43db67ab704aac20f06311d1ea66a4f89b754ca0554edc374fa83",
+      "configDigest": "sha256:8788b993b93cf5a2cc0cb3f66773171184669e19f4cb4edbd54145b639b1ba5e",
+      "companionSourceRevision": "595bd51be79995642da846afa2206d2ccb96bd08",
+      "companionSourceTree": "fd8fdcb99068c3d7fb4185aff0260a86b43876a2",
+      "allDistributedLayersAudited": true,
+      "allLayerDigestsVerified": true,
+      "noApplicationPythonSources": true,
+      "noSourceMaps": true,
+      "noApplicationPrivateKeyMaterial": true,
+      "nativeStartupVerified": true,
+      "cpuProfile": "amd64-v2",
+      "supervisorSHA256": "46a738b1f941af33d816a8fac3bb9e8ebec8ce9f6d904a3e4c0c8b497a0d042f",
+      "serviceSHA256": "ed2fb9e08f2217753e2b25c54d2f81546013eb9f8b5dc7e0fd028967cadd2916",
+      "llamaSHA256": "034a22de64cc6abf39039fcb29f3c3529c98a910c6b849b5fe15e768f2544fa4",
+      "intentProfileSHA256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+      "compiledProfileVerified": true,
+      "compiledCheckVerified": true,
+      "cpuBuildProofVerified": true,
+      "cpuBuildProof": {
+        "path": "release-records/amd64-local-ai019-cpu-build-proof.json",
+        "sha256": "d0bc0dfb5c3fa94b94e70c99ddfd8b3f1832461b0920e2f25080092efc066315"
+      },
+      "runtimeConfiguration": {
+        "path": "release-records/amd64-local-ai019-runtime-config.json",
+        "sha256": "29fa7e714e19961613bd9f8c6ab775696dfae02c0b9d0d86d36da75fe06bedf9"
+      },
+      "configSHA256": "29fa7e714e19961613bd9f8c6ab775696dfae02c0b9d0d86d36da75fe06bedf9",
+      "serviceBuildInputs": {
+        "path": "release-records/amd64-local-ai019-service-build-inputs.json",
+        "sha256": "c88a7637e3a3abfa50be7fabcf05ef20e5f0ac586e4d0d5906a37aaf14636fb9"
+      },
+      "runtimeConfigurationVerified": true,
+      "runtimeNoticesVerified": true,
+      "runtimeReadOnlyRootfsVerified": true,
+      "runtimeNoticesSHA256": "75701c2ed5e2a0e2b6448e7a51d410ce1b764346a7b8732f5e9f255f385e4fe5",
+      "performanceEvidence": {
+        "path": "release-records/amd64-local-ai019-source-performance.json",
+        "sha256": "932fad2f742df9a233e4b74ffd5e0770c1ba8410ba0a2fb716e82371491097ae"
+      },
+      "performanceSummary": {
+        "scope": "laboratory-runtime-corpus",
+        "caseCount": 25,
+        "passes": 25,
+        "failures": 0,
+        "coldStart": {
+          "caseId": "minimal-home",
+          "verdict": "pass",
+          "seconds": 596.83,
+          "errorCode": null,
+          "errorReason": null,
+          "technicalError": null
+        },
+        "configuredServiceBudgetSeconds": 600,
+        "allCasesPassed": true,
+        "allCasesPassedWithinServiceBudget": true
+      },
+      "layerAudit": {
+        "path": "release-records/amd64-local-ai019-layer-audit.json",
+        "sha256": "ec3e57ff9dd43f29a5e803398dc12d294f2761565fa264765d5c20bd458fa4b5"
+      },
+      "modelFreeQa": {
+        "path": "release-records/amd64-local-ai019-model-free-qa.json",
+        "sha256": "fd3c5e64504968ba86fe4bd969735445dc4c1f052780a55d4c76eb1833e2585a"
+      },
+      "producerRecord": {
+        "path": "release-records/amd64-local-ai019-producer-record.json",
+        "sha256": "bdb206d304d1ffc8ad3dc4e048487b3a5f5b47d841e18a2da75c38c533072684"
+      },
+      "independentStaticReview": {
+        "path": "release-records/root-final-amd595-static-review.json",
+        "sha256": "82a6e4bf6c749619dae410d47c385fd60bbdd91ef838dda1ef128d72b23c7810"
+      }
+    },
+    "arm64": {
+      "manifestDigest": "sha256:665cf51df9cbf8b17edaaefcdbbfffb2a0534339c7fa6819a4a82f1a8e7e7d8a",
+      "configDigest": "sha256:6a2d44c4ef1f3dea9dcf35ff9233926c5edef28c8c50976408fab26f974e7899",
+      "companionSourceRevision": "138fd6cfd1b99cea858f19f39f8976015da1de1b",
+      "companionSourceTree": "75ed4c702490df1f168bf590ba055768c260d236",
+      "allDistributedLayersAudited": true,
+      "allLayerDigestsVerified": true,
+      "noApplicationPythonSources": true,
+      "noSourceMaps": true,
+      "noApplicationPrivateKeyMaterial": true,
+      "nativeStartupVerified": true,
+      "cpuProfile": "arm64",
+      "supervisorSHA256": "73b8f69e65d0e8ff2c56c92a243d408adbc44f8b82bf5adc6c673b9b3e459ccb",
+      "serviceSHA256": "57782241c49af84d788846c4c2bcf547e24ed7878e9327bca96e029b3d37d77a",
+      "llamaSHA256": "e7a1fe417870f5bdbc826376ef1afae3986c8bb4de3dd3dce71e2ac4e2bf337b",
+      "intentProfileSHA256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+      "compiledProfileVerified": true,
+      "compiledCheckVerified": true,
+      "cpuBuildProofVerified": true,
+      "cpuBuildProof": {
+        "path": "release-records/arm64-local-ai019-cpu-build-proof.json",
+        "sha256": "f0641b55dd46cff0db6b800dddc7e5df6e71551f8a697b10abc937942bc8f49f"
+      },
+      "runtimeConfiguration": {
+        "path": "release-records/arm64-local-ai019-runtime-config.json",
+        "sha256": "a412ebd600f4e7cc72c7495a74262e8aa9af0d461f6f097db1057f0961ef4ccc"
+      },
+      "configSHA256": "a412ebd600f4e7cc72c7495a74262e8aa9af0d461f6f097db1057f0961ef4ccc",
+      "serviceBuildInputs": {
+        "path": "release-records/arm64-local-ai019-service-build-inputs.json",
+        "sha256": "a8279c57791060015e539ce8f0c7d92247c213614e7da8d04859ce3da063bca3"
+      },
+      "runtimeConfigurationVerified": true,
+      "runtimeNoticesVerified": true,
+      "runtimeReadOnlyRootfsVerified": true,
+      "runtimeNoticesSHA256": "94f29bbed6a22c35b992c5c6ebf0e7c92f13b836b90f36f461c9cf2f0f1d010d",
+      "performanceEvidence": {
+        "path": "release-records/arm64-local-ai019-source-performance.json",
+        "sha256": "008dfae21487e2fbe577f87aa927c4037af97d37092469ca51b0eeac8aeea98f"
+      },
+      "performanceSummary": {
+        "scope": "laboratory-runtime-corpus",
+        "caseCount": 25,
+        "passes": 25,
+        "failures": 0,
+        "coldStart": {
+          "caseId": "minimal-home",
+          "verdict": "pass",
+          "seconds": 129.852,
+          "errorCode": null,
+          "errorReason": null,
+          "technicalError": null
+        },
+        "configuredServiceBudgetSeconds": 180,
+        "allCasesPassed": true,
+        "allCasesPassedWithinServiceBudget": true
+      },
+      "layerAudit": {
+        "path": "release-records/arm64-local-ai019-layer-audit.json",
+        "sha256": "c8d43d0b1c4a7e88f3c03e370b7e190de81e45dfbe7cdcba2e18c09694bab3ec"
+      },
+      "modelFreeQa": {
+        "path": "release-records/arm64-local-ai019-model-free-qa.json",
+        "sha256": "c10de294a0042caeb3f0d6213c81185f384aef2bbca26694dc88d2c7152f4b4f"
+      },
+      "producerRecord": {
+        "path": "release-records/arm64-local-ai019-producer-record.json",
+        "sha256": "b14f556aa0ecdf96682cd2f2f9fe8af5f594015fe74b1b7156178d5434816a17"
+      },
+      "independentStaticReview": {
+        "path": "release-records/root-final-arm-static-review.json",
+        "sha256": "7cffaef087a49697b40dc618fab95102d46eea5fd45f0bffbcf50b676342c6f0"
+      }
+    }
+  },
+  "result": "PASS",
+  "anonymousMuxAndCompanionIndicesVerified": true,
+  "rootDeliveryReviews": {
+    "applicationPublicDelivery": {
+      "path": "release-records/root-umbrel-app082-public-delivery-admission.json",
+      "sha256": "7bbba6733fe5f07f1e2bc2bf331fb71445c869e9109398557057420f78e3162f"
+    },
+    "companionPublicDelivery": {
+      "path": "release-records/root-companion019-public-delivery-admission.json",
+      "sha256": "332878d507efeda316a533597839874533e77e2505c1d2a0777d9a69912e4818"
+    },
+    "normalGeneratedPackage": {
+      "path": "release-records/root-normal-package396-final-review.json",
+      "sha256": "f8fb0ac36a2c312bfbf375cb3756382a6b599b465a9c613fc9dc3fd364549a43"
+    }
+  },
+  "semanticQualification": {
+    "path": "release-records/local-ai019-reviewed-semantic-qualification.json",
+    "sha256": "008dfae21487e2fbe577f87aa927c4037af97d37092469ca51b0eeac8aeea98f"
+  },
+  "nativeRuntimePerformance": {
+    "evidence": {
+      "path": "release-records/native-local-ai019-source-performance.json",
+      "sha256": "89cb22927650d28bc5d15b0c9810b1acc8bcdca7b5236471ee77b2e4f32c7570"
+    },
+    "summary": {
+      "scope": "laboratory-runtime-corpus",
+      "caseCount": 25,
+      "passes": 24,
+      "failures": 1,
+      "coldStart": {
+        "caseId": "minimal-home",
+        "verdict": "fail",
+        "seconds": 180.004,
+        "errorCode": "runtime_timeout",
+        "errorReason": "intent_deadline",
+        "technicalError": null
+      },
+      "configuredServiceBudgetSeconds": 180,
+      "allCasesPassed": false,
+      "allCasesPassedWithinServiceBudget": false
+    }
+  },
+  "rejectedVariantHistory": {
+    "baseline-4b-600s": {
+      "path": "release-records/baseline-4b600-rejected-performance.json",
+      "sha256": "c311d5e8724be487b289615517bc0cd390fde0b0aac1f0c563b6a7ef9e559877"
+    },
+    "baseline-0.8b": {
+      "path": "release-records/baseline-08b-rejected-performance.json",
+      "sha256": "d6d0b412d7ec4dac69a7e0d79ffdc20c9669d06a99c955deb3c020d29b3f8ce7"
+    }
+  },
+  "compiledAmdOperation": {
+    "rawEvidence": {
+      "path": "release-records/amd595-compiled-operation-evidence.json",
+      "sha256": "04ea1742894c9e5a1e73e8d316a7c2191fa68f13d88dd4a607c2879b5030e55c"
+    },
+    "producerOutcomeSummary": {
+      "path": "release-records/amd595-compiled-operation-producer-summary.json",
+      "sha256": "03113860a8b252290583243d38d9e5e6cc2e9289151c976f02d85b1e051106bc"
+    },
+    "independentRootReview": {
+      "path": "release-records/root-final-amd595-compiled-operation-summary-bound-review.json",
+      "sha256": "80b33ea8e16e9deda572e8e277e84d8051b2e96bacebd6c48daede0b3ea7cf83"
+    }
+  },
+  "umbrelQualification": {
+    "1.7.4": {
+      "path": "release-records/umbrel642-normal-main082-memory-hold-qualification.json",
+      "sha256": "fe404621099c3a1534621fbfa4e5f27894b5ee25be035989316f92ff220a3783"
+    },
+    "2.0.0": {
+      "path": "release-records/umbrel643-normal-main082-memory-hold-qualification.json",
+      "sha256": "9cde523c19be96005044486efc9633a9f0f8eae2d00ab2329b6fc651f0b560a7"
+    }
+  },
+  "freshUnlicensedUmbrelQualification": {
+    "path": "release-records/umbrel649-normal-dev082-unlicensed-qualification.json",
+    "sha256": "5df849b70eeca328a35d1dfa9d2647e3a711fd02d984fe434068df8c0ad9f29d"
+  },
+  "armNativePackageQualification": {
+    "path": "release-records/arm396-dev-normal-package-qualification.json",
+    "sha256": "bd0de750169cb2b33a62d738234322946bcd27e4982711c99d71cf7243f4e8c7"
+  },
+  "additionalIndependentReviewBindings": {
+    "amdSource25": {
+      "path": "release-records/root-final-source25-review.json",
+      "sha256": "3cad479aa98456370c79c88f223a22522ae2e201e0cdea7f484b682bc4224fb2"
+    },
+    "armCompiled25": {
+      "path": "release-records/root-final-arm-compiled-qualification-review.json",
+      "sha256": "ddb26b60848a6bdd8b340d49d9072f96d6f8049d339040dfcbe6f54cbe9c717b"
+    },
+    "existingNormalUpdates": {
+      "path": "release-records/root-existing642643-normal-main-final-acceptance.json",
+      "sha256": "8995e24592244b8e6120ee97442bac9b2a466d2d850fe9983742c31b6d574354"
+    },
+    "unchangedOwnedVmHardwareAndConfig": {
+      "path": "release-records/root-final-lab-cleanup-preflight.json",
+      "sha256": "6fc63f51675c2e5f2235e5a02243bbfd96f897f3570c4e4e875304016969a18a"
+    }
+  },
+  "performanceScopeDisclosure": {
+    "sourceAMD25AllPassed": true,
+    "compiledAMDFirstColdDeadlinePassed": false,
+    "normal649DEVFirstColdDeadlinePassed": false,
+    "normal649DEVExplicitlyAdmittedWarmSuccess": true,
+    "normal649MAINMissionIntentFollowsProviderInference": true,
+    "normal649MAINFirstMissionDeadlinePassed": false,
+    "normal649MAINExplicitlyAdmittedWarmSuccess": true,
+    "normal649MAINMissionIntentColdClaimed": false,
+    "automaticModelRestoreVerified": false,
+    "modelRestartPolicy": "model-Off-on-service-restart-explicit-owner-Start",
+    "armPackageSmokeScope": "native-container-no-Umbrel-OS-gateway-or-store-install-claim"
+  }
+}

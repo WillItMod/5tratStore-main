@@ -1,0 +1,63 @@
+{
+  "owner": "codex-local-ai-free-20261016",
+  "target": 649,
+  "startedAt": "2026-10-16T18:04:14.159029+00:00",
+  "repository": "https://github.com/WillItMod/5tratStore-dev.git",
+  "repositoryHead": "088250e9acdbaa5ec16d4dda9f507762330d7775",
+  "version": "0.9.80-dev",
+  "image": "ghcr.io/willitmod/5tratmux-app:0.9.80-umbrel-dev@sha256:8f614bf5481e359da2f6cd79f95c178077e7e272da5bc29c4c023b3926ca8f18",
+  "phase": "stopped-needs-state-review",
+  "repositoryAddAttempts": 1,
+  "installAttempts": 1,
+  "candidateOrCompanionInstalled": false,
+  "licenceOrTrialActivationRequested": false,
+  "polls": [
+    {
+      "at": "2026-10-16T18:05:33.605639+00:00",
+      "state": {
+        "state": "ready",
+        "progress": 0
+      }
+    },
+    {
+      "at": "2026-10-16T18:05:48.703443+00:00",
+      "state": {
+        "state": "ready",
+        "progress": 0
+      }
+    },
+    {
+      "at": "2026-10-16T18:06:03.738124+00:00",
+      "state": {
+        "state": "ready",
+        "progress": 0
+      }
+    }
+  ],
+  "resolvedPublicApp": {
+    "store": {
+      "id": "willitmod-dev",
+      "name": "WillItMod Dev"
+    },
+    "app": {
+      "id": "willitmod-dev-5tratmux",
+      "version": "0.9.80-dev",
+      "port": null,
+      "name": "5tratMux DEV",
+      "dependencies": [],
+      "compatible": true
+    }
+  },
+  "normalInstallReview": {
+    "requiredFolders": [],
+    "gpuAccess": false
+  },
+  "beforeInstallState": {
+    "state": "not-installed",
+    "progress": 0
+  },
+  "installResponse": true,
+  "installResponseAt": "2026-10-16T18:05:33.569385+00:00",
+  "errorType": "KeyboardInterrupt",
+  "stoppedAt": "2026-10-16T18:06:05.884983+00:00"
+}

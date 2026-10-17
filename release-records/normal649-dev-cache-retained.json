@@ -1,0 +1,210 @@
+{
+  "schemaVersion": 1,
+  "kind": "root-admitted-normal-package649-phase",
+  "targetVmid": 649,
+  "actionId": "dev-cache-retained",
+  "operation": "operator",
+  "channel": "DEV",
+  "startedAt": "2026-10-16T19:56:06.515505+00:00",
+  "rootAdmission": {
+    "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/fresh649/root-normal649-safe-off-policy-successor-admission.json",
+    "sha256": "d760914b3f565152a65193f47cc8864352e9f53f464d73870b486c0b5ab0187d"
+  },
+  "result": "STOPPED_REQUIRES_REVIEW",
+  "apiMutationAttempts": [],
+  "polls": [],
+  "licenceOrTrialActivationRequested": false,
+  "hardwareChangeRequested": false,
+  "upstreamStorePublicationRequested": false,
+  "automaticMutationRetries": 0,
+  "beforeSnapshot": {
+    "kind": "read-only-normal649-public-app-state-snapshot",
+    "targetVmid": 649,
+    "version": "0.9.82-dev",
+    "channel": "DEV",
+    "imageId": "sha256:3cd72ad4d37a9a21ac7cca0a2cd085ea6eccc908c3a091df4af8ec40426c53bf",
+    "containerId": "f1ad8d4a8276a66d356bd71ad3fd9a05bbeab349a8db1ca57c945a8a5cda2c99",
+    "running": true,
+    "stateFiles": {
+      "mux_settings.json": {
+        "sha256": "87962e06b1084b749e0c6d5d154ed8284f80018e7ffbe5f6c6ff536d33efd0f5",
+        "bytes": 472,
+        "uid": 1000,
+        "gid": 1000,
+        "mode": "0o600"
+      },
+      "licensing_device_key.pem": {
+        "sha256": "3e991af3778d2c96f4e5e9f21d7777e70d86ae06a0fa0157077622ee358bf19e",
+        "bytes": 119,
+        "uid": 1000,
+        "gid": 1000,
+        "mode": "0o600"
+      },
+      "licensing_installation_id": {
+        "sha256": "548ec4b6a9d8d9356ddb7bad38527829df952a49d402d6118875dd1eac846626",
+        "bytes": 64,
+        "uid": 1000,
+        "gid": 1000,
+        "mode": "0o600"
+      },
+      "standalone_auth/session-key": {
+        "sha256": "cb60b421552e97029d6be431720a92bba8a218cb6e6ea53171853cd01cb7d93a",
+        "bytes": 32,
+        "uid": 1000,
+        "gid": 1000,
+        "mode": "0o600"
+      }
+    },
+    "authorityOverridesPresent": false,
+    "credentialBytesCopiedOut": false
+  },
+  "actualOperatorOrMonitorResult": {
+    "kind": "actual-fresh649-normal-package-operator-step",
+    "targetVmid": 649,
+    "owner": "codex-local-ai-free-20261016",
+    "action": "model-hash",
+    "startedAt": "2026-10-16T19:56:13.748894+00:00",
+    "channel": "DEV",
+    "imageRef": "ghcr.io/willitmod/5tratmux-app:0.9.82-umbrel-dev@sha256:5eb55feec01de1a3b4bdf16027dd22a4fdf5844c83c016996eeeace0e876ca5e",
+    "localAIImageRef": "ghcr.io/willitmod/5tratmux-app:local-ai-0.1.9-umbrel@sha256:b8050920c408eab295ba5848f209d560b5207f821901e09d7a6788c1e2b175d3",
+    "rootAdmissionSha256": "d760914b3f565152a65193f47cc8864352e9f53f464d73870b486c0b5ab0187d",
+    "result": "STOPPED_REQUIRES_REVIEW",
+    "licenceOrTrialActivationRequested": false,
+    "providerApplyRequested": false,
+    "keyOrSessionCredentialCopiedOut": false,
+    "hostHardwareMutationRequested": false,
+    "automaticMutationRetry": false,
+    "applicationBoundary": {
+      "imageId": "sha256:3cd72ad4d37a9a21ac7cca0a2cd085ea6eccc908c3a091df4af8ec40426c53bf",
+      "containerId": "f1ad8d4a8276a66d356bd71ad3fd9a05bbeab349a8db1ca57c945a8a5cda2c99",
+      "user": "1000:1000",
+      "running": true,
+      "oomKilled": false,
+      "restartCount": 0,
+      "readOnlyRootfs": true,
+      "capDrop": [
+        "ALL"
+      ],
+      "securityOpt": [
+        "no-new-privileges:true"
+      ],
+      "cpuQuotaNano": 0,
+      "memoryLimitBytes": 1610612736,
+      "memorySwapLimitBytes": 3221225472,
+      "pidsLimit": 256,
+      "tmpfs": {
+        "/tmp": "rw,nosuid,nodev,exec,size=256m,mode=1777"
+      },
+      "publishedPorts": {
+        "7331/tcp": [
+          {
+            "HostIp": "",
+            "HostPort": "7331"
+          }
+        ]
+      },
+      "mounts": [
+        {
+          "Type": "bind",
+          "Source": "/home/umbrel/umbrel/app-data/willitmod-dev-5tratmux/data/state",
+          "Destination": "/data/state",
+          "RW": true
+        },
+        {
+          "Type": "bind",
+          "Source": "/home/umbrel/umbrel/app-data/willitmod-dev-5tratmux/data/local-ai-control",
+          "Destination": "/run/5tratmux-local-ai",
+          "RW": false
+        }
+      ]
+    },
+    "companionBoundary": {
+      "imageId": "sha256:8788b993b93cf5a2cc0cb3f66773171184669e19f4cb4edbd54145b639b1ba5e",
+      "containerId": "be1c20d7dc29ce1f842574b3a2028ee6e146ce5b5f9455b2946dfc8a56d255e0",
+      "user": "1000:1000",
+      "running": true,
+      "oomKilled": false,
+      "restartCount": 0,
+      "readOnlyRootfs": true,
+      "capDrop": [
+        "ALL"
+      ],
+      "securityOpt": [
+        "no-new-privileges:true"
+      ],
+      "cpuQuotaNano": 2000000000,
+      "memoryLimitBytes": 6442450944,
+      "memorySwapLimitBytes": 6442450944,
+      "pidsLimit": 128,
+      "tmpfs": {
+        "/tmp": "rw,nosuid,nodev,exec,size=512m,mode=1777"
+      },
+      "publishedPorts": {},
+      "mounts": [
+        {
+          "Type": "bind",
+          "Source": "/home/umbrel/umbrel/app-data/willitmod-dev-5tratmux/data/local-ai-control",
+          "Destination": "/run/5tratmux-local-ai",
+          "RW": true
+        },
+        {
+          "Type": "bind",
+          "Source": "/home/umbrel/umbrel/app-data/willitmod-dev-5tratmux/data/local-ai",
+          "Destination": "/data/local-ai",
+          "RW": true
+        }
+      ]
+    },
+    "actualConfigSha256": "29fa7e714e19961613bd9f8c6ab775696dfae02c0b9d0d86d36da75fe06bedf9",
+    "actualProducerInputsSha256": "c88a7637e3a3abfa50be7fabcf05ef20e5f0ac586e4d0d5906a37aaf14636fb9",
+    "actualServiceSha256VerifiedByPackageIdentity": "ed2fb9e08f2217753e2b25c54d2f81546013eb9f8b5dc7e0fd028967cadd2916",
+    "actualRuntimeConfig": {
+      "threads": 2,
+      "requestTimeoutSeconds": 600,
+      "cpuProfile": "amd64-v2",
+      "binarySha256": "034a22de64cc6abf39039fcb29f3c3529c98a910c6b849b5fe15e768f2544fa4"
+    },
+    "actualReservePolicy": {
+      "reserveBytes": 1073741824,
+      "reserveFraction": 0.15,
+      "monitorSeconds": 5
+    },
+    "stableFilesBefore": {
+      "mux_settings.json": {
+        "sha256": "87962e06b1084b749e0c6d5d154ed8284f80018e7ffbe5f6c6ff536d33efd0f5",
+        "bytes": 472,
+        "mode": "0o600",
+        "uid": 1000,
+        "gid": 1000
+      },
+      "licensing_device_key.pem": {
+        "sha256": "3e991af3778d2c96f4e5e9f21d7777e70d86ae06a0fa0157077622ee358bf19e",
+        "bytes": 119,
+        "mode": "0o600",
+        "uid": 1000,
+        "gid": 1000
+      },
+      "licensing_installation_id": {
+        "sha256": "548ec4b6a9d8d9356ddb7bad38527829df952a49d402d6118875dd1eac846626",
+        "bytes": 64,
+        "mode": "0o600",
+        "uid": 1000,
+        "gid": 1000
+      },
+      "standalone_auth/session-key": {
+        "sha256": "cb60b421552e97029d6be431720a92bba8a218cb6e6ea53171853cd01cb7d93a",
+        "bytes": 32,
+        "mode": "0o600",
+        "uid": 1000,
+        "gid": 1000
+      }
+    },
+    "endedAt": "2026-10-16T19:56:13.839926+00:00",
+    "errorType": "AssertionError",
+    "errorDetail": "Raw exception text and credentials withheld; read retained phase/response and reconcile, never repeat automatically."
+  },
+  "endedAt": "2026-10-16T19:56:13.852874+00:00",
+  "errorType": "AssertionError",
+  "rawExceptionWithheld": true,
+  "modelMayRemainOn": true
+}

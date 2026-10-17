@@ -1,0 +1,51 @@
+#!/bin/sh
+set -eu
+umask 077
+# Repair only verified app-owned directory inodes, never saved files.
+app_dir=${APP_DATA_DIR:?APP_DATA_DIR must name this app directory}
+case "$app_dir" in /*) ;; *) echo "App directory must be absolute" >&2; exit 1;; esac
+if [ ! -d "$app_dir" ] || [ -L "$app_dir" ]; then
+  echo "Refusing a missing or symlinked app directory" >&2; exit 1
+fi
+app_real=$(cd -P -- "$app_dir" && pwd -P)
+app_id=willitmod-dev-5tratmux
+[ "${app_real##*/}" = "$app_id" ] || { echo "Refusing another app's definition directory" >&2; exit 1; }
+data_root=${APP_DATA_ROOT:-$app_dir/data}
+case "$data_root" in /*) ;; *) echo "Data root must be absolute" >&2; exit 1;; esac
+if [ "$data_root" = "$app_dir" ] || [ "$data_root" = "$app_real" ]; then
+  echo "Refusing the app definition directory as storage" >&2; exit 1
+fi
+legacy_root=false
+case "$data_root" in "$app_dir/data"|"$app_real/data") legacy_root=true;;
+  */"$app_id") ;; *) echo "Refusing a data root outside this app's managed slot" >&2; exit 1;; esac
+[ ! -L "$data_root" ] || { echo "Refusing a symlinked data root" >&2; exit 1; }
+if [ ! -e "$data_root" ]; then
+  if [ -n "${APP_DATA_ROOT:-}" ]; then echo "Relocated data root is unavailable" >&2; exit 1; fi
+  mkdir -m 700 -- "$data_root"
+fi
+[ -d "$data_root" ] || { echo "Data root is not a directory" >&2; exit 1; }
+cd -P -- "$data_root"
+root_real=$(pwd -P)
+[ "$root_real" != "$app_real" ] || { echo "Refusing the app definition directory as storage" >&2; exit 1; }
+if [ "$legacy_root" = true ]; then
+  [ "$root_real" = "$app_real/data" ] || { echo "Refusing a changed app data root" >&2; exit 1; }
+else
+  [ "${root_real##*/}" = "$app_id" ] || { echo "Refusing an unexpected relocated slot" >&2; exit 1; }
+fi
+# Validate every child before changing any child's permissions. A stale symlink
+# must fail the update rather than cause a partial new runtime installation.
+for child in state local-ai local-ai-control; do
+  [ ! -L "$child" ] || { echo "Refusing symlinked $child directory" >&2; exit 1; }
+  if [ -e "$child" ] && [ ! -d "$child" ]; then echo "$child is not a directory" >&2; exit 1; fi
+done
+chown -h 1000:1000 -- .
+chmod 700 .
+for child in state local-ai local-ai-control; do
+  if [ ! -e "$child" ]; then mkdir -m 700 -- "$child"; fi
+  (
+    cd -P -- "$child"
+    [ "$(pwd -P)" = "$root_real/$child" ] || { echo "Refusing changed $child directory" >&2; exit 1; }
+    chown -h 1000:1000 -- .
+    chmod 700 .
+  )
+done

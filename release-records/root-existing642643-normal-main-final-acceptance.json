@@ -1,0 +1,234 @@
+{
+  "status": "ROOT_EXISTING642643_NORMAL_MAIN082_UPDATE_OFF_LIFECYCLE_MEMORY_HOLD_ACCEPTED",
+  "reviewer": "/root",
+  "at": "2026-10-16T19:37:56.289636+00:00",
+  "peerReview": {
+    "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/existing642643-normal-main-qa-peer-review.json",
+    "sha256": "2504436514d9ee01ab2140c63b14f68d0a36a24a15bbdc4c07bf0bac9b34b991"
+  },
+  "reviewedRawRecomputationSource": {
+    "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/review_existing_normal_sequences_v3.py",
+    "sha256": "614e614b7b7aac02f57d05fc29e29f5cae57c2de0480b02b058ac28afc372fc8"
+  },
+  "results": [
+    {
+      "targetVmid": 642,
+      "pipeline": {
+        "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/normal-existing-642-pipeline-v3.json",
+        "sha256": "e8fd9c480f330da3b1b866bd527a6ee1e3d6c447c6ebccf37468702b2e2ab905",
+        "bytes": 6053
+      },
+      "pipelineLog": {
+        "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/normal-existing-642-pipeline-v3.log",
+        "sha256": "4d57adfb0242c6dfc7e43c095d87de3ffa3db2b2172f17d7b23b39522fccd65f",
+        "bytes": 2474
+      },
+      "rawPhases": [
+        {
+          "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/normal-existing-642-normal080-to082-old-layout-fix.json",
+          "sha256": "64c7f48cb7fff722ae88c3b843a131e5b32609005b75cdbf1a5ff6d484c527d7",
+          "bytes": 83706
+        },
+        {
+          "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/normal-existing-642-capture.json",
+          "sha256": "a248fbce3d78ce91d82b36370dc9f778dfef8f315862a9a952d8a5749a0bf527",
+          "bytes": 75183
+        },
+        {
+          "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/normal-existing-642-install-off.json",
+          "sha256": "14023f01d5f944553006516a2e6606c875a031a7376b321359d0c9434e30f68c",
+          "bytes": 92246
+        },
+        {
+          "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/normal-existing-642-select4b-off.json",
+          "sha256": "f7046c8ca052af6b41d546a5141914ecbcecf81688f25a841f68a3f8c858d900",
+          "bytes": 90853
+        },
+        {
+          "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/normal-existing-642-actual-memory-capacity-hold.json",
+          "sha256": "6acf88672d20d7ee0fd99ca39280762561a25faaa0987a019bdddea4a8494a17",
+          "bytes": 75181
+        },
+        {
+          "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/normal-existing-642-private-socket-peer-check.json",
+          "sha256": "6d02200140c5cc9c2e8fcee34114d964f33ed04766fa15eb0769500bef0a67b6",
+          "bytes": 74706
+        },
+        {
+          "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/normal-existing-642-restart-off.json",
+          "sha256": "17612f4e62a2ae5fc8543f6afe1c58008ede33c6ee0d0f76183be381efc2e149",
+          "bytes": 134407
+        },
+        {
+          "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/normal-existing-642-explicit-off.json",
+          "sha256": "3ef0279039c3ee7eb5bea70a3161f7913402139607cd12320fcb402b2ba0f33d",
+          "bytes": 74721
+        },
+        {
+          "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/normal-existing-642-remove-off.json",
+          "sha256": "7194f57c084f03c914466f1e0b6cb51b5e7482da3c1429500ee5058161e1af4d",
+          "bytes": 91325
+        },
+        {
+          "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/normal-existing-642-reinstall-off.json",
+          "sha256": "8f6e82caa8a1e3eaf59cb3df9ee2544eb56b76b2c72dd768b8453df0ea473996",
+          "bytes": 91294
+        },
+        {
+          "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/normal-existing-642-final-off-capture.json",
+          "sha256": "341ce29910e43bf87f64d83e3d48f210a3ee2015324048d8755fc4c4d2760a45",
+          "bytes": 74434
+        }
+      ],
+      "normalUpdateAttempts": 1,
+      "synchronousUpdateResponseUncertain": true,
+      "normalUpdateReconciledReadyWithoutRepeat": true,
+      "hostHardwareSHA256": "bb648b08da3cdc19d6d06eed65eec077bfe66be012c1c46458601953b027ad44",
+      "actualMemoryHold": {
+        "hostTotalBytes": 8262787072,
+        "hostAvailableBytes": 4769153024,
+        "reserveBytes": 1239418060,
+        "modelBudgetBytes": 5368709120,
+        "requiredHostAvailableBytes": 6608127180,
+        "hostFailsBudgetPlusReserve": true,
+        "memoryLimitBytes": 6442450944
+      },
+      "memoryHoldHttpStatus": 409,
+      "socketPeerCheck": {
+        "socketOwnerUid": 1000,
+        "socketMode": "0o600",
+        "serverUid": 1000,
+        "callerUid": 0,
+        "wrongUidRejectedBeforeHttp": true,
+        "authenticatedAppUid1000StatusAlreadySucceeded": true
+      },
+      "allRawStatusCount": 24,
+      "protectedSixFilesAuthorityPortsStateRootAndEmptyModelCachePreserved": true,
+      "existingPaidLabIdentityPreserved": true,
+      "defaultProductionAuthorityPaidProofClaimed": false,
+      "localAiLicenceRequired": false,
+      "finalModel": "qwen3.5-4b",
+      "finalDesiredEnabled": false,
+      "finalRuntimeRunning": false,
+      "modelDownloads": 0,
+      "modelInferences": 0,
+      "rootFinalAcceptanceRequired": true
+    },
+    {
+      "targetVmid": 643,
+      "pipeline": {
+        "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/normal-existing-643-pipeline-v3.json",
+        "sha256": "e467a2b26ce5e2a5dc8ca0720215d5a27a825d8b271a76c10f035eb363556425",
+        "bytes": 6053
+      },
+      "pipelineLog": {
+        "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/normal-existing-643-pipeline-v3.log",
+        "sha256": "808e0d3900113777e5d162e3e400e553438e70ea2c72929844fa8fe0840a551d",
+        "bytes": 2474
+      },
+      "rawPhases": [
+        {
+          "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/normal-existing-643-normal080-to082-old-layout-fix.json",
+          "sha256": "30766650ff70dc7d9af0f5ceb6492ab02033c32ed77bcd35a1139591387700d7",
+          "bytes": 83472
+        },
+        {
+          "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/normal-existing-643-capture.json",
+          "sha256": "3677b8cb16881f795c63a67d65a6e32a6cdc05170cae3388bc48b42be72e3445",
+          "bytes": 75183
+        },
+        {
+          "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/normal-existing-643-install-off.json",
+          "sha256": "42ccb7360b84592bff6153a015abc05d1d1099b206ac5eb1ce4175228dcfcb77",
+          "bytes": 92246
+        },
+        {
+          "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/normal-existing-643-select4b-off.json",
+          "sha256": "378a333d4acac0a4e355c3c84764787f47f5712fe87bc584bea1c587fa62ebad",
+          "bytes": 90853
+        },
+        {
+          "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/normal-existing-643-actual-memory-capacity-hold.json",
+          "sha256": "7c4866e73fade6428a2f226e4983c84bbba1fccb37bc85fa7089c1b9fdaf8917",
+          "bytes": 75181
+        },
+        {
+          "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/normal-existing-643-private-socket-peer-check.json",
+          "sha256": "5b396a9330fa0c307f5ed6e9235b30af3f7de1a9e2e518d0d8a3384e3d3c1f8a",
+          "bytes": 74706
+        },
+        {
+          "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/normal-existing-643-restart-off.json",
+          "sha256": "d94e73f3e06ae9dc1e281ddfee26f8d00bcd127ce3f55517a57408424f5a6c70",
+          "bytes": 134407
+        },
+        {
+          "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/normal-existing-643-explicit-off.json",
+          "sha256": "a5d210ba9ae1e39058f81c599ef4086ca8c0b52de586b910a30c1d379d825dde",
+          "bytes": 74721
+        },
+        {
+          "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/normal-existing-643-remove-off.json",
+          "sha256": "08cc8b877753edb3664cb8e23e06ebe4124bd934eb4026e6ff91399257bf114b",
+          "bytes": 91325
+        },
+        {
+          "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/normal-existing-643-reinstall-off.json",
+          "sha256": "ccb90555f25ea1db4798a3e29148b42955b695ba78faf400eeb95d16b0551d88",
+          "bytes": 91294
+        },
+        {
+          "path": "/Users/johnny/Documents/AI LLM/umbrel-local-ai-evidence-20261016/qa-vms/normal-existing-643-final-off-capture.json",
+          "sha256": "79d5ccc34d26cd83841a1975bf57d7e62b7be9f7c18472d08ef114334286276c",
+          "bytes": 74434
+        }
+      ],
+      "normalUpdateAttempts": 1,
+      "synchronousUpdateResponseUncertain": true,
+      "normalUpdateReconciledReadyWithoutRepeat": true,
+      "hostHardwareSHA256": "2e798c40547746aea37703e4e9cd8f5d22a302411bbe0758188315285717dd07",
+      "actualMemoryHold": {
+        "hostTotalBytes": 8262782976,
+        "hostAvailableBytes": 4839874560,
+        "reserveBytes": 1239417446,
+        "modelBudgetBytes": 5368709120,
+        "requiredHostAvailableBytes": 6608126566,
+        "hostFailsBudgetPlusReserve": true,
+        "memoryLimitBytes": 6442450944
+      },
+      "memoryHoldHttpStatus": 409,
+      "socketPeerCheck": {
+        "socketOwnerUid": 1000,
+        "socketMode": "0o600",
+        "serverUid": 1000,
+        "callerUid": 0,
+        "wrongUidRejectedBeforeHttp": true,
+        "authenticatedAppUid1000StatusAlreadySucceeded": true
+      },
+      "allRawStatusCount": 24,
+      "protectedSixFilesAuthorityPortsStateRootAndEmptyModelCachePreserved": true,
+      "existingPaidLabIdentityPreserved": true,
+      "defaultProductionAuthorityPaidProofClaimed": false,
+      "localAiLicenceRequired": false,
+      "finalModel": "qwen3.5-4b",
+      "finalDesiredEnabled": false,
+      "finalRuntimeRunning": false,
+      "modelDownloads": 0,
+      "modelInferences": 0,
+      "rootFinalAcceptanceRequired": true
+    }
+  ],
+  "all22RawPhaseReceiptsRehashedAndRecomputed": true,
+  "priorFailedCheckpointPinsRehashed": 14,
+  "normalUpdatesSubmittedOnceEach": true,
+  "uncertainSynchronousResponsesRetainedAndReadyReconciledWithoutRepeat": true,
+  "sixProtectedFilesAuthorityPortsCacheHardwarePreserved": true,
+  "actualFreshRam409AndUidBoundaryPassed": true,
+  "noModelDownloadOrInferenceClaimed": true,
+  "paidIdentityScope": "pre-existing-owned-lab-paid-identity",
+  "defaultProductionAuthorityPaidProofClaimed": false,
+  "freshUnlicensedProofSeparate649": true,
+  "productionOrStorePromotionGrantedByThisReceipt": false,
+  "ordinaryShutdownOfOwned642643ToOriginalStoppedAdmitted": true,
+  "router641MustRemainUpUntil649Completed": true
+}

@@ -1,0 +1,40 @@
+{
+  "kind": "read-only-existing-qa-authority-source-classification",
+  "observedAt": "2026-10-16T18:32:43.462290+00:00",
+  "containerId": "9d70e21ec7736055cdd2e14227c051db43a24e8316958607f3d5e7a283f091b2",
+  "imageId": "sha256:5690e50ccecf41d97ce3613033f6a46a4eed6444f3a5f33ae2cd8dc11d970487",
+  "running": true,
+  "licensingEnvironmentKeyNames": [
+    "MUX_LICENSING_FALLBACK_IP",
+    "MUX_LICENSING_FALLBACK_IPS",
+    "MUX_LICENSING_PUBLIC_KEY",
+    "MUX_LICENSING_URL"
+  ],
+  "licensingEnvironmentMappingSha256": "4898afbd65a4e32b88886c2cda9d863b2d3c153d09f1ac93cdd042c1056f5eda",
+  "authoritySourceClassification": "existing-owned-lab-authority",
+  "installedFiles": {
+    "docker-compose.yml": {
+      "sha256": "3f7482082efa5f7d4f0c23ba96e428a6ceb84f365f56404f86a140826350f6be",
+      "bytes": 1149,
+      "mode": "0o644",
+      "uid": 0,
+      "licensingKeyNamesOnly": []
+    },
+    "testoverride.env": {
+      "sha256": "47ac86e0a951db644f687a5e5336a33b83ae1387eabd669c965b78467b885383",
+      "bytes": 181,
+      "mode": "0o600",
+      "uid": 0,
+      "licensingKeyNamesOnly": [
+        "MUX_LICENSING_FALLBACK_IP",
+        "MUX_LICENSING_FALLBACK_IPS",
+        "MUX_LICENSING_PUBLIC_KEY",
+        "MUX_LICENSING_URL"
+      ]
+    }
+  },
+  "valuesOrKeyBytesCopiedOut": false,
+  "authorityOrLicenceMutationPerformed": false,
+  "appContainerOrHardwareMutationPerformed": false,
+  "targetVmid": 642
+}

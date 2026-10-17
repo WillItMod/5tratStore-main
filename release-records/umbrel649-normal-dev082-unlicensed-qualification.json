@@ -1,0 +1,338 @@
+{
+  "kind": "fresh-unlicensed-normal-umbrel-package-qualification",
+  "result": "PASS",
+  "architecture": "amd64",
+  "osVersion": "2.0.0",
+  "targetVmid": 649,
+  "configuredMemoryMiB": 16384,
+  "sourceRevision": "138fd6cfd1b99cea858f19f39f8976015da1de1b",
+  "sourceTree": "75ed4c702490df1f168bf590ba055768c260d236",
+  "testedChannel": "DEV",
+  "testedVersion": "0.9.82-dev",
+  "testedImageRef": "ghcr.io/willitmod/5tratmux-app:0.9.82-umbrel-dev@sha256:5eb55feec01de1a3b4bdf16027dd22a4fdf5844c83c016996eeeace0e876ca5e",
+  "localAIImageRef": "ghcr.io/willitmod/5tratmux-app:local-ai-0.1.9-umbrel@sha256:b8050920c408eab295ba5848f209d560b5207f821901e09d7a6788c1e2b175d3",
+  "testedApplicationConfigDigest": "sha256:3cd72ad4d37a9a21ac7cca0a2cd085ea6eccc908c3a091df4af8ec40426c53bf",
+  "testedPackageRecipeSHA256": "d05e15851ef0376fc2967cdbcbc33fbf796fa3251fb24726df1b8177ff82dcbf",
+  "protectedExecutableSHA256": "e14b3b4bcf1e30686cc7d9040b0c9a441e582ab182c6766396233c335d0b5b7c",
+  "freshNormalOwnerVerified": true,
+  "normalBaselineToCandidateTransitionVerified": true,
+  "operatorAuthenticationVerified": true,
+  "actualChannelInferenceVerified": true,
+  "onPreferenceRetained": true,
+  "actualModelAndConfigurationVerified": true,
+  "socketPeerIdentityVerified": true,
+  "noHostControllerOrDockerSocket": true,
+  "hardwareUnchanged": true,
+  "hostReserveUnchanged": true,
+  "rootFilesystemReadOnlyVerified": true,
+  "transitionPreservedState": true,
+  "transitionKind": "public080-dev-to082-dev-normal-app-manager-update",
+  "priorVersion": "0.9.80-dev",
+  "licenceOrTrialActivationPerformed": false,
+  "licenceState": {
+    "registered": true,
+    "recordedState": "inactive",
+    "accessAllowed": false,
+    "source": "none"
+  },
+  "paidRoutingGuardHttpStatuses": {
+    "settings": 402,
+    "workerAllocation": 402
+  },
+  "runtimeCpuLimit": 2,
+  "runtimeMemoryLimitBytes": 6442450944,
+  "runtimeMemorySwapLimitBytes": 6442450944,
+  "runtimeBinarySha256": "034a22de64cc6abf39039fcb29f3c3529c98a910c6b849b5fe15e768f2544fa4",
+  "modelSha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+  "intentProfileSha256": "100cea9af32f231ffbb36ee57990dfe5b3c4d2aaaafecf48028288ce7fef83f6",
+  "requestTimeoutSeconds": 600,
+  "continuousOnSeconds": 660.0477377460002,
+  "lifecycleScope": "observed-this-channel",
+  "onOffPersistenceVerified": true,
+  "normalAppStopStartVerified": true,
+  "runtimeRemovalReinstallOffVerified": true,
+  "modelAndPreferencesRetained": true,
+  "noEntitlementStop": true,
+  "noOom": true,
+  "firstIntentOutcome": {
+    "firstHostEvidence": {
+      "path": "release-records/normal649-dev-canonical-intent-first.json",
+      "sha256": "d69be0973807594b5935978bbb2bcd0571900943c1ee03f6506229691827925d"
+    },
+    "firstGuestEvidence": {
+      "path": "release-records/normal649-dev-canonical-intent-first-guest.json",
+      "sha256": "3c6d4858a43ac255338e9f5ae53fcb8e7769622d6ccb1c20431d01fd83a53451"
+    },
+    "independentFirstFailureReview": {
+      "path": "release-records/root-dev-first-cold-failure-and-660-review.json",
+      "sha256": "96423a505682f67a9d195e06e51b2b3cc128a37f55cef164ec51fde33412640d"
+    },
+    "explicitWarmAdmission": {
+      "path": "release-records/root-normal649-dev-one-explicit-warm-admission.json",
+      "sha256": "36c315b7e6e832b479cd684ca0f305caf9f7bf4401284d0121d099ca7ddcfdb0"
+    },
+    "successfulHostEvidence": {
+      "path": "release-records/normal649-dev-canonical-intent-explicit-warm-after-reviewed600.json",
+      "sha256": "4ca28302e91990183c244b5c09451c2e61ae90f5427862ef7cb26357e312befe"
+    },
+    "successfulGuestEvidence": {
+      "path": "release-records/normal649-dev-canonical-intent-explicit-warm-guest.json",
+      "sha256": "8745506dc8f60a7bf939a7c9787bf7dd487aedc20ebd15361b31a25f545e52eb"
+    },
+    "independentWarmSuccessReview": {
+      "path": "release-records/root-dev-explicit-warm-success-review.json",
+      "sha256": "9bda77215419bf7ac40eb6dd67be64e0226d3228441b0cb7e6111d44955bfaae"
+    },
+    "firstAttemptPassed": false,
+    "firstAttemptElapsedSeconds": 600.002,
+    "firstColdDeadlinePassed": false,
+    "successfulGenerationSeconds": 149.944,
+    "automaticWarmRetries": 0,
+    "sameModelPid": 89,
+    "firstUsableOutputProduced": false,
+    "filesystemOrPromptCacheCleared": false
+  },
+  "restartPolicyEvidence": {
+    "originalRestartExpectationFailure": {
+      "path": "release-records/normal649-dev-restart-on.json",
+      "sha256": "b5b82eeec80388fd3fc8bbe527947db781850bc531cbec0927e44f728916f677"
+    },
+    "safeOffEvidence": {
+      "path": "release-records/normal649-dev-reconcile-saved-on-restart-safe-off.json",
+      "sha256": "ff435c971c3bebcfa23043302e9ed22a07ab20609d5486be25046b8deddf8ecf"
+    },
+    "explicitOwnerStartEvidence": {
+      "path": "release-records/normal649-dev-explicit-owner-resume-after-restart.json",
+      "sha256": "cb2fb925d2773cfaa1312aca2017017fe73c0d016bc487065b195629ddcd71e2"
+    },
+    "explicitOwnerStartReadiness": {
+      "path": "release-records/normal649-dev-explicit-owner-resume-after-restart-settled-readiness.json",
+      "sha256": "f4e69cde5e7f0e5fbc2df7330608e296f1a1cbae1f383a82a1627279931c160c"
+    }
+  },
+  "savedOnAndOffPreferencesRetained": true,
+  "restartSafeOffVerified": true,
+  "explicitOwnerStartVerified": true,
+  "automaticModelRestoreVerified": false,
+  "modelRestartPolicy": "model-Off-on-service-restart-explicit-owner-Start",
+  "healthObservation": {
+    "firstHealthyResponseElapsedSeconds": 0.042687706999458896,
+    "lastHealthyRequestStartedElapsedSeconds": 660.0904254529996,
+    "sampleCount": 132,
+    "passiveOnlyClaimed": false
+  },
+  "modelAcquisitionScope": "verified-public-cache-reuse-then-normal-physical-hash-admission",
+  "wanDownloadClaimed": false,
+  "uncachedFilesystemColdStartClaimed": false,
+  "originalColdPassed": false,
+  "normalManagerOriginalIncorrectAutoRestoreExpectationRetained": true,
+  "originalAuthPreflightFailureCause": "unknown",
+  "authLimitsOrCredentialsChanged": false,
+  "rawEvidence": {
+    "normal649-dev-660-first-valid-sample.json": {
+      "path": "release-records/normal649-dev-660-first-valid-sample.json",
+      "sha256": "e9cb4c41baa07e1aed4a1b714828eb7e9478e490be8b4ee99b74ea7c1578f029"
+    },
+    "normal649-dev-660-observation.json": {
+      "path": "release-records/normal649-dev-660-observation.json",
+      "sha256": "f7d1bb0c681002136844e13c36c9ced930ea232d30365e970b4a40a6952a9bbf"
+    },
+    "normal649-dev-admit-public-cache.json": {
+      "path": "release-records/normal649-dev-admit-public-cache.json",
+      "sha256": "dc827ed99b1f649e093e544611532fa5be4d101fc8363f518ba7fd196d133481"
+    },
+    "normal649-dev-after-first-cold-deadline-monitor-snapshot.json": {
+      "path": "release-records/normal649-dev-after-first-cold-deadline-monitor-snapshot.json",
+      "sha256": "07e5b7b62152ff138e9da7239f1dbce78fb8ef174de4aaf7643ab15982a9d679"
+    },
+    "normal649-dev-auth-after-window-normal-login-and-public-cache-read.json": {
+      "path": "release-records/normal649-dev-auth-after-window-normal-login-and-public-cache-read.json",
+      "sha256": "90bec1b37de81be12dbaf3ca57ab4e9c5534609eba81ae3b09d7d61e5a3d08af"
+    },
+    "normal649-dev-cache-auth-refusal-readonly-classification.json": {
+      "path": "release-records/normal649-dev-cache-auth-refusal-readonly-classification.json",
+      "sha256": "590786e574b8023c5e24b33af8b53a976e386cae3aaa39e8546aace23ea47ca9"
+    },
+    "normal649-dev-cache-retained-after-reviewed-auth-preflight.json": {
+      "path": "release-records/normal649-dev-cache-retained-after-reviewed-auth-preflight.json",
+      "sha256": "b0d8e101304db53be7d390f2f8df31e80d388cee276ac3068dccde1395eb14e9"
+    },
+    "normal649-dev-cache-retained.json": {
+      "path": "release-records/normal649-dev-cache-retained.json",
+      "sha256": "8f04a0e21954bef190ce850d6633e2200dedb8558d2b14faf2b8884e89caff18"
+    },
+    "normal649-dev-canonical-intent-explicit-warm-after-reviewed600.json": {
+      "path": "release-records/normal649-dev-canonical-intent-explicit-warm-after-reviewed600.json",
+      "sha256": "4ca28302e91990183c244b5c09451c2e61ae90f5427862ef7cb26357e312befe"
+    },
+    "normal649-dev-canonical-intent-explicit-warm-guest.json": {
+      "path": "release-records/normal649-dev-canonical-intent-explicit-warm-guest.json",
+      "sha256": "8745506dc8f60a7bf939a7c9787bf7dd487aedc20ebd15361b31a25f545e52eb"
+    },
+    "normal649-dev-canonical-intent-first-guest.json": {
+      "path": "release-records/normal649-dev-canonical-intent-first-guest.json",
+      "sha256": "3c6d4858a43ac255338e9f5ae53fcb8e7769622d6ccb1c20431d01fd83a53451"
+    },
+    "normal649-dev-canonical-intent-first.json": {
+      "path": "release-records/normal649-dev-canonical-intent-first.json",
+      "sha256": "d69be0973807594b5935978bbb2bcd0571900943c1ee03f6506229691827925d"
+    },
+    "normal649-dev-capture.json": {
+      "path": "release-records/normal649-dev-capture.json",
+      "sha256": "08d4abff600ba5330e6227c9a7dc39c7e74bf2d3eb27af175877b3bfa0dd29cb"
+    },
+    "normal649-dev-copy-public-cache.json": {
+      "path": "release-records/normal649-dev-copy-public-cache.json",
+      "sha256": "6eae942bccf35a13abcb0c137ebba622a5e736bd659bf2d69da9011d7c6ee836"
+    },
+    "normal649-dev-disable-settled-readiness.json": {
+      "path": "release-records/normal649-dev-disable-settled-readiness.json",
+      "sha256": "089f9c0bc0cd321d5e37fd758c0236502fae998bd5506527ec48cb5de6df26a1"
+    },
+    "normal649-dev-disable.json": {
+      "path": "release-records/normal649-dev-disable.json",
+      "sha256": "ac65f99f3c04dc63d4989b465a9e234ac0526c2da5069869ce087b51258b6ffa"
+    },
+    "normal649-dev-enable.json": {
+      "path": "release-records/normal649-dev-enable.json",
+      "sha256": "a2b7bb0e13bf3d54cea1d42bc4e85c0d5bf9dbf7e7f9be4052e8e7f651b3596b"
+    },
+    "normal649-dev-explicit-owner-resume-after-restart-settled-readiness.json": {
+      "path": "release-records/normal649-dev-explicit-owner-resume-after-restart-settled-readiness.json",
+      "sha256": "f4e69cde5e7f0e5fbc2df7330608e296f1a1cbae1f383a82a1627279931c160c"
+    },
+    "normal649-dev-explicit-owner-resume-after-restart.json": {
+      "path": "release-records/normal649-dev-explicit-owner-resume-after-restart.json",
+      "sha256": "cb2fb925d2773cfaa1312aca2017017fe73c0d016bc487065b195629ddcd71e2"
+    },
+    "normal649-dev-first-intent-progress-01.json": {
+      "path": "release-records/normal649-dev-first-intent-progress-01.json",
+      "sha256": "b9a607ffa80d203adb25bccb84eec261eabf5a8e0f86c1765c02ad6275b9f2d2"
+    },
+    "normal649-dev-first-on-readiness.json": {
+      "path": "release-records/normal649-dev-first-on-readiness.json",
+      "sha256": "151a6478d5b16ca4c0faea85995fa08765f8bf362d193012aeec121d67ea07c6"
+    },
+    "normal649-dev-install.json": {
+      "path": "release-records/normal649-dev-install.json",
+      "sha256": "7393a5a7c7ef0b23a779c2affe10ce5ff92196e9d15ba65526602439939b7001"
+    },
+    "normal649-dev-installed-off-readiness.json": {
+      "path": "release-records/normal649-dev-installed-off-readiness.json",
+      "sha256": "46628865b25b0300e2f953897b0aa74bd022de7ae0c60b1abff30294089b0b77"
+    },
+    "normal649-dev-model-hash.json": {
+      "path": "release-records/normal649-dev-model-hash.json",
+      "sha256": "109a448b339902c18f03833a63acc40f1cc45a54b2037878edc491c10e141bfc"
+    },
+    "normal649-dev-normal080-to082-icon-bound-fix.json": {
+      "path": "release-records/normal649-dev-normal080-to082-icon-bound-fix.json",
+      "sha256": "6fffbc2f32053e21ba1ab91353d849a644cdbf00c87ae7574d309b7bf65652f5"
+    },
+    "normal649-dev-normal080-to082.json": {
+      "path": "release-records/normal649-dev-normal080-to082.json",
+      "sha256": "efabfbdb36a3dbd30b03421540c80732577a40413d60fcabfb55bcf97a084866"
+    },
+    "normal649-dev-peer-check.json": {
+      "path": "release-records/normal649-dev-peer-check.json",
+      "sha256": "afe0c985718202eabc70a4abcbb252d45cf456f4aaca3c1ae845a87d0b04c033"
+    },
+    "normal649-dev-pre-explicit-warm-readiness.json": {
+      "path": "release-records/normal649-dev-pre-explicit-warm-readiness.json",
+      "sha256": "64e83bf135a9becfd116e06cf76c87f591c7f3a5748a1196e7617a61acc924b4"
+    },
+    "normal649-dev-provider-comparison.json": {
+      "path": "release-records/normal649-dev-provider-comparison.json",
+      "sha256": "1d102d3452449c2546ce370951c6450c14c2ae9ee594988e2883cc71d341057d"
+    },
+    "normal649-dev-provider-read-only-progress.json": {
+      "path": "release-records/normal649-dev-provider-read-only-progress.json",
+      "sha256": "f7152ff68a20bce7b346dc73579689e9c03fa1bbcc41df719a6bc602a64425dd"
+    },
+    "normal649-dev-public-cache-admission-complete.json": {
+      "path": "release-records/normal649-dev-public-cache-admission-complete.json",
+      "sha256": "f692ef6adffd66a448c342e2ef0123b5e7774cbdd08d5b6eb67b51c7173a89c3"
+    },
+    "normal649-dev-reconcile-saved-on-restart-safe-off.json": {
+      "path": "release-records/normal649-dev-reconcile-saved-on-restart-safe-off.json",
+      "sha256": "ff435c971c3bebcfa23043302e9ed22a07ab20609d5486be25046b8deddf8ecf"
+    },
+    "normal649-dev-reenable-before-main-settled-readiness.json": {
+      "path": "release-records/normal649-dev-reenable-before-main-settled-readiness.json",
+      "sha256": "d7a3b2e646af6481d1c28bf0df7d75665e5e35cf8dffb8e787c7aabfd9fa3d3d"
+    },
+    "normal649-dev-reenable-before-main.json": {
+      "path": "release-records/normal649-dev-reenable-before-main.json",
+      "sha256": "cde76f35426b52f819d282502033913290f3ded30965e7635fabc722e2a5043a"
+    },
+    "normal649-dev-reinstall-off-settled-readiness.json": {
+      "path": "release-records/normal649-dev-reinstall-off-settled-readiness.json",
+      "sha256": "3aaff93a52d09053b56e90429a1ac90678c2de33905c96b252b04aefd67c1ade"
+    },
+    "normal649-dev-reinstall-off.json": {
+      "path": "release-records/normal649-dev-reinstall-off.json",
+      "sha256": "19413d3ea5cb4a1bab3e8edf4ad39412e6b7f03b01899872071d667f5092b495"
+    },
+    "normal649-dev-remove-settled-readiness.json": {
+      "path": "release-records/normal649-dev-remove-settled-readiness.json",
+      "sha256": "ddd42ef6b0d78ec99fd33031e2abdb44d52632dab889054c2411cdb9e9c01f3b"
+    },
+    "normal649-dev-remove.json": {
+      "path": "release-records/normal649-dev-remove.json",
+      "sha256": "13061654336806df0545f6164307bfab70a8c21eb6e2974dc1cbc58e3376a9ca"
+    },
+    "normal649-dev-restart-off.json": {
+      "path": "release-records/normal649-dev-restart-off.json",
+      "sha256": "92d9f24e267b06c6b5bfa40ec19f5097631e4f683bfe5e3d2f168f4b5a736060"
+    },
+    "normal649-dev-restart-on-read-only-progress.json": {
+      "path": "release-records/normal649-dev-restart-on-read-only-progress.json",
+      "sha256": "6a6786f9fd4149b64e49095cf12bf800972a02badad5736becfa87f351727f05"
+    },
+    "normal649-dev-restart-on.json": {
+      "path": "release-records/normal649-dev-restart-on.json",
+      "sha256": "b5b82eeec80388fd3fc8bbe527947db781850bc531cbec0927e44f728916f677"
+    },
+    "normal649-dev-select.json": {
+      "path": "release-records/normal649-dev-select.json",
+      "sha256": "2771d84c4a7fbf69d5d478c2d4e7bd87663206184af72eea93d2e4c1bb3d57ed"
+    },
+    "normal649-dev-warm-host-readonly-predicate-refusal.json": {
+      "path": "release-records/normal649-dev-warm-host-readonly-predicate-refusal.json",
+      "sha256": "f4f35e65f1b5dc5caed2bc59aa7490e7241fa9139031202ed30c85aea4760068"
+    },
+    "onboarding-649.json": {
+      "path": "release-records/onboarding-649.json",
+      "sha256": "2a0e5ba71fd980696ce519ddf1bf2029400f94abafe471b0691ec7ce84107d8b"
+    },
+    "public080-unlicensed-baseline.json": {
+      "path": "release-records/public080-unlicensed-baseline.json",
+      "sha256": "252e2ec40f510356703673d7c9e104927031686bac902d14f8c8cfda7f2b50be"
+    },
+    "public080-normal-install.json": {
+      "path": "release-records/public080-normal-install.json",
+      "sha256": "4bd1ef87573bdf3a3b70d5bf579041274b6ad47a2130f7e0f127c110ddc3ea42"
+    },
+    "root-dev-first-cold-failure-and-660-review.json": {
+      "path": "release-records/root-dev-first-cold-failure-and-660-review.json",
+      "sha256": "96423a505682f67a9d195e06e51b2b3cc128a37f55cef164ec51fde33412640d"
+    },
+    "root-normal649-dev-one-explicit-warm-admission.json": {
+      "path": "release-records/root-normal649-dev-one-explicit-warm-admission.json",
+      "sha256": "36c315b7e6e832b479cd684ca0f305caf9f7bf4401284d0121d099ca7ddcfdb0"
+    },
+    "root-dev-explicit-warm-success-review.json": {
+      "path": "release-records/root-dev-explicit-warm-success-review.json",
+      "sha256": "9bda77215419bf7ac40eb6dd67be64e0226d3228441b0cb7e6111d44955bfaae"
+    },
+    "root-normal649-safe-off-policy-successor-admission.json": {
+      "path": "release-records/root-normal649-safe-off-policy-successor-admission.json",
+      "sha256": "d760914b3f565152a65193f47cc8864352e9f53f464d73870b486c0b5ab0187d"
+    },
+    "root-normal649-auth-preflight-recovery-admission.json": {
+      "path": "release-records/root-normal649-auth-preflight-recovery-admission.json",
+      "sha256": "485569862ef42f36428a702389b36d30cd35fd551a57eeda8657cdc31cf1d7db"
+    }
+  },
+  "storePublicationGrantedByThisDerivedRecord": false
+}

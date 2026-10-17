@@ -1,0 +1,199 @@
+{
+  "actualDefaultGgmlPollingLevel": 0,
+  "actualDisassemblySha256": "0659deb179905423755b03f437ccdcb822e4066abf99bc8948b7713bd805ef0f",
+  "binaryBytes": 15653840,
+  "binarySha256": "034a22de64cc6abf39039fcb29f3c3529c98a910c6b849b5fe15e768f2544fa4",
+  "cmakeOff": [
+    "BUILD_SHARED_LIBS",
+    "GGML_AMX_BF16",
+    "GGML_AMX_INT8",
+    "GGML_AMX_TILE",
+    "GGML_AVX",
+    "GGML_AVX2",
+    "GGML_AVX512",
+    "GGML_AVX512_BF16",
+    "GGML_AVX512_VBMI",
+    "GGML_AVX512_VNNI",
+    "GGML_AVX_VNNI",
+    "GGML_BACKEND_DL",
+    "GGML_BMI2",
+    "GGML_CPU_ALL_VARIANTS",
+    "GGML_CPU_KLEIDIAI",
+    "GGML_CPU_REPACK",
+    "GGML_F16C",
+    "GGML_FMA",
+    "GGML_LLAMAFILE",
+    "GGML_NATIVE",
+    "GGML_OPENMP",
+    "GGML_STATIC",
+    "LLAMA_OPENSSL",
+    "LLAMA_USE_PREBUILT_UI"
+  ],
+  "compiledInitialOpenBlasThreadTimeoutTicks": 16,
+  "compilerCommandsChecked": 345,
+  "cpuProfile": "amd64-v2",
+  "elfHeader": "ELF Header:\n  Magic:   7f 45 4c 46 02 01 01 03 00 00 00 00 00 00 00 00 \n  Class:                             ELF64\n  Data:                              2's complement, little endian\n  Version:                           1 (current)\n  OS/ABI:                            UNIX - GNU\n  ABI Version:                       0\n  Type:                              DYN (Position-Independent Executable file)\n  Machine:                           Advanced Micro Devices X86-64\n  Version:                           0x1\n  Entry point address:               0x12edf0\n  Start of program headers:          64 (bytes into file)\n  Start of section headers:          15651536 (bytes into file)\n  Flags:                             0x0\n  Size of this header:               64 (bytes)\n  Size of program headers:           56 (bytes)\n  Number of program headers:         14\n  Size of section headers:           64 (bytes)\n  Number of section headers:         36\n  Section header string table index: 35\n",
+  "guardedInstructionReviewSha256": "ee79136adb2dc1b59ddd2b8738ff4966ac7b681c14a0297aecf81d556fb02e54",
+  "guardedInstructionSites": 62,
+  "inferencePerformed": false,
+  "kind": "actual-amd64-v2-static-nehalem-openblas-build",
+  "linkedLibraries": "\tlinux-vdso.so.1 (0x00007fcc999ce000)\n\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007fcc998e5000)\n\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007fcc98a1e000)\n\t/lib64/ld-linux-x86-64.so.2 (0x00007fcc999d0000)\n",
+  "mathTeamIncludesCallingThread": true,
+  "modelWeightsIncluded": false,
+  "openblasDynamicArchitecture": false,
+  "openblasMathTeamMaximumThreads": 2,
+  "openblasOverrideProbe": {
+    "config": {
+      "config": "OpenBLAS 0.3.34 NO_LAPACK NO_LAPACKE NO_AFFINITY USE_LOCKING NEHALEM MAX_THREADS=2",
+      "core": "NEHALEM",
+      "kind": "config",
+      "parallel": 1,
+      "tasksBefore": 2,
+      "threadsBeforeSetter": 2
+    },
+    "result": {
+      "apiOverrideClamped": true,
+      "correct": true,
+      "kind": "result",
+      "residentThreads": 2,
+      "threads": 2
+    },
+    "shapes": [
+      {
+        "correct": true,
+        "k": 512,
+        "kind": "sgemm",
+        "m": 512,
+        "maxResidentThreads": 2,
+        "n": 512,
+        "repeats": 8,
+        "seconds": 0.064393812
+      },
+      {
+        "correct": true,
+        "k": 2560,
+        "kind": "sgemm",
+        "m": 64,
+        "maxResidentThreads": 2,
+        "n": 9216,
+        "repeats": 4,
+        "seconds": 0.427206702
+      },
+      {
+        "correct": true,
+        "k": 9216,
+        "kind": "sgemm",
+        "m": 64,
+        "maxResidentThreads": 2,
+        "n": 2560,
+        "repeats": 4,
+        "seconds": 0.461195557
+      },
+      {
+        "correct": true,
+        "k": 2560,
+        "kind": "sgemm",
+        "m": 64,
+        "maxResidentThreads": 2,
+        "n": 8192,
+        "repeats": 4,
+        "seconds": 0.700082805
+      }
+    ],
+    "threadCpuTickDeltas": {
+      "33": 178,
+      "34": 161
+    }
+  },
+  "openblasProbe": {
+    "config": {
+      "config": "OpenBLAS 0.3.34 NO_LAPACK NO_LAPACKE NO_AFFINITY USE_LOCKING NEHALEM MAX_THREADS=2",
+      "core": "NEHALEM",
+      "kind": "config",
+      "parallel": 1,
+      "tasksBefore": 2,
+      "threadsBeforeSetter": 2
+    },
+    "result": {
+      "apiOverrideClamped": true,
+      "correct": true,
+      "kind": "result",
+      "residentThreads": 2,
+      "threads": 2
+    },
+    "shapes": [
+      {
+        "correct": true,
+        "k": 512,
+        "kind": "sgemm",
+        "m": 512,
+        "maxResidentThreads": 2,
+        "n": 512,
+        "repeats": 8,
+        "seconds": 0.121377545
+      },
+      {
+        "correct": true,
+        "k": 2560,
+        "kind": "sgemm",
+        "m": 64,
+        "maxResidentThreads": 2,
+        "n": 9216,
+        "repeats": 4,
+        "seconds": 0.689432316
+      },
+      {
+        "correct": true,
+        "k": 9216,
+        "kind": "sgemm",
+        "m": 64,
+        "maxResidentThreads": 2,
+        "n": 2560,
+        "repeats": 4,
+        "seconds": 0.77001336
+      },
+      {
+        "correct": true,
+        "k": 2560,
+        "kind": "sgemm",
+        "m": 64,
+        "maxResidentThreads": 2,
+        "n": 8192,
+        "repeats": 4,
+        "seconds": 0.606494384
+      }
+    ],
+    "threadCpuTickDeltas": {
+      "31": 240,
+      "32": 213
+    }
+  },
+  "openblasProbeSha256": "1fa7dee6b784f301fd96e9e5cf103b8d9301697ef7046c9bfac2da34f4cf4b16",
+  "openblasSourceCommit": "e0166008be8e466242aa76b2ff75ce3f0fbf574a",
+  "openblasSourceSha256": "cd7e129868320cc2d033afa920e31202dfe0b8066a5b66661900ccc0f197dfed",
+  "openblasStaticSha256": "7a586f302ff38736a0d4624eb2806c29614001bc7e3a3209943ce8a0b7cca4c9",
+  "openblasThreadTimeoutExponent": 4,
+  "openblasVersion": "0.3.34",
+  "openblasWorkerThreads": 1,
+  "productionQualificationGranted": false,
+  "schemaVersion": "1.0",
+  "sourceArchiveSha256": "94b3e8281bbc803bdc081a5e54ea84c7e9004f1f2cf332662deef433d542a86a",
+  "sourceCommit": "465e49b9cea78a68b9c244ffb48d0ee24a82873d",
+  "upstreamBaseCommit": "465e49b9cea78a68b9c244ffb48d0ee24a82873d",
+  "upstreamPatch": {
+    "afterSha256": "5e741b1b0e0826b075e9d6582207a5251ad112c75c4a02a81d395d9b56d3734c",
+    "beforeSha256": "7cfcc6a57122702ea35d04ed20861aef162bd94f55cfbbf9fd23ee3127fe6cb4",
+    "changedArchiveFiles": [
+      "common/common.h"
+    ],
+    "defaultPollingLevel": 0,
+    "originalArchiveFilesChecked": 3543,
+    "patchSha256": "461eb4eb61e5a01f282c996f86ef7c679d23363ec37ed6dfe5b21ed9e72fb94f",
+    "path": "common/common.h",
+    "upstreamBaseCommit": "465e49b9cea78a68b9c244ffb48d0ee24a82873d",
+    "upstreamSourceModified": true
+  },
+  "upstreamSourceModified": true,
+  "version": "version: 0.4.0-dev (build 0, commit 465e49b9cea78a68b9c244ffb48d0ee24a82873d)\nbuilt with GNU 12.2.0 for Linux x86_64\n",
+  "wholeServerThreadLimitClaimed": false
+}

@@ -1,0 +1,19 @@
+{
+  "owner": "codex-local-ai-free-20261016",
+  "target": "649",
+  "resourceId": 649,
+  "resourceName": "codex-local-ai-free-umbrel200-20261016",
+  "version": "2.0.0",
+  "ip": "172.30.241.17",
+  "mac": "02:CA:16:06:49:01",
+  "origin": "http://127.0.0.1:19249",
+  "observedAt": "2026-10-16T18:03:18.934392+00:00",
+  "registeredOwnerVerified": true,
+  "authenticatedOwnerVerified": true,
+  "authenticatedAppListingVerified": true,
+  "appCount": 0,
+  "sshHostKeyVerified": true,
+  "appInstalled": false,
+  "runtimeQualified": false,
+  "normalOwnerSshAndSudoVerified": true
+}

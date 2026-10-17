@@ -1,0 +1,25 @@
+{
+  "at": "2026-10-16T20:07:56.130629+00:00",
+  "readOnly": true,
+  "powerActionsSent": 0,
+  "vms": [
+    {
+      "vmid": 641,
+      "canonicalApiConfigSHA256": "096229aeadf1d86d70a7c7abccc34747abd1e6617a2bbc792b9eb3ca0da6f51c",
+      "rawConfigSHA256": "88f75de8257a13cb9e247462e1406c313c9dea29a3575d6bf9a46efe007d97bc",
+      "status": "status: running",
+      "baselineConfigurationUnchanged": true
+    },
+    {
+      "vmid": 649,
+      "canonicalApiConfigSHA256": "2afab82508e8303e395739c0c51ed0c65d30928e0593ed195f9a6637bc90db22",
+      "rawConfigSHA256": "6be64bb201fe5452561db3f623fbfec2663b7be035f92d45952194b5bc6996f9",
+      "status": "status: running",
+      "baselineConfigurationUnchanged": true
+    }
+  ],
+  "priorReadOnlyGuardRefusal": {
+    "cause": "Compared raw649file digest with canonical API JSON digest; assertion before any power or configuration action",
+    "reconciled": true
+  }
+}

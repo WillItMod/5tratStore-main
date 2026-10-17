@@ -1,0 +1,234 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "root",
+  "at": "2026-10-16T17:40:29.868967+00:00",
+  "status": "ANONYMOUS_ALL_CONFIG_AND_LAYER_DELIVERY_UMBREL_APP082_ACCEPTED",
+  "source": {
+    "revision": "138fd6cfd1b99cea858f19f39f8976015da1de1b",
+    "tree": "75ed4c702490df1f168bf590ba055768c260d236"
+  },
+  "images": {
+    "dev": {
+      "imageRef": "ghcr.io/willitmod/5tratmux-app:0.9.82-umbrel-dev@sha256:5eb55feec01de1a3b4bdf16027dd22a4fdf5844c83c016996eeeace0e876ca5e",
+      "indexDigest": "sha256:5eb55feec01de1a3b4bdf16027dd22a4fdf5844c83c016996eeeace0e876ca5e",
+      "platforms": {
+        "amd64": {
+          "manifestDigest": "sha256:7b989399a0241ec14560add97728316c7e9c67f515a589a55f6bb8573dfb98eb",
+          "configurationDigest": "sha256:3cd72ad4d37a9a21ac7cca0a2cd085ea6eccc908c3a091df4af8ec40426c53bf",
+          "orderedRootfsDiffIds": [
+            "sha256:e58989146fcec76699871403b9897b5c014af1ccd85f5a9300a215e7975525d7",
+            "sha256:6ca3a08f2584aff16a2d93315ecef6d9a97c889c35698e1a828d075208a4f561",
+            "sha256:71620f689d9194eb8c4a3260af32bbadfff8f3d4e8bedf62e522e09bc3cb8d9d",
+            "sha256:d7c934459a99c0ae40c110b15be003c91ca5b76d03ffdff9ad90fb03c8c13571",
+            "sha256:3e8689434ee20fb814e648b0ed0d46fe833c2382f7f46a2130669be3c3cc93db",
+            "sha256:a1859c8c390c370a71559bc1060aa83a45b5f63e765dcea2f624ddbd2edd3616"
+          ],
+          "registryLayers": [
+            {
+              "mediaType": "application/vnd.oci.image.layer.v1.tar",
+              "digest": "sha256:e58989146fcec76699871403b9897b5c014af1ccd85f5a9300a215e7975525d7",
+              "size": 77936640
+            },
+            {
+              "mediaType": "application/vnd.oci.image.layer.v1.tar",
+              "digest": "sha256:6ca3a08f2584aff16a2d93315ecef6d9a97c889c35698e1a828d075208a4f561",
+              "size": 1536
+            },
+            {
+              "mediaType": "application/vnd.oci.image.layer.v1.tar",
+              "digest": "sha256:71620f689d9194eb8c4a3260af32bbadfff8f3d4e8bedf62e522e09bc3cb8d9d",
+              "size": 28626944
+            },
+            {
+              "mediaType": "application/vnd.oci.image.layer.v1.tar",
+              "digest": "sha256:d7c934459a99c0ae40c110b15be003c91ca5b76d03ffdff9ad90fb03c8c13571",
+              "size": 17155584
+            },
+            {
+              "mediaType": "application/vnd.oci.image.layer.v1.tar",
+              "digest": "sha256:3e8689434ee20fb814e648b0ed0d46fe833c2382f7f46a2130669be3c3cc93db",
+              "size": 19913728
+            },
+            {
+              "mediaType": "application/vnd.oci.image.layer.v1.tar",
+              "digest": "sha256:a1859c8c390c370a71559bc1060aa83a45b5f63e765dcea2f624ddbd2edd3616",
+              "size": 28896768
+            }
+          ],
+          "archiveSha256": "c0c117b770f24bcbf1ee24736b804c11fb87c18d13bc9ab07096773e50190ed0",
+          "archiveBytes": 90781425
+        },
+        "arm64": {
+          "manifestDigest": "sha256:984dc7bb99dcddbea915dd30f78412005741f77c4c947f2782cd3bb4350f6a88",
+          "configurationDigest": "sha256:32e761e4e942095ed87df4f56404ad4fab3f92e185aa56076a8e827fd07f5bf2",
+          "orderedRootfsDiffIds": [
+            "sha256:dca69811453d69d10b6c0345a5c49147162abe20a2f77802d66efc60667949ea",
+            "sha256:ee43b99525cdbb29069c578a18076eefcff6a1595af7acadf5f633c8082e36d5",
+            "sha256:f615992aa0a3d0a075c6448c5dcba6b3e774a48f1aa17cb225e43f0f1f5ca5b9",
+            "sha256:efa7d73e802d7ab777384367654291b94aa7789eebcda68ea4613c2d8f77525e",
+            "sha256:72ba49f8a4484add6bf6c92b68fc8cc2101abdff5437418167ff8b4178beb769",
+            "sha256:011c5f1ed640d53cbc437967af59a19690d4086890e4e6da32584808f2f9fda3"
+          ],
+          "registryLayers": [
+            {
+              "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+              "digest": "sha256:c75f989a229d12b2d2613a5997de9ff3546f664c22da9248720033a2410220f6",
+              "size": 28137179
+            },
+            {
+              "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+              "digest": "sha256:aa91bd1fb08a27c9bf0228f6deb8aaab07e19a70c56a14fdda75ff5cb4b3228e",
+              "size": 93
+            },
+            {
+              "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+              "digest": "sha256:0b5beacad90b9f8ede7c675b05cd973f207b892c54421d832e6dcf7cb694d338",
+              "size": 18329334
+            },
+            {
+              "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+              "digest": "sha256:53a615c3d49c107dfbf50ba03533c8721516a66947f691755c7328515850858c",
+              "size": 16379964
+            },
+            {
+              "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+              "digest": "sha256:256e1f7fae173be2edc4f77aa01017abff3464d3e5a6bf0e55cad4c38c8dd05b",
+              "size": 14272144
+            },
+            {
+              "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+              "digest": "sha256:9bc8969f3e060abf8c11d4527deb2287d57e294cc754b8add2720f88c62a436b",
+              "size": 7787401
+            }
+          ],
+          "archiveSha256": "a3fef979f5a144e286607b6adbebd1fc592fa16d63523bf0ddce627f21e76a22",
+          "archiveBytes": 84469892
+        }
+      }
+    },
+    "main": {
+      "imageRef": "ghcr.io/willitmod/5tratmux-app:0.9.82-umbrel@sha256:9ef5ac209472b9f57cfb74eeda3e96e5a03f77747cab19a12cbfdf8abaafbe15",
+      "indexDigest": "sha256:9ef5ac209472b9f57cfb74eeda3e96e5a03f77747cab19a12cbfdf8abaafbe15",
+      "platforms": {
+        "amd64": {
+          "manifestDigest": "sha256:1c02e6a5c54d6213de3f783255e993b631e3e4cca942b075bb890825cb1fe920",
+          "configurationDigest": "sha256:73fc590eb227a54fb945ac0579b9af54b6d82db97b09a86d9be30aecddf232ba",
+          "orderedRootfsDiffIds": [
+            "sha256:e58989146fcec76699871403b9897b5c014af1ccd85f5a9300a215e7975525d7",
+            "sha256:6ca3a08f2584aff16a2d93315ecef6d9a97c889c35698e1a828d075208a4f561",
+            "sha256:29f603f5b04039c33f6b672beb5af9b684567dd5f5c0dd3bb981c3a0c4e15e41",
+            "sha256:d8ea4bc567390459ebc0dd4fc4c7ea28d059f617e2cd4c6ae886c6f1d5251f14",
+            "sha256:fd26acfb6de0f74094599f39012b6ee29c7f8017af7b3efb4d7a65b234f23b14",
+            "sha256:3a814a890bbf97505c305b8bf9ca939e2750c4bca15f2f13beddd2f93f83b33e"
+          ],
+          "registryLayers": [
+            {
+              "mediaType": "application/vnd.oci.image.layer.v1.tar",
+              "digest": "sha256:e58989146fcec76699871403b9897b5c014af1ccd85f5a9300a215e7975525d7",
+              "size": 77936640
+            },
+            {
+              "mediaType": "application/vnd.oci.image.layer.v1.tar",
+              "digest": "sha256:6ca3a08f2584aff16a2d93315ecef6d9a97c889c35698e1a828d075208a4f561",
+              "size": 1536
+            },
+            {
+              "mediaType": "application/vnd.oci.image.layer.v1.tar",
+              "digest": "sha256:29f603f5b04039c33f6b672beb5af9b684567dd5f5c0dd3bb981c3a0c4e15e41",
+              "size": 28626944
+            },
+            {
+              "mediaType": "application/vnd.oci.image.layer.v1.tar",
+              "digest": "sha256:d8ea4bc567390459ebc0dd4fc4c7ea28d059f617e2cd4c6ae886c6f1d5251f14",
+              "size": 17155584
+            },
+            {
+              "mediaType": "application/vnd.oci.image.layer.v1.tar",
+              "digest": "sha256:fd26acfb6de0f74094599f39012b6ee29c7f8017af7b3efb4d7a65b234f23b14",
+              "size": 19913728
+            },
+            {
+              "mediaType": "application/vnd.oci.image.layer.v1.tar",
+              "digest": "sha256:3a814a890bbf97505c305b8bf9ca939e2750c4bca15f2f13beddd2f93f83b33e",
+              "size": 28896768
+            }
+          ],
+          "archiveSha256": "222e9d31edec9e8ba4b476448e76c705019a4f56b3c2aa80776c78b79ec4f1d6",
+          "archiveBytes": 90775770
+        },
+        "arm64": {
+          "manifestDigest": "sha256:f33a9a70d14f9ea1465232e87137d849b346addb3589d7b4e4231247fe4332d5",
+          "configurationDigest": "sha256:e5c89729436bc7632488938dc7861980e10f14c2a6f469af85891de2632c2abe",
+          "orderedRootfsDiffIds": [
+            "sha256:dca69811453d69d10b6c0345a5c49147162abe20a2f77802d66efc60667949ea",
+            "sha256:ee43b99525cdbb29069c578a18076eefcff6a1595af7acadf5f633c8082e36d5",
+            "sha256:b7fca695c677062a18be2da6c491e1feda525460b088ef5a0a076dcd6ce6b151",
+            "sha256:299505441346804b41346260bcd7ce877ec94f5ed776ab5fd3dcbc4c6a0da834",
+            "sha256:92ac69af7e968859de739bdbf16d26aa76c0c97e716cedbcdcd0bc966f92d653",
+            "sha256:9d4633f5e54ce5179024d4bbf50eba094939b8bddd319bbf7175941749de15c8"
+          ],
+          "registryLayers": [
+            {
+              "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+              "digest": "sha256:c75f989a229d12b2d2613a5997de9ff3546f664c22da9248720033a2410220f6",
+              "size": 28137179
+            },
+            {
+              "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+              "digest": "sha256:aa91bd1fb08a27c9bf0228f6deb8aaab07e19a70c56a14fdda75ff5cb4b3228e",
+              "size": 93
+            },
+            {
+              "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+              "digest": "sha256:fa278b47145d8ac185beb1f0d162cf5aa0feb4cc97bf63f089b848a8458e8708",
+              "size": 18329327
+            },
+            {
+              "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+              "digest": "sha256:ddbc132302a8f49cf39dc40b08636e9208c324d34f381917c73d96aaff081a19",
+              "size": 16379964
+            },
+            {
+              "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+              "digest": "sha256:5edddf7142e5a6942e3e9cb98db4954ae65814a77925adb078ea923a4b16403d",
+              "size": 14272144
+            },
+            {
+              "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+              "digest": "sha256:2f76a163006f69fe8fbb672c50fcbed629a5b8d59e654394706cfe03faf0b912",
+              "size": 7787395
+            }
+          ],
+          "archiveSha256": "072a3611c2c13d512158aadc4a388b14619580de3ae16671f8ba2df828e8558a",
+          "archiveBytes": 84469561
+        }
+      }
+    }
+  },
+  "rootAnonymousMetadataReview": {
+    "path": "/Users/johnny/Documents/AI LLM/local-ai-free-evidence-20261016/app082-registry-root-readonly/identity-receipt.json",
+    "sha256": "614264e94c689cbe2d6645d18319348d00188d2cb6df53f82ee0371fedcb31c1"
+  },
+  "macInventory": {
+    "path": "/Users/johnny/Documents/AI LLM/local-ai-free-evidence-20261016/mac-umbrel-app082-publication-return/delivery-files.json",
+    "sha256": "43f4c490548697f0198948d707653aeba8afeebb0f069cf5b6d1164a9187c061"
+  },
+  "macIndependentReview": {
+    "path": "/Users/johnny/Documents/AI LLM/local-ai-free-evidence-20261016/mac-umbrel-app082-publication-return/final-independent-publication-review.json",
+    "sha256": "95633138efe237c29ab3d45b478b1bd3b3b819695ba6a8ada6def70989a89ea4"
+  },
+  "macCompletedPublisher": {
+    "path": "/Users/johnny/Documents/AI LLM/local-ai-free-evidence-20261016/mac-umbrel-app082-publication-return/attempt-2/publication-result.json",
+    "sha256": "6bcfa37e5f56ed21115930170521f5e4003115203e1d320bee7ad72a32648819"
+  },
+  "all27MetadataFilesHashVerified": true,
+  "uniqueAll24BlobDownloadsVerifiedAgainstActualPlatformDescriptors": true,
+  "layerDeliveryEvidenceScope": "Publisher downloaded every compressed layer/config anonymously before and after final tags; root independently fetched both indexes, four manifests/configs and checked exact audited config hashes/ordered rootfs. Root did not repeat layer downloads.",
+  "oldTagsAndLocalEngineSettingsPreserved": true,
+  "sourceAndAll57FrozenWebFilesPreserved": true,
+  "initialUploadFailureRetained": true,
+  "normalUmbrelUpdatesQualified": false,
+  "companionInferenceOrTargetDeploymentQualified": false,
+  "nativeMuxOrOSFeedReleasePublished": false,
+  "storePointersPublished": false
+}

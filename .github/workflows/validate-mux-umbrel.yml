@@ -4,21 +4,27 @@ on:
   pull_request:
     paths:
       - "willitmod-dev-5tratmux/**"
-      - "MUX-UMBREL-0.9.80-2026-10-16.json"
-      - "release-records/mux-umbrel-*-delivery.json"
-      - "release-records/mux-umbrel-*-qualification.json"
+      - "MUX-UMBREL-*.json"
+      - "release-records/**"
       - "scripts/mux_umbrel_release.py"
+      - "scripts/mux_local_ai_umbrel*.py"
+      - "scripts/mux-local-ai/**"
       - "tests/test_mux_umbrel_release.py"
+      - "tests/test_mux_local_ai_umbrel_release.py"
+      - "tests/fixtures/**"
       - ".github/workflows/validate-mux-umbrel.yml"
   push:
     branches: [main]
     paths:
       - "willitmod-dev-5tratmux/**"
-      - "MUX-UMBREL-0.9.80-2026-10-16.json"
-      - "release-records/mux-umbrel-*-delivery.json"
-      - "release-records/mux-umbrel-*-qualification.json"
+      - "MUX-UMBREL-*.json"
+      - "release-records/**"
       - "scripts/mux_umbrel_release.py"
+      - "scripts/mux_local_ai_umbrel*.py"
+      - "scripts/mux-local-ai/**"
       - "tests/test_mux_umbrel_release.py"
+      - "tests/test_mux_local_ai_umbrel_release.py"
+      - "tests/fixtures/**"
       - ".github/workflows/validate-mux-umbrel.yml"
 
 permissions:
@@ -40,3 +46,4 @@ jobs:
       - name: Verify MUX security boundaries and exact MUX published ports
         run: |
           python3 -m unittest discover -s tests -p test_mux_umbrel_release.py -v
+          python3 -m unittest discover -s tests -p test_mux_local_ai_umbrel_release.py -v

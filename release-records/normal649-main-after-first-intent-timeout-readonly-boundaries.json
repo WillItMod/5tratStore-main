@@ -1,0 +1,128 @@
+{
+  "kind": "read-only-normal649-after-original-MAIN-intent-timeout-boundary-and-state",
+  "result": "PASS",
+  "targetVmid": 649,
+  "channel": "MAIN",
+  "applicationBoundary": {
+    "imageId": "sha256:73fc590eb227a54fb945ac0579b9af54b6d82db97b09a86d9be30aecddf232ba",
+    "containerId": "aa00474043a729c87cd07daf186f98c9c329a14a9104c375544d64fd444577fb",
+    "user": "1000:1000",
+    "running": true,
+    "oomKilled": false,
+    "restartCount": 0,
+    "readOnlyRootfs": true,
+    "capDrop": [
+      "ALL"
+    ],
+    "securityOpt": [
+      "no-new-privileges:true"
+    ],
+    "cpuQuotaNano": 0,
+    "memoryLimitBytes": 1610612736,
+    "memorySwapLimitBytes": 3221225472,
+    "pidsLimit": 256,
+    "tmpfs": {
+      "/tmp": "rw,nosuid,nodev,exec,size=256m,mode=1777"
+    },
+    "publishedPorts": {
+      "7331/tcp": [
+        {
+          "HostIp": "",
+          "HostPort": "7331"
+        }
+      ]
+    },
+    "mounts": [
+      {
+        "Type": "bind",
+        "Source": "/home/umbrel/umbrel/app-data/willitmod-dev-5tratmux/data/state",
+        "Destination": "/data/state",
+        "RW": true
+      },
+      {
+        "Type": "bind",
+        "Source": "/home/umbrel/umbrel/app-data/willitmod-dev-5tratmux/data/local-ai-control",
+        "Destination": "/run/5tratmux-local-ai",
+        "RW": false
+      }
+    ]
+  },
+  "companionBoundary": {
+    "imageId": "sha256:8788b993b93cf5a2cc0cb3f66773171184669e19f4cb4edbd54145b639b1ba5e",
+    "containerId": "968646c54e69416d9a13d46f4762f23f41c6a09384750dc2712c1c77ba3c6c49",
+    "user": "1000:1000",
+    "running": true,
+    "oomKilled": false,
+    "restartCount": 0,
+    "readOnlyRootfs": true,
+    "capDrop": [
+      "ALL"
+    ],
+    "securityOpt": [
+      "no-new-privileges:true"
+    ],
+    "cpuQuotaNano": 2000000000,
+    "memoryLimitBytes": 6442450944,
+    "memorySwapLimitBytes": 6442450944,
+    "pidsLimit": 128,
+    "tmpfs": {
+      "/tmp": "rw,nosuid,nodev,exec,size=512m,mode=1777"
+    },
+    "publishedPorts": {},
+    "mounts": [
+      {
+        "Type": "bind",
+        "Source": "/home/umbrel/umbrel/app-data/willitmod-dev-5tratmux/data/local-ai-control",
+        "Destination": "/run/5tratmux-local-ai",
+        "RW": true
+      },
+      {
+        "Type": "bind",
+        "Source": "/home/umbrel/umbrel/app-data/willitmod-dev-5tratmux/data/local-ai",
+        "Destination": "/data/local-ai",
+        "RW": true
+      }
+    ]
+  },
+  "stateFiles": {
+    "mux_settings.json": {
+      "sha256": "87962e06b1084b749e0c6d5d154ed8284f80018e7ffbe5f6c6ff536d33efd0f5",
+      "bytes": 472,
+      "mode": "0o600",
+      "uid": 1000,
+      "gid": 1000
+    },
+    "licensing_device_key.pem": {
+      "sha256": "3e991af3778d2c96f4e5e9f21d7777e70d86ae06a0fa0157077622ee358bf19e",
+      "bytes": 119,
+      "mode": "0o600",
+      "uid": 1000,
+      "gid": 1000
+    },
+    "licensing_installation_id": {
+      "sha256": "548ec4b6a9d8d9356ddb7bad38527829df952a49d402d6118875dd1eac846626",
+      "bytes": 64,
+      "mode": "0o600",
+      "uid": 1000,
+      "gid": 1000
+    },
+    "standalone_auth/session-key": {
+      "sha256": "cb60b421552e97029d6be431720a92bba8a218cb6e6ea53171853cd01cb7d93a",
+      "bytes": 32,
+      "mode": "0o600",
+      "uid": 1000,
+      "gid": 1000
+    }
+  },
+  "memoryEvents": {
+    "low": 0,
+    "high": 0,
+    "max": 0,
+    "oom": 0,
+    "oom_kill": 0,
+    "oom_group_kill": 0
+  },
+  "apiCallsSent": 0,
+  "controlRequestsSent": 0,
+  "credentialBytesCopiedOut": false
+}
