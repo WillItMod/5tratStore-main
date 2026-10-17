@@ -8,7 +8,7 @@
       }
     },
     "server": {
-      "image": "ghcr.io/willitmod/5tratmux-app:0.9.82-umbrel@sha256:9ef5ac209472b9f57cfb74eeda3e96e5a03f77747cab19a12cbfdf8abaafbe15",
+      "image": "ghcr.io/willitmod/5tratmux-app:0.9.83-umbrel@sha256:483de527d1de5b50a52b466f7875d31f3a2251177fd7bcff80dbf63ae06c2794",
       "user": "1000:1000",
       "init": true,
       "restart": "unless-stopped",
@@ -44,7 +44,7 @@
         "MUX_AUTH_TRUSTED_PROXIES": "${GATEWAY_IP}",
         "MUX_HTTP_STRICT_HOST": "1",
         "MUX_HTTP_ALLOWED_HOSTS": "${DEVICE_DOMAIN_NAME},${DEVICE_HOSTNAME},localhost",
-        "APP_VERSION": "0.9.82",
+        "APP_VERSION": "0.9.83",
         "APP_CHANNEL": "MAIN",
         "LOCAL_AI_SUPERVISOR_SOCKET": "/run/5tratmux-local-ai/control.sock"
       }
