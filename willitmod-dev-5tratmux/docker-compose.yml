@@ -8,7 +8,7 @@
       }
     },
     "server": {
-      "image": "ghcr.io/willitmod/5tratmux-app:0.9.85-umbrel@sha256:4209326af3d4810609dd9c51ca2dc2a0fd761df9c6d49f800a75fef28b12756f",
+      "image": "ghcr.io/willitmod/5tratmux-app:0.9.87-umbrel@sha256:fff062362d914279dbbb209b2e9c74ac8e1b2f12066946038f15b83b9328c5a0",
       "user": "1000:1000",
       "init": true,
       "restart": "unless-stopped",
@@ -44,13 +44,13 @@
         "MUX_AUTH_TRUSTED_PROXIES": "${GATEWAY_IP}",
         "MUX_HTTP_STRICT_HOST": "1",
         "MUX_HTTP_ALLOWED_HOSTS": "${DEVICE_DOMAIN_NAME},${DEVICE_HOSTNAME},localhost",
-        "APP_VERSION": "0.9.85",
+        "APP_VERSION": "0.9.87",
         "APP_CHANNEL": "MAIN",
         "LOCAL_AI_SUPERVISOR_SOCKET": "/run/5tratmux-local-ai/control.sock"
       }
     },
     "local_ai": {
-      "image": "ghcr.io/willitmod/5tratmux-app:local-ai-0.1.9-umbrel@sha256:b8050920c408eab295ba5848f209d560b5207f821901e09d7a6788c1e2b175d3",
+      "image": "ghcr.io/willitmod/5tratmux-app:local-ai-0.1.11-umbrel@sha256:1d43ac1c696733f4d2eb3097b4c8ea501091be0489921ebf53a44fffe333314f",
       "user": "1000:1000",
       "init": true,
       "restart": "unless-stopped",

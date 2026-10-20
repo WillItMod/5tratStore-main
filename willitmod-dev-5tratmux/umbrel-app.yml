@@ -5,7 +5,7 @@
   "tagline": "Route miners through one stable Stratum endpoint",
   "icon": "https://raw.githubusercontent.com/WillItMod/5tratStore-main/main/willitmod-dev-5tratmux/icon.png",
   "category": "crypto",
-  "version": "0.9.85",
+  "version": "0.9.87",
   "port": 21222,
   "description": "Standalone Stratum routing for Umbrel. Configure a pool endpoint and account, set the Umbrel LAN address in Connection settings, and connect miners to TCP port 7331. Manual routing requires active trial or paid licence access. Local AI is available without a licence on supported hardware and downloads its model when installed from Settings. Cloud AI remains optional. An 8 GB or larger Umbrel host is recommended; Local AI requires sufficient available memory and storage. Sign in using the generated app password shown by Umbrel. Use Umbrel to start, stop and update the app.",
   "developer": "WillItMod",
@@ -21,5 +21,5 @@
   "storage": {
     "dataRoot": "data"
   },
-  "releaseNotes": "Adds per-miner exclusion from MUX attacks while retaining AI routing. Fits expanded route details inside miner cards, corrects block device and control history, and refreshes cached controls. Local AI remains available without a licence; the Local AI companion is unchanged."
+  "releaseNotes": "Local AI interprets the complete instruction before the checked planner allocates miners. Automatic missions no longer wait for manual meaning approval, and named miners must be available before their routing requirements can be applied. Preserves attack exclusions and existing layouts, with a wider responsive review panel. Includes the matched Local AI 0.1.11 companion."
 }
