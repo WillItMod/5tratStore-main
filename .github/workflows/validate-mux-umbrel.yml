@@ -12,6 +12,7 @@ on:
       - "tests/test_mux_umbrel_release.py"
       - "tests/test_mux_local_ai_umbrel_release.py"
       - "tests/test_mux_local_ai_umbrel_ui_release.py"
+      - "tests/test_mux_local_ai_umbrel_compiled_release.py"
       - "tests/fixtures/**"
       - ".github/workflows/validate-mux-umbrel.yml"
   push:
@@ -26,6 +27,7 @@ on:
       - "tests/test_mux_umbrel_release.py"
       - "tests/test_mux_local_ai_umbrel_release.py"
       - "tests/test_mux_local_ai_umbrel_ui_release.py"
+      - "tests/test_mux_local_ai_umbrel_compiled_release.py"
       - "tests/fixtures/**"
       - ".github/workflows/validate-mux-umbrel.yml"
 
@@ -50,3 +52,4 @@ jobs:
           python3 -m unittest discover -s tests -p test_mux_umbrel_release.py -v
           python3 -m unittest discover -s tests -p test_mux_local_ai_umbrel_release.py -v
           python3 -m unittest discover -s tests -p test_mux_local_ai_umbrel_ui_release.py -v
+          python3 -m unittest discover -s tests -p test_mux_local_ai_umbrel_compiled_release.py -v

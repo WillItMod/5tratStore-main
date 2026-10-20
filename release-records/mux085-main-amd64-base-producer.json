@@ -1,0 +1,16 @@
+{
+  "archiveSHA256": "5a49d8ea36c0d99f96990c042bafed38f4655bd867c2613d41c8e0389e2de534",
+  "buildIntentSHA256": "ea3676b7360919ff35a90fa4cab9d7136b95fd49faa5851f7bed2d0cdf443c0d",
+  "buildResultSHA256": "998cc5aae73d727d0acc3c7b565440477fff51c18d9ca4b47a9c667725161ca4",
+  "buildSucceeded": true,
+  "ciRun": 39299985902,
+  "compilerJobs": 4,
+  "imageConfigDigest": "sha256:6ab5c143c208ba967aa5a87754860e4beb2fb0fc1f8fee2b913aa2bba904c79a",
+  "imageTag": "5tratmux-umbrel:0.9.84-amd64",
+  "role": "umbrel",
+  "sourceArchiveSHA256": "4e6af7a3e25c98c6719f6e4ac2d43635ebde16360d06e15e5558c0add8a80c39",
+  "sourceCommit": "e0fcc8f0c11a5d923d5220b462d06b466c69037d",
+  "sourceTree": "f194309a9ff33415e9709c4be59a0d206d512a07",
+  "version": "0.9.84",
+  "wrapperCompilerInvoked": false
+}

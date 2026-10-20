@@ -1,0 +1,510 @@
+{
+  "actualLiveProviderHealthOrInferenceQualified": false,
+  "admissionSha256": "b16ed90faf35b99778f2f2433a6affcd95ea041a0a4c860ea98a62da0265a2bd",
+  "canaryFailureState": null,
+  "canaryReadiness": [
+    {
+      "dockerExitCode": 0,
+      "name": "mux084-smoke-v2-cfe2e0a5-5c43-435f-a81c-6c2d732e1adc-0-canary",
+      "probe": {
+        "attempts": 7,
+        "elapsedSeconds": 1.610036,
+        "endpoint": "127.0.0.1:18080",
+        "fatalClass": null,
+        "httpRequestsSent": 0,
+        "lastSocketError": "connection_refused",
+        "protocol": "tcp-connect-only",
+        "ready": true,
+        "reasonCode": "ready"
+      },
+      "ready": true,
+      "reasonCode": "ready"
+    },
+    {
+      "dockerExitCode": 0,
+      "name": "mux084-smoke-v2-cfe2e0a5-5c43-435f-a81c-6c2d732e1adc-1-canary",
+      "probe": {
+        "attempts": 9,
+        "elapsedSeconds": 2.112435,
+        "endpoint": "127.0.0.1:18080",
+        "fatalClass": null,
+        "httpRequestsSent": 0,
+        "lastSocketError": "connection_refused",
+        "protocol": "tcp-connect-only",
+        "ready": true,
+        "reasonCode": "ready"
+      },
+      "ready": true,
+      "reasonCode": "ready"
+    },
+    {
+      "dockerExitCode": 0,
+      "name": "mux084-smoke-v2-cfe2e0a5-5c43-435f-a81c-6c2d732e1adc-2-canary",
+      "probe": {
+        "attempts": 8,
+        "elapsedSeconds": 1.864131,
+        "endpoint": "127.0.0.1:18080",
+        "fatalClass": null,
+        "httpRequestsSent": 0,
+        "lastSocketError": "connection_refused",
+        "protocol": "tcp-connect-only",
+        "ready": true,
+        "reasonCode": "ready"
+      },
+      "ready": true,
+      "reasonCode": "ready"
+    },
+    {
+      "dockerExitCode": 0,
+      "name": "mux084-smoke-v2-cfe2e0a5-5c43-435f-a81c-6c2d732e1adc-3-canary",
+      "probe": {
+        "attempts": 8,
+        "elapsedSeconds": 1.954048,
+        "endpoint": "127.0.0.1:18080",
+        "fatalClass": null,
+        "httpRequestsSent": 0,
+        "lastSocketError": "connection_refused",
+        "protocol": "tcp-connect-only",
+        "ready": true,
+        "reasonCode": "ready"
+      },
+      "ready": true,
+      "reasonCode": "ready"
+    }
+  ],
+  "cleanup": {
+    "complete": true,
+    "forceOrPruneUsed": false,
+    "unresolvedOwnedResourceNames": []
+  },
+  "engineId": "5062098b-0d76-4f26-b041-692e868314ff",
+  "errorCode": null,
+  "failureFrames": [],
+  "hostPublishedPorts": [],
+  "internalClientFailureFrames": [],
+  "internalClientSha256": "5e70c387c6b59fe268581a5b8b6504bd2f8447ab205d04da12d7d3011a601bc6",
+  "kind": "compiled-mux084-disposable-smoke-v2",
+  "nativeOrUmbrelProductionTargetActions": false,
+  "owner": "cfe2e0a5-5c43-435f-a81c-6c2d732e1adc",
+  "publicationAuthorized": false,
+  "result": "PASS",
+  "routingLicenceBypassOrGrantFabrication": false,
+  "rows": [
+    {
+      "architecture": "amd64",
+      "assetSha256": {
+        "/app.css": "a426d88ee14ff4d5baf87392be2e992d2a8a9c63257d09f04ea2e26d1bcedccb",
+        "/app.js": "bdb37ef7a575df021f1f041762939ca19fc3666aac581e85715c38c3ae380e8a",
+        "/index.html": "e29bcfe2d4628f13b27cac3334329112c3e257e1bdc54e679965b22dee2db656"
+      },
+      "attackMutationScope": "Natural no-grant402 only; successful mutation remains covered by source integration tests.",
+      "binarySha256": "9f662fe9c81ceb6e2086830b96942d0eab2b00cfa177212cf3d1675a2e012e3c",
+      "compiledAttackMutationQualified": false,
+      "hostPublishedPorts": [],
+      "httpClientScope": "same-owned-internal-network",
+      "imageId": "sha256:a277af43fff1492657f30ca3ae0b4a848a2423fbdb1a46648a2b7a52856706f9",
+      "noModelOrMiningCallsPerformed": true,
+      "observedHttpVersion": "0.9.84-dev",
+      "ownerAuthenticatedWhereRequired": false,
+      "platform": "native",
+      "policyPostStatus": 402,
+      "provider": {
+        "activity": {
+          "inferenceConfirmed": false,
+          "observedAt": "2026-10-19T19:17:29.533662+00:00",
+          "scope": "mux_mission_review",
+          "state": "idle"
+        },
+        "capabilities": {
+          "control": false,
+          "discovery": false,
+          "test": false
+        },
+        "kind": "selected-ai-provider",
+        "lastReview": null,
+        "metrics": {
+          "available": false
+        },
+        "provider": {
+          "configurationScope": "provider_and_model_only",
+          "configured": true,
+          "id": "ollama",
+          "label": "Ollama",
+          "model": "phi4:latest",
+          "revision": 3
+        },
+        "reachability": {
+          "checkedAt": null,
+          "state": "not_checked"
+        },
+        "schemaVersion": "1.0"
+      },
+      "providerCanaryRequests": 0,
+      "rawProviderPrivacyVerified": true,
+      "syntheticStatePreserved": {
+        "plans": {
+          "qa-ai-one": {
+            "allocations": {
+              "qa-offline-sha256": 100
+            },
+            "missionId": "qa-disabled",
+            "muxAttack": false
+          }
+        },
+        "policies": {
+          "worker:qa-ai-one": {
+            "excluded": false,
+            "revision": 1
+          },
+          "worker:qa-manual-two": {
+            "excluded": true,
+            "revision": 2
+          }
+        },
+        "provider": {
+          "aiEnabled": false,
+          "aiMissions": [],
+          "aiModel": "phi4:latest",
+          "aiProvider": "ollama",
+          "aiProviderRevision": 3
+        },
+        "workers": [
+          {
+            "aiManaged": true,
+            "allocations": {
+              "qa-offline-sha256": 100
+            },
+            "id": "qa-ai-one",
+            "mode": "ai-controlled",
+            "muxAttackExcluded": false,
+            "targetId": "qa-offline-sha256"
+          },
+          {
+            "allocations": {
+              "qa-offline-sha256": 100
+            },
+            "id": "qa-manual-two",
+            "mode": "allocation",
+            "muxAttackExcluded": true,
+            "targetId": "qa-offline-sha256"
+          }
+        ]
+      },
+      "unauthStatus": 200,
+      "version": "0.9.84-dev"
+    },
+    {
+      "architecture": "amd64",
+      "assetSha256": {
+        "/app.css": "a426d88ee14ff4d5baf87392be2e992d2a8a9c63257d09f04ea2e26d1bcedccb",
+        "/app.js": "bdb37ef7a575df021f1f041762939ca19fc3666aac581e85715c38c3ae380e8a",
+        "/index.html": "e29bcfe2d4628f13b27cac3334329112c3e257e1bdc54e679965b22dee2db656"
+      },
+      "attackMutationScope": "Natural no-grant402 only; successful mutation remains covered by source integration tests.",
+      "binarySha256": "9f662fe9c81ceb6e2086830b96942d0eab2b00cfa177212cf3d1675a2e012e3c",
+      "compiledAttackMutationQualified": false,
+      "hostPublishedPorts": [],
+      "httpClientScope": "same-owned-internal-network",
+      "imageId": "sha256:cc2c1b46413e74428de11d37877c282b18ba3be558b83a8c983bbd8e4fdbb91b",
+      "noModelOrMiningCallsPerformed": true,
+      "observedHttpVersion": "0.9.84-dev",
+      "ownerAuthenticatedWhereRequired": true,
+      "platform": "umbrel",
+      "policyPostStatus": 402,
+      "provider": {
+        "activity": {
+          "inferenceConfirmed": false,
+          "observedAt": "2026-10-19T19:18:37.968602+00:00",
+          "scope": "mux_mission_review",
+          "state": "idle"
+        },
+        "capabilities": {
+          "control": false,
+          "discovery": false,
+          "test": false
+        },
+        "kind": "selected-ai-provider",
+        "lastReview": null,
+        "metrics": {
+          "available": false
+        },
+        "provider": {
+          "configurationScope": "provider_and_model_only",
+          "configured": true,
+          "id": "ollama",
+          "label": "Ollama",
+          "model": "phi4:latest",
+          "revision": 3
+        },
+        "reachability": {
+          "checkedAt": null,
+          "state": "not_checked"
+        },
+        "schemaVersion": "1.0"
+      },
+      "providerCanaryRequests": 0,
+      "rawProviderPrivacyVerified": true,
+      "syntheticStatePreserved": {
+        "plans": {
+          "qa-ai-one": {
+            "allocations": {
+              "qa-offline-sha256": 100
+            },
+            "missionId": "qa-disabled",
+            "muxAttack": false
+          }
+        },
+        "policies": {
+          "worker:qa-ai-one": {
+            "excluded": false,
+            "revision": 1
+          },
+          "worker:qa-manual-two": {
+            "excluded": true,
+            "revision": 2
+          }
+        },
+        "provider": {
+          "aiEnabled": false,
+          "aiMissions": [],
+          "aiModel": "phi4:latest",
+          "aiProvider": "ollama",
+          "aiProviderRevision": 3
+        },
+        "workers": [
+          {
+            "aiManaged": true,
+            "allocations": {
+              "qa-offline-sha256": 100
+            },
+            "id": "qa-ai-one",
+            "mode": "ai-controlled",
+            "muxAttackExcluded": false,
+            "targetId": "qa-offline-sha256"
+          },
+          {
+            "allocations": {
+              "qa-offline-sha256": 100
+            },
+            "id": "qa-manual-two",
+            "mode": "allocation",
+            "muxAttackExcluded": true,
+            "targetId": "qa-offline-sha256"
+          }
+        ]
+      },
+      "unauthStatus": 401,
+      "version": "0.9.84-dev"
+    },
+    {
+      "architecture": "amd64",
+      "assetSha256": {
+        "/app.css": "a426d88ee14ff4d5baf87392be2e992d2a8a9c63257d09f04ea2e26d1bcedccb",
+        "/app.js": "bdb37ef7a575df021f1f041762939ca19fc3666aac581e85715c38c3ae380e8a",
+        "/index.html": "e29bcfe2d4628f13b27cac3334329112c3e257e1bdc54e679965b22dee2db656"
+      },
+      "attackMutationScope": "Natural no-grant402 only; successful mutation remains covered by source integration tests.",
+      "binarySha256": "9f662fe9c81ceb6e2086830b96942d0eab2b00cfa177212cf3d1675a2e012e3c",
+      "compiledAttackMutationQualified": false,
+      "hostPublishedPorts": [],
+      "httpClientScope": "same-owned-internal-network",
+      "imageId": "sha256:c46286d18394388dcaf6b39b039ad0b852ab930aecfd54ae00c8c3739cfc2d36",
+      "noModelOrMiningCallsPerformed": true,
+      "observedHttpVersion": "0.9.84",
+      "ownerAuthenticatedWhereRequired": false,
+      "platform": "native",
+      "policyPostStatus": 402,
+      "provider": {
+        "activity": {
+          "inferenceConfirmed": false,
+          "observedAt": "2026-10-19T19:19:44.810893+00:00",
+          "scope": "mux_mission_review",
+          "state": "idle"
+        },
+        "capabilities": {
+          "control": false,
+          "discovery": false,
+          "test": false
+        },
+        "kind": "selected-ai-provider",
+        "lastReview": null,
+        "metrics": {
+          "available": false
+        },
+        "provider": {
+          "configurationScope": "provider_and_model_only",
+          "configured": true,
+          "id": "ollama",
+          "label": "Ollama",
+          "model": "phi4:latest",
+          "revision": 3
+        },
+        "reachability": {
+          "checkedAt": null,
+          "state": "not_checked"
+        },
+        "schemaVersion": "1.0"
+      },
+      "providerCanaryRequests": 0,
+      "rawProviderPrivacyVerified": true,
+      "syntheticStatePreserved": {
+        "plans": {
+          "qa-ai-one": {
+            "allocations": {
+              "qa-offline-sha256": 100
+            },
+            "missionId": "qa-disabled",
+            "muxAttack": false
+          }
+        },
+        "policies": {
+          "worker:qa-ai-one": {
+            "excluded": false,
+            "revision": 1
+          },
+          "worker:qa-manual-two": {
+            "excluded": true,
+            "revision": 2
+          }
+        },
+        "provider": {
+          "aiEnabled": false,
+          "aiMissions": [],
+          "aiModel": "phi4:latest",
+          "aiProvider": "ollama",
+          "aiProviderRevision": 3
+        },
+        "workers": [
+          {
+            "aiManaged": true,
+            "allocations": {
+              "qa-offline-sha256": 100
+            },
+            "id": "qa-ai-one",
+            "mode": "ai-controlled",
+            "muxAttackExcluded": false,
+            "targetId": "qa-offline-sha256"
+          },
+          {
+            "allocations": {
+              "qa-offline-sha256": 100
+            },
+            "id": "qa-manual-two",
+            "mode": "allocation",
+            "muxAttackExcluded": true,
+            "targetId": "qa-offline-sha256"
+          }
+        ]
+      },
+      "unauthStatus": 200,
+      "version": "0.9.84"
+    },
+    {
+      "architecture": "amd64",
+      "assetSha256": {
+        "/app.css": "a426d88ee14ff4d5baf87392be2e992d2a8a9c63257d09f04ea2e26d1bcedccb",
+        "/app.js": "bdb37ef7a575df021f1f041762939ca19fc3666aac581e85715c38c3ae380e8a",
+        "/index.html": "e29bcfe2d4628f13b27cac3334329112c3e257e1bdc54e679965b22dee2db656"
+      },
+      "attackMutationScope": "Natural no-grant402 only; successful mutation remains covered by source integration tests.",
+      "binarySha256": "9f662fe9c81ceb6e2086830b96942d0eab2b00cfa177212cf3d1675a2e012e3c",
+      "compiledAttackMutationQualified": false,
+      "hostPublishedPorts": [],
+      "httpClientScope": "same-owned-internal-network",
+      "imageId": "sha256:6ab5c143c208ba967aa5a87754860e4beb2fb0fc1f8fee2b913aa2bba904c79a",
+      "noModelOrMiningCallsPerformed": true,
+      "observedHttpVersion": "0.9.84",
+      "ownerAuthenticatedWhereRequired": true,
+      "platform": "umbrel",
+      "policyPostStatus": 402,
+      "provider": {
+        "activity": {
+          "inferenceConfirmed": false,
+          "observedAt": "2026-10-19T19:20:55.252346+00:00",
+          "scope": "mux_mission_review",
+          "state": "idle"
+        },
+        "capabilities": {
+          "control": false,
+          "discovery": false,
+          "test": false
+        },
+        "kind": "selected-ai-provider",
+        "lastReview": null,
+        "metrics": {
+          "available": false
+        },
+        "provider": {
+          "configurationScope": "provider_and_model_only",
+          "configured": true,
+          "id": "ollama",
+          "label": "Ollama",
+          "model": "phi4:latest",
+          "revision": 3
+        },
+        "reachability": {
+          "checkedAt": null,
+          "state": "not_checked"
+        },
+        "schemaVersion": "1.0"
+      },
+      "providerCanaryRequests": 0,
+      "rawProviderPrivacyVerified": true,
+      "syntheticStatePreserved": {
+        "plans": {
+          "qa-ai-one": {
+            "allocations": {
+              "qa-offline-sha256": 100
+            },
+            "missionId": "qa-disabled",
+            "muxAttack": false
+          }
+        },
+        "policies": {
+          "worker:qa-ai-one": {
+            "excluded": false,
+            "revision": 1
+          },
+          "worker:qa-manual-two": {
+            "excluded": true,
+            "revision": 2
+          }
+        },
+        "provider": {
+          "aiEnabled": false,
+          "aiMissions": [],
+          "aiModel": "phi4:latest",
+          "aiProvider": "ollama",
+          "aiProviderRevision": 3
+        },
+        "workers": [
+          {
+            "aiManaged": true,
+            "allocations": {
+              "qa-offline-sha256": 100
+            },
+            "id": "qa-ai-one",
+            "mode": "ai-controlled",
+            "muxAttackExcluded": false,
+            "targetId": "qa-offline-sha256"
+          },
+          {
+            "allocations": {
+              "qa-offline-sha256": 100
+            },
+            "id": "qa-manual-two",
+            "mode": "allocation",
+            "muxAttackExcluded": true,
+            "targetId": "qa-offline-sha256"
+          }
+        ]
+      },
+      "unauthStatus": 401,
+      "version": "0.9.84"
+    }
+  ],
+  "runnerSha256": "9ae2d3a2e07a1a492b52dd9c588018fbcc6aaaf71d260856b9ffd7a52d333039",
+  "schemaVersion": 1,
+  "sourceRevision": "e0fcc8f0c11a5d923d5220b462d06b466c69037d",
+  "sourceTree": "f194309a9ff33415e9709c4be59a0d206d512a07"
+}

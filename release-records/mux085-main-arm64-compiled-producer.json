@@ -1,0 +1,14 @@
+{
+  "sourceCommit": "e0fcc8f0c11a5d923d5220b462d06b466c69037d",
+  "sourceTree": "f194309a9ff33415e9709c4be59a0d206d512a07",
+  "sourceArchiveSHA256": "2a320dced097a167593105a698969133035966528d10920876a2dde94df5f2c9",
+  "imageConfigDigest": "sha256:884b2b61d537e83a83c93f7a6ac09a2a104e8f4f003110c17c690fc91e92ff35",
+  "archiveSHA256": "7ab5f85296f31d992107ea7e98b332d2f78bd1a69af98939e73add1e8a3f7c7a",
+  "imageTag": "codex-mux084-arm64:a1edb3b5a48c436ca2d390fccfc378fd",
+  "buildSucceeded": true,
+  "compilerJobs": 2,
+  "imageId": "sha256:3a1b285dd94c080c0428f10e6a91e4562114c3d4f0e9526234f64788a99b5f9d",
+  "compilationReceiptSHA256": "2a75358117e1027f2f80a87a6eef68810d597edb853d29ed66108649a972c55d",
+  "archiveBytes": 84750375,
+  "observedAt": "2026-10-19T18:24:42.855391+00:00"
+}

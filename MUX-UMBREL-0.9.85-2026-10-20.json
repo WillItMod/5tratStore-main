@@ -1,0 +1,83 @@
+{
+  "appId": "willitmod-dev-5tratmux",
+  "channel": "MAIN",
+  "compiledApplicationSource": {
+    "sourceRevision": "e0fcc8f0c11a5d923d5220b462d06b466c69037d",
+    "sourceTree": "f194309a9ff33415e9709c4be59a0d206d512a07"
+  },
+  "imageRef": "ghcr.io/willitmod/5tratmux-app:0.9.85-umbrel@sha256:4209326af3d4810609dd9c51ca2dc2a0fd761df9c6d49f800a75fef28b12756f",
+  "localAIImageRef": "ghcr.io/willitmod/5tratmux-app:local-ai-0.1.9-umbrel@sha256:b8050920c408eab295ba5848f209d560b5207f821901e09d7a6788c1e2b175d3",
+  "localAIPlatforms": {
+    "amd64": {
+      "companionSourceRevision": "595bd51be79995642da846afa2206d2ccb96bd08",
+      "companionSourceTree": "fd8fdcb99068c3d7fb4185aff0260a86b43876a2",
+      "configDigest": "sha256:8788b993b93cf5a2cc0cb3f66773171184669e19f4cb4edbd54145b639b1ba5e",
+      "manifestDigest": "sha256:67344ce981b43db67ab704aac20f06311d1ea66a4f89b754ca0554edc374fa83"
+    },
+    "arm64": {
+      "companionSourceRevision": "138fd6cfd1b99cea858f19f39f8976015da1de1b",
+      "companionSourceTree": "75ed4c702490df1f168bf590ba055768c260d236",
+      "configDigest": "sha256:6a2d44c4ef1f3dea9dcf35ff9233926c5edef28c8c50976408fab26f974e7899",
+      "manifestDigest": "sha256:665cf51df9cbf8b17edaaefcdbbfffb2a0534339c7fa6819a4a82f1a8e7e7d8a"
+    }
+  },
+  "packageBaseProducer": {
+    "packageProducerInputs": {
+      "packaging/umbrel-local-ai-release/pre-start": "fb25f9246aff606a00567ec0a0333b49397bf988b30deaff0c3da5baaaa4eb6e",
+      "packaging/umbrel-local-ai-release/prepare_package.py": "7c3deed5b8aa35777d1776a6a15ce0be7217dc98d40a1e082af21e88c4cb0f1c"
+    },
+    "packageProducerSourceRevision": "396c137930d27fb39251147426a70bd61307bf98",
+    "packageProducerSourceTree": "ec2daf28cc1920be3e83bc791e25f3e6443769cc"
+  },
+  "packageFiles": {
+    "willitmod-dev-5tratmux/data/.gitkeep": {
+      "mode": "0o644",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    "willitmod-dev-5tratmux/docker-compose.yml": {
+      "mode": "0o644",
+      "sha256": "339c330556883f0087b30efa4c10c6eaa74d1610045d469a8c0b618fb3fdfde8"
+    },
+    "willitmod-dev-5tratmux/hooks/pre-start": {
+      "mode": "0o755",
+      "sha256": "fb25f9246aff606a00567ec0a0333b49397bf988b30deaff0c3da5baaaa4eb6e"
+    },
+    "willitmod-dev-5tratmux/icon.png": {
+      "mode": "0o644",
+      "sha256": "3eef68f8307de4df7a43386b2dbc3cdaa2b9e97423c93945c18e6be3256ad9e8"
+    },
+    "willitmod-dev-5tratmux/umbrel-app.yml": {
+      "mode": "0o644",
+      "sha256": "731f330071f59a5c4a9c5151032bf033e95882455cb8f50d1467559ec9b38028"
+    }
+  },
+  "platforms": {
+    "amd64": {
+      "configDigest": "sha256:71cc15c2e95e7b4b3536c35b2f28f5c5a8a45c72ed25337fd2b5232df59cb709",
+      "manifestDigest": "sha256:612b71ee250b455364e3e9d092ee8ca18fcdc0d1f618cb16cdcc1c9bc7e6fad2"
+    },
+    "arm64": {
+      "configDigest": "sha256:1f8a3145b935baad11e5f14a97f5d04de2cc6924c8ba2839a4e941bf2873aa97",
+      "manifestDigest": "sha256:44e624f7e5e535006267ac3effc618a84d30056487951700560524de7367b02d"
+    }
+  },
+  "predecessor": {
+    "delivery": {
+      "path": "release-records/mux-umbrel-0.9.83-delivery.json",
+      "sha256": "82a99a9a934a3456777d9b11d0c97f5566c206cd0217ebc6716a57665a3c9e39"
+    },
+    "record": "MUX-UMBREL-0.9.83-2026-10-17.json",
+    "sha256": "f5bc3203a6d8c1490bf4a1babef14a7e68d8102b2a2ee876090f4c8ea3e57de5"
+  },
+  "publication": {
+    "path": "release-records/mux-umbrel-0.9.85-delivery.json",
+    "sha256": "dbde0205b55a02f05c63c3369934049cd2e89671b13b6ebd226bd49ce7356896"
+  },
+  "schemaVersion": 1,
+  "status": "qualified",
+  "uiSource": {
+    "sourceRevision": "e61719f4d357397a9bfd14a4e258973430bbd7e3",
+    "sourceTree": "7d5d6eb45cbb697cad751b2c91ab51e8aa58ac75"
+  },
+  "version": "0.9.85"
+}
