@@ -209,6 +209,12 @@ def validate_publication(root, release):
 
 
 def validate(root=ROOT, *, check_baseline=False):
+    if (root / "MUX-UMBREL-0.9.85-2026-10-20.json").exists():
+        assert not check_baseline, "0.9.85 retains the qualified historical releases"
+        import sys
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        import mux_local_ai_umbrel_compiled_release
+        return mux_local_ai_umbrel_compiled_release.validate(root)
     if (root / "MUX-UMBREL-0.9.83-2026-10-17.json").exists():
         assert not check_baseline, "0.9.83 retains the qualified 0.9.82 history"
         import sys

@@ -1,0 +1,22 @@
+{
+  "admissionSHA256": "c083133959ab8c8824d11e342903b454e4a3791e3ef180ca14f3f0eb136506a4",
+  "archiveSHA256": "78a0e717a0fccea8ccdbe0b00ec20d8215702918f4848ab9b24455ab7d6b4484",
+  "buildSucceeded": true,
+  "channel": "MAIN",
+  "compiledBaseConfigDigest": "sha256:884b2b61d537e83a83c93f7a6ac09a2a104e8f4f003110c17c690fc91e92ff35",
+  "compiledBaseDockerImageId": "sha256:3a1b285dd94c080c0428f10e6a91e4562114c3d4f0e9526234f64788a99b5f9d",
+  "compiledBaseProducerReceiptSHA256": "3e1060b450095f1df41dbfda6781dfab41e5e2fb18b48cf5d38403bb71bfa7e9",
+  "compilerJobs": 2,
+  "compilerJobsReferToRetainedBase": true,
+  "executorSHA256": "73edd4c6e544a572c66f92b24289f91e8462b595071b4d916e820ff22884a5e1",
+  "imageConfigDigest": "sha256:a561392544bb9677ccb514f05c40112b58a7edbf5a5e6e2b05b2f9131f9d42e7",
+  "imageId": "sha256:3b06b52fcbef3f1421cca30e8a727921c3f865cedfc89a3e29bbf083258a5d88",
+  "imageTag": "5tratmux-umbrel:0.9.84-arm64",
+  "kind": "umbrel",
+  "sourceArchiveSHA256": "2a320dced097a167593105a698969133035966528d10920876a2dde94df5f2c9",
+  "sourceCommit": "e0fcc8f0c11a5d923d5220b462d06b466c69037d",
+  "sourceTree": "f194309a9ff33415e9709c4be59a0d206d512a07",
+  "version": "0.9.84",
+  "wrapperCompilerInvoked": false,
+  "wrapperContainsOnlyMetadata": true
+}

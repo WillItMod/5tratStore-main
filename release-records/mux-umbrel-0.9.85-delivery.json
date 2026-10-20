@@ -1,0 +1,116 @@
+{
+  "channel": "MAIN",
+  "companionQualification": {
+    "evidence": {
+      "path": "release-records/mux-umbrel-0.9.82-delivery.json",
+      "sha256": "9441ccef7d5950ab47101c57716207fae0c0a25fc1b0ab50459b75436744527b"
+    },
+    "newModelInferenceClaimed": false,
+    "scope": "unchanged-local-ai-0.1.9-components-only"
+  },
+  "imageRef": "ghcr.io/willitmod/5tratmux-app:0.9.85-umbrel@sha256:4209326af3d4810609dd9c51ca2dc2a0fd761df9c6d49f800a75fef28b12756f",
+  "independentPublicArchiveCorrelation": {
+    "path": "release-records/mux085-main-public-correlation.json",
+    "sha256": "eaf540ae419758635d508a17463cea1b1737fd148e0c3be5b64f2c036a9b29fe"
+  },
+  "index": {
+    "path": "release-records/mux085-main-index.json",
+    "sha256": "4209326af3d4810609dd9c51ca2dc2a0fd761df9c6d49f800a75fef28b12756f"
+  },
+  "kind": "protected-compiled-application-successor",
+  "platforms": {
+    "amd64": {
+      "allLayerAudit": {
+        "path": "release-records/mux085-main-amd64-base-audit.json",
+        "sha256": "405b57e7ee17b4f1eb5bab2a4f75cc3ad15319bb01c9a897eb9b33b2578de119"
+      },
+      "baseConfiguration": {
+        "path": "release-records/mux085-main-amd64-base-config.json",
+        "sha256": "6ab5c143c208ba967aa5a87754860e4beb2fb0fc1f8fee2b913aa2bba904c79a"
+      },
+      "baseManifest": {
+        "path": "release-records/mux085-main-amd64-base-manifest.json",
+        "sha256": "00686764f6da21d6387adb5223397bcdfe3df3f1cac06bc72e75d3ef869b9342"
+      },
+      "compiledBaseAudit": {
+        "path": "release-records/mux085-main-amd64-compiled-audit.json",
+        "sha256": "169db2660d6c4d0138d36cca24f3c513ca571a4fe87f4e00d040ad3a040b3b84"
+      },
+      "compiledBaseProducer": {
+        "path": "release-records/mux085-main-amd64-compiled-producer.json",
+        "sha256": "0f3f8694cfa0ea98b079aeb4e435199de8969fd307dcf9e9ee154a17154a99c4"
+      },
+      "compiledSmoke": {
+        "path": "release-records/mux084-amd64-original-runtime.json",
+        "sha256": "802e7a9f5d2103835b83bc8c736ddab5d97ad0c4e56261d1c0ba28f993b9e6d2"
+      },
+      "configuration": {
+        "path": "release-records/mux085-main-amd64-config.json",
+        "sha256": "71cc15c2e95e7b4b3536c35b2f28f5c5a8a45c72ed25337fd2b5232df59cb709"
+      },
+      "manifest": {
+        "path": "release-records/mux085-main-amd64-manifest.json",
+        "sha256": "612b71ee250b455364e3e9d092ee8ca18fcdc0d1f618cb16cdcc1c9bc7e6fad2"
+      },
+      "wrapperProducer": {
+        "path": "release-records/mux085-main-amd64-base-producer.json",
+        "sha256": "85ed0c9bc77de0a309f15cafc8bf97517e191170c3c7cc1b8399e45c4c9eee42"
+      }
+    },
+    "arm64": {
+      "allLayerAudit": {
+        "path": "release-records/mux085-main-arm64-base-audit.json",
+        "sha256": "5c501318f6c6c2b4178599ac4d111f8ad3df053bd816713749fc7099b53122c7"
+      },
+      "baseConfiguration": {
+        "path": "release-records/mux085-main-arm64-base-config.json",
+        "sha256": "a561392544bb9677ccb514f05c40112b58a7edbf5a5e6e2b05b2f9131f9d42e7"
+      },
+      "baseManifest": {
+        "path": "release-records/mux085-main-arm64-base-manifest.json",
+        "sha256": "a5f4ae7c59c849092a6e4c23bb80cb5a7003f739d4a447497288feb3f132e238"
+      },
+      "compiledBaseAudit": {
+        "path": "release-records/mux085-main-arm64-compiled-audit.json",
+        "sha256": "fcfe3b7267ec04a6e75e78f848b93128c1882eadc8376b4e9d3e88c29ae9e695"
+      },
+      "compiledBaseProducer": {
+        "path": "release-records/mux085-main-arm64-compiled-producer.json",
+        "sha256": "3e1060b450095f1df41dbfda6781dfab41e5e2fb18b48cf5d38403bb71bfa7e9"
+      },
+      "compiledSmoke": {
+        "path": "release-records/mux084-arm64-original-runtime.json",
+        "sha256": "570e677801f1637175f1176af05140f14e6cd82ad80b2c4540deb62b4111eb9d"
+      },
+      "configuration": {
+        "path": "release-records/mux085-main-arm64-config.json",
+        "sha256": "1f8a3145b935baad11e5f14a97f5d04de2cc6924c8ba2839a4e941bf2873aa97"
+      },
+      "manifest": {
+        "path": "release-records/mux085-main-arm64-manifest.json",
+        "sha256": "44e624f7e5e535006267ac3effc618a84d30056487951700560524de7367b02d"
+      },
+      "wrapperProducer": {
+        "path": "release-records/mux085-main-arm64-base-producer.json",
+        "sha256": "d3df6483c3d35f80beec27331f7d12fabd63a054ee1511b1066c76685d71a24e"
+      }
+    }
+  },
+  "predecessor": {
+    "delivery": {
+      "path": "release-records/mux-umbrel-0.9.83-delivery.json",
+      "sha256": "82a99a9a934a3456777d9b11d0c97f5566c206cd0217ebc6716a57665a3c9e39"
+    },
+    "record": "MUX-UMBREL-0.9.83-2026-10-17.json",
+    "sha256": "f5bc3203a6d8c1490bf4a1babef14a7e68d8102b2a2ee876090f4c8ea3e57de5"
+  },
+  "result": "PASS",
+  "source": {
+    "sourceRevision": "e0fcc8f0c11a5d923d5220b462d06b466c69037d",
+    "sourceTree": "f194309a9ff33415e9709c4be59a0d206d512a07"
+  },
+  "uiSource": {
+    "sourceRevision": "e61719f4d357397a9bfd14a4e258973430bbd7e3",
+    "sourceTree": "7d5d6eb45cbb697cad751b2c91ab51e8aa58ac75"
+  }
+}
