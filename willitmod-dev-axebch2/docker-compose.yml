@@ -22,8 +22,11 @@ services:
         mkdir -p /data/ui/state /data/node /data/pool/config /data/pool/www/pool /data/pool/www/users
         # Core owns /data/node as bch2:bch2. Changing a running Core's
         # database ownership here prevents writes and can force a restart.
-        chown -R 1000:1000 /data/ui /data/pool || true
-        chmod -R ug+rwX /data/ui /data/pool || true
+        # The host owns retention leases. Never change their metadata or
+        # promote existing bytes into a protected lease. Leave symlinks and
+        # multiply-linked files alone; the app still owns its checkpoint/lock.
+        find /data/ui /data/pool -name ckpool-retention-capability.json -prune -o \( -type d -o \( -type f -links 1 \) \) -exec chown -h 1000:1000 {} + || true
+        find /data/ui /data/pool -name ckpool-retention-capability.json -prune -o \( -type d -o \( -type f -links 1 \) \) -exec chmod ug+rwX {} + || true
 
   app:
     stop_signal: SIGINT
@@ -52,7 +55,7 @@ services:
       APP_REVISION: 611287fd9d41656a3fd19651dcb2ce98dbebf5d3
       MUX_IDENTITY_URL: "http://172.17.0.1:21222/api/integrations/workers"
       APP_ID: "willitmod-dev-axebch2"
-      APP_VERSION: "0.2.2"
+      APP_VERSION: "0.2.3"
       APP_CHANNEL: "MAIN"
       APP_RELEASE_PHASE: "STABLE"
       APP_SELF_RESTART_ENABLED: "1"

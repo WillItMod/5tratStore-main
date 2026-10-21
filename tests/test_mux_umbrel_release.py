@@ -37,11 +37,18 @@ def synthetic_icon_coverage(delivery_channel, observation_channel=None):
 
 class MuxUmbrelReleaseTests(unittest.TestCase):
     def test_pending_metadata_cannot_be_admitted_as_a_published_release(self):
-        if mux.LOCKS[CHANNEL] is None:
+        # Exercise the original admission boundary directly. Newer package
+        # dispatch must not bypass this deliberately pending-record case.
+        with patch.dict(mux.LOCKS, {CHANNEL: None}):
             with self.assertRaisesRegex(AssertionError, "not been finalized"):
-                mux.validate()
-        else:
-            mux.validate()
+                mux.record()
+
+    def test_finalized_historical_record_and_delivery_remain_exact(self):
+        # Immutable release evidence is independent of the current package.
+        release = mux.record()
+        proof = mux.validate_publication(ROOT, release)
+        self.assertEqual(release['version'], mux.VERSIONS[CHANNEL])
+        self.assertEqual(proof['result'], 'PASS')
 
     def test_permanent_mux_admission_does_not_freeze_unrelated_app_updates(self):
         release = {"channel": CHANNEL}

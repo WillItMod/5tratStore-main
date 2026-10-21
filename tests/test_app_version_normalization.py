@@ -25,8 +25,10 @@ class AppVersionNormalizationTests(unittest.TestCase):
         self.assertEqual(normalization.previous_app_version_model(APP, current), old)
         self.assertEqual(normalization.digest(health_release.previous_model(APP, current, ROOT)), row["afterModelSHA256"])
         self.assertEqual(normalization.previous_app_version_model(APP, old), old)
-        self.assertEqual(normalization.package_version(APP, row["beforeVersion"]), health_release.version(APP, normalization.RECORD["channel"]))
-        self.assertEqual(normalization.package_version(APP, row["version"]), health_release.version(APP, normalization.RECORD["channel"]))
+        latest = health_release.bch2_successor(ROOT).VERSIONS[normalization.RECORD['channel']]
+        self.assertEqual(normalization.package_version(APP, row["beforeVersion"]), latest)
+        self.assertEqual(normalization.package_version(APP, row["version"]), latest)
+        self.assertEqual(normalization.package_version(APP, latest), latest)
         with self.assertRaises(AssertionError):
             normalization.package_version(APP, "arbitrary-old-version")
 

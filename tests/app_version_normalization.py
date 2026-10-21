@@ -128,10 +128,12 @@ def package_version(app_id, historical):
     row = contract()["apps"].get(app_id)
     if row is not None:
         current_health_version = health_release.version(app_id, RECORD["channel"]) if app_id in health_release.APPS else None
-        accepted = (row["beforeVersion"], row["version"]) + ((current_health_version,) if current_health_version else ())
+        recipe_version = health_release.bch2_successor(ROOT).VERSIONS[RECORD['channel']] if app_id == APP else None
+        accepted = (row["beforeVersion"], row["version"]) + ((current_health_version,) if current_health_version else ()) + ((recipe_version,) if recipe_version else ())
         assert historical in accepted, "Unreviewed preceding package version"
         historical = row["version"]
-    return health_release.package_version(app_id, historical, ROOT)
+    current = health_release.package_version(app_id, historical, ROOT)
+    return health_release.bch2_successor(ROOT).package_version(app_id, current, ROOT) if app_id == APP else current
 
 
 def source_bytes(path, revision=None):
