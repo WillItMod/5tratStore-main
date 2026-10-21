@@ -238,7 +238,7 @@ services:
   app:
     stop_signal: SIGINT
     hostname: axeppc-app
-    image: ghcr.io/willitmod/axeppc-app-umbrel-dev:0.2.37-mux.5b0aac96a475@sha256:df22d1f1ba4f607d7422945cbdb0ec4ad348b9ce7ddd578d8179849db45d536d
+    image: ghcr.io/willitmod/axeppc-app-umbrel-dev:0.2.38-mux.0264b623c305@sha256:959012f43b4ef82a73cd33bbf25f894072e66fbfe00733fbddde0b4da8651533
     user: "1000:1000"
     restart: unless-stopped
     stop_grace_period: 30s
