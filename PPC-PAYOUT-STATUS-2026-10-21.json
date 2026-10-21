@@ -4,20 +4,20 @@
   "channel": "MAIN",
   "baselineCommit": "3e05eb57cbe1688c7660f690ac4afa0dce902611",
   "sourceRepository": "https://github.com/WillItMod/AxePPC_Build",
-  "sourceRevision": "a3764b8173971e3b155073e5794bfcd1b602f706",
-  "sourceTree": "82518e630ee7dae3cddcdde45a6fc2a2026806a9",
-  "imageRef": "ghcr.io/willitmod/axeppc-app-umbrel-dev:0.2.38-mux.a3764b817397@sha256:822ecd4f43f22a469720cb30ce2f4f8c7b7c24d1be8d1fde94e0b1fc87aa25f9",
+  "sourceRevision": "0264b623c305eb275a12af6b107177854e2b0b57",
+  "sourceTree": "1743f3b8cb281e6c3980122763cae65a4d6e4d67",
+  "imageRef": "ghcr.io/willitmod/axeppc-app-umbrel-dev:0.2.38-mux.0264b623c305@sha256:959012f43b4ef82a73cd33bbf25f894072e66fbfe00733fbddde0b4da8651533",
   "priorImageRef": "ghcr.io/willitmod/axeppc-app-umbrel-dev:0.2.37-mux.5b0aac96a475@sha256:df22d1f1ba4f607d7422945cbdb0ec4ad348b9ce7ddd578d8179849db45d536d",
-  "publicationRun": 39585921897,
-  "publicationURL": "https://github.com/WillItMod/AxePPC_Build/actions/runs/39585921897",
+  "publicationRun": 39586830468,
+  "publicationURL": "https://github.com/WillItMod/AxePPC_Build/actions/runs/39586830468",
   "platforms": {
     "amd64": {
-      "manifestDigest": "sha256:bfedde8c410fca2c8bd0903207e93db111450765ae0aefb90483f2f1bef4d2d5",
-      "configDigest": "sha256:4db57951172bba378d79a2f42d38325acd1b2105836395a18371670522288c99"
+      "manifestDigest": "sha256:714ea53ff9a352a3d0cf46f77db3f63a9055c51f245108f995ff20fcad044847",
+      "configDigest": "sha256:49155f41b6e1a4ee768a928eba3b8746b40e79947d376b059cd04dc1e9da4aea"
     },
     "arm64": {
-      "manifestDigest": "sha256:2afab10904e0ce5f9fee621d5374777bd50dc837fca6857f8adfc31f7b600c55",
-      "configDigest": "sha256:464758f9e41a4ff89546a5f3c5e586810b5d8c974f078ee1cb910009d98aac5a"
+      "manifestDigest": "sha256:85ae65b962002ffdbb864328cf8c90a05ef944cda30abe578f2017037f6cf15e",
+      "configDigest": "sha256:df52d7430fea146833c0d67d128cbfb18f4e8d9aac596a1dc8767da4764ce1f0"
     }
   },
   "applicationVersion": "0.2.38",
@@ -32,7 +32,7 @@
     ]
   ],
   "beforeModelSHA256": "109c01e39b4348fd3b760f03bdd7ae68b8c1e54e21776aab8f9e4730ff2fb683",
-  "afterModelSHA256": "42ce3e84af56d1b0e98325d7031064be47dbf14e0d5a9a753969cf0e2290b290",
+  "afterModelSHA256": "53de4b3ee8e3e9b5961a1f51369d9b59b5ce42a11e94d3edd03c59e3a0bbf333",
   "beforeManifestSHA256": "192eebf84e4edc3ec1d620ed650d7908d4dead5acb81a576f4f0b929b31ce9f3",
   "afterManifestSHA256": "8528d20df91f61fefd1d4f4597c170a10d4dd867b7776986693592c060ca5d8c",
   "qualificationScope": {
@@ -43,7 +43,7 @@
     "miningPayoutReceiptClaimed": false,
     "isolatedNativeArm64ExactImageMigration": {
       "path": "release-records/ppc-0.2.38-native-arm64-migration.json",
-      "sha256": "6d2ece398f6b2d03cf85f47511d57c0548ab5f13ba89a0d17ed31f1d85836e9c",
+      "sha256": "433317c254b4309ac67d01058daa1268933cd2a9238b3af577872cf1888bd5eb",
       "platform": "linux/arm64",
       "stages": 9,
       "assertions": 218,
