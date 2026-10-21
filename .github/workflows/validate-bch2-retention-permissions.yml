@@ -4,7 +4,7 @@ on:
     paths:
       - "willitmod-dev-axebch2/**"
       - "BCH2-RETENTION-PERMISSIONS-2026-10-21.json"
-      - "release-records/bch2-retention-permissions-fixtures-2026-10-21.json"
+      - "BCH2-RETENTION-PERMISSIONS-FIXTURES-2026-10-21.json"
       - "scripts/bch2_retention_release.py"
       - "scripts/health_release.py"
       - "tests/test_bch2_retention_permissions.py"
@@ -14,7 +14,7 @@ on:
     paths:
       - "willitmod-dev-axebch2/**"
       - "BCH2-RETENTION-PERMISSIONS-2026-10-21.json"
-      - "release-records/bch2-retention-permissions-fixtures-2026-10-21.json"
+      - "BCH2-RETENTION-PERMISSIONS-FIXTURES-2026-10-21.json"
       - "scripts/bch2_retention_release.py"
       - "scripts/health_release.py"
       - "tests/test_bch2_retention_permissions.py"

@@ -51,8 +51,8 @@
     }
   },
   "fixtureProof": {
-    "path": "release-records/bch2-retention-permissions-fixtures-2026-10-21.json",
-    "sha256": "3cd40decc50032fc08f4128f142145e0de3f899624a960a3103d2badbd87255d"
+    "path": "BCH2-RETENTION-PERMISSIONS-FIXTURES-2026-10-21.json",
+    "sha256": "655159688ac54cf031d9a6a382c38b582fc9af57c8088f12601517bc0a447ef3"
   },
   "historicalRecordsSHA256": {
     "APP-VERSION-NORMALIZATION-2026-10-15.json": "84004b9e8757c0631ef03166bfafc01619a424d8dadbe47987b19e6e75f1827f",
