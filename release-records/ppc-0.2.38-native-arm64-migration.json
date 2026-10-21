@@ -1,0 +1,74 @@
+{
+  "finishedAt": 1792579175.474402,
+  "newImage": "ghcr.io/willitmod/axeppc-app-umbrel-dev:0.2.38-mux.a3764b817397@sha256:822ecd4f43f22a469720cb30ce2f4f8c7b7c24d1be8d1fde94e0b1fc87aa25f9",
+  "oldImage": "ghcr.io/willitmod/axeppc-app-umbrel-dev:0.2.37-mux.5b0aac96a475@sha256:df22d1f1ba4f607d7422945cbdb0ec4ad348b9ce7ddd578d8179849db45d536d",
+  "outcome": "passed",
+  "revision": "a3764b8173971e3b155073e5794bfcd1b602f706",
+  "runId": "native-arm64-20261021",
+  "stages": [
+    {
+      "assertions": 22,
+      "httpRequests": 6,
+      "outcome": "passed",
+      "receiptSha256": "3ebe90302e573e36cab25ef4614439380f0cf6d0439b1035450b2637570900da",
+      "stage": "01-old-online-save"
+    },
+    {
+      "assertions": 22,
+      "httpRequests": 6,
+      "outcome": "passed",
+      "receiptSha256": "131c83ab1e2f50c519189fc55124aa926556840f2872d7738731e876d3db2c6f",
+      "stage": "02-old-offline-save"
+    },
+    {
+      "assertions": 20,
+      "httpRequests": 5,
+      "outcome": "passed",
+      "receiptSha256": "b21ddaaaace71b3ba2d17412847109b8194dfc8b101057c0de827b6e26a39678",
+      "stage": "03-new-main-migration-read"
+    },
+    {
+      "assertions": 20,
+      "httpRequests": 5,
+      "outcome": "passed",
+      "receiptSha256": "e74e982855e84a25730b731560016af0c8c5e5f3173df1b29656dc90b0672bf8",
+      "stage": "04-new-dev-restart-read"
+    },
+    {
+      "assertions": 54,
+      "httpRequests": 14,
+      "outcome": "passed",
+      "receiptSha256": "690b1ad319ef1dc4e4d8eb0c480b36f9cd4029d22e6c6333539d6a6e4a6e9c8d",
+      "stage": "05-new-native-api"
+    },
+    {
+      "assertions": 19,
+      "httpRequests": 5,
+      "outcome": "passed",
+      "receiptSha256": "4261e951a12d651859615860b725a30cedc9bbcbc912d1a4fb03f3f7b27b6786",
+      "stage": "06-new-node-unavailable-read"
+    },
+    {
+      "assertions": 21,
+      "httpRequests": 6,
+      "outcome": "passed",
+      "receiptSha256": "e391cd11f459856f9256aa1a00e9e9fce2e2db52a70c0fe92abac959842fd2c1",
+      "stage": "07-new-node-offline-save"
+    },
+    {
+      "assertions": 20,
+      "httpRequests": 5,
+      "outcome": "passed",
+      "receiptSha256": "3f30e8a72f8b1cf6c835346467806bd66141a7463bf1bd1b2c3cfb85d7042b9a",
+      "stage": "08-new-node-recovery-read"
+    },
+    {
+      "assertions": 20,
+      "httpRequests": 5,
+      "outcome": "passed",
+      "receiptSha256": "4eac02e87294429a8c340f3a4c8945677b0b9c9d64561ec25ee3a99cea263f0c",
+      "stage": "09-new-main-restart-read"
+    }
+  ],
+  "startedAt": 1792579166.735401
+}

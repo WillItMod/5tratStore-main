@@ -2,7 +2,7 @@ manifestVersion: 1
 id: willitmod-dev-ppc
 category: altcoin
 name: AxePPC
-version: "0.2.37"
+version: "0.2.38"
 tagline: PPC node + solo pool
 description: >-
   ALPHA RELEASE (DEV CHANNEL)
@@ -24,7 +24,7 @@ description: >-
 
 
   Notes:
-    - Payout address must be a Base58 Peercoin address.
+    - Use a bare native Peercoin receiving address without a peercoin: prefix. Legacy Base58 P... addresses are recommended; the node validates the address.
     - Stratum will not respond until the node finishes initial sync.
     - ALPHA: expect breaking changes while this is being tested on 5tratumOS.
 developer: WillItMod
@@ -40,6 +40,8 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
+  Payout status now distinguishes node-validated, invalid, missing and not-yet-validated addresses. The channel label is informational. Node-rejected addresses are never saved, and an unavailable node is shown explicitly. Use a bare native Peercoin receiving address without a peercoin: prefix. Existing payout settings, pool configuration and stored data are retained.
+
   Pins the reviewed payout-validation app and an immutable Peercoin node image. The node retains the same official Peercoin 0.15.1ppc binaries and wrapper, and receives SIGTERM with two minutes for normal database shutdown. Existing chain data, wallets, payouts, pool image, mining configuration and Claude layout are retained.
 
   Best-share records now retain complete pool-log entries that arrive across
