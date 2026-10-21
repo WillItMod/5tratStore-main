@@ -8,6 +8,7 @@ are not permanently frozen by this app-specific gate.
 import argparse
 import copy
 import hashlib
+import importlib.util
 import json
 from pathlib import Path
 import re
@@ -116,12 +117,21 @@ def model(app_id, before, row, release_channel):
     return expected
 
 
+def bch2_successor(root=ROOT):
+    spec = importlib.util.spec_from_file_location('bch2_retention_successor', root / 'scripts/bch2_retention_release.py')
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
 def previous_model(app_id, current, root=ROOT, *, historical_models=()):
     if app_id not in APPS:
         return copy.deepcopy(current)
     before = predecessor(root, app_id)
     if current == before or digest(current) in historical_models:
         return copy.deepcopy(current)
+    if app_id == APPS[1] and current.get('services', {}).get('app', {}).get('environment', {}).get('APP_VERSION') in ('0.2.3', '0.2.3-dev'):
+        current = bch2_successor(root).previous_model(current, root)
     release = record(root)
     assert current == model(app_id, before, release["apps"][app_id], release["channel"]), "Unreviewed health runtime delta"
     return before
@@ -133,6 +143,8 @@ def previous_manifest(app_id, current, filename="umbrel-app.yml", root=ROOT):
     before = predecessor(root, app_id, filename)
     if current == before:
         return copy.deepcopy(current)
+    if app_id == APPS[1] and current.get('version') in ('0.2.3', '0.2.3-dev'):
+        current = bch2_successor(root).previous_manifest(current, filename, root)
     release = record(root)
     expected = copy.deepcopy(before)
     expected["version"] = version(app_id, release["channel"])
@@ -162,6 +174,12 @@ def validate_package(root, app_id, release):
     names = git(root, "ls-tree", "-r", "--name-only", release["baselineCommit"], "--", app_id).decode().splitlines()
     actual = package_files(root, app_id)
     assert set(actual) == set(names), "Unexpected health package inventory"
+    successor = None
+    if app_id == APPS[1] and actual != row['packageFiles']:
+        successor = bch2_successor(root)
+        successor.validate(root)
+        actual = {name: {'sha256': sha256(successor.previous_file_bytes((root / name).read_bytes(), name, root)),
+                         'mode': value['mode']} for name, value in actual.items()}
     assert actual == row["packageFiles"], "Unreviewed health package bytes"
     for name in names:
         path = root / name

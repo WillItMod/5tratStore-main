@@ -1,0 +1,38 @@
+name: Validate BCH2 retention permission repair
+on:
+  pull_request:
+    paths:
+      - "willitmod-dev-axebch2/**"
+      - "BCH2-RETENTION-PERMISSIONS-2026-10-21.json"
+      - "release-records/bch2-retention-permissions-fixtures-2026-10-21.json"
+      - "scripts/bch2_retention_release.py"
+      - "scripts/health_release.py"
+      - "tests/test_bch2_retention_permissions.py"
+      - ".github/workflows/validate-bch2-retention-permissions.yml"
+  push:
+    branches: [main]
+    paths:
+      - "willitmod-dev-axebch2/**"
+      - "BCH2-RETENTION-PERMISSIONS-2026-10-21.json"
+      - "release-records/bch2-retention-permissions-fixtures-2026-10-21.json"
+      - "scripts/bch2_retention_release.py"
+      - "scripts/health_release.py"
+      - "tests/test_bch2_retention_permissions.py"
+      - ".github/workflows/validate-bch2-retention-permissions.yml"
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.11"
+      - run: python -m pip install PyYAML==6.0.3
+      - run: docker pull alpine:3.22.1
+      - run: python scripts/bch2_retention_release.py
+      - name: Exercise actual initializer in private tmpfs
+        run: BCH2_RETENTION_DOCKER_RUNTIME=1 python -m unittest discover -s tests -p test_bch2_retention_permissions.py -v

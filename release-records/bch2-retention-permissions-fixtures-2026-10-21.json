@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "result": "PASS",
+  "channel": "MAIN",
+  "version": "0.2.3",
+  "scope": "Actual Alpine initializer in disposable tmpfs; exact native install/update renderers with isolated socket metadata and parsed source-contract fixtures. No installed native manager or physical mining qualification.",
+  "initImage": "alpine:3.22.1",
+  "initImageConfigDigest": "sha256:4bcff63911fcb4448bd4fdacec207030997caf25e9bea4045fa6c8c44de311d1",
+  "initCommandSHA256": "cfffd8c03713f8fdece64a68da19ca39563c828d2b83b359dcac8893be0b3006",
+  "testSourceSHA256": "a0fdb2f2c0f912231e354408ac6dd316d03548be0d8a670f6d4a50c0f5df2f89",
+  "actualAlpineInitializerExecuted": true,
+  "nativeInstallAndUpdateGeneratorsPreserveInitializer": true,
+  "nativeRendererFixtureSubstitutions": [
+    "Docker socket metadata from isolated real Unix socket",
+    "Exact source retention contracts parsed without installed root-ownership check"
+  ],
+  "nativeSourceCommit": "22d70707e52aac5aa91642446b0a5d9272ae5ee1",
+  "nativeSourceFilesSHA256": {
+    "bin/5tratumos": "ed31277d1229da6a6dfb505f3fd814524aa82cd35cb70caad784c606bfa291f0",
+    "daemon/app_stop_policy.py": "110b0c04b91c0a5e611da4d979b46b08301c7869355d1a43ddaeab66a89326bd",
+    "daemon/docker_socket_access.py": "e08271cf0c535aa638d83415b69858bc14c6b583f8bbad5a0f68777658985c87",
+    "daemon/pool_retention_contracts.json": "974994b3c1e61f03f716a0af6f3b8868a87171cd9fcfbac52ab2578272a32617"
+  },
+  "cases": {
+    "oldInitializerReproducesRoot0644ToUid1000Mode0664": true,
+    "protectedLeaseBytesOwnerModeInodePreservedAfterTwoStarts": true,
+    "malformedUid1000Mode0666LeaseNotPromoted": true,
+    "absentLeaseNotCreated": true,
+    "symlinkCapabilityNotFollowed": true,
+    "hardlinkCapabilityNotChanged": true,
+    "directoryCapabilityPruned": true,
+    "otherSymlinkAndHardlinkTargetsUnchanged": true,
+    "checkpointAndLockBytesRetainedAndUid1000CanAppend": true,
+    "poolLogBytesRetainedAndUid1000CanAppend": true,
+    "nodeDataUntouched": true
+  },
+  "liveAppNodeOrMinerStarted": false,
+  "liveDataAccessed": false,
+  "hostPortsPublished": false,
+  "networkUsed": false
+}
