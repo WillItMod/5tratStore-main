@@ -1,0 +1,114 @@
+{
+  "result": "PASS",
+  "schemaVersion": 1,
+  "imageRef": "ghcr.io/willitmod/powpow-pool:0.2.37-mux.cfbbfc500fda@sha256:a1fcca03de7339e1e93f0748e35c6d8fbe48435016202e0aca93d0d04772affd",
+  "sourceRevision": "cfbbfc500fdaac6a6bcaba01eb0f543782e67397",
+  "sourceTree": "78868a4614fda2e8e1d648a02a8bc53b29d79db3",
+  "workflowRun": 41484899413,
+  "workflowURL": "https://github.com/WillItMod/PowPow_Build/actions/runs/41484899413",
+  "platforms": {
+    "amd64": {
+      "manifestDigest": "sha256:f1e458e30b49c19f0a8633b48d33699603b3920583cce408056ebc0c3dfb41ba",
+      "configDigest": "sha256:86937ad4d16be9d2c436a668ae005be6fc2ac974b9d045c39d8ae5bb5ded3630"
+    },
+    "arm64": {
+      "manifestDigest": "sha256:310eb7b66b6f5d1a9e9306dd77c2623c573cad90c31b918906daf8474a9ced3e",
+      "configDigest": "sha256:642541138384e5d8a6cf8c5ac42835af3dc7f89d3474cae22cc9fe0da95e5ab1"
+    }
+  },
+  "attestations": {
+    "amd64": {
+      "manifestDigest": "sha256:239641455733c02bb299c19d19a9ee875143d2157845fa5abe3d910ea5a94f75",
+      "spdxStatementDigest": "sha256:7e0fb7394f78c17e030a6a17afca339e27adc34a9aa4fb6a541bdd8efa380671",
+      "slsaStatementDigest": "sha256:2b4223530a1af0148c27b1c548d20c8e9466703813071b135336fad8fc2efd77"
+    },
+    "arm64": {
+      "manifestDigest": "sha256:02a6265d1e7f20a627a01575819efd5acb5727978ab868e30da606c81485c1f2",
+      "spdxStatementDigest": "sha256:f03c1fd08b1770169d18bfc9bf65647e70a5c2d42079973eb5a913c59dfa7907",
+      "slsaStatementDigest": "sha256:f738a7c9291400c313114c4e91717a09d92ebb92a4ff55e40b96082a8a5b3457"
+    }
+  },
+  "publicAnonymousRegistryChecks": true,
+  "manifestConfigAndAttestationBytesHashed": true,
+  "attestationSubjectsBindNativeManifests": true,
+  "provenanceBindsExactSource": true,
+  "cryptographicSignerVerificationClaimed": false,
+  "guestUpdateQualificationClaimed": false,
+  "schemaRepairQualification": {
+    "result": "PASS",
+    "bootstrapSHA256": "e4670bb15c1f8f4aba9fc872f62fa5fb82b97a979c666c0a317359454cc0ad48",
+    "platforms": {
+      "arm64": {
+        "schemaVersion": 1,
+        "image": "ghcr.io/willitmod/powpow-pool@sha256:36c3bc092e58bd0e78306a39855bfe7bacc9aa67b03f715b88cc145d7d065385",
+        "postgresImage": "postgres@sha256:721873c34ceb9f8d8fc265984940dc982404c105f19ad51be9fdc5970a6080ea",
+        "userVolumesMounted": false,
+        "hostPortsPublished": false,
+        "postgresDataUsesTmpfs": true,
+        "fixtureLabel": "com.willitmod.powpow.schema-qa",
+        "historicalSeed3RunsOnlyInEmptyDisposableDatabase": true,
+        "bootstrapSHA256": "e4670bb15c1f8f4aba9fc872f62fa5fb82b97a979c666c0a317359454cc0ad48",
+        "entrypointSHA256": "05d40b8aa3752beb0c6e9f97cb571219774f2ffbd0dd2d2a55f81841ef03f45b",
+        "bundledEntrypointSingleTransactionVerified": true,
+        "freshSeedSHA256": {
+          "2-schema.sql": "c9a0e0c871ddb7fe198e154903c053db1a26c614c5062d660af0add0e2fc8427",
+          "3-multi-pool-partition.sql": "83a380949be2a2dd7b67a667575fc06133eae7be885ce458e0687803edc2f4bf"
+        },
+        "cases": {
+          "freshHistoricalSeedsThenTwoRepairsAndDefaultCustomPoolCOPY": true,
+          "existingPlainRowsAndOIDPreservedWithoutPartitionConversion": true,
+          "MissingPartitionCOPYReproducedThenRecoveredWithRowsAndOIDsPreserved": true,
+          "ExistingDifferentlyNamedDefaultPartitionPreserved": true,
+          "ConflictingChildNameFailsAndRollsBackAllSchemaChanges": true,
+          "unexpected_list_keyFailsWithoutChangingRowsOrSchema": true,
+          "unexpected_range_keyFailsWithoutChangingRowsOrSchema": true,
+          "concurrent_freshBootstrapsSerializeSuccessfully": true,
+          "concurrent_partitionedBootstrapsSerializeSuccessfully": true,
+          "ActualBundledEntrypointRepairsBeforeRPCWaitAndStopsCleanly": true
+        },
+        "result": "PASS",
+        "allDisposableObjectsRemoved": true,
+        "nativeGitHubJob": 125412639466,
+        "nativeArchitecture": "arm64",
+        "verifiedNativeManifestDigest": "sha256:310eb7b66b6f5d1a9e9306dd77c2623c573cad90c31b918906daf8474a9ced3e"
+      },
+      "amd64": {
+        "schemaVersion": 1,
+        "image": "ghcr.io/willitmod/powpow-pool@sha256:bf09fab6a75467806cf5cb0e27ff6f99807a669234abd38660212590a9b92a85",
+        "postgresImage": "postgres@sha256:721873c34ceb9f8d8fc265984940dc982404c105f19ad51be9fdc5970a6080ea",
+        "userVolumesMounted": false,
+        "hostPortsPublished": false,
+        "postgresDataUsesTmpfs": true,
+        "fixtureLabel": "com.willitmod.powpow.schema-qa",
+        "historicalSeed3RunsOnlyInEmptyDisposableDatabase": true,
+        "bootstrapSHA256": "e4670bb15c1f8f4aba9fc872f62fa5fb82b97a979c666c0a317359454cc0ad48",
+        "entrypointSHA256": "05d40b8aa3752beb0c6e9f97cb571219774f2ffbd0dd2d2a55f81841ef03f45b",
+        "bundledEntrypointSingleTransactionVerified": true,
+        "freshSeedSHA256": {
+          "2-schema.sql": "c9a0e0c871ddb7fe198e154903c053db1a26c614c5062d660af0add0e2fc8427",
+          "3-multi-pool-partition.sql": "83a380949be2a2dd7b67a667575fc06133eae7be885ce458e0687803edc2f4bf"
+        },
+        "cases": {
+          "freshHistoricalSeedsThenTwoRepairsAndDefaultCustomPoolCOPY": true,
+          "existingPlainRowsAndOIDPreservedWithoutPartitionConversion": true,
+          "MissingPartitionCOPYReproducedThenRecoveredWithRowsAndOIDsPreserved": true,
+          "ExistingDifferentlyNamedDefaultPartitionPreserved": true,
+          "ConflictingChildNameFailsAndRollsBackAllSchemaChanges": true,
+          "unexpected_list_keyFailsWithoutChangingRowsOrSchema": true,
+          "unexpected_range_keyFailsWithoutChangingRowsOrSchema": true,
+          "concurrent_freshBootstrapsSerializeSuccessfully": true,
+          "concurrent_partitionedBootstrapsSerializeSuccessfully": true,
+          "ActualBundledEntrypointRepairsBeforeRPCWaitAndStopsCleanly": true
+        },
+        "result": "PASS",
+        "allDisposableObjectsRemoved": true,
+        "nativeGitHubJob": 125412639555,
+        "nativeArchitecture": "amd64",
+        "verifiedNativeManifestDigest": "sha256:f1e458e30b49c19f0a8633b48d33699603b3920583cce408056ebc0c3dfb41ba"
+      }
+    }
+  },
+  "workflowConclusion": "success",
+  "nativePoolRuntimeAndSourceChecks": "passed on native ARM64 and AMD64 GitHub runners",
+  "actualSyncedMiningAndGuestUpdateQualificationClaimed": false
+}

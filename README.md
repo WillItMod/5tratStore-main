@@ -34,7 +34,7 @@ own licenses.
 - **AxeXEC** (`willitmod-dev-xec`) - `0.1.24`
 - **Fumbrel** (`willitmod-dev-fumbrel`) - `0.1.3` (Umbrel only)
 - **FracAttack** (`willitmod-dev-fracattack`) - `0.1.12`
-- **PowPow** (`willitmod-dev-powpow`) - `0.2.38`
+- **PowPow** (`willitmod-dev-powpow`) - `0.2.39`
 
 The 2026-10-15 promotion uses the running DEV packages with existing MAIN app IDs.
 Immutable application images, layouts, configuration controls and migration guards are retained.
