@@ -4,7 +4,7 @@ on:
     paths:
       - "willitmod-dev-powpow/**"
       - "POWPOW-POOL-STABILITY-2026-11-02.json"
-      - "release-records/powpow-pool-stability-*"
+      - "powpow-release-records/pool-stability-20261102-publication.json"
       - "scripts/powpow_pool_stability_release.py"
       - "tests/test_powpow_pool_stability_release.py"
       - ".github/workflows/validate-powpow-pool-stability.yml"
@@ -13,7 +13,7 @@ on:
     paths:
       - "willitmod-dev-powpow/**"
       - "POWPOW-POOL-STABILITY-2026-11-02.json"
-      - "release-records/powpow-pool-stability-*"
+      - "powpow-release-records/pool-stability-20261102-publication.json"
       - "scripts/powpow_pool_stability_release.py"
       - "tests/test_powpow_pool_stability_release.py"
       - ".github/workflows/validate-powpow-pool-stability.yml"

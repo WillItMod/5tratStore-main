@@ -25,7 +25,7 @@
     }
   },
   "publicationEvidence": {
-    "path": "release-records/powpow-pool-stability-20261102-publication.json",
+    "path": "powpow-release-records/pool-stability-20261102-publication.json",
     "sha256": "1b8bcdb9a4c27bcb1564951afcdfcb021498d5e9dcf818f03853c2f584b804f9"
   },
   "packageChangeScope": [
