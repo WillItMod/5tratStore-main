@@ -106,7 +106,7 @@ services:
       start_period: 3m
 
   pool:
-    image: ghcr.io/willitmod/powpow-pool:0.2.37-pool-startup.a443d6f3e552@sha256:b89d5e8c8e078fb200690b1b7ce941c2c995b18ba9cfa699ccac08ff6ddebea8
+    image: ghcr.io/willitmod/powpow-pool:0.2.37-mux.a20704f8b2ad@sha256:16de156be9f022b1fa2a5d9859232845dd041c457836901647353dcc57851b3c
     restart: unless-stopped
     depends_on:
       init_permissions:

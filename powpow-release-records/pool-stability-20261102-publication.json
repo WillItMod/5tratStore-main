@@ -1,0 +1,137 @@
+{
+  "result": "PASS",
+  "schemaVersion": 1,
+  "imageRef": "ghcr.io/willitmod/powpow-pool:0.2.37-mux.a20704f8b2ad@sha256:16de156be9f022b1fa2a5d9859232845dd041c457836901647353dcc57851b3c",
+  "sourceRevision": "a20704f8b2adb93d17249944b4c1f1d9128305aa",
+  "sourceTree": "60670662b59d34ce55ced4da4998bcee4a9bbf4e",
+  "workflowRun": 41470941258,
+  "workflowURL": "https://github.com/WillItMod/PowPow_Build/actions/runs/41470941258",
+  "platforms": {
+    "amd64": {
+      "manifestDigest": "sha256:25b3d6231c51f687fe127f4bbf88f50a00f993b4579224cd313af0c8dd0eac45",
+      "configDigest": "sha256:c49638062afe0a799bc0465a3e476d1d4497513d5e899a640d7647bbb289e95a"
+    },
+    "arm64": {
+      "manifestDigest": "sha256:4fa2d055228bd127abebbcba9863d2d08382a70f4bac87da276d369b0fa8a2ec",
+      "configDigest": "sha256:791cbce125f3ba15bde467204fea115c998e73ed1b518106b99526ad5d130af5"
+    }
+  },
+  "attestations": {
+    "amd64": {
+      "manifestDigest": "sha256:a9ab4b77602b07c42534229f353df37988060949ff9bbd7728fe9f44f6d5e929",
+      "spdxStatementDigest": "sha256:b5a0b0698663ea03834907b5bbd893cac777c24e8e898934f34b20c3ac55e038",
+      "slsaStatementDigest": "sha256:afe430622cdb9748cd55480c1f0829dd92eba21626305902d9728b4080759d74"
+    },
+    "arm64": {
+      "manifestDigest": "sha256:57760213ccb98f7e9d2356071450a4dc1844afbee9417a251f50d5d8a0397218",
+      "spdxStatementDigest": "sha256:0443cf1b9323498b8fc5c9c9ccc105a7b2a18bb2e6a004eda11ce426f1157fab",
+      "slsaStatementDigest": "sha256:af991608544b94560f6e91e4bc16179c33d3a6769fcfce85b9f069f466f106c9"
+    }
+  },
+  "publicAnonymousRegistryChecks": true,
+  "manifestConfigAndAttestationBytesHashed": true,
+  "attestationSubjectsBindNativeManifests": true,
+  "provenanceBindsExactSource": true,
+  "cryptographicSignerVerificationClaimed": false,
+  "guestUpdateQualificationClaimed": false,
+  "workflowConclusion": "success",
+  "nativePoolRuntimeAndSourceChecks": "passed on both native GitHub runners",
+  "publishedImageLifecycleChecks": {
+    "amd64": [
+      {
+        "stage": "missing-config",
+        "baseline": false,
+        "signal": "TERM",
+        "running": false,
+        "exit_code": 0,
+        "oom": false,
+        "elapsed_s": 0.041,
+        "actual_image": "ghcr.io/willitmod/powpow-pool@sha256:25b3d6231c51f687fe127f4bbf88f50a00f993b4579224cd313af0c8dd0eac45",
+        "no_synthetic_protocol_or_published_ports": true
+      },
+      {
+        "stage": "missing-config",
+        "baseline": false,
+        "signal": "INT",
+        "running": false,
+        "exit_code": 0,
+        "oom": false,
+        "elapsed_s": 0.045,
+        "actual_image": "ghcr.io/willitmod/powpow-pool@sha256:25b3d6231c51f687fe127f4bbf88f50a00f993b4579224cd313af0c8dd0eac45",
+        "no_synthetic_protocol_or_published_ports": true
+      },
+      {
+        "stage": "real-postgres-chain-wait",
+        "baseline": false,
+        "signal": "TERM",
+        "running": false,
+        "exit_code": 0,
+        "oom": false,
+        "elapsed_s": 0.072,
+        "actual_image": "ghcr.io/willitmod/powpow-pool@sha256:25b3d6231c51f687fe127f4bbf88f50a00f993b4579224cd313af0c8dd0eac45",
+        "no_synthetic_protocol_or_published_ports": true
+      },
+      {
+        "stage": "real-postgres-chain-wait",
+        "baseline": false,
+        "signal": "INT",
+        "running": false,
+        "exit_code": 0,
+        "oom": false,
+        "elapsed_s": 0.061,
+        "actual_image": "ghcr.io/willitmod/powpow-pool@sha256:25b3d6231c51f687fe127f4bbf88f50a00f993b4579224cd313af0c8dd0eac45",
+        "no_synthetic_protocol_or_published_ports": true
+      }
+    ],
+    "arm64": [
+      {
+        "stage": "missing-config",
+        "baseline": false,
+        "signal": "TERM",
+        "running": false,
+        "exit_code": 0,
+        "oom": false,
+        "elapsed_s": 0.039,
+        "actual_image": "ghcr.io/willitmod/powpow-pool@sha256:4fa2d055228bd127abebbcba9863d2d08382a70f4bac87da276d369b0fa8a2ec",
+        "no_synthetic_protocol_or_published_ports": true
+      },
+      {
+        "stage": "missing-config",
+        "baseline": false,
+        "signal": "INT",
+        "running": false,
+        "exit_code": 0,
+        "oom": false,
+        "elapsed_s": 0.037,
+        "actual_image": "ghcr.io/willitmod/powpow-pool@sha256:4fa2d055228bd127abebbcba9863d2d08382a70f4bac87da276d369b0fa8a2ec",
+        "no_synthetic_protocol_or_published_ports": true
+      },
+      {
+        "stage": "real-postgres-chain-wait",
+        "baseline": false,
+        "signal": "TERM",
+        "running": false,
+        "exit_code": 0,
+        "oom": false,
+        "elapsed_s": 0.088,
+        "actual_image": "ghcr.io/willitmod/powpow-pool@sha256:4fa2d055228bd127abebbcba9863d2d08382a70f4bac87da276d369b0fa8a2ec",
+        "no_synthetic_protocol_or_published_ports": true
+      },
+      {
+        "stage": "real-postgres-chain-wait",
+        "baseline": false,
+        "signal": "INT",
+        "running": false,
+        "exit_code": 0,
+        "oom": false,
+        "elapsed_s": 0.072,
+        "actual_image": "ghcr.io/willitmod/powpow-pool@sha256:4fa2d055228bd127abebbcba9863d2d08382a70f4bac87da276d369b0fa8a2ec",
+        "no_synthetic_protocol_or_published_ports": true
+      }
+    ]
+  },
+  "publishedSourceManifestChecks": true,
+  "localPublishedImageAMD64Execution": "emulated on arm64",
+  "localPublishedImageARM64Execution": "native arm64",
+  "actualSyncedMiningAndGuestUpdateQualificationClaimed": false
+}
