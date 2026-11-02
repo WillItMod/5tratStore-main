@@ -1,0 +1,38 @@
+name: Validate PowPow share partition repair
+on:
+  pull_request:
+    paths:
+      - "willitmod-dev-powpow/**"
+      - "POWPOW-SHARE-PARTITION-2026-11-02.json"
+      - "powpow-release-records/share-partition-20261102-publication.json"
+      - "scripts/powpow_share_partition_release.py"
+      - "scripts/powpow_pool_stability_release.py"
+      - "tests/test_powpow_share_partition_release.py"
+      - ".github/workflows/validate-powpow-share-partition.yml"
+  push:
+    branches: [main]
+    paths:
+      - "willitmod-dev-powpow/**"
+      - "POWPOW-SHARE-PARTITION-2026-11-02.json"
+      - "powpow-release-records/share-partition-20261102-publication.json"
+      - "scripts/powpow_share_partition_release.py"
+      - "scripts/powpow_pool_stability_release.py"
+      - "tests/test_powpow_share_partition_release.py"
+      - ".github/workflows/validate-powpow-share-partition.yml"
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.11"
+      - run: python -m pip install PyYAML==6.0.3
+      - run: python scripts/powpow_share_partition_release.py --check-baseline
+      - run: python -m unittest discover -s tests -p test_powpow_share_partition_release.py -v
+      - name: Preserve the prior stability release contracts
+        run: python -m unittest discover -s tests -p test_powpow_pool_stability_release.py -v

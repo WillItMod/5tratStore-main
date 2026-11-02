@@ -2,8 +2,10 @@ manifestVersion: 1
 id: willitmod-dev-powpow
 category: altcoin
 name: "PowPow"
-version: "0.2.38"
+version: "0.2.39"
 releaseNotes: >-
+  Repairs missing share-table partitions automatically when the pool starts so new shares and pool statistics can be saved. Existing database rows are preserved, and custom pool names are supported.
+
   Improves pool stability when miners reconnect and prevents failed share writes from exhausting database connections. Updates the pool service while retaining the application interface at version 0.2.37, node images, mining settings and stored data.
 
   Apply the existing 15 minute 30 second blockchain shutdown allowance to Umbrel as well as 5tratumOS. Litecoin and Dogecoin receive SIGTERM and time to flush their data before the platform shutdown deadline. Images, wallets, pool settings, layouts and full-sync requirements are unchanged.

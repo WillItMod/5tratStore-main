@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "status": "qualified",
+  "channel": "MAIN",
+  "appId": "willitmod-dev-powpow",
+  "packageVersion": "0.2.39",
+  "previousPackageVersion": "0.2.38",
+  "retainedAppRuntimeVersion": "0.2.37",
+  "baselineCommit": "72e764558938feba3557ec23dbe6753a34771c63",
+  "sourceRepository": "https://github.com/WillItMod/PowPow_Build",
+  "sourceRevision": "cfbbfc500fdaac6a6bcaba01eb0f543782e67397",
+  "sourceTree": "78868a4614fda2e8e1d648a02a8bc53b29d79db3",
+  "workflowRun": 41484899413,
+  "workflowURL": "https://github.com/WillItMod/PowPow_Build/actions/runs/41484899413",
+  "imageTag": "ghcr.io/willitmod/powpow-pool:0.2.37-mux.cfbbfc500fda",
+  "imageRef": "ghcr.io/willitmod/powpow-pool:0.2.37-mux.cfbbfc500fda@sha256:a1fcca03de7339e1e93f0748e35c6d8fbe48435016202e0aca93d0d04772affd",
+  "platforms": {
+    "amd64": {
+      "manifestDigest": "sha256:f1e458e30b49c19f0a8633b48d33699603b3920583cce408056ebc0c3dfb41ba",
+      "configDigest": "sha256:86937ad4d16be9d2c436a668ae005be6fc2ac974b9d045c39d8ae5bb5ded3630"
+    },
+    "arm64": {
+      "manifestDigest": "sha256:310eb7b66b6f5d1a9e9306dd77c2623c573cad90c31b918906daf8474a9ced3e",
+      "configDigest": "sha256:642541138384e5d8a6cf8c5ac42835af3dc7f89d3474cae22cc9fe0da95e5ab1"
+    }
+  },
+  "publicationEvidence": {
+    "path": "powpow-release-records/share-partition-20261102-publication.json",
+    "sha256": "c26f94d8485defa0c75e2d614b6fc9639576abd20fa1d2da684cd217cdeacb7c"
+  },
+  "packageChangeScope": [
+    "services.pool.image",
+    "umbrel-app.yml: version and releaseNotes",
+    "global-app.yml: version and releaseNotes"
+  ],
+  "applicationImageRetained": true,
+  "nodeImagesRetained": true,
+  "postgresImageRetained": true,
+  "portsAndMountsRetained": true,
+  "fumbrelBundleRetained": true,
+  "guestUpdateQualificationClaimed": false,
+  "beforeModelSHA256": "49fc1d9a12612887e876a01d0f0bc51420d7be90bde251b7c2a333d9a75994bd",
+  "afterModelSHA256": "909d682ea56d9e80c01e168334d0c56918baaefb96832a2a1fee4e2f25d32c12",
+  "packageFiles": {
+    "willitmod-dev-powpow/.gitignore": {
+      "sha256": "f60baee9ab26467714a8bf7e754bc7140a01da8e4ae8a02f42d79c41dfefa164",
+      "mode": "0o644"
+    },
+    "willitmod-dev-powpow/LICENSES.md": {
+      "sha256": "9e45b79db85a4e2292a4f89523011566e6df36578c676dab67905c5a519301b7",
+      "mode": "0o644"
+    },
+    "willitmod-dev-powpow/LOCAL_NOTES.md": {
+      "sha256": "5a69adc4f469571daf4f0cec0739a25e7beddad63605621bff331ceed4c44116",
+      "mode": "0o644"
+    },
+    "willitmod-dev-powpow/data/postgres-init/2-schema.sql": {
+      "sha256": "c9a0e0c871ddb7fe198e154903c053db1a26c614c5062d660af0add0e2fc8427",
+      "mode": "0o644"
+    },
+    "willitmod-dev-powpow/data/postgres-init/3-multi-pool-partition.sql": {
+      "sha256": "83a380949be2a2dd7b67a667575fc06133eae7be885ce458e0687803edc2f4bf",
+      "mode": "0o644"
+    },
+    "willitmod-dev-powpow/docker-compose.yml": {
+      "sha256": "abf72ea6923c42456c3878deb427a4f2448e520c2c1fb6e5178cac9dbc9a43a3",
+      "mode": "0o644"
+    },
+    "willitmod-dev-powpow/exports.sh": {
+      "sha256": "6d21c61f8c413ce7921b0b6ba0d76987ae8c27b9ed25a8fd957b77fffff50809",
+      "mode": "0o644"
+    },
+    "willitmod-dev-powpow/global-app.yml": {
+      "sha256": "c27d5a152b8ae7b547d9195c893d4d118e4988531fc1e79439d77b3a060f1fbd",
+      "mode": "0o644"
+    },
+    "willitmod-dev-powpow/hooks/pre-start": {
+      "sha256": "b3d8a834f7a7f1c60d58d4813ac1d3c080f5b58752b92b076dafdda7e5fb586f",
+      "mode": "0o755"
+    },
+    "willitmod-dev-powpow/icon.png": {
+      "sha256": "970bbfe4ee69d96caa0194371b595ed91640d2be1dfa79544ec1f4584c061dbd",
+      "mode": "0o644"
+    },
+    "willitmod-dev-powpow/icon.svg": {
+      "sha256": "007dc20b758672cde8de2d693bbe304774308244cdda79af6ef8428c91fdfe30",
+      "mode": "0o644"
+    },
+    "willitmod-dev-powpow/images/1.png": {
+      "sha256": "970bbfe4ee69d96caa0194371b595ed91640d2be1dfa79544ec1f4584c061dbd",
+      "mode": "0o644"
+    },
+    "willitmod-dev-powpow/images/2.png": {
+      "sha256": "cf549e818b47690ae91605356a1a45e01689403779d9d34542c7365eaf544409",
+      "mode": "0o644"
+    },
+    "willitmod-dev-powpow/images/3.png": {
+      "sha256": "ff2e14ec6be8f413abea1f6225161e67c61442189df3c56e5e718c14a30b4df8",
+      "mode": "0o644"
+    },
+    "willitmod-dev-powpow/postgres/bootstrap/10-schema-bootstrap.sql": {
+      "sha256": "4ee99fd275f15f66b3589dbf6294c93633d0eff3eb2b119ccd10e6647bca339f",
+      "mode": "0o644"
+    },
+    "willitmod-dev-powpow/postgres/init/2-schema.sql": {
+      "sha256": "c9a0e0c871ddb7fe198e154903c053db1a26c614c5062d660af0add0e2fc8427",
+      "mode": "0o644"
+    },
+    "willitmod-dev-powpow/postgres/init/3-multi-pool-partition.sql": {
+      "sha256": "83a380949be2a2dd7b67a667575fc06133eae7be885ce458e0687803edc2f4bf",
+      "mode": "0o644"
+    },
+    "willitmod-dev-powpow/powpow-2-schema.sql.template": {
+      "sha256": "c9a0e0c871ddb7fe198e154903c053db1a26c614c5062d660af0add0e2fc8427",
+      "mode": "0o644"
+    },
+    "willitmod-dev-powpow/powpow-3-multi-pool-partition.sql.template": {
+      "sha256": "83a380949be2a2dd7b67a667575fc06133eae7be885ce458e0687803edc2f4bf",
+      "mode": "0o644"
+    },
+    "willitmod-dev-powpow/umbrel-app.yml": {
+      "sha256": "c27d5a152b8ae7b547d9195c893d4d118e4988531fc1e79439d77b3a060f1fbd",
+      "mode": "0o644"
+    }
+  },
+  "previousImageRef": "ghcr.io/willitmod/powpow-pool:0.2.37-mux.a20704f8b2ad@sha256:16de156be9f022b1fa2a5d9859232845dd041c457836901647353dcc57851b3c",
+  "bootstrapSHA256": "e4670bb15c1f8f4aba9fc872f62fa5fb82b97a979c666c0a317359454cc0ad48"
+}

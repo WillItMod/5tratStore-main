@@ -47,6 +47,17 @@ def baseline_model(root=ROOT):
     return model
 
 
+def partition_successor(root=ROOT):
+    """A separately locked successor precedes these frozen stability checks."""
+    if not (root / 'POWPOW-SHARE-PARTITION-2026-11-02.json').is_file():
+        return None
+    import importlib.util
+    spec = importlib.util.spec_from_file_location('powpow_share_partition_successor', root / 'scripts/powpow_share_partition_release.py')
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
 def require_image():
     assert IMAGE_REF is not None, "PowPow pool publication has not been finalized"
     assert re.fullmatch(re.escape(IMAGE_TAG) + r"@sha256:[0-9a-f]{64}", IMAGE_REF)
@@ -54,9 +65,12 @@ def require_image():
 
 
 def validate_model(current, root=ROOT, image=None):
+    successor = partition_successor(root) if image is None else None
     image = require_image() if image is None else image
     expected = baseline_model(root)
     expected["services"]["pool"]["image"] = image
+    if successor is not None and digest(current) != digest(expected):
+        current = successor.previous_model(APP, current, root)
     assert digest(current) == digest(expected), "Unreviewed complete PowPow successor model"
     assert current["services"]["app"]["environment"]["APP_VERSION"] == APP_RUNTIME_VERSION
     return current
@@ -100,16 +114,23 @@ def baseline_files(root=ROOT):
 
 
 def validate_package(root=ROOT, image=None):
+    successor = partition_successor(root) if image is None else None
     expected = baseline_files(root)
     current = {str(path.relative_to(root)): path for path in (root / APP).rglob("*") if not path.is_dir() or path.is_symlink()}
     assert set(current) == set(expected), "PowPow package file set changed"
+    identities = {}
     for name, path in current.items():
         info = path.lstat()
         assert stat.S_ISREG(info.st_mode), f"PowPow file is not regular: {name}"
         assert stat.S_IMODE(info.st_mode) == int(expected[name], 8) & 0o777, f"PowPow file mode changed: {name}"
-        assert path.read_bytes() == expected_package_bytes(str(path.relative_to(root / APP)), root, image), f"Unreviewed PowPow package bytes: {name}"
+        relative = str(path.relative_to(root / APP))
+        raw = path.read_bytes()
+        if successor is not None:
+            raw = successor.previous_package_bytes(relative, raw, root)
+        assert raw == expected_package_bytes(relative, root, image), f"Unreviewed PowPow package bytes: {name}"
+        identities[name] = {"sha256": hashlib.sha256(raw).hexdigest(), "mode": oct(stat.S_IMODE(info.st_mode))}
     validate_model(yaml.safe_load((root / APP / "docker-compose.yml").read_text()), root, image)
-    return {name: {"sha256": hashlib.sha256(path.read_bytes()).hexdigest(), "mode": oct(stat.S_IMODE(path.stat().st_mode))} for name, path in sorted(current.items())}
+    return dict(sorted(identities.items()))
 
 
 def validate_baseline(root=ROOT):
@@ -156,6 +177,9 @@ def record(root=ROOT):
 
 
 def validate(root=ROOT, check_baseline=False):
+    successor = partition_successor(root)
+    if successor is not None:
+        successor.validate(root)
     result = record(root)
     if check_baseline:
         validate_baseline(root)
