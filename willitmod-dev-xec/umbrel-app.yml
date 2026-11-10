@@ -2,7 +2,7 @@ manifestVersion: 1
 id: willitmod-dev-xec
 category: bitcoin
 name: AxeXEC
-version: "0.1.24"
+version: "0.1.25"
 tagline: XEC node + solo pool
 description: >-
   ALPHA RELEASE (DEV CHANNEL)
@@ -67,6 +67,8 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
+  Updates the eCash node to Bitcoin ABC 0.34.3, required to stay on the network after the 15 November 2026 upgrade at 12:00 UTC. Only the node image changes. The app, pool, settings, ports and chain data are unchanged, and no reindex is needed.
+
   Uses portable SHA256 for the eCash pool on CPUs without AVX2/BMI2, built from the same pinned upstream source. The node, app image, protocol, payout rules and data paths are unchanged. Full mining acceptance remains a separate DEV test.
 
   Adds safe pool log retention with 5tratumOS 0.8.23. Complete block and pool accounting records are saved before old raw log bytes are retired. The active log uses a 20 MiB rolling target with two recent archives. Unread or unresolved evidence is retained, and the app reports backlog or blockers. Existing mining, wallet and chain data are preserved.
