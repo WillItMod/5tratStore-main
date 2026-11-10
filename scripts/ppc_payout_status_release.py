@@ -7,6 +7,7 @@ JSON never authorizes another image, setting, node, pool, or release claim.
 import argparse
 import copy
 import hashlib
+import importlib.util
 import json
 from pathlib import Path
 import subprocess
@@ -77,6 +78,17 @@ def record(root=ROOT):
     return result
 
 
+def node_successor(root=ROOT):
+    """The 2026-11-10 node-only release, when present (reversed before older contracts)."""
+    path = root / 'scripts/node_core_release.py'
+    if not path.is_file():
+        return None
+    spec = importlib.util.spec_from_file_location('node_core_successor', path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
 def predecessor(filename, root=ROOT):
     channel = record(root)['channel']
     return yaml.safe_load(git(root, 'show', f'{BASELINES[channel]}:{APP}/{filename}'))
@@ -92,6 +104,9 @@ def expected_model(root=ROOT):
 def previous_model(app_id, current, root=ROOT):
     if app_id != APP:
         return copy.deepcopy(current)
+    node = node_successor(root)
+    if node is not None:
+        current = node.previous_node_model(app_id, current, root)
     before = predecessor('docker-compose.yml', root)
     if current == before:
         return copy.deepcopy(current)
@@ -113,6 +128,9 @@ def expected_manifest(root=ROOT):
 def previous_manifest(app_id, current, root=ROOT):
     if app_id != APP:
         return copy.deepcopy(current)
+    node = node_successor(root)
+    if node is not None:
+        current = node.previous_node_manifest(app_id, current, 'umbrel-app.yml', root)
     before = predecessor('umbrel-app.yml', root)
     if current == before:
         return copy.deepcopy(current)
@@ -125,16 +143,22 @@ def package_version(app_id, historical, root=ROOT):
         return historical
     channel = record(root)['channel']
     assert historical in (BEFORE_VERSIONS[channel], VERSIONS[channel]), 'Unexpected preceding PPC version'
-    return VERSIONS[channel]
+    node = node_successor(root)
+    return VERSIONS[channel] if node is None else node.node_package_version(app_id, VERSIONS[channel], root)
 
 
 def validate(root=ROOT, *, check_catalogue=False):
     release = record(root)
+    node = node_successor(root)
     current = yaml.safe_load((root / APP / 'docker-compose.yml').read_text())
+    if node is not None:
+        current = node.previous_node_model(APP, current, root)
     assert current == expected_model(root), 'Current PPC image or runtime configuration differs'
     assert digest(current) == release['afterModelSHA256']
     assert digest(previous_model(APP, current, root)) == release['beforeModelSHA256']
     manifest = yaml.safe_load((root / APP / 'umbrel-app.yml').read_text())
+    if node is not None:
+        manifest = node.previous_node_manifest(APP, manifest, 'umbrel-app.yml', root)
     assert manifest == expected_manifest(root), 'Current PPC manifest differs'
     assert digest(manifest) == release['afterManifestSHA256']
     assert digest(previous_manifest(APP, manifest, root)) == release['beforeManifestSHA256']

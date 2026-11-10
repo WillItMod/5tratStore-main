@@ -1,0 +1,42 @@
+name: Validate node-only releases (BTC, BCH, PPC)
+on:
+  pull_request:
+    paths:
+      - "willitmod-btc/**"
+      - "willitmod-dev-bch/**"
+      - "willitmod-dev-ppc/**"
+      - "NODE-CORE-2026-11-10.json"
+      - "scripts/node_core_release.py"
+      - "scripts/health_release.py"
+      - "scripts/ppc_payout_status_release.py"
+      - "tests/test_node_core_release.py"
+      - ".github/workflows/validate-node-core.yml"
+  push:
+    branches: [main]
+    paths:
+      - "willitmod-btc/**"
+      - "willitmod-dev-bch/**"
+      - "willitmod-dev-ppc/**"
+      - "NODE-CORE-2026-11-10.json"
+      - "scripts/node_core_release.py"
+      - "scripts/health_release.py"
+      - "scripts/ppc_payout_status_release.py"
+      - "tests/test_node_core_release.py"
+      - ".github/workflows/validate-node-core.yml"
+permissions:
+  contents: read
+jobs:
+  validate-node-core:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - run: python3 -m pip install PyYAML==6.0.2
+      - run: python3 scripts/node_core_release.py
+      - run: python3 scripts/health_release.py
+      - run: python3 scripts/ppc_payout_status_release.py
+      - name: Verify exact node releases and retained historical contracts
+        env:
+          PYTHONPATH: tests
+        run: python3 -m unittest test_node_core_release test_app_version_normalization test_health_release test_ppc_payout_status_release test_ppc_immutable_release test_bch2_retention_permissions.RecipeReleaseTests -v

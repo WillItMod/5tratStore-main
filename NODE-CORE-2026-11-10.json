@@ -1,0 +1,252 @@
+{
+  "schemaVersion": 1,
+  "status": "qualified-node-only",
+  "channel": "MAIN",
+  "baselineCommit": "a51608a87e45bd61e1b4afaa9b1d320ffe351c69",
+  "apps": {
+    "willitmod-btc": {
+      "previousVersion": "0.7.83",
+      "version": "0.7.84",
+      "note": "Updates Bitcoin Core to 30.4, which fixes two security issues (CVE-2026-117346 and CVE-2026-117349). Only the node image changes. The optional Knots node stays on 29.2 because newer Knots releases follow a different proof-of-work chain. The app, pool, settings, ports and chain data are unchanged, and no reindex is needed.",
+      "previousNodeImageRef": "ghcr.io/willitmod/axebtc-bitcoind-switch:0.7.44",
+      "nodeImageRef": "ghcr.io/willitmod/axebtc-bitcoind-switch:0.7.48@sha256:7cfae1465aee1a81deeeafd2b7494ed77aeec984def55356f8b20e6df3e2eced",
+      "changes": [
+        {
+          "path": [
+            "services",
+            "bitcoind",
+            "image"
+          ],
+          "before": "ghcr.io/willitmod/axebtc-bitcoind-switch:0.7.44",
+          "after": "ghcr.io/willitmod/axebtc-bitcoind-switch:0.7.48@sha256:7cfae1465aee1a81deeeafd2b7494ed77aeec984def55356f8b20e6df3e2eced"
+        },
+        {
+          "path": [
+            "services",
+            "app",
+            "environment",
+            "BITCOIND_IMAGE"
+          ],
+          "before": "ghcr.io/willitmod/axebtc-bitcoind-switch:0.7.44",
+          "after": "ghcr.io/willitmod/axebtc-bitcoind-switch:0.7.48@sha256:7cfae1465aee1a81deeeafd2b7494ed77aeec984def55356f8b20e6df3e2eced"
+        }
+      ],
+      "beforeModelSHA256": "cfd50ba78f6b7fa49f6f7e01e0a0fc3d3cd3761934c445a3dd83388059a95410",
+      "afterModelSHA256": "19327d110ed0a31e4dbcd95aaaee6658d3dea9f90b08417911955c7c3eacfbb4",
+      "beforeManifestSHA256": {
+        "umbrel-app.yml": "65382eca2df93468dedc5325783130f4188fa552c7b273b61e0a72966b8416c9"
+      },
+      "core": {
+        "name": "Bitcoin Core",
+        "version": "30.4",
+        "previousVersion": "30.0",
+        "upstreamCommit": "5cd4411542f3fd9c2f6e42af5c52c1a2b21506f6",
+        "versionOutput": "Bitcoin Core daemon version v30.4.0 bitcoind",
+        "fixes": [
+          "CVE-2026-117346",
+          "CVE-2026-117349"
+        ],
+        "knots": {
+          "version": "29.2.knots20251110",
+          "unchanged": true,
+          "reason": "Bitcoin Knots 29.4.1 and later enforce a different proof of work and are not used"
+        }
+      },
+      "build": {
+        "repository": "https://github.com/WillItMod/AxeBTC_Build",
+        "revision": "98ecddfb847db1feaf0fbd0633f5d5858b8633a6",
+        "workflowRun": 42859056043,
+        "nativeArchitectures": [
+          "amd64",
+          "arm64"
+        ]
+      },
+      "images": {
+        "amd64": {
+          "manifestDigest": "sha256:c679ccb85853aa48a467604a03f2dd401e17e983b0110a99655c95e748fafce8",
+          "configDigest": "sha256:0dd56e6030e01d1eabd303f3a4147f7bda74e866a4b1398a33dbd61044466bba"
+        },
+        "arm64": {
+          "manifestDigest": "sha256:0d27844270a21ffd01ec05671c65a2a5261299d3aa79b454e83b23de238dfcda",
+          "configDigest": "sha256:3b402eb6e47c0689eacd3bafddb58dc60e8bb9d7060535af30064fc081d66d8d"
+        }
+      },
+      "reindexRequested": false,
+      "testEvidence": {
+        "amd64": {
+          "environment": "5tratumOS DEV test box, updated through 5tratumos app update from the candidate catalogue",
+          "result": "The AxeBTC wrapper started Bitcoin Core 30.4 (choice: core). It loaded the existing pruned chain at the tip (975,325) without rewind, verified the last 6 blocks, stayed healthy and followed new blocks to 975,328. ckpool reconnected after warm-up and received templates.",
+          "chainAgreement": {
+            "975325": "00000000000000000001e421b6ab2cfc40c1aed1babd2c21196875f6694b0763",
+            "matchedSource": "mempool.space"
+          },
+          "testedAt": "2026-11-10T17:04:06Z"
+        },
+        "arm64": {
+          "environment": "Apple Silicon host, native linux/arm64 container",
+          "result": "Through the AxeBTC wrapper (choice: core) Bitcoin Core 30.4 started in regtest, mined a block and returned getblocktemplate; Knots 29.2 also starts",
+          "mainnetSyncQualified": false
+        },
+        "ciVerification": "Both native builds checked /opt/bitcoind/current = Core 30.4 and /opt/knots/current = Knots 29.2"
+      }
+    },
+    "willitmod-dev-bch": {
+      "previousVersion": "0.9.27",
+      "version": "0.9.28",
+      "note": "Updates Bitcoin Cash Node to 29.2.0, which BCHN strongly recommends for everyone on 29.1.0 or older. Only the node image changes. The app, pool, settings, ports and chain data are unchanged, and no reindex is needed.",
+      "previousNodeImageRef": "ghcr.io/willitmod/bitcoin-cash-node:v29.0.0-wm3",
+      "nodeImageRef": "ghcr.io/willitmod/bitcoin-cash-node:v29.2.0-wm1@sha256:368fa5c653c63a0406fa8841ca26060c5d1317f49bdbb34f0ac8692a9de8e6a7",
+      "changes": [
+        {
+          "path": [
+            "services",
+            "bchn",
+            "image"
+          ],
+          "before": "ghcr.io/willitmod/bitcoin-cash-node:v29.0.0-wm3",
+          "after": "ghcr.io/willitmod/bitcoin-cash-node:v29.2.0-wm1@sha256:368fa5c653c63a0406fa8841ca26060c5d1317f49bdbb34f0ac8692a9de8e6a7"
+        },
+        {
+          "path": [
+            "services",
+            "app",
+            "environment",
+            "BCHN_IMAGE"
+          ],
+          "before": "ghcr.io/willitmod/bitcoin-cash-node:v29.0.0-wm3",
+          "after": "ghcr.io/willitmod/bitcoin-cash-node:v29.2.0-wm1@sha256:368fa5c653c63a0406fa8841ca26060c5d1317f49bdbb34f0ac8692a9de8e6a7"
+        }
+      ],
+      "beforeModelSHA256": "f452ab054890223b8200eb1b4babb4e8f7b7fd6049b1173738e6483f2e2ab438",
+      "afterModelSHA256": "957153fccc19f733433ae7fdb02f6b33bcc0e64d39e024565e2a6fe9aa946121",
+      "beforeManifestSHA256": {
+        "global-app.yml": "698d84de2708a6e52e22adcdda24fb87dcd74c595640bf2c046ef4fca2de6c5b",
+        "umbrel-app.yml": "698d84de2708a6e52e22adcdda24fb87dcd74c595640bf2c046ef4fca2de6c5b"
+      },
+      "core": {
+        "name": "Bitcoin Cash Node",
+        "version": "29.2.0",
+        "previousVersion": "29.0.0",
+        "upstreamCommit": "07576013c91ff4a3a74acd85f189c69121cdad1b",
+        "versionOutput": "Bitcoin Cash Node Daemon version v29.2.0-unk",
+        "configNote": "29.2.0 refuses to start if excessiveblocksize is set; the AxeBCH templates do not set it"
+      },
+      "build": {
+        "repository": "https://github.com/WillItMod/bitcoin-cash-node",
+        "revision": "813240f6e45778ca138a16f629604e3c5ded2609",
+        "tag": "v29.2.0-wm1",
+        "workflowRun": 42857374244,
+        "architectures": [
+          "amd64",
+          "arm64 (QEMU, as v29.0.0-wm3)"
+        ]
+      },
+      "images": {
+        "amd64": {
+          "manifestDigest": "sha256:fcf6a66671ff2fdc2fe68df76853fac9bde4a3b5d8e8b51e45a82825ba622883",
+          "configDigest": "sha256:887562a8f71562442903d8225bf021b3e9cd3f3379f8c6cc4910a3b9760bf25b"
+        },
+        "arm64": {
+          "manifestDigest": "sha256:bb59ab98fdd03f4c5da0a73b258555952455161ad3fd355fa2b9fd0fc334e9fd",
+          "configDigest": "sha256:ad28fa0223a06357c6fa3c286d4ae0276da0083096f9906951c14bee05406f5a"
+        }
+      },
+      "reindexRequested": false,
+      "testEvidence": {
+        "amd64": {
+          "environment": "5tratumOS DEV test box, updated through 5tratumos app update from the candidate catalogue",
+          "result": "BCHN 29.2.0 loaded the chain at the tip (976,797) without rewind, verified the last 6 blocks, stayed healthy and followed the next block. ckpool reconnected and received templates. The AxeBCH configuration contains no excessiveblocksize.",
+          "chainAgreement": {
+            "976797": "000000000000000000ca5f9736519875c18e48f5262a725fdb8cc51ba9b575f9",
+            "matchedSource": "blockchair.com"
+          },
+          "testedAt": "2026-11-10T17:50:45Z"
+        },
+        "arm64": {
+          "environment": "Apple Silicon host, native linux/arm64 container",
+          "result": "BCHN 29.2.0 started in regtest, connected to a second node, mined a block and returned getblocktemplate",
+          "mainnetSyncQualified": false
+        }
+      }
+    },
+    "willitmod-dev-ppc": {
+      "previousVersion": "0.2.38",
+      "version": "0.2.39",
+      "note": "Updates the Peercoin node to 0.15.2, which rejects blocks whose proof-of-stake flag does not match the block. Only the node image changes. The app, pool, settings, ports and chain data are unchanged, and no reindex is needed.",
+      "previousNodeImageRef": "ghcr.io/willitmod/axeppc-peercoind:0.15.1ppc-node.602518e559df@sha256:41bebfa7003bfc3073cae18345abd55da8831288277b1c4185114e91ef437e75",
+      "nodeImageRef": "ghcr.io/willitmod/axeppc-peercoind:0.15.2ppc-node.7b8e9374247e@sha256:20b5d3c9908fbb8e6a1444304d2a34be8e014667acff130bdb2dfe42768658cc",
+      "changes": [
+        {
+          "path": [
+            "services",
+            "ppcd",
+            "image"
+          ],
+          "before": "ghcr.io/willitmod/axeppc-peercoind:0.15.1ppc-node.602518e559df@sha256:41bebfa7003bfc3073cae18345abd55da8831288277b1c4185114e91ef437e75",
+          "after": "ghcr.io/willitmod/axeppc-peercoind:0.15.2ppc-node.7b8e9374247e@sha256:20b5d3c9908fbb8e6a1444304d2a34be8e014667acff130bdb2dfe42768658cc"
+        },
+        {
+          "path": [
+            "services",
+            "app",
+            "environment",
+            "PPCD_IMAGE"
+          ],
+          "before": "ghcr.io/willitmod/axeppc-peercoind:0.15.1ppc-node.602518e559df@sha256:41bebfa7003bfc3073cae18345abd55da8831288277b1c4185114e91ef437e75",
+          "after": "ghcr.io/willitmod/axeppc-peercoind:0.15.2ppc-node.7b8e9374247e@sha256:20b5d3c9908fbb8e6a1444304d2a34be8e014667acff130bdb2dfe42768658cc"
+        }
+      ],
+      "beforeModelSHA256": "53de4b3ee8e3e9b5961a1f51369d9b59b5ce42a11e94d3edd03c59e3a0bbf333",
+      "afterModelSHA256": "3a993a0d28e4b76c9a163503354364f271af3b14223f91887f140519978d1f1c",
+      "beforeManifestSHA256": {
+        "umbrel-app.yml": "8528d20df91f61fefd1d4f4597c170a10d4dd867b7776986693592c060ca5d8c"
+      },
+      "core": {
+        "name": "Peercoin",
+        "version": "0.15.2ppc",
+        "previousVersion": "0.15.1ppc",
+        "upstreamCommit": "f56b8a1e2b1425b791d5900a7298bad850ed8b7c",
+        "versionOutput": "Peercoin version v0.15.2.0 Anisoptera"
+      },
+      "build": {
+        "repository": "https://github.com/WillItMod/AxePPC_Build",
+        "revision": "7b8e9374247e0eea338ab803359c24b518997ec8",
+        "workflowRun": 42858227072,
+        "nativeArchitectures": [
+          "amd64",
+          "arm64"
+        ]
+      },
+      "images": {
+        "amd64": {
+          "manifestDigest": "sha256:ad997fd34ba1047f8ca608347b2b0f03faed7b6d1161a7184816e8ff83b6f403",
+          "configDigest": "sha256:e529e22a36cb1e36fe65c5bc6cbe5c6eca07f2c7b761c37ec9e237b387d34307"
+        },
+        "arm64": {
+          "manifestDigest": "sha256:f860a05ff71d6dae6dadc71cbb50dfbc9c4d46d2aac745b5e9a1e47d0bcec855",
+          "configDigest": "sha256:b1cdbbc7af27cc0c68d79c33a1d9961adc06a5c542221a806f733e6fbf9dd52b"
+        }
+      },
+      "reindexRequested": false,
+      "testEvidence": {
+        "amd64": {
+          "environment": "5tratumOS DEV test box, updated through 5tratumos app update from the candidate catalogue (the app stayed Off; started for the test, then stopped)",
+          "result": "Peercoin 0.15.2 started on data last run by 0.15.1 on 2026-10-21. That data had followed an invalid branch from block 896,621 (2026-10-16 19:08 UTC; hash 00000000000019689463e26094f65836af44d435280f03c002bf9f357626043c, flagged proof-of-stake with an empty stake proof), the mismatched proof type that 0.15.2 rejects. After invalidateblock on that block and disconnecting peers stuck on that branch, 0.15.2 synced to the network tip (900,488). The pool started normally.",
+          "chainAgreement": {
+            "896621": "9a999c6470c1023264099764caa9094c1360b64ae69472bfd163cef299ddf8d8",
+            "900488": "1ab5357b0938855b528f05bca908bdd8e781020b5e1b9e9d9838e93686b7d8fe",
+            "matchedSource": "chainz.cryptoid.info"
+          },
+          "knownLimitation": "A node that already followed the 2026-10-16 invalid branch stays on it after updating until that block is invalidated; 0.15.2 prevents new nodes from following it.",
+          "testedAt": "2026-11-10T18:02:16Z"
+        },
+        "arm64": {
+          "environment": "Apple Silicon host, native linux/arm64 container",
+          "result": "Through tini and the wrapper, Peercoin 0.15.2 started in regtest, answered RPC and mined a block",
+          "mainnetSyncQualified": false
+        },
+        "ciVerification": "Native amd64 and arm64 build, binding and boot verification (AxePPC_Build peercoind-candidate workflow)"
+      }
+    }
+  }
+}

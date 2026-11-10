@@ -17,7 +17,10 @@ SPEC.loader.exec_module(release)
 class PpcPayoutStatusReleaseTests(unittest.TestCase):
     def test_current_package_is_exact_app_image_and_text_successor(self):
         row = release.validate()
+        node = release.node_successor()
         current = yaml.safe_load((ROOT / release.APP / 'docker-compose.yml').read_text())
+        if node is not None:  # read through the later node-only release
+            current = node.previous_node_model(release.APP, current)
         before = release.predecessor('docker-compose.yml')
         self.assertEqual(release.previous_model(release.APP, current), before)
         self.assertEqual(release.previous_model(release.APP, before), before)
@@ -25,8 +28,9 @@ class PpcPayoutStatusReleaseTests(unittest.TestCase):
         self.assertEqual(current['services']['app']['volumes'], before['services']['app']['volumes'])
         for service in ('app_proxy', 'init', 'ppcd', 'pool', 'redis'):
             self.assertEqual(current['services'][service], before['services'][service])
-        self.assertEqual(release.package_version(release.APP, row['previousPackageVersion']), row['packageVersion'])
-        self.assertEqual(release.package_version(release.APP, row['packageVersion']), row['packageVersion'])
+        expected = row['packageVersion'] if node is None else node.node_package_version(release.APP, row['packageVersion'])
+        self.assertEqual(release.package_version(release.APP, row['previousPackageVersion']), expected)
+        self.assertEqual(release.package_version(release.APP, row['packageVersion']), expected)
         with self.assertRaises(AssertionError):
             release.package_version(release.APP, 'arbitrary-version')
 

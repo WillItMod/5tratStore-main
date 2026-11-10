@@ -164,7 +164,7 @@ services:
         fi
 
   bchn:
-    image: ghcr.io/willitmod/bitcoin-cash-node:v29.0.0-wm3
+    image: ghcr.io/willitmod/bitcoin-cash-node:v29.2.0-wm1@sha256:368fa5c653c63a0406fa8841ca26060c5d1317f49bdbb34f0ac8692a9de8e6a7
     user: "1000:1000"
     restart: unless-stopped
     stop_grace_period: 15m30s
@@ -248,7 +248,7 @@ services:
       CKPOOL_STRATUM_PORT: "3333"
       APP_CHANNEL: "MAIN"
       APP_VERSION_SUFFIX: ""
-      BCHN_IMAGE: "ghcr.io/willitmod/bitcoin-cash-node:v29.0.0-wm3"
+      BCHN_IMAGE: "ghcr.io/willitmod/bitcoin-cash-node:v29.2.0-wm1@sha256:368fa5c653c63a0406fa8841ca26060c5d1317f49bdbb34f0ac8692a9de8e6a7"
       CKPOOL_IMAGE: "ghcr.io/willitmod/wim-solo-ckpool:0.8.3-rc1-590fb2a"
       STATIC_DIR: "/app/static"
 

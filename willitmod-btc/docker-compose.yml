@@ -211,7 +211,7 @@ services:
         fi
 
   bitcoind:
-    image: ghcr.io/willitmod/axebtc-bitcoind-switch:0.7.44
+    image: ghcr.io/willitmod/axebtc-bitcoind-switch:0.7.48@sha256:7cfae1465aee1a81deeeafd2b7494ed77aeec984def55356f8b20e6df3e2eced
     user: "1000:1000"
     restart: unless-stopped
     stop_grace_period: 15m30s
@@ -275,7 +275,7 @@ services:
       CKPOOL_STRATUM_PORT: "3333"
       APP_CHANNEL: "MAIN"
       APP_VERSION_SUFFIX: ""
-      BITCOIND_IMAGE: "ghcr.io/willitmod/axebtc-bitcoind-switch:0.7.44"
+      BITCOIND_IMAGE: "ghcr.io/willitmod/axebtc-bitcoind-switch:0.7.48@sha256:7cfae1465aee1a81deeeafd2b7494ed77aeec984def55356f8b20e6df3e2eced"
       CKPOOL_IMAGE: "ghcr.io/willitmod/docker-ckpool-solo:590fb2a"
       STATIC_DIR: "/app/static"
 

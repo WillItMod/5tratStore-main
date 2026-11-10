@@ -135,6 +135,12 @@ def validate(root=ROOT, *, check_baseline=False):
     if check_baseline:
         protected = [n for n in git(root, 'ls-tree', '-r', '--name-only', row['baselineCommit']).decode().splitlines()
                      if n.startswith('willitmod-') and not n.startswith(APP + '/')]
+        if (root / 'NODE-CORE-2026-11-10.json').is_file():
+            import importlib.util
+            spec = importlib.util.spec_from_file_location('node_core_retention_predecessor', root / 'scripts/node_core_release.py')
+            node_successor = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(node_successor)
+            protected = node_successor.historical_protected_paths(root, row['baselineCommit'], protected)
         assert not git(root, 'diff', '--name-only', row['baselineCommit'], '--', *protected).strip(), 'Other application changed'
     return row
 

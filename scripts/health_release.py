@@ -117,6 +117,17 @@ def model(app_id, before, row, release_channel):
     return expected
 
 
+def node_successor(root=ROOT):
+    """The 2026-11-10 node-only release, when present (reversed before older contracts)."""
+    path = root / 'scripts/node_core_release.py'
+    if not path.is_file():
+        return None
+    spec = importlib.util.spec_from_file_location('node_core_successor', path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
 def bch2_successor(root=ROOT):
     spec = importlib.util.spec_from_file_location('bch2_retention_successor', root / 'scripts/bch2_retention_release.py')
     module = importlib.util.module_from_spec(spec)
@@ -125,6 +136,9 @@ def bch2_successor(root=ROOT):
 
 
 def previous_model(app_id, current, root=ROOT, *, historical_models=()):
+    node = node_successor(root)
+    if node is not None:
+        current = node.previous_node_model(app_id, current, root)
     if app_id not in APPS:
         return copy.deepcopy(current)
     before = predecessor(root, app_id)
@@ -138,6 +152,9 @@ def previous_model(app_id, current, root=ROOT, *, historical_models=()):
 
 
 def previous_manifest(app_id, current, filename="umbrel-app.yml", root=ROOT):
+    node = node_successor(root)
+    if node is not None:
+        current = node.previous_node_manifest(app_id, current, filename, root)
     if app_id not in APPS:
         return copy.deepcopy(current)
     before = predecessor(root, app_id, filename)
@@ -154,6 +171,13 @@ def previous_manifest(app_id, current, filename="umbrel-app.yml", root=ROOT):
 
 
 def package_version(app_id, historical, root=ROOT):
+    node = node_successor(root)
+    if node is not None:
+        return node.node_package_version(app_id, health_package_version(app_id, historical, root), root)
+    return health_package_version(app_id, historical, root)
+
+
+def health_package_version(app_id, historical, root=ROOT):
     if app_id not in APPS:
         return historical
     release = record(root)
@@ -175,6 +199,9 @@ def validate_package(root, app_id, release):
     actual = package_files(root, app_id)
     assert set(actual) == set(names), "Unexpected health package inventory"
     successor = None
+    node = node_successor(root)
+    if node is not None and node.app_row(app_id, root) is not None:
+        actual = {name: {'sha256': sha256(node.current_bytes(root, name)), 'mode': value['mode']} for name, value in actual.items()}
     if app_id == APPS[1] and actual != row['packageFiles']:
         successor = bch2_successor(root)
         successor.validate(root)

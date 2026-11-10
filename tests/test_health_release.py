@@ -164,10 +164,11 @@ class HealthReleaseTests(unittest.TestCase):
             for app_id in health.APPS:
                 before = health.BEFORE_VERSIONS[app_id] + ("-dev" if CHANNEL == "DEV" else "")
                 now = health.version(app_id, CHANNEL)
-                self.assertEqual(health.package_version(app_id, before), now)
-                self.assertEqual(health.package_version(app_id, now), now)
+                # The health release's own step; later node-only successors map on top of it.
+                self.assertEqual(health.health_package_version(app_id, before), now)
+                self.assertEqual(health.health_package_version(app_id, now), now)
                 with self.assertRaises(AssertionError):
-                    health.package_version(app_id, "arbitrary-old-version")
+                    health.health_package_version(app_id, "arbitrary-old-version")
 
     def test_unrelated_apps_are_copied_without_mutation_or_version_change(self):
         original = {"services": {"app": {"image": "unchanged"}}}

@@ -198,7 +198,7 @@ services:
         fi
 
   ppcd:
-    image: ghcr.io/willitmod/axeppc-peercoind:0.15.1ppc-node.602518e559df@sha256:41bebfa7003bfc3073cae18345abd55da8831288277b1c4185114e91ef437e75
+    image: ghcr.io/willitmod/axeppc-peercoind:0.15.2ppc-node.7b8e9374247e@sha256:20b5d3c9908fbb8e6a1444304d2a34be8e014667acff130bdb2dfe42768658cc
     stop_signal: SIGTERM
     stop_grace_period: 2m
     user: "1000:1000"
@@ -257,7 +257,7 @@ services:
       STATIC_DIR: "/app/static"
       APP_CHANNEL: "MAIN"
       APP_VERSION_SUFFIX: ""
-      PPCD_IMAGE: "ghcr.io/willitmod/axeppc-peercoind:0.15.1ppc-node.602518e559df@sha256:41bebfa7003bfc3073cae18345abd55da8831288277b1c4185114e91ef437e75"
+      PPCD_IMAGE: "ghcr.io/willitmod/axeppc-peercoind:0.15.2ppc-node.7b8e9374247e@sha256:20b5d3c9908fbb8e6a1444304d2a34be8e014667acff130bdb2dfe42768658cc"
       PPC_RPC_HOST: "ppcd"
       PPC_RPC_PORT: "9902"
       PPC_RPC_USER: "ppc"
