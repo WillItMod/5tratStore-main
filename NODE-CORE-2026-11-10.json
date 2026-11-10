@@ -71,7 +71,24 @@
           "configDigest": "sha256:3b402eb6e47c0689eacd3bafddb58dc60e8bb9d7060535af30064fc081d66d8d"
         }
       },
-      "reindexRequested": false
+      "reindexRequested": false,
+      "testEvidence": {
+        "amd64": {
+          "environment": "5tratumOS DEV test box, updated through 5tratumos app update from the candidate catalogue",
+          "result": "The AxeBTC wrapper started Bitcoin Core 30.4 (choice: core). It loaded the existing pruned chain at the tip (975,325) without rewind, verified the last 6 blocks, stayed healthy and followed new blocks to 975,328. ckpool reconnected after warm-up and received templates.",
+          "chainAgreement": {
+            "975325": "00000000000000000001e421b6ab2cfc40c1aed1babd2c21196875f6694b0763",
+            "matchedSource": "mempool.space"
+          },
+          "testedAt": "2026-11-10T17:04:06Z"
+        },
+        "arm64": {
+          "environment": "Apple Silicon host, native linux/arm64 container",
+          "result": "Through the AxeBTC wrapper (choice: core) Bitcoin Core 30.4 started in regtest, mined a block and returned getblocktemplate; Knots 29.2 also starts",
+          "mainnetSyncQualified": false
+        },
+        "ciVerification": "Both native builds checked /opt/bitcoind/current = Core 30.4 and /opt/knots/current = Knots 29.2"
+      }
     },
     "willitmod-dev-bch": {
       "previousVersion": "0.9.27",
@@ -134,7 +151,23 @@
           "configDigest": "sha256:ad28fa0223a06357c6fa3c286d4ae0276da0083096f9906951c14bee05406f5a"
         }
       },
-      "reindexRequested": false
+      "reindexRequested": false,
+      "testEvidence": {
+        "amd64": {
+          "environment": "5tratumOS DEV test box, updated through 5tratumos app update from the candidate catalogue",
+          "result": "BCHN 29.2.0 loaded the chain at the tip (976,797) without rewind, verified the last 6 blocks, stayed healthy and followed the next block. ckpool reconnected and received templates. The AxeBCH configuration contains no excessiveblocksize.",
+          "chainAgreement": {
+            "976797": "000000000000000000ca5f9736519875c18e48f5262a725fdb8cc51ba9b575f9",
+            "matchedSource": "blockchair.com"
+          },
+          "testedAt": "2026-11-10T17:50:45Z"
+        },
+        "arm64": {
+          "environment": "Apple Silicon host, native linux/arm64 container",
+          "result": "BCHN 29.2.0 started in regtest, connected to a second node, mined a block and returned getblocktemplate",
+          "mainnetSyncQualified": false
+        }
+      }
     },
     "willitmod-dev-ppc": {
       "previousVersion": "0.2.38",
@@ -194,7 +227,26 @@
           "configDigest": "sha256:b1cdbbc7af27cc0c68d79c33a1d9961adc06a5c542221a806f733e6fbf9dd52b"
         }
       },
-      "reindexRequested": false
+      "reindexRequested": false,
+      "testEvidence": {
+        "amd64": {
+          "environment": "5tratumOS DEV test box, updated through 5tratumos app update from the candidate catalogue (the app stayed Off; started for the test, then stopped)",
+          "result": "Peercoin 0.15.2 started on data last run by 0.15.1 on 2026-10-21. That data had followed an invalid branch from block 896,621 (2026-10-16 19:08 UTC; hash 00000000000019689463e26094f65836af44d435280f03c002bf9f357626043c, flagged proof-of-stake with an empty stake proof), the mismatched proof type that 0.15.2 rejects. After invalidateblock on that block and disconnecting peers stuck on that branch, 0.15.2 synced to the network tip (900,488). The pool started normally.",
+          "chainAgreement": {
+            "896621": "9a999c6470c1023264099764caa9094c1360b64ae69472bfd163cef299ddf8d8",
+            "900488": "1ab5357b0938855b528f05bca908bdd8e781020b5e1b9e9d9838e93686b7d8fe",
+            "matchedSource": "chainz.cryptoid.info"
+          },
+          "knownLimitation": "A node that already followed the 2026-10-16 invalid branch stays on it after updating until that block is invalidated; 0.15.2 prevents new nodes from following it.",
+          "testedAt": "2026-11-10T18:02:16Z"
+        },
+        "arm64": {
+          "environment": "Apple Silicon host, native linux/arm64 container",
+          "result": "Through tini and the wrapper, Peercoin 0.15.2 started in regtest, answered RPC and mined a block",
+          "mainnetSyncQualified": false
+        },
+        "ciVerification": "Native amd64 and arm64 build, binding and boot verification (AxePPC_Build peercoind-candidate workflow)"
+      }
     }
   }
 }
