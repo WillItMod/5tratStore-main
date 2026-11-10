@@ -73,6 +73,69 @@
       },
       "reindexRequested": false
     },
+    "willitmod-dev-bch": {
+      "previousVersion": "0.9.27",
+      "version": "0.9.28",
+      "note": "Updates Bitcoin Cash Node to 29.2.0, which BCHN strongly recommends for everyone on 29.1.0 or older. Only the node image changes. The app, pool, settings, ports and chain data are unchanged, and no reindex is needed.",
+      "previousNodeImageRef": "ghcr.io/willitmod/bitcoin-cash-node:v29.0.0-wm3",
+      "nodeImageRef": "ghcr.io/willitmod/bitcoin-cash-node:v29.2.0-wm1@sha256:368fa5c653c63a0406fa8841ca26060c5d1317f49bdbb34f0ac8692a9de8e6a7",
+      "changes": [
+        {
+          "path": [
+            "services",
+            "bchn",
+            "image"
+          ],
+          "before": "ghcr.io/willitmod/bitcoin-cash-node:v29.0.0-wm3",
+          "after": "ghcr.io/willitmod/bitcoin-cash-node:v29.2.0-wm1@sha256:368fa5c653c63a0406fa8841ca26060c5d1317f49bdbb34f0ac8692a9de8e6a7"
+        },
+        {
+          "path": [
+            "services",
+            "app",
+            "environment",
+            "BCHN_IMAGE"
+          ],
+          "before": "ghcr.io/willitmod/bitcoin-cash-node:v29.0.0-wm3",
+          "after": "ghcr.io/willitmod/bitcoin-cash-node:v29.2.0-wm1@sha256:368fa5c653c63a0406fa8841ca26060c5d1317f49bdbb34f0ac8692a9de8e6a7"
+        }
+      ],
+      "beforeModelSHA256": "f452ab054890223b8200eb1b4babb4e8f7b7fd6049b1173738e6483f2e2ab438",
+      "afterModelSHA256": "957153fccc19f733433ae7fdb02f6b33bcc0e64d39e024565e2a6fe9aa946121",
+      "beforeManifestSHA256": {
+        "global-app.yml": "698d84de2708a6e52e22adcdda24fb87dcd74c595640bf2c046ef4fca2de6c5b",
+        "umbrel-app.yml": "698d84de2708a6e52e22adcdda24fb87dcd74c595640bf2c046ef4fca2de6c5b"
+      },
+      "core": {
+        "name": "Bitcoin Cash Node",
+        "version": "29.2.0",
+        "previousVersion": "29.0.0",
+        "upstreamCommit": "07576013c91ff4a3a74acd85f189c69121cdad1b",
+        "versionOutput": "Bitcoin Cash Node Daemon version v29.2.0-unk",
+        "configNote": "29.2.0 refuses to start if excessiveblocksize is set; the AxeBCH templates do not set it"
+      },
+      "build": {
+        "repository": "https://github.com/WillItMod/bitcoin-cash-node",
+        "revision": "813240f6e45778ca138a16f629604e3c5ded2609",
+        "tag": "v29.2.0-wm1",
+        "workflowRun": 42857374244,
+        "architectures": [
+          "amd64",
+          "arm64 (QEMU, as v29.0.0-wm3)"
+        ]
+      },
+      "images": {
+        "amd64": {
+          "manifestDigest": "sha256:fcf6a66671ff2fdc2fe68df76853fac9bde4a3b5d8e8b51e45a82825ba622883",
+          "configDigest": "sha256:887562a8f71562442903d8225bf021b3e9cd3f3379f8c6cc4910a3b9760bf25b"
+        },
+        "arm64": {
+          "manifestDigest": "sha256:bb59ab98fdd03f4c5da0a73b258555952455161ad3fd355fa2b9fd0fc334e9fd",
+          "configDigest": "sha256:ad28fa0223a06357c6fa3c286d4ae0276da0083096f9906951c14bee05406f5a"
+        }
+      },
+      "reindexRequested": false
+    },
     "willitmod-dev-ppc": {
       "previousVersion": "0.2.38",
       "version": "0.2.39",
