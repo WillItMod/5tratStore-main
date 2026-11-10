@@ -164,7 +164,7 @@ services:
         fi
 
   xecd:
-    image: ghcr.io/willitmod/xecd-abc:0.33.4-nojemalloc-r1
+    image: ghcr.io/willitmod/xecd-abc:0.34.3-nojemalloc-r1@sha256:0d806800b35583fb7c3a21a07027df9b5e0e382eae62ec533ce0fc6f52b03653
     user: "1000:1000"
     restart: unless-stopped
     stop_grace_period: 15m30s
@@ -246,7 +246,7 @@ services:
       CKPOOL_STATUS_DIR: "/data/pool/www/pool"
       APP_CHANNEL: "MAIN"
       APP_VERSION_SUFFIX: ""
-      XECD_IMAGE: "ghcr.io/willitmod/xecd-abc:0.33.4-nojemalloc-r1"
+      XECD_IMAGE: "ghcr.io/willitmod/xecd-abc:0.34.3-nojemalloc-r1@sha256:0d806800b35583fb7c3a21a07027df9b5e0e382eae62ec533ce0fc6f52b03653"
       CKPOOL_IMAGE: "ghcr.io/willitmod/ecash-ckpool-solo:18b38ad-portable-dev-20261014@sha256:20069e6ac004af010b20ca9aeb056ebbaf48a8656ad858ad69c8deba7f590d61"
       STATIC_DIR: "/app/static"
 
