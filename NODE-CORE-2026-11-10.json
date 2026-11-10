@@ -1,0 +1,137 @@
+{
+  "schemaVersion": 1,
+  "status": "qualified-node-only",
+  "channel": "MAIN",
+  "baselineCommit": "a51608a87e45bd61e1b4afaa9b1d320ffe351c69",
+  "apps": {
+    "willitmod-btc": {
+      "previousVersion": "0.7.83",
+      "version": "0.7.84",
+      "note": "Updates Bitcoin Core to 30.4, which fixes two security issues (CVE-2026-117346 and CVE-2026-117349). Only the node image changes. The optional Knots node stays on 29.2 because newer Knots releases follow a different proof-of-work chain. The app, pool, settings, ports and chain data are unchanged, and no reindex is needed.",
+      "previousNodeImageRef": "ghcr.io/willitmod/axebtc-bitcoind-switch:0.7.44",
+      "nodeImageRef": "ghcr.io/willitmod/axebtc-bitcoind-switch:0.7.48@sha256:7cfae1465aee1a81deeeafd2b7494ed77aeec984def55356f8b20e6df3e2eced",
+      "changes": [
+        {
+          "path": [
+            "services",
+            "bitcoind",
+            "image"
+          ],
+          "before": "ghcr.io/willitmod/axebtc-bitcoind-switch:0.7.44",
+          "after": "ghcr.io/willitmod/axebtc-bitcoind-switch:0.7.48@sha256:7cfae1465aee1a81deeeafd2b7494ed77aeec984def55356f8b20e6df3e2eced"
+        },
+        {
+          "path": [
+            "services",
+            "app",
+            "environment",
+            "BITCOIND_IMAGE"
+          ],
+          "before": "ghcr.io/willitmod/axebtc-bitcoind-switch:0.7.44",
+          "after": "ghcr.io/willitmod/axebtc-bitcoind-switch:0.7.48@sha256:7cfae1465aee1a81deeeafd2b7494ed77aeec984def55356f8b20e6df3e2eced"
+        }
+      ],
+      "beforeModelSHA256": "cfd50ba78f6b7fa49f6f7e01e0a0fc3d3cd3761934c445a3dd83388059a95410",
+      "afterModelSHA256": "19327d110ed0a31e4dbcd95aaaee6658d3dea9f90b08417911955c7c3eacfbb4",
+      "beforeManifestSHA256": {
+        "umbrel-app.yml": "65382eca2df93468dedc5325783130f4188fa552c7b273b61e0a72966b8416c9"
+      },
+      "core": {
+        "name": "Bitcoin Core",
+        "version": "30.4",
+        "previousVersion": "30.0",
+        "upstreamCommit": "5cd4411542f3fd9c2f6e42af5c52c1a2b21506f6",
+        "versionOutput": "Bitcoin Core daemon version v30.4.0 bitcoind",
+        "fixes": [
+          "CVE-2026-117346",
+          "CVE-2026-117349"
+        ],
+        "knots": {
+          "version": "29.2.knots20251110",
+          "unchanged": true,
+          "reason": "Bitcoin Knots 29.4.1 and later enforce a different proof of work and are not used"
+        }
+      },
+      "build": {
+        "repository": "https://github.com/WillItMod/AxeBTC_Build",
+        "revision": "98ecddfb847db1feaf0fbd0633f5d5858b8633a6",
+        "workflowRun": 42859056043,
+        "nativeArchitectures": [
+          "amd64",
+          "arm64"
+        ]
+      },
+      "images": {
+        "amd64": {
+          "manifestDigest": "sha256:c679ccb85853aa48a467604a03f2dd401e17e983b0110a99655c95e748fafce8",
+          "configDigest": "sha256:0dd56e6030e01d1eabd303f3a4147f7bda74e866a4b1398a33dbd61044466bba"
+        },
+        "arm64": {
+          "manifestDigest": "sha256:0d27844270a21ffd01ec05671c65a2a5261299d3aa79b454e83b23de238dfcda",
+          "configDigest": "sha256:3b402eb6e47c0689eacd3bafddb58dc60e8bb9d7060535af30064fc081d66d8d"
+        }
+      },
+      "reindexRequested": false
+    },
+    "willitmod-dev-ppc": {
+      "previousVersion": "0.2.38",
+      "version": "0.2.39",
+      "note": "Updates the Peercoin node to 0.15.2, which rejects blocks whose proof-of-stake flag does not match the block. Only the node image changes. The app, pool, settings, ports and chain data are unchanged, and no reindex is needed.",
+      "previousNodeImageRef": "ghcr.io/willitmod/axeppc-peercoind:0.15.1ppc-node.602518e559df@sha256:41bebfa7003bfc3073cae18345abd55da8831288277b1c4185114e91ef437e75",
+      "nodeImageRef": "ghcr.io/willitmod/axeppc-peercoind:0.15.2ppc-node.7b8e9374247e@sha256:20b5d3c9908fbb8e6a1444304d2a34be8e014667acff130bdb2dfe42768658cc",
+      "changes": [
+        {
+          "path": [
+            "services",
+            "ppcd",
+            "image"
+          ],
+          "before": "ghcr.io/willitmod/axeppc-peercoind:0.15.1ppc-node.602518e559df@sha256:41bebfa7003bfc3073cae18345abd55da8831288277b1c4185114e91ef437e75",
+          "after": "ghcr.io/willitmod/axeppc-peercoind:0.15.2ppc-node.7b8e9374247e@sha256:20b5d3c9908fbb8e6a1444304d2a34be8e014667acff130bdb2dfe42768658cc"
+        },
+        {
+          "path": [
+            "services",
+            "app",
+            "environment",
+            "PPCD_IMAGE"
+          ],
+          "before": "ghcr.io/willitmod/axeppc-peercoind:0.15.1ppc-node.602518e559df@sha256:41bebfa7003bfc3073cae18345abd55da8831288277b1c4185114e91ef437e75",
+          "after": "ghcr.io/willitmod/axeppc-peercoind:0.15.2ppc-node.7b8e9374247e@sha256:20b5d3c9908fbb8e6a1444304d2a34be8e014667acff130bdb2dfe42768658cc"
+        }
+      ],
+      "beforeModelSHA256": "53de4b3ee8e3e9b5961a1f51369d9b59b5ce42a11e94d3edd03c59e3a0bbf333",
+      "afterModelSHA256": "3a993a0d28e4b76c9a163503354364f271af3b14223f91887f140519978d1f1c",
+      "beforeManifestSHA256": {
+        "umbrel-app.yml": "8528d20df91f61fefd1d4f4597c170a10d4dd867b7776986693592c060ca5d8c"
+      },
+      "core": {
+        "name": "Peercoin",
+        "version": "0.15.2ppc",
+        "previousVersion": "0.15.1ppc",
+        "upstreamCommit": "f56b8a1e2b1425b791d5900a7298bad850ed8b7c",
+        "versionOutput": "Peercoin version v0.15.2.0 Anisoptera"
+      },
+      "build": {
+        "repository": "https://github.com/WillItMod/AxePPC_Build",
+        "revision": "7b8e9374247e0eea338ab803359c24b518997ec8",
+        "workflowRun": 42858227072,
+        "nativeArchitectures": [
+          "amd64",
+          "arm64"
+        ]
+      },
+      "images": {
+        "amd64": {
+          "manifestDigest": "sha256:ad997fd34ba1047f8ca608347b2b0f03faed7b6d1161a7184816e8ff83b6f403",
+          "configDigest": "sha256:e529e22a36cb1e36fe65c5bc6cbe5c6eca07f2c7b761c37ec9e237b387d34307"
+        },
+        "arm64": {
+          "manifestDigest": "sha256:f860a05ff71d6dae6dadc71cbb50dfbc9c4d46d2aac745b5e9a1e47d0bcec855",
+          "configDigest": "sha256:b1cdbbc7af27cc0c68d79c33a1d9961adc06a5c542221a806f733e6fbf9dd52b"
+        }
+      },
+      "reindexRequested": false
+    }
+  }
+}

@@ -2,7 +2,7 @@ manifestVersion: 1
 id: willitmod-btc
 category: bitcoin
 name: AxeBTC
-version: "0.7.83"
+version: "0.7.84"
 tagline: BTC node + solo pool
 description: >-
   BETA RELEASE (DEV CHANNEL)
@@ -47,6 +47,8 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
+  Updates Bitcoin Core to 30.4, which fixes two security issues (CVE-2026-117346 and CVE-2026-117349). Only the node image changes. The optional Knots node stays on 29.2 because newer Knots releases follow a different proof-of-work chain. The app, pool, settings, ports and chain data are unchanged, and no reindex is needed.
+
   Standardizes the app version to 0.7.83 in the running interface and catalogue. Existing ports, mining code, node and pool images, configuration and stored data are retained.
 
   Keeps pool shutdown responsive while waiting for configuration or node sync. The update migrates the known public supervisor and refuses custom or linked scripts. Existing initialization, images, UI, payout settings and chain data are unchanged.

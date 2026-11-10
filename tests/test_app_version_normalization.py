@@ -80,9 +80,13 @@ class AppVersionNormalizationTests(unittest.TestCase):
         current = yaml.safe_load((ROOT / app / "docker-compose.yml").read_text())
         old = yaml.safe_load(normalization.source_bytes(app + "/docker-compose.yml", normalization.contract()["baselineCommit"]))
         self.assertEqual(normalization.previous_app_version_model(app, current), old)
+        # Field checks below describe this release; read through the later node-only release.
+        node = health_release.node_successor(ROOT)
+        current = current if node is None else node.previous_node_model(app, current, ROOT)
         self.assertEqual(current["services"]["app"]["image"], normalization.BTC_IMAGE)
         self.assertEqual(current["services"]["app"]["environment"], old["services"]["app"]["environment"])
-        self.assertEqual(normalization.package_version(app, row["beforeVersion"]), row["version"])
+        expected = row["version"] if node is None else node.node_package_version(app, row["version"], ROOT)
+        self.assertEqual(normalization.package_version(app, row["beforeVersion"]), expected)
         for service, key, value in (("app", "image", normalization.BTC_OLD), ("app", "volumes", []),
                                     ("app", "environment", {}), ("app", "ports", ["123:3000"]),
                                     ("ckpool", "image", "changed:latest"), ("init", "command", [])):
@@ -103,6 +107,9 @@ class AppVersionNormalizationTests(unittest.TestCase):
             if not path.exists():
                 continue
             current = yaml.safe_load(path.read_text())
+            node = health_release.node_successor(ROOT)
+            if node is not None:  # read through the later node-only release
+                current = node.previous_node_manifest(app, current, filename, ROOT)
             old = yaml.safe_load(normalization.source_bytes(app + "/" + filename, normalization.contract()["baselineCommit"]))
             self.assertEqual(current.pop("version"), row["version"])
             self.assertEqual(old.pop("version"), row["beforeVersion"])
