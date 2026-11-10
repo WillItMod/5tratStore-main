@@ -20,6 +20,7 @@ own licenses.
 
 ## Current app releases
 
+- **5tratDoom** (`willitmod-axedoom`) - `0.2.1` - Doom (Freedoom) running natively in the browser
 - **5tratSmack** (`willitmod-dev-5tratsmack`) - `0.11.23`
 - **AxeBC2** (`willitmod-dev-bc2`) - `0.1.22`
 - **AxeBCH** (`willitmod-dev-bch`) - `0.9.26`
