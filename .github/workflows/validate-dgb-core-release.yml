@@ -1,0 +1,39 @@
+name: Validate AxeDGB MAIN Core release
+on:
+  pull_request:
+    paths:
+      - "willitmod-dev-dgb/**"
+      - "release-records/dgb-core-9.26.6-thaw-day-2026-11-10.json"
+      - "scripts/dgb_core_release.py"
+      - "scripts/dgb_gateway_release.py"
+      - "scripts/dgb_backend_release.py"
+      - "tests/test_dgb_core_release.py"
+      - ".github/workflows/validate-dgb-core-release.yml"
+  push:
+    branches: [main]
+    paths:
+      - "willitmod-dev-dgb/**"
+      - "release-records/dgb-core-9.26.6-thaw-day-2026-11-10.json"
+      - "scripts/dgb_core_release.py"
+      - "scripts/dgb_gateway_release.py"
+      - "scripts/dgb_backend_release.py"
+      - "tests/test_dgb_core_release.py"
+      - ".github/workflows/validate-dgb-core-release.yml"
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.11"
+      - run: python3 -m pip install PyYAML==6.0.3
+      - run: python3 scripts/dgb_core_release.py
+      - name: Verify exact Core release and retained historical DGB contracts
+        env:
+          PYTHONPATH: tests
+        run: python3 -m unittest test_dgb_core_release test_dgb_gateway_release test_dgb_backend_release test_dgb_umbrel_release test_axedgb_memory_package -v

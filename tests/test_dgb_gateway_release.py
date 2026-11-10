@@ -41,7 +41,7 @@ class DgbGatewayHostnameTests(unittest.TestCase):
         cls.row = gateway.record(ROOT)
         cls.before_raw = gateway.baseline_bytes(ROOT)
         cls.before = yaml.safe_load(cls.before_raw)
-        cls.current_raw = (ROOT / gateway.COMPOSE).read_bytes()
+        cls.current_raw = gateway.current_bytes(ROOT, gateway.COMPOSE)
         cls.current = yaml.safe_load(cls.current_raw)
 
     def test_exact_package_successor_and_all_historical_proofs_are_preserved(self):

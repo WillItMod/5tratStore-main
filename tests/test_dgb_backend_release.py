@@ -18,7 +18,7 @@ class DgbBackendAdmissionTests(unittest.TestCase):
     def setUpClass(cls):
         cls.row=release.record(ROOT)
         cls.before=yaml.safe_load(release.baseline_bytes(ROOT,release.APP+'/docker-compose.yml'))
-        cls.current=yaml.safe_load((ROOT/release.APP/'docker-compose.yml').read_text())
+        cls.current=yaml.safe_load(release.gateway_adapter(ROOT).current_bytes(ROOT,release.APP+'/docker-compose.yml'))
 
     def test_exact_prepared_successor_and_original_images_are_admitted(self):
         release.validate(ROOT)

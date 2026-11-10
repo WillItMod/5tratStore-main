@@ -2,7 +2,7 @@ manifestVersion: 1
 id: willitmod-dev-dgb
 category: altcoin
 name: AxeDGB
-version: "0.9.182"
+version: "0.9.183"
 tagline: DGB node + solo pool
 description: >-
   RC6 RELEASE
@@ -104,9 +104,9 @@ backupIgnore:
 submitter: WillItMod
 
 releaseNotes: >-
-  Fixes Umbrel 2 updates when the legacy authentication container is absent.
-  Installations already blocked by the old authentication hook need that installed
-  hook repaired once before retrying Update.
-  Uses guarded optional authentication lookups and a compiled application with
-  minified browser assets. Existing ports, node/pool/init images, settings and
-  stored chain data are preserved.
+  Updates DigiByte Core from 9.26.5 to 9.26.6 for Thaw Day. Every DigiByte node
+  and miner must run 9.26.6 or newer from mainnet block 24,490,000; older nodes
+  can disagree about valid blocks. Only the node image changes. App, pool and
+  init images, ports, settings, the memory watchdog, the shutdown allowance and
+  stored chain data are unchanged, and no reindex is requested. The first start
+  after updating can take longer while Core checks DigiDollar history.

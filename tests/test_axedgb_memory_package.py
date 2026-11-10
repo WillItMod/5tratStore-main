@@ -10,12 +10,16 @@ ROOT = Path(__file__).resolve().parents[1] / "willitmod-dev-dgb"
 SPEC = importlib.util.spec_from_file_location("dgb_app_successor", ROOT.parent / "scripts/dgb_umbrel_release.py")
 release = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(release)
+CORE_SPEC = importlib.util.spec_from_file_location("dgb_core_successor", ROOT.parent / "scripts/dgb_core_release.py")
+core = importlib.util.module_from_spec(CORE_SPEC)
+CORE_SPEC.loader.exec_module(core)
 
 
 class AxeDgbPackageTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.compose = yaml.safe_load((ROOT / "docker-compose.yml").read_text())
+        # Contracts of the 0.9.182 app release, read after reversing the Core-only successor.
+        cls.compose = yaml.safe_load(core.current_bytes(ROOT.parent, core.COMPOSE))
         cls.services = cls.compose["services"]
         cls.init = cls.services["init"]["command"][-1]
 
@@ -37,7 +41,7 @@ class AxeDgbPackageTests(unittest.TestCase):
 
     def test_exact_app_only_successor_preserves_core_init_and_memory_supervisor(self):
         admitted = release.record()
-        self.assertEqual(yaml.safe_load((ROOT / "umbrel-app.yml").read_text())["version"], "0.9.182")
+        self.assertEqual(yaml.safe_load(core.current_bytes(ROOT.parent, core.MANIFEST))["version"], "0.9.182")
         self.assertEqual(self.services["app"]["image"], admitted["imageRef"])
         self.assertEqual(self.services["init"]["image"], "ghcr.io/willitmod/axedgb-init:0.9.181")
         self.assertEqual(self.services["dgbd"]["image"], "ghcr.io/willitmod/axedgb-core:0.9.181")
