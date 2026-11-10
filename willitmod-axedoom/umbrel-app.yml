@@ -1,0 +1,36 @@
+manifestVersion: 1
+id: willitmod-axedoom
+category: gaming
+name: 5tratDoom
+version: "0.2.1"
+tagline: Play Doom in your browser (Freedoom)
+description: >-
+  Chocolate Doom compiled to WebAssembly, so the game runs natively in your
+  browser with no VNC or remote desktop. Includes the free Freedoom: Phase 1
+  and Phase 2 game data.
+
+
+  Play with keyboard and mouse, with sound effects. Save games are
+  kept in the browser you play in. The app itself only serves the game files,
+  so it uses almost no CPU or memory on your node.
+developer: WillItMod
+website: https://freedoom.github.io/
+repo: https://github.com/WillItMod/5tratStore-main
+support: https://discord.gg/vC2UrFAbUF
+dependencies: []
+port: 5300
+gallery: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+releaseNotes: >-
+  v0.2.1: Clicking the game now captures the mouse, so it no longer drifts off
+  the game while turning (Esc releases it). Windows that cannot capture the
+  mouse explain how to play instead.
+
+
+  v0.2.0: Doom now runs natively in the browser (WebAssembly) instead of being
+  streamed from a VNC desktop. Adds sound effects, a choice of Freedoom:
+  Phase 1 or Phase 2, and save games kept in your browser. The app keeps its
+  existing address and port.
+submitter: WillItMod

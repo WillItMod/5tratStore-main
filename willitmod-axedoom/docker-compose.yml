@@ -1,0 +1,25 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: willitmod-axedoom_app_1
+      APP_PORT: 8080
+
+  # Static web server only: the game runs in the player's browser.
+  app:
+    image: ghcr.io/willitmod/5tratdoom:0.2.1@sha256:58cfac7dbfb436fb63ed080900ecc7f75185924da0ad8ba41757e84484a66ba0
+    restart: on-failure
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:8080/healthz"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 5s

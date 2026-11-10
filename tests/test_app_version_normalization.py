@@ -15,6 +15,8 @@ health_release = normalization.health_release
 
 ROOT = Path(__file__).resolve().parents[1]
 APP = normalization.APP
+AXEDOOM_APP = "willitmod-axedoom"
+AXEDOOM_PORTS = {"umbrel-app.yml": 5300, "services": {}}
 
 
 class AppVersionNormalizationTests(unittest.TestCase):
@@ -145,6 +147,9 @@ class AppVersionNormalizationTests(unittest.TestCase):
         # Admit only the exact new Umbrel-only MUX listener inventory. Every
         # preexisting app retains the frozen channel baseline without filters.
         self.assertEqual(current.pop(mux_release.APP), mux_release.PORTS)
+        # 5tratDoom (app id axedoom) is new in this store: its web UI keeps the
+        # 5tratumOS Doom port (5300) and its recipe publishes no other host ports.
+        self.assertEqual(current.pop(AXEDOOM_APP), AXEDOOM_PORTS)
         self.assertEqual(current, old)
 
     def test_every_preexisting_release_record_remains_byte_exact(self):
