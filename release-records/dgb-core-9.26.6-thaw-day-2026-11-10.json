@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "status": "qualified-core-image-package",
+  "appId": "willitmod-dev-dgb",
+  "channel": "MAIN",
+  "previousVersion": "0.9.182",
+  "version": "0.9.183",
+  "baselineCommit": "9c0fc81f22ea3e81060e098f7e5272480816b99f",
+  "reason": "DigiByte Thaw Day consensus rules apply from mainnet block 24,490,000. DigiByte Core 9.26.5 can disagree about valid blocks after that height; 9.26.6 or newer is required.",
+  "thawDayHeight": 24490000,
+  "observedMainnetHeight": {
+    "height": 24539276,
+    "observedAt": "2026-11-10T15:05:00Z",
+    "sources": [
+      "chainz.cryptoid.info",
+      "digiexplorer.info"
+    ]
+  },
+  "previousCoreImage": "ghcr.io/willitmod/axedgb-core:0.9.181",
+  "previousCoreIndexDigest": "sha256:e607edeb10e5c70ee87018ae533acec10db3cd451b1d3280154bd056dc78190a",
+  "previousDigibyteVersion": "v9.26.5",
+  "coreImage": "ghcr.io/willitmod/axedgb-core:9.26.6-dev.1@sha256:b10bb332316286348a6f0e52bc4da961135fe617ed9e1c4e415550c431f0a126",
+  "digibyteVersion": "v9.26.6",
+  "upstreamRelease": {
+    "repository": "https://github.com/DigiByte-Core/digibyte",
+    "tag": "v9.26.6",
+    "commit": "92330d952625e20aef2ee40671a179ef03872ac1"
+  },
+  "coreSource": {
+    "repository": "https://github.com/WillItMod/AxeDGB_Build",
+    "revision": "67bea1beafda9a08265e1aeadca26d1a217ff3d4",
+    "dockerfile": "Dockerfile.core",
+    "notes": "docs/core-9.26.6.md"
+  },
+  "platforms": {
+    "amd64": {
+      "manifestDigest": "sha256:d33f392795248c7a213894347c9a12b011d78675c767cb523c5679e2b71efb86"
+    },
+    "arm64": {
+      "manifestDigest": "sha256:79653de7cab80bf00407c0a3f8b8de704f2380a8a749030043e43043976a746f"
+    }
+  },
+  "imageEvidence": {
+    "inspectedOn": "5tratumOS DEV test box (amd64), images pulled anonymously",
+    "user": "1000:1000",
+    "cmd": [
+      "digibyted",
+      "-datadir=/data",
+      "-printtoconsole"
+    ],
+    "previousSupervisorSHA256": {
+      "core_memory.py": "3366979a0386d4592e86d36f4be80cb0e8818997f0bc45d33c86d980cdea4094",
+      "core_supervisor.py": "646822727a74c284d849c0c6e8028b00ed2c23ef749f236f74179293a8815591"
+    },
+    "supervisorSHA256": {
+      "core_memory.py": "3366979a0386d4592e86d36f4be80cb0e8818997f0bc45d33c86d980cdea4094",
+      "core_supervisor.py": "646822727a74c284d849c0c6e8028b00ed2c23ef749f236f74179293a8815591"
+    },
+    "digibytedSHA256": "9d22795dbacc82524c3ca11a0315e33bfa48c5c16195c3769a268cb5f5158fb2",
+    "digibyteCliSHA256": "0ba4809442f09005fd20a2531fecfdc073f10d2b882f9c327fa025bc6ff2885b",
+    "versionOutput": "DigiByte version v9.26.6",
+    "sameBinariesAsDevCore": "ghcr.io/willitmod/axedgb-core:9.26.6-dev.2@sha256:fb46ff018e701accf6630b65c4b33a7d9d24b5fa248c31122d2daa2503677039"
+  },
+  "changedPackageFiles": [
+    "willitmod-dev-dgb/docker-compose.yml",
+    "willitmod-dev-dgb/umbrel-app.yml"
+  ],
+  "beforeComposeSHA256": "ec2c630de2468f0496c6b9bfcbf6ddad665566549926dd7a297a145a616600d5",
+  "afterComposeSHA256": "30b19c1a1f8f20140d2cdffe75a0574e1613a6f02eb8aa4bef359cb28e903d31",
+  "beforeManifestSHA256": "3625fcc09a2056583d84f5e11c271795524604fe52786f84afe582fa537ce0e8",
+  "afterManifestSHA256": "b9a4a5d1dbe0c8ab49281725da35468e51a4a58462169a7806b660a93035784a",
+  "historicalRecordsSHA256": {
+    "DGB-UMBREL-AUTH-RELEASE-2026-10-16.json": "df5b4f4fac4288082dfce7d7121bb3d18b20b81b00770c9ff80ea7ab89be0071",
+    "DGB-BACKEND-SAFETY-2026-10-16.json": "368de09334748aa6678e5a41c0c2ca23d647fca05ede92b7e3386fe48bab34b1",
+    "release-records/dgb-0.9.182-umbrel-authfix-delivery.json": "eddc0c850e5d1ab0c64452e15584eccb4c6b190882d0736e9d3700443e82b504",
+    "release-records/dgb-gateway-hostname-delivery-2026-10-16.json": "adb6f7c873169ec12e368ed09ea26e01ebc3ee84d05c5a1ade795b75c1c26acb"
+  },
+  "unchanged": "App, init, Miningcore and Postgres images; ports; mounts; credentials; node launcher; memory supervisor and watchdog behaviour; 15m30s shutdown allowance; pruning and cache settings; stored chain data.",
+  "reindexRequested": false,
+  "nativeMainnetUpgradeQualified": true,
+  "physicalMiningQualified": false,
+  "scope": "Exact package delta and image identity verified. amd64: mainnet sync from pre-activation data across Thaw Day to the tip on the 5tratumOS DEV box, with block hashes matching a public explorer and the pool receiving jobs. arm64: native regtest start, peer connection, block and template. A node that kept running 9.26.5 past block 24,490,000 relies on DigiByte 9.26.6 late-upgrade recovery, which was not reproduced.",
+  "testEvidence": {
+    "amd64": {
+      "environment": "5tratumOS DEV test box, AxeDGB started through 5tratumOS with exactly this core image (two references swapped, then restored)",
+      "startingHeight": 24314583,
+      "thawDayHeight": 24490000,
+      "syncedHeight": 24539646,
+      "result": "Synced from pre-activation data across Thaw Day to the tip in about 13 minutes; headers equalled blocks and initial block download ended. No invalid or rejected blocks. DigiDollar transactions validated after activation.",
+      "chainAgreement": {
+        "24490000": "b334947e84c3743975645635850b1c7b941da695fd45945281fce0003e9d2370",
+        "24539637": "32897293f5ec807413f2ac4c62e0180cd9178879f51d273b4438407d32d7b438",
+        "matchedSource": "chainz.cryptoid.info"
+      },
+      "supervisorStartLine": "[axedgb] Starting Core: dbcache=128 MiB; soft memory budget=None MiB",
+      "pool": "Miningcore SHA256 and Scrypt pools detected new blocks and broadcast jobs",
+      "shutdown": "Clean (Shutdown: done) through 5tratumOS app down",
+      "testedAt": "2026-11-10T16:06:33Z/2026-11-10T16:20:53Z"
+    },
+    "arm64": {
+      "environment": "Apple Silicon host, native linux/arm64 container",
+      "result": "Memory supervisor modules import; DigiByte 9.26.6 started in regtest, connected to a second node, mined a block and returned getblocktemplate at height 2",
+      "mainnetSyncQualified": false
+    }
+  },
+  "lateUpgradeAfterActivationQualified": false
+}

@@ -2,6 +2,7 @@
 import argparse
 import copy
 import hashlib
+import importlib.util
 import json
 from pathlib import Path
 import stat
@@ -29,6 +30,17 @@ def git(root, *args):
 
 def baseline_bytes(root, name=COMPOSE):
     return git(root, 'show', BASELINE + ':' + name)
+
+
+def current_bytes(root, name):
+    """A DGB package file as this release shipped it, after reversing admitted successors."""
+    successor = root / 'scripts/dgb_core_release.py'
+    if successor.is_file():
+        spec = importlib.util.spec_from_file_location('dgb_core_successor', successor)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        return module.current_bytes(root, name)
+    return (root / name).read_bytes()
 
 
 def record(root=ROOT):
@@ -89,10 +101,10 @@ def validate(root=ROOT, *, check_baseline=False):
         mode = git(root, 'ls-tree', BASELINE, '--', name).decode().split()[0]
         assert ('100755' if path.stat().st_mode & 0o111 else '100644') == mode, 'DGB package mode changed'
         if name == COMPOSE:
-            assert previous_compose_bytes(path.read_bytes(), root) == baseline_bytes(root)
+            assert previous_compose_bytes(current_bytes(root, name), root) == baseline_bytes(root)
         else:
-            assert path.read_bytes() == baseline_bytes(root, name), 'Unrelated DGB package content changed'
-    assert yaml.safe_load((root / APP / 'umbrel-app.yml').read_text())['version'] == VERSION
+            assert current_bytes(root, name) == baseline_bytes(root, name), 'Unrelated DGB package content changed'
+    assert yaml.safe_load(current_bytes(root, APP + '/umbrel-app.yml'))['version'] == VERSION
     for name, digest in row['historicalRecordsSHA256'].items():
         assert sha((root / name).read_bytes()) == digest == sha(baseline_bytes(root, name)), 'Historical release record changed'
     if check_baseline:

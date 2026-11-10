@@ -1066,7 +1066,7 @@ services:
         init_status ready
 
   dgbd:
-    image: ghcr.io/willitmod/axedgb-core:0.9.181
+    image: ghcr.io/willitmod/axedgb-core:9.26.6-dev.1@sha256:b10bb332316286348a6f0e52bc4da961135fe617ed9e1c4e415550c431f0a126
     networks:
       default:
         aliases:
@@ -1173,7 +1173,7 @@ services:
       WORKER_ACTIVE_SECONDS: "300"
       APP_CHANNEL: "RC6"
       APP_VERSION_SUFFIX: ""
-      DGB_IMAGE: "ghcr.io/willitmod/axedgb-core:0.9.181"
+      DGB_IMAGE: "ghcr.io/willitmod/axedgb-core:9.26.6-dev.1@sha256:b10bb332316286348a6f0e52bc4da961135fe617ed9e1c4e415550c431f0a126"
       MININGCORE_IMAGE: "ghcr.io/willitmod/axedgb-miningcore:axedgb-0.8.10-r26"
       POSTGRES_IMAGE: "postgres:16-alpine"
       STATIC_DIR: "/app/static"

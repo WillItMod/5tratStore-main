@@ -89,18 +89,18 @@ def validate_package(root=ROOT, release=None):
         baseline_mode = git(root, 'ls-tree', BASELINE, '--', name).decode().split()[0]
         assert ('100755' if path.stat().st_mode & 0o111 else '100644') == baseline_mode, 'DGB package mode changed'
         if name in CHANGED:
-            raw = path.read_bytes()
+            raw = gateway_adapter(root).current_bytes(root, name)
             if name == APP + '/docker-compose.yml' and sha(raw) != release['changedPackageFiles'][name]:
                 raw = gateway_adapter(root).previous_compose_bytes(raw, root)
             assert sha(raw) == release['changedPackageFiles'][name], 'Unreviewed DGB repair bytes'
         else:
-            assert path.read_bytes() == baseline_bytes(root, name), 'Unrelated DGB file changed'
+            assert gateway_adapter(root).current_bytes(root, name) == baseline_bytes(root, name), 'Unrelated DGB file changed'
     before = yaml.safe_load(baseline_bytes(root, APP + '/docker-compose.yml'))
-    current = yaml.safe_load((root / APP / 'docker-compose.yml').read_text())
+    current = yaml.safe_load(gateway_adapter(root).current_bytes(root, APP + '/docker-compose.yml'))
     admit_model(current, before, release, root)
     template = APP + '/data/templates/miningcore.json.template'
     assert (root / template).read_bytes() == baseline_bytes(root, template).replace(b'"host": "dgbd"', b'"host": "${DGB_RPC_HOST}"'), 'Only generic template daemon hosts may change'
-    assert yaml.safe_load((root / APP / 'umbrel-app.yml').read_text())['version'] == VERSION
+    assert yaml.safe_load(gateway_adapter(root).current_bytes(root, APP + '/umbrel-app.yml'))['version'] == VERSION
     images = {name: value['image'] for name, value in current['services'].items() if 'image' in value}
     assert images == release['runtimeImages'] == {name: value['image'] for name, value in before['services'].items() if 'image' in value}, 'DGB image changed'
     for name, digest in release['historicalRecordsSHA256'].items():
