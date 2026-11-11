@@ -22,6 +22,7 @@ NEW_CORE = 'ghcr.io/willitmod/axedgb-core:9.26.6-dev.1@sha256:b10bb332316286348a
 UPSTREAM_COMMIT = '92330d952625e20aef2ee40671a179ef03872ac1'
 COMPOSE = APP + '/docker-compose.yml'
 MANIFEST = APP + '/umbrel-app.yml'
+CHANGED = {COMPOSE, MANIFEST}
 NOTE = ('Updates DigiByte Core from 9.26.5 to 9.26.6 for Thaw Day. Every DigiByte node and miner must run '
         '9.26.6 or newer from mainnet block 24,490,000; older nodes can disagree about valid blocks. Only the '
         'node image changes. App, pool and init images, ports, settings, the memory watchdog, the shutdown '
@@ -121,6 +122,17 @@ def validate(root=ROOT, *, check_baseline=False):
                      if name.startswith('willitmod-') and not name.startswith(APP + '/')]
         assert not git(root, 'diff', '--name-only', BASELINE, '--', *protected).strip(), 'Other app changed'
     return row
+
+
+def historical_protected_paths(root, previous_commit, protected):
+    """Admit only this exact successor before an older other-app comparison."""
+    validate(root)
+    assert CHANGED <= set(protected), 'Historical DGB package inventory differs'
+    for name in CHANGED:
+        assert baseline_bytes(root, name) == git(root, 'show', previous_commit + ':' + name), 'Historical DGB predecessor bytes differ'
+        mode = git(root, 'ls-tree', BASELINE, '--', name).decode().split()[0]
+        assert mode == git(root, 'ls-tree', previous_commit, '--', name).decode().split()[0], 'Historical DGB predecessor mode differs'
+    return [name for name in protected if name not in CHANGED]
 
 
 if __name__ == '__main__':

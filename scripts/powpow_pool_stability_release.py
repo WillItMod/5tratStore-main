@@ -137,14 +137,46 @@ def validate_baseline(root=ROOT):
     """Release-time scope check; unrelated future app updates remain independent."""
     names = git(root, "ls-tree", "-r", "--name-only", BASELINE).decode().splitlines()
     protected = [name for name in names if (name.startswith("willitmod-") and not name.startswith(APP + "/")) or ("/" not in name and name.endswith(".json"))]
+    # Later node-only successors: each validates its exact delta, then its
+    # changed files are compared at their predecessor bytes.
+    xec_node = node_core = dgb_core = None
+    if (root / 'XEC-NODE-2026-11-10.json').is_file():
+        import importlib.util
+        spec = importlib.util.spec_from_file_location('xec_node_powpow_predecessor', root / 'scripts/xec_node_release.py')
+        xec_node = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(xec_node)
+        xec_node.validate(root)
+    if (root / 'NODE-CORE-2026-11-10.json').is_file():
+        import importlib.util
+        spec = importlib.util.spec_from_file_location('node_core_powpow_predecessor', root / 'scripts/node_core_release.py')
+        node_core = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(node_core)
+        node_core.validate(root)
+    if (root / 'release-records/dgb-core-9.26.6-thaw-day-2026-11-10.json').is_file():
+        import importlib.util
+        spec = importlib.util.spec_from_file_location('dgb_core_powpow_predecessor', root / 'scripts/dgb_core_release.py')
+        dgb_core = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(dgb_core)
+        dgb_core.validate(root)
+    node_core_changed = node_core.changed_files(root) if node_core is not None else set()
     for name in protected:
         path = root / name
         assert path.is_file() and not path.is_symlink(), f"Protected predecessor file missing: {name}"
-        assert path.read_bytes() == baseline_bytes(name, root), f"Protected predecessor file changed: {name}"
+        raw = path.read_bytes()
+        if xec_node is not None and name in xec_node.CHANGED:
+            raw = xec_node.baseline_bytes(root, name)
+        if name in node_core_changed:
+            raw = node_core.current_bytes(root, name)
+        if dgb_core is not None and name in dgb_core.CHANGED:
+            raw = dgb_core.current_bytes(root, name)
+        assert raw == baseline_bytes(name, root), f"Protected predecessor file changed: {name}"
         mode = git(root, "ls-tree", BASELINE, "--", name).decode().split()[0]
         assert stat.S_IMODE(path.stat().st_mode) == int(mode, 8) & 0o777, f"Protected predecessor mode changed: {name}"
     old_packages = {name for name in names if name.startswith("willitmod-")}
     actual = {str(path.relative_to(root)) for directory in root.glob("willitmod-*") if directory.is_dir() for path in directory.rglob("*") if not path.is_dir() or path.is_symlink()}
+    # 5tratDoom (willitmod-axedoom) is a separately admitted new package;
+    # its published ports are pinned by test_app_version_normalization.
+    actual = {name for name in actual if not name.startswith("willitmod-axedoom/")}
     assert actual == old_packages, "Store package file set changed outside approved successor"
 
 
@@ -184,6 +216,19 @@ def validate(root=ROOT, check_baseline=False):
     if check_baseline:
         validate_baseline(root)
     return result
+
+
+def historical_protected_paths(root, previous_commit, protected):
+    """Admit only this exact successor before an older other-app comparison."""
+    validate(root)
+    reviewed = {APP + '/' + name for name in ('docker-compose.yml', *MANIFESTS)}
+    assert reviewed <= set(protected), 'Historical PowPow package inventory differs'
+    for name in reviewed:
+        assert baseline_bytes(name, root) == git(root, 'show', previous_commit + ':' + name), 'Historical PowPow predecessor bytes differ'
+        before_mode = git(root, 'ls-tree', BASELINE, '--', name).decode().split()[0]
+        historical_mode = git(root, 'ls-tree', previous_commit, '--', name).decode().split()[0]
+        assert before_mode == historical_mode, 'Historical PowPow predecessor mode differs'
+    return [name for name in protected if name not in reviewed]
 
 
 if __name__ == "__main__":

@@ -1,0 +1,32 @@
+name: Validate XEC node release
+on:
+  pull_request:
+    paths:
+      - "willitmod-dev-xec/**"
+      - "XEC-NODE-2026-11-10.json"
+      - "scripts/xec_node_release.py"
+      - "tests/test_xec_node_release.py"
+      - ".github/workflows/validate-xec-node.yml"
+  push:
+    branches: [main]
+    paths:
+      - "willitmod-dev-xec/**"
+      - "XEC-NODE-2026-11-10.json"
+      - "scripts/xec_node_release.py"
+      - "tests/test_xec_node_release.py"
+      - ".github/workflows/validate-xec-node.yml"
+permissions:
+  contents: read
+jobs:
+  validate-xec-node:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - run: python3 -m pip install PyYAML==6.0.2
+      - run: python3 scripts/xec_node_release.py
+      - name: Verify exact node release and retained historical contracts
+        env:
+          PYTHONPATH: tests
+        run: python3 -m unittest test_xec_node_release test_bch2_retention_permissions.RecipeReleaseTests -v

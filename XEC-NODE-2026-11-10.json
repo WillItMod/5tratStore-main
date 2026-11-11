@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "appId": "willitmod-dev-xec",
+  "channel": "MAIN",
+  "baselineCommit": "9c0fc81f22ea3e81060e098f7e5272480816b99f",
+  "previousPackageVersion": "0.1.24",
+  "version": "0.1.25",
+  "coreVersion": "0.34.3",
+  "previousCoreVersion": "0.33.4",
+  "upstreamRepository": "https://github.com/Bitcoin-ABC/bitcoin-abc",
+  "upstreamRevision": "5621f13e073c007bed66a35fdfda3bc67772bab6",
+  "reason": "Bitcoin ABC 0.34.x is required to stay in sync with eCash after the network upgrade at MTP 1794744000 (2026-11-15 12:00:00 UTC).",
+  "previousNodeImageRef": "ghcr.io/willitmod/xecd-abc:0.33.4-nojemalloc-r1",
+  "nodeImageRef": "ghcr.io/willitmod/xecd-abc:0.34.3-nojemalloc-r1@sha256:0d806800b35583fb7c3a21a07027df9b5e0e382eae62ec533ce0fc6f52b03653",
+  "buildRepository": "https://github.com/WillItMod/xecd-abc-docker",
+  "buildRevision": "1d710b9259f89a16d432190a78adc2694009a24f",
+  "publicationRun": 42847959531,
+  "images": {
+    "amd64": {
+      "manifestDigest": "sha256:a026995cbee6163acc007c038e23c82933daada21829b259b5ccba52a7fb3c95",
+      "configDigest": "sha256:c0e14087640b391f4cf18ea03d0b7405d1f1a9b17aadcf1728146b484a19979a"
+    },
+    "arm64": {
+      "manifestDigest": "sha256:682e18d8a4fb4ab0e38fee5e19243d25b96f0e913055a38b0df6c317997d031a",
+      "configDigest": "sha256:2859de50a26b42f3ee76de003b5ed7590f8bedb27be15457cbcbbfb78f28cc2d"
+    }
+  },
+  "versionOutput": "Bitcoin ABC version v0.34.3-5621f13e073c",
+  "runtimeContract": {
+    "beforeModelSHA256": "43a4a4c0894866a90f30bda2d21804fa0f4d9de2a27939ee3f614484ca8ee9fe",
+    "afterModelSHA256": "29de8e34e6e4833dd650e6f73415bc7331c266c28336260f475e3505532918bd",
+    "changes": [
+      {
+        "path": [
+          "services",
+          "xecd",
+          "image"
+        ],
+        "before": "ghcr.io/willitmod/xecd-abc:0.33.4-nojemalloc-r1",
+        "after": "ghcr.io/willitmod/xecd-abc:0.34.3-nojemalloc-r1@sha256:0d806800b35583fb7c3a21a07027df9b5e0e382eae62ec533ce0fc6f52b03653"
+      },
+      {
+        "path": [
+          "services",
+          "app",
+          "environment",
+          "XECD_IMAGE"
+        ],
+        "before": "ghcr.io/willitmod/xecd-abc:0.33.4-nojemalloc-r1",
+        "after": "ghcr.io/willitmod/xecd-abc:0.34.3-nojemalloc-r1@sha256:0d806800b35583fb7c3a21a07027df9b5e0e382eae62ec533ce0fc6f52b03653"
+      }
+    ]
+  },
+  "unchanged": "App, pool and init images; pool and app settings; ports; mounts; node launcher; chain and wallet data.",
+  "reindexRequested": false,
+  "validationScope": {
+    "nodeImageVersionVerified": true,
+    "onBoxUpgradeQualified": true,
+    "arm64RegtestQualified": true,
+    "miningProtocolQualified": false,
+    "networkUpgradeActivationObserved": false
+  },
+  "testEvidence": {
+    "amd64": {
+      "environment": "5tratumOS DEV test box; DEV catalogue synced from the candidate branch, then 5tratumos app update axexec, then catalogue restored to main",
+      "result": "Updated 0.1.24-dev.1 to 0.1.25-dev in about 10 seconds with a clean node shutdown. Bitcoin ABC 0.34.3 loaded the existing chain without rewind, verified the last 6 blocks, stayed healthy at the tip and followed the next block.",
+      "chainAgreement": {
+        "974956": "0000000000000000572017008912cacdedf29c444cb549ab7756b616c6de80e2",
+        "matchedSource": "chronik.e.cash"
+      },
+      "pool": "ckpool reconnected after node warm-up and received block templates. Its existing cash-address warning predates this node update.",
+      "testedAt": "2026-11-10T16:02:50Z"
+    },
+    "arm64": {
+      "environment": "Apple Silicon host, native linux/arm64 container",
+      "result": "Bitcoin ABC 0.34.3 started in regtest, connected to a second node, mined a block and returned getblocktemplate at height 2",
+      "mainnetSyncQualified": false
+    }
+  },
+  "releasedIn": "https://github.com/WillItMod/5tratStore-main/pull/83"
+}
