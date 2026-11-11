@@ -135,6 +135,26 @@ def validate(root=ROOT, *, check_baseline=False):
     if check_baseline:
         protected = [n for n in git(root, 'ls-tree', '-r', '--name-only', row['baselineCommit']).decode().splitlines()
                      if n.startswith('willitmod-') and not n.startswith(APP + '/')]
+        # Later released successors each validate their exact delta and
+        # remove only their own files from this other-app comparison.
+        if (root / 'POWPOW-POOL-STABILITY-2026-11-02.json').is_file():
+            import importlib.util
+            spec = importlib.util.spec_from_file_location('powpow_retention_predecessor', root / 'scripts/powpow_pool_stability_release.py')
+            successor = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(successor)
+            protected = successor.historical_protected_paths(root, row['baselineCommit'], protected)
+        if (root / 'release-records/dgb-core-9.26.6-thaw-day-2026-11-10.json').is_file():
+            import importlib.util
+            spec = importlib.util.spec_from_file_location('dgb_core_retention_predecessor', root / 'scripts/dgb_core_release.py')
+            successor = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(successor)
+            protected = successor.historical_protected_paths(root, row['baselineCommit'], protected)
+        if (root / 'XEC-NODE-2026-11-10.json').is_file():
+            import importlib.util
+            spec = importlib.util.spec_from_file_location('xec_node_retention_predecessor', root / 'scripts/xec_node_release.py')
+            successor = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(successor)
+            protected = successor.historical_protected_paths(root, row['baselineCommit'], protected)
         if (root / 'NODE-CORE-2026-11-10.json').is_file():
             import importlib.util
             spec = importlib.util.spec_from_file_location('node_core_retention_predecessor', root / 'scripts/node_core_release.py')
