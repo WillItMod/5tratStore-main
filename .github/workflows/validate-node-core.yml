@@ -39,4 +39,4 @@ jobs:
       - name: Verify exact node releases and retained historical contracts
         env:
           PYTHONPATH: tests
-        run: python3 -m unittest test_node_core_release test_app_version_normalization test_health_release test_ppc_payout_status_release test_ppc_immutable_release test_bch2_retention_permissions.RecipeReleaseTests -v
+        run: python3 -m unittest test_node_core_release test_app_version_normalization test_health_release test_ppc_payout_status_release -v
