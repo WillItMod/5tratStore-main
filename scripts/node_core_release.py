@@ -7,6 +7,7 @@ read the package through the reverse functions here, so they still apply.
 import argparse
 import copy
 import hashlib
+import importlib.util
 import json
 from pathlib import Path
 import stat
@@ -17,6 +18,16 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 RECORD = 'NODE-CORE-2026-11-10.json'
 MANIFESTS = ('umbrel-app.yml', 'global-app.yml', '5tratstore-app.yml')
+
+
+def app_successor(root=ROOT):
+    """The separately bound app-only release precedes these node contracts."""
+    if not (root / 'PPC-LIVE-STATS-2026-11-16.json').is_file():
+        return None
+    spec = importlib.util.spec_from_file_location('ppc_live_stats_successor', root / 'scripts/ppc_live_stats_release.py')
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
 
 
 def sha(raw):
@@ -57,6 +68,11 @@ def baseline_bytes(root, name):
 
 def previous_node_model(app_id, current, root=ROOT):
     """Reverse this node-only release; any other model passes through unchanged."""
+    successor = app_successor(root)
+    if successor is not None and app_id == successor.APP:
+        release = successor.record(root)
+        if digest(current) == release['afterModelSHA256']:
+            current = successor.previous_model(app_id, current, root)
     row = app_row(app_id, root)
     if row is None or digest(current) != row['afterModelSHA256']:
         return copy.deepcopy(current)
@@ -72,6 +88,11 @@ def previous_node_model(app_id, current, root=ROOT):
 
 
 def previous_node_manifest(app_id, current, filename='umbrel-app.yml', root=ROOT):
+    successor = app_successor(root)
+    if successor is not None and app_id == successor.APP:
+        release = successor.record(root)
+        if current.get('version') == release['packageVersion']:
+            current = successor.previous_manifest(app_id, current, filename, root)
     row = app_row(app_id, root)
     if row is None or current.get('version') != row['version']:
         return copy.deepcopy(current)
@@ -88,8 +109,13 @@ def node_package_version(app_id, historical, root=ROOT):
     row = app_row(app_id, root)
     if row is None:
         return historical
-    assert historical in (row['previousVersion'], row['version']), 'Unexpected preceding package version'
-    return row['version']
+    successor = app_successor(root)
+    release = successor.record(root) if successor is not None and app_id == successor.APP else None
+    accepted = (row['previousVersion'], row['version'])
+    if release is not None:
+        accepted += (release['packageVersion'],)
+    assert historical in accepted, 'Unexpected preceding package version'
+    return row['version'] if release is None else successor.package_version(app_id, row['version'], root)
 
 
 def expected_bytes(root, app_id, name, before):
@@ -135,6 +161,9 @@ def changed_files(root=ROOT):
 def current_bytes(root, name):
     """A package file as the previous release shipped it."""
     raw = (root / name).read_bytes()
+    successor = app_successor(root)
+    if successor is not None:
+        raw = successor.previous_bytes(root, name, raw)
     row = record(root)
     if row is None or name not in changed_files(root):
         return raw
@@ -157,10 +186,15 @@ def validate(root=ROOT):
             assert ('100755' if path.stat().st_mode & 0o111 else '100644') == mode, 'Package mode changed'
             assert current_bytes(root, name) == baseline_bytes(root, name), 'Unrelated package content changed: ' + name
         compose = yaml.safe_load((root / app_id / 'docker-compose.yml').read_text())
+        successor = app_successor(root)
+        if successor is not None and app_id == successor.APP:
+            compose = successor.previous_model(app_id, compose, root)
         assert digest(compose) == app['afterModelSHA256']
         assert digest(previous_node_model(app_id, compose, root)) == app['beforeModelSHA256']
         for filename in app['beforeManifestSHA256']:
             manifest = yaml.safe_load((root / app_id / filename).read_text())
+            if successor is not None and app_id == successor.APP:
+                manifest = successor.previous_manifest(app_id, manifest, filename, root)
             assert manifest['version'] == app['version']
             assert digest(previous_node_manifest(app_id, manifest, filename, root)) == app['beforeManifestSHA256'][filename]
     return row

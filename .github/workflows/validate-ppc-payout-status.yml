@@ -7,6 +7,9 @@ on:
       - "PPC-PAYOUT-STATUS-2026-10-21.json"
       - "release-records/ppc-0.2.38-native-arm64-migration.json"
       - "scripts/ppc_payout_status_release.py"
+      - "PPC-LIVE-STATS-2026-11-16.json"
+      - "scripts/ppc_live_stats_release.py"
+      - "tests/test_ppc_live_stats_release.py"
       - "tests/test_ppc_payout_status_release.py"
       - ".github/workflows/validate-ppc-payout-status.yml"
   push:
@@ -16,6 +19,9 @@ on:
       - "PPC-PAYOUT-STATUS-2026-10-21.json"
       - "release-records/ppc-0.2.38-native-arm64-migration.json"
       - "scripts/ppc_payout_status_release.py"
+      - "PPC-LIVE-STATS-2026-11-16.json"
+      - "scripts/ppc_live_stats_release.py"
+      - "tests/test_ppc_live_stats_release.py"
       - "tests/test_ppc_payout_status_release.py"
       - ".github/workflows/validate-ppc-payout-status.yml"
 

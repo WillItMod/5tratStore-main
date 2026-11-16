@@ -34,11 +34,19 @@ class NodeCoreReleaseTests(unittest.TestCase):
                         self.assertEqual(current['services'][name], service)
                 for filename in app['beforeManifestSHA256']:
                     manifest = yaml.safe_load((ROOT / app_id / filename).read_text())
+                    successor = node.app_successor(ROOT)
+                    if successor is not None and app_id == successor.APP:
+                        manifest = successor.previous_manifest(app_id, manifest, filename, ROOT)
                     previous = yaml.safe_load(node.baseline_bytes(ROOT, f'{app_id}/{filename}'))
                     self.assertEqual(manifest['version'], app['version'])
                     self.assertTrue(manifest['releaseNotes'].startswith(app['note']))
                     self.assertEqual(node.previous_node_manifest(app_id, manifest, filename, ROOT), previous)
-                self.assertEqual(node.node_package_version(app_id, app['previousVersion'], ROOT), app['version'])
+                successor = node.app_successor(ROOT)
+                expected_version = app['version']
+                if successor is not None and app_id == successor.APP:
+                    expected_version = successor.record(ROOT)['packageVersion']
+                self.assertEqual(node.node_package_version(app_id, app['previousVersion'], ROOT), expected_version)
+                self.assertEqual(node.node_package_version(app_id, expected_version, ROOT), expected_version)
                 self.assertIn('Only the node image changes', app['note'])
 
     def test_other_changes_are_not_reversed(self):
