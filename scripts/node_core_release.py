@@ -109,8 +109,13 @@ def node_package_version(app_id, historical, root=ROOT):
     row = app_row(app_id, root)
     if row is None:
         return historical
-    assert historical in (row['previousVersion'], row['version']), 'Unexpected preceding package version'
-    return row['version']
+    successor = app_successor(root)
+    release = successor.record(root) if successor is not None and app_id == successor.APP else None
+    accepted = (row['previousVersion'], row['version'])
+    if release is not None:
+        accepted += (release['packageVersion'],)
+    assert historical in accepted, 'Unexpected preceding package version'
+    return row['version'] if release is None else successor.package_version(app_id, row['version'], root)
 
 
 def expected_bytes(root, app_id, name, before):
