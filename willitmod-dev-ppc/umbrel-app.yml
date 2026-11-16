@@ -2,7 +2,7 @@ manifestVersion: 1
 id: willitmod-dev-ppc
 category: altcoin
 name: AxePPC
-version: "0.2.39"
+version: "0.2.40"
 tagline: PPC node + solo pool
 description: >-
   ALPHA RELEASE (DEV CHANNEL)
@@ -40,6 +40,8 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
+  Shows active workers from recent accepted shares and the current Peercoin mining target. Historical worker records remain available, and unavailable mining targets are shown explicitly. The Peercoin 0.15.2 node, pool, payout settings and stored data are retained.
+
   Updates the Peercoin node to 0.15.2, which rejects blocks whose proof-of-stake flag does not match the block. Only the node image changes. The app, pool, settings, ports and chain data are unchanged, and no reindex is needed.
 
   Payout status now distinguishes node-validated, invalid, missing and not-yet-validated addresses. The channel label is informational. Node-rejected addresses are never saved, and an unavailable node is shown explicitly. Use a bare native Peercoin receiving address without a peercoin: prefix. Existing payout settings, pool configuration and stored data are retained.

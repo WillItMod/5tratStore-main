@@ -34,6 +34,9 @@ class NodeCoreReleaseTests(unittest.TestCase):
                         self.assertEqual(current['services'][name], service)
                 for filename in app['beforeManifestSHA256']:
                     manifest = yaml.safe_load((ROOT / app_id / filename).read_text())
+                    successor = node.app_successor(ROOT)
+                    if successor is not None and app_id == successor.APP:
+                        manifest = successor.previous_manifest(app_id, manifest, filename, ROOT)
                     previous = yaml.safe_load(node.baseline_bytes(ROOT, f'{app_id}/{filename}'))
                     self.assertEqual(manifest['version'], app['version'])
                     self.assertTrue(manifest['releaseNotes'].startswith(app['note']))

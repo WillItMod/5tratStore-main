@@ -29,6 +29,9 @@ class PpcPayoutStatusReleaseTests(unittest.TestCase):
         for service in ('app_proxy', 'init', 'ppcd', 'pool', 'redis'):
             self.assertEqual(current['services'][service], before['services'][service])
         expected = row['packageVersion'] if node is None else node.node_package_version(release.APP, row['packageVersion'])
+        successor = None if node is None else node.app_successor()
+        if successor is not None:
+            expected = successor.package_version(release.APP, expected)
         self.assertEqual(release.package_version(release.APP, row['previousPackageVersion']), expected)
         self.assertEqual(release.package_version(release.APP, row['packageVersion']), expected)
         with self.assertRaises(AssertionError):

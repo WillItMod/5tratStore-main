@@ -144,7 +144,9 @@ def package_version(app_id, historical, root=ROOT):
     channel = record(root)['channel']
     assert historical in (BEFORE_VERSIONS[channel], VERSIONS[channel]), 'Unexpected preceding PPC version'
     node = node_successor(root)
-    return VERSIONS[channel] if node is None else node.node_package_version(app_id, VERSIONS[channel], root)
+    current = VERSIONS[channel] if node is None else node.node_package_version(app_id, VERSIONS[channel], root)
+    successor = None if node is None else node.app_successor(root)
+    return current if successor is None else successor.package_version(app_id, current, root)
 
 
 def validate(root=ROOT, *, check_catalogue=False):

@@ -9,6 +9,9 @@ on:
       - "scripts/node_core_release.py"
       - "scripts/health_release.py"
       - "scripts/ppc_payout_status_release.py"
+      - "PPC-LIVE-STATS-2026-11-16.json"
+      - "scripts/ppc_live_stats_release.py"
+      - "tests/test_ppc_live_stats_release.py"
       - "tests/test_node_core_release.py"
       - ".github/workflows/validate-node-core.yml"
   push:
@@ -21,6 +24,9 @@ on:
       - "scripts/node_core_release.py"
       - "scripts/health_release.py"
       - "scripts/ppc_payout_status_release.py"
+      - "PPC-LIVE-STATS-2026-11-16.json"
+      - "scripts/ppc_live_stats_release.py"
+      - "tests/test_ppc_live_stats_release.py"
       - "tests/test_node_core_release.py"
       - ".github/workflows/validate-node-core.yml"
 permissions:
@@ -39,4 +45,4 @@ jobs:
       - name: Verify exact node releases and retained historical contracts
         env:
           PYTHONPATH: tests
-        run: python3 -m unittest test_node_core_release test_app_version_normalization test_health_release test_ppc_payout_status_release -v
+        run: python3 -m unittest test_node_core_release test_ppc_live_stats_release test_app_version_normalization test_health_release test_ppc_payout_status_release -v
